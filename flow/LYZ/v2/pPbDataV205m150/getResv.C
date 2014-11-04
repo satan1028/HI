@@ -12,8 +12,8 @@ void getResv(){
 
 
 	ofstream fstrv;
-	if(isSum)fstrv.open("v.txt");
-	else fstrv.open("v_2.txt");
+	if(isSum)fstrv.open("v_inV2.txt");
+	else fstrv.open("v_inV2_2.txt");
 	TVectorD totmult[nbin], totpt[nbin];	TVectorD Nevent, totmultall;
 	TVectorD V_int;
 	TVectorD* V_mean;
@@ -48,8 +48,8 @@ void getResv(){
 	}
 
         for(int ifile=0; ifile<nFileAll; ifile++){
-	        if(isSum) f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m150/Anav_Prod_%d.root",ifile));
-	        else f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m150/Anav_Prod2_%d.root",ifile));
+	        if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/Anav_Prod_inV2_%d.root",ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/Anav_Prod2_inV2_%d.root",ifile));
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
 		for(int ibin=0;ibin<nbin;ibin++){
@@ -88,9 +88,10 @@ void getResv(){
 			for(int itheta=0;itheta<ntheta;itheta++){
 				dN[ibin][itheta][iptbin]/=totmult[ibin][iptbin];
 				TComplex Res=dN[ibin][itheta][iptbin]/dD[ibin][itheta];
-				v[ibin][itheta][iptbin]=(*V[ibin])[itheta]*avgmultall[ibin]*TMath::BesselJ1(j01)/Besselj01(mm)*Res.Re();
+				//v[ibin][itheta][iptbin]=(*V[ibin])[itheta]*avgmultall[ibin]*TMath::BesselJ1(j01)/Besselj01(mm)*Res.Re();
+				v[ibin][itheta][iptbin]=inV2*avgmultall[ibin]*TMath::BesselJ1(j01)/Besselj01(mm)*Res.Re();
 				vmean[ibin][iptbin]+=v[ibin][itheta][iptbin];
-				deltav[ibin][itheta][iptbin]=TMath::Cos(mm*nn*theta[itheta])/totmult[ibin][iptbin]*(TMath::Exp(j01*j01/2./(*chi[ibin])[itheta]/(*chi[ibin])[itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Power(-1,mm)*TMath::Exp(-j01*j01/2./(*chi[ibin])[itheta]/(*chi[ibin])[itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.)));
+				deltav[ibin][itheta][iptbin]=TMath::Cos(mm*nn*theta[itheta])/totmult[ibin][iptbin]*(TMath::Exp(j01*j01/2./(*chi[ibin])[0]/(*chi[ibin])[0]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Power(-1,mm)*TMath::Exp(-j01*j01/2./(*chi[ibin])[0]/(*chi[ibin])[0]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.)));
 				deltavmean[ibin][iptbin]+=deltav[ibin][itheta][iptbin];
 			//	fstrv<<itheta<<"\t"<<v[ibin][itheta][iptbin]<<"\t"<<deltav[ibin][itheta][iptbin]<<endl;
 			}
@@ -105,8 +106,8 @@ void getResv(){
 		fstrv<<endl<<"V ref="<<(*V_mean)[ibin]<<"\t"<<"V int="<<V_int[ibin]<<endl;
 	}
 	
-	if(isSum)TFile *fout = new TFile("mergedv_Prod.root","Recreate");
-	else TFile *fout = new TFile("mergedv_Prod2.root","Recreate");
+	if(isSum)TFile *fout = new TFile("mergedv_Prod_inV2.root","Recreate");
+	else TFile *fout = new TFile("mergedv_Prod2_inV2.root","Recreate");
 	for(ibin=0;ibin<nbin;ibin++){
 	Nevent.Write("Nevent");
 	V_int.Write("V_int");

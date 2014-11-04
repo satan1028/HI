@@ -1,4 +1,6 @@
 #include "TMath.h"
+#include <stdlib.h>
+#include <time.h>
 Double_t GetRandom1(TF1 *f){
 Double_t*	fAlpha;	//!Array alpha. for each bin in x the deconvolution r of fIntegral
 Double_t*	fBeta;	//!Array beta. is approximated by x = alpha +beta*r *gamma*r**2
@@ -88,7 +90,10 @@ Double_t	fXmin;	//Lower bounds for the range
    // return random number
    //Double_t r  = gRandom->Rndm();
    TRandom3 *rnd0 = new TRandom3(0);
-   Double_t r = rnd0->Uniform(0.0,1.0);
+   //Double_t r = rnd0->Uniform(0.0,1.0);
+   Double_t r = rnd0->Rndm();
+   //srand(time(0));
+   //Double_t r = (double)rand()/(double)(RAND_MAX+1);
    Int_t bin  = TMath::BinarySearch(fNpx,fIntegral,r);
    Double_t rr = r - fIntegral[bin];
 

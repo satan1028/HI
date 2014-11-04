@@ -36,11 +36,13 @@ makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
 
 for(int i=0;i<ntotbin;i++){
 	TGraphErrors* gr24=new TGraphErrors(npt24,pt,v24[i],0,v24err[i]);
-    	TGraphErrors* grPFfull=plot("PFcandpt01to10",0,4,33,i);
-    	TGraphErrors* grPFon=plot("PFcandpt01to10/OnlyCharged",0,4,29,i);
-    	TGraphErrors* grtracklc01to10=plot("tracklcpt01to10",0,2,34,i);
+//    	TGraphErrors* grPFfull=plot("PFcandpt01to10",0,4,33,i);
+//    	TGraphErrors* grPFon=plot("PFcandpt01to10/OnlyCharged",0,4,29,i);
+//    	TGraphErrors* grtracklc01to10=plot("tracklcpt01to10",0,2,34,i);
     	TGraphErrors* grtracknormc03to6=plot("tracknormcpt03to6",0,2,21,i);
-    	TGraphErrors* grtracknormc03to6Sum=plot("tracknormcpt03to6",1,4,29,i);
+    //	TGraphErrors* grtracknormc03to6Sum=plot("tracknormcpt03to6",1,4,29,i);
+    	TGraphErrors* grtracknormc03to3tracknormcpt03to6=plot("tracknormcpt03to3tracknormcpt03to6",0,4,29,i);
+    	TGraphErrors* grtracknormc03to3=plot("tracknormcpt03to3",0,4,34,i);
         gr24->SetMarkerSize(1.6);
         gr24->SetMarkerColor(1);
         gr24->SetMarkerStyle(20);
@@ -53,7 +55,9 @@ for(int i=0;i<ntotbin;i++){
 	//grPFfull->Draw("Psame");
 	//grPFon->Draw("Psame");
    	grtracknormc03to6->Draw("Psame");
-   	grtracknormc03to6Sum->Draw("Psame");
+   	//grtracknormc03to6Sum->Draw("Psame");
+   	grtracknormc03to3tracknormcpt03to6->Draw("Psame");
+   	grtracknormc03to3->Draw("Psame");
         if(i==0 || i==3)
                 TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
         else
@@ -73,8 +77,11 @@ for(int i=0;i<ntotbin;i++){
       //  tl->AddEntry(grtracklc01to10,"LYZ track loose cut","lp");
         // tl->AddEntry(hFrame,Form("%.1f<p_{T}<%.1f (GeV/c)",0.1,10.0),"");
         tl->AddEntry(grtracknormc03to6,"LYZ general track ","lp");
-        tl->AddEntry(grtracknormc03to6Sum,"LYZ general track Sum","lp");
+       //tl->AddEntry(grtracknormc03to6Sum,"LYZ general track Sum","lp");
         tl->AddEntry(hFrame,Form("%.1f<p_{T}<%.1f (GeV/c)",0.3,6.0),"");
+        tl->AddEntry(grtracknormc03to3tracknormcpt03to6,"LYZ general track 0.3 to 6","lp");
+        tl->AddEntry(grtracknormc03to3,"LYZ general track ","lp");
+        tl->AddEntry(hFrame,Form("%.1f<p_{T}<%.1f (GeV/c)",0.3,3.0),"");
         //tlx1->SetNDC();
         //tlx1->SetTextSize(0.065);
         tlx2->SetTextSize(0.065);

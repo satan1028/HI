@@ -31,6 +31,7 @@ void proSTEGvn()
 
   //simple toy event generator
   TFile f(Form("/lio/lfs/cms/store/user/qixu/flow/NewSTEG/pPbDataV205m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
+  //TFile f(Form("vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
   TTree *tree = new TTree("tree","Event tree with a few branches");
   tree->Branch("npg", &b_npg, "npg/I");   // # of particles;
   tree->Branch("phirg", &b_phirg, "phirg/F");  // RP angle;
@@ -68,16 +69,17 @@ void proSTEGvn()
   for(int i=0; i<tot_num; i++){ 
     
     Psi = rnd->Uniform(0.0,PI2);
+    //Psi=0;
     b_phirg = Psi; 
     b_npg = rnd->Gaus(MeanMult,RMSMult); 
     n = 0;
   
     for(int j=0; j<b_npg;j++ ){
-     
       //mypt = PtDistr->GetRandom();
       mypt = GetRandom1(PtDistr);
       //myeta =  EtaDistr->GetRandom();
       myeta = GetRandom1(EtaDistr);
+
       //v1=V1vsEta->Eval(myeta);
       v2=V2vsPt->Eval(mypt);
       v3=V3vsPt->Eval(mypt);
@@ -92,6 +94,7 @@ void proSTEGvn()
       
       //myphi = PhiDistr->GetRandom(); // randon selection dn/dphi
       myphi = GetRandom1(PhiDistr); // randon selection dn/dphi
+
       myphi = myphi+Psi; // angle in lab frame -- needed for correct cumulant v2
       if (myphi>PI2) myphi=myphi-PI2; // 0 - 2*Pi
       
@@ -101,7 +104,7 @@ void proSTEGvn()
       
     } // End of loop over particles
  
-    if (i%50 == 0) cout << i << " " << "events processed" << endl;
+    if (i%1 == 0) cout << i << " " << "events processed" << endl;
 
     b_n = n;
     tree->Fill();
