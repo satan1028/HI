@@ -1,0 +1,22 @@
+chi2=0	NDF=0
+par0=1	err0=0
+par1=0.3	err1=0
+par2=-2	err2=0
+par3=0.3	err3=0
+par4=0.6	err4=0
+HFEnergy4
+chi2=0	NDF=0
+par0=1	err0=0
+par1=0.3	err1=0
+par2=-2	err2=0
+par3=0.3	err3=0
+par4=0.6	err4=0
+HFEnergyPlus
+chi2=0	NDF=0
+par0=1	err0=0
+par1=0.3	err1=0
+par2=-2	err2=0
+par3=0.3	err3=0
+par4=0.6	err4=0
+HFEnergyPlus4
+Ntrk

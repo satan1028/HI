@@ -1,0 +1,14 @@
+pluginAppeltelRpPbAnalysis.so PAPileUpVertexFilter CMS%EDM%Framework%Module
+pluginAppeltelRpPbAnalysis.so PAPileUpVertexFilter CMS%EDM%Framework%ParameterSet%Description
+pluginAppeltelRpPbAnalysis.so RpPbMCAnalyzer CMS%EDM%Framework%Module
+pluginAppeltelRpPbAnalysis.so RpPbMCAnalyzer CMS%EDM%Framework%ParameterSet%Description
+pluginAppeltelRpPbAnalysis.so RpPbTrackingAnalyzer CMS%EDM%Framework%Module
+pluginAppeltelRpPbAnalysis.so RpPbTrackingAnalyzer CMS%EDM%Framework%ParameterSet%Description
+pluginAppeltelRpPbAnalysis.so RpPbTrackingCorrections CMS%EDM%Framework%Module
+pluginAppeltelRpPbAnalysis.so RpPbTrackingCorrections CMS%EDM%Framework%ParameterSet%Description
+pluginAppeltelRpPbAnalysis.so RpPbVertexAnalyzer CMS%EDM%Framework%Module
+pluginAppeltelRpPbAnalysis.so RpPbVertexAnalyzer CMS%EDM%Framework%ParameterSet%Description
+pluginTutorialExampleGenAnalyzer.so ExampleGenAnalyzer CMS%EDM%Framework%Module
+pluginTutorialExampleGenAnalyzer.so ExampleGenAnalyzer CMS%EDM%Framework%ParameterSet%Description
+pluginflowAnalysisSkimPFCand.so SkimPFCand CMS%EDM%Framework%Module
+pluginflowAnalysisSkimPFCand.so SkimPFCand CMS%EDM%Framework%ParameterSet%Description

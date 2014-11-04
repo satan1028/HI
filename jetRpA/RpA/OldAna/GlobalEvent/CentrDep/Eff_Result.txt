@@ -1,0 +1,12 @@
+output/weight/pPbHist_Epos_HLT.root
+before event selection and trigger efficiency correction:188500
+after event selection and trigger efficiency correction:178388
+left ratio:0.946355
+skimed ratio:0.0536446
+-----------------------------------------------
+output/weight/pPbHist_Hijing_HLT.root
+before event selection and trigger efficiency correction:180000
+after event selection and trigger efficiency correction:177395
+left ratio:0.985528
+skimed ratio:0.0144722
+-----------------------------------------------

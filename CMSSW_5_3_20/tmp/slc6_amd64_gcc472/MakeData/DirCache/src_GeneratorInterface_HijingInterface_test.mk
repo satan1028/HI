@@ -1,0 +1,3 @@
+ALL_COMMONRULES += src_GeneratorInterface_HijingInterface_test
+src_GeneratorInterface_HijingInterface_test_parent := GeneratorInterface/HijingInterface
+src_GeneratorInterface_HijingInterface_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_GeneratorInterface_HijingInterface_test,src/GeneratorInterface/HijingInterface/test,TEST))

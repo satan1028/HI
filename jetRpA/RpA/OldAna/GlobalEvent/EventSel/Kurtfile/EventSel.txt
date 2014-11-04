@@ -1,0 +1,11 @@
+	CutName		Number of Events	fraction to the total	fraction to the previous
+Jet20:
+1. Run <=211256		79079894		100.00%			
+2. HLT_PAJet*_NoJetID_v1	380668			0.48%			0.48%
+3. pBeamScrapingFilter		190331			0.24%			50.00%
+4. pprimaryvertexFilter		190146			0.24%			99.90%
+5. phfPosFilter1		190078			0.24%			99.96%
+6. phfNegFilter1		190055			0.24%			99.99%
+7. pHBHENoiseFilter		189974			0.24%			99.96%
+8. |vertex.z| < 15		189116			0.24%			99.55%
+

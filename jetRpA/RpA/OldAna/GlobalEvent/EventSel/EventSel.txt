@@ -1,0 +1,73 @@
+	CutName		Number of Events	fraction to the total	fraction to the previous
+Jet20:
+0. Nocut			3170341			100.00%			
+1. Run 210676-211256		738608			23.30%			23.30%
+2. HLT_PAJet*_NoJetID_v1	738608			23.30%			100.00%
+3. pBeamScrapingFilter		738597			23.30%			100.00%
+4. pprimaryvertexFilter		736479			23.23%			99.71%
+5. phfPosFilter1		736199			23.22%			99.96%
+6. phfNegFilter1		736098			23.22%			99.99%
+7. pHBHENoiseFilter		735944			23.21%			99.98%
+8. |vertex.z| < 15		733105			23.12%			99.61%
+9. pVertexFilterCutGplus	698428			22.03%			95.27%
+
+Jet40:
+0. Nocut			9251812			100.00%			
+1. Run 210676-211256		4462959			48.24%			48.24%
+2. HLT_PAJet*_NoJetID_v1	1822578			19.70%			40.84%
+3. pBeamScrapingFilter		1822501			19.70%			100.00%
+4. pprimaryvertexFilter		1794293			19.39%			98.45%
+5. phfPosFilter1		1793568			19.39%			99.96%
+6. phfNegFilter1		1793375			19.38%			99.99%
+7. pHBHENoiseFilter		1790933			19.36%			99.86%
+8. |vertex.z| < 15		1783243			19.27%			99.57%
+9. pVertexFilterCutGplus	1712040			18.50%			96.01%
+
+Jet60:
+0. Nocut			9251812			100.00%			
+1. Run 210676-211256		4462959			48.24%			48.24%
+2. HLT_PAJet*_NoJetID_v1	2744624			29.67%			61.50%
+3. pBeamScrapingFilter		2744420			29.66%			99.99%
+4. pprimaryvertexFilter		2649393			28.64%			96.54%
+5. phfPosFilter1		2648335			28.63%			99.96%
+6. phfNegFilter1		2648031			28.62%			99.99%
+7. pHBHENoiseFilter		2643101			28.57%			99.81%
+8. |vertex.z| < 15		2631322			28.44%			99.55%
+9. pVertexFilterCutGplus	2538487			27.44%			96.47%
+
+Jet80:
+0. Nocut			4825168			100.00%			
+1. Run 210676-211256		2185713			45.30%			45.30%
+2. HLT_PAJet*_NoJetID_v1	1929412			39.99%			88.27%
+3. pBeamScrapingFilter		1929226			39.98%			99.99%
+4. pprimaryvertexFilter		1775114			36.79%			92.01%
+5. phfPosFilter1		1774335			36.77%			99.96%
+6. phfNegFilter1		1774114			36.77%			99.99%
+7. pHBHENoiseFilter		1767587			36.63%			99.63%
+8. |vertex.z| < 15		1760192			36.48%			99.58%
+9. pVertexFilterCutGplus	1693667			35.10%			96.22%
+
+Jet100:
+0. Nocut			4825168			100.00%			
+1. Run 210676-211256		2185713			45.30%			45.30%
+2. HLT_PAJet*_NoJetID_v1	932632			19.33%			42.67%
+3. pBeamScrapingFilter		932523			19.33%			99.99%
+4. pprimaryvertexFilter		818325			16.96%			87.75%
+5. phfPosFilter1		817912			16.95%			99.95%
+6. phfNegFilter1		817786			16.95%			99.98%
+7. pHBHENoiseFilter		812597			16.84%			99.37%
+8. |vertex.z| < 15		809394			16.77%			99.61%
+9. pVertexFilterCutGplus	775784			16.08%			95.85%
+
+MB:
+0. Nocut			30938610		100.00%			
+1. Run 210676-211256		9884727			31.95%			31.95%
+2. HLT_PAJet*_NoJetID_v1	9871745			31.91%			99.87%
+3. pBeamScrapingFilter		9869825			31.90%			99.98%
+4. pprimaryvertexFilter		9670779			31.26%			97.98%
+5. phfPosFilter1		9384251			30.33%			97.04%
+6. phfNegFilter1		9279018			29.99%			98.88%
+7. pHBHENoiseFilter		9278727			29.99%			100.00%
+8. |vertex.z| < 15		9244738			29.88%			99.63%
+9. pVertexFilterCutGplus	9060917			29.29%			98.01%
+

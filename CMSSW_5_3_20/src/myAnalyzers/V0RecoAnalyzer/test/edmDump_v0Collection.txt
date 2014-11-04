@@ -1,0 +1,17 @@
+Type                                  Module                      Label       Process    
+-----------------------------------------------------------------------------------------
+L1GlobalTriggerReadoutRecord          "gtDigis"                   ""          "RECO"     
+L1MuGMTReadoutCollection              "gtDigis"                   ""          "RECO"     
+edm::OwnVector<TrackingRecHit,edm::ClonePolicy<TrackingRecHit> >    "generalTracks"             ""          "RECO"     
+edm::SortedCollection<CaloTower,edm::StrictWeakOrdering<CaloTower> >    "towerMaker"                ""          "RECO"     
+reco::BeamSpot                        "offlineBeamSpot"           ""          "RECO"     
+vector<reco::Track>                   "generalTracks"             ""          "RECO"     
+vector<reco::TrackExtra>              "generalTracks"             ""          "RECO"     
+vector<reco::Vertex>                  "offlinePrimaryVertices"    ""          "RECO"     
+vector<reco::Vertex>                  "offlinePrimaryVerticesWithBS"   ""          "RECO"     
+vector<reco::Vertex>                  "pixelVertices"             ""          "RECO"     
+vector<reco::VertexCompositeCandidate>    "generalV0Candidates"       "Kshort"    "RECO"     
+vector<reco::VertexCompositeCandidate>    "generalV0Candidates"       "Lambda"    "RECO"     
+vector<pat::CompositeCandidate>       "v0CollectionMaker"         "allVees"   "V0COLL"   
+vector<reco::VertexCompositeCandidate>    "localV0Candidates"         "Kshort"    "V0COLL"   
+vector<reco::VertexCompositeCandidate>    "localV0Candidates"         "Lambda"    "V0COLL"   

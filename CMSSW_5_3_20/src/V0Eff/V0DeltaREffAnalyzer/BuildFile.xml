@@ -1,0 +1,33 @@
+<use   name="FWCore/Framework"/>
+<use   name="FWCore/PluginManager"/>
+<use   name="FWCore/ParameterSet"/>
+<use   name="FWCore/ServiceRegistry"/>
+<use   name="CommonTools/UtilAlgos"/>
+<use   name="DataFormats/GeometryVector"/>
+<use   name="DataFormats/TrackReco"/>
+<use   name="DataFormats/VertexReco"/>
+<use   name="DataFormats/PatCandidates"/>
+<use   name="DataFormats/RecoCandidate"/>
+<use   name="DataFormats/BeamSpot"/>
+<use   name="SimDataFormats/GeneratorProducts"/>
+<use   name="DataFormats/Candidate"/>
+<use   name="DataFormats/HepMCCandidate"/>
+<use   name="DataFormats/Math"/>
+<use   name="RecoVertex/KinematicFit"/>
+<use   name="RecoVertex/KinematicFitPrimitives"/>
+<use   name="RecoVertex/AdaptiveVertexFit"/>
+<use   name="TrackingTools/IPTools"/>
+<use   name="TrackingTools/TransientTrack"/>
+<use   name="TrackingTools/Records"/>
+<use   name="TrackingTools/PatternTools"/>
+<use   name="TrackingTools/TrajectoryState"/>
+<use   name="MagneticField/Engine"/>
+<use   name="MagneticField/Records"/>
+<use   name="DataFormats/L1GlobalTrigger"/>
+<use   name="DataFormats/HcalDetId"/>
+<use   name="CondFormats/L1TObjects"/>
+<use   name="CondFormats/DataRecord"/>
+<use   name="root"/>
+<flags   EDM_PLUGIN="1"/>
+<export>
+</export>

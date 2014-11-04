@@ -1,0 +1,22 @@
+<arguments>
+  <Job MaxEvents="500"  InputFiles="/store/himc/HiWinter13/Hijing_PPb502_MinimumBias/GEN-SIM-RECO/pa_STARTHI53_V25-v1/30000/F6667454-0A78-E211-8630-00266CFAEA68.root"  SkipEvents="0"  InputBlocks="/Hijing_PPb502_MinimumBias/HiWinter13-pa_STARTHI53_V25-v1/GEN-SIM-RECO#ca77d35c-77aa-11e2-bb2c-00221959e69e"  JobID="1" >
+  </Job>
+  <Job MaxEvents="500"  InputFiles="/store/himc/HiWinter13/Hijing_PPb502_MinimumBias/GEN-SIM-RECO/pa_STARTHI53_V25-v1/30000/F6667454-0A78-E211-8630-00266CFAEA68.root"  SkipEvents="500"  InputBlocks="/Hijing_PPb502_MinimumBias/HiWinter13-pa_STARTHI53_V25-v1/GEN-SIM-RECO#ca77d35c-77aa-11e2-bb2c-00221959e69e"  JobID="2" >
+  </Job>
+  <Job MaxEvents="500"  InputFiles="/store/himc/HiWinter13/Hijing_PPb502_MinimumBias/GEN-SIM-RECO/pa_STARTHI53_V25-v1/30000/F6667454-0A78-E211-8630-00266CFAEA68.root"  SkipEvents="1000"  InputBlocks="/Hijing_PPb502_MinimumBias/HiWinter13-pa_STARTHI53_V25-v1/GEN-SIM-RECO#ca77d35c-77aa-11e2-bb2c-00221959e69e"  JobID="3" >
+  </Job>
+  <Job MaxEvents="500"  InputFiles="/store/himc/HiWinter13/Hijing_PPb502_MinimumBias/GEN-SIM-RECO/pa_STARTHI53_V25-v1/30000/F6667454-0A78-E211-8630-00266CFAEA68.root"  SkipEvents="1500"  InputBlocks="/Hijing_PPb502_MinimumBias/HiWinter13-pa_STARTHI53_V25-v1/GEN-SIM-RECO#ca77d35c-77aa-11e2-bb2c-00221959e69e"  JobID="4" >
+  </Job>
+  <Job MaxEvents="500"  InputFiles="/store/himc/HiWinter13/Hijing_PPb502_MinimumBias/GEN-SIM-RECO/pa_STARTHI53_V25-v1/30000/F6667454-0A78-E211-8630-00266CFAEA68.root"  SkipEvents="2000"  InputBlocks="/Hijing_PPb502_MinimumBias/HiWinter13-pa_STARTHI53_V25-v1/GEN-SIM-RECO#ca77d35c-77aa-11e2-bb2c-00221959e69e"  JobID="5" >
+  </Job>
+  <Job MaxEvents="500"  InputFiles="/store/himc/HiWinter13/Hijing_PPb502_MinimumBias/GEN-SIM-RECO/pa_STARTHI53_V25-v1/30000/F6667454-0A78-E211-8630-00266CFAEA68.root"  SkipEvents="2500"  InputBlocks="/Hijing_PPb502_MinimumBias/HiWinter13-pa_STARTHI53_V25-v1/GEN-SIM-RECO#ca77d35c-77aa-11e2-bb2c-00221959e69e"  JobID="6" >
+  </Job>
+  <Job MaxEvents="500"  InputFiles="/store/himc/HiWinter13/Hijing_PPb502_MinimumBias/GEN-SIM-RECO/pa_STARTHI53_V25-v1/30000/F6667454-0A78-E211-8630-00266CFAEA68.root"  SkipEvents="3000"  InputBlocks="/Hijing_PPb502_MinimumBias/HiWinter13-pa_STARTHI53_V25-v1/GEN-SIM-RECO#ca77d35c-77aa-11e2-bb2c-00221959e69e"  JobID="7" >
+  </Job>
+  <Job MaxEvents="500"  InputFiles="/store/himc/HiWinter13/Hijing_PPb502_MinimumBias/GEN-SIM-RECO/pa_STARTHI53_V25-v1/30000/F6667454-0A78-E211-8630-00266CFAEA68.root"  SkipEvents="3500"  InputBlocks="/Hijing_PPb502_MinimumBias/HiWinter13-pa_STARTHI53_V25-v1/GEN-SIM-RECO#ca77d35c-77aa-11e2-bb2c-00221959e69e"  JobID="8" >
+  </Job>
+  <Job MaxEvents="500"  InputFiles="/store/himc/HiWinter13/Hijing_PPb502_MinimumBias/GEN-SIM-RECO/pa_STARTHI53_V25-v1/30000/F6667454-0A78-E211-8630-00266CFAEA68.root"  SkipEvents="4000"  InputBlocks="/Hijing_PPb502_MinimumBias/HiWinter13-pa_STARTHI53_V25-v1/GEN-SIM-RECO#ca77d35c-77aa-11e2-bb2c-00221959e69e"  JobID="9" >
+  </Job>
+  <Job MaxEvents="500"  InputFiles="/store/himc/HiWinter13/Hijing_PPb502_MinimumBias/GEN-SIM-RECO/pa_STARTHI53_V25-v1/30000/F6667454-0A78-E211-8630-00266CFAEA68.root"  SkipEvents="4500"  InputBlocks="/Hijing_PPb502_MinimumBias/HiWinter13-pa_STARTHI53_V25-v1/GEN-SIM-RECO#ca77d35c-77aa-11e2-bb2c-00221959e69e"  JobID="10" >
+  </Job>
+</arguments>

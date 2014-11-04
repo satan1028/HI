@@ -1,0 +1,12 @@
+TRandES efficiency:
+pPbHist_Hijing_TrandEs.root
+before TRandES efficiency correction:180000
+after TRandES efficiency correction:151471
+ratio:0.841506
+-----------------------------------------------
+TRandES efficiency:
+pPbHist_Epos_TrandEs.root
+before TRandES efficiency correction:188500
+after TRandES efficiency correction:151708
+ratio:0.804817
+-----------------------------------------------

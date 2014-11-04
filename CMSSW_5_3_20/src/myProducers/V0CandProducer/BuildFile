@@ -1,0 +1,24 @@
+<use name=FWCore/Framework>
+<use name=FWCore/PluginManager>
+<use name=FWCore/ParameterSet>
+<use name=DataFormats/PatCandidates>
+<use name=DataFormats/RecoCandidate>
+<use name=DataFormats/V0Candidate>
+<use name=TrackingTools/Records>
+<use name=TrackingTools/TransientTrack>
+<use name=RecoVertex/KalmanVertexFit>
+<use name=RecoVertex/VertexTools>
+<flags EDM_PLUGIN=1>
+<export>
+   <lib name=myProducersV0CandProducer>
+   <use name=FWCore/Framework>
+   <use name=FWCore/PluginManager>
+   <use name=FWCore/ParameterSet>
+   <use name=DataFormats/PatCandidates>
+   <use name=DataFormats/RecoCandidate>
+   <use name=DataFormats/V0Candidate>
+   <use name=TrackingTools/Records>
+   <use name=TrackingTools/TransientTrack>
+   <use name=RecoVertex/VertexTools>
+   <use name=RecoVertex/KalmanVertexFit>
+</export>

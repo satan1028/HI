@@ -1,0 +1,120 @@
+hHFEnergy4_DS Integral=0.986464
+0th: 31.59	0.1
+1th: 25.53	0.2
+2th: 21.03	0.3
+3th: 10.1	0.6
+4th: 2.8	0.9
+hHFEnergy4_corr_Eric Integral=0.988055
+0th: 31.6	0.1
+1th: 25.54	0.2
+2th: 21.05	0.3
+3th: 10.14	0.6
+4th: 2.86	0.9
+hHFEnergy4_corr_QiaoNtrk Integral=0.986464
+0th: 31.59	0.1
+1th: 25.53	0.2
+2th: 21.03	0.3
+3th: 10.11	0.6
+4th: 2.85	0.9
+hHFEnergy4_corr_QiaoHFPlus4 Integral=0.986464
+0th: 31.59	0.1
+1th: 25.53	0.2
+2th: 21.03	0.3
+3th: 10.12	0.6
+4th: 2.86	0.9
+hHFEnergy4_corr_QiaoReHFPlus4 Integral=0.986464
+0th: 31.59	0.1
+1th: 25.53	0.2
+2th: 21.03	0.3
+3th: 10.12	0.6
+4th: 2.86	0.9
+hHFEnergyPlus_DS Integral=0.986462
+0th: 42.62	0.1
+1th: 32.71	0.2
+2th: 25.74	0.3
+3th: 10.83	0.6
+4th: 2.55	0.9
+hHFEnergyPlus_corr_Eric Integral=0.988053
+0th: 42.63	0.1
+1th: 32.73	0.2
+2th: 25.76	0.3
+3th: 10.87	0.6
+4th: 2.61	0.9
+hHFEnergyPlus_corr_QiaoNtrk Integral=0.986462
+0th: 42.62	0.1
+1th: 32.71	0.2
+2th: 25.74	0.3
+3th: 10.83	0.6
+4th: 2.59	0.9
+hHFEnergyPlus_corr_QiaoHFPlus4 Integral=0.986462
+0th: 42.62	0.1
+1th: 32.71	0.2
+2th: 25.74	0.3
+3th: 10.84	0.6
+4th: 2.58	0.9
+hHFEnergyPlus_corr_QiaoReHFPlus4 Integral=0.986462
+0th: 42.62	0.1
+1th: 32.71	0.2
+2th: 25.74	0.3
+3th: 10.84	0.6
+4th: 2.58	0.9
+hHFEnergyPlus4_DS Integral=0.986464
+0th: 19.11	0.1
+1th: 14.5	0.2
+2th: 11.31	0.3
+3th: 4.71	0.6
+4th: 1.05	0.9
+hHFEnergyPlus4_corr_Eric Integral=0.988055
+0th: 19.11	0.1
+1th: 14.51	0.2
+2th: 11.33	0.3
+3th: 4.73	0.6
+4th: 1.08	0.9
+hHFEnergyPlus4_corr_QiaoNtrk Integral=0.986464
+0th: 19.11	0.1
+1th: 14.5	0.2
+2th: 11.31	0.3
+3th: 4.71	0.6
+4th: 1.07	0.9
+hHFEnergyPlus4_corr_QiaoHFPlus4 Integral=0.986464
+0th: 19.11	0.1
+1th: 14.5	0.2
+2th: 11.31	0.3
+3th: 4.71	0.6
+4th: 1.05	0.9
+hHFEnergyPlus4_corr_QiaoReHFPlus4 Integral=0.986464
+0th: 19.11	0.1
+1th: 14.5	0.2
+2th: 11.31	0.3
+3th: 4.71	0.6
+4th: 1.05	0.9
+hNtrk_DS Integral=0.983849
+0th: 85	0.1
+1th: 73	0.2
+2th: 61	0.3
+3th: 30	0.6
+4th: 9	0.9
+hNtrk_corr_Eric Integral=0.985688
+0th: 85	0.1
+1th: 73	0.2
+2th: 61	0.3
+3th: 30	0.6
+4th: 10	0.9
+hNtrk_corr_QiaoNtrk Integral=0.983849
+0th: 85	0.1
+1th: 73	0.2
+2th: 61	0.3
+3th: 30	0.6
+4th: 9	0.9
+hNtrk_corr_QiaoHFPlus4 Integral=0.983843
+0th: 85	0.1
+1th: 73	0.2
+2th: 61	0.3
+3th: 30	0.6
+4th: 10	0.9
+hNtrk_corr_QiaoReHFPlus4 Integral=0.983844
+0th: 85	0.1
+1th: 73	0.2
+2th: 61	0.3
+3th: 30	0.6
+4th: 10	0.9

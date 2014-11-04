@@ -1,0 +1,536 @@
+// -*- C++ -*-
+//
+// Package:    LYZfirst
+// Class:      LYZfirst
+// 
+/**\class LYZfirst LYZfirst.cc Analysis/LYZfirst/src/LYZfirst.cc
+
+ Description: [one line class summary]
+
+ Implementation:
+     [Notes on implementation]
+*/
+//
+// Original Author:  Tuo Shengquan
+//         Created:  Sun Jul 21 21:49:24 EDT 2013
+// $Id$
+//
+//
+
+
+// system include files
+#include <memory>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <math.h>
+#include <TH1D.h>
+#include <TH2D.h>
+#include <TNtuple.h>
+#include <TFile.h>
+#include <TROOT.h>
+#include <TSystem.h>
+#include <TString.h>
+#include <TCanvas.h>
+#include <TVector3.h>
+#include <TRandom.h>
+
+// user include files
+#include "FWCore/Framework/interface/Frameworkfwd.h"
+#include "FWCore/Framework/interface/EDAnalyzer.h"
+#include "FWCore/Framework/interface/Event.h"
+#include "FWCore/Framework/interface/MakerMacros.h"
+#include "FWCore/Utilities/interface/InputTag.h"
+#include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "CommonTools/UtilAlgos/interface/TFileService.h"
+#include "DataFormats/VertexReco/interface/Vertex.h"
+#include "DataFormats/VertexReco/interface/VertexFwd.h"
+#include "DataFormats/TrackReco/interface/Track.h"
+#include "DataFormats/TrackReco/interface/TrackFwd.h"
+
+#include "DataFormats/HeavyIonEvent/interface/CentralityProvider.h"
+const int NtrkBin=7;
+const int binboundaries[NtrkBin+1]={185,180,175,170,165,160,155,150};  //
+#include <complex>
+#define rootJ0 2.4048256
+#define J1rootJ0 0.519147 // J1(rootJ0)
+#define J2rootJ0 0.431755 // J2(rootJ0)
+#define kr 200
+#define kt 5
+#define Pi 3.1415926535
+
+  int nct, nh;
+  double Nh, had;
+  double phi0[20000];
+  double pt0[20000];
+  double eta0[20000];
+
+double GthetaRe[NtrkBin][kt][kr], GthetaIm[NtrkBin][kt][kr];
+double Qtheta[kt], Q2[NtrkBin][kt], Qxa[NtrkBin][kt], Qya[NtrkBin][kt], Qx[kt], Qy[kt];
+double Mmean[NtrkBin];
+long Evt[NtrkBin], Mult;
+
+FILE *outGtheta, *outgtheta;
+
+const std::complex<double> i(0.,1.);
+std::complex<double> gtheta[kt][kr];
+std::complex<double> G2[NtrkBin][kt][kr];
+double G2Re[NtrkBin][kt][kr], G2Im[NtrkBin][kt][kr], gthetaRe[kt][kr], gthetaIm[kt][kr];
+
+double temp;
+double RZ[NtrkBin][kr];
+int k0, k1, k2, islcpt, inttemp;
+double theta[kt];
+
+Int_t nkr, fnkr;
+Double_t hQ2, hQx, hQy; 
+Double_t hGthetaRe[kr], hGthetaIm[kr], hG2Re[kr], hG2Im[kr];
+
+double Vmax[NtrkBin]={0.065*215.0, 0.065*210.0, 0.065*205.0, 0.065*200.0, 0.065*195.0, 0.065*190.0, 0.065*185.0};
+double Vstep[NtrkBin]={0.00025*215.0, 0.00025*210.0, 0.00025*205.0, 0.00025*200.0, 0.00025*195.0, 0.00025*190.0, 0.00025*185.0};
+
+//
+// class declaration
+//
+
+class LYZfirst : public edm::EDAnalyzer {
+   public:
+      explicit LYZfirst(const edm::ParameterSet&);
+      ~LYZfirst();
+
+      static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+
+
+   private:
+      virtual void beginJob() ;
+      virtual void analyze(const edm::Event&, const edm::EventSetup&);
+      virtual void endJob() ;
+
+      virtual void beginRun(edm::Run const&, edm::EventSetup const&);
+      virtual void endRun(edm::Run const&, edm::EventSetup const&);
+      virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
+      virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
+
+      // ----------member data ---------------------------
+      void lyzFirstPass(const edm::Event&, const edm::EventSetup&);
+      edm::Service<TFileService> fs;
+
+  edm::InputTag srcTrack_;
+   double vzcutmin_;
+   double vzcutmax_;
+   double etaMin_;
+   double etaMax_;
+   double ptMin_;
+   double ptMax_;
+   double d0cut_;
+   double dzcut_;
+   double chi2cut_;
+   double jetptcut_;
+   int minMult_;
+   int maxMult_;
+
+   TH1D* hMult[NtrkBin];
+   TTree *tree[NtrkBin];
+
+   TH1D* hpt;
+   TH1D* heta;
+   TH1D* hphi;
+   TH1D* hvz;
+TH1D * NtrkBinHist_;
+TH1D * trkHist_;
+TH1D * trkHistFull_;
+TH1D * centHist_;
+TH1D * CentMult[NtrkBin];
+
+//CentralityProvider * centrality_;
+
+};
+
+//
+// constants, enums and typedefs
+//
+
+//
+// static data member definitions
+//
+
+//
+// constructors and destructor
+//
+LYZfirst::LYZfirst(const edm::ParameterSet& iConfig):
+
+  srcTrack_(iConfig.getUntrackedParameter<edm::InputTag>("srcTrack")),
+  vzcutmin_(iConfig.getUntrackedParameter<double>("vzcutmin")),
+  vzcutmax_(iConfig.getUntrackedParameter<double>("vzcutmax")),
+  etaMin_(iConfig.getUntrackedParameter<double>("etaMin")),
+  etaMax_(iConfig.getUntrackedParameter<double>("etaMax")),
+  ptMin_(iConfig.getUntrackedParameter<double>("ptMin")),
+  ptMax_(iConfig.getUntrackedParameter<double>("ptMax")),
+  d0cut_(iConfig.getUntrackedParameter<double>("d0cut")),
+  dzcut_(iConfig.getUntrackedParameter<double>("dzcut")),
+  chi2cut_(iConfig.getUntrackedParameter<double>("chi2cut")),
+  jetptcut_(iConfig.getUntrackedParameter<double>("jetptcut")),
+  minMult_(iConfig.getUntrackedParameter<int>("minMult")),
+  maxMult_(iConfig.getUntrackedParameter<int>("maxMult"))
+{
+   //now do what ever initialization is needed
+
+}
+
+
+LYZfirst::~LYZfirst()
+{
+ 
+   // do anything here that needs to be done at desctruction time
+   // (e.g. close files, deallocate resources etc.)
+   fclose(outGtheta);
+   fclose(outgtheta);
+
+}
+
+
+//
+// member functions
+//
+
+// ------------ method called for each event  ------------
+void
+LYZfirst::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
+{
+   using namespace edm;
+   using namespace std;
+   using namespace reco;
+
+   //cout<<"IN analyze now;"<<endl;
+   lyzFirstPass(iEvent, iSetup);
+
+#ifdef THIS_IS_AN_EVENT_EXAMPLE
+   Handle<ExampleData> pIn;
+   iEvent.getByLabel("example",pIn);
+#endif
+   
+#ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
+   ESHandle<SetupData> pSetup;
+   iSetup.get<SetupRecord>().get(pSetup);
+#endif
+}
+
+
+// ------------ method called once each job just before starting event loop  ------------
+void 
+LYZfirst::beginJob()
+{
+   if ((outGtheta=fopen("Gtheta.txt","w")) == NULL)  printf("\n ERROR: Can't open results\n\n");
+   if ((outgtheta=fopen("gtheta.txt","w")) == NULL)  printf("\n ERROR: Can't open results\n\n");
+   
+   for(k0=0; k0<NtrkBin; k0++){
+    for(k2=0; k2<kr; k2++){
+      RZ[k0][k2]=rootJ0/(Vmax[k0]-Vstep[k0]*k2);
+     }
+    }
+    
+    for(k1=0; k1<kt; k1++)  theta[k1]=((double) k1)*Pi/((double) kt);
+   for(k0=0; k0<NtrkBin; k0++){
+    for(k1=0; k1<kt; k1++){
+      Qxa[k0][k1]=0.;
+      Qya[k0][k1]=0.;
+      Q2[k0][k1]=0.;
+     for(k2=0; k2<kr; k2++){
+       GthetaRe[k0][k1][k2]=GthetaIm[k0][k1][k2]=0.0;
+       G2Re[k0][k1][k2]=G2Im[k0][k1][k2]=0.0;
+       G2[k0][k1][k2]=0.0;
+      }
+     }
+     Evt[k0]=0;
+     Mmean[k0]=0;
+    }
+
+  TH1D::SetDefaultSumw2();
+  char histName[200];
+  for(k0=0; k0<NtrkBin; k0++){
+   sprintf(histName,"hMult_%d",k0);
+   hMult[k0] = fs->make<TH1D>(histName,histName,2000,0,2000);
+  }
+
+  char treename[200];
+  for(k0=0; k0<NtrkBin; k0++){
+   sprintf(treename,"tree_%d",k0);
+   tree[k0] = fs->make<TTree>(treename,"Five Event tree");
+   tree[k0]->Branch("nkr", &nkr, "nkr/I");
+   tree[k0]->Branch("hQ2", &hQ2, "hQ2/D");
+   tree[k0]->Branch("hQx", &hQx, "hQx/D");
+   tree[k0]->Branch("hQy", &hQy, "hQy/D");
+   tree[k0]->Branch("hGthetaRe", &hGthetaRe, "hGthetaRe[nkr]/D");
+   tree[k0]->Branch("hGthetaIm", &hGthetaIm, "hGthetaIm[nkr]/D");
+   tree[k0]->Branch("hG2Re", &hG2Re, "hG2Re[nkr]/D");
+   tree[k0]->Branch("hG2Im", &hG2Im, "hG2Im[nkr]/D");
+  }  
+
+  hvz = fs->make<TH1D>("vz",";N",200,-30,30);
+  hpt = fs->make<TH1D>("pt",";Tracks",200,0,50);
+  heta = fs->make<TH1D>("eta",";Tracks",200,-4,4);
+  hphi = fs->make<TH1D>("phi",";Tracks",200,-4,4);
+
+NtrkBinHist_ = fs->make<TH1D>("ntrkbinhist","NTrackOffline Bin Distribution", 10, 0., 10.);
+centHist_ = fs->make<TH1D>("centhist","NTrackOffline Bin Distribution", 100, 0., 100.);
+trkHist_ = fs->make<TH1D>("trkhist","NTrackOffline Distribution", 800, 0., 800.);
+trkHistFull_ = fs->make<TH1D>("trkhistfull","NTrackOffline Distribution", 800, 0., 800.);
+
+ char hname[NtrkBin][200]={"ntrk0", "ntrk1", "ntrk2", "ntrk3", "ntrk4", "ntrk5", "ntrk6"};
+ for(int hist=0;hist<NtrkBin;hist++){
+  CentMult[hist] = fs->make<TH1D>(hname[hist],hname[hist], 500, 0., 500.);
+ }
+
+}
+
+// ------------ method called once each job just after ending the event loop  ------------
+void 
+LYZfirst::endJob() 
+{
+
+      for(k0=0; k0<NtrkBin; k0++){
+       if(Evt[k0]>0){
+       for(k1=0; k1<kt; k1++) {
+         Q2[k0][k1]/=Evt[k0];
+         Qxa[k0][k1]/=Evt[k0];
+         Qya[k0][k1]/=Evt[k0];
+        for(k2=0; k2<kr; k2++) {
+         GthetaRe[k0][k1][k2]/=Evt[k0];
+         GthetaIm[k0][k1][k2]/=Evt[k0];
+         G2[k0][k1][k2]/=Evt[k0];
+         G2Re[k0][k1][k2]=std::real(G2[k0][k1][k2]);
+         G2Im[k0][k1][k2]=std::imag(G2[k0][k1][k2]);
+        }
+       } // k1
+       Mmean[k0]/=Evt[k0];
+
+       fprintf(outGtheta,"%li   %.6g\n", Evt[k0], Mmean[k0]);
+       fprintf(outgtheta,"%li   %.6g\n", Evt[k0], Mmean[k0]);
+       for(k1=0; k1<kt; k1++) {
+        fnkr = 0;
+        for(k2=0; k2<kr; k2++) {
+         fprintf(outGtheta,"%.10g   %.10g\n", GthetaRe[k0][k1][k2], GthetaIm[k0][k1][k2]);
+         fprintf(outgtheta,"%.10g   %.10g\n", G2Re[k0][k1][k2], G2Im[k0][k1][k2]);
+         hGthetaRe[fnkr] = GthetaRe[k0][k1][k2];
+         hGthetaIm[fnkr] = GthetaIm[k0][k1][k2];
+         hG2Re[fnkr] = G2Re[k0][k1][k2];
+         hG2Im[fnkr] = G2Im[k0][k1][k2];
+         fnkr++;
+        }
+         fprintf(outGtheta,"%.10g   %.10g   %.10g\n", Q2[k0][k1], Qxa[k0][k1], Qya[k0][k1]);
+         fprintf(outgtheta,"%.10g   %.10g   %.10g\n", Q2[k0][k1], Qxa[k0][k1], Qya[k0][k1]);
+        hQ2 = Q2[k0][k1];
+        hQx = Qxa[k0][k1];
+        hQy = Qya[k0][k1];
+        nkr = fnkr;
+        tree[k0]->Fill();
+       } // k1
+      tree[k0]->Write();
+      hMult[k0]->Write();
+      } // Evt>0
+      } // k0 loop
+
+}
+
+
+// ------------ method called to for each event  ------------
+void
+LYZfirst::lyzFirstPass(const edm::Event& iEvent, const edm::EventSetup& iSetup)
+{
+  using namespace edm;
+  using namespace std;
+  using namespace reco;
+
+       Nh=0; had=0; nh=0;
+       for(k1=0; k1<kt; k1++)  {
+         Qtheta[k1]=0.;
+         Qx[k1]=0.;
+         Qy[k1]=0.;
+         for(k2=0; k2<kr; k2++) gtheta[k1][k2]=1.0;
+        }
+       Mult=0;
+
+  double vx=-999.;
+  double vy=-999.;
+  double vz=-999.;
+  double vxError=-999.;
+  double vyError=-999.;
+  double vzError=-999.;
+  math::XYZVector vtxPos(0,0,0);
+    // only looks at the first vertex collection
+    const reco::VertexCollection * recoVertices;
+    edm::Handle<reco::VertexCollection> vertexCollection;
+    iEvent.getByLabel("offlinePrimaryVertices",vertexCollection);
+    recoVertices = vertexCollection.product();
+    unsigned int daughter = 0;
+    int greatestvtx = 0;
+    
+    for (unsigned int j = 0 ; j< recoVertices->size(); ++j){
+      daughter = (*recoVertices)[j].tracksSize();
+      if( daughter > (*recoVertices)[greatestvtx].tracksSize()) greatestvtx = j;
+    }  
+       
+    if(recoVertices->size()>0){
+      vx = (*recoVertices)[greatestvtx].position().x();
+      vy = (*recoVertices)[greatestvtx].position().y();
+      vz = (*recoVertices)[greatestvtx].position().z();
+      vxError = (*recoVertices)[greatestvtx].xError();
+      vyError = (*recoVertices)[greatestvtx].yError();
+      vzError = (*recoVertices)[greatestvtx].zError();
+    }    
+         
+       math::XYZPoint v1(vx,vy, vz); 
+
+    //cout<<"vz = "<<vz<<endl;
+    //if(fabs(vz[1])<vzcutmax_ && recoVertices->size()==1 ){
+    //if(fabs(vz[1])<vzcutmax_ && (recoVertices->size()==1||recoVertices->size()==2 ) ){
+    //if(fabs(vz[1])>vzcutmin_&&fabs(vz[1])<vzcutmax_){
+    if(fabs(vz)<vzcutmax_){
+    int nTracks = 0;
+    edm::Handle<reco::TrackCollection> tracks;
+    iEvent.getByLabel(srcTrack_,tracks);
+
+    for(unsigned it=0; it<tracks->size(); ++it){
+      const reco::Track & track = (*tracks)[it];
+      double eta = track.eta();
+      double phi = track.phi();
+      double pt  = track.pt();
+      hpt->Fill(pt);
+      heta->Fill(eta);
+      hphi->Fill(phi);
+      //if(pt>1&&pt<2) cout<<"eta= "<<eta<<"  pt="<<pt<<"  phi="<<phi<<" #####, track.size = "<<tracks->size()<<endl;
+       double dz= track.dz(v1);
+       double dzsigma = sqrt(track.dzError()*track.dzError()+vzError*vzError);    
+       double dxy= track.dxy(v1);
+       double dxysigma = sqrt(track.dxyError()*track.dxyError()+vxError*vyError);
+       if( track.quality(reco::TrackBase::highPurity) && track.pt()>0.1 && fabs(track.eta())<2.4 && track.ptError()/track.pt()<0.1 && fabs(dz/dzsigma)<3.0 && fabs(dxy/dxysigma)<3.0) {
+       //if( track.quality(reco::TrackBase::highPurity) && track.pt()>0.1 && fabs(track.eta())<2.4 && fabs(dz/dzsigma)<5.0 && fabs(dxy/dxysigma)<5.0) {  //looser
+         //if(track.pt()>0.1 && track.ptError()/track.pt()<0.05 && fabs(dz/dzsigma)<2.0 && fabs(dxy/dxysigma)<2.0){
+        //if(fabs(track.eta())<2.4 && track.pt()>0.1){
+           phi0[nh]=track.phi(); pt0[nh]=track.pt(); eta0[nh]=track.eta();
+           nh++;
+          //}         
+         if(track.pt()>0.4)
+         nTracks++;
+         //if(track.pt()>0.4 && fabs(dz/dzsigma)<3.0 && fabs(dxy/dxysigma)<3.0) nTracks++;
+        }
+    } // tracks;
+
+   int trkbin=-1;
+   //binboundaries[0]=maxMult_; binboundaries[1]=minMult_;
+   //cout<<"binboundaries="<<binboundaries[0]<<"  "<<binboundaries[1]<<endl;
+   for(int j=0;j<NtrkBin;j++)
+      if(nTracks<binboundaries[j]&&nTracks>=binboundaries[j+1])
+        trkbin=j;
+   //NtrkBinHist_->Fill(trkbin);
+   trkHistFull_->Fill(nTracks);
+
+    //edm::Handle<reco::Centrality> cent;
+    //iEvent.getByLabel(edm::InputTag("pACentrality"),cent);
+    //int nTracks2 = cent->Ntracks();
+    //cout<<"Calculated Ntrkoffline: "<<nTracks<<",  Ntrkoffline from centrality: "<<nTracks2<<endl;
+    //cout<<"Calculated Ntrkoffline: "<<nTracks<<endl;
+
+   //centrality_=0;
+   //if(!centrality_) centrality_ = new CentralityProvider(iSetup);
+   //centrality_->newEvent(iEvent,iSetup); // make sure you do this first in every event
+   //double c = centrality_->centralityValue();
+   //int bin = centrality_->getBin();
+   //cout<<"bin="<<bin<<endl;
+   //centHist_->Fill(bin);
+   //bin=bin-20;
+   int bin=0;
+   //int CentBin=int(bin/20);
+   int CentBin=int(trkbin/1);
+   //CentMult[CentBin]->Fill(bin*1.0); 
+
+  //if (CentBin < NtrkBin  && fabs(oPVvz) <= vzcut_)  { 
+  if (CentBin>=0 && CentBin < NtrkBin )  { 
+  //if (CentBin == 1 )  { 
+      //cout<<"CentBin="<<CentBin<<", NtrkBin="<<NtrkBin<<", bin="<<bin<<", vz="<<oPVvz<<endl;
+      trkHist_->Fill(nTracks);  
+      //CentMult[CentBin]->Fill(bin*1.0); 
+      CentMult[CentBin]->Fill(nTracks); 
+      centHist_->Fill(bin);
+      NtrkBinHist_->Fill(trkbin);
+
+      had=nh*1.0;
+      int nha=nh;
+        for(nh=0;nh<nha;nh++){
+         if(pt0[nh]>ptMin_&&pt0[nh]<ptMax_&&eta0[nh]>etaMin_&&eta0[nh]<etaMax_){
+           Nh=Nh+1;
+          }
+         }
+      Mult = Nh;
+      //if(Nh>3){
+        for(nh=0;nh<nha;nh++){
+         if(pt0[nh]>ptMin_&&pt0[nh]<ptMax_&&eta0[nh]>etaMin_&&eta0[nh]<etaMax_){
+           for(k1=0; k1<kt; k1++)
+             {
+               Qtheta[k1]+=(1.*cos(2.*phi0[nh]-theta[k1]));
+               Qx[k1]+=cos(2.*phi0[nh]);
+               Qy[k1]+=sin(2.*phi0[nh]);
+               temp=1.0*cos(2.*phi0[nh]-theta[k1]);
+               for(k2=0; k2<kr; k2++)  gtheta[k1][k2]*=(1.0+i*RZ[CentBin][k2]*temp);
+             }
+          } // pt, eta cut
+        } //end of loop over nha tracks
+      //} // endo of Nh>3
+      
+       for(k1=0; k1<kt; k1++) {
+         Q2[CentBin][k1]+=Qx[k1]*Qx[k1]+Qy[k1]*Qy[k1];
+         Qxa[CentBin][k1]+=Qx[k1];
+         Qya[CentBin][k1]+=Qy[k1];
+        for(k2=0; k2<kr; k2++) {
+         GthetaRe[CentBin][k1][k2]+=cos(RZ[CentBin][k2]*Qtheta[k1]);
+         GthetaIm[CentBin][k1][k2]+=sin(RZ[CentBin][k2]*Qtheta[k1]);
+         G2[CentBin][k1][k2]+=gtheta[k1][k2];
+        }
+       } // k1
+ //cout<<"CentBin = "<<CentBin<<",  Mult= "<<Mult<<", Evt[CentBin]= "<<Evt[CentBin]<<endl;
+ Evt[CentBin]++;
+ Mmean[CentBin]+=Mult;
+ hMult[CentBin]->Fill(Mult);
+
+   }// loop over cent cuts;
+  } //vz cut
+
+}
+
+// ------------ method called when starting to processes a run  ------------
+void 
+LYZfirst::beginRun(edm::Run const&, edm::EventSetup const&)
+{
+}
+
+// ------------ method called when ending the processing of a run  ------------
+void 
+LYZfirst::endRun(edm::Run const&, edm::EventSetup const&)
+{
+}
+
+// ------------ method called when starting to processes a luminosity block  ------------
+void 
+LYZfirst::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+{
+}
+
+// ------------ method called when ending the processing of a luminosity block  ------------
+void 
+LYZfirst::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+{
+}
+
+// ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
+void
+LYZfirst::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+  //The following says we do not know what parameters are allowed so do no validation
+  // Please change this to state exactly what you do use, even if it is no parameters
+  edm::ParameterSetDescription desc;
+  desc.setUnknown();
+  descriptions.addDefault(desc);
+}
+
+//define this as a plug-in
+DEFINE_FWK_MODULE(LYZfirst);

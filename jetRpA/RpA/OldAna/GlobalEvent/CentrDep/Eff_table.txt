@@ -1,0 +1,6 @@
+HFEnergy4
+bin	HF range	# before	# after	Effciency	Error
+HFEnergyPlus
+bin	HF range	# before	# after	Effciency	Error
+HFEnergyPlus4
+bin	HF range	# before	# after	Effciency	Error

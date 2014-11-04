@@ -1,0 +1,23 @@
+N_integral=26.5716
+Integrated V2 in Centrality 0-10% is: 0.0305896
+Integrated V3 in Centrality 0-10% is: 0.0171055
+Integrated V4 in Centrality 0-10% is: 0.00862545
+N_integral=18.8189
+Integrated V2 in Centrality 10-20% is: 0.0543286
+Integrated V3 in Centrality 10-20% is: 0.0215276
+Integrated V4 in Centrality 10-20% is: 0.0124305
+N_integral=13.0712
+Integrated V2 in Centrality 20-30% is: 0.0742695
+Integrated V3 in Centrality 20-30% is: 0.0244715
+Integrated V4 in Centrality 20-30% is: 0.0169721
+N_integral=8.67506
+Integrated V2 in Centrality 30-40% is: 0.0874837
+Integrated V3 in Centrality 30-40% is: 0.0253761
+Integrated V4 in Centrality 30-40% is: 0.0193137
+N_integral=5.42861
+Integrated V2 in Centrality 40-50% is: 0.093866
+Integrated V3 in Centrality 40-50% is: 0.0252598
+Integrated V4 in Centrality 40-50% is: 0.0210331
+N_integral=3.09894
+Integrated V2 in Centrality 50-60% is: 0.0950002
+Integrated V3 in Centrality 50-60% is: 0.0230391

@@ -1,0 +1,22 @@
+
+pfjet_HF4 Integral=9244738.00
+pfjet_HF4
+0th: 30.17	0.10
+1th: 23.69	0.20
+2th: 19.33	0.30
+3th: 10.08	0.60
+4th: 2.90	0.90
+pfjet_HFPlus Integral=9244738.00
+pfjet_HFPlus
+0th: 49.16	0.10
+1th: 36.54	0.20
+2th: 28.36	0.30
+3th: 12.48	0.60
+4th: 2.70	0.90
+pfjet_HFPlus4 Integral=9244738.00
+pfjet_HFPlus4
+0th: 20.42	0.10
+1th: 15.05	0.20
+2th: 11.60	0.30
+3th: 5.02	0.60
+4th: 1.03	0.90

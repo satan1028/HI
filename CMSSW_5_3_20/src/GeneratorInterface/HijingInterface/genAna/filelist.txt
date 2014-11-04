@@ -1,0 +1,1 @@
+/home/xuq7/CMSSW_5_3_7_patch5/src/DataHijing_PPb_MinimumBias_cfi_GEN_jb0.root

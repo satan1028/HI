@@ -1,0 +1,72 @@
+pfjet_HF4Wt Integral=9.25015e+06
+0th: 29.39	0.1
+1th: 23.07	0.2
+2th: 18.77	0.3
+3th: 9.59	0.6
+4th: 2.61	0.9
+pfjet_HF4_QiaoNtrkWt Integral=9.24294e+06
+0th: 29.4	0.1
+1th: 23.08	0.2
+2th: 18.78	0.3
+3th: 9.6	0.6
+4th: 2.62	0.9
+pfjet_HF4_QiaoHFPlus4Wt Integral=inf
+0th: 0	0.1
+1th: 0	0.2
+2th: 0	0.3
+3th: 0	0.6
+4th: 0	0.9
+pfjet_HF4_QiaoReHFPlus4Wt Integral=inf
+0th: 0	0.1
+1th: 0	0.2
+2th: 0	0.3
+3th: 0	0.6
+4th: 0	0.9
+pfjet_HFPlusWt Integral=9.25015e+06
+0th: 47.88	0.1
+1th: 35.47	0.2
+2th: 27.4	0.3
+3th: 11.74	0.6
+4th: 2.4	0.9
+pfjet_HFPlus_QiaoNtrkWt Integral=9.24295e+06
+0th: 47.9	0.1
+1th: 35.49	0.2
+2th: 27.42	0.3
+3th: 11.76	0.6
+4th: 2.4	0.9
+pfjet_HFPlus_QiaoHFPlus4Wt Integral=inf
+0th: 0	0.1
+1th: 0	0.2
+2th: 0	0.3
+3th: 0	0.6
+4th: 0	0.9
+pfjet_HFPlus_QiaoReHFPlus4Wt Integral=inf
+0th: 0	0.1
+1th: 0	0.2
+2th: 0	0.3
+3th: 0	0.6
+4th: 0	0.9
+pfjet_HFPlus4Wt Integral=9.25014e+06
+0th: 19.88	0.1
+1th: 14.6	0.2
+2th: 11.21	0.3
+3th: 4.72	0.6
+4th: 0.92	0.9
+pfjet_HFPlus4_QiaoNtrkWt Integral=9.24293e+06
+0th: 19.88	0.1
+1th: 14.61	0.2
+2th: 11.21	0.3
+3th: 4.73	0.6
+4th: 0.92	0.9
+pfjet_HFPlus4_QiaoHFPlus4Wt Integral=inf
+0th: 0	0.1
+1th: 0	0.2
+2th: 0	0.3
+3th: 0	0.6
+4th: 0	0.9
+pfjet_HFPlus4_QiaoReHFPlus4Wt Integral=inf
+0th: 0	0.1
+1th: 0	0.2
+2th: 0	0.3
+3th: 0	0.6
+4th: 0	0.9

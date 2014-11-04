@@ -1,0 +1,19 @@
+This file is to instruct trigger selection process.
+
+The reconstructed HiForest file is large and contains very detailed information. Here we would like to use reco file(HiForest) to get distribution histogram of Trackhits and nHFhits(Maybe also total HF energy). These are two different parameters used to identity Centrality and is needed by NBD+Glauber model. Before directly applying the results, we need to select event(use some triggers) to remove many fake or invalid events. 
+
+Here our original data file is pPb HiForest root file. Several event selection triggers may apply here. 
+
+phltPixelClusterShapeFilter=True
+phfPosFilter1=True
+phfNegFilter1=True
+pprimaryvertexFilter=True
+HLT_PAZeroBiasPixel_SingleTrack_v1=True
+fabs(vz)<15
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Files we use are in /scratch/xuq7 directory, here is the absolute pathes:
+
+

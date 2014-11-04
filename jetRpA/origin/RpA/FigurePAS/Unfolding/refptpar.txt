@@ -1,0 +1,41 @@
+TF1 * ftrue = new TF1("ftrue","[0]*exp([1]/x)*pow(x,[2])*pow(1-x*cosh([4])/4000.,[3])", 20, 1000) ;
+-2.2<#eta_{CM}<-1.2
+NDF=555	Chi2=630.962
+par0=849024	par1=-28.3143	par2=-5.6681	par3=2.17521	par4=-2.55257
+par0 Error=351437	par1 Error=4.46197	par2 Error=0.0851317	par3 Error=0.215973	par4 Error=0.0282741
+ftrue->SetParameters(849024,-28.3143,-5.6681,2.17521,-2.55257)
+-1.2<#eta_{CM}<-0.7
+NDF=564	Chi2=634.166
+par0=502410	par1=-31.9562	par2=-5.67148	par3=1.38717	par4=-2.42498
+par0 Error=57233.6	par1 Error=1.41459	par2 Error=0.0230891	par3 Error=0.104039	par4 Error=0.030571
+ftrue->SetParameters(502410,-31.9562,-5.67148,1.38717,-2.42498)
+-0.7<#eta_{CM}<-0.3
+NDF=565	Chi2=600.926
+par0=328711	par1=-32.8816	par2=-5.60216	par3=1.20122	par4=-2.39189
+par0 Error=9776.23	par1 Error=1.19937	par2 Error=0.00250006	par3 Error=0.0953345	par4 Error=0.0401055
+ftrue->SetParameters(328711,-32.8816,-5.60216,1.20122,-2.39189)
+-0.3<#eta_{CM}<0.3
+NDF=565	Chi2=591.353
+par0=204716	par1=-22.7658	par2=-5.40987	par3=2.50187	par4=-2.01246
+par0 Error=7792.89	par1 Error=0.85673	par2 Error=0.00746886	par3 Error=0.137604	par4 Error=0.0382914
+ftrue->SetParameters(204716,-22.7658,-5.40987,2.50187,-2.01246)
+0.3<#eta_{CM}<0.7
+NDF=565	Chi2=651.548
+par0=486014	par1=-32.1686	par2=-5.69752	par3=0.96763	par4=-2.48216
+par0 Error=195998	par1 Error=4.76374	par2 Error=0.0808225	par3 Error=0.184542	par4 Error=0.0498546
+ftrue->SetParameters(486014,-32.1686,-5.69752,0.96763,-2.48216)
+0.7<#eta_{CM}<1.2
+NDF=565	Chi2=650.721
+par0=542042	par1=-31.0662	par2=-5.67342	par3=1.38688	par4=-2.39644
+par0 Error=46515.1	par1 Error=1.38065	par2 Error=0.0159902	par3 Error=0.0305176	par4 Error=0.012346
+ftrue->SetParameters(542042,-31.0662,-5.67342,1.38688,-2.39644)
+1.2<#eta_{CM}<2.2
+NDF=546	Chi2=616.344
+par0=430110	par1=-21.9301	par2=-5.53504	par3=2.79409	par4=-2.4318
+par0 Error=228871	par1 Error=5.56334	par2 Error=0.111275	par3 Error=0.400923	par4 Error=0.0502338
+ftrue->SetParameters(430110,-21.9301,-5.53504,2.79409,-2.4318)
+-1.0<#eta_{CM}<1.0
+NDF=565	Chi2=577.931
+par0=764067	par1=-23.2318	par2=-5.43202	par3=3.76402	par4=-1.718
+par0 Error=209051	par1 Error=2.67463	par2 Error=0.0595852	par3 Error=1.12793	par4 Error=0.205615
+ftrue->SetParameters(764067,-23.2318,-5.43202,3.76402,-1.718)

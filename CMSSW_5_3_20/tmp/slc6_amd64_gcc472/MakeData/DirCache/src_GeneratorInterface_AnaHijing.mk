@@ -1,0 +1,2 @@
+ALL_PACKAGES += $(patsubst src/%,%,src/GeneratorInterface/AnaHijing)
+subdirs_src_GeneratorInterface_AnaHijing := src_GeneratorInterface_AnaHijing_interface src_GeneratorInterface_AnaHijing_src src_GeneratorInterface_AnaHijing_test src_GeneratorInterface_AnaHijing_doc src_GeneratorInterface_AnaHijing_python
