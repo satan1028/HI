@@ -3,8 +3,7 @@
 #PBS -l mem=4000mb
 #PBS -l pmem=4000mb
 #PBS -l walltime=2:00:00
-#PBS -e job$I.err
-#PBS -o /dev/null
+#PBS -o job$I.out
 #PBS -j oe
 
 cd $PBS_O_WORKDIR
