@@ -23,8 +23,8 @@ eval `scramv1 runtime -sh`
 
 cd /home/xuq7/HI/flow/LYZ/v2/pPbDataV205m260
 
-root -l -b dofirst.C
-#root -l -b dosecond.C
+#root -l -b dofirst.C
+root -l -b dosecond.C
 echo "Done!"
 
 exit 0

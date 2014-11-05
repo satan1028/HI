@@ -48,8 +48,8 @@ void getResv(){
 	}
 
         for(int ifile=0; ifile<nFileAll; ifile++){
-	        if(isSum) f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m220/Anav_Prod_%d.root",ifile));
-	        else f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m220/Anav_Prod2_%d.root",ifile));
+	        if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m220/Anav_Prod_%d.root",ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m220/Anav_Prod2_%d.root",ifile));
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
 		for(int ibin=0;ibin<nbin;ibin++){
@@ -97,7 +97,7 @@ void getResv(){
 		deltavmean[ibin][iptbin]=TMath::Sqrt(deltavmean[ibin][iptbin])/2./Besselj01(mm);
 		//fstrv<<endl;
 		vmean[ibin][iptbin]/=ntheta;
-		deltavmean[ibin][iptbin]/=TMath::Sqrt(ntheta);
+		deltavmean[ibin][iptbin]/=ntheta;
 		fstrv<<ptbinv[iptbin]<<"-"<<ptbinv[iptbin+1]<<"\t"<<vmean[ibin][iptbin]<<"\t"<<deltavmean[ibin][iptbin]<<endl;
 		V_int[ibin]+=vmean[ibin][iptbin]*totmult[ibin][iptbin];
 		}

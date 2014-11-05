@@ -36,7 +36,7 @@ void getResv(){
 		totpt[ibin].ResizeTo(nptv);	totpt[ibin].Zero();
 		vmean[ibin].ResizeTo(nptv);	deltavmean[ibin].ResizeTo(nptv);
 		V[ibin] = (TVectorD*) infile->Get(Form("D_%d/D_0/V",ibin));
-		chi[ibin] = (TVectorD*) infile->Get(Form("D_%d/D_0/chi",ibin));
+		chi[ibin] = (TVectorD*) infile->Get(Form("D_%d/chi",ibin));
 		V_mean = (TVectorD*) infile->Get(Form("D_%d/Vmean",ibin));
 		for(int itheta=0;itheta<ntheta;itheta++){
 			v[ibin][itheta].ResizeTo(nptv);	deltav[ibin][itheta].ResizeTo(nptv);
@@ -48,8 +48,8 @@ void getResv(){
 	}
 
         for(int ifile=0; ifile<nFileAll; ifile++){
-	        if(isSum) f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/ToyV206m150/Anav_Prod_%d.root",ifile));
-	        else f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/ToyV206m150/Anav_Prod2_%d.root",ifile));
+	        if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m300/Anav_Prod_%d.root",ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m300/Anav_Prod2_%d.root",ifile));
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
 		for(int ibin=0;ibin<nbin;ibin++){
@@ -90,7 +90,7 @@ void getResv(){
 				TComplex Res=dN[ibin][itheta][iptbin]/dD[ibin][itheta];
 				v[ibin][itheta][iptbin]=(*V[ibin])[itheta]*avgmultall[ibin]*TMath::BesselJ1(j01)/Besselj01(mm)*Res.Re();
 				vmean[ibin][iptbin]+=v[ibin][itheta][iptbin];
-				deltav[ibin][itheta][iptbin]=TMath::Cos(mm*nn*theta[itheta])/totmult[ibin][iptbin]*(TMath::Exp(j01*j01/2./(*chi[ibin])[itheta]/(*chi[ibin])[itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Power(-1,mm)*TMath::Exp(-j01*j01/2./(*chi[ibin])[itheta]/(*chi[ibin])[itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.)));
+				deltav[ibin][itheta][iptbin]=TMath::Cos(mm*nn*theta[itheta])/totmult[ibin][iptbin]*(TMath::Exp(j01*j01/2./(*chi[ibin])[0]/(*chi[ibin])[0]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Power(-1,mm)*TMath::Exp(-j01*j01/2./(*chi[ibin])[0]/(*chi[ibin])[0]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.)));
 				deltavmean[ibin][iptbin]+=deltav[ibin][itheta][iptbin];
 			//	fstrv<<itheta<<"\t"<<v[ibin][itheta][iptbin]<<"\t"<<deltav[ibin][itheta][iptbin]<<endl;
 			}

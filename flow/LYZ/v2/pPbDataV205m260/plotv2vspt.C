@@ -2,7 +2,7 @@
 void plotv2vspt(){
 
 int ibin=0;
-TFile *f = TFile::Open("mergedv_Prod.root");
+TFile *f = TFile::Open("mergedv_Prod2_inV2.root");
 TFile *fProd = TFile::Open("mergedv_Prod2.root");
 TVectorD *vecDv2 = (TVectorD*)f->Get(Form("D_%d/vmean",ibin));
 TVectorD *vecDv2err = (TVectorD*)f->Get(Form("D_%d/deltavmean",ibin));
@@ -31,7 +31,7 @@ V2vsPt->SetLineColor(2);
 V2vsPt->SetTitle("v_{2} vs momentum");
 V2vsPt->GetXaxis()->SetTitle("p_{T} (GeV/c)");
 V2vsPt->GetYaxis()->SetTitle("v_{2}");
-V2vsPt->GetYaxis()->SetRangeUser(0,0.1);
+V2vsPt->GetYaxis()->SetRangeUser(-0.1,0.13);
 V2vsPt->Draw();
 TGraphErrors *gr=new TGraphErrors(nptv,avgpt,v2corr,0,v2err);
 
@@ -53,10 +53,10 @@ tl->SetFillColor(0);
 tl->SetBorderSize(0);
 tl->SetTextSize(0.05);
 tl->AddEntry(V2vsPt,"input v_{2}","lp");
-tl->AddEntry(gr,"LYZ Sum method","lp");
+tl->AddEntry(gr,"LYZ Prod method inV2","lp");
 tl->AddEntry(grProd,"LYZ Prod method","lp");
 tl->Draw("same");
-TLatex *tlx = new TLatex(0.2,0.3,"STEG, 15M events");
+TLatex *tlx = new TLatex(0.2,0.3,Form("STEG, 15M events, mult=%d",(trkbin[0]+trkbin[1])/2));
 tlx->SetNDC();
 tlx->SetTextSize(0.045);
 tlx->Draw("same");

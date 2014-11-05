@@ -3,8 +3,7 @@
 #PBS -l mem=4000mb
 #PBS -l pmem=4000mb
 #PBS -l walltime=2:00:00
-#PBS -e job$I.err
-#PBS -o /dev/null
+#PBS -o job$I.out
 #PBS -j oe
 
 cd $PBS_O_WORKDIR
@@ -25,8 +24,8 @@ eval `scramv1 runtime -sh`
 cd /home/xuq7/HI/flow/LYZ/v2/pPbDataV205m220
 
 #root -l -b dofirst.C
-#root -l -b dosecond.C
-root -l -b dosecondsub.C
+root -l -b dosecond.C
+#root -l -b dosecondsub.C
 echo "Done!"
 
 exit 0

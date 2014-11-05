@@ -16,9 +16,10 @@ void getResV(){
 	TVectorD Qx1[nbin], Qy1[nbin], Q2[nbin];
 	TVectorD Gmod2[nbin][nptV][ntheta];
 	TVectorD sigma2[nbin][nptV],deltaV[nbin][nptV];
+	TVectorD sigma2_[nbin],chi_[nbin];
 	TVectorD deltaVmean[nbin], Vmean[nbin];
 	TVectorD r[nbin];
-	TVectorD r0[nbin][nptV], V[nbin][nptV], chi[nbin][nptV];
+	TVectorD r0[nbin][nptV], r01[nbin][nptV], r02[nbin][nptV], V[nbin][nptV], chi[nbin][nptV];
 	TVectorD GRe[nbin][nptV][ntheta]; TVectorD* GRe_t[nbin][nptV][ntheta];
 	TVectorD GIm[nbin][nptV][ntheta]; TVectorD* GIm_t[nbin][nptV][ntheta];
 	TComplex G[nbin][nptV][ntheta][nstepr];
@@ -43,6 +44,8 @@ void getResV(){
 	for(int ibin=0;ibin<nbin;ibin++){
 		for(int iptbin=0;iptbin<nptV;iptbin++){
 			r0[ibin][iptbin].ResizeTo(ntheta);
+			r01[ibin][iptbin].ResizeTo(ntheta);
+			r02[ibin][iptbin].ResizeTo(ntheta);
 			sigma2[ibin][iptbin].ResizeTo(ntheta);
 			V[ibin][iptbin].ResizeTo(ntheta);
 			deltaV[ibin][iptbin].ResizeTo(ntheta);
@@ -57,12 +60,15 @@ void getResV(){
 		}
 
 		avgmult[ibin].ResizeTo(nptV);	deltaVmean[ibin].ResizeTo(nptV);	Vmean[ibin].ResizeTo(nptV);
+		Vmean[ibin].Zero();	deltaVmean[ibin].Zero();
 		totpt[ibin].ResizeTo(nptV);	totpt[ibin].Zero();
 		totmult[ibin].ResizeTo(nptV);	totmult[ibin].Zero();
 		avgpt[ibin].ResizeTo(nptV);
                 Qx1[ibin].ResizeTo(nptV);     Qx1[ibin].Zero();
                 Qy1[ibin].ResizeTo(nptV);     Qy1[ibin].Zero();
                 Q2[ibin].ResizeTo(nptV);     Q2[ibin].Zero();
+		sigma2_[ibin].ResizeTo(nptV);sigma2_[ibin].Zero();
+		chi_[ibin].ResizeTo(nptV);chi_[ibin].Zero();
 	}
 
 	for(int ifile=0; ifile<nFileAll; ifile++){
@@ -111,23 +117,34 @@ void getResV(){
 				}
 				for(ir=0; ir<nstepr-1; ir++)
 					if(ir!=0 && Gmod2[ibin][iptbin][itheta][ir]<=Gmod2[ibin][iptbin][itheta][ir-1] && Gmod2[ibin][iptbin][itheta][ir]<=Gmod2[ibin][iptbin][itheta][ir+1]) break;
-				if(ir!=0 && ir<nstepr-1)	r0[ibin][iptbin][itheta]=r[ibin][ir];
+				if(ir!=0 && ir<nstepr-1)	r01[ibin][iptbin][itheta]=r[ibin][ir];
 				else if(ir==0)	{cout<<"ibin="<<ibin<<"\t"<<"iptbin="<<iptbin<<"\t"<<"itheta="<<itheta<<"\tminimum lies on ir = 0, please select proper range!"<<endl;	continue;}
 				else 	{cout<<"ibin="<<ibin<<"\t"<<"iptbin="<<iptbin<<"\t"<<"itheta="<<itheta<<"\tminimum lies on ir = maximum "<<nstepr-1<<", please select proper range!"<<endl;	continue;}
 				avgmult[ibin][iptbin]=1.0*totmult[ibin][iptbin]/Nevent[ibin];
 				avgpt[ibin][iptbin]=1.0*totpt[ibin][iptbin]/totmult[ibin][iptbin];
 				if(isSimple==0)	V[ibin][iptbin][itheta]=Vmax[ibin]-ir*eps[ibin]+eps[ibin]*(Gmod2[ibin][iptbin][itheta][ir+1]-Gmod2[ibin][iptbin][itheta][ir-1])/2./(Gmod2[ibin][iptbin][itheta][ir-1]-2*Gmod2[ibin][iptbin][itheta][ir]+Gmod2[ibin][iptbin][itheta][ir+1]);
 				else V[ibin][iptbin][itheta]=j01/r0[ibin][iptbin][itheta]; //simple method
+				r0[ibin][iptbin][itheta]=j01/V[ibin][iptbin][itheta];
 				V[ibin][iptbin][itheta]/=avgmult[ibin][iptbin];
-				sigma2[ibin][iptbin][itheta]=Q2[ibin][iptbin]/Nevent[ibin]-(Qx1[ibin][iptbin]/Nevent[ibin])*(Qx1[ibin][iptbin]/Nevent[ibin])-(Qy1[ibin][iptbin]/Nevent[ibin])*(Qy1[ibin][iptbin]/Nevent[ibin])-(V[ibin][iptbin][itheta]*avgmult[ibin][iptbin])*(V[ibin][iptbin][itheta]*avgmult[ibin][iptbin]);
+				r02[ibin][iptbin][itheta]=j01/inV2/avgmult[ibin][iptbin];
+				//sigma2[ibin][iptbin][itheta]=Q2[ibin][iptbin]/Nevent[ibin]-(Qx1[ibin][iptbin]/Nevent[ibin])*(Qx1[ibin][iptbin]/Nevent[ibin])-(Qy1[ibin][iptbin]/Nevent[ibin])*(Qy1[ibin][iptbin]/Nevent[ibin])-(V[ibin][iptbin][itheta]*avgmult[ibin][iptbin])*(V[ibin][iptbin][itheta]*avgmult[ibin][iptbin]);
+				sigma2[ibin][iptbin][itheta]=Q2[ibin][iptbin]/Nevent[ibin]-(Qx1[ibin][iptbin]/Nevent[ibin])*(Qx1[ibin][iptbin]/Nevent[ibin])-(Qy1[ibin][iptbin]/Nevent[ibin])*(Qy1[ibin][iptbin]/Nevent[ibin]);
+				sigma2_[ibin][iptbin]+=sigma2[ibin][iptbin][itheta];
 				Vmean[ibin][iptbin]+=V[ibin][iptbin][itheta];
 				chi[ibin][iptbin][itheta]=V[ibin][iptbin][itheta]*avgmult[ibin][iptbin]/TMath::Sqrt(sigma2[ibin][iptbin][itheta]);
-				deltaV[ibin][iptbin][itheta]=V[ibin][iptbin][itheta]/j01/TMath::BesselJ1(j01)*TMath::Sqrt((TMath::Exp(j01*j01/2./chi[ibin][iptbin][itheta]/chi[ibin][iptbin][itheta])+TMath::Exp(-j01*j01/2./chi[ibin][iptbin][itheta]/chi[ibin][iptbin][itheta])*TMath::BesselJ0(2*j01))/2./Nevent[ibin]);
-				fstrV<<ibin<<"\t"<<iptbin<<"\t"<<itheta<<"\t"<<r0[ibin][iptbin][itheta]<<"\t"<<V[ibin][iptbin][itheta]<<"\t"<<sigma2[ibin][iptbin][itheta]<<"\t"<<chi[ibin][iptbin][itheta]<<"\t"<<deltaV[ibin][iptbin][itheta]<<endl;
-				deltaVmean[ibin][iptbin]+=TMath::Exp(j01*j01/2./chi[ibin][iptbin][itheta]/chi[ibin][iptbin][itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Exp(-j01*j01/2./chi[ibin][iptbin][itheta]/chi[ibin][iptbin][itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.));
+				//deltaV[ibin][iptbin][itheta]=V[ibin][iptbin][itheta]/j01/TMath::BesselJ1(j01)*TMath::Sqrt((TMath::Exp(j01*j01/2./chi[ibin][iptbin][itheta]/chi[ibin][iptbin][itheta])+TMath::Exp(-j01*j01/2./chi[ibin][iptbin][itheta]/chi[ibin][iptbin][itheta])*TMath::BesselJ0(2*j01))/2./Nevent[ibin]);
+				}
+			sigma2_[ibin][iptbin]/=ntheta;
+			Vmean[ibin][iptbin]/=ntheta;
+			sigma2_[ibin][iptbin]-=TMath::Power(Vmean[ibin][iptbin]*avgmult[ibin][iptbin],2);
+			chi_[ibin][iptbin]=Vmean[ibin][iptbin]*avgmult[ibin][iptbin]/TMath::Sqrt(sigma2_[ibin][iptbin]);
+			//deltaVmean[ibin][iptbin]+=TMath::Exp(j01*j01/2./chi[ibin][iptbin][itheta]/chi[ibin][iptbin][itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Exp(-j01*j01/2./chi[ibin][iptbin][itheta]/chi[ibin][iptbin][itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.));
+			for(int itheta=0;itheta<ntheta;itheta++){
+			deltaV[ibin][iptbin][itheta]=V[ibin][iptbin][itheta]/j01/TMath::BesselJ1(j01)*TMath::Sqrt((TMath::Exp(j01*j01/2./chi_[ibin][iptbin]/chi_[ibin][iptbin])+TMath::Exp(-j01*j01/2./chi_[ibin][iptbin]/chi_[ibin][iptbin])*TMath::BesselJ0(2*j01))/2./Nevent[ibin]);
+			deltaVmean[ibin][iptbin]+=TMath::Exp(j01*j01/2./chi_[ibin][iptbin]/chi_[ibin][iptbin]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Exp(-j01*j01/2./chi_[ibin][iptbin]/chi_[ibin][iptbin]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.));
+			fstrV<<ibin<<"\t"<<iptbin<<"\t"<<itheta<<"\t"<<r0[ibin][iptbin][itheta]<<"\t"<<V[ibin][iptbin][itheta]<<"\t"<<sigma2[ibin][iptbin][itheta]<<"\t"<<chi[ibin][iptbin][itheta]<<"\t"<<deltaV[ibin][iptbin][itheta]<<endl;
 			}
 			fstrV<<endl;
-			Vmean[ibin][iptbin]/=ntheta;
 			deltaVmean[ibin][iptbin]=Vmean[ibin][iptbin]/j01/TMath::BesselJ1(j01)*TMath::Sqrt(deltaVmean[ibin][iptbin]/ntheta/2./Nevent[ibin]);
 		}
 		fstrV<<endl;
@@ -159,11 +176,12 @@ void getResV(){
 		avgpt[ibin].Write("avgpt");
 		Vmean[ibin].Write("Vmean");
 		deltaVmean[ibin].Write("deltaVmean");
+		chi_[ibin].Write("chi");
 
 		for(int iptbin=0;iptbin<nptV;iptbin++){
                         TDirectory *dir1 = dir0->mkdir(Form("D_%d",iptbin));dir1->cd();
-			sigma2[ibin][iptbin].Write("sigma2");	chi[ibin][iptbin].Write("chi");	deltaV[ibin][iptbin].Write("deltaV");
-			r0[ibin][iptbin].Write("r0");	V[ibin][iptbin].Write("V");
+			sigma2[ibin][iptbin].Write("sigma2");	chi[ibin][iptbin].Write("chi0");	deltaV[ibin][iptbin].Write("deltaV");
+			r0[ibin][iptbin].Write("r0");	r01[ibin][iptbin].Write("r01");	r02[ibin][iptbin].Write("r02"); V[ibin][iptbin].Write("V");
 
         		for(int itheta=0;itheta<ntheta;itheta++){
                         	TDirectory *dir2 = dir1->mkdir(Form("D_%d",itheta));dir2->cd();
