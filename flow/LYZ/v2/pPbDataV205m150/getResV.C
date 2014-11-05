@@ -19,7 +19,7 @@ void getResV(){
 	TVectorD sigma2_[nbin],chi_[nbin];
 	TVectorD deltaVmean[nbin], Vmean[nbin];
 	TVectorD r[nbin];
-	TVectorD r0[nbin][nptV], r01[nbin][nptV], V[nbin][nptV], chi[nbin][nptV];
+	TVectorD r0[nbin][nptV], r01[nbin][nptV], r02[nbin][nptV], V[nbin][nptV], chi[nbin][nptV];
 	TVectorD GRe[nbin][nptV][ntheta]; TVectorD* GRe_t[nbin][nptV][ntheta];
 	TVectorD GIm[nbin][nptV][ntheta]; TVectorD* GIm_t[nbin][nptV][ntheta];
 	TComplex G[nbin][nptV][ntheta][nstepr];
@@ -45,6 +45,7 @@ void getResV(){
 		for(int iptbin=0;iptbin<nptV;iptbin++){
 			r0[ibin][iptbin].ResizeTo(ntheta);
 			r01[ibin][iptbin].ResizeTo(ntheta);
+			r02[ibin][iptbin].ResizeTo(ntheta);
 			sigma2[ibin][iptbin].ResizeTo(ntheta);
 			V[ibin][iptbin].ResizeTo(ntheta);
 			deltaV[ibin][iptbin].ResizeTo(ntheta);
@@ -125,6 +126,7 @@ void getResV(){
 				else V[ibin][iptbin][itheta]=j01/r0[ibin][iptbin][itheta]; //simple method
 				r0[ibin][iptbin][itheta]=j01/V[ibin][iptbin][itheta];
 				V[ibin][iptbin][itheta]/=avgmult[ibin][iptbin];
+				r02[ibin][iptbin][itheta]=j01/inV2/avgmult[ibin][iptbin];
 				//sigma2[ibin][iptbin][itheta]=Q2[ibin][iptbin]/Nevent[ibin]-(Qx1[ibin][iptbin]/Nevent[ibin])*(Qx1[ibin][iptbin]/Nevent[ibin])-(Qy1[ibin][iptbin]/Nevent[ibin])*(Qy1[ibin][iptbin]/Nevent[ibin])-(V[ibin][iptbin][itheta]*avgmult[ibin][iptbin])*(V[ibin][iptbin][itheta]*avgmult[ibin][iptbin]);
 				sigma2[ibin][iptbin][itheta]=Q2[ibin][iptbin]/Nevent[ibin]-(Qx1[ibin][iptbin]/Nevent[ibin])*(Qx1[ibin][iptbin]/Nevent[ibin])-(Qy1[ibin][iptbin]/Nevent[ibin])*(Qy1[ibin][iptbin]/Nevent[ibin]);
 				sigma2_[ibin][iptbin]+=sigma2[ibin][iptbin][itheta];
@@ -179,7 +181,7 @@ void getResV(){
 		for(int iptbin=0;iptbin<nptV;iptbin++){
                         TDirectory *dir1 = dir0->mkdir(Form("D_%d",iptbin));dir1->cd();
 			sigma2[ibin][iptbin].Write("sigma2");	chi[ibin][iptbin].Write("chi0");	deltaV[ibin][iptbin].Write("deltaV");
-			r0[ibin][iptbin].Write("r0");	r01[ibin][iptbin].Write("r01");	V[ibin][iptbin].Write("V");
+			r0[ibin][iptbin].Write("r0");	r01[ibin][iptbin].Write("r01");	r02[ibin][iptbin].Write("r02"); V[ibin][iptbin].Write("V");
 
         		for(int itheta=0;itheta<ntheta;itheta++){
                         	TDirectory *dir2 = dir1->mkdir(Form("D_%d",itheta));dir2->cd();

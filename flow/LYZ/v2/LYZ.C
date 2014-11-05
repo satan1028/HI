@@ -138,21 +138,17 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
 
 void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 	TComplex g0[ntheta], dDsum[ntheta], dNsum[ntheta][nptv];
-	TVectorD* r0res[nbin]; 
+	TVectorD* r0res[nbin];
 	//TVectorD* Vres[nbin]; TVectorD* chires[nbin];
 	TFile *fres = TFile::Open(res);
 	int xpt=0;
 	for(int ibin=0;ibin<nbin;ibin++){
-		r0res[ibin]=new TVectorD();
-		r0res[ibin]->ResizeTo(ntheta);
-		r0res[ibin]->Zero();
 		if(isample>=0)
 		r0res[ibin] = (TVectorD*)fres->Get(Form("s_%d/D_%d/D_%d/r0",isample,ibin,xpt));
 		else if(isample==-1)
 		r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/D_%d/r0",ibin,xpt));
-		else if(isample==-2)
-		for(int itheta=0;itheta<ntheta;itheta++)
-		(*r0res[ibin])[itheta] = inV2;
+		else
+		r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/D_%d/r02",ibin,xpt));
 	}
 		
         int mult;
