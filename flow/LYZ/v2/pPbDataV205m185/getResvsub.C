@@ -62,8 +62,8 @@ void getResvsub(){
 	}
 
         for(int ifile=start; ifile<end; ifile++){
-	        if(isSum) f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m185/Anav_Prod_sub_%d.root",ifile));
-	        else f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m185/Anav_Prod2_sub_%d.root",ifile));
+	        if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m185/Anav_Prod_sub_%d.root",ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m185/Anav_Prod2_sub_%d.root",ifile));
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
 		for(int ibin=0;ibin<nbin;ibin++){

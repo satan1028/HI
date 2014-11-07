@@ -146,7 +146,7 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 	int xpt=0;
 	for(int ibin=0;ibin<nbin;ibin++){
 		if(isample>=0)
-                	r0res[ibin] = (TVectorD*)fres->Get(Form("s_%d/D_%d/D_%d/r0",isample,ibin,xpt));
+                	r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/s_%d/D_%d/r0",ibin,isample,xpt));
                 else
 			r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/D_%d/r0",ibin,xpt));
 	}

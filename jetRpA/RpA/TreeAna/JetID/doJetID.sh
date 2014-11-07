@@ -1,13 +1,13 @@
 #!/bin/sh
 export SCRAM_ARCH=slc6_amd64_gcc472
 
-cd /home/xuq7/CMSSW_6_2_3_patch1/src/
+cd /home/xuq7/HI/CMSSW_5_3_20/src
 #cmsenv
 eval `scramv1 runtime -sh`
 
 #rm /home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/Quality/pic/JetIDcut/merged/*.png
 
-cd /home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID
+cd /home/xuq7/HI/jetRpA/RpA/TreeAna/JetID
 
 for (( i=0;i<18;i++ )) 
 #for (( i=0;i<1;i++ )) 

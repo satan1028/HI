@@ -2,11 +2,11 @@
 void plotv2vspt(){
 
 int ibin=0;
-TFile *f = TFile::Open("mergedv_Prod.root");
+TFile *f = TFile::Open("mergedv_Prod2_sub.root");
 TFile *fProd = TFile::Open("mergedv_Prod2.root");
-TVectorD *vecDv2 = (TVectorD*)f->Get(Form("D_%d/vmean",ibin));
-TVectorD *vecDv2err = (TVectorD*)f->Get(Form("D_%d/deltavmean",ibin));
-TVectorD *vecDavgpt = (TVectorD*)f->Get(Form("D_%d/avgpt",ibin));
+TVectorD *vecDv2 = (TVectorD*)f->Get(Form("D_%d/vmeanmean",ibin));
+TVectorD *vecDv2err = (TVectorD*)f->Get(Form("D_%d/sigmavmeanmean",ibin));
+TVectorD *vecDavgpt = (TVectorD*)f->Get(Form("D_%d/avgavgpt",ibin));
 
 TVectorD *vecDv2_ = (TVectorD*)fProd->Get(Form("D_%d/vmean",ibin));
 TVectorD *vecDv2err_ = (TVectorD*)fProd->Get(Form("D_%d/deltavmean",ibin));
@@ -54,10 +54,10 @@ tl->SetFillColor(0);
 tl->SetBorderSize(0);
 tl->SetTextSize(0.05);
 //tl->AddEntry(V2vsPt,"input v_{2}","lp");
-tl->AddEntry(gr,"LYZ Sum method","lp");
+tl->AddEntry(gr,"LYZ Prod method sub","lp");
 tl->AddEntry(grProd,"LYZ Prod method","lp");
 tl->Draw("same");
-TLatex *tlx = new TLatex(0.2,0.3,"STEG, 15M events");
+TLatex *tlx = new TLatex(0.2,0.3,Form("track norm cut, %.1f <p_{T}< %.1f",0.3,0.6));
 tlx->SetNDC();
 tlx->SetTextSize(0.045);
 tlx->Draw("same");

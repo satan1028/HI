@@ -36,49 +36,43 @@ makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
     hFrame->SetMaximum(0.2);
 
 for(int i=0;i<ntotbin;i++){
-	TFile *fSum = TFile::Open(Form("M%d%d/mergedv_Prod.root",trkpointmax[i],trkpointmin[i]));
+	TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_sub.root",trkpointmax[i],trkpointmin[i]));
 	TFile *fProd = TFile::Open(Form("M%d%d/mergedv_Prod2.root",trkpointmax[i],trkpointmin[i]));
-	TVectorD *vecDv2_Sum = (TVectorD*)fSum->Get(Form("D_%d/vmean",ibin));
-	TVectorD *vecDv2err_Sum = (TVectorD*)fSum->Get(Form("D_%d/deltavmean",ibin));
-	TVectorD *vecDavgpt_Sum = (TVectorD*)fSum->Get(Form("D_%d/avgpt",ibin));
+	TVectorD *vecDv2_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/vmeanmean",ibin));
+	TVectorD *vecDv2err_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/sigmavmeanmean",ibin));
+	TVectorD *vecDavgpt_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/avgavgpt",ibin));
 	
 	TVectorD *vecDv2_Prod = (TVectorD*)fProd->Get(Form("D_%d/vmean",ibin));
 	TVectorD *vecDv2err_Prod = (TVectorD*)fProd->Get(Form("D_%d/deltavmean",ibin));
 	TVectorD *vecDavgpt_Prod = (TVectorD*)fProd->Get(Form("D_%d/avgpt",ibin));
 
-	double *avgpt_Sum = vecDavgpt_Sum->GetMatrixArray();
-	double *v2_Sum = vecDv2_Sum->GetMatrixArray();
-	double *v2err_Sum = vecDv2err_Sum->GetMatrixArray();
+	double *avgpt_Proderr = vecDavgpt_Proderr->GetMatrixArray();
+	double *v2_Proderr = vecDv2_Proderr->GetMatrixArray();
+	double *v2err_Proderr = vecDv2err_Proderr->GetMatrixArray();
 
 	double *avgpt_Prod = vecDavgpt_Prod->GetMatrixArray();
 	double *v2_Prod = vecDv2_Prod->GetMatrixArray();
 	double *v2err_Prod = vecDv2err_Prod->GetMatrixArray();
-	int npt = vecDavgpt_Sum->GetUpb();
+	int npt = vecDavgpt_Prod->GetUpb();
 	
 	c1->cd(i+1);
 	if(i!=ntotbin-1)
 	TGraphErrors *gr24=new TGraphErrors(npt24,pt,v24[i],0,v24err[i]);
-	TGraphErrors *grSum=new TGraphErrors(npt,avgpt_Sum,v2_Sum,0,v2err_Sum);
 	TGraphErrors *grProd=new TGraphErrors(npt,avgpt_Prod,v2_Prod,0,v2err_Prod);
 	gr24->SetMarkerSize(1.3);
 	gr24->SetMarkerColor(1);
 	gr24->SetMarkerStyle(20);
-	grSum->SetMarkerStyle(24);
 	grProd->SetMarkerStyle(29);
-	grSum->SetMarkerColor(2);
 	grProd->SetMarkerColor(4);
-	grSum->SetLineColor(2);
 	grProd->SetLineColor(4);
 	hFrame->Draw();
 	gr24->Draw("Psame");
-	//grSum->Draw("Psame");
 	grProd->Draw("Psame");
 	TLegend *tl = new TLegend(0.4,0.5,0.7,0.65);
 	tl->SetFillColor(0);
 	tl->SetBorderSize(0);
 	tl->SetTextSize(0.05);
 	tl->AddEntry(gr24,"v2 4-particle cum","lp");
-	//tl->AddEntry(grSum,"LYZ Sum method","lp");
 	tl->AddEntry(grProd,"LYZ Prod method","lp");
 	if(i==0 || i==3) 
 		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
@@ -86,7 +80,6 @@ for(int i=0;i<ntotbin;i++){
 		TLatex *tlx2 = new TLatex(0.1,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
 	tlx2->SetNDC();
 	tlx2->Draw("same");
-	fSum->Close();
 	fProd->Close();
 	}
 	c1->cd(ntotbin+1);

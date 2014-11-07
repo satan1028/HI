@@ -43,8 +43,8 @@ void getResvsub(){
 	TH1D* hpteffcorr[nbin];
 	for(int ibin=0;ibin<nbin;ibin++){
         for(int ifile=0; ifile<nFileAll; ifile++){
-        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/%s/Anav_Prod_sub_%d.root",mdir.c_str(),ifile));
-        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/%s/Anav_Prod2_sub_%d.root",mdir.c_str(),ifile));
+        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod_sub_%d.root",mdir.c_str(),ifile));
+        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod2_sub_%d.root",mdir.c_str(),ifile));
         TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
         Nevent_[ibin]+=(*Nevent_t)[ibin];
         f[ifile]->Close();
@@ -87,8 +87,8 @@ void getResvsub(){
 		}
 
         for(int ifile=0; ifile<nFileAll; ifile++){
-	        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/%s/Anav_Prod_sub_%d.root",mdir.c_str(),ifile));
-	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/%s/Anav_Prod2_sub_%d.root",mdir.c_str(),ifile));
+	        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod_sub_%d.root",mdir.c_str(),ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod2_sub_%d.root",mdir.c_str(),ifile));
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
 		Nevent0[ibin] += (*Nevent_t)[ibin];
@@ -117,10 +117,24 @@ void getResvsub(){
 	f[ifile]->Close();
 	}
 	
+	TFile *fhisto = TFile::Open("histomerged.root");
+	TFile *feff = TFile::Open("/home/xuq7/HI/flow/LYZ/v2/TrackCorrections_HIJING_538_OFFICIAL_Mar24.root");
+	TH2F* heff = (TH2F*)feff->Get("rTotalEff3D");
+      	TH1D* hpteff = (TH1D*)heff->ProjectionY("hpteff",heff->GetXaxis()->FindBin(-2.4),heff->GetXaxis()->FindBin(2.4)-1,"o");
+	TArrayD *ptarr = (TArrayD*)heff->GetYaxis()->GetXbins();
+	double *ptbinhisto = ptarr->GetArray();
+	int NbinX = heff->GetXaxis()->GetNbins();
+	int NbinY = heff->GetYaxis()->GetNbins();
+	hpteff->Scale(1.0/NbinX);
+        
 		for(int itheta=0;itheta<ntheta;itheta++)
 			dD[ibin][itheta]*=TComplex::Power(TComplex::I(),mm-1)/(Double_t)Nevent[ibin][isample];
 	
 		avgmultall[ibin]=1.0*totmultall[ibin][isample]/Nevent[ibin][isample];
+                hpt[ibin] = (TH1D*)fhisto->Get(Form("D_%d/hpt",ibin));
+                TH1D* hptre = (TH1D*)hpt[ibin]->Rebin(NbinY,"hptre",ptbinhisto);
+                hpteffcorr[ibin] = (TH1D*)hptre->Clone(Form("hpteffcorr_%d",ibin));
+                hpteffcorr[ibin]->Divide(hpteff);
 		for(int iptbin=0;iptbin<nptv; iptbin++){
 			vmean[ibin][iptbin]=0;
 			deltavmean[ibin][iptbin]=0;
@@ -141,8 +155,12 @@ void getResvsub(){
 		deltavmean[ibin][iptbin]/=TMath::Sqrt(ntheta);
 		fstrv<<ptbinv[iptbin]<<"-"<<ptbinv[iptbin+1]<<"\t"<<vmean[ibin][iptbin]<<"\t"<<deltavmean[ibin][iptbin]<<endl;
 		if(ptbinv[iptbin+1]>3.0) continue;
+                totmulthisto[ibin][iptbin]=hpt[ibin]->Integral(hpt[ibin]->GetXaxis()->FindBin(ptbinv[iptbin]),hpt[ibin]->GetXaxis()->FindBin(ptbinv[iptbin+1])-1);
+                totmulthistocorr[ibin][iptbin]=hpteffcorr[ibin]->Integral(hpteffcorr[ibin]->GetXaxis()->FindBin(ptbinv[iptbin]),hpteffcorr[ibin]->GetXaxis()->FindBin(ptbinv[iptbin+1])-1);
 		V_int[ibin][isample]+=vmean[ibin][iptbin]*totmult[ibin][iptbin];
 		V_interr[ibin][isample]+=deltavmean[ibin][iptbin]*totmult[ibin][iptbin];
+		V_intcorr[ibin][isample]+=vmean[ibin][iptbin]*totmulthistocorr[ibin][iptbin];
+		V_intcorrerr[ibin][isample]+=deltavmean[ibin][iptbin]*totmulthistocorr[ibin][iptbin];
 		totmultall_[ibin][isample]+=totmult[ibin][iptbin];
 		}
 		V_int[ibin][isample]/=totmultall_[ibin][isample];
