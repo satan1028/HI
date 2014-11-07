@@ -58,7 +58,7 @@ for(int i=0;i<ntotbin;i++){
 	c1->cd(i+1);
 	if(i!=ntotbin-1)
 	TGraphErrors *gr24=new TGraphErrors(npt24,pt,v24[i],0,v24err[i]);
-	TGraphErrors *grProd=new TGraphErrors(npt,avgpt_Prod,v2_Prod,0,v2err_Prod);
+	TGraphErrors *grProd=new TGraphErrors(npt,avgpt_Prod,v2_Prod,0,v2err_Proderr);
 	gr24->SetMarkerSize(1.3);
 	gr24->SetMarkerColor(1);
 	gr24->SetMarkerStyle(20);
