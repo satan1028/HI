@@ -34,6 +34,7 @@ void plot(){
 //	hHFp4->Draw();
 //	g->Draw("same");
 	TLatex *tl = new TLatex(0.2,0.6,Form("fit range %.1f to %.1f",xmin,xmax));
+	tl->Draw("same");
 	c1->Print("hHFp4FitGamma.png");
 //	cout<<g->GetParameter(0)<<"\t"<<g->GetParError(0)<<endl;
 //	cout<<g->GetParameter(1)<<"\t"<<g->GetParError(1)<<endl;
