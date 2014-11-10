@@ -11,7 +11,7 @@ double function(double *v, double *par){
 void plot(){
 	gStyle->SetOptFit(kTRUE);
 	double xmin=1;
-	double xmax=50;
+	double xmax=100;
 	TFile *f = TFile::Open("/lio/lfs/cms/store/user/qixu/dNchdeta/MC/pythia6/pPbMC.root");
 	TDirectory *dir = f->GetDirectory("demo");
 	TH1D* hHFp4 = dir->Get("hHFp4");
@@ -25,17 +25,18 @@ void plot(){
 	hHFp4->GetXaxis()->SetRangeUser(0,50);
 	hHFp->GetXaxis()->SetRangeUser(0,50);
 	hHF4->GetXaxis()->SetRangeUser(0,50);
+	hHF3->GetXaxis()->SetRangeUser(0,200);
 	TCanvas *c1= new TCanvas;
 	c1->SetLogy();
 	TF1 *g = new TF1("g",function,0,100,2);
 	g->SetParameters(0.8,2);
 //	hHFp->Fit("g");
-	hHF4->Fit("g","","",xmin,xmax);
+	hHF3->Fit("g","","",xmin,xmax);
 //	hHFp4->Draw();
 //	g->Draw("same");
 	TLatex *tl = new TLatex(0.2,0.6,Form("fit range %.1f to %.1f",xmin,xmax));
 	tl->Draw("same");
-	c1->Print("hHFp4FitGamma.png");
+	c1->Print("hHFp3FitGamma.png");
 //	cout<<g->GetParameter(0)<<"\t"<<g->GetParError(0)<<endl;
 //	cout<<g->GetParameter(1)<<"\t"<<g->GetParError(1)<<endl;
 //	cout<<g->GetParameter(2)<<"\t"<<g->GetParError(2)<<endl;
