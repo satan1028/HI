@@ -1,0 +1,11 @@
+Info in <TUnixSystem::ACLiC>: creating shared library /home/xuq7/HI/dNchdeta/pPbData/GammaFit_C.so
+Error: /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/bin/rootcint: error loading headers...
+Error in <ACLiC>: Dictionary generation failed!
+Info in <ACLiC>: Invoking compiler to check macro's validity
+Info in <ACLiC>: The compiler has not found any problem with your macro.
+	Probably your macro uses something rootcint can't parse.
+	Check http://root.cern.ch/viewvc/trunk/cint/doc/limitati.txt for Cint's limitations.
+Error: Symbol GammaF is not defined in current scope  store.C:10:
+Error: Symbol l is not defined in current scope  store.C:10:
+*** Interpreter error recovered ***
+(const int)0

@@ -23,7 +23,6 @@ Make rootTuple for Lambda+track (Xi or Omega) analyses
 #include <memory>
 
 // user include files
-#include "myAnalyzers/PiLambda/interface/PiLambda.h"
 //#include "../interface/PiLambda.h" //by Qiao
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/EDAnalyzer.h"
@@ -67,6 +66,7 @@ Make rootTuple for Lambda+track (Xi or Omega) analyses
 #include <vector>
 #include <utility>
 
+#include "myAnalyzers/PiLambda/interface/PiLambda.h"
 //
 // constants, enums and typedefs
 //

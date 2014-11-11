@@ -59,8 +59,8 @@ struct HIJINGEvent{
    float b;
    float npart;
    float ncoll;
-   float nhard;
-   float phi0;
+//   float nhard;
+//   float phi0;
 
    int n[ETABINS];
    float ptav[ETABINS];
@@ -72,10 +72,10 @@ struct HIJINGEvent{
    int pdg[MAXPARTICLES];
    int chg[MAXPARTICLES];
 
-   float vx;
-   float vy;
-   float vz;
-   float vr;
+//   float vx;
+//   float vy;
+//   float vz;
+//   float vr;
 
 };
 
@@ -195,22 +195,22 @@ AnaHijing::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    }*/
    hev_.mult = 0;
       
-   double phi0 = 0;
+//   double phi0 = 0;
    double b = -1;
    int npart = -1;
    int ncoll = -1;
-   int nhard = -1;
-   double vx = -99;
-   double vy = -99;
-   double vz = -99;
-   double vr = -99;
+//   int nhard = -1;
+//   double vx = -99;
+//   double vy = -99;
+//   double vz = -99;
+//   double vr = -99;
    const GenEvent* evt;
-   const GenEvent* evt2;
+//   const GenEvent* evt2;
   
-   int nmix = -1;
+//   int nmix = -1;
    int np = 0;
-   int sig = -1;
-   int src = -1;
+//   int sig = -1;
+//   int src = -1;
 
    if(doCF_){
 
@@ -220,7 +220,7 @@ AnaHijing::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
      MixCollection<HepMCProduct> mix(cf.product());
 
-     nmix = mix.size();
+  //   nmix = mix.size();
 
      cout<<"Mix Collection Size: "<<mix<<endl;
 
@@ -260,15 +260,15 @@ AnaHijing::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       
       Handle<HepMCProduct> mc2;
       iEvent.getByLabel(src_,mc2);
-      evt2 = mc2->GetEvent();
+//      evt2 = mc2->GetEvent();
    
    const HeavyIon* hi = evt->heavy_ion();
    if(hi){
       b = hi->impact_parameter();
       npart = hi->Npart_proj()+hi->Npart_targ();
       ncoll = hi->Ncoll();
-      nhard = hi->Ncoll_hard();
-      phi0 = hi->event_plane_angle();
+//      nhard = hi->Ncoll_hard();
+//      phi0 = hi->event_plane_angle();
       
       if(printLists_){
 	 out_b<<b<<endl;
@@ -276,8 +276,8 @@ AnaHijing::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       }
    }
    
-   src = evt->particles_size();
-   sig = evt2->particles_size();
+//   src = evt->particles_size();
+//   sig = evt2->particles_size();
    
    if(b<1.5){
    HepMC::GenEvent::particle_const_iterator begin = evt->particles_begin();
@@ -291,27 +291,27 @@ AnaHijing::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 	
 	if(pdg_id_1 == 211 && pdg_id_2 == -211){	//3122--lambda	2212--proton 211--pi+ -211--pi- 2112--neutron
 
-	 float eta_1 = (*it1)->momentum().eta();
-	 float phi_1 = (*it1)->momentum().phi();
-	 float pt_1 = (*it1)->momentum().perp();
+	 //float eta_1 = (*it1)->momentum().eta();
+	 //float phi_1 = (*it1)->momentum().phi();
+	 //float pt_1 = (*it1)->momentum().perp();
 	 float e_1 = (*it1)->momentum().e();
 	 float px_1 = (*it1)->momentum().px();
 	 float py_1 = (*it1)->momentum().py();
 	 float pz_1 = (*it1)->momentum().pz();
 
-	 float eta_2 = (*it2)->momentum().eta();
-	 float phi_2 = (*it2)->momentum().phi();
-	 float pt_2 = (*it2)->momentum().perp();
+	 //float eta_2 = (*it2)->momentum().eta();
+	 //float phi_2 = (*it2)->momentum().phi();
+	 //float pt_2 = (*it2)->momentum().perp();
 	 float e_2 = (*it2)->momentum().e();
 	 float px_2 = (*it2)->momentum().px();
 	 float py_2 = (*it2)->momentum().py();
 	 float pz_2 = (*it2)->momentum().pz();
 
-	 const ParticleData * part_1 = pdt->particle(pdg_id_1 );
-	 const ParticleData * part_2 = pdt->particle(pdg_id_2 );
+	// const ParticleData * part_1 = pdt->particle(pdg_id_1 );
+ 	// const ParticleData * part_2 = pdt->particle(pdg_id_2 );
 
-	 int charge_1 = static_cast<int>(part_1->charge());
-	 int charge_2 = static_cast<int>(part_2->charge());
+	 //int charge_1 = static_cast<int>(part_1->charge());
+	 //int charge_2 = static_cast<int>(part_2->charge());
 	 
 //	 if(charge_1!=0&&pt_1>0.3&&fabs(eta_1)<4.0&&phi_1!=0){
 //	 if(charge_2!=0&&pt_2>0.3&&fabs(eta_2)<4.0&&phi_2!=0){

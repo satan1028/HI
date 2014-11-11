@@ -995,14 +995,14 @@ void V0DeltaREffAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetu
 	reco::Track negDauTk( *((dynamic_cast<const reco::RecoCandidate*>(recoNegDau))->track()));
 
 	double posDauChi2 = -1000., posDauNormChi2 = -1000., posDauD0 = -1000.;
-	double negDauChi2 = -1000., negDauNormChi2 = -1000., negDauD0 = -1000.;
+	double negDauChi2 = -1000., negDauNormChi2 = -1000.;//, negDauD0 = -1000.;
 	int posDauNhitsVal = -1000, negDauNhitsVal = -1000;
 	posDauChi2 = posDauTk.chi2();
 	posDauNormChi2 = posDauTk.normalizedChi2();
 	posDauD0 = posDauTk.d0();
 	negDauChi2 = negDauTk.chi2();
         negDauNormChi2 = negDauTk.normalizedChi2();
-	negDauD0 = negDauTk.d0();
+	//negDauD0 = negDauTk.d0();
 	posDauNhitsVal = posDauTk.numberOfValidHits();
 	negDauNhitsVal = negDauTk.numberOfValidHits();
 

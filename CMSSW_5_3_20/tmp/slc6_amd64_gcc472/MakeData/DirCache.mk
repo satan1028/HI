@@ -112,7 +112,7 @@ ALL_COMMONRULES += src_EffAna_AnaEff_test
 src_EffAna_AnaEff_test_parent := EffAna/AnaEff
 src_EffAna_AnaEff_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_EffAna_AnaEff_test,src/EffAna/AnaEff/test,TEST))
 ALL_PACKAGES += $(patsubst src/%,%,src/EffAna/ESAnaEff)
-subdirs_src_EffAna_ESAnaEff := src_EffAna_ESAnaEff_interface src_EffAna_ESAnaEff_src src_EffAna_ESAnaEff_test src_EffAna_ESAnaEff_python
+subdirs_src_EffAna_ESAnaEff := src_EffAna_ESAnaEff_src src_EffAna_ESAnaEff_python src_EffAna_ESAnaEff_test
 ifeq ($(strip $(PyEffAnaESAnaEff)),)
 PyEffAnaESAnaEff := self/src/EffAna/ESAnaEff/python
 src_EffAna_ESAnaEff_python_parent := 
@@ -165,18 +165,41 @@ src_HeavyIonsAnalysis_Configuration_python_INIT_FUNC += $$(eval $$(call CommonPr
 ALL_COMMONRULES += src_HeavyIonsAnalysis_Configuration_test
 src_HeavyIonsAnalysis_Configuration_test_parent := HeavyIonsAnalysis/Configuration
 src_HeavyIonsAnalysis_Configuration_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_HeavyIonsAnalysis_Configuration_test,src/HeavyIonsAnalysis/Configuration/test,TEST))
-ALL_SUBSYSTEMS+=$(patsubst src/%,%,src/PythiaMC)
-subdirs_src_PythiaMC = src_PythiaMC_interface src_PythiaMC_src src_PythiaMC_test src_PythiaMC_doc src_PythiaMC_python
-ALL_PACKAGES += $(patsubst src/%,%,src/PythiaMC/doc)
-subdirs_src_PythiaMC_doc := 
-ALL_PACKAGES += $(patsubst src/%,%,src/PythiaMC/interface)
-subdirs_src_PythiaMC_interface := 
-ALL_PACKAGES += $(patsubst src/%,%,src/PythiaMC/python)
-subdirs_src_PythiaMC_python := 
-ALL_PACKAGES += $(patsubst src/%,%,src/PythiaMC/src)
-subdirs_src_PythiaMC_src := 
-ALL_PACKAGES += $(patsubst src/%,%,src/PythiaMC/test)
-subdirs_src_PythiaMC_test := 
+ALL_SUBSYSTEMS+=$(patsubst src/%,%,src/dNchdeta)
+subdirs_src_dNchdeta = src_dNchdeta_PythiaMC
+ALL_PACKAGES += $(patsubst src/%,%,src/dNchdeta/PythiaMC)
+subdirs_src_dNchdeta_PythiaMC := src_dNchdeta_PythiaMC_doc src_dNchdeta_PythiaMC_interface src_dNchdeta_PythiaMC_python src_dNchdeta_PythiaMC_src src_dNchdeta_PythiaMC_test
+ifeq ($(strip $(PydNchdetaPythiaMC)),)
+PydNchdetaPythiaMC := self/src/dNchdeta/PythiaMC/python
+src_dNchdeta_PythiaMC_python_parent := 
+ALL_PYTHON_DIRS += $(patsubst src/%,%,src/dNchdeta/PythiaMC/python)
+PydNchdetaPythiaMC_files := $(patsubst src/dNchdeta/PythiaMC/python/%,%,$(wildcard $(foreach dir,src/dNchdeta/PythiaMC/python ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
+PydNchdetaPythiaMC_LOC_USE := self  
+PydNchdetaPythiaMC_PACKAGE := self/src/dNchdeta/PythiaMC/python
+ALL_PRODS += PydNchdetaPythiaMC
+PydNchdetaPythiaMC_INIT_FUNC        += $$(eval $$(call PythonProduct,PydNchdetaPythiaMC,src/dNchdeta/PythiaMC/python,src_dNchdeta_PythiaMC_python,1,1,$(SCRAMSTORENAME_PYTHON),$(SCRAMSTORENAME_LIB),,))
+else
+$(eval $(call MultipleWarningMsg,PydNchdetaPythiaMC,src/dNchdeta/PythiaMC/python))
+endif
+ALL_COMMONRULES += src_dNchdeta_PythiaMC_python
+src_dNchdeta_PythiaMC_python_INIT_FUNC += $$(eval $$(call CommonProductRules,src_dNchdeta_PythiaMC_python,src/dNchdeta/PythiaMC/python,PYTHON))
+ifeq ($(strip $(dNchdeta/PythiaMC)),)
+ALL_COMMONRULES += src_dNchdeta_PythiaMC_src
+src_dNchdeta_PythiaMC_src_parent := dNchdeta/PythiaMC
+src_dNchdeta_PythiaMC_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_dNchdeta_PythiaMC_src,src/dNchdeta/PythiaMC/src,LIBRARY))
+dNchdetaPythiaMC := self/dNchdeta/PythiaMC
+dNchdeta/PythiaMC := dNchdetaPythiaMC
+dNchdetaPythiaMC_files := $(patsubst src/dNchdeta/PythiaMC/src/%,%,$(wildcard $(foreach dir,src/dNchdeta/PythiaMC/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
+dNchdetaPythiaMC_BuildFile    := $(WORKINGDIR)/cache/bf/src/dNchdeta/PythiaMC/BuildFile
+dNchdetaPythiaMC_LOC_USE := self  FWCore/Framework FWCore/PluginManager FWCore/ParameterSet FWCore/ServiceRegistry root CommonTools/UtilAlgos DataFormats/HeavyIonEvent SimDataFormats/HiGenData SimDataFormats/Vertex SimDataFormats/GeneratorProducts
+dNchdetaPythiaMC_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,dNchdetaPythiaMC,dNchdetaPythiaMC,$(SCRAMSTORENAME_LIB),src/dNchdeta/PythiaMC/src))
+dNchdetaPythiaMC_PACKAGE := self/src/dNchdeta/PythiaMC/src
+ALL_PRODS += dNchdetaPythiaMC
+dNchdetaPythiaMC_INIT_FUNC        += $$(eval $$(call Library,dNchdetaPythiaMC,src/dNchdeta/PythiaMC/src,src_dNchdeta_PythiaMC_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
+endif
+ALL_COMMONRULES += src_dNchdeta_PythiaMC_test
+src_dNchdeta_PythiaMC_test_parent := dNchdeta/PythiaMC
+src_dNchdeta_PythiaMC_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_dNchdeta_PythiaMC_test,src/dNchdeta/PythiaMC/test,TEST))
 ALL_SUBSYSTEMS+=$(patsubst src/%,%,src/RecoHI)
 subdirs_src_RecoHI = src_RecoHI_HiCentralityAlgos
 ALL_PACKAGES += $(patsubst src/%,%,src/RecoHI/HiCentralityAlgos)
@@ -326,7 +349,7 @@ ALL_COMMONRULES += src_flowAnalysis_SkimPFCand_test
 src_flowAnalysis_SkimPFCand_test_parent := flowAnalysis/SkimPFCand
 src_flowAnalysis_SkimPFCand_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_flowAnalysis_SkimPFCand_test,src/flowAnalysis/SkimPFCand/test,TEST))
 ALL_PACKAGES += $(patsubst src/%,%,src/flowAnalysis/SkimTrack)
-subdirs_src_flowAnalysis_SkimTrack := src_flowAnalysis_SkimTrack_src src_flowAnalysis_SkimTrack_test src_flowAnalysis_SkimTrack_python
+subdirs_src_flowAnalysis_SkimTrack := src_flowAnalysis_SkimTrack_python src_flowAnalysis_SkimTrack_src src_flowAnalysis_SkimTrack_test
 ifeq ($(strip $(PyflowAnalysisSkimTrack)),)
 PyflowAnalysisSkimTrack := self/src/flowAnalysis/SkimTrack/python
 src_flowAnalysis_SkimTrack_python_parent := 
@@ -389,273 +412,20 @@ ALL_PACKAGES += $(patsubst src/%,%,src/V0Scripts/plots)
 subdirs_src_V0Scripts_plots := 
 ALL_SUBSYSTEMS+=$(patsubst src/%,%,src/myAnalyzers)
 subdirs_src_myAnalyzers = src_myAnalyzers_PiLambda src_myAnalyzers_V0RecoAnalyzer
-ALL_SUBSYSTEMS+=$(patsubst src/%,%,src/usercode)
-subdirs_src_usercode = src_usercode_GeneralAnalyzers src_usercode_HeavyIonsAnalysis src_usercode_PhysicsTools src_usercode_SimG4Core src_usercode_HIN-10-002 src_usercode_HITrackCorrections src_usercode_JEX src_usercode_MergedTrackCorrections src_usercode_Misc src_usercode_Phase1HITracking src_usercode_PixelFiducialRemover src_usercode_PixelTrackAnalysis src_usercode_PixelTracksRun2010 src_usercode_SiStripCMNAnalyzer src_usercode_hackedSiStripDigitizer
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/GeneralAnalyzers)
-subdirs_src_usercode_GeneralAnalyzers := src_usercode_GeneralAnalyzers_bin src_usercode_GeneralAnalyzers_test src_usercode_GeneralAnalyzers_src
-ifeq ($(strip $(PlotCaloTowers)),)
-PlotCaloTowers_files := $(patsubst src/usercode/GeneralAnalyzers/bin/%,%,$(foreach file,PlotCaloTowers.cc,$(eval xfile:=$(wildcard src/usercode/GeneralAnalyzers/bin/$(file)))$(if $(xfile),$(xfile),$(warning No such file exists: src/usercode/GeneralAnalyzers/bin/$(file). Please fix src/usercode/GeneralAnalyzers/bin/BuildFile.))))
-PlotCaloTowers := self/src/usercode/GeneralAnalyzers/bin
-PlotCaloTowers_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/GeneralAnalyzers/bin/BuildFile
-PlotCaloTowers_LOC_USE := self  root boost rootcintex DataFormats/FWLite FWCore/FWLite FWCore/Framework CommonTools/Utils PhysicsTools/FWLite PhysicsTools/Utilities DataFormats/Common DataFormats/CaloTowers
-PlotCaloTowers_PACKAGE := self/src/usercode/GeneralAnalyzers/bin
-ALL_PRODS += PlotCaloTowers
-PlotCaloTowers_INIT_FUNC        += $$(eval $$(call Binary,PlotCaloTowers,src/usercode/GeneralAnalyzers/bin,src_usercode_GeneralAnalyzers_bin,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_BIN),bin,$(SCRAMSTORENAME_LOGS)))
-else
-$(eval $(call MultipleWarningMsg,PlotCaloTowers,src/usercode/GeneralAnalyzers/bin))
+ifeq ($(strip $(myFilters/V0CandFilter)),)
+ALL_COMMONRULES += src_myFilters_V0CandFilter_src
+src_myFilters_V0CandFilter_src_parent := myFilters/V0CandFilter
+src_myFilters_V0CandFilter_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_myFilters_V0CandFilter_src,src/myFilters/V0CandFilter/src,LIBRARY))
+myFiltersV0CandFilter := self/myFilters/V0CandFilter
+myFilters/V0CandFilter := myFiltersV0CandFilter
+myFiltersV0CandFilter_files := $(patsubst src/myFilters/V0CandFilter/src/%,%,$(wildcard $(foreach dir,src/myFilters/V0CandFilter/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
+myFiltersV0CandFilter_BuildFile    := $(WORKINGDIR)/cache/bf/src/myFilters/V0CandFilter/BuildFile
+myFiltersV0CandFilter_LOC_USE := self  FWCore/Framework FWCore/PluginManager FWCore/ParameterSet DataFormats/Candidate DataFormats/TrackReco
+myFiltersV0CandFilter_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,myFiltersV0CandFilter,myFiltersV0CandFilter,$(SCRAMSTORENAME_LIB),src/myFilters/V0CandFilter/src))
+myFiltersV0CandFilter_PACKAGE := self/src/myFilters/V0CandFilter/src
+ALL_PRODS += myFiltersV0CandFilter
+myFiltersV0CandFilter_INIT_FUNC        += $$(eval $$(call Library,myFiltersV0CandFilter,src/myFilters/V0CandFilter/src,src_myFilters_V0CandFilter_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
 endif
-ALL_COMMONRULES += src_usercode_GeneralAnalyzers_bin
-src_usercode_GeneralAnalyzers_bin_parent := usercode/GeneralAnalyzers
-src_usercode_GeneralAnalyzers_bin_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_GeneralAnalyzers_bin,src/usercode/GeneralAnalyzers/bin,BINARY))
-ifeq ($(strip $(usercode/GeneralAnalyzers)),)
-ALL_COMMONRULES += src_usercode_GeneralAnalyzers_src
-src_usercode_GeneralAnalyzers_src_parent := usercode/GeneralAnalyzers
-src_usercode_GeneralAnalyzers_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_usercode_GeneralAnalyzers_src,src/usercode/GeneralAnalyzers/src,LIBRARY))
-usercodeGeneralAnalyzers := self/usercode/GeneralAnalyzers
-usercode/GeneralAnalyzers := usercodeGeneralAnalyzers
-usercodeGeneralAnalyzers_files := $(patsubst src/usercode/GeneralAnalyzers/src/%,%,$(wildcard $(foreach dir,src/usercode/GeneralAnalyzers/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-usercodeGeneralAnalyzers_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/GeneralAnalyzers/BuildFile
-usercodeGeneralAnalyzers_LOC_USE := self  FWCore/Framework FWCore/PluginManager FWCore/ParameterSet FWCore/MessageLogger FWCore/Utilities DataFormats/Common DataFormats/FEDRawData DataFormats/SiStripDetId DataFormats/TrackerRecHit2D DataFormats/SiPixelDetId DataFormats/DetId CondFormats/DataRecord CondFormats/SiStripObjects CalibFormats/SiStripObjects CalibTracker/Records FWCore/ServiceRegistry CommonTools/UtilAlgos DataFormats/SiStripCluster DataFormats/SiPixelCluster DataFormats/HeavyIonEvent DataFormats/TrackReco DataFormats/VertexReco DataFormats/HepMCCandidate DataFormats/Math Geometry/Records
-usercodeGeneralAnalyzers_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,usercodeGeneralAnalyzers,usercodeGeneralAnalyzers,$(SCRAMSTORENAME_LIB),src/usercode/GeneralAnalyzers/src))
-usercodeGeneralAnalyzers_PACKAGE := self/src/usercode/GeneralAnalyzers/src
-ALL_PRODS += usercodeGeneralAnalyzers
-usercodeGeneralAnalyzers_INIT_FUNC        += $$(eval $$(call Library,usercodeGeneralAnalyzers,src/usercode/GeneralAnalyzers/src,src_usercode_GeneralAnalyzers_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
-endif
-ALL_COMMONRULES += src_usercode_GeneralAnalyzers_test
-src_usercode_GeneralAnalyzers_test_parent := usercode/GeneralAnalyzers
-src_usercode_GeneralAnalyzers_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_GeneralAnalyzers_test,src/usercode/GeneralAnalyzers/test,TEST))
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/JEX)
-subdirs_src_usercode_JEX := src_usercode_JEX_python src_usercode_JEX_scripts src_usercode_JEX_src src_usercode_JEX_test
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/HIN-10-002)
-subdirs_src_usercode_HIN-10-002 := 
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/HITrackCorrections)
-subdirs_src_usercode_HITrackCorrections := src_usercode_HITrackCorrections_python src_usercode_HITrackCorrections_src src_usercode_HITrackCorrections_test
-ifeq ($(strip $(PyusercodeHITrackCorrections)),)
-PyusercodeHITrackCorrections := self/src/usercode/HITrackCorrections/python
-src_usercode_HITrackCorrections_python_parent := 
-ALL_PYTHON_DIRS += $(patsubst src/%,%,src/usercode/HITrackCorrections/python)
-PyusercodeHITrackCorrections_files := $(patsubst src/usercode/HITrackCorrections/python/%,%,$(wildcard $(foreach dir,src/usercode/HITrackCorrections/python ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-PyusercodeHITrackCorrections_LOC_USE := self  
-PyusercodeHITrackCorrections_PACKAGE := self/src/usercode/HITrackCorrections/python
-ALL_PRODS += PyusercodeHITrackCorrections
-PyusercodeHITrackCorrections_INIT_FUNC        += $$(eval $$(call PythonProduct,PyusercodeHITrackCorrections,src/usercode/HITrackCorrections/python,src_usercode_HITrackCorrections_python,1,1,$(SCRAMSTORENAME_PYTHON),$(SCRAMSTORENAME_LIB),,))
-else
-$(eval $(call MultipleWarningMsg,PyusercodeHITrackCorrections,src/usercode/HITrackCorrections/python))
-endif
-ALL_COMMONRULES += src_usercode_HITrackCorrections_python
-src_usercode_HITrackCorrections_python_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_HITrackCorrections_python,src/usercode/HITrackCorrections/python,PYTHON))
-ifeq ($(strip $(usercode/HITrackCorrections)),)
-ALL_COMMONRULES += src_usercode_HITrackCorrections_src
-src_usercode_HITrackCorrections_src_parent := usercode/HITrackCorrections
-src_usercode_HITrackCorrections_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_usercode_HITrackCorrections_src,src/usercode/HITrackCorrections/src,LIBRARY))
-usercodeHITrackCorrections := self/usercode/HITrackCorrections
-usercode/HITrackCorrections := usercodeHITrackCorrections
-usercodeHITrackCorrections_files := $(patsubst src/usercode/HITrackCorrections/src/%,%,$(wildcard $(foreach dir,src/usercode/HITrackCorrections/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-usercodeHITrackCorrections_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/HITrackCorrections/BuildFile
-usercodeHITrackCorrections_LOC_USE := self  hepmc FWCore/Framework FWCore/PluginManager FWCore/ParameterSet FWCore/MessageLogger FWCore/Utilities DataFormats/Common DataFormats/FEDRawData DataFormats/SiStripDetId DataFormats/TrackerRecHit2D DataFormats/SiPixelDetId DataFormats/DetId CondFormats/DataRecord CondFormats/SiStripObjects CalibFormats/SiStripObjects CalibTracker/Records FWCore/ServiceRegistry CommonTools/UtilAlgos DataFormats/SiStripCluster DataFormats/SiPixelCluster DataFormats/HeavyIonEvent DataFormats/TrackReco DataFormats/VertexReco DataFormats/HepMCCandidate DataFormats/Math DataFormats/Scalers
-usercodeHITrackCorrections_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,usercodeHITrackCorrections,usercodeHITrackCorrections,$(SCRAMSTORENAME_LIB),src/usercode/HITrackCorrections/src))
-usercodeHITrackCorrections_PACKAGE := self/src/usercode/HITrackCorrections/src
-ALL_PRODS += usercodeHITrackCorrections
-usercodeHITrackCorrections_INIT_FUNC        += $$(eval $$(call Library,usercodeHITrackCorrections,src/usercode/HITrackCorrections/src,src_usercode_HITrackCorrections_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
-endif
-ALL_COMMONRULES += src_usercode_HITrackCorrections_test
-src_usercode_HITrackCorrections_test_parent := usercode/HITrackCorrections
-src_usercode_HITrackCorrections_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_HITrackCorrections_test,src/usercode/HITrackCorrections/test,TEST))
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/HeavyIonsAnalysis)
-subdirs_src_usercode_HeavyIonsAnalysis := 
-ifeq ($(strip $(PyusercodeJEX)),)
-PyusercodeJEX := self/src/usercode/JEX/python
-src_usercode_JEX_python_parent := 
-ALL_PYTHON_DIRS += $(patsubst src/%,%,src/usercode/JEX/python)
-PyusercodeJEX_files := $(patsubst src/usercode/JEX/python/%,%,$(wildcard $(foreach dir,src/usercode/JEX/python ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-PyusercodeJEX_LOC_USE := self  
-PyusercodeJEX_PACKAGE := self/src/usercode/JEX/python
-ALL_PRODS += PyusercodeJEX
-PyusercodeJEX_INIT_FUNC        += $$(eval $$(call PythonProduct,PyusercodeJEX,src/usercode/JEX/python,src_usercode_JEX_python,1,1,$(SCRAMSTORENAME_PYTHON),$(SCRAMSTORENAME_LIB),,))
-else
-$(eval $(call MultipleWarningMsg,PyusercodeJEX,src/usercode/JEX/python))
-endif
-ALL_COMMONRULES += src_usercode_JEX_python
-src_usercode_JEX_python_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_JEX_python,src/usercode/JEX/python,PYTHON))
-src_usercode_JEX_scripts_files := $(filter-out \#% %\#,$(notdir $(wildcard $(foreach dir,$(LOCALTOP)/src/usercode/JEX/scripts,$(dir)/*))))
-$(eval $(call Src2StoreCopy,src_usercode_JEX_scripts,src/usercode/JEX/scripts,$(SCRAMSTORENAME_BIN),*))
-ifeq ($(strip $(usercode/JEX)),)
-ALL_COMMONRULES += src_usercode_JEX_src
-src_usercode_JEX_src_parent := usercode/JEX
-src_usercode_JEX_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_usercode_JEX_src,src/usercode/JEX/src,LIBRARY))
-usercodeJEX := self/usercode/JEX
-usercode/JEX := usercodeJEX
-usercodeJEX_files := $(patsubst src/usercode/JEX/src/%,%,$(wildcard $(foreach dir,src/usercode/JEX/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-usercodeJEX_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/JEX/BuildFile
-usercodeJEX_LOC_USE := self  DataFormats/Common DataFormats/DetId DataFormats/Math DataFormats/SiPixelDetId DataFormats/SiStripDetId DataFormats/TrackCandidate DataFormats/TrackReco DataFormats/TrackerRecHit2D DataFormats/TrackingRecHit DataFormats/TrajectorySeed DataFormats/VertexReco FWCore/Framework FWCore/MessageLogger FWCore/ParameterSet FWCore/PluginManager FWCore/Utilities Geometry/CommonDetUnit Geometry/CommonTopologies Geometry/Records Geometry/TrackerGeometryBuilder MagneticField/Engine MagneticField/Records TrackingTools/PatternTools RecoLocalTracker/SiStripClusterizer RecoLocalTracker/Records TrackingTools/TransientTrack TrackingTools/TrajectoryCleaning TrackingTools/TrajectoryFiltering TrackingTools/Records RecoTracker/TrackProducer RecoPixelVertexing/PixelTriplets RecoPixelVertexing/PixelTrackFitting RecoPixelVertexing/PixelLowPtUtilities SimDataFormats/GeneratorProducts RecoVertex/VertexTools CommonTools/Utils clhep
-usercodeJEX_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,usercodeJEX,usercodeJEX,$(SCRAMSTORENAME_LIB),src/usercode/JEX/src))
-usercodeJEX_PACKAGE := self/src/usercode/JEX/src
-ALL_PRODS += usercodeJEX
-usercodeJEX_INIT_FUNC        += $$(eval $$(call Library,usercodeJEX,src/usercode/JEX/src,src_usercode_JEX_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
-endif
-ALL_COMMONRULES += src_usercode_JEX_test
-src_usercode_JEX_test_parent := usercode/JEX
-src_usercode_JEX_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_JEX_test,src/usercode/JEX/test,TEST))
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/MergedTrackCorrections)
-subdirs_src_usercode_MergedTrackCorrections := src_usercode_MergedTrackCorrections_data src_usercode_MergedTrackCorrections_src
-ifeq ($(strip $(usercode/MergedTrackCorrections)),)
-ALL_COMMONRULES += src_usercode_MergedTrackCorrections_src
-src_usercode_MergedTrackCorrections_src_parent := usercode/MergedTrackCorrections
-src_usercode_MergedTrackCorrections_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_usercode_MergedTrackCorrections_src,src/usercode/MergedTrackCorrections/src,LIBRARY))
-usercodeMergedTrackCorrections := self/usercode/MergedTrackCorrections
-usercode/MergedTrackCorrections := usercodeMergedTrackCorrections
-usercodeMergedTrackCorrections_files := $(patsubst src/usercode/MergedTrackCorrections/src/%,%,$(wildcard $(foreach dir,src/usercode/MergedTrackCorrections/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-usercodeMergedTrackCorrections_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/MergedTrackCorrections/BuildFile
-usercodeMergedTrackCorrections_LOC_USE := self  FWCore/Framework FWCore/ParameterSet FWCore/PluginManager FWCore/Utilities DataFormats/Math DataFormats/Common DataFormats/TrackReco DataFormats/VertexReco DataFormats/HeavyIonEvent CommonTools/Utils CommonTools/UtilAlgos
-usercodeMergedTrackCorrections_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,usercodeMergedTrackCorrections,usercodeMergedTrackCorrections,$(SCRAMSTORENAME_LIB),src/usercode/MergedTrackCorrections/src))
-usercodeMergedTrackCorrections_PACKAGE := self/src/usercode/MergedTrackCorrections/src
-ALL_PRODS += usercodeMergedTrackCorrections
-usercodeMergedTrackCorrections_INIT_FUNC        += $$(eval $$(call Library,usercodeMergedTrackCorrections,src/usercode/MergedTrackCorrections/src,src_usercode_MergedTrackCorrections_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
-endif
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/Misc)
-subdirs_src_usercode_Misc := src_usercode_Misc_python
-ifeq ($(strip $(PyusercodeMisc)),)
-PyusercodeMisc := self/src/usercode/Misc/python
-src_usercode_Misc_python_parent := 
-ALL_PYTHON_DIRS += $(patsubst src/%,%,src/usercode/Misc/python)
-PyusercodeMisc_files := $(patsubst src/usercode/Misc/python/%,%,$(wildcard $(foreach dir,src/usercode/Misc/python ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-PyusercodeMisc_LOC_USE := self  
-PyusercodeMisc_PACKAGE := self/src/usercode/Misc/python
-ALL_PRODS += PyusercodeMisc
-PyusercodeMisc_INIT_FUNC        += $$(eval $$(call PythonProduct,PyusercodeMisc,src/usercode/Misc/python,src_usercode_Misc_python,1,1,$(SCRAMSTORENAME_PYTHON),$(SCRAMSTORENAME_LIB),,))
-else
-$(eval $(call MultipleWarningMsg,PyusercodeMisc,src/usercode/Misc/python))
-endif
-ALL_COMMONRULES += src_usercode_Misc_python
-src_usercode_Misc_python_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_Misc_python,src/usercode/Misc/python,PYTHON))
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/Phase1HITracking)
-subdirs_src_usercode_Phase1HITracking := src_usercode_Phase1HITracking_test
-ALL_COMMONRULES += src_usercode_Phase1HITracking_test
-src_usercode_Phase1HITracking_test_parent := usercode/Phase1HITracking
-src_usercode_Phase1HITracking_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_Phase1HITracking_test,src/usercode/Phase1HITracking/test,TEST))
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/PhysicsTools)
-subdirs_src_usercode_PhysicsTools := 
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/PixelFiducialRemover)
-subdirs_src_usercode_PixelFiducialRemover := src_usercode_PixelFiducialRemover_src
-ifeq ($(strip $(usercode/PixelFiducialRemover)),)
-ALL_COMMONRULES += src_usercode_PixelFiducialRemover_src
-src_usercode_PixelFiducialRemover_src_parent := usercode/PixelFiducialRemover
-src_usercode_PixelFiducialRemover_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_usercode_PixelFiducialRemover_src,src/usercode/PixelFiducialRemover/src,LIBRARY))
-usercodePixelFiducialRemover := self/usercode/PixelFiducialRemover
-usercode/PixelFiducialRemover := usercodePixelFiducialRemover
-usercodePixelFiducialRemover_files := $(patsubst src/usercode/PixelFiducialRemover/src/%,%,$(wildcard $(foreach dir,src/usercode/PixelFiducialRemover/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-usercodePixelFiducialRemover_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/PixelFiducialRemover/BuildFile
-usercodePixelFiducialRemover_LOC_USE := self  FWCore/Framework FWCore/PluginManager FWCore/ParameterSet DataFormats/SiPixelDetId DataFormats/TrackerRecHit2D DataFormats/SiPixelCluster DataFormats/DetId DataFormats/Common
-usercodePixelFiducialRemover_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,usercodePixelFiducialRemover,usercodePixelFiducialRemover,$(SCRAMSTORENAME_LIB),src/usercode/PixelFiducialRemover/src))
-usercodePixelFiducialRemover_PACKAGE := self/src/usercode/PixelFiducialRemover/src
-ALL_PRODS += usercodePixelFiducialRemover
-usercodePixelFiducialRemover_INIT_FUNC        += $$(eval $$(call Library,usercodePixelFiducialRemover,src/usercode/PixelFiducialRemover/src,src_usercode_PixelFiducialRemover_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
-endif
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/PixelTrackAnalysis)
-subdirs_src_usercode_PixelTrackAnalysis := src_usercode_PixelTrackAnalysis_src src_usercode_PixelTrackAnalysis_test
-ifeq ($(strip $(usercode/PixelTrackAnalysis)),)
-ALL_COMMONRULES += src_usercode_PixelTrackAnalysis_src
-src_usercode_PixelTrackAnalysis_src_parent := usercode/PixelTrackAnalysis
-src_usercode_PixelTrackAnalysis_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_usercode_PixelTrackAnalysis_src,src/usercode/PixelTrackAnalysis/src,LIBRARY))
-usercodePixelTrackAnalysis := self/usercode/PixelTrackAnalysis
-usercode/PixelTrackAnalysis := usercodePixelTrackAnalysis
-usercodePixelTrackAnalysis_files := $(patsubst src/usercode/PixelTrackAnalysis/src/%,%,$(wildcard $(foreach dir,src/usercode/PixelTrackAnalysis/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-usercodePixelTrackAnalysis_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/PixelTrackAnalysis/BuildFile
-usercodePixelTrackAnalysis_LOC_USE := self  FWCore/Framework FWCore/ParameterSet FWCore/PluginManager FWCore/Utilities DataFormats/Math DataFormats/Common DataFormats/TrackReco DataFormats/VertexReco DataFormats/HeavyIonEvent CommonTools/Utils CommonTools/UtilAlgos SimDataFormats/TrackingAnalysis SimTracker/Records SimTracker/TrackAssociation DataFormats/RecoCandidate Geometry/TrackerGeometryBuilder
-usercodePixelTrackAnalysis_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,usercodePixelTrackAnalysis,usercodePixelTrackAnalysis,$(SCRAMSTORENAME_LIB),src/usercode/PixelTrackAnalysis/src))
-usercodePixelTrackAnalysis_PACKAGE := self/src/usercode/PixelTrackAnalysis/src
-ALL_PRODS += usercodePixelTrackAnalysis
-usercodePixelTrackAnalysis_INIT_FUNC        += $$(eval $$(call Library,usercodePixelTrackAnalysis,src/usercode/PixelTrackAnalysis/src,src_usercode_PixelTrackAnalysis_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
-endif
-ALL_COMMONRULES += src_usercode_PixelTrackAnalysis_test
-src_usercode_PixelTrackAnalysis_test_parent := usercode/PixelTrackAnalysis
-src_usercode_PixelTrackAnalysis_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_PixelTrackAnalysis_test,src/usercode/PixelTrackAnalysis/test,TEST))
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/PixelTracksRun2010)
-subdirs_src_usercode_PixelTracksRun2010 := src_usercode_PixelTracksRun2010_bin src_usercode_PixelTracksRun2010_interface src_usercode_PixelTracksRun2010_python src_usercode_PixelTracksRun2010_scripts src_usercode_PixelTracksRun2010_src src_usercode_PixelTracksRun2010_test
-ifeq ($(strip $(CheckPixelTracks)),)
-CheckPixelTracks_files := $(patsubst src/usercode/PixelTracksRun2010/bin/%,%,$(foreach file,CheckPixelTracks.cc,$(eval xfile:=$(wildcard src/usercode/PixelTracksRun2010/bin/$(file)))$(if $(xfile),$(xfile),$(warning No such file exists: src/usercode/PixelTracksRun2010/bin/$(file). Please fix src/usercode/PixelTracksRun2010/bin/BuildFile.))))
-CheckPixelTracks := self/src/usercode/PixelTracksRun2010/bin
-CheckPixelTracks_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/PixelTracksRun2010/bin/BuildFile
-CheckPixelTracks_LOC_USE := self  root boost rootcintex DataFormats/FWLite FWCore/FWLite FWCore/Framework CommonTools/Utils PhysicsTools/FWLite PhysicsTools/Utilities DataFormats/Common DataFormats/TrackReco DataFormats/VertexReco
-CheckPixelTracks_PACKAGE := self/src/usercode/PixelTracksRun2010/bin
-ALL_PRODS += CheckPixelTracks
-CheckPixelTracks_INIT_FUNC        += $$(eval $$(call Binary,CheckPixelTracks,src/usercode/PixelTracksRun2010/bin,src_usercode_PixelTracksRun2010_bin,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_BIN),bin,$(SCRAMSTORENAME_LOGS)))
-else
-$(eval $(call MultipleWarningMsg,CheckPixelTracks,src/usercode/PixelTracksRun2010/bin))
-endif
-ALL_COMMONRULES += src_usercode_PixelTracksRun2010_bin
-src_usercode_PixelTracksRun2010_bin_parent := usercode/PixelTracksRun2010
-src_usercode_PixelTracksRun2010_bin_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_PixelTracksRun2010_bin,src/usercode/PixelTracksRun2010/bin,BINARY))
-ifeq ($(strip $(PyusercodePixelTracksRun2010)),)
-PyusercodePixelTracksRun2010 := self/src/usercode/PixelTracksRun2010/python
-src_usercode_PixelTracksRun2010_python_parent := 
-ALL_PYTHON_DIRS += $(patsubst src/%,%,src/usercode/PixelTracksRun2010/python)
-PyusercodePixelTracksRun2010_files := $(patsubst src/usercode/PixelTracksRun2010/python/%,%,$(wildcard $(foreach dir,src/usercode/PixelTracksRun2010/python ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-PyusercodePixelTracksRun2010_LOC_USE := self  
-PyusercodePixelTracksRun2010_PACKAGE := self/src/usercode/PixelTracksRun2010/python
-ALL_PRODS += PyusercodePixelTracksRun2010
-PyusercodePixelTracksRun2010_INIT_FUNC        += $$(eval $$(call PythonProduct,PyusercodePixelTracksRun2010,src/usercode/PixelTracksRun2010/python,src_usercode_PixelTracksRun2010_python,1,1,$(SCRAMSTORENAME_PYTHON),$(SCRAMSTORENAME_LIB),,))
-else
-$(eval $(call MultipleWarningMsg,PyusercodePixelTracksRun2010,src/usercode/PixelTracksRun2010/python))
-endif
-ALL_COMMONRULES += src_usercode_PixelTracksRun2010_python
-src_usercode_PixelTracksRun2010_python_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_PixelTracksRun2010_python,src/usercode/PixelTracksRun2010/python,PYTHON))
-src_usercode_PixelTracksRun2010_scripts_files := $(filter-out \#% %\#,$(notdir $(wildcard $(foreach dir,$(LOCALTOP)/src/usercode/PixelTracksRun2010/scripts,$(dir)/*))))
-$(eval $(call Src2StoreCopy,src_usercode_PixelTracksRun2010_scripts,src/usercode/PixelTracksRun2010/scripts,$(SCRAMSTORENAME_BIN),*))
-ifeq ($(strip $(usercode/PixelTracksRun2010)),)
-ALL_COMMONRULES += src_usercode_PixelTracksRun2010_src
-src_usercode_PixelTracksRun2010_src_parent := usercode/PixelTracksRun2010
-src_usercode_PixelTracksRun2010_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_usercode_PixelTracksRun2010_src,src/usercode/PixelTracksRun2010/src,LIBRARY))
-usercodePixelTracksRun2010 := self/usercode/PixelTracksRun2010
-usercode/PixelTracksRun2010 := usercodePixelTracksRun2010
-usercodePixelTracksRun2010_files := $(patsubst src/usercode/PixelTracksRun2010/src/%,%,$(wildcard $(foreach dir,src/usercode/PixelTracksRun2010/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-usercodePixelTracksRun2010_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/PixelTracksRun2010/BuildFile
-usercodePixelTracksRun2010_LOC_USE := self  DataFormats/Common DataFormats/DetId DataFormats/Math DataFormats/SiPixelDetId DataFormats/SiStripDetId DataFormats/TrackCandidate DataFormats/TrackReco DataFormats/TrackerRecHit2D DataFormats/TrackingRecHit DataFormats/TrajectorySeed DataFormats/VertexReco FWCore/Framework FWCore/MessageLogger FWCore/ParameterSet FWCore/PluginManager FWCore/Utilities Geometry/CommonDetUnit Geometry/CommonTopologies Geometry/Records Geometry/TrackerGeometryBuilder MagneticField/Engine MagneticField/Records TrackingTools/PatternTools RecoLocalTracker/SiStripClusterizer RecoLocalTracker/Records TrackingTools/TransientTrack TrackingTools/TrajectoryCleaning TrackingTools/TrajectoryFiltering TrackingTools/Records RecoTracker/TrackProducer RecoPixelVertexing/PixelTriplets RecoPixelVertexing/PixelTrackFitting RecoPixelVertexing/PixelLowPtUtilities SimDataFormats/GeneratorProducts RecoVertex/VertexTools CommonTools/Utils clhep
-usercodePixelTracksRun2010_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,usercodePixelTracksRun2010,usercodePixelTracksRun2010,$(SCRAMSTORENAME_LIB),src/usercode/PixelTracksRun2010/src))
-usercodePixelTracksRun2010_PACKAGE := self/src/usercode/PixelTracksRun2010/src
-ALL_PRODS += usercodePixelTracksRun2010
-usercodePixelTracksRun2010_INIT_FUNC        += $$(eval $$(call Library,usercodePixelTracksRun2010,src/usercode/PixelTracksRun2010/src,src_usercode_PixelTracksRun2010_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
-endif
-ALL_COMMONRULES += src_usercode_PixelTracksRun2010_test
-src_usercode_PixelTracksRun2010_test_parent := usercode/PixelTracksRun2010
-src_usercode_PixelTracksRun2010_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_PixelTracksRun2010_test,src/usercode/PixelTracksRun2010/test,TEST))
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/SiStripCMNAnalyzer)
-subdirs_src_usercode_SiStripCMNAnalyzer := src_usercode_SiStripCMNAnalyzer_test src_usercode_SiStripCMNAnalyzer_bin src_usercode_SiStripCMNAnalyzer_src
-ifeq ($(strip $(ClusterOut)),)
-ClusterOut_files := $(patsubst src/usercode/SiStripCMNAnalyzer/bin/%,%,$(foreach file,ClusterOut.cc,$(eval xfile:=$(wildcard src/usercode/SiStripCMNAnalyzer/bin/$(file)))$(if $(xfile),$(xfile),$(warning No such file exists: src/usercode/SiStripCMNAnalyzer/bin/$(file). Please fix src/usercode/SiStripCMNAnalyzer/bin/BuildFile.))))
-ClusterOut := self/src/usercode/SiStripCMNAnalyzer/bin
-ClusterOut_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/SiStripCMNAnalyzer/bin/BuildFile
-ClusterOut_LOC_USE := self  root boost rootcintex DataFormats/FWLite FWCore/FWLite FWCore/Framework CommonTools/Utils PhysicsTools/FWLite PhysicsTools/Utilities DataFormats/SiStripCluster DataFormats/Common
-ClusterOut_PACKAGE := self/src/usercode/SiStripCMNAnalyzer/bin
-ALL_PRODS += ClusterOut
-ClusterOut_INIT_FUNC        += $$(eval $$(call Binary,ClusterOut,src/usercode/SiStripCMNAnalyzer/bin,src_usercode_SiStripCMNAnalyzer_bin,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_BIN),bin,$(SCRAMSTORENAME_LOGS)))
-else
-$(eval $(call MultipleWarningMsg,ClusterOut,src/usercode/SiStripCMNAnalyzer/bin))
-endif
-ALL_COMMONRULES += src_usercode_SiStripCMNAnalyzer_bin
-src_usercode_SiStripCMNAnalyzer_bin_parent := usercode/SiStripCMNAnalyzer
-src_usercode_SiStripCMNAnalyzer_bin_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_SiStripCMNAnalyzer_bin,src/usercode/SiStripCMNAnalyzer/bin,BINARY))
-ifeq ($(strip $(usercode/SiStripCMNAnalyzer)),)
-ALL_COMMONRULES += src_usercode_SiStripCMNAnalyzer_src
-src_usercode_SiStripCMNAnalyzer_src_parent := usercode/SiStripCMNAnalyzer
-src_usercode_SiStripCMNAnalyzer_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_usercode_SiStripCMNAnalyzer_src,src/usercode/SiStripCMNAnalyzer/src,LIBRARY))
-usercodeSiStripCMNAnalyzer := self/usercode/SiStripCMNAnalyzer
-usercode/SiStripCMNAnalyzer := usercodeSiStripCMNAnalyzer
-usercodeSiStripCMNAnalyzer_files := $(patsubst src/usercode/SiStripCMNAnalyzer/src/%,%,$(wildcard $(foreach dir,src/usercode/SiStripCMNAnalyzer/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-usercodeSiStripCMNAnalyzer_BuildFile    := $(WORKINGDIR)/cache/bf/src/usercode/SiStripCMNAnalyzer/BuildFile
-usercodeSiStripCMNAnalyzer_LOC_USE := self  FWCore/Framework FWCore/PluginManager FWCore/ParameterSet FWCore/MessageLogger FWCore/Utilities DataFormats/Common DataFormats/FEDRawData DataFormats/SiStripDetId CondFormats/DataRecord CondFormats/SiStripObjects CalibFormats/SiStripObjects CalibTracker/Records RecoLocalTracker/SiStripZeroSuppression RecoLocalTracker/SiStripClusterizer FWCore/ServiceRegistry CommonTools/UtilAlgos SimTracker/SiStripDigitizer DataFormats/SiStripCluster
-usercodeSiStripCMNAnalyzer_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,usercodeSiStripCMNAnalyzer,usercodeSiStripCMNAnalyzer,$(SCRAMSTORENAME_LIB),src/usercode/SiStripCMNAnalyzer/src))
-usercodeSiStripCMNAnalyzer_PACKAGE := self/src/usercode/SiStripCMNAnalyzer/src
-ALL_PRODS += usercodeSiStripCMNAnalyzer
-usercodeSiStripCMNAnalyzer_INIT_FUNC        += $$(eval $$(call Library,usercodeSiStripCMNAnalyzer,src/usercode/SiStripCMNAnalyzer/src,src_usercode_SiStripCMNAnalyzer_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
-endif
-ALL_COMMONRULES += src_usercode_SiStripCMNAnalyzer_test
-src_usercode_SiStripCMNAnalyzer_test_parent := usercode/SiStripCMNAnalyzer
-src_usercode_SiStripCMNAnalyzer_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_usercode_SiStripCMNAnalyzer_test,src/usercode/SiStripCMNAnalyzer/test,TEST))
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/SimG4Core)
-subdirs_src_usercode_SimG4Core := 
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/hackedSiStripDigitizer)
-subdirs_src_usercode_hackedSiStripDigitizer := 
 ALL_PACKAGES += $(patsubst src/%,%,src/myAnalyzers/PiLambda)
 subdirs_src_myAnalyzers_PiLambda := src_myAnalyzers_PiLambda_src src_myAnalyzers_PiLambda_test
 ALL_COMMONRULES += src_myAnalyzers_PiLambda_test
@@ -816,3 +586,45 @@ src_GeneratorInterface_HijingInterface_python_INIT_FUNC += $$(eval $$(call Commo
 ALL_COMMONRULES += src_GeneratorInterface_HijingInterface_test
 src_GeneratorInterface_HijingInterface_test_parent := GeneratorInterface/HijingInterface
 src_GeneratorInterface_HijingInterface_test_INIT_FUNC += $$(eval $$(call CommonProductRules,src_GeneratorInterface_HijingInterface_test,src/GeneratorInterface/HijingInterface/test,TEST))
+ifeq ($(strip $(myAnalyzers/PiLambda)),)
+ALL_COMMONRULES += src_myAnalyzers_PiLambda_src
+src_myAnalyzers_PiLambda_src_parent := myAnalyzers/PiLambda
+src_myAnalyzers_PiLambda_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_myAnalyzers_PiLambda_src,src/myAnalyzers/PiLambda/src,LIBRARY))
+myAnalyzersPiLambda := self/myAnalyzers/PiLambda
+myAnalyzers/PiLambda := myAnalyzersPiLambda
+myAnalyzersPiLambda_files := $(patsubst src/myAnalyzers/PiLambda/src/%,%,$(wildcard $(foreach dir,src/myAnalyzers/PiLambda/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
+myAnalyzersPiLambda_BuildFile    := $(WORKINGDIR)/cache/bf/src/myAnalyzers/PiLambda/BuildFile
+myAnalyzersPiLambda_LOC_USE := self  CommonTools/UtilAlgos FWCore/Framework FWCore/PluginManager FWCore/ParameterSet DataFormats/Candidate DataFormats/Common DataFormats/RecoCandidate DataFormats/PatCandidates DataFormats/TrackReco DataFormats/VertexReco DataFormats/Math RecoVertex/PrimaryVertexProducer RecoVertex/KinematicFit RecoVertex/KinematicFitPrimitives TrackingTools/TransientTrack TrackingTools/IPTools TrackingTools/Records MagneticField/Engine DataFormats/HepMCCandidate CondFormats/L1TObjects DataFormats/L1GlobalTrigger DataFormats/HcalDetId CondFormats/DataRecord
+myAnalyzersPiLambda_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,myAnalyzersPiLambda,myAnalyzersPiLambda,$(SCRAMSTORENAME_LIB),src/myAnalyzers/PiLambda/src))
+myAnalyzersPiLambda_PACKAGE := self/src/myAnalyzers/PiLambda/src
+ALL_PRODS += myAnalyzersPiLambda
+myAnalyzersPiLambda_INIT_FUNC        += $$(eval $$(call Library,myAnalyzersPiLambda,src/myAnalyzers/PiLambda/src,src_myAnalyzers_PiLambda_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
+endif
+ifeq ($(strip $(V0Eff/V0DeltaREffAnalyzer)),)
+ALL_COMMONRULES += src_V0Eff_V0DeltaREffAnalyzer_src
+src_V0Eff_V0DeltaREffAnalyzer_src_parent := V0Eff/V0DeltaREffAnalyzer
+src_V0Eff_V0DeltaREffAnalyzer_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_V0Eff_V0DeltaREffAnalyzer_src,src/V0Eff/V0DeltaREffAnalyzer/src,LIBRARY))
+V0EffV0DeltaREffAnalyzer := self/V0Eff/V0DeltaREffAnalyzer
+V0Eff/V0DeltaREffAnalyzer := V0EffV0DeltaREffAnalyzer
+V0EffV0DeltaREffAnalyzer_files := $(patsubst src/V0Eff/V0DeltaREffAnalyzer/src/%,%,$(wildcard $(foreach dir,src/V0Eff/V0DeltaREffAnalyzer/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
+V0EffV0DeltaREffAnalyzer_BuildFile    := $(WORKINGDIR)/cache/bf/src/V0Eff/V0DeltaREffAnalyzer/BuildFile
+V0EffV0DeltaREffAnalyzer_LOC_USE := self  FWCore/Framework FWCore/PluginManager FWCore/ParameterSet FWCore/ServiceRegistry CommonTools/UtilAlgos DataFormats/GeometryVector DataFormats/TrackReco DataFormats/VertexReco DataFormats/PatCandidates DataFormats/RecoCandidate DataFormats/BeamSpot SimDataFormats/GeneratorProducts DataFormats/Candidate DataFormats/HepMCCandidate DataFormats/Math RecoVertex/KinematicFit RecoVertex/KinematicFitPrimitives RecoVertex/AdaptiveVertexFit TrackingTools/IPTools TrackingTools/TransientTrack TrackingTools/Records TrackingTools/PatternTools TrackingTools/TrajectoryState MagneticField/Engine MagneticField/Records DataFormats/L1GlobalTrigger DataFormats/HcalDetId CondFormats/L1TObjects CondFormats/DataRecord root
+V0EffV0DeltaREffAnalyzer_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,V0EffV0DeltaREffAnalyzer,V0EffV0DeltaREffAnalyzer,$(SCRAMSTORENAME_LIB),src/V0Eff/V0DeltaREffAnalyzer/src))
+V0EffV0DeltaREffAnalyzer_PACKAGE := self/src/V0Eff/V0DeltaREffAnalyzer/src
+ALL_PRODS += V0EffV0DeltaREffAnalyzer
+V0EffV0DeltaREffAnalyzer_INIT_FUNC        += $$(eval $$(call Library,V0EffV0DeltaREffAnalyzer,src/V0Eff/V0DeltaREffAnalyzer/src,src_V0Eff_V0DeltaREffAnalyzer_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
+endif
+ifeq ($(strip $(myProducers/V0CandProducer)),)
+ALL_COMMONRULES += src_myProducers_V0CandProducer_src
+src_myProducers_V0CandProducer_src_parent := myProducers/V0CandProducer
+src_myProducers_V0CandProducer_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_myProducers_V0CandProducer_src,src/myProducers/V0CandProducer/src,LIBRARY))
+myProducersV0CandProducer := self/myProducers/V0CandProducer
+myProducers/V0CandProducer := myProducersV0CandProducer
+myProducersV0CandProducer_files := $(patsubst src/myProducers/V0CandProducer/src/%,%,$(wildcard $(foreach dir,src/myProducers/V0CandProducer/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
+myProducersV0CandProducer_BuildFile    := $(WORKINGDIR)/cache/bf/src/myProducers/V0CandProducer/BuildFile
+myProducersV0CandProducer_LOC_USE := self  FWCore/Framework FWCore/PluginManager FWCore/ParameterSet DataFormats/PatCandidates DataFormats/RecoCandidate DataFormats/V0Candidate TrackingTools/Records TrackingTools/TransientTrack RecoVertex/KalmanVertexFit RecoVertex/VertexTools
+myProducersV0CandProducer_PRE_INIT_FUNC += $$(eval $$(call edmPlugin,myProducersV0CandProducer,myProducersV0CandProducer,$(SCRAMSTORENAME_LIB),src/myProducers/V0CandProducer/src))
+myProducersV0CandProducer_PACKAGE := self/src/myProducers/V0CandProducer/src
+ALL_PRODS += myProducersV0CandProducer
+myProducersV0CandProducer_INIT_FUNC        += $$(eval $$(call Library,myProducersV0CandProducer,src/myProducers/V0CandProducer/src,src_myProducers_V0CandProducer_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
+endif

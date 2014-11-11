@@ -4,7 +4,7 @@ const double bin[]={1.0,0.5,0.3,0.2,0.1,0};	//G1.root
 int N=(int)(sizeof(bin)/sizeof(double));
 int method=1;	//method=0;
 
-const TString datafile="/afs/cern.ch/user/q/qixu/CMSSW_6_2_5/src/Centrality/Correction/pPbHistPlusEta4.root";
+const TString datafile="/scratch/xuq7/Centrality/Correction/pPbHistPlusEta4.root";
 
 const TString histoname="hHFEnergyPlus4";
 

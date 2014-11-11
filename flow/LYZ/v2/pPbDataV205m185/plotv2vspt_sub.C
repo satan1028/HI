@@ -12,7 +12,7 @@ TFile *f = TFile::Open("mergedv_Prod_sub.root");
 TFile *fProd = TFile::Open("mergedv_Prod.root");
 }
 TVectorD *vecDv2 = (TVectorD*)f->Get(Form("D_%d/vmeanmean",ibin));
-TVectorD *vecDv2err = (TVectorD*)f->Get(Form("D_%d/deltavmeanmean",ibin));
+TVectorD *vecDv2err = (TVectorD*)f->Get(Form("D_%d/sigmavmeanmean",ibin));
 TVectorD *vecDavgpt = (TVectorD*)f->Get(Form("D_%d/avgpt",ibin));
 
 TVectorD *vecDv2_ = (TVectorD*)fProd->Get(Form("D_%d/vmean",ibin));

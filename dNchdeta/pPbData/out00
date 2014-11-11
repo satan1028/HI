@@ -1,0 +1,10 @@
+Info in <TUnixSystem::ACLiC>: creating shared library /home/xuq7/HI/dNchdeta/pPbData/GammaFit_C.so
+g++: error: /home/xuq7/HI/dNchdeta/pPbData/GammaFit_C_ACLiC_dict.cxx: No such file or directory
+g++: fatal error: no input files
+compilation terminated.
+g++: error: /home/xuq7/HI/dNchdeta/pPbData/GammaFit_C_ACLiC_dict.o: No such file or directory
+Error in <ACLiC>: Compilation failed!
+Error: Symbol GammaF is not defined in current scope  store.C:10:
+Error: Symbol l is not defined in current scope  store.C:10:
+*** Interpreter error recovered ***
+(const int)0

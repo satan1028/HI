@@ -29,12 +29,12 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
-#include "DataFormats/V0Candidate/interface/V0Candidate.h"
+//#include "DataFormats/V0Candidate/interface/V0Candidate.h"
 
-#include "DataFormats/Candidate/interface/VertexCompositeCandidate.h"   //by Qiao
-#include "DataFormats/Candidate/interface/VertexCompositeCandidateFwd.h" 	//by Qiao
+//#include "DataFormats/Candidate/interface/VertexCompositeCandidate.h"   //by Qiao
+//#include "DataFormats/Candidate/interface/VertexCompositeCandidateFwd.h" 	//by Qiao
 
-//#include "myProducers/V0CandProducer/interface/V0Candidate.h"   //by Qiao
+#include "myProducers/V0CandProducer/interface/V0Candidate.h"   //by Qiao
 
 #include "DataFormats/RecoCandidate/interface/RecoChargedCandidate.h"
 #include "DataFormats/PatCandidates/interface/CompositeCandidate.h"
@@ -106,13 +106,13 @@ void V0CandProducer::produce(edm::Event& iEvent,
    std::auto_ptr<pat::CompositeCandidateCollection> 
      patOut(new pat::CompositeCandidateCollection);
 
-   reco::TrackBase::TrackQuality loose_ = reco::TrackBase::qualityByName("loose");
+ /*  reco::TrackBase::TrackQuality loose_ = reco::TrackBase::qualityByName("loose");
    reco::TrackBase::TrackQuality tight_ = reco::TrackBase::qualityByName("tight");
    reco::TrackBase::TrackQuality highPurity_ = reco::TrackBase::qualityByName("highPurity");
    reco::TrackBase::TrackQuality confirmed_ = reco::TrackBase::qualityByName("confirmed");
    reco::TrackBase::TrackQuality goodIterative_ = reco::TrackBase::qualityByName("goodIterative");
    reco::TrackBase::TrackQuality qualSize = reco::TrackBase::qualityByName("qualitySize");
-
+*/
 //    cout << "loose:" << loose_
 // 	<< " tight:" << tight_
 // 	<< " highPurity:" << highPurity_

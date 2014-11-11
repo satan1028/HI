@@ -1,1 +1,3 @@
 
+/bin/rm -f lib/slc6_amd64_gcc472/pluginPythiaMCPythiaMC.so lib/slc6_amd64_gcc472/PythiaMCPythiaMC.edmplugin
+edmPluginRefresh lib/slc6_amd64_gcc472

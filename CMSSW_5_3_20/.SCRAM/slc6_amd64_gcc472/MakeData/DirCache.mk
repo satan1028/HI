@@ -18,54 +18,6 @@ DataFormatsHeavyIonEvent_PACKAGE := self/src/DataFormats/HeavyIonEvent/src
 ALL_PRODS += DataFormatsHeavyIonEvent
 DataFormatsHeavyIonEvent_INIT_FUNC        += $$(eval $$(call Library,DataFormatsHeavyIonEvent,src/DataFormats/HeavyIonEvent/src,src_DataFormats_HeavyIonEvent_src,$(SCRAMSTORENAME_BIN),,$(SCRAMSTORENAME_LIB),$(SCRAMSTORENAME_LOGS)))
 endif
-ifeq ($(strip $(V0Eff/V0DeltaREffAnalyzer)),)
-ALL_COMMONRULES += src_V0Eff_V0DeltaREffAnalyzer_src
-src_V0Eff_V0DeltaREffAnalyzer_src_parent := V0Eff/V0DeltaREffAnalyzer
-src_V0Eff_V0DeltaREffAnalyzer_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_V0Eff_V0DeltaREffAnalyzer_src,src/V0Eff/V0DeltaREffAnalyzer/src,LIBRARY))
-V0EffV0DeltaREffAnalyzer := self/V0Eff/V0DeltaREffAnalyzer
-V0Eff/V0DeltaREffAnalyzer := V0EffV0DeltaREffAnalyzer
-V0EffV0DeltaREffAnalyzer_files := $(patsubst src/V0Eff/V0DeltaREffAnalyzer/src/%,%,$(wildcard $(foreach dir,src/V0Eff/V0DeltaREffAnalyzer/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-V0EffV0DeltaREffAnalyzer_LOC_USE :=  
-V0EffV0DeltaREffAnalyzer_PACKAGE := self/src/V0Eff/V0DeltaREffAnalyzer/src
-ALL_PRODS += V0EffV0DeltaREffAnalyzer
-V0EffV0DeltaREffAnalyzer_INIT_FUNC        += $$(eval $$(call Library,V0EffV0DeltaREffAnalyzer,src/V0Eff/V0DeltaREffAnalyzer/src,src_V0Eff_V0DeltaREffAnalyzer_src,$(),,$(),$()))
-endif
-ifeq ($(strip $(myAnalyzers/PiLambda)),)
-ALL_COMMONRULES += src_myAnalyzers_PiLambda_src
-src_myAnalyzers_PiLambda_src_parent := myAnalyzers/PiLambda
-src_myAnalyzers_PiLambda_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_myAnalyzers_PiLambda_src,src/myAnalyzers/PiLambda/src,LIBRARY))
-myAnalyzersPiLambda := self/myAnalyzers/PiLambda
-myAnalyzers/PiLambda := myAnalyzersPiLambda
-myAnalyzersPiLambda_files := $(patsubst src/myAnalyzers/PiLambda/src/%,%,$(wildcard $(foreach dir,src/myAnalyzers/PiLambda/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-myAnalyzersPiLambda_LOC_USE :=  
-myAnalyzersPiLambda_PACKAGE := self/src/myAnalyzers/PiLambda/src
-ALL_PRODS += myAnalyzersPiLambda
-myAnalyzersPiLambda_INIT_FUNC        += $$(eval $$(call Library,myAnalyzersPiLambda,src/myAnalyzers/PiLambda/src,src_myAnalyzers_PiLambda_src,$(),,$(),$()))
-endif
-ifeq ($(strip $(myFilters/V0CandFilter)),)
-ALL_COMMONRULES += src_myFilters_V0CandFilter_src
-src_myFilters_V0CandFilter_src_parent := myFilters/V0CandFilter
-src_myFilters_V0CandFilter_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_myFilters_V0CandFilter_src,src/myFilters/V0CandFilter/src,LIBRARY))
-myFiltersV0CandFilter := self/myFilters/V0CandFilter
-myFilters/V0CandFilter := myFiltersV0CandFilter
-myFiltersV0CandFilter_files := $(patsubst src/myFilters/V0CandFilter/src/%,%,$(wildcard $(foreach dir,src/myFilters/V0CandFilter/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-myFiltersV0CandFilter_LOC_USE :=  
-myFiltersV0CandFilter_PACKAGE := self/src/myFilters/V0CandFilter/src
-ALL_PRODS += myFiltersV0CandFilter
-myFiltersV0CandFilter_INIT_FUNC        += $$(eval $$(call Library,myFiltersV0CandFilter,src/myFilters/V0CandFilter/src,src_myFilters_V0CandFilter_src,$(),,$(),$()))
-endif
-ifeq ($(strip $(myProducers/V0CandProducer)),)
-ALL_COMMONRULES += src_myProducers_V0CandProducer_src
-src_myProducers_V0CandProducer_src_parent := myProducers/V0CandProducer
-src_myProducers_V0CandProducer_src_INIT_FUNC := $$(eval $$(call CommonProductRules,src_myProducers_V0CandProducer_src,src/myProducers/V0CandProducer/src,LIBRARY))
-myProducersV0CandProducer := self/myProducers/V0CandProducer
-myProducers/V0CandProducer := myProducersV0CandProducer
-myProducersV0CandProducer_files := $(patsubst src/myProducers/V0CandProducer/src/%,%,$(wildcard $(foreach dir,src/myProducers/V0CandProducer/src ,$(foreach ext,$(SRC_FILES_SUFFIXES),$(dir)/*.$(ext)))))
-myProducersV0CandProducer_LOC_USE :=  
-myProducersV0CandProducer_PACKAGE := self/src/myProducers/V0CandProducer/src
-ALL_PRODS += myProducersV0CandProducer
-myProducersV0CandProducer_INIT_FUNC        += $$(eval $$(call Library,myProducersV0CandProducer,src/myProducers/V0CandProducer/src,src_myProducers_V0CandProducer_src,$(),,$(),$()))
-endif
 ifeq ($(strip $(myProducers/V0TrackFilter)),)
 src_myProducers_V0TrackFilter := self/myProducers/V0TrackFilter
 myProducers/V0TrackFilter  := src_myProducers_V0TrackFilter

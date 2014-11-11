@@ -1561,8 +1561,8 @@ void V0RecoAnalyzer::analyze(const edm::Event& iEvent,
           
 	  KinematicState theCurrentKinematicState = v0FitKinematicParticle->currentState();
 
-	  KinematicParameters theKinParams = theCurrentKinematicState.kinematicParameters();
-	  /*KinematicParametersError theKinParamErrors 
+	  /*KinematicParameters theKinParams = theCurrentKinematicState.kinematicParameters();
+	  KinematicParametersError theKinParamErrors 
 	    = theCurrentKinematicState.kinematicParametersError();
 	  AlgebraicSymMatrix77 mtrx = theKinParamErrors.matrix();
 	  double kinParams66 = sqrt( mtrx(6,6) );
@@ -1735,7 +1735,7 @@ void V0RecoAnalyzer::analyze(const edm::Event& iEvent,
       ksZvsRFull->Fill( iV0->vertex().z(), iV0->vertex().Rho(), 1. );
       ksEtaFull->Fill( v0p_.eta() );
       ksPhiFull->Fill( v0p_.phi() );
-      ksPtFull->Fill( v0p_stransverse() );
+      ksPtFull->Fill( v0p_.transverse() );
       if( iV0->mass() > (ksMassConst - 0.01) 
           && iV0->mass() < (ksMassConst + 0.01) ) {
         ksRSignal->Fill( iV0->vertex().Rho() );

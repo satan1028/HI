@@ -1,0 +1,74 @@
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/submit
+/usr/spool/PBS/aux//615845.vmpsched
+vmp1129
+Info in <TUnixSystem::ACLiC>: creating shared library /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple_C.so
+In file included from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:16:0,
+                 from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:38,
+                 from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.h:34,
+                 from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.cxx:17:
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h: In constructor 'reco::Particle::Particle(reco::Particle::Charge, const LorentzVector&, const Point&, int, int, bool)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:39:67: warning: declaration of 'status' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:39:67: warning: declaration of 'pdgId' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:39:67: warning: declaration of 'vertex' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:39:67: warning: declaration of 'p4' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h: In constructor 'reco::Particle::Particle(reco::Particle::Charge, const PolarLorentzVector&, const Point&, int, int, bool)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:47:67: warning: declaration of 'status' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:47:67: warning: declaration of 'pdgId' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:47:67: warning: declaration of 'vertex' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:47:67: warning: declaration of 'p4' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h: In member function 'void reco::Particle::setP4(const LorentzVector&)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:105:44: warning: declaration of 'p4' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h: In member function 'void reco::Particle::setP4(const PolarLorentzVector&)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:116:49: warning: declaration of 'p4' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h: In member function 'void reco::Particle::setPz(double)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:130:29: warning: declaration of 'pz' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h: In member function 'void reco::Particle::setVertex(const Point&)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:148:44: warning: declaration of 'vertex' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h: In member function 'void reco::Particle::setPdgId(int)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:152:32: warning: declaration of 'pdgId' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h: In member function 'void reco::Particle::setStatus(int)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/Candidate/interface/Particle.h:156:34: warning: declaration of 'status' shadows a member of 'this' [-Wshadow]
+In file included from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:38:0,
+                 from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.h:34,
+                 from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.cxx:17:
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h: In constructor 'trigger::TriggerObject::TriggerObject(int, float, float, float, float)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:37:70: warning: declaration of 'mass' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:37:70: warning: declaration of 'phi' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:37:70: warning: declaration of 'eta' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:37:70: warning: declaration of 'pt' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:37:70: warning: declaration of 'id' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h: In constructor 'trigger::TriggerObject::TriggerObject(int, const T&)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:42:38: warning: declaration of 'id' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h: In member function 'void trigger::TriggerObject::setId(int)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:50:30: warning: declaration of 'id' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h: In member function 'void trigger::TriggerObject::setPt(float)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:51:30: warning: declaration of 'pt' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h: In member function 'void trigger::TriggerObject::setEta(float)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:52:30: warning: declaration of 'eta' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h: In member function 'void trigger::TriggerObject::setPhi(float)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:53:30: warning: declaration of 'phi' shadows a member of 'this' [-Wshadow]
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h: In member function 'void trigger::TriggerObject::setMass(float)':
+/cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:54:30: warning: declaration of 'mass' shadows a member of 'this' [-Wshadow]
+In file included from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.h:34:0,
+                 from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.cxx:17:
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C: At global scope:
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:66:6: warning: unused parameter 'isMC' [-Wunused-parameter]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C: In function 'double trigComb(bool*, double*, double, int)':
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:99:74: warning: declaration of 'combinationMethod' shadows a global declaration [-Wshadow]
+In file included from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.h:34:0,
+                 from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.cxx:17:
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:52:5: warning: shadowed declaration is here [-Wshadow]
+In file included from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.h:34:0,
+                 from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.cxx:17:
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C: In function 'void skimTreesPAsimple(int)':
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:531:57: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:554:12: warning: variable 'trgPtWeight' set but not used [-Wunused-but-set-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:203:7: warning: unused variable 'useWeight' [-Wunused-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:208:9: warning: variable 'trigObjPt' set but not used [-Wunused-but-set-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:209:9: warning: variable 'trigObjEta' set but not used [-Wunused-but-set-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:210:9: warning: variable 'trigObjPhi' set but not used [-Wunused-but-set-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:237:12: warning: variable 'C_rel' set but not used [-Wunused-but-set-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:245:11: warning: unused variable 'pscls' [-Wunused-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:254:6: warning: unused variable 'dupRuns' [-Wunused-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:291:9: warning: unused variable 'pVertexFilterCutGplusUpsPP' [-Wunused-variable]
+=>> PBS: job killed: walltime 7230 exceeded limit 7200

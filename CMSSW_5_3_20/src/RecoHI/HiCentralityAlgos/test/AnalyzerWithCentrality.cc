@@ -78,8 +78,8 @@ class AnalyzerWithCentrality : public edm::EDAnalyzer {
 AnalyzerWithCentrality::AnalyzerWithCentrality(const edm::ParameterSet& iConfig) : 
 centrality_(0)
 {
-  bool tableDump_ = iConfig.getUntrackedParameter<bool>("dumpTable",true);
-  bool debugEvents_ = iConfig.getUntrackedParameter<bool>("debugEvents",false);
+ // bool tableDump_ = iConfig.getUntrackedParameter<bool>("dumpTable",true);
+ // bool debugEvents_ = iConfig.getUntrackedParameter<bool>("debugEvents",false);
    //now do what ever initialization is needed
    h1 = fs->make<TH1D>("h1","histogram",100,0,100);
    nt = fs->make<TNtuple>("hi","hi","hf:hft:hftp:hftm:eb:ee:eep:eem:npix:et:zdc:zdcp:zdcm:bin:trig");

@@ -15,8 +15,8 @@ namespace reco{
     V0Candidate();
     V0Candidate( const VertexCompositeCandidate& theCandIn, 
 		 const reco::Track& thePosTk, 
-		 const reco::Track& theNegTk );
-    /*V0Candidate( const VertexCompositeCandidate& theCandIn,
+		 const reco::Track& theNegTk ){};
+   /* V0Candidate( const VertexCompositeCandidate& theCandIn,
 		 const reco::TrackRef thePosTkRef,
 		 const reco::TrackRef theNegTkRef );*/
 

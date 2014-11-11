@@ -1,2 +1,0 @@
-ALL_PACKAGES += $(patsubst src/%,%,src/usercode/PixelTracksRun2010)
-subdirs_src_usercode_PixelTracksRun2010 := src_usercode_PixelTracksRun2010_bin src_usercode_PixelTracksRun2010_interface src_usercode_PixelTracksRun2010_python src_usercode_PixelTracksRun2010_scripts src_usercode_PixelTracksRun2010_src src_usercode_PixelTracksRun2010_test
