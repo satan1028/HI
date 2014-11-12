@@ -89,5 +89,5 @@ l->SetLineStyle(2);
 l->SetLineColor(1);
 l->Draw("same");
 //T->Draw("same");
-
+c1->Print("compare.png");
 }
