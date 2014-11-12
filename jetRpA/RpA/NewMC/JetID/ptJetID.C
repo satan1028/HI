@@ -10,7 +10,7 @@
 #include "TObject.h"
 #include "iostream"
 #include "fstream"
-#include "/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/Quality/root_setting.h"
+#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 #include "file.h"
 
 TH1* myRebin(TH1* histo,int Nbin, double binbound[]){
@@ -40,7 +40,8 @@ gStyle->SetLabelFont(70);
 //------------------------------------------------------------Get Histograms---------------------------------------------
 
 double xrange_JetIDcut[2]; double JetIDcut[2];
-
+int ilist=atoi(getenv("LIST"));
+TString JetIDName=JetIDNameList[ilist];
 if(ilist== 0)  { JetID = "chargedMax"; JetIDcut[0]=1.1; JetIDcut[1]=200.;}
 else if(ilist== 1)      JetID = "chargedSum";
 else if(ilist== 2)      JetID = "neutralMax";
