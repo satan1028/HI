@@ -4,7 +4,7 @@ void Draw3panelfit(){
         gStyle->SetOptStat(kFALSE);
 	TString outG="G0.root";
 	TString dirname;
-	TCanvas *c1 = new TCanvas("","",1000,400);
+	TCanvas *c1 = new TCanvas("c1","c1",1000,400);
 	c1->Divide(3);
 
 	for(int sth=0;sth<3;sth++){
@@ -166,6 +166,6 @@ void Draw3panelfit(){
 	histo_obs_norm->Draw("Psame");
 	gPad->RedrawAxis();
 	}
-	c1->SaveAs(Form("3panelfit.png"));	
-	c1->SaveAs(Form("3panelfit.pdf"));	
+	c1->Print(Form("3panelfit.png"));	
+	c1->Print(Form("3panelfit.pdf"));	
 }
