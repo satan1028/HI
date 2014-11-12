@@ -47,8 +47,8 @@ void store(){
 	else
 		l->initx(var.xmin+binshift,var.xmax);
 
-	l->fit();	
-/*
+//	l->fit();	
+
  	if(sth==0) l->assign(bestlist1[Gth].thetabest,bestlist1[Gth].kbest);
 	else if(sth==1) l->assign(bestlist2[Gth].thetabest,bestlist2[Gth].kbest);
 	else l->assign(bestlist3[Gth].thetabest,bestlist3[Gth].kbest);
@@ -84,5 +84,5 @@ void store(){
 	l->Npartdis->Write("Npartdis",TObject::kOverwrite);
 	l->Grgrid->Write("Grgrid",TObject::kOverwrite);
         outfile->Close();
-*/
+
 }
