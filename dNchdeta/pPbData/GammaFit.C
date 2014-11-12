@@ -122,6 +122,7 @@ void GammaF::fit(){
 	//ofstream fout("chis3.txt");
 	for(theta=thetamin;theta<=thetamax;theta+=thetastep){
 		for(k=kmin;k<=kmax;k+=kstep){
+        		gammafun->SetParameters(k,theta);
 		//	if(npar%50==0)	cout<<"Have run "<<npar<<" parameter sets"<<endl; 
 			TTree *t = (TTree*)fGlauber->Get("nt_p_Pb");
 
@@ -139,16 +140,17 @@ void GammaF::fit(){
 			unr.Init(dist, "method=dgt");	*/
 
 			for (Ev=0; Ev<Nevent; Ev++){
-				//if(Ev%100000==0)	cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
+				//if(Ev%10000==0)	cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
 				t->GetEntry(Ev);
                 	        double k_=k0[0]+k*(Npart-2);
                         	double theta_=theta0[0]+theta*TMath::Log(Npart-1);
-        	                gammafun->SetParameter(0,k_);   //[1]: k value
-                	        gammafun->SetParameter(1,theta_);       //[2]: theta value
+        	               // gammafun->SetParameter(0,k_);   //[1]: k value
+                	       // gammafun->SetParameter(1,theta_);       //[2]: theta value
 				Para = 0; //make sure that Para doesn't accuthetalate through loops
 				for(Bino=0; Bino<Npart; Bino++){
 				//	Bi_Para = unr.SampleDiscr();
-					Bi_Para =gammafun->GetRandom();
+				//	Bi_Para =gammafun->Eval(10);
+					Bi_Para = gammafun->GetRandom();
 					Para += Bi_Para;
 				}
 				histo_exp->Fill(Para);
@@ -201,7 +203,7 @@ void GammaF::fit(){
 					chi_square_max[i]=chi_square[i];
 				}
 			}
-			npar++;
+			npar++;	
 			histo_exp->Reset("M");
 			histo_exp_norm->Reset("M");
 		}
@@ -235,6 +237,7 @@ void GammaF::calcvar(){
         double Maxx = histo_obs->GetXaxis()->GetXmax();
 	TH1D *histo_exp = new TH1D("histo_exp","Simulated distribution;Multiplicity;# of events",binnum,Minx,Maxx);
         TF1 *gammafun = new TF1("gammafun","TMath::GammaDist(x,[0],0,[1])",0,100);
+	gammafun->SetParameters(kbest[0],thetabest[0]);
 	TTree *t = (TTree*) fGlauber ->Get("nt_p_Pb");
 	Float_t Ncoll, Npart, B;
 	Long_t Nevent;
@@ -255,12 +258,12 @@ void GammaF::calcvar(){
 	GlauEvent -> Branch("B",&B,"B/F");
 
 	for(Ev=0; Ev<Nevent; Ev++){
-		if(Ev%1000==0)	 cout<<"Have run "<<Ev<<" events"<<endl;
+		//if(Ev%1000==0)	 cout<<"Have run "<<Ev<<" events"<<endl;
 		t->GetEntry(Ev);
                 double k_  = k0[0] + kbest[0] * (Npart - 2);
                 double theta_ = theta0[0] + thetabest[0] * TMath::Log(Npart-1);
-       		gammafun->SetParameter(0,k_);
-       		gammafun->SetParameter(1,theta_);
+       		//gammafun->SetParameter(0,k_);
+       		//gammafun->SetParameter(1,theta_);
 		Para = 0; //make sure that Para doesn't accuthetalate through loops
 		for(Bino=0; Bino<Ncoll; Bino++){
 		//	Bi_Para = unr.SampleDiscr();

@@ -43,8 +43,8 @@ typedef std::vector<trigger::TriggerObject> trigO;
 //TStopwatch timer;
 
 // ******* GLOBAL DECLARATIONS **********
-const int QCDpthatBins = 8;
-//const int QCDpthatBins = 9;
+//const int QCDpthatBins = 8;
+const int QCDpthatBins = 9;
 //const int QCDpthatBins = 1;
 const int dataFiles = 10292;
 int startfile ;
@@ -56,8 +56,9 @@ const double deta[]={-2.2, -1.2, -0.7, -0.3, 0.3, 0.7,1.2,2.2} ;
 const int netabin = sizeof(deta)/sizeof(Double_t)-1 ;
 const Double_t jetPtBin[]={3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
 const int nJetPtBin = sizeof(jetPtBin)/sizeof(Double_t)-1 ;
-const int pthatbin[10] = {15,30,50,80,120,170,220,280,370, 9999};
-const double wght[10] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 0};
+//const double wght[] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08,0};
+const int pthatbin[10] = {15,30,50,80,120,170,220,280,460, 9999};
+const double wght[10] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 2.527E-08, 0};
 
 //**********************************************************
 // Count the MC events to appropriately weight the pthat bins
@@ -189,7 +190,7 @@ triggerPt = trigPt[iObj];
 void skimTreesPAsimple(int isMC=0)
  // isMC=0 --> Real data, ==1 --> QCD,
 {
-  TString coll = "PP";
+  TString coll = "PPb";
   TString dataType;
     if(isMC){
 	dataType="MC";
@@ -501,13 +502,13 @@ if(!isMC){
 	}
       if(isMC){
         if(!tweight){
-/*         if(ifile==0){
+         if(ifile==0){
          cout << "Weight not found in Tree. Calculating..." << endl;
          useWeight=0;
          }
         }
 		if(!useWeight && ifile==0){
-*/
+
          MCentr = countMCevents(infile, isMC);
          for(int i=0; i<QCDpthatBins; i++){
          cout << "MCentr["<<i<<"]: " << *(MCentr+i) << endl;

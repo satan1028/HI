@@ -28,7 +28,7 @@ void getResV(){
 	TComplex G[nbin][nptV][ntheta][nstepr];
 	if(SumorProd=="Sum")	fstrV.open("V_Sum.txt");
 	else	fstrV.open("V_Prod.txt");
-	TFile *f[nFileAll];
+	TFile *f[nFileAllPF];
 
         for(int ibin=0; ibin<nbin; ibin++){
 		r[ibin].ResizeTo(nstepr);
@@ -75,7 +75,7 @@ void getResV(){
 		chi_[ibin].ResizeTo(nptV);chi_[ibin].Zero();
 	}
 
-	for(int ifile=0; ifile<nFileAll; ifile++){
+	for(int ifile=0; ifile<nFileAllPF; ifile++){
 		if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/PFcandpt01to10tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),ifile));
 		else f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/PFcandpt01to10tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));

@@ -1072,10 +1072,10 @@ double jetidv[nJetID]={chMax,chSum,neuMax,neuSum,phoMax,phoSum,chMax/jet_pt,chSu
 
 	if(my_hists->IsMC==kTRUE){
 	  	if(ref_pt<0){	//Added
-	  my_hists->jetptjetid_fake[curr_bin][ijetid]->Fill(jet_pt, chMax, weight);	//Added
+	  my_hists->jetptjetid_fake[curr_bin][ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
 	}	//Added
 	else{	//Added
-	  my_hists->jetptjetid_real[curr_bin][ijetid]->Fill(jet_pt, chMax, weight);	//Added
+	  my_hists->jetptjetid_real[curr_bin][ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
 	}	
 	}//Added
     	}

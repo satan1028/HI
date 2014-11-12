@@ -14,7 +14,7 @@ void store(){
 	if(sth==0){
 	TString dirname = "std";
 	if(Gth<nGlau) l = new GammaF(datafile,stdGlaulist[Gth],histoname,MCfitdat);
-	else l = new GammaF(datafile,stdGlaulist[0],histoname);
+	else l = new GammaF(datafile,stdGlaulist[0],histoname,MCfitdat);
 	var=var1;
 //	l->inittheta(bestlist1[Gth].thetabest-0.01,bestlist1[Gth].thetabest+0.01,0.001);
 //	l->initk(bestlist1[Gth].kbest-0.01,bestlist1[Gth].kbest+0.01,0.001);
@@ -23,7 +23,7 @@ void store(){
 	else if(sth==1){
 	TString dirname ="Gri055"; 
 	if(Gth<nGlau) l = new GammaF(datafile,Gri055Glaulist[Gth],histoname,MCfitdat);
-	else l = new GammaF(datafile,Gri055Glaulist[0],histoname);
+	else l = new GammaF(datafile,Gri055Glaulist[0],histoname,MCfitdat);
 	var=var2;
 //	l->inittheta(bestlist2[Gth].thetabest-0.01,bestlist2[Gth].thetabest+0.01,0.001);
 //	l->initk(bestlist2[Gth].kbest-0.01,bestlist2[Gth].kbest+0.01,0.001);
@@ -32,7 +32,7 @@ void store(){
 	else {
 	TString dirname ="Gri101";
 	if(Gth<nGlau) l = new GammaF(datafile,Gri101Glaulist[Gth],histoname,MCfitdat);
-	else l = new GammaF(datafile,Gri101Glaulist[0],histoname);
+	else l = new GammaF(datafile,Gri101Glaulist[0],histoname,MCfitdat);
 	var=var3;
 //	l->inittheta(bestlist3[Gth].thetabest-0.01,bestlist3[Gth].thetabest+0.01,0.001);
 //	l->initk(bestlist3[Gth].kbest-0.01,bestlist3[Gth].kbest+0.01,0.001);

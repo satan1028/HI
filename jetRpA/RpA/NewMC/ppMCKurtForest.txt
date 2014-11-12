@@ -1,8 +1,0 @@
-/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/QCD_Pt_15_TuneZ2_Mix_5p02TeV_pythia.root
-/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/QCD_Pt_30_TuneZ2_Mix_5p02TeV_pythia.root
-/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/QCD_Pt_50_TuneZ2_Mix_5p02TeV_pythia.root
-/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/QCD_Pt_80_TuneZ2_Mix_5p02TeV_pythia.root
-/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/QCD_Pt_120_TuneZ2_Mix_5p02TeV_pythia.root
-/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/QCD_Pt_170_TuneZ2_Mix_5p02TeV_pythia.root
-/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/QCD_Pt_220_TuneZ2_Mix_5p02TeV_pythia.root
-/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/QCD_Pt_280_TuneZ2_Mix_5p02TeV_pythia.root

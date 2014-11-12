@@ -1,6 +1,6 @@
 /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/submit
-/usr/spool/PBS/aux//615845.vmpsched
-vmp1129
+/usr/spool/PBS/aux//624865.vmpsched
+vmp110
 Info in <TUnixSystem::ACLiC>: creating shared library /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple_C.so
 In file included from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_20/src/DataFormats/HLTReco/interface/TriggerObject.h:16:0,
                  from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:38,
@@ -52,23 +52,22 @@ In file included from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.
 In file included from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.h:34:0,
                  from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.cxx:17:
 /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C: At global scope:
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:66:6: warning: unused parameter 'isMC' [-Wunused-parameter]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:67:6: warning: unused parameter 'isMC' [-Wunused-parameter]
 /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C: In function 'double trigComb(bool*, double*, double, int)':
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:99:74: warning: declaration of 'combinationMethod' shadows a global declaration [-Wshadow]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:100:74: warning: declaration of 'combinationMethod' shadows a global declaration [-Wshadow]
 In file included from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.h:34:0,
                  from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.cxx:17:
 /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:52:5: warning: shadowed declaration is here [-Wshadow]
 In file included from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.h:34:0,
                  from /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/skimTreesPAsimple_C_ACLiC_dict.cxx:17:
 /gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C: In function 'void skimTreesPAsimple(int)':
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:531:57: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:554:12: warning: variable 'trgPtWeight' set but not used [-Wunused-but-set-variable]
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:203:7: warning: unused variable 'useWeight' [-Wunused-variable]
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:208:9: warning: variable 'trigObjPt' set but not used [-Wunused-but-set-variable]
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:209:9: warning: variable 'trigObjEta' set but not used [-Wunused-but-set-variable]
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:210:9: warning: variable 'trigObjPhi' set but not used [-Wunused-but-set-variable]
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:237:12: warning: variable 'C_rel' set but not used [-Wunused-but-set-variable]
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:245:11: warning: unused variable 'pscls' [-Wunused-variable]
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:254:6: warning: unused variable 'dupRuns' [-Wunused-variable]
-/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:291:9: warning: unused variable 'pVertexFilterCutGplusUpsPP' [-Wunused-variable]
-=>> PBS: job killed: walltime 7230 exceeded limit 7200
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:532:57: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:555:12: warning: variable 'trgPtWeight' set but not used [-Wunused-but-set-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:209:9: warning: variable 'trigObjPt' set but not used [-Wunused-but-set-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:210:9: warning: variable 'trigObjEta' set but not used [-Wunused-but-set-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:211:9: warning: variable 'trigObjPhi' set but not used [-Wunused-but-set-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:238:12: warning: variable 'C_rel' set but not used [-Wunused-but-set-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:246:11: warning: unused variable 'pscls' [-Wunused-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:255:6: warning: unused variable 'dupRuns' [-Wunused-variable]
+/gpfs22/home/xuq7/HI/jetRpA/RpA/NewMC/./skimTreesPAsimple.C:292:9: warning: unused variable 'pVertexFilterCutGplusUpsPP' [-Wunused-variable]
+Done all jobs!
