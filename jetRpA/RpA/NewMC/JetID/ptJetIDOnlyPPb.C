@@ -205,6 +205,10 @@ c2->cd(1)->SetLogy();
 rehisto_hPPb_JetID->Draw("E1");
 rehisto_hPPb_JetID_fake->Draw("E1same");
 rehisto_hPPb_JetID_real->Draw("E1same");
+TLine *l = new TLine(JetIDcut[1],0,JetIDcut[1],rehisto_hPPb_JetID->GetMaximum());
+l->SetLineStyle(2);
+l->SetLineWidth(1.2);
+l->Draw("same");
 if(ilist==7)
 TLegend *leg2=new TLegend(0.7,0.32,0.9,0.45);
 else
@@ -224,6 +228,10 @@ T7.SetNDC();
 T7.SetTextSize(0.03);
 T7.SetTextFont(42);
 T7.DrawLatex(0.65,0.28,Form("p_{T}: %.f-%.f (GeV/c)",xrange_pt[0],xrange_pt[1]));
+T7.DrawLatex(0.25,0.33,Form("Cut :%.2f - %.2f",JetIDcut[0],JetIDcut[1]));
+T7.DrawLatex(0.25,0.28,Form("Inc ratio: %.2f%%",rehisto_hPPb_JetID->Integral(rehisto_hPPb_JetID->FindBin(JetIDcut[1]), -1)/rehisto_hPPb_JetID->Integral(0, -1)*100));
+T7.DrawLatex(0.25,0.23,Form("real ratio: %.2f%%",rehisto_hPPb_JetID_real->Integral(rehisto_hPPb_JetID_real->FindBin(JetIDcut[1]), -1)/rehisto_hPPb_JetID_real->Integral(0, -1)*100));
+T7.DrawLatex(0.25,0.18,Form("fake ratio: %.2f%%",rehisto_hPPb_JetID_fake->Integral(rehisto_hPPb_JetID_fake->FindBin(JetIDcut[1]), -1)/rehisto_hPPb_JetID_fake->Integral(0, -1)*100));
 /*T7.DrawLatex(0.65,0.28,Form("Inc: Mean=%.3f",hPPb_JetID->GetMean()));
 T7.DrawLatex(0.65,0.24,Form("Fake: Mean=%.3f",hPPb_JetID_fake->GetMean()));
 T7.DrawLatex(0.65,0.2,Form("Fake: RMSError=%.3f",hPPb_JetID_fake->GetRMSError()));
