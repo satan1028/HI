@@ -185,7 +185,6 @@ Double_t chargedSum, photonSum, neutralSum, chargedMax, neutralMax,photonMax, eS
   
       int dEtaBin = -1.;
 
-	if(raw_pt<22) continue;
 	if(subid==0){
 		my_hists->jetptEta->Fill(jet_pt,jet_eta,weight);
 		my_hists->jetptphi->Fill(jet_pt,jet_phi,weight);

@@ -3,6 +3,7 @@
 void overlay(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
+TString JetIDName="SumSumpt";
 
 //double binbound_pt[]={30,40,50,60,70,80,90,100,110,120,140,160,180,200,220,260,300,350,500};
 const double binbound_pt[]={0,5,10,15,20,30,45,60,75,90,105,120,140,160,180,200,220,260,300,400,600,1000};
@@ -12,11 +13,12 @@ TString filename1="MCPPbakPu3PF.root";
 TString filename2="MCPPbakPu3PF_useskim.root";
 
 TString dir1="/scratch/xuq7/RpA/TreeAna";//Old
+//TString dir1="/scratch/xuq7/RpA/NewMC";//New
 TString dir2="/scratch/xuq7/RpA/NewMC";//New
 
 TString histoname="jetpt";
 TString histoname1="jetptEta";
-//TString histoname1=Form("jetpt%s_0-100%%",JetIDName.Data());
+//TString histoname1=Form("jetpt%s",JetIDName.Data());
 
 TFile *file1=TFile::Open(Form("%s/%s",dir1.Data(),filename1.Data()));
 TFile *file2=TFile::Open(Form("%s/%s",dir2.Data(),filename2.Data()));
@@ -28,8 +30,8 @@ TH2F* histo22F=(TH2F*)file2->Get(histoname1);
 TH1D* histo1=(TH1D*)histo12F->ProjectionX("histo1");
 TH1D* histo2=(TH1D*)histo22F->ProjectionX("histo2");
 
-TH1D* histo1=(TH1D*)file1->Get(histoname);
-TH1D* histo2=(TH1D*)file2->Get(histoname);
+//TH1D* histo1=(TH1D*)file1->Get(histoname);
+//TH1D* histo2=(TH1D*)file2->Get(histoname);
 
 rehisto1=(TH1D*)histo1->Clone("rehisto1");
 rehisto2=(TH1D*)histo2->Clone("rehisto2");
@@ -56,8 +58,8 @@ makeMultiPanelCanvas(c1,1,2,0.1,0.12,0.12,0.1,0.03);
 
 c1->cd(1)->SetLogy();
 //rehisto1->GetXaxis()->SetTitle(histo12F->GetYaxis()->GetTitle());
-//rehisto1->GetXaxis()->SetRangeUser(0.8,1.2);
-//rehisto2->GetXaxis()->SetRangeUser(0.8,1.2);
+//rehisto1->GetXaxis()->SetRangeUser(0,2);
+//rehisto2->GetXaxis()->SetRangeUser(0,2);
 //rehisto1->SetMinimum(1e-8);
 //rehisto1->SetMaximum(1);
 rehisto1->SetTitle("");

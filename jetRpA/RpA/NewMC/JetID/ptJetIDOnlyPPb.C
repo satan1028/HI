@@ -29,7 +29,7 @@ fixedFontHist(rehisto,1.2,1.3);
 return rehisto;
 }
 
-void ptJetID(){
+void ptJetIDOnlyPPb(){
 
 using namespace std;
 gStyle->SetOptStat(kFALSE);
@@ -87,12 +87,8 @@ Unit="(GeV/c)";
 }
 int Nbin_JetID=sizeof(binbound_JetID)/sizeof(double)-1;
 
-
-TH2F *hPP2D= (TH2F*)fPP->Get(Form("jetpt%s",JetIDName.Data()));
 TH2F *hPPb2D= (TH2F*)fPPb->Get(Form("jetpt%s",JetIDName.Data()));
-TH2F *hPP2D_real= (TH2F*)fPP->Get(Form("jetpt%s_real",JetIDName.Data()));
 TH2F *hPPb2D_real= (TH2F*)fPPb->Get(Form("jetpt%s_real",JetIDName.Data()));
-TH2F *hPP2D_fake= (TH2F*)fPP->Get(Form("jetpt%s_fake",JetIDName.Data()));
 TH2F *hPPb2D_fake= (TH2F*)fPPb->Get(Form("jetpt%s_fake",JetIDName.Data()));
 
 const double binbound_pt_coarse[]={0,30,70,150,200,600};
@@ -111,35 +107,11 @@ TH1D* hPPb_JetIDcut_pt=hPPb2D->ProjectionX("hPPb_JetIDcut_pt",hPPb2D->GetYaxis()
 TH1D* hPPb_JetIDcut_pt_real=hPPb2D_real->ProjectionX("hPPb_JetIDcut_pt_real",hPPb2D_real->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D_real->GetYaxis()->FindBin(xrange_JetIDcut[1]));
 TH1D* hPPb_JetIDcut_pt_fake=hPPb2D_fake->ProjectionX("hPPb_JetIDcut_pt_fake",hPPb2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[1]));
 
-TH1D* hPP_pt=hPP2D->ProjectionX("hPP_pt",hPP2D->GetYaxis()->FindBin(xrange_JetID[0]),hPP2D->GetYaxis()->FindBin(xrange_JetID[1]));
-TH1D* hPP_pt_real=hPP2D_real->ProjectionX("hPP_pt_real",hPP2D_real->GetYaxis()->FindBin(xrange_JetID[0]),hPP2D_real->GetYaxis()->FindBin(xrange_JetID[1]));
-TH1D* hPP_pt_fake=hPP2D_fake->ProjectionX("hPP_pt_fake",hPP2D_fake->GetYaxis()->FindBin(xrange_JetID[0]),hPP2D_fake->GetYaxis()->FindBin(xrange_JetID[1]));
-TH1D* hPP_JetID=hPP2D->ProjectionY("hPP_JetID",hPP2D->GetXaxis()->FindBin(xrange_pt[0]),hPP2D->GetXaxis()->FindBin(xrange_pt[1]));
-TH1D* hPP_JetID_real=hPP2D_real->ProjectionY("hPP_JetID_real",hPP2D_real->GetXaxis()->FindBin(xrange_pt[0]),hPP2D_real->GetXaxis()->FindBin(xrange_pt[1]));
-TH1D* hPP_JetID_fake=hPP2D_fake->ProjectionY("hPP_JetID_fake",hPP2D_fake->GetXaxis()->FindBin(xrange_pt[0]),hPP2D_fake->GetXaxis()->FindBin(xrange_pt[1]));
-TH1D* hPP_JetIDcut_pt=hPP2D->ProjectionX("hPP_JetIDcut_pt",hPP2D->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPP2D->GetYaxis()->FindBin(xrange_JetIDcut[1]));
-TH1D* hPP_JetIDcut_pt_real=hPP2D_real->ProjectionX("hPP_JetIDcut_pt_real",hPP2D_real->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D_real->GetYaxis()->FindBin(xrange_JetIDcut[1]));
-TH1D* hPP_JetIDcut_pt_fake=hPP2D_fake->ProjectionX("hPP_JetIDcut_pt_fake",hPP2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[1]));
-
-//TProfile *hProfPP=(TProfile*)hPP2D->ProfileX("hProfPP",hPP2D->GetYaxis()->FindBin(xrange_JetID[0]),hPP2D->GetYaxis()->FindBin(xrange_JetID[1]));
-TProfile *hProfPP=(TProfile*)hPP2D->ProfileX("hProfPP",1,-1);
-TProfile *hProfPP_fake=(TProfile*)hPP2D_fake->ProfileX("hProfPP_fake",1,-1);
-TProfile *hProfPP_real=(TProfile*)hPP2D_real->ProfileX("hProfPP_real",1,-1);
 TProfile *hProfPPb=(TProfile*)hPPb2D->ProfileX("hProfPPb",1,-1);
 TProfile *hProfPPb_fake=(TProfile*)hPPb2D_fake->ProfileX("hProfPPb_fake",1,-1);
 TProfile *hProfPPb_real=(TProfile*)hPPb2D_real->ProfileX("hProfPPb_real",1,-1);
 
 //---------------------------------------------------Rebin and Format histograms-----------------------------------------
-TH1D* rehisto_hPP_pt=myRebin(hPP_pt,Nbin_pt,binbound_pt);
-TH1D* rehisto_hPP_pt_real=myRebin(hPP_pt_real,Nbin_pt,binbound_pt);
-TH1D* rehisto_hPP_pt_fake=myRebin(hPP_pt_fake,Nbin_pt,binbound_pt);
-TH1D* rehisto_hPP_JetIDcut_pt=myRebin(hPP_JetIDcut_pt,Nbin_pt,binbound_pt);
-TH1D* rehisto_hPP_JetIDcut_pt_real=myRebin(hPP_JetIDcut_pt_real,Nbin_pt,binbound_pt);
-TH1D* rehisto_hPP_JetIDcut_pt_fake=myRebin(hPP_JetIDcut_pt_fake,Nbin_pt,binbound_pt);
-TH1D* rehisto_hPP_JetID=myRebin(hPP_JetID,Nbin_JetID,binbound_JetID);
-TH1D* rehisto_hPP_JetID_real=myRebin(hPP_JetID_real,Nbin_JetID,binbound_JetID);
-TH1D* rehisto_hPP_JetID_fake=myRebin(hPP_JetID_fake,Nbin_JetID,binbound_JetID);
-
 TH1D* rehisto_hPPb_pt=myRebin(hPPb_pt,Nbin_pt,binbound_pt);
 TH1D* rehisto_hPPb_pt_real=myRebin(hPPb_pt_real,Nbin_pt,binbound_pt);
 TH1D* rehisto_hPPb_pt_fake=myRebin(hPPb_pt_fake,Nbin_pt,binbound_pt);
@@ -149,59 +121,28 @@ TH1D* rehisto_hPPb_JetIDcut_pt_fake=myRebin(hPPb_JetIDcut_pt_fake,Nbin_pt,binbou
 TH1D* rehisto_hPPb_JetID=myRebin(hPPb_JetID,Nbin_JetID,binbound_JetID);
 TH1D* rehisto_hPPb_JetID_real=myRebin(hPPb_JetID_real,Nbin_JetID,binbound_JetID);
 TH1D* rehisto_hPPb_JetID_fake=myRebin(hPPb_JetID_fake,Nbin_JetID,binbound_JetID);
-
-TProfile *rehisto_hProfPP=(TProfile*)myRebin(hProfPP,Nbin_pt,binbound_pt);
-TProfile *rehisto_hProfPP_fake=(TProfile*)myRebin(hProfPP_fake,Nbin_pt,binbound_pt);
-TProfile *rehisto_hProfPP_real=(TProfile*)myRebin(hProfPP_real,Nbin_pt,binbound_pt);
 TProfile *rehisto_hProfPPb=(TProfile*)myRebin(hProfPPb,Nbin_pt,binbound_pt);
 TProfile *rehisto_hProfPPb_fake=(TProfile*)myRebin(hProfPPb_fake,Nbin_pt,binbound_pt);
 TProfile *rehisto_hProfPPb_real=(TProfile*)myRebin(hProfPPb_real,Nbin_pt,binbound_pt);
-rehisto_hPP_pt->SetFillStyle(3004);
-rehisto_hPP_pt->SetMarkerStyle(0);
-rehisto_hPP_pt->SetFillColor(2);
-rehisto_hPP_pt->SetMarkerColor(2);
-rehisto_hPP_pt->SetLineColor(2);
-rehisto_hPP_pt->SetLineColor(2);
-rehisto_hPP_pt->SetMarkerStyle(24);
-rehisto_hPP_pt->SetMarkerSize(1.5);
-rehisto_hPP_pt->SetTitle(Form("%.2f--%.2f %s",xrange_JetID[0],xrange_JetID[1], Unit.Data()));
-rehisto_hPP_pt->GetYaxis()->SetTitle("Probability");
-rehisto_hPP_JetIDcut_pt->SetTitle(Form(""));
-rehisto_hPP_JetIDcut_pt->GetYaxis()->SetTitle("Probability");
 
+rehisto_hPPb_pt->GetYaxis()->SetTitle("Probability");
+rehisto_hPPb_pt->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 rehisto_hPPb_pt->SetTitle(Form("%.2f--%.2f %s",xrange_JetID[0],xrange_JetID[1], Unit.Data()));
-rehisto_hPPb_pt->SetMarkerStyle(24);
+rehisto_hPPb_pt->SetMarkerStyle(20);
 rehisto_hPPb_pt->SetMarkerSize(1.5);
 rehisto_hPPb_pt->SetMarkerColor(1);
 rehisto_hPPb_pt->SetLineColor(1);
 rehisto_hPPb_pt->SetLineColor(1);
-rehisto_hPPb_pt->GetYaxis()->SetTitle("");
 rehisto_hPPb_JetIDcut_pt->SetTitle("");
-rehisto_hPPb_JetIDcut_pt->GetYaxis()->SetTitle("");
+rehisto_hPPb_JetIDcut_pt->GetXaxis()->SetTitle("p_{T}^{jet}(GeV/c)");
+rehisto_hPPb_JetIDcut_pt->GetYaxis()->SetTitle("Probability");
 
-rehisto_hPP_JetID->SetMarkerStyle(24);
-rehisto_hPP_JetID->SetMarkerSize(1.5);
-rehisto_hPP_JetID->SetTitle("");
-rehisto_hPP_JetID->SetMaximum(rehisto_hPP_JetID->GetMaximum()*10);
-rehisto_hPP_JetID->SetMinimum(rehisto_hPP_JetID_fake->GetMinimum()/2+1e-11);
-rehisto_hPP_JetID->GetYaxis()->SetTitle("Probability");
-rehisto_hPP_JetID->GetXaxis()->SetTitle(Form("%s %s",JetID.Data(), Unit.Data()));
-rehisto_hPP_JetID_fake->SetMarkerStyle(20);
-rehisto_hPP_JetID_fake->GetXaxis()->SetTitle(Form("%s %s",JetID.Data(), Unit.Data()));
-rehisto_hPP_JetID_fake->GetYaxis()->SetTitle("Probability");
-rehisto_hPP_JetID_fake->SetMarkerColor(2);
-rehisto_hPP_JetID_fake->SetLineColor(2);
-rehisto_hPP_JetID_fake->SetMarkerSize(1.5);
-rehisto_hPP_JetID_real->SetMarkerStyle(29);
-rehisto_hPP_JetID_real->SetMarkerColor(4);
-rehisto_hPP_JetID_real->SetLineColor(4);
-rehisto_hPP_JetID_real->SetMarkerSize(1.5);
-rehisto_hPPb_JetID->SetMarkerStyle(24);
-rehisto_hPPb_JetID->SetMaximum(rehisto_hPP_JetID->GetMaximum());
-rehisto_hPPb_JetID->SetMinimum(rehisto_hPP_JetID->GetMinimum());
+rehisto_hPPb_JetID->SetMaximum(rehisto_hPPb_JetID->GetMaximum()*10);
+rehisto_hPPb_JetID->SetMinimum(rehisto_hPPb_JetID_fake->GetMinimum()/2+1e-11);
 rehisto_hPPb_JetID->SetMarkerSize(1.5);
+rehisto_hPPb_JetID->SetMarkerStyle(24);
 rehisto_hPPb_JetID->SetTitle("");
-rehisto_hPPb_JetID->GetYaxis()->SetTitle("");
+rehisto_hPPb_JetID->GetYaxis()->SetTitle("Probability");
 rehisto_hPPb_JetID->GetXaxis()->SetTitle(Form("%s %s",JetID.Data(), Unit.Data()));
 rehisto_hPPb_JetID_fake->SetMarkerStyle(20);
 rehisto_hPPb_JetID_fake->GetXaxis()->SetTitle(Form("%s %s",JetID.Data(), Unit.Data()));
@@ -213,20 +154,8 @@ rehisto_hPPb_JetID_real->SetMarkerSize(1.5);
 rehisto_hPPb_JetID_real->SetMarkerColor(4);
 rehisto_hPPb_JetID_real->SetLineColor(4);
 
-rehisto_hProfPP->SetMarkerSize(1.3);
 TH1F* hFrame=new TH1F("","",1000,0,1000);
 hFrame->GetXaxis()->SetLimits(30.1,599.9);
-rehisto_hProfPP_fake->SetMarkerSize(1.3);
-rehisto_hProfPP_real->SetMarkerSize(1.3);
-rehisto_hProfPP->SetMarkerStyle(24);
-rehisto_hProfPP_fake->SetMarkerStyle(20);
-rehisto_hProfPP_real->SetMarkerStyle(29);
-rehisto_hProfPP->SetMarkerColor(1);
-rehisto_hProfPP->SetLineColor(1);
-rehisto_hProfPP_fake->SetMarkerColor(2);
-rehisto_hProfPP_fake->SetLineColor(2);
-rehisto_hProfPP_real->SetMarkerColor(4);
-rehisto_hProfPP_real->SetLineColor(4);
 hFrame->SetTitle("");
 hFrame->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 
@@ -245,55 +174,34 @@ rehisto_hProfPPb_real->SetMarkerColor(4);
 rehisto_hProfPPb_real->SetLineColor(4);
 
 fixedFontHist(hFrame,1.2,1.2);
-fixedFontHist(rehisto_hProfPP,1.2,1.2);
 fixedFontHist(rehisto_hProfPPb,1.2,1.2);
 
 
 //--------------------------------------------------------pT distribution------------------------------------------------
 
-c1 = new TCanvas("c1"," ",800,600);
-makeMultiPanelCanvas(c1,1,1,0,0,0.08,0.1,0.03);
+c1 = new TCanvas("c1"," ",600,600);
+makeMultiPanelCanvas(c1,1,1,-0.02,0,0.1,0.1,0.03);
 c1->cd(1)->SetLogy();
-rehisto_hPP_pt->SetMarkerStyle(20);
-rehisto_hPP_pt->Draw("E1");
-rehisto_hPPb_pt->Draw("E1same");
-TLegend *leg1=new TLegend(0.7,0.7,0.9,0.8);
+rehisto_hPPb_pt->Draw("E1");
+TLegend *leg1=new TLegend(0.5,0.7,0.7,0.8);
 leg1->SetBorderSize(0);
 leg1->SetFillColor(0);
 leg1->SetLineWidth(0);
 leg1->SetTextSize(0.05);
-leg1->AddEntry(rehisto_hPP_pt,"PYTHIA","lpf");
 leg1->AddEntry(rehisto_hPPb_pt,"PYTHIA+HIJING","lp");
 leg1->Draw("same");
-c1->Print(Form("pic/%s/jetpt_PPbvsPP.png",JetIDName.Data()));
+c1->Print(Form("pic/%s/jetpt_PPb.png",JetIDName.Data()));
 
 //-------------------------------------------------PP&PPb JetID distribution---------------------------------------------
 
-c2 = new TCanvas("c2"," ",1200,600);
-makeMultiPanelCanvas(c2,2,1,0,0,0.15,0.1,0.03);
-c2->cd(1)->SetLogy();
-rehisto_hPP_JetID->Draw("E1");
-rehisto_hPP_JetID_fake->Draw("E1same");
-rehisto_hPP_JetID_real->Draw("E1same");
-TLatex *T1=new TLatex(0.5,0.92,"PYTHIA");
-T1->SetNDC();
-T1->SetTextAlign(12);
-T1->SetTextSize(0.05);
-T1->SetTextColor(1);
-T1->SetTextFont(42);
-T1->Draw("same");
-TLatex T4;
-T4.SetNDC();
-T4.SetTextSize(0.03);
-T4.SetTextFont(42);
-T4.DrawLatex(0.65,0.28,Form("p_{T}: %.f-%.f (GeV/c)",xrange_pt[0],xrange_pt[1]));
+c2 = new TCanvas("c2"," ",600,600);
+makeMultiPanelCanvas(c2,1,1,0,0,0.1,0.15,0.03);
 /*T4.DrawLatex(0.65,0.28,Form("Inc: Mean=%.3f",hPP_JetID->GetMean()));
 T4.DrawLatex(0.65,0.24,Form("Fake: Mean=%.3f",rehisto_hPP_JetID_fake->GetMean()));
 T4.DrawLatex(0.65,0.2,Form("Fake: RMSError=%.3f",hPP_JetID_fake->GetRMSError()));
 T4.DrawLatex(0.65,0.16,Form("Fake: MeanError=%.3f",hPP_JetID_fake->GetMeanError()));
 T4.DrawLatex(0.65,0.12,Form("Fake: RMS=%.3f",hPP_JetID_fake->GetRMS()));*/
-c2->cd(2)->SetLogy();
-rehisto_hPPb_JetID->GetYaxis()->SetLabelSize(0);
+c2->cd(1)->SetLogy();
 rehisto_hPPb_JetID->Draw("E1");
 rehisto_hPPb_JetID_fake->Draw("E1same");
 rehisto_hPPb_JetID_real->Draw("E1same");
@@ -329,31 +237,20 @@ T2->Draw("same");
 c2->Print(Form("pic/%s/jetid.png",JetIDName.Data()));
 
 //---------------------------------------PP&PPb JetID f/i&r/i ratio before cut ------------------------------------------ 
-c3 = new TCanvas("c3"," ",1200,600);
-makeMultiPanelCanvas(c3,2,1,0,0,0.15,0.1,0.03);
+c3 = new TCanvas("c3","",600,600);
+makeMultiPanelCanvas(c3,1,1,0,0,0.1,0.15,0.03);
 c3->cd(1)->SetLogy();
-ratio_hPP_JetID_fake=(TH1D*)rehisto_hPP_JetID_fake->Clone("ratio_hPP_JetID_fake");
-ratio_hPP_JetID_fake->Divide(rehisto_hPP_JetID);
-ratio_hPP_JetID_fake->GetYaxis()->SetTitle("ratio");
-ratio_hPP_JetID_fake->SetTitle("");
-ratio_hPP_JetID_fake->SetMaximum(5);
-ratio_hPP_JetID_fake->SetMinimum(1e-5);
-ratio_hPP_JetID_fake->Draw();
-ratio_hPP_JetID_real=(TH1D*)rehisto_hPP_JetID_real->Clone("ratio_hPP_JetID_real");
-ratio_hPP_JetID_real->Divide(rehisto_hPP_JetID);
-ratio_hPP_JetID_real->Draw("same");
-T1->Draw("same");
-c3->cd(2)->SetLogy();
 ratio_hPPb_JetID_fake=(TH1D*)rehisto_hPPb_JetID_fake->Clone("ratio_hPPb_JetID_fake");
 ratio_hPPb_JetID_fake->Divide(rehisto_hPPb_JetID);
 ratio_hPPb_JetID_fake->SetTitle("");
+ratio_hPPb_JetID_fake->GetYaxis()->SetTitle("ratio");
 ratio_hPPb_JetID_fake->SetMaximum(5);
 ratio_hPPb_JetID_fake->SetMinimum(1e-5);
 ratio_hPPb_JetID_fake->Draw();
 ratio_hPPb_JetID_real=(TH1D*)rehisto_hPPb_JetID_real->Clone("ratio_hPPb_JetID_real");
 ratio_hPPb_JetID_real->Divide(rehisto_hPPb_JetID);
 ratio_hPPb_JetID_real->Draw("same");
-TLegend *leg3=new TLegend(0.35,0.10,0.65,0.25);
+TLegend *leg3=new TLegend(0.55,0.20,0.80,0.35);
 leg3->SetBorderSize(0);
 leg3->SetFillColor(0);
 leg3->SetLineWidth(0);
@@ -364,113 +261,14 @@ leg3->Draw("same");
 T2->Draw("same");
 c3->Print(Form("pic/%s/ratio_jetid.png",JetIDName.Data()));
 
-//---------------------------------------------PPb/Pb JetID distribution------------------------------------------------
-
-TCanvas *c5=new TCanvas("c5");
-c5->cd();
-TH1D* ratio_JetID=(TH1D*)rehisto_hPPb_JetID->Clone();
-ratio_JetID->Divide(rehisto_hPP_JetID);
-ratio_JetID->SetTitle(Form("p_{T}^{jet}: %3.f--%3.f (GeV/c)",xrange_pt[0],xrange_pt[1]));
-ratio_JetID->GetYaxis()->SetTitle("#frac{PPb}{PP} ratio");
-ratio_JetID->SetMarkerStyle(20);
-ratio_JetID->SetMarkerSize(1);
-ratio_JetID->SetMinimum(0);
-ratio_JetID->SetMaximum(2.0);
-ratio_JetID->Draw();
-/*for(int i=ratio_JetID->GetXaxis()->FindBin(xrange_JetID[0]);i<ratio_JetID->GetXaxis()->FindBin(xrange_JetID[1]);i++){
-ymean_JetID+=ratio_JetID->GetBinContent(i)*rehisto_hPP_JetID->GetBinContent(i)*ratio_JetID->GetBinWidth(i)/rehisto_hPP_JetID->Integral("width");
-}
-ratio_JetID->Fit("pol0");
-double ymean_JetID=pol0->GetParameter(0);
-TPaveText *pt2=new TPaveText(0.7,0.8,0.9,0.9,"NDC");
-pt2->AddText(Form("MeanY=%.4f",ymean_JetID));
-pt2->Draw("same");
-c5->Update();
-*/
-TLine *l2 =new TLine(c5->GetUxmin(),1,c5->GetUxmax(),1);
-l2->SetLineStyle(2);
-l2->SetLineColor(kBlue);
-l2->Draw("same");
-c5->Print(Form("pic/%s/ratio_jet%s_PPbvsPP.png",JetIDName.Data(),JetIDName.Data()));
-/*
-//---------------------------------------------PPb/Pb pT distribution---------------------------------------------------
-
-TCanvas *c6=new TCanvas("c6");
-c6->cd();
-TH1D* ratio_pt=(TH1D*)rehisto_hPPb_pt->Clone("ratio_pt");
-ratio_pt->Divide(rehisto_hPP_pt);
-ratio_pt->SetTitle(Form("%s: %.1f--%.1f %s",JetID.Data(), xrange_JetID[0],xrange_JetID[1], Unit.Data()));
-ratio_pt->GetYaxis()->SetTitle("#frac{PPb}{PP} ratio");
-ratio_pt->SetMarkerStyle(20);
-ratio_pt->SetMarkerSize(1);
-ratio_pt->SetMinimum(0);
-ratio_pt->SetMaximum(2.0);
-ratio_pt->Draw("E1");
-ratio_pt->Fit("pol0");
-double ymean_pt=pol0->GetParameter(0);
-TPaveText *pt1=new TPaveText(0.7,0.8,0.9,0.9,"NDC");
-pt1->AddText(Form("MeanY=%.4f",ymean_pt));
-pt1->Draw("same");
-TLine *l1 =new TLine(xrange_pt[0],1,xrange_pt[1],1);
-l1->SetLineStyle(2);
-l1->SetLineColor(kBlue);
-l1->Draw("same");
-c6->Print(Form("pic/merged/ratio_jetpt_%.3f-%.3f_%.3f-%.3f_PPbvsPP.png",xrange_JetID[0],xrange_JetID[1],xrange_pt[0],xrange_pt[1]));
-*/
-
 //----------------------------------------------PP&PPb f&r&i cutvsnocut-------------------------------------------------
 
-c6 = new TCanvas("c6"," ",1200,600);
-makeMultiPanelCanvas(c6,2,1,0,0,0.15,0.1,0.03);
+c6 = new TCanvas("c6"," ",600,600);
+makeMultiPanelCanvas(c6,1,1,0,0,0.1,0.15,0.03);
 c6->cd(1);
-TH1D* ratio_hPP_JetIDcutvsnocut_pt=(TH1D*)rehisto_hPP_JetIDcut_pt->Clone("ratio_hPP_JetIDcut_ptcutvsnocut_pt");
-ratio_hPP_JetIDcutvsnocut_pt->Divide(rehisto_hPP_pt);
 hFrame->GetYaxis()->SetTitle(Form("%s #frac{cut}{no cut}",JetID.Data()));
 hFrame->SetMaximum(1.19);
 hFrame->SetMinimum(0.01);
-hFrame->DrawCopy();
-ratio_hPP_JetIDcutvsnocut_pt->SetMarkerSize(1.5);
-ratio_hPP_JetIDcutvsnocut_pt->SetMarkerStyle(24);
-ratio_hPP_JetIDcutvsnocut_pt->SetMarkerColor(1);
-ratio_hPP_JetIDcutvsnocut_pt->SetLineColor(1);
-ratio_hPP_JetIDcutvsnocut_pt->Draw("same");
-TH1D* ratio_hPP_JetIDcutvsnocut_pt_fake=(TH1D*)rehisto_hPP_JetIDcut_pt_fake->Clone("ratio_hPP_JetIDcutvsnocut_pt_fake");
-TH1D* cl_rehisto_hPP_pt_fake=(TH1D*)rehisto_hPP_pt_fake->Clone("cl_rehisto_hPP_pt_fake");
-cl_rehisto_hPP_pt_fake=(TH1D*)cl_rehisto_hPP_pt_fake->Rebin(Nbin_pt_coarse,"cl_rehisto_hPP_pt_fake",binbound_pt_coarse);
-ratio_hPP_JetIDcutvsnocut_pt_fake=(TH1D*)ratio_hPP_JetIDcutvsnocut_pt_fake->Rebin(Nbin_pt_coarse,"ratio_hPP_JetIDcutvsnocut_pt_fake",binbound_pt_coarse);
-normalizeByBinWidth(ratio_hPP_JetIDcutvsnocut_pt_fake);
-normalizeByBinWidth(cl_rehisto_hPP_pt_fake);
-ratio_hPP_JetIDcutvsnocut_pt_fake->Divide(cl_rehisto_hPP_pt_fake);
-ratio_hPP_JetIDcutvsnocut_pt_fake->GetYaxis()->SetTitle("");
-ratio_hPP_JetIDcutvsnocut_pt_fake->SetMarkerSize(1.5);
-ratio_hPP_JetIDcutvsnocut_pt_fake->SetMarkerStyle(20);
-ratio_hPP_JetIDcutvsnocut_pt_fake->SetMarkerColor(2);
-ratio_hPP_JetIDcutvsnocut_pt_fake->SetLineColor(2);
-ratio_hPP_JetIDcutvsnocut_pt_fake->Draw("same");
-TH1D* ratio_hPP_JetIDcutvsnocut_pt_real=(TH1D*)rehisto_hPP_JetIDcut_pt_real->Clone("ratio_hPP_JetIDcutvsnocut_pt_real");
-ratio_hPP_JetIDcutvsnocut_pt_real->Divide(rehisto_hPP_pt_real);
-ratio_hPP_JetIDcutvsnocut_pt_real->GetYaxis()->SetTitle("");
-ratio_hPP_JetIDcutvsnocut_pt_real->SetMarkerSize(1.5);
-ratio_hPP_JetIDcutvsnocut_pt_real->SetMarkerStyle(29);
-ratio_hPP_JetIDcutvsnocut_pt_real->SetMarkerColor(4);
-ratio_hPP_JetIDcutvsnocut_pt_real->SetLineColor(4);
-ratio_hPP_JetIDcutvsnocut_pt_real->Draw("same");
-TLatex *T5=new TLatex(0.65,0.2,Form("cut: JetID = %.2f - %.2f", JetIDcut[0], JetIDcut[1]));
-T5->SetNDC();
-T5->SetTextAlign(12);
-T5->SetTextSize(0.03);
-T5->SetTextColor(1);
-T5->SetTextFont(42);
-T1->Draw("same");
-T5->Draw("same");
-TLine *l3 =new TLine(30,1,600,1);
-l3->SetLineStyle(2);
-l3->SetLineColor(kBlack);
-l3->Draw("same");
-
-c6->cd(2);
-hFrame->GetYaxis()->SetTitle("");
-hFrame->GetYaxis()->SetLabelSize(0);
 hFrame->DrawCopy();
 TH1D* ratio_hPPb_JetIDcutvsnocut_pt=(TH1D*)rehisto_hPPb_JetIDcut_pt->Clone("ratio_hPPb_JetIDcut_ptcutvsnocut_pt");
 ratio_hPPb_JetIDcutvsnocut_pt->Divide(rehisto_hPPb_pt);
@@ -500,6 +298,12 @@ ratio_hPPb_JetIDcutvsnocut_pt_real->SetMarkerStyle(29);
 ratio_hPPb_JetIDcutvsnocut_pt_real->SetMarkerColor(4);
 ratio_hPPb_JetIDcutvsnocut_pt_real->SetLineColor(4);
 ratio_hPPb_JetIDcutvsnocut_pt_real->Draw("same");
+TLatex *T5=new TLatex(0.65,0.2,Form("cut: JetID = %.2f - %.2f", JetIDcut[0], JetIDcut[1]));
+T5->SetNDC();
+T5->SetTextAlign(12);
+T5->SetTextSize(0.03);
+T5->SetTextColor(1);
+T5->SetTextFont(42);
 TLegend *leg6=new TLegend(0.7,0.25,0.9,0.4);
 leg6->SetBorderSize(0);
 leg6->SetFillColor(0);
@@ -511,64 +315,31 @@ leg6->AddEntry(rehisto_hPPb_JetID_real,"real","lp");
 leg6->Draw("same");
 T2->Draw("same");
 T5->Draw("same");
+TLine *l3 =new TLine(30,1,600,1);
+l3->SetLineStyle(2);
+l3->SetLineColor(kBlack);
 l3->Draw("same");
 c6->Print(Form("pic/%s/ratio_jetpt_cutvsnocut.png",JetIDName.Data()));
 
 //---------------------------------------PP&PPb pT f/i&r/i ratio before and after cut-----------------------------------
 
-c7 = new TCanvas("c7"," ",800,800);
-makeMultiPanelCanvas(c7,2,2,0,0,0.15,0.1,0.03);
+c7 = new TCanvas("c7"," ",1200,600);
+makeMultiPanelCanvas(c7,2,1,0,0,0.1,0.15,0.03);
 c7->cd(1)->SetLogy();
-TH1D* ratio_hPP_JetIDcut_pt_fakevsInc=(TH1D*)rehisto_hPP_JetIDcut_pt_fake->Clone("ratio_hPP_JetIDcut_pt_fakevsInc");
-ratio_hPP_JetIDcut_pt_fakevsInc->Divide(rehisto_hPP_JetIDcut_pt);
-ratio_hPP_JetIDcut_pt_fakevsInc->SetTitle(Form("PYTHIA cut: %.2f-%.2f", JetIDcut[0],JetIDcut[1]));
-ratio_hPP_JetIDcut_pt_fakevsInc->SetMarkerStyle(20);
-ratio_hPP_JetIDcut_pt_fakevsInc->SetMarkerSize(1.5);
-ratio_hPP_JetIDcut_pt_fakevsInc->SetMarkerColor(2);
-ratio_hPP_JetIDcut_pt_fakevsInc->SetLineColor(2);
-ratio_hPP_JetIDcut_pt_fakevsInc->SetMaximum(5);
-ratio_hPP_JetIDcut_pt_fakevsInc->SetMinimum(1e-6);
-ratio_hPP_JetIDcut_pt_fakevsInc->Draw();
-
-TH1D* ratio_hPP_JetIDcut_pt_realvsInc=(TH1D*)rehisto_hPP_JetIDcut_pt_real->Clone("ratio_hPP_JetIDcut_pt_realvsInc");
-ratio_hPP_JetIDcut_pt_realvsInc->Divide(rehisto_hPP_JetIDcut_pt);
-ratio_hPP_JetIDcut_pt_realvsInc->SetMarkerStyle(29);
-ratio_hPP_JetIDcut_pt_realvsInc->SetMarkerSize(1.5);
-ratio_hPP_JetIDcut_pt_realvsInc->SetMarkerColor(4);
-ratio_hPP_JetIDcut_pt_realvsInc->SetLineColor(4);
-ratio_hPP_JetIDcut_pt_realvsInc->Draw("same");
-
-c7->cd(2)->SetLogy();
-TH1D* ratio_hPP_pt_fakevsInc=(TH1D*)rehisto_hPP_pt_fake->Clone("ratio_hPP_pt_fakevsInc");
-ratio_hPP_pt_fakevsInc->Divide(rehisto_hPP_pt);
-ratio_hPP_pt_fakevsInc->SetTitle(Form("PYTHIA nocut %.2f-%.2f", xrange_JetID[0],xrange_JetID[1]));
-ratio_hPP_pt_fakevsInc->SetMarkerStyle(20);
-ratio_hPP_pt_fakevsInc->SetMarkerSize(1.5);
-ratio_hPP_pt_fakevsInc->SetMarkerColor(2);
-ratio_hPP_pt_fakevsInc->SetLineColor(2);
-ratio_hPP_pt_fakevsInc->SetMaximum(5);
-ratio_hPP_pt_fakevsInc->SetMinimum(1e-6);
-ratio_hPP_pt_fakevsInc->Draw();
-
-TH1D* ratio_hPP_pt_realvsInc=(TH1D*)rehisto_hPP_pt_real->Clone("ratio_hPP_pt_realvsInc");
-ratio_hPP_pt_realvsInc->Divide(rehisto_hPP_pt);
-ratio_hPP_pt_realvsInc->SetMarkerStyle(29);
-ratio_hPP_pt_realvsInc->SetMarkerSize(1.5);
-ratio_hPP_pt_realvsInc->SetMarkerColor(4);
-ratio_hPP_pt_realvsInc->SetLineColor(4);
-ratio_hPP_pt_realvsInc->Draw("same");
-
-c7->cd(3)->SetLogy();
+hFrame->GetYaxis()->SetTitle(Form("ratio"));
+hFrame->SetMaximum(5);
+hFrame->SetMinimum(1e-5);
+hFrame->DrawCopy();
 TH1D* ratio_hPPb_JetIDcut_pt_fakevsInc=(TH1D*)rehisto_hPPb_JetIDcut_pt_fake->Clone("ratio_hPPb_JetIDcut_pt_fakevsInc");
 ratio_hPPb_JetIDcut_pt_fakevsInc->Divide(rehisto_hPPb_JetIDcut_pt);
-ratio_hPPb_JetIDcut_pt_fakevsInc->SetTitle(Form("PYTHIA+HIJING"));
+ratio_hPPb_JetIDcut_pt_fakevsInc->SetTitle(Form("PYTHIA+HIJING: %.2f-%.2f", JetIDcut[0],JetIDcut[1]));
 ratio_hPPb_JetIDcut_pt_fakevsInc->SetMarkerStyle(20);
 ratio_hPPb_JetIDcut_pt_fakevsInc->SetMarkerSize(1.5);
 ratio_hPPb_JetIDcut_pt_fakevsInc->SetMarkerColor(2);
 ratio_hPPb_JetIDcut_pt_fakevsInc->SetLineColor(2);
 ratio_hPPb_JetIDcut_pt_fakevsInc->SetMaximum(5);
 ratio_hPPb_JetIDcut_pt_fakevsInc->SetMinimum(1e-6);
-ratio_hPPb_JetIDcut_pt_fakevsInc->Draw();
+ratio_hPPb_JetIDcut_pt_fakevsInc->Draw("same");
 
 TH1D* ratio_hPPb_JetIDcut_pt_realvsInc=(TH1D*)rehisto_hPPb_JetIDcut_pt_real->Clone("ratio_hPPb_JetIDcut_pt_realvsInc");
 ratio_hPPb_JetIDcut_pt_realvsInc->Divide(rehisto_hPPb_JetIDcut_pt);
@@ -578,17 +349,18 @@ ratio_hPPb_JetIDcut_pt_realvsInc->SetMarkerColor(4);
 ratio_hPPb_JetIDcut_pt_realvsInc->SetLineColor(4);
 ratio_hPPb_JetIDcut_pt_realvsInc->Draw("same");
 
-c7->cd(4)->SetLogy();
+c7->cd(2)->SetLogy();
+hFrame->DrawCopy();
 TH1D* ratio_hPPb_pt_fakevsInc=(TH1D*)rehisto_hPPb_pt_fake->Clone("ratio_hPPb_pt_fakevsInc");
 ratio_hPPb_pt_fakevsInc->Divide(rehisto_hPPb_pt);
-ratio_hPPb_pt_fakevsInc->SetTitle(Form("PYTHIA+HIJING nocut"));
+ratio_hPPb_pt_fakevsInc->SetTitle(Form("PYTHIA+HIJING nocut: %.2f-%.2f", xrange_JetID[0],xrange_JetID[1]));
 ratio_hPPb_pt_fakevsInc->SetMarkerStyle(20);
 ratio_hPPb_pt_fakevsInc->SetMarkerSize(1.5);
 ratio_hPPb_pt_fakevsInc->SetMarkerColor(2);
 ratio_hPPb_pt_fakevsInc->SetLineColor(2);
 ratio_hPPb_pt_fakevsInc->SetMaximum(5);
 ratio_hPPb_pt_fakevsInc->SetMinimum(1e-6);
-ratio_hPPb_pt_fakevsInc->Draw();
+ratio_hPPb_pt_fakevsInc->Draw("same");
 
 TH1D* ratio_hPPb_pt_realvsInc=(TH1D*)rehisto_hPPb_pt_real->Clone("ratio_hPPb_pt_realvsInc");
 ratio_hPPb_pt_realvsInc->Divide(rehisto_hPPb_pt);
@@ -597,55 +369,20 @@ ratio_hPPb_pt_realvsInc->SetMarkerSize(1.5);
 ratio_hPPb_pt_realvsInc->SetMarkerColor(4);
 ratio_hPPb_pt_realvsInc->SetLineColor(4);
 ratio_hPPb_pt_realvsInc->Draw("same");
-TLegend *leg7=new TLegend(0.65,0.25,0.9,0.35);
+TLegend *leg7=new TLegend(0.55,0.25,0.8,0.35);
 leg7->SetBorderSize(0);
 leg7->SetFillColor(0);
 leg7->SetLineWidth(0);
 leg7->SetTextSize(0.05);
-leg7->AddEntry(ratio_hPP_JetIDcut_pt_fakevsInc,"fake Jet/Inc Jet","lp");
-leg7->AddEntry(ratio_hPP_JetIDcut_pt_realvsInc,"real Jet/Inc Jet","lp");
+leg7->AddEntry(ratio_hPPb_JetIDcut_pt_fakevsInc,"fake Jet/Inc Jet","lp");
+leg7->AddEntry(ratio_hPPb_JetIDcut_pt_realvsInc,"real Jet/Inc Jet","lp");
 leg7->Draw("same");
 c7->Print(Form("pic/%s/ratio_jetpt_%s.png",JetIDName.Data(),JetIDName.Data()));
 
 //-------------------------------PP&PPb pT distribution before and after cut-------------------------------------------
-c8 = new TCanvas("c8"," ",1200,700);
-makeMultiPanelCanvas(c8,2,2,0,0,0.15,0.1,0.03);
+c8 = new TCanvas("c8"," ",1200,600);
+makeMultiPanelCanvas(c8,2,1,0,0,0.1,0.15,0.03);
 c8->cd(1)->SetLogy();
-rehisto_hPP_pt->SetMarkerStyle(24);
-rehisto_hPP_pt->SetMarkerSize(1.5);
-rehisto_hPP_pt->SetMaximum(1e-2);
-rehisto_hPP_pt->SetMinimum(1e-13);
-rehisto_hPP_pt_real->SetMarkerStyle(29);
-rehisto_hPP_pt_real->SetMarkerColor(4);
-rehisto_hPP_pt_real->SetLineColor(4);
-rehisto_hPP_pt_real->SetMarkerSize(1.5);
-rehisto_hPP_pt_fake->SetMarkerStyle(20);
-rehisto_hPP_pt_fake->SetMarkerColor(2);
-rehisto_hPP_pt_fake->SetLineColor(2);
-rehisto_hPP_pt_fake->SetMarkerSize(1.5);
-rehisto_hPP_pt->Draw();
-rehisto_hPP_pt_real->Draw("E1same");
-rehisto_hPP_pt_fake->Draw("E1same");
-
-c8->cd(2)->SetLogy();
-rehisto_hPP_JetIDcut_pt->SetMarkerStyle(24);
-rehisto_hPP_JetIDcut_pt->SetMarkerSize(1.5);
-rehisto_hPP_JetIDcut_pt->SetMaximum(1e-2);
-rehisto_hPP_JetIDcut_pt->SetMinimum(1e-13);
-rehisto_hPP_JetIDcut_pt->GetYaxis()->SetTitle("");
-rehisto_hPP_JetIDcut_pt_real->SetMarkerSize(1.5);
-rehisto_hPP_JetIDcut_pt_real->SetMarkerStyle(29);
-rehisto_hPP_JetIDcut_pt_real->SetMarkerColor(4);
-rehisto_hPP_JetIDcut_pt_real->SetLineColor(4);
-rehisto_hPP_JetIDcut_pt_fake->SetMarkerStyle(20);
-rehisto_hPP_JetIDcut_pt_fake->SetMarkerColor(2);
-rehisto_hPP_JetIDcut_pt_fake->SetLineColor(2);
-rehisto_hPP_JetIDcut_pt_fake->SetMarkerSize(1.5);
-rehisto_hPP_JetIDcut_pt->Draw();
-rehisto_hPP_JetIDcut_pt_real->Draw("E1same");
-rehisto_hPP_JetIDcut_pt_fake->Draw("E1same");
-
-c8->cd(3)->SetLogy();
 rehisto_hPPb_pt->SetMarkerStyle(24);
 rehisto_hPPb_pt->SetMarkerSize(1.5);
 rehisto_hPPb_pt->SetMaximum(1e-2);
@@ -663,7 +400,7 @@ rehisto_hPPb_pt->Draw();
 rehisto_hPPb_pt_real->Draw("E1same");
 rehisto_hPPb_pt_fake->Draw("E1same");
 
-c8->cd(4)->SetLogy();
+c8->cd(2)->SetLogy();
 rehisto_hPPb_JetIDcut_pt->SetMarkerStyle(24);
 rehisto_hPPb_JetIDcut_pt->SetMarkerSize(1.5);
 rehisto_hPPb_JetIDcut_pt->SetMaximum(1e-2);
@@ -684,29 +421,21 @@ leg8->SetBorderSize(0);
 leg8->SetFillColor(0);
 leg8->SetTextSize(0.05);
 leg8->SetLineWidth(0);
-leg8->AddEntry(rehisto_hPP_pt,"Inclusive","lp");
-leg8->AddEntry(rehisto_hPP_pt_real,"real","lp");
-leg8->AddEntry(rehisto_hPP_pt_fake,"fake","lp");
+leg8->AddEntry(rehisto_hPPb_pt,"Inclusive","lp");
+leg8->AddEntry(rehisto_hPPb_pt_real,"real","lp");
+leg8->AddEntry(rehisto_hPPb_pt_fake,"fake","lp");
 leg8->Draw("same");
 c8->Print(Form("pic/%s/jetpt.png",JetIDName.Data()));
 
 //--------------------------------------------------PP&PPb JetID,pT Profile histograms-----------------------------------
 
-c9 = new TCanvas("c9"," ",1200,600);
-makeMultiPanelCanvas(c9,2,1,0,0,0.15,0.1,0.03);
+c9 = new TCanvas("c9"," ",600,600);
+makeMultiPanelCanvas(c9,1,1,0,0,0.1,0.15,0.03);
 c9->cd(1);
 hFrame->GetYaxis()->SetLabelSize(20);
 hFrame->GetYaxis()->SetTitle(Form("%s %s",JetID.Data(), Unit.Data()));
-hFrame->SetMaximum(TMath::Max(rehisto_hProfPP_fake->GetMaximum(),rehisto_hProfPP_real->GetMaximum())*1.5);
+hFrame->SetMaximum(TMath::Max(rehisto_hProfPPb_fake->GetMaximum(),rehisto_hProfPPb_real->GetMaximum())*1.5);
 hFrame->SetMinimum(0);
-hFrame->DrawCopy();
-rehisto_hProfPP->Draw("same");
-rehisto_hProfPP_fake->Draw("same");
-rehisto_hProfPP_real->Draw("same");
-T1->Draw("same");
-c9->cd(2);
-hFrame->GetYaxis()->SetLabelSize(0);
-hFrame->GetYaxis()->SetTitle("");
 hFrame->DrawCopy();
 rehisto_hProfPPb->Draw("same");
 rehisto_hProfPPb_fake->Draw("same");
@@ -716,9 +445,9 @@ leg9->SetBorderSize(0);
 leg9->SetFillColor(0);
 leg9->SetLineWidth(0);
 leg9->SetTextSize(0.05);
-leg9->AddEntry(rehisto_hProfPP,"Inclusive","lp");
-leg9->AddEntry(rehisto_hProfPP_fake,"fake","lp");
-leg9->AddEntry(rehisto_hProfPP_real,"real","lp");
+leg9->AddEntry(rehisto_hProfPPb,"Inclusive","lp");
+leg9->AddEntry(rehisto_hProfPPb_fake,"fake","lp");
+leg9->AddEntry(rehisto_hProfPPb_real,"real","lp");
 leg9->Draw("same");
 T2->Draw("same");
 
