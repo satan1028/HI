@@ -53,7 +53,8 @@ void Drawjtptvsjtpu(){
 	
 	c1 = new TCanvas("c1"," ",600,600);
 //	makeMultiPanelCanvas(c1,2,1,0,0,0.1,0.15,0.03);		
-	c1->Divide(1,1,0.01,0.01);
+//	c1->Divide(1,1,0.01,0.01);
+	c1->SetRightMargin(0.15);
 //	t->Draw("jtpt:jtpu>>jtptvsjtpu","weight*(rawpt>=20 && jteta<=1-0.465 && jteta>=-1-0.465)");
 	jtptvsjtpu->SetTitle("");
 	jtptvsjtpu->GetXaxis()->SetTitle("jet p_{T} (GeV/c)");
