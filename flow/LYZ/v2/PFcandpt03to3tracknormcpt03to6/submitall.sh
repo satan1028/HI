@@ -18,7 +18,7 @@ if [[ -d $dir && $dir == M220185 ]];then
 echo $dir
 
 for i in $( seq 0 $njobs );do
-if [[ $i == 19 ]];then
+if [[ $i == 13 ]];then
 begin=`echo "$i*$nfilesperjob" | bc`
 end=`echo "($i+1)*$nfilesperjob" | bc`
 if [[ $i == $njobs ]];then
