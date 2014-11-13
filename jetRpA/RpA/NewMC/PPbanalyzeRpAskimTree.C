@@ -265,7 +265,6 @@ for(int j4i = 0; j4i < nref; j4i++){
         my_hists->refjetptEtaBin[dEtaBin]->Fill(ref_pt, weight);
        }
 
-	        if(raw_pt<22) continue;
         if(sub_id==0 && TMath::Abs(jet_eta)<=3){
                 my_hists->jetptEta->Fill(jet_pt,jet_eta,weight);
                 my_hists->jetptphi->Fill(jet_pt,jet_phi,weight);

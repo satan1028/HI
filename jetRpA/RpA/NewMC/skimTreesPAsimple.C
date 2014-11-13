@@ -327,6 +327,7 @@ else{
   nt->Branch("jtpt",jtpt,"jtpt[nref]/F");
   nt->Branch("jteta",jteta,"jteta[nref]/F");
   nt->Branch("jtphi",jtphi,"jtphi[nref]/F");
+  nt->Branch("jtpu",jtpu,"jtpu[nref]/F");
 if(isMC)  {
 nt->Branch("subid",subid,"subid[nref]/I");
 nt->Branch("refpt",refpt,"refpt[nref]/F");
