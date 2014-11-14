@@ -1,5 +1,5 @@
 #!/bin/bash
-SumorProd="Prod"
+SumorProd="Sum"
 Vorv="v"
 
 nfilesperjob=25
@@ -10,7 +10,7 @@ echo "split into $(($njobs+1)) jobs, $nfilesperjob files per job"
 echo $SumorProd $Vorv
 
 for dir in `ls`;do
-if [[ -d $dir && $dir != M150120 && $dir == M* ]];then
+if [[ -d $dir && $dir == M* ]];then
 echo $dir
 
 for i in $( seq 0 $njobs );do

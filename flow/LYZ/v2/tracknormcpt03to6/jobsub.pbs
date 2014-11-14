@@ -28,7 +28,7 @@ root -l -b <<EOF
 .L ../Do.C
 string Vorv=getenv("VORV")
 if(Vorv=="V") dofirst()
-if(Vorv=="v") dosecondsub()
+if(Vorv=="v") dosecond()
 EOF
 
 echo "Done!"

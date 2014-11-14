@@ -18,8 +18,8 @@ void dofirst(){
 	int end=atoi(getenv("END"));
 	string dir=getenv("DIR");
 	for(int i=start;i<end;i++){
-		if(SumorProd=="Sum")	name=Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),i);
-		else	name=Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),i);
+		if(SumorProd=="Sum")	name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),i);
+		else	name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),i);
 		remove(name.Data());
 		LYZ *l = new LYZ(readline("./filelist.dat",i));
 		cout<<"start "<<i<<" th job"<<endl;
@@ -42,8 +42,8 @@ void dosecond(){
 	string dir=getenv("DIR");
         TString name;
         for(int i=start;i<end;i++){
-                if(SumorProd=="Sum")       name=Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/tracknormcpt03to6/%s/newptbin/Anav_Prod_%d.root",dir.c_str(),i);
-                else            name=Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/tracknormcpt03to6/%s/newptbin/Anav_Prod2_%d.root",dir.c_str(),i);
+                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/newptbin/Anav_Prod_%d.root",dir.c_str(),i);
+                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/newptbin/Anav_Prod2_%d.root",dir.c_str(),i);
                 remove(name.Data());
                 LYZ *l = new LYZ(readline("filelist.dat",i));
                 cout<<"start "<<i<<" th job"<<endl;
