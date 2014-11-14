@@ -43,21 +43,27 @@ for(int i=0;i<ntotbin;i++){
     //	TGraphErrors* grtracknormc03to6Sum=plot("tracknormcpt03to6",1,4,29,i);
     	TGraphErrors* grtracknormc03to3tracknormcpt03to6=plot("tracknormcpt03to3tracknormcpt03to6",0,4,29,i);
     	TGraphErrors* grtracknormc03to3=plot("tracknormcpt03to3",0,4,34,i);
+    	TGraphErrors* grPFcandpt01to10tracknormcpt03to6=plot("PFcandpt01to10tracknormcpt03to6",0,2,34,i);
+    	TGraphErrors* grPFcandpt03to6tracknormcpt03to6=plot("PFcandpt03to6tracknormcpt03to6",0,4,29,i);
+    	TGraphErrors* grPFcandpt03to3tracknormcpt03to6=plot("PFcandpt03to3tracknormcpt03to6",0,3,33,i);
         gr24->SetMarkerSize(1.6);
         gr24->SetMarkerColor(1);
         gr24->SetMarkerStyle(20);
         gr24->SetLineColor(1);
 	c1->cd(i+1);
 	hFrame->Draw();
-	if(i!=ntotbin-1) gr24->Draw("Psame");
 	//grtracklc01to10->Draw("Psame");
 	//grtracknormc03to6->Draw("Psame");
 	//grPFfull->Draw("Psame");
 	//grPFon->Draw("Psame");
    	grtracknormc03to6->Draw("Psame");
    	//grtracknormc03to6Sum->Draw("Psame");
-   	grtracknormc03to3tracknormcpt03to6->Draw("Psame");
-   	grtracknormc03to3->Draw("Psame");
+   	//grtracknormc03to3tracknormcpt03to6->Draw("Psame");
+   	//grtracknormc03to3->Draw("Psame");
+   	grPFcandpt01to10tracknormcpt03to6->Draw("Psame");
+   	grPFcandpt03to6tracknormcpt03to6->Draw("Psame");
+   	grPFcandpt03to3tracknormcpt03to6->Draw("Psame");
+	if(i!=ntotbin-1) gr24->Draw("Psame");
         if(i==0 || i==3)
                 TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
         else
@@ -67,7 +73,7 @@ for(int i=0;i<ntotbin;i++){
 	}
         c1->cd(ntotbin+1);
         //TLatex *tlx1 = new TLatex(0.12,0.60,Form("%.1f<p_{T}<%.1f (GeV/c)",0.1,10.0));
-        TLegend *tl = new TLegend(0.2,0.45,0.5,0.85);
+        TLegend *tl = new TLegend(0.2,0.40,0.5,0.85);
         tl->SetFillColor(0);
         tl->SetBorderSize(0);
         tl->SetTextSize(0.065);
@@ -78,10 +84,13 @@ for(int i=0;i<ntotbin;i++){
         // tl->AddEntry(hFrame,Form("%.1f<p_{T}<%.1f (GeV/c)",0.1,10.0),"");
         tl->AddEntry(grtracknormc03to6,"LYZ general track ","lp");
        //tl->AddEntry(grtracknormc03to6Sum,"LYZ general track Sum","lp");
+       tl->AddEntry(grPFcandpt01to10tracknormcpt03to6,Form("PF cand %.1f < p_{T} < %.1f",0.1,10.0),"lp");
+       tl->AddEntry(grPFcandpt03to6tracknormcpt03to6,Form("PF cand %.1f < p_{T} < %.1f",0.3,6.0),"lp");
+       tl->AddEntry(grPFcandpt03to3tracknormcpt03to6,Form("PF cand %.1f < p_{T} < %.1f",0.3,3.0),"lp");
         tl->AddEntry(hFrame,Form("%.1f<p_{T}<%.1f (GeV/c)",0.3,6.0),"");
-        tl->AddEntry(grtracknormc03to3tracknormcpt03to6,"LYZ general track 0.3 to 6","lp");
-        tl->AddEntry(grtracknormc03to3,"LYZ general track ","lp");
-        tl->AddEntry(hFrame,Form("%.1f<p_{T}<%.1f (GeV/c)",0.3,3.0),"");
+        //tl->AddEntry(grtracknormc03to3tracknormcpt03to6,"LYZ general track 0.3 to 6","lp");
+        //tl->AddEntry(grtracknormc03to3,"LYZ general track ","lp");
+        //tl->AddEntry(hFrame,Form("%.1f<p_{T}<%.1f (GeV/c)",0.3,3.0),"");
         //tlx1->SetNDC();
         //tlx1->SetTextSize(0.065);
         tlx2->SetTextSize(0.065);
