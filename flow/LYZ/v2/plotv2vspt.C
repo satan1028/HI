@@ -113,7 +113,7 @@ TGraphErrors* plot(TString dir, int isSum, int color, int marker, int i){
 	double *avgpt = vecDavgpt->GetMatrixArray();
 	double *v2 = vecDv2->GetMatrixArray();
 	double *v2err = vecDv2err->GetMatrixArray();
-	int npt = vecDavgpt->GetUpb();
+	int npt = vecDavgpt->GetNrows();
 	
 	TGraphErrors *gr=new TGraphErrors(npt,avgpt,v2,0,v2err);
 	gr->SetMarkerStyle(marker);
