@@ -1,12 +1,12 @@
+#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 #include "parameter.h"
 #include <vector>
 void Draw3panelfit(){
         gStyle->SetOptStat(kFALSE);
 	TString outG="G0.root";
 	TString dirname;
-	TCanvas *c1 = new TCanvas("c1","c1",1000,400);
-	c1->Divide(3);
-
+	c1 = new TCanvas("c1"," ",1200,800);
+	makeMultiPanelCanvas(c1,3,2,0,0,0.2,0.1,0.03);
 	for(int sth=0;sth<3;sth++){
 	int cenvar=0, Gth=0;
 	//TFile *f = TFile::Open(Form("%s/%s",cenvardir[cenvar].Data(),outG.Data()));
@@ -76,7 +76,7 @@ void Draw3panelfit(){
 	TH1D *histo_exp_norm = (TH1D*) histo_exp->Clone();
 	histo_exp_norm->Scale(scale);
 	c1->cd(sth+1)->SetLogy();
-	c1->cd(sth+1)->SetFrameFillColor(0);
+	/*c1->cd(sth+1)->SetFrameFillColor(0);
         c1->cd(sth+1)->SetFrameBorderSize(0);
         c1->cd(sth+1)->SetFrameBorderMode(0);
         if(sth==0)c1->cd(sth+1)->SetLeftMargin(0.12);
@@ -85,6 +85,7 @@ void Draw3panelfit(){
         c1->cd(sth+1)->SetTopMargin(0.02);
         if(sth==2)c1->cd(sth+1)->SetRightMargin(0.05);
         else c1->cd(sth+1)->SetRightMargin(0);
+	*/
         c1->cd(sth+1)->SetTicks(-1);
 
 	
@@ -95,7 +96,7 @@ void Draw3panelfit(){
 	else hFrame->GetXaxis()->SetRangeUser(0,200);
         if(cenvar==2)hFrame->SetMaximum(0.5);
         else hFrame->SetMaximum(1.0);
-        hFrame->GetXaxis()->SetTitle(cenvariable[cenvar]);
+        hFrame->GetXaxis()->SetTitle("");
         if(sth==0)	hFrame->GetYaxis()->SetTitle("Event Fraction");
 	else hFrame->GetYaxis()->SetTitle("");
         hFrame->SetTitle("");
@@ -115,7 +116,7 @@ void Draw3panelfit(){
         hFrame->GetXaxis()->SetTitleSize(0.05);
         hFrame->GetXaxis()->SetTitleOffset(1.0);
 
-	hFrame->Draw();
+	hFrame->DrawCopy();
 
 	histo_obs_norm->SetLineColor(1);
 	histo_obs_norm->SetLineWidth(0.5);
@@ -165,6 +166,20 @@ void Draw3panelfit(){
                 }
 	histo_obs_norm->Draw("Psame");
 	gPad->RedrawAxis();
+	c1->cd(sth+4);
+	TH1D* histo_ratio = (TH1D*)histo_exp_norm->Clone();
+	histo_ratio->Divide(histo_obs_norm);
+	histo_ratio->SetMarkerStyle(20);
+	histo_ratio->SetMarkerSize(1.1);
+	hFrame->GetYaxis()->SetRangeUser(0,4.5);
+        hFrame->GetXaxis()->SetTitle(cenvariable[cenvar]);
+        if(sth==0)	hFrame->GetYaxis()->SetTitle("fit/data");
+	hFrame->DrawCopy();
+	histo_ratio->Draw("Psame");
+	TLine *l = new TLine(0,1,histo_ratio->GetXaxis()->GetXmax(),1);
+	l->SetLineStyle(2);
+	l->SetLineWidth(1.2);
+	l->Draw("same");
 	}
 	c1->Print(Form("3panelfit.png"));	
 	c1->Print(Form("3panelfit.pdf"));	
