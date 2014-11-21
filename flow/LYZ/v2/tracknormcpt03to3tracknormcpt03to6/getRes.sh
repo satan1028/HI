@@ -1,5 +1,5 @@
 #!/bin/bash
-SumorProd="Prod"
+SumorProd="Sum"
 Vorv="v"
 
 cd /home/xuq7/HI/CMSSW_5_3_20/src

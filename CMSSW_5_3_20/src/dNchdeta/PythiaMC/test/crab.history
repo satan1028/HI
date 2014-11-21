@@ -21,3 +21,29 @@
 141110_030459: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1/python/crab.py -status -c pythia6mc/
 141110_030542: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1/python/crab.py -status -c pythia6mc/
 141110_114803: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1/python/crab.py -status -c pythia6mc/
+141119_145346: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -clean -c pythia8mc/
+141119_145416: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -getoutput -c pythia8mc/
+141119_145720: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -create -submit
+141119_150308: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -create -submit
+141119_150625: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141119_155754: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141119_160553: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141119_160701: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141119_160855: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141119_161258: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141119_165503: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141119_165522: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141120_104425: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141120_105232: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -kill all -c pythia8mc/
+141120_105255: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -getoutput -c pythia8mc/
+141120_105316: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -clean -c pythia8mc/
+141120_110252: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -create -submit
+141120_112517: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141120_113523: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141120_114115: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141120_122744: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141120_122836: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141121_083339: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141121_100255: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141121_100315: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c pythia8mc/
+141121_100449: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -getoutput -c pythia8mc/

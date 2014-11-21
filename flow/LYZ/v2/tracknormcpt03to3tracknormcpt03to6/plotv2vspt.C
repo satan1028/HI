@@ -36,7 +36,7 @@ makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
     hFrame->SetMaximum(0.2);
 
 for(int i=0;i<ntotbin;i++){
-	TFile *fSum = TFile::Open(Form("M%d%d/mergedv_Prod2.root",trkpointmax[i],trkpointmin[i]));
+	TFile *fSum = TFile::Open(Form("M%d%d/mergedv_Prod.root",trkpointmax[i],trkpointmin[i]));
 	TFile *fProd = TFile::Open(Form("M%d%d/mergedv_Prod2.root",trkpointmax[i],trkpointmin[i]));
 	TVectorD *vecDv2_Sum = (TVectorD*)fSum->Get(Form("D_%d/vmean",ibin));
 	TVectorD *vecDv2err_Sum = (TVectorD*)fSum->Get(Form("D_%d/deltavmean",ibin));
@@ -71,14 +71,14 @@ for(int i=0;i<ntotbin;i++){
 	grProd->SetLineColor(4);
 	hFrame->Draw();
 	gr24->Draw("Psame");
-	//grSum->Draw("Psame");
+	grSum->Draw("Psame");
 	grProd->Draw("Psame");
 	TLegend *tl = new TLegend(0.4,0.5,0.7,0.65);
 	tl->SetFillColor(0);
 	tl->SetBorderSize(0);
 	tl->SetTextSize(0.05);
 	tl->AddEntry(gr24,"v2 4-particle cum","lp");
-	//tl->AddEntry(grSum,"LYZ Sum method","lp");
+	tl->AddEntry(grSum,"LYZ Sum method","lp");
 	tl->AddEntry(grProd,"LYZ Prod method","lp");
 	if(i==0 || i==3) 
 		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
