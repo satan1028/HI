@@ -1,4 +1,4 @@
-#include "/home/xuq7/CMSSW_6_2_3_patch1/src/Centrality/NBD/parameter.h"
+#include "/home/xuq7/HI/centrality/NBD/parameter.h"
 void Draw3panelNcoll_an(){
         gStyle->SetOptStat(kFALSE);
 	TString outG="G1.root";
@@ -23,7 +23,7 @@ void Draw3panelNcoll_an(){
         c1->cd(sth+1)->SetLeftMargin(0.15);
         c1->cd(sth+1)->SetBottomMargin(0.15);
         c1->cd(sth+1)->SetTopMargin(0.02);
-        c1->cd(sth+1)->SetRightMargin(0.02);
+        c1->cd(sth+1)->SetRightMargin(0.01);
         c1->cd(sth+1)->SetTicks(-1);
 
 	int Gth=0;
@@ -38,7 +38,7 @@ void Draw3panelNcoll_an(){
 	ss_graph = (TGraphErrors*)fss->Get(Form("%s/%s_graph",dirname.Data(),str.Data()));
 	Ntrk_graph = (TGraphErrors*)fNtrk->Get(Form("%s/%s_graph",dirname.Data(),str.Data()));
         TVectorD *centbin = (TVectorD*)fds->Get(Form("%s/%s/centbin",dirname.Data(),name.Data()));
-        TVectorD *kpoint = (TVectorD*)fds->Get(Form("%s/%s/kpoint",dirname.Data(),name,Data()));
+        TVectorD *kpoint = (TVectorD*)fds->Get(Form("%s/%s/kpoint",dirname.Data(),name.Data()));
         TVectorD *method = (TVectorD*)fds->Get(Form("%s/%s/method",dirname.Data(),name.Data()));
 	int N = centbin->GetUpb();
 	TH1D* hist = new TH1D("","",N,0,N);
@@ -50,7 +50,7 @@ void Draw3panelNcoll_an(){
         hist->GetXaxis()->CenterTitle(0);
         hist->GetYaxis()->CenterTitle(1);
         hist->GetYaxis()->SetTitleOffset(1.1);
-        hist->GetXaxis()->SetTitleOffset(1.1);
+        hist->GetXaxis()->SetTitleOffset(1.4);
         hist->GetXaxis()->SetTitleSize(0.056);
         hist->GetYaxis()->SetTitleSize(0.056);
         hist->GetXaxis()->SetLabelSize(0.05);
@@ -92,8 +92,8 @@ void Draw3panelNcoll_an(){
 	if((*method)[0]==0)label[i] = Form("%.2f-%.2f%%",(*centbin)[i]*100,(*centbin)[i+1]*100);
 	else label[i] = Form("%.2f-%.2f",(*kpoint)[i],(*kpoint)[i+1]);
 
-    	TLatex *tex1= new TLatex(0.6,26.05,"CMS Preliminary pPb \ #sqrt{s_{NN}} = 5.02 TeV");
-    	TLatex *tex2= new TLatex(3,5,Form("%s",Grilist[sth].Data()));
+    	TLatex *tex1= new TLatex(0.1,26.05,"CMS Preliminary pPb \ #sqrt{s_{NN}} = 5.02 TeV");
+    	TLatex *tex2= new TLatex(2,5,Form("%s",Grilist[sth].Data()));
     	tex1->SetTextColor(1);
     	tex2->SetTextColor(1);
     	tex1->SetTextFont(42);

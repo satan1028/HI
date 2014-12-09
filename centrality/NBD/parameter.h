@@ -6,7 +6,7 @@ const int nGlau=9;
 TString cenvarlist[3]={"ds","ss","Ntrk"};
 TString cenvardir[3]={"double_side","PlusEta4_Rebin","Ntrk"};
 TString cenvariable[3]={"HF Energy |#eta|>4","HF Energy #eta>4","N_{trk}^{offline}"};
-TString Grilist[3]={"standard","Gribov #Omega=0.55","Gribov #Omega=1.01"};
+TString Grilist[3]={"Standard Glauber","Glauber Gribov #Omega=0.55","Glauber Gribov #Omega=1.01"};
 struct para1{
 	double xmin;	double xmax;
 	double mumin;	double mumax;	double mustep;

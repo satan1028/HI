@@ -33,7 +33,14 @@ makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
     hFrame->GetXaxis()->SetTitleSize(0.04);
     hFrame->GetYaxis()->SetTitleSize(0.04);
     hFrame->GetXaxis()->SetRangeUser(-0.3,6.3);
-    hFrame->SetMaximum(0.2);
+    hFrame->GetXaxis()->CenterTitle();
+    hFrame->GetYaxis()->CenterTitle();
+    hFrame->GetXaxis()->SetTitleSize(0.08);
+    hFrame->GetYaxis()->SetTitleSize(0.07);
+    hFrame->GetYaxis()->SetTitleOffset(1);
+    hFrame->GetXaxis()->SetLabelSize(0.05);
+    hFrame->GetYaxis()->SetLabelSize(0.05);
+    hFrame->SetMaximum(0.23);
 
 for(int i=0;i<ntotbin;i++){
 	TFile *fSum = TFile::Open(Form("M%d%d/mergedv_Prod.root",trkpointmax[i],trkpointmin[i]));
@@ -53,55 +60,58 @@ for(int i=0;i<ntotbin;i++){
 	double *avgpt_Prod = vecDavgpt_Prod->GetMatrixArray();
 	double *v2_Prod = vecDv2_Prod->GetMatrixArray();
 	double *v2err_Prod = vecDv2err_Prod->GetMatrixArray();
-	int npt = vecDavgpt_Sum->GetUpb();
+	int npt = vecDavgpt_Sum->GetNrows();
 	
 	c1->cd(i+1);
 	if(i!=ntotbin-1)
 	TGraphErrors *gr24=new TGraphErrors(npt24,pt,v24[i],0,v24err[i]);
 	TGraphErrors *grSum=new TGraphErrors(npt,avgpt_Sum,v2_Sum,0,v2err_Sum);
 	TGraphErrors *grProd=new TGraphErrors(npt,avgpt_Prod,v2_Prod,0,v2err_Prod);
-	gr24->SetMarkerSize(1.3);
+	gr24->SetMarkerSize(1.5);
+	grProd->SetMarkerSize(1.5);
 	gr24->SetMarkerColor(1);
-	gr24->SetMarkerStyle(20);
-	grSum->SetMarkerStyle(24);
-	grProd->SetMarkerStyle(29);
-	grSum->SetMarkerColor(2);
-	grProd->SetMarkerColor(4);
-	grSum->SetLineColor(2);
-	grProd->SetLineColor(4);
+	gr24->SetMarkerStyle(24);
+	//grSum->SetMarkerStyle(24);
+	grProd->SetMarkerStyle(20);
+	//grSum->SetMarkerColor(2);
+	grProd->SetMarkerColor(2);
+	//grSum->SetLineColor(2);
+	grProd->SetLineColor(2);
 	hFrame->Draw();
 	gr24->Draw("Psame");
-	grSum->Draw("Psame");
+	//grSum->Draw("Psame");
 	grProd->Draw("Psame");
-	TLegend *tl = new TLegend(0.4,0.5,0.7,0.65);
+	TLegend *tl = new TLegend(0.1,0.7,0.5,0.85);
 	tl->SetFillColor(0);
 	tl->SetBorderSize(0);
 	tl->SetTextSize(0.05);
-	tl->AddEntry(gr24,"v2 4-particle cum","lp");
-	tl->AddEntry(grSum,"LYZ Sum method","lp");
-	tl->AddEntry(grProd,"LYZ Prod method","lp");
+	tl->AddEntry(gr24,"v_{2}{4}, PLB 724 (2013) 213","lp");
+//	tl->AddEntry(grSum,"LYZ Sum method","lp");
+	tl->AddEntry(grProd,"v_{2}{LYZ}","lp");
 	if(i==0 || i==3) 
-		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
+		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<N_{trk}^{offline}<%d",trkpointmin[i],trkpointmax[i]));
 	else
-		TLatex *tlx2 = new TLatex(0.1,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
+		TLatex *tlx2 = new TLatex(0.1,0.8,Form("%d<N_{trk}^{offline}<%d",trkpointmin[i],trkpointmax[i]));
 	tlx2->SetNDC();
+	tlx2->SetTextSize(0.05);
 	tlx2->Draw("same");
 	fSum->Close();
 	fProd->Close();
 	}
 	c1->cd(ntotbin+1);
-	TLatex *tlx0 = new TLatex(0.12,0.3,Form("track normal cut"));
-        TLatex *tlx1 = new TLatex(0.12,0.25,Form("%.1f<p_{T}<%.1f (GeV/c)",0.3,3.0));
+	TLatex *tlx0 = new TLatex(0.12,0.5,Form("CMS pPb #sqrt{s_{NN}} = 5.02TeV"));
+        TLatex *tlx1 = new TLatex(0.12,0.4,Form("%.1f < p_{T} < %.1f (GeV/c), |#eta| < 2.4",0.3,3.0));
 	tlx0->SetNDC();
 	tlx1->SetNDC();
-	tlx0->SetTextSize(0.045);
-	tlx1->SetTextSize(0.045);
-	tlx2->SetTextSize(0.045);
+	tlx0->SetTextSize(0.05);
+	tlx1->SetTextSize(0.05);
+	tlx2->SetTextSize(0.05);
 	hFrame->Draw();
 	tlx0->Draw("same");
 	tlx1->Draw("same");
 	tl->Draw("same");
 	c1->Print("v2vspt.png");
+	c1->Print("v2vspt.pdf");
 
 }
 

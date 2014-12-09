@@ -53,7 +53,7 @@ for(int i=0;i<ntotbin;i++){
 	double *avgpt_Prod = vecDavgpt_Prod->GetMatrixArray();
 	double *v2_Prod = vecDv2_Prod->GetMatrixArray();
 	double *v2err_Prod = vecDv2err_Prod->GetMatrixArray();
-	int npt = vecDavgpt_Prod->GetUpb();
+	int npt = vecDavgpt_Prod->GetNrows();
 	
 	c1->cd(i+1);
 	if(i!=ntotbin-1)
