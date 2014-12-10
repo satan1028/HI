@@ -6,7 +6,7 @@ void Drawhisto(){
 	TCanvas *c1 = new TCanvas();
 	c1->SetTickx(1);
 	c1->SetTicky(1);
-	hratioplus->GetXaxis()->SetTitle("#Sigma E_{T} (#eta<0) (GeV)");
+	hratioplus->GetXaxis()->SetTitle("#Sigma E_{T} (2.9<#eta<5.2) (GeV)");
 	hratioplus->GetXaxis()->SetRangeUser(0,30);
 	hratioplus->GetYaxis()->SetRangeUser(0,0.07);
 	hratioplus->GetYaxis()->SetTitle("N_{jet}/N_{evt}");
