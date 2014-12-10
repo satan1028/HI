@@ -8,6 +8,7 @@ void Drawhisto(){
 	c1->SetTicky(1);
 	hratioplus->GetXaxis()->SetTitle("#Sigma E_{T} (#eta<0) (GeV)");
 	hratioplus->GetXaxis()->SetRangeUser(0,30);
+	hratioplus->GetYaxis()->SetRangeUser(0,0.07);
 	hratioplus->GetYaxis()->SetTitle("N_{jet}/N_{evt}");
 	hratioplus->SetMarkerSize(1);
 	hratioplus->SetMarkerStyle(20);
