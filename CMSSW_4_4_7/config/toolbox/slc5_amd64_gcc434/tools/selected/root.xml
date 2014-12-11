@@ -1,0 +1,4 @@
+<tool name="root" version="5.27.06b-cms31">
+  <info url="http://root.cern.ch/root/"/>
+  <use name="rootphysics"/>
+</tool>

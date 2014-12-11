@@ -2,32 +2,32 @@ TString algo, datafile, PPfile, PPbfile;
 
 algo="akPu3PF";
 
-TString DataPPbfile="/home/xuq/Documents/HI/RpA/output/TreeAna/DATAPPbakPu3PFskimUniv.root";
-TString DataPPbJetIDfile="/home/xuq/Documents/HI/RpA/output/TreeAna/DATAPPbakPu3PFskimJetID.root";
-TString DataPbPJetIDfile="/home/xuq/Documents/HI/RpA/output/TreeAna/DATAPbPakPu3PFskimJetID.root";
-TString DataPbPfile="/home/xuq/Documents/HI/RpA/output/TreeAna/DATAPbPakPu3PFskimUniv.root";
-TString MCPPbfile="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPPbakPu3PFskimUniv.root";
-TString MCPbPfile="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPbPakPu3PFskimUniv.root";
-TString MCPPbxSecfile="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPPbakPu3PFxSecskimUniv.root";
-//TString MCPbPfile="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPbPakPu3PFskimUniv.root";
+TString DataPPbfile="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPPbakPu3PFskimUniv.root";
+TString DataPPbJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPPbakPu3PFskimJetID.root";
+TString DataPbPJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPbPakPu3PFskimJetID.root";
+TString DataPbPfile="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPbPakPu3PFskimUniv.root";
+TString MCPPbfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFskimUniv.root";
+TString MCPbPfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimUniv.root";
+TString MCPPbxSecfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimUniv.root";
+//TString MCPbPfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimUniv.root";
 
-TString MCPPxSecfile="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPPakPu3PFxSecskimUniv.root";
-TString MCPPxSecJetIDfile="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPPakPu3PFxSecskimJetID.root";
+TString MCPPxSecfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPakPu3PFxSecskimUniv.root";
+TString MCPPxSecJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPakPu3PFxSecskimJetID.root";
 
-TString MCPPbJetIDfile="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPPbakPu3PFskimJetID.root";
-TString MCPPbxSecJetIDfile="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPPbakPu3PFxSecskimJetID.root";
-TString MCPbPJetIDfile="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPbPakPu3PFskimJetID.root";
+TString MCPPbJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFskimJetID.root";
+TString MCPPbxSecJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimJetID.root";
+TString MCPbPJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimJetID.root";
 
-TString DataPPbfileOld="/home/xuq/Documents/HI/RpA/output/TreeAna/DATAPPbakPu3PFUniv.root";
-TString DataPbPfileOld="/home/xuq/Documents/HI/RpA/output/TreeAna/DATAPbPakPu3PFUniv.root";
-TString DataPbPJetIDfileOld="/home/xuq/Documents/HI/RpA/output/TreeAna/DATAPbPakPu3PFJetID.root";
-TString MCPPbfileOld="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPPbakPu3PFUniv.root";
-TString MCPPbJetIDfileOld="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPPbakPu3PFJetID.root";
-TString MCPbPfileOld="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPbPakPu3PFUniv.root";
-TString MCPbPJetIDfileOld="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPbPakPu3PFJetID.root";
+TString DataPPbfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPPbakPu3PFUniv.root";
+TString DataPbPfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPbPakPu3PFUniv.root";
+TString DataPbPJetIDfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPbPakPu3PFJetID.root";
+TString MCPPbfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFUniv.root";
+TString MCPPbJetIDfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFJetID.root";
+TString MCPbPfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPbPakPu3PFUniv.root";
+TString MCPbPJetIDfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPbPakPu3PFJetID.root";
 
 //TString 
-//TString MCPPfileOld="/home/xuq/Documents/HI/RpA/output/TreeAna/MCPPakPu3PFUniv.root";
+//TString MCPPfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPakPu3PFUniv.root";
 
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18,21,24,28,32,37,43,49,56,64,74,84,97,114,133,153,174,196,220,245,272,300,330,362,395,430,468,507,548,592,638,686,1000};
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;

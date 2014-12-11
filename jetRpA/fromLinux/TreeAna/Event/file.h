@@ -3,7 +3,7 @@ TString algo, datafile, PPfile, PPbfile;
 algo="akPu3PF";
 
 
-TString datafile="/home/xuq/Documents/HI/RpA/output/TreeAna/JetTrigvzandcent.root";
+TString datafile="/home/xuq7/HI/RpA/output/TreeAna/JetTrigvzandcent.root";
 TString PPfile="/home/xuq/Documents/HI/RpA/output/akPu3PF/MCPPakPu3PFjetana_merged.root";
 TString PPbfile="/home/xuq/Documents/HI/RpA/output/akPu3PF/MCPPbakPu3PFjetana_merged.root";
 

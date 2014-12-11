@@ -1,0 +1,14 @@
+<tool name="roofitcore" version="5.28.00a-cms17">
+  <info url="http://root.cern.ch/root/"/>
+  <lib name="RooFitCore"/>
+  <client>
+    <environment name="ROOFIT_BASE" default="/cvmfs/cms.cern.ch/slc5_amd64_gcc434/lcg/roofit/5.28.00a-cms17"/>
+    <environment name="LIBDIR" default="$ROOFIT_BASE/lib"/>
+    <environment name="INCLUDE" default="$ROOFIT_BASE/include"/>
+  </client>
+  <runtime name="ROOFITSYS" value="$ROOFIT_BASE/"/>
+  <use name="rootcore"/>
+  <use name="roothistmatrix"/>
+  <use name="rootgpad"/>
+  <use name="rootminuit"/>
+</tool>

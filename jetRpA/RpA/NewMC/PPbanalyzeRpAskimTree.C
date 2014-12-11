@@ -21,7 +21,7 @@ const TString JetIDName[]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoS
 const int nJetID = sizeof(JetIDName)/sizeof(TString);
 
 TString algo="akPu3PF";//"akPu3PF"
-TString coll = "PPb";
+TString coll = "PbP";
 
 class hist_class{
 public:
@@ -176,7 +176,7 @@ void PPbanalyzeRpAskimTree()
 
   cout<<"Analyzing MC!"<<endl;
 
-  TFile *f = new TFile("/cms/store/user/qixu/jetRpA/skimTree/MCPPbakPu3PFskimfile0_9.root");
+  TFile *f = new TFile("/store/user/qixu/jetRpA/skimTree/MCPbPakPu3PFskimfile0_10.root");
   
   TTree *nt = (TTree*)f->Get("nt");
 

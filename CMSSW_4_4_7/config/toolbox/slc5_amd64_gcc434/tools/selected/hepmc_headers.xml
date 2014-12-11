@@ -1,0 +1,6 @@
+<tool name="hepmc_headers" version="2.05.01-cms4">
+  <client>
+    <environment name="HEPMC_HEADERS_BASE" default="/cvmfs/cms.cern.ch/slc5_amd64_gcc434/external/hepmc/2.05.01-cms4"/>
+    <environment name="INCLUDE" default="$HEPMC_HEADERS_BASE/include"/>
+  </client>
+</tool>

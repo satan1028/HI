@@ -2,7 +2,7 @@ void NjetNeventratio(){
 	const TString instring = "/store/user/tuos/mergedForestPythiaMiniBias.root";
 	TFile *fin = TFile::Open(instring);
 	TFile *fout = new TFile("PythiaMBhistos.root","Recreate");
-	Float_t hiHFplusEta4, hiHFplus;
+	Float_t hiHFplusEta4, hiHFplus, hiHF;
 	Float_t genpt[1000],geneta[1000];
 	int ngen;
 	//int Nevt, Njet;
@@ -13,10 +13,12 @@ void NjetNeventratio(){
         TH1D* hHFplusNjet = new TH1D("hHFplusNjet","",100,0,100);
         TH1D* hHFplusNjet_ = new TH1D("hHFplusNjet_","",100,0,100);
         TH1D* hHFplus = new TH1D("hHFplus","",100,0,100);
+        TH1D* hHF = new TH1D("hHF","",100,0,100);
 	TTree *tree = (TTree*)fin->Get("hiEvtAnalyzer/HiTree");
 	tree->AddFriend("akPu3PFJetAnalyzer/t");
 	tree->SetBranchAddress("hiHFplusEta4",&hiHFplusEta4);
 	tree->SetBranchAddress("hiHFplus",&hiHFplus);
+	tree->SetBranchAddress("hiHF",&hiHF);
 	tree->SetBranchAddress("ngen",&ngen);
 	tree->SetBranchAddress("genpt",genpt);
 	tree->SetBranchAddress("geneta",geneta);
@@ -25,6 +27,7 @@ void NjetNeventratio(){
 	        tree->GetEntry(evi);
 		hHFplus4->Fill(hiHFplusEta4);
 		hHFplus->Fill(hiHFplus);
+		hHF->Fill(hiHF);
 		for(int j4i = 0; j4i<ngen; j4i++){
 			if(genpt[j4i]>20 && TMath::Abs(geneta[j4i])<2.8){
 			hHFplus4Njet->Fill(hiHFplusEta4);
@@ -53,6 +56,7 @@ void NjetNeventratio(){
         hHFplusNjet->Write();
         hHFplusNjet_->Write();
         hHFplus->Write();
+        hHF->Write();
 	hratioplus->Write();
 	hratioplus_->Write();
 	fin->Close();
