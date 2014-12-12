@@ -785,7 +785,7 @@ filename=(
 )
 
 #for file in $(seq 0 ${#filename[@]})
-for ifile in $(seq 564 ${#filename[@]})
+for ifile in $(seq 564 564)
 do
 #xrdcp root://xrootd.unl.edu/$file /lio/lfs/cms/store/user/qixu/Glauber
 xrdcp  root://cmsxrootd.fnal.gov/${filename[$ifile]} /lio/lfs/cms/store/user/qixu/flow/PACorrHM/PP2010MBData

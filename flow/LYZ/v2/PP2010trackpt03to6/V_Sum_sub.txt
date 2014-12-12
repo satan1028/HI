@@ -1,0 +1,550 @@
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+
+ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	1	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	2	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	3	0.0000	0.0000	0.0000	0.0000	-nan
+0	0	4	0.0000	0.0000	0.0000	0.0000	-nan
+
+
+ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error
+0	0	0.0000	0.0000	0.0000	-nan
+

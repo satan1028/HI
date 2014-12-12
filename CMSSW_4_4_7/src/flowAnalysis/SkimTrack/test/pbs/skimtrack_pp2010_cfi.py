@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 import FWCore.Utilities.FileUtils as FileUtils
-import os
+import sys
 
 process = cms.Process("Demo")
 
