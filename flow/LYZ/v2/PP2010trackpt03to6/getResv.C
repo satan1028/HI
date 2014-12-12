@@ -48,8 +48,8 @@ void getResv(){
 	}
 
         for(int ifile=0; ifile<nFileAll; ifile++){
-	        if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/Anav_Prod_%d.root",ifile));
-	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/Anav_Prod2_%d.root",ifile));
+	        if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/PP2010trackpt03to6/Anav_Prod_%d.root",ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/PP2010trackpt03to6/Anav_Prod2_%d.root",ifile));
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
 		for(int ibin=0;ibin<nbin;ibin++){

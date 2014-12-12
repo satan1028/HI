@@ -11,10 +11,10 @@ void dosecond(){
         int end=atoi(getenv("END"));
         TString name;
 	for(int i=start;i<end;i++){	
-		if(isSum)	name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/Anav_Prod_%d.root",i);
-		else		name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/Anav_Prod2_%d.root",i);
+		if(isSum)	name=Form("/scratch/xuq7/flow/pbsjoboutput/PP2010trackpt03to6/Anav_Prod_%d.root",i);
+		else		name=Form("/scratch/xuq7/flow/pbsjoboutput/PP2010trackpt03to6/Anav_Prod2_%d.root",i);
 		remove(name.Data());
-		LYZ *l = new LYZ(Form("%s/vndata_50k_%d.root",dir.Data(),i));
+		LYZ *l = new LYZ(Form("%s/pPbskimAnaTree_%d.root",dir.Data(),i));
 		cout<<"start "<<i<<" th job"<<endl;
 		l->beginJob();
 		if(isSum)	l->calcv("mergedV_Sum.root",0,-1);

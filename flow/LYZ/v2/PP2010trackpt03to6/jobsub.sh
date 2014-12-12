@@ -23,8 +23,8 @@ eval `scramv1 runtime -sh`
 
 cd /home/xuq7/HI/flow/LYZ/v2/PP2010trackpt03to6
 
-root -l -b dofirst.C
-#root -l -b dosecond.C
+#root -l -b dofirst.C
+root -l -b dosecond.C
 #root -l -b dosecondsub.C
 echo "Done!"
 
