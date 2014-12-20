@@ -44,7 +44,7 @@ typedef std::vector<trigger::TriggerObject> trigO;
 
 // ******* GLOBAL DECLARATIONS **********
 const int QCDpthatBins = 8;
-//const int QCDpthatBins = 9;
+//const int QCDpthatBins = 10;
 //const int QCDpthatBins = 1;
 const int dataFiles = 10292;
 int startfile ;
@@ -56,8 +56,11 @@ const double deta[]={-2.2, -1.2, -0.7, -0.3, 0.3, 0.7,1.2,2.2} ;
 const int netabin = sizeof(deta)/sizeof(Double_t)-1 ;
 const Double_t jetPtBin[]={3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
 const int nJetPtBin = sizeof(jetPtBin)/sizeof(Double_t)-1 ;
-const int pthatbin[10] = {15,30,50,80,120,170,220,280,370, 9999};
-const double wght[10] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 0};
+//const double wght[] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08, 0};
+//const int pthatbin[11] = {15,30,50,80,120,170,220,280,370,460, 9999};
+const int pthatbin[9] = {15,30,50,80,120,170,220,280, 9999};
+//const double wght[11] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08, 0};
+const double wght[9] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07,  0};
 
 //**********************************************************
 // Count the MC events to appropriately weight the pthat bins
@@ -192,15 +195,13 @@ void skimTreesPAsimple(int isMC=0)
   TString coll = "PPb";
   TString dataType;
     if(isMC){
-     startfile=0;
-     endfile=QCDpthatBins;
 	dataType="MC";
     }
 	else{
-    startfile=atoi(getenv("FIRST"));
-    endfile=atoi(getenv("LAST"));
     dataType="Data";
 	}
+    startfile=atoi(getenv("FIRST"));
+    endfile=atoi(getenv("LAST"));
    cout <<"analysis  "  << "  in file " << startfile << "  and " <<endfile<<endl ;
   int useWeight=1;
 
@@ -221,12 +222,17 @@ trigO *HLT_PAJet_NoJetID_v1_trigObject[6];
       TF1 * fVz = new TF1("fVx","[0]+[1]*x+[2]*TMath::Power(x,2)+[3]*TMath::Power(x,3)+[4]*TMath::Power(x,4)", -15., 15.);
 if(coll=="PPb"){
  //        fCen->SetParameters(8.68073e-03, 5.09356e+00, -1.33053e-02, 1.46904e-03, -6.99681e-05, 1.06721e-06, -5.21398e-09);
-         fCen->SetParameters(1.20916e-02, 5.02157e+00, -3.38300e-02, 1.87647e-03, -6.76442e-05, 9.08602e-07, -4.01536e-09);//parameterize on 05.03 after approval
-      fVz->SetParameters(1.60182e+00,1.08425e-03,-1.29156e-02,-7.24899e-06,2.80750e-05);
+ //        fCen->SetParameters(1.20916e-02, 5.02157e+00, -3.38300e-02, 1.87647e-03, -6.76442e-05, 9.08602e-07, -4.01536e-09);//parameterize on 05.03 after approval
+	  fCen->SetParameters(7.92204e-03, 4.52005e+00, 9.77340e-02, -5.00362e-03, 9.74735e-05, -8.93897e-07, 3.39375e-09);//parameterize on new official MC after QM on 12/03/14
+ //	fVz->SetParameters(1.60182e+00,1.08425e-03,-1.29156e-02,-7.24899e-06,2.80750e-05);
+	 fVz->SetParameters(1.47442e+00, -2.83100e-03, -1.19295e-02, 1.10312e-05, 2.64814e-05); //! new official MC >QM14
         }
        else if(coll=="PbP"){
-         fCen->SetParameters(1.05408e-02, 5.27477e+00, -8.03382e-02, 3.51669e-03, -8.85332e-05, 1.08917e-06, -4.90091e-09);
-         fVz->SetParameters(1.54398e+00, -8.56155e-03, -1.40026e-02, 4.01020e-05, 3.47683e-05); //latest parameterization
+   //   fCen->SetParameters(1.05408e-02, 5.27477e+00, -8.03382e-02, 3.51669e-03, -8.85332e-05, 1.08917e-06, -4.90091e-09);
+   fCen->SetParameters(2.89263e-02, 3.43643e+00, 5.62562e-02, -1.86555e-03, 1.97924e-06, 3.15416e-07, -1.97946e-09);//parameterize on new official MC after QM on 12/03/14
+   //	fCen->SetParameters(1.14851e-02, 5.31172e+00, -8.52366e-02, 3.00268e-03, -6.04667e-05, 6.24105e-07, -2.43580e-09);	
+   //   fVz->SetParameters(1.54398e+00, -8.56155e-03, -1.40026e-02, 4.01020e-05, 3.47683e-05); //latest parameterization
+	  fVz->SetParameters(1.49736e+00, -6.93060e-03, -1.26864e-02, 2.98693e-05, 2.89538e-05); //! new official MC after QM14 
    //     fVz->SetParameters(1.66731e+00,-2.43367e-03,-1.42488e-02,7.40147e-06,3.22477e-05);
   }
                     else{
@@ -237,7 +243,7 @@ if(coll=="PPb"){
      TFile *fcrel3 = NULL ;
      TH1D *C_rel= NULL ;
  
-     fcrel3 = TFile::Open(Form("/afs/cern.ch/work/y/ymao/public/RpA/Corrections/Casym_pPb_double_hcalbins_algo_%s_pt100_140_jet80_alphahigh_20_phicut250.root", algo.Data()), "readonly");
+     fcrel3 = TFile::Open(Form("/home/xuq7/HI/jetRpA/RpA/OldAna/Corrections/Casym_pPb_double_hcalbins_algo_%s_pt100_140_jet80_alphahigh_20_phicut250.root", algo.Data()), "readonly");
      if(fcrel3)  C_rel=(TH1D*)fcrel3->Get("C_asym"); 
 
   TFile *fin=NULL;
@@ -317,7 +323,7 @@ else{
 
   TFile *fout=NULL;
 
-   fout=new TFile(Form("/afs/cern.ch/work/q/qixu/private/RpA/skimTree/%s%s%sskimfile%d_%d.root",dataType.Data(),coll.Data(),algo.Data(),startfile,endfile),"recreate");
+   fout=new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/%s%s%sskimfile%d_%d.root",dataType.Data(),coll.Data(),algo.Data(),startfile,endfile),"recreate");
 
   TTree *nt = new TTree("nt","");
 
@@ -327,6 +333,7 @@ else{
   nt->Branch("jtpt",jtpt,"jtpt[nref]/F");
   nt->Branch("jteta",jteta,"jteta[nref]/F");
   nt->Branch("jtphi",jtphi,"jtphi[nref]/F");
+  nt->Branch("jtpu",jtpu,"jtpu[nref]/F");
 if(isMC)  {
 nt->Branch("subid",subid,"subid[nref]/I");
 nt->Branch("refpt",refpt,"refpt[nref]/F");
@@ -395,17 +402,8 @@ nt->Branch("geneta",geneta,"geneta[ngen]/F");
     }
  } 
 
-  int nFiles=0;
-  if(isMC){
-    endfile=QCDpthatBins ;
-   startfile=0 ; 
-    nFiles=QCDpthatBins;
-  }
-  else{
-//    nFiles=dataFiles;
-   if(endfile>0 && endfile<dataFiles ) nFiles = endfile ; 
-  else nFiles = dataFiles ; 
-  }
+   if(endfile>0 && endfile<dataFiles ); 
+  else endfile = dataFiles ; 
      float w = 1.;
 
     TTree *t;
@@ -414,7 +412,7 @@ nt->Branch("geneta",geneta,"geneta[ngen]/F");
     TTree *tTrk = NULL;
       TBranch* tweight;
 
-  for(int ifile = startfile; ifile<nFiles; ifile++){
+  for(int ifile = startfile; ifile<endfile; ifile++){
       if(isMC){ 
      if(( ifile<QCDpthatBins)){
         instr >> filename;
@@ -445,7 +443,6 @@ nt->Branch("geneta",geneta,"geneta[ngen]/F");
    t->SetBranchAddress("hiBin",&hiBin);
  if(!isMC)  t->SetBranchAddress("run",&run);
  if(isMC){ 
-      t->SetBranchAddress("weight",&weight);
       t->SetBranchAddress("pthat",&pthat);
       t->SetBranchAddress("refpt",refpt);
       t->SetBranchAddress("ngen",&ngen);
@@ -464,14 +461,15 @@ nt->Branch("geneta",geneta,"geneta[ngen]/F");
     t->SetBranchAddress("jtphi",jtphi);
       t->SetBranchAddress("jtpu",jtpu);
       t->SetBranchAddress("jty",jty);
-
+if(!isMC){
+      t->SetBranchAddress("weight",&weight);
        t->SetBranchAddress("pVertexFilterCutGplus",&pVertexFilterCutGplus);
        t->SetBranchAddress("pBeamScrapingFilter",&pBeamScrapingFilter);
        t->SetBranchAddress("pprimaryvertexFilter",&pprimaryvertexFilter);
        t->SetBranchAddress("phfPosFilter1",&phfPosFilter1);
        t->SetBranchAddress("phfNegFilter1",&phfNegFilter1);
        t->SetBranchAddress("pHBHENoiseFilter",&pHBHENoiseFilter);
-      
+      }
     t->SetBranchAddress("chargedN",chargedN);
     t->SetBranchAddress("photonN",photonN);
     t->SetBranchAddress("neutralN",neutralN);
@@ -484,7 +482,7 @@ nt->Branch("geneta",geneta,"geneta[ngen]/F");
     t->SetBranchAddress("neutralSum",neutralSum);
     t->SetBranchAddress("muSum",muSum);
     t->SetBranchAddress("eSum",eSum);
-    
+    if(!isMC){
       t->SetBranchAddress("HLT_PAZeroBiasPixel_SingleTrack_v1",&HLT_PAZeroBiasPixel_SingleTrack_v1);
       t->SetBranchAddress("HLT_PAJet20_NoJetID_v1",&HLT_PAJet20_NoJetID_v1);
       t->SetBranchAddress("HLT_PAJet40_NoJetID_v1",&HLT_PAJet40_NoJetID_v1);
@@ -508,6 +506,7 @@ nt->Branch("geneta",geneta,"geneta[ngen]/F");
       t->SetBranchAddress("hiHFplusEta4", &hiHFplusEta4);
       t->SetBranchAddress("hiHFminusEta4", &hiHFminusEta4);
 	 tweight = t->GetBranch("weight");
+	}
       if(isMC){
         if(!tweight){
          if(ifile==0){
@@ -516,6 +515,7 @@ nt->Branch("geneta",geneta,"geneta[ngen]/F");
          }
         }
 		if(!useWeight && ifile==0){
+
          MCentr = countMCevents(infile, isMC);
          for(int i=0; i<QCDpthatBins; i++){
          cout << "MCentr["<<i<<"]: " << *(MCentr+i) << endl;

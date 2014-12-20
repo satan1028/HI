@@ -21,7 +21,7 @@ const TString JetIDName[]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoS
 const int nJetID = sizeof(JetIDName)/sizeof(TString);
 
 TString algo="akPu3PF";//"akPu3PF"
-TString coll = "PbP";
+TString coll = "PPb";
 
 class hist_class{
 public:
@@ -131,7 +131,7 @@ void hist_class::Write()
   TString dataType;
   TString out_name;
   dataType = "MC";
-  out_name=Form("%s%s%s_useskim.root",dataType.Data(),coll.Data(),algo.Data());
+  out_name=Form("%s%s%s_useskimMLast2pthat.root",dataType.Data(),coll.Data(),algo.Data());
 
   TFile *out_file = new TFile(Form("/scratch/xuq7/RpA/NewMC/%s",out_name.Data()),"RECREATE");  
     refjetpt->Write();
@@ -176,7 +176,7 @@ void PPbanalyzeRpAskimTree()
 
   cout<<"Analyzing MC!"<<endl;
 
-  TFile *f = new TFile("/store/user/qixu/jetRpA/skimTree/MCPbPakPu3PFskimfile0_10.root");
+  TFile *f = new TFile(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimfile0_8.root",coll.Data()));
   
   TTree *nt = (TTree*)f->Get("nt");
 

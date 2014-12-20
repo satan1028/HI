@@ -1,11 +1,11 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 void DrawQuality(){
-	TString dir1 = "PFcandpt01to10";
-	TString dir2 = "tracklcpt01to10";
-	TString mult = "M260220";
-	TH1D* hpt_PFon = plot(dir1,mult,"pt",1,20);
-	TH1D* heta_PFon = plot(dir1,mult,"eta",1,20);
-	TH1D* hphi_PFon = plot(dir1,mult,"phi",1,20);
+	TString dir1 = "PP2010trackpt03to6";
+	TString dir2 = "tracknormcpt03to6";
+	TString mult = "M150120";
+	TH1D* hpt_PFon = plot(dir1,"","pt",1,20);
+	TH1D* heta_PFon = plot(dir1,"","eta",1,20);
+	TH1D* hphi_PFon = plot(dir1,"","phi",1,20);
         TH1D* hpt_t03to6 = plot(dir2,mult,"pt",2,20);
         TH1D* heta_t03to6 = plot(dir2,mult,"eta",2,20);
         TH1D* hphi_t03to6 = plot(dir2,mult,"phi",2,20);
@@ -68,6 +68,10 @@ TH1D* plot(TString dir, TString Tmult, TString var,int color, int marker){
 	if(dir.Contains("PF"))	pf="pf";
 	else pf="";
 	int xbin=0;
+	if(Tmult==""){
+	TFile *fhisto = TFile::Open(Form("%s/histomerged.root",dir.Data()));
+	}
+	else
 	TFile *fhisto = TFile::Open(Form("%s/%s/histomerged.root",dir.Data(),Tmult.Data()));
 	TH1D* histo = (TH1D*)fhisto->Get(Form("D_%d/h%s%s",xbin,pf.Data(),var.Data()));
 	int rebin=histo->GetNbinsX()/100;

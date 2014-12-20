@@ -10,19 +10,21 @@ double function(double *v, double *par){
 
 void gammafit(){
 	gStyle->SetOptFit(kTRUE);
-	double xmin=2;
-	double xmax=50;
+	double xmin=5;
+	double xmax=60;
 	ofstream fout("fitresultMC.dat");
 	TFile *f = TFile::Open("PythiaMBhistos.root");
 	TH1D* hHFp4 = (TH1D*)f->Get("hHFplus4");
 	TH1D* hHFp = (TH1D*)f->Get("hHFplus");
 	TH1D* hHF = (TH1D*)f->Get("hHF");
+	TH1D* hHF4 = (TH1D*)f->Get("hHF4");
 	hHFp4->Scale(1.0/hHFp4->Integral("width"));
 	hHFp->Scale(1.0/hHFp->Integral("width"));
 	hHF->Scale(1.0/hHF->Integral("width"));
+	hHF4->Scale(1.0/hHF4->Integral("width"));
 	hHFp4->GetXaxis()->SetRangeUser(0,50);
 	hHFp->GetXaxis()->SetRangeUser(0,50);
-	hHF->GetXaxis()->SetRangeUser(0,50);
+	hHF->GetXaxis()->SetRangeUser(0,100);
 	TCanvas *c1= new TCanvas;
 	c1->SetLogy();
 	TF1 *g = new TF1("g",function,0,100,2);
@@ -31,8 +33,8 @@ void gammafit(){
 	NBD_fun->SetParameter(1,0.5);
 	NBD_fun->SetParameter(2,1.0);
 	g->SetParameters(0.8,2);
-//	hHFp->Fit("NBD_fun","","",xmin,xmax);
-	hHFp4->Fit("g","","",xmin,xmax);
+	hHF4->Fit("g","","",xmin,xmax);
+//	hHFp->Fit("g","","",xmin,xmax);
 //	hHFp4->Fit("g","","",xmin,xmax);
 //	g->Draw("same");
 	TLatex *tl = new TLatex(0.2,0.6,Form("fit range %.1f to %.1f",xmin,xmax));

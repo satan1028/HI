@@ -21,11 +21,11 @@ cd /home/xuq7/HI/CMSSW_5_3_20/src/
 #cmsenv
 eval `scramv1 runtime -sh`
 
-cd /home/xuq7/HI/jetRpA/RpA/NewMC
+cd /home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck
 #  echo "First = $FIRST and last file = $LAST"   
 #.L analyzeTreesPA.C+
 #analyzeTreesPA(1, 0, 0, 1, 1, 1, 0, -1, false, 1)
-root -b > submit/AnaTree.log <<EOF
+root -b > ../submit/AnaTree.log <<EOF
 .x rootlogin.C
 .L skimTreesPAsimple.C+
 skimTreesPAsimple(1)

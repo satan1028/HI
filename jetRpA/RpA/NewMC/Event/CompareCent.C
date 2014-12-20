@@ -1,37 +1,30 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
-#include "/home/xuq7/HI/jetRpA/fromLinux/TreeAna/produceandcheck/file.h"
+#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 
 void CompareCent(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
-TString coll="PbP";
+TString coll="PPb";
 bool Save=kTRUE;
-TFile *fNMCPPb = TFile::Open("/scratch/xuq7/RpA/NewMC/MCPPbakPu3PF_useskim.root");
-TFile *fNMCPbP = TFile::Open("/scratch/xuq7/RpA/NewMC/MCPbPakPu3PF_useskim.root");
 TF1 * fCen = new TF1("fCen","[0]*exp([1]+[2]*x+[3]*x*x+[4]*x*x*x+[5]*x*x*x*x+[6]*x*x*x*x*x)", 0., 100.);
-/*fCen->FixParameter(0,1.20916e-02);
-fCen->FixParameter(1,5.02157e+00);
-fCen->FixParameter(2, -3.38300e-02);
-fCen->FixParameter(3, 1.87647e-03);
-fCen->FixParameter(4, -6.76442e-05);
-fCen->FixParameter(5, 9.08602e-07);
-fCen->FixParameter(6,-4.01536e-09); //YX's */
 if(coll=="PPb"){
-fCen->SetParameters(1.20916e-02, 5.02157e+00, -3.38300e-02, 1.87647e-03, -6.76442e-05, 9.08602e-07, -4.01536e-09);//parameterize on 05.03 after approval
+//fCen->SetParameters(1.20916e-02, 5.02157e+00, -3.38300e-02, 1.87647e-03, -6.76442e-05, 9.08602e-07, -4.01536e-09);//parameterize on 05.03 after approval
+fCen->SetParameters(7.92204e-03, 4.52005e+00, 9.77340e-02, -5.00362e-03, 9.74735e-05, -8.93897e-07, 3.39375e-09);//parameterize on new official MC after QM on 12/03/14
 TH1F* histodata=(TH1F*)fDataPPb->Get("Cent");
 TH1F* histo1=(TH1F*)fMCPPb->Get("Cent");
-TH1F* histo2=(TH1F*)fNMCPPb->Get("Cent");
-//TH1F* histo2=(TH1F*)fMCPPb->Get("CentW");
+//TH1F* histo2=(TH1F*)fNMCPPb->Get("Cent");
+TH1F* histo2=(TH1F*)fMCPPb->Get("CentW");
 TString data="Pb going positive side";
 }
 //fCen->SetParameters(8.68073e-03, 5.09356e+00, -1.33053e-02, 1.46904e-03, -6.99681e-05, 1.06721e-06, -5.21398e-09); //original
 else if(coll=="PbP"){
 //fCen->SetParameters(1.05408e-02, 5.27477e+00, -8.03382e-02, 3.51669e-03, -8.85332e-05, 1.08917e-06, -4.90091e-09);
-fCen->SetParameters(1.14851e-02, 5.31172e+00, -8.52366e-02, 3.00268e-03, -6.04667e-05, 6.24105e-07, -2.43580e-09);
+//fCen->SetParameters(1.14851e-02, 5.31172e+00, -8.52366e-02, 3.00268e-03, -6.04667e-05, 6.24105e-07, -2.43580e-09);
+fCen->SetParameters(2.89263e-02, 3.43643e+00, 5.62562e-02, -1.86555e-03, 1.97924e-06, 3.15416e-07, -1.97946e-09);//parameterize on new official MC after QM on 12/03/14
 TH1F* histodata=(TH1F*)fDataPbP->Get("Cent");
 TH1F* histo1=(TH1F*)fMCPbP->Get("Cent");
-TH1F* histo2=(TH1F*)fNMCPbP->Get("Cent");
-//TH1F* histo2=(TH1F*)fNMCPPb->Get("Cent");
+//TH1F* histo2=(TH1F*)fNMCPbP->Get("Cent");
+TH1F* histo2=(TH1F*)fMCPbP->Get("CentW");
 TString data="Proton going positive side";
 }
 histo1->SetName(Form("%sOldMC_unweighted",coll.Data()));
@@ -46,12 +39,12 @@ histo1->SetMarkerStyle(24);
 histo1->SetMarkerSize(1.2);
 histo1->SetMarkerColor(2);
 histo1->SetLineColor(2);
-histo2->SetMarkerStyle(29);
-histo2->SetMarkerSize(1.2);
-//histo2->SetFillStyle(3004);
-//histo2->SetFillColor(2);
-histo2->SetLineColor(4);
-histo2->SetMarkerColor(4);
+histo2->SetMarkerStyle(0);
+histo2->SetMarkerSize(0);
+histo2->SetFillStyle(3004);
+histo2->SetFillColor(2);
+histo2->SetLineColor(2);
+//histo2->SetMarkerColor(4);
 //histo2->SetMarkerColor(2);
 histodata->SetMarkerStyle(20);
 histodata->SetMarkerSize(1.2);
@@ -72,12 +65,12 @@ hFrame->GetXaxis()->SetTitle("Centrality");
 hFrame->GetYaxis()->SetTitle("Event Fraction");
 hFrame->GetXaxis()->SetLimits(0,100);
 //hFrame->GetXaxis()->SetLimits(-3,3);
-hFrame->GetYaxis()->SetRangeUser(0,5.2e-2);
+hFrame->GetYaxis()->SetRangeUser(0,9.2e-2);
 c1->cd(1);
 hFrame->DrawCopy();
 histodata->Draw("same");
 histo1->Draw("same");
-histo2->Draw("same");
+histo2->Draw("HIST same");
 TLegend *leg1=new TLegend(0.20,0.80,0.85,0.92);
 TLegend *leg2=new TLegend(0.20,0.80,0.85,0.92);
 leg1->SetBorderSize(0);
@@ -87,7 +80,8 @@ leg2->SetFillColor(0);
 leg1->SetTextSize(0.04);
 leg2->SetTextSize(0.04);
 leg1->AddEntry(histo1,"Old MC Before Centrality weighting","lp");
-leg1->AddEntry(histo2,"New MC Before Centrality weighting","lfp");
+//leg1->AddEntry(histo2,"New MC Before Centrality weighting","lfp");
+leg1->AddEntry(histo2,"New MC Before Centrality weighting Last 2 pthat","lfp");
 leg1->AddEntry(histodata,data,"lp");
 leg1->Draw("same");
 TLatex *T1=new TLatex(0.25,0.92,"");
@@ -104,7 +98,7 @@ hFrame->GetYaxis()->SetRangeUser(0,2);
 hFrame->DrawCopy();
 TH1F* ratio = (TH1F*)histodata->Clone(Form("%sratio",coll.Data()));
 //ratio->SetName("ratio");
-ratio->Divide(histo2);
+ratio->Divide(histo1);
 /*ratio->Fit(fCen);
 cout<<fCen->GetNDF()<<endl;
 cout<<fCen->GetChisquare()<<endl;

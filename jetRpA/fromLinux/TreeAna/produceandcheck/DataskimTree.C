@@ -69,7 +69,7 @@ void DataskimTree(){
 
   cout<<"Analyzing Data!"<<endl;
 
-  TFile *f = new TFile(Form("/home/xuq/Documents/HI/RpA/output/skimTree/DATA%s%sskimfile.root",coll.Data(),algo.Data()));
+  TFile *f = new TFile(Form("/home/xuq7/Documents/HI/RpA/output/skimTree/DATA%s%sskimfile.root",coll.Data(),algo.Data()));
       TFile *fcrel3 = NULL ;
      TH1D *C_rel= NULL ;
 
@@ -191,7 +191,7 @@ for(int j4i = 0; j4i < nref; j4i++){
   dataType = "DATA";
   out_name=Form("%s%s%sskimUniv.root",dataType.Data(),coll.Data(),algo.Data());
 
-  TFile *out_file = new TFile(Form("/home/xuq/Documents/HI/RpA/output/TreeAna/%s",out_name.Data()),"RECREATE");  
+  TFile *out_file = new TFile(Form("/scratch/xuq7/RpA/fromLinux/TreeAna/%s",out_name.Data()),"RECREATE");  
 
 	
     jetpt0->Write();

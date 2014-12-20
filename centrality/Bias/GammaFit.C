@@ -14,9 +14,10 @@
 #include <TMath.h>
 #include <TTree.h>
 #include <TGraphErrors.h>
-#include "sort.h"
+#include "/home/xuq7/HI/centrality/NBD/sort.h"
 
 using namespace std;
+const int maxNpart = 40;
 class GammaF{
 private:	
 	double thetamin, thetamax, thetastep;
@@ -101,9 +102,8 @@ void GammaF::fit(){
 	int xbinmin=(int)((xmin[0]-Minx)/binsize);
 	int xbinmax=(int)((xmax[0]-Minx)/binsize);
 	TH1D *histo_exp = new TH1D("histo_exp","Simulated distribution;Multiplicity;# of events",binnum,Minx,Maxx);
-        TF1 *gammafun = new TF1("gammafun","TMath::GammaDist(x,[0],0,[1])",0,100);
+        TF1 *gammafun[maxNpart];
 //      TF1 *gaus = new TF1("gaus","[0]*TMath::Gaus(x,[1]-[2],[3])",0,100);
-//              gamma->SetParameters(k,theta);
 	int ibin;
 	TH1D *histo_obs_norm = (TH1D*)histo_obs->Clone();
 	histo_obs_norm->Scale(1/histo_obs->Integral(xbinmin,xbinmax));
@@ -122,7 +122,15 @@ void GammaF::fit(){
 	//ofstream fout("chis3.txt");
 	for(theta=thetamin;theta<=thetamax;theta+=thetastep){
 		for(k=kmin;k<=kmax;k+=kstep){
-        		gammafun->SetParameters(k,theta);
+		        for(int iNpart=0;iNpart<maxNpart;iNpart++){
+				gammafun[iNpart] = new TF1("gammafun","TMath::GammaDist(x,[0],0,[1])",0,100);
+   				double k_=k0[0]+k*(iNpart-2);
+        			double theta_=theta0[0]+theta*TMath::Log(iNpart-1);
+        			gammafun[iNpart]->SetParameter(0,k_);   //[1]: k value
+        			gammafun[iNpart]->SetParameter(1,theta_);       //[2]: theta value
+        		}
+
+        	//	gammafun->SetParameters(k,theta);
 		//	if(npar%50==0)	cout<<"Have run "<<npar<<" parameter sets"<<endl; 
 			TTree *t = (TTree*)fGlauber->Get("nt_p_Pb");
 
@@ -142,15 +150,11 @@ void GammaF::fit(){
 			for (Ev=0; Ev<Nevent; Ev++){
 				//if(Ev%10000==0)	cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
 				t->GetEntry(Ev);
-                	        double k_=k0[0]+k*(Npart-2);
-                        	double theta_=theta0[0]+theta*TMath::Log(Npart-1);
-        	               // gammafun->SetParameter(0,k_);   //[1]: k value
-                	       // gammafun->SetParameter(1,theta_);       //[2]: theta value
 				Para = 0; //make sure that Para doesn't accuthetalate through loops
 				for(Bino=0; Bino<Npart; Bino++){
 				//	Bi_Para = unr.SampleDiscr();
 				//	Bi_Para =gammafun->Eval(10);
-					Bi_Para = gammafun->GetRandom();
+					Bi_Para = gammafun[(int)Npart]->GetRandom();
 					Para += Bi_Para;
 				}
 				histo_exp->Fill(Para);
@@ -236,8 +240,15 @@ void GammaF::calcvar(){
         double Minx = histo_obs->GetXaxis()->GetXmin();
         double Maxx = histo_obs->GetXaxis()->GetXmax();
 	TH1D *histo_exp = new TH1D("histo_exp","Simulated distribution;Multiplicity;# of events",binnum,Minx,Maxx);
-        TF1 *gammafun = new TF1("gammafun","TMath::GammaDist(x,[0],0,[1])",0,100);
-	gammafun->SetParameters(kbest[0],thetabest[0]);
+        TF1 *gammafun[maxNpart];
+        //TF1 *gammafun = new TF1("gammafun","TMath::GammaDist(x,[0],0,[1])",0,100);
+        for(int iNpart=0;iNpart<maxNpart;iNpart++){
+	        gammafun[iNpart] = new TF1("gammafun","TMath::GammaDist(x,[0],0,[1])",0,100);
+                double k_=k0[0]+kbest[0]*(iNpart-2);
+        	double theta_=theta0[0]+thetabest[0]*TMath::Log(iNpart-1);
+                gammafun[iNpart]->SetParameter(0,k_);   //[1]: k value
+                gammafun[iNpart]->SetParameter(1,theta_);       //[2]: theta value
+        }
 	TTree *t = (TTree*) fGlauber ->Get("nt_p_Pb");
 	Float_t Ncoll, Npart, B;
 	Long_t Nevent;
@@ -260,20 +271,16 @@ void GammaF::calcvar(){
 	for(Ev=0; Ev<Nevent; Ev++){
 		//if(Ev%1000==0)	 cout<<"Have run "<<Ev<<" events"<<endl;
 		t->GetEntry(Ev);
-                double k_  = k0[0] + kbest[0] * (Npart - 2);
-                double theta_ = theta0[0] + thetabest[0] * TMath::Log(Npart-1);
-       		//gammafun->SetParameter(0,k_);
-       		//gammafun->SetParameter(1,theta_);
 		Para = 0; //make sure that Para doesn't accuthetalate through loops
-		for(Bino=0; Bino<Ncoll; Bino++){
+		for(Bino=0; Bino<Npart; Bino++){
 		//	Bi_Para = unr.SampleDiscr();
-			Bi_Para = gammafun->GetRandom();
+			Bi_Para = gammafun[(int)Npart]->GetRandom();
 			Para += Bi_Para;
 		}
 		histo_exp->Fill(Para);
 		GlauEvent->Fill();
 	}
-        
+        GlauEvent->Write();
 	GlauEvent->SetBranchAddress("Ncoll",&Ncoll);
         GlauEvent->SetBranchAddress("Npart",&Npart);
         GlauEvent->SetBranchAddress("B",&B);
@@ -364,5 +371,5 @@ void GammaF::calcvar(){
                 hNpart[N]->Scale(1.0/TotalEvent);
 		Npartdis->Add(hNpart[N]);
 		treefile->Close();
-		remove(treestr);
+		//remove(treestr);
 }
