@@ -46,10 +46,22 @@ void Draw3modelYvsET(){
 	gammafun->SetLineColor(1);
 	gammafunevt->SetLineColor(2);
 	gammafunnucl->SetLineColor(4);
+	TLegend *leg = new TLegend(0.4,0.55,0.7,0.85);
+	leg->AddEntry(gammafun,"gamma function for total","lp");
+	leg->AddEntry(gammafunevt,"gamma function for proton","lp");
+	leg->AddEntry(gammafunnucl,"gamma function for nucleus","lp");
+	leg->SetBorderSize(0);
+	leg->SetFillColor(0);
+	leg->SetTextSize(0.04);
 	gammafun->GetYaxis()->SetRangeUser(0,0.5);
+	gammafun->SetTitle("gamma function");
+	gammafun->GetXaxis()->SetTitle("x");
+	gammafun->GetYaxis()->SetTitle("Probability");
 	gammafun->Draw();	
 	gammafunevt->Draw("same");	
 	gammafunnucl->Draw("same");	
+	leg->Draw("same");
+
 
 	TH2D *UCM = new TH2D("UCM","UCM",100,0,100,200,0,40);
 	TH2D *PCM = new TH2D("PCM","PCM",100,0,100,200,0,40);
