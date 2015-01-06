@@ -52,6 +52,7 @@ public:
 		k0.ResizeTo(1);theta0.ResizeTo(1);
 	     	fin>>k0[0]>>k0err;
         	fin>>theta0[0]>>theta0err;
+        	//k0[0]=1.39;theta0[0]=3.41;
 	        thetabest.ResizeTo(1);  kbest.ResizeTo(1);
 	        chis.ResizeTo(1);  Ndf.ResizeTo(1);
 	};
@@ -150,13 +151,13 @@ void GammaF::fit(){
 			for (Ev=0; Ev<Nevent; Ev++){
 				//if(Ev%10000==0)	cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
 				t->GetEntry(Ev);
-				Para = 0; //make sure that Para doesn't accuthetalate through loops
-				for(Bino=0; Bino<Npart; Bino++){
+				//Para = 0; //make sure that Para doesn't accuthetalate through loops
+				//for(Bino=0; Bino<Npart; Bino++){
 				//	Bi_Para = unr.SampleDiscr();
 				//	Bi_Para =gammafun->Eval(10);
-					Bi_Para = gammafun[(int)Npart]->GetRandom();
-					Para += Bi_Para;
-				}
+				Para = gammafun[(int)Npart]->GetRandom();
+				//	Para += Bi_Para;
+				//}
 				histo_exp->Fill(Para);
 			}
 
@@ -271,12 +272,12 @@ void GammaF::calcvar(){
 	for(Ev=0; Ev<Nevent; Ev++){
 		//if(Ev%1000==0)	 cout<<"Have run "<<Ev<<" events"<<endl;
 		t->GetEntry(Ev);
-		Para = 0; //make sure that Para doesn't accuthetalate through loops
-		for(Bino=0; Bino<Npart; Bino++){
+		//Para = 0; //make sure that Para doesn't accuthetalate through loops
+		//for(Bino=0; Bino<Npart; Bino++){
 		//	Bi_Para = unr.SampleDiscr();
-			Bi_Para = gammafun[(int)Npart]->GetRandom();
-			Para += Bi_Para;
-		}
+		Para = gammafun[(int)Npart]->GetRandom();
+		//Para += Bi_Para;
+		//}
 		histo_exp->Fill(Para);
 		GlauEvent->Fill();
 	}
@@ -371,5 +372,5 @@ void GammaF::calcvar(){
                 hNpart[N]->Scale(1.0/TotalEvent);
 		Npartdis->Add(hNpart[N]);
 		treefile->Close();
-		//remove(treestr);
+		remove(treestr);
 }

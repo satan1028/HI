@@ -1,6 +1,7 @@
 #include "parameter.h"
 #include "par.h"
 #include <vector>
+#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 const int maxNpart = 40;
 void Drawfit(){
 	int sth=0, Gth=0;
@@ -61,15 +62,14 @@ void Drawfit(){
 	Float_t Ncoll, Npart;
 	t->SetBranchAddress("Ncoll",&Ncoll);
 	t->SetBranchAddress("Npart",&Npart);
-
-	for(Ev=0; Ev<Nevent; Ev++){
+	for(Ev=0; Ev<100000; Ev++){
 		if(Ev%100000==0)	 cout<<"Have run "<<Ev<<" events"<<endl;
 		t->GetEntry(Ev);
-		Para = 0; //make sure that Para doesn't accuthetalate through loops
-		for(Bino=0; Bino<Npart; Bino++){
-                         Bi_Para = gammafun[(int)Npart]->GetRandom();
-                         Para += Bi_Para;
-		}	
+		//Para = 0; //make sure that Para doesn't accumulate through loops
+		//for(Bino=0; Bino<Npart; Bino++){
+                Para = gammafun[(int)Npart]->GetRandom();
+                //         Para += Bi_Para;
+		//}	
 		histo_exp->Fill(Para);
 	}
 	Double_t SumEvent, scale;
@@ -79,13 +79,17 @@ void Drawfit(){
 	histo_exp_norm->Scale(scale);
 
         gStyle->SetOptStat(kFALSE);
-	TCanvas *c1 = new TCanvas();
-	c1->SetLogy();
+	c1 = new TCanvas("c1","",500,800);
+	makeMultiPanelCanvas(c1,1,2,-0.1,0.04,0.12,0.12,0.01);
+	c1->cd(1)->SetLogy();
 
-        histo_obs_norm->GetXaxis()->SetRangeUser(Minx,Maxx);
+        histo_obs_norm->GetXaxis()->SetRangeUser(Minx,100);
         histo_obs_norm->SetMaximum(1.0);
-        histo_obs_norm->GetXaxis()->SetTitle("HF #Sigma E_{T} |#eta|>4");
+        histo_obs_norm->GetXaxis()->SetTitle("");
         histo_obs_norm->GetYaxis()->SetTitle("Event Fraction");
+        histo_obs_norm->GetYaxis()->SetTitleSize(0.06);
+        histo_obs_norm->GetYaxis()->SetLabelSize(0.04);
+        histo_obs_norm->GetYaxis()->CenterTitle();
         histo_obs_norm->SetTitle("");
 
 	histo_obs_norm->SetLineColor(1);
@@ -94,7 +98,7 @@ void Drawfit(){
         histo_obs_norm->SetMarkerSize(1.5);
 	histo_obs_norm->Draw("P");
 
-        TLegend *leg = new TLegend(0.56, 0.7, 0.8, 0.9);
+        TLegend *leg = new TLegend(0.46, 0.7, 0.7, 0.9);
         leg->SetFillColor(10);
         leg->SetFillStyle(0);
         leg->SetBorderSize(0.035);
@@ -103,8 +107,8 @@ void Drawfit(){
         leg->AddEntry(histo_obs_norm,"CMS pPb real data","p");
         leg->AddEntry(histo_exp_norm,Form("Gamma Fit, #theta=%.3f, k=%.3f",(*thetabest)[0],(*kbest)[0]),"l");
 	leg->Draw("same");
-        TLatex *tex1= new TLatex(0.2,0.8,Form("#chi^{2}/NDF=%.1f/%.f",(*chis)[0],(*Ndf)[0]));
-        TLatex *tex2= new TLatex(0.6,0.65,Form("fit range %.f<x<%.f",(*xmin)[0],(*xmax)[0]));
+        TLatex *tex1= new TLatex(0.7,0.55,Form("#chi^{2}/NDF=%.1f/%.f",(*chis)[0],(*Ndf)[0]));
+        TLatex *tex2= new TLatex(0.7,0.65,Form("fit range %.f<x<%.f",(*xmin)[0],(*xmax)[0]));
 	tex1->SetNDC();
 	tex2->SetNDC();
         tex1->SetTextColor(1);
@@ -122,5 +126,24 @@ void Drawfit(){
                 h2_Clone->GetXaxis()->SetRangeUser((*kpoint)[i],(*kpoint)[i+1]);
 		h2_Clone->Draw("same");
                 }
+	gPad->RedrawAxis();
+	c1->cd(2);
+	
+	TH1D* ratio = (TH1D*)histo_obs_norm->Clone();
+	ratio->Divide(histo_exp_norm);
+	ratio->GetYaxis()->SetTitle("Data/fit");
+	ratio->GetXaxis()->SetTitle("HF #Sigma E_{T} |#eta|>4");
+	ratio->GetYaxis()->CenterTitle();
+	ratio->GetXaxis()->CenterTitle();
+	ratio->GetXaxis()->SetTitleSize(0.06);
+	ratio->GetXaxis()->SetLabelSize(0.04);
+	ratio->GetYaxis()->SetRangeUser(0,1.95);
+	ratio->SetMarkerSize(1);
+	ratio->SetMarkerStyle(20);
+	ratio->SetLineColor(1);
+	ratio->Draw("P");
+	TLine *l = new TLine(0,1,100,1);
+	l->SetLineStyle(2);
+	l->Draw("same");
 	c1->SaveAs(Form("%sfit.png",dirname.Data()));	
 }

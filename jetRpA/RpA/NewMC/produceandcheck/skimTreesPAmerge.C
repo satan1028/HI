@@ -43,22 +43,21 @@ typedef std::vector<trigger::TriggerObject> trigO;
 //TStopwatch timer;
 
 // ******* GLOBAL DECLARATIONS **********
-//const int QCDpthatBins = 8;
-const int QCDpthatBins = 9;
+const int QCDpthatBins = 10;
 //const int QCDpthatBins = 1;
 const int dataFiles = 10292;
 int startfile ;
 int endfile ;
 int combinationMethod ;
 
-TString coll = "PP";
 const TString algo = "akPu3PF" ;
-const double deta[]={-2.0, -1.5, -1.0, -0.5, 0.5, 1.0, 1.5, 2.0} ;
+const double deta[]={-2.2, -1.2, -0.7, -0.3, 0.3, 0.7,1.2,2.2} ;
 const int netabin = sizeof(deta)/sizeof(Double_t)-1 ;
-const double jetPtBin[]={ 3, 4, 5, 7, 9, 12, 15, 18,21,24,28,32,37,43,49,56,64,74,84,97,114,133,153,174,196,220,245,272,300,330,362,395,430,468,507,548,592,638,686,1000};
+const Double_t jetPtBin[]={3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
 const int nJetPtBin = sizeof(jetPtBin)/sizeof(Double_t)-1 ;
-const int pthatbin[10] = {15,30,50,80,120,170,220,280,370, 9999};
-const double wght[10] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 0};
+//const double wght[] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08, 0};
+const int pthatbin[11] = {15,30,50,80,120,170,220,280,370,460, 9999};
+const double wght[11] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08, 0};
 
 //**********************************************************
 // Count the MC events to appropriately weight the pthat bins
@@ -99,7 +98,27 @@ int *countMCevents(std::string infile, int isMC){
 //[0] = MB, [1] = Jet20, [2] = Jet40, [3] = Jet60, [4] = Jet80, [5] = Jet100
 double trigComb(bool *trg, double *pscl, double pt, int combinationMethod){
   double weight=0;
- if(combinationMethod==1){
+//old method used by HIN-12-003
+/*  //new method can be used for 5 triggers: [0] = Jet20, [4]= Jet100
+    if(trg[0] && !trg[1] && !trg[2] && !trg[3] && !trg[4]) weight = 1./(1./pscl[0]);
+    else if(trg[1] && !trg[2] && !trg[3] && !trg[4]) weight = 1.;
+    else if(trg[2] && !trg[3] && !trg[4]) weight = 1.;
+    else if(trg[3] && !trg[4]) weight = 1.;
+    else weight =1. ;
+  //  if(trg[4]) weight = 1.;
+
+    if(trg[0] && !trg[1] && !trg[2] ) weight = 1./(1./pscl[0]);
+    if(trg[1] && !trg[2]) weight = 1./(1./pscl[1]);
+    else weight = 1. ; ///(1./pscl[2]) ;
+
+  //HIN-12-017 (charged part RpA) combination method - solid but loses events that slip through the pt bins
+    if(trg[0] && pt>40 && pt<60) weight = pscl[0];
+    if(trg[1] && pt>60 && pt<75) weight = pscl[1];
+    if(trg[2] && pt>75 && pt<95) weight = pscl[2];
+    if(trg[3] && pt>95 && pt<120) weight = pscl[3];
+    if(trg[4] && pt>120) weight = 1.;
+*/
+ if(combinationMethod==1){ 
    //Final CMS Methodology - jet-by-jet weighting method for CMS trigger-type setup.
         if(trg[4] && pt>=100) weight = 1; //pscl[4];
         if(trg[3] && pt>=80 && pt<100) weight = pscl[3];
@@ -118,19 +137,68 @@ double trigComb(bool *trg, double *pscl, double pt, int combinationMethod){
   return weight;
 }
 
+//**********************************************************
+// "get" the trigger prescales by counting trigger overlap
+//**********************************************************
+
+double* getPscls(std::string infile, int nFiles){
+  
+  TChain *dataCH = NULL;
+    dataCH = new TChain(Form("%sJetAnalyzer/t", algo.Data()));
+  TChain *dataCH2 = new TChain("hltanalysis/HltTree");
+  std::ifstream instr(infile.c_str(), std::ifstream::in);
+  std::string filename;
+  for(int ifile=0; ifile<nFiles; ifile++){
+    instr >> filename;
+    dataCH->Add(filename.c_str());
+    dataCH2->Add(filename.c_str());
+  }
+  dataCH->AddFriend(dataCH2, "hltanalysis/HltTree");
+  double ov1, ov2, ov3, ov4;
+  ov1 = dataCH->GetEntries("HLT_PAJet20_NoJetID_v1 && HLT_PAJet80_NoJetID_v1");
+  ov2 = dataCH->GetEntries("HLT_PAJet40_NoJetID_v1 && HLT_PAJet80_NoJetID_v1");
+  ov3 = dataCH->GetEntries("HLT_PAJet60_NoJetID_v1 && HLT_PAJet80_NoJetID_v1");
+  ov4 = dataCH->GetEntries("HLT_PAJet80_NoJetID_v1");
+  double *pscls = new double[4];
+  pscls[0] = ov4/ov1;
+  pscls[1] = ov4/ov2;
+  pscls[2] = ov4/ov3;
+  pscls[3] = 1.;
+  return pscls;
+}
+
+// *************************************************************
+float triggerMatch(int trgObjSize, float* trigPhi, float* trigEta, float *trigPt, float jtphi, float jteta, float jtpt){
+  float triggerPt=0;
+  float closestMatch=999999.;
+  
+  for(int iObj=0; iObj<trgObjSize; iObj++){
+    if(abs(trigPhi[iObj]-jtphi)<0.2 && abs(trigEta[iObj]-jteta)<0.2 && abs(trigPt[iObj]-jtpt)/jtpt<1. && abs(trigPt[iObj]-TMath::Floor(trigPt[iObj]))>0.0001){
+      if(sqrt(pow((trigPhi[iObj]-jtphi),2)+pow((trigEta[iObj]-jteta),2))<closestMatch){
+closestMatch = sqrt(pow((trigPhi[iObj]-jtphi),2)+pow((trigEta[iObj]-jteta),2));
+triggerPt = trigPt[iObj];
+      }
+    }
+  }
+  return triggerPt;
+}
+
 // ****************************************************************
 
 
 void skimTreesPAsimple(int isMC=0)
  // isMC=0 --> Real data, ==1 --> QCD,
 {
+  TString coll = "PPb";
+  TString dataType;
     if(isMC){
-     startfile=0;
-     endfile=QCDpthatBins ;
+	dataType="MC";
     }
 	else{
+    dataType="Data";
+	}
     startfile=atoi(getenv("FIRST"));
-    endfile=atoi(getenv("LAST"));}
+    endfile=atoi(getenv("LAST"));
    cout <<"analysis  "  << "  in file " << startfile << "  and " <<endfile<<endl ;
   int useWeight=1;
 
@@ -147,43 +215,51 @@ trigO *HLT_PAJet_NoJetID_v1_trigObject[6];
 
 //  timer.Start();  
 
-    TF1 * fVz = new TF1("fVx","[0]+[1]*x+[2]*TMath::Power(x,2)+[3]*TMath::Power(x,3)+[4]*TMath::Power(x,4)", -15., 15.);
-    if(coll=="PPb")
-        fVz->SetParameters(1.60182e+00,1.08425e-03,-1.29156e-02,-7.24899e-06,2.80750e-05);
-    else   if(coll=="PbP")
-        fVz->SetParameters(1.54398e+00, -8.56155e-03, -1.40026e-02, 4.01020e-05, 3.47683e-05); //latest parameterization
-  //      fVz->SetParameters(1.66731e+00,-2.43367e-03,-1.42488e-02,7.40147e-06,3.22477e-05);
-    else
-        fVz->SetParameters(1.,0,0,0,0);
-    
-    TF1 * fCen = new TF1("fCen","[0]*exp([1]+[2]*x+[3]*x*x+[4]*x*x*x+[5]*x*x*x*x+[6]*x*x*x*x*x)", 0., 100.);
-    if(coll=="PPb")
-        fCen->SetParameters(8.68073e-03, 5.09356e+00, -1.33053e-02, 1.46904e-03, -6.99681e-05, 1.06721e-06, -5.21398e-09);
-    else if(coll=="PbP")
-        fCen->SetParameters(1.05408e-02, 5.27477e+00, -8.03382e-02, 3.51669e-03, -8.85332e-05, 1.08917e-06, -4.90091e-09);
-    else
-        fCen->SetParameters(1, 0, 0, 0, 0, 0, 0);
-    
+        TF1 * fCen = new TF1("fCen","[0]*exp([1]+[2]*x+[3]*x*x+[4]*x*x*x+[5]*x*x*x*x+[6]*x*x*x*x*x)", 0., 100.);
+      TF1 * fVz = new TF1("fVx","[0]+[1]*x+[2]*TMath::Power(x,2)+[3]*TMath::Power(x,3)+[4]*TMath::Power(x,4)", -15., 15.);
+if(coll=="PPb"){
+ //        fCen->SetParameters(8.68073e-03, 5.09356e+00, -1.33053e-02, 1.46904e-03, -6.99681e-05, 1.06721e-06, -5.21398e-09);
+ //        fCen->SetParameters(1.20916e-02, 5.02157e+00, -3.38300e-02, 1.87647e-03, -6.76442e-05, 9.08602e-07, -4.01536e-09);//parameterize on 05.03 after approval
+	  fCen->SetParameters(7.92204e-03, 4.52005e+00, 9.77340e-02, -5.00362e-03, 9.74735e-05, -8.93897e-07, 3.39375e-09);//parameterize on new official MC after QM on 12/03/14
+ //	fVz->SetParameters(1.60182e+00,1.08425e-03,-1.29156e-02,-7.24899e-06,2.80750e-05);
+	 fVz->SetParameters(1.47442e+00, -2.83100e-03, -1.19295e-02, 1.10312e-05, 2.64814e-05); //! new official MC >QM14
+        }
+       else if(coll=="PbP"){
+   //   fCen->SetParameters(1.05408e-02, 5.27477e+00, -8.03382e-02, 3.51669e-03, -8.85332e-05, 1.08917e-06, -4.90091e-09);
+   fCen->SetParameters(2.89263e-02, 3.43643e+00, 5.62562e-02, -1.86555e-03, 1.97924e-06, 3.15416e-07, -1.97946e-09);//parameterize on new official MC after QM on 12/03/14
+   //	fCen->SetParameters(1.14851e-02, 5.31172e+00, -8.52366e-02, 3.00268e-03, -6.04667e-05, 6.24105e-07, -2.43580e-09);	
+   //   fVz->SetParameters(1.54398e+00, -8.56155e-03, -1.40026e-02, 4.01020e-05, 3.47683e-05); //latest parameterization
+	  fVz->SetParameters(1.49736e+00, -6.93060e-03, -1.26864e-02, 2.98693e-05, 2.89538e-05); //! new official MC after QM14 
+   //     fVz->SetParameters(1.66731e+00,-2.43367e-03,-1.42488e-02,7.40147e-06,3.22477e-05);
+  }
+                    else{
+                        fVz->SetParameters(1.,0,0,0,0); 
+                        fCen->SetParameters(1.,0,0,0,0,0,0); 
+}
+
+     TFile *fcrel3 = NULL ;
+     TH1D *C_rel= NULL ;
+ 
+     fcrel3 = TFile::Open(Form("/home/xuq7/HI/jetRpA/RpA/OldAna/Corrections/Casym_pPb_double_hcalbins_algo_%s_pt100_140_jet80_alphahigh_20_phicut250.root", algo.Data()), "readonly");
+     if(fcrel3)  C_rel=(TH1D*)fcrel3->Get("C_asym"); 
 
   TFile *fin=NULL;
   std::string infile;
    int *MCentr = NULL;
   double *pscls = NULL;
  
-if(!isMC){
-    if(coll=="PPb")   infile = "pAFileListKurtv4.txt";
-    else  infile = "PbpDataForest.txt";
-  }
+if(!isMC)
+     infile = "pAFileListKurtv4.txt";
 else{
-       if(coll=="PPb") infile = "pPbMCKurtForest.txt";
-      else if(coll=="PbP") infile = "PbpMCKurtForest.txt";
-        else infile = "ppMCKurtForest.txt";
+     if(coll=="PPb") infile = "pPbMCKurtForest.txt";
+     if(coll=="PP") infile = "ppMCKurtForest.txt";
+     if(coll=="PbP") infile = "PbpMCKurtForest.txt";
 }
  int dupRuns[6] = {181912,181913,181938,181950,181985,182124};
   //Declaration of leaves types
   Int_t evt;
   Int_t run;
-  Int_t bin;
+  Int_t hiBin;
   Int_t lumi;
    Float_t         hiHFplusEta4;
    Float_t         hiHFminusEta4;
@@ -199,9 +275,9 @@ else{
   Int_t subid[1000];
   Float_t pthat;
   Float_t refpt[1000];
-  Float_t refeta[1000];
   Float_t genpt[1000];
   Float_t geneta[1000];
+  Float_t refeta[1000];
   Float_t refy[1000];
   Float_t refphi[1000];
   Int_t          HLT_PAZeroBiasPixel_SingleTrack_v1;
@@ -237,7 +313,7 @@ else{
   Float_t muSum[1000];
   Float_t eSum[1000];
  
-  // track variables
+ // track variables
   Int_t t_nTrk;
   Int_t nTrk;
   Float_t t_trkPt[1000];
@@ -252,28 +328,26 @@ else{
   centWeight = 1. ; 
 
   TFile *fout=NULL;
-  TString datatype ;
-  if(isMC) datatype = "MC";
-  else datatype = "DATA";
-   fout=new TFile(Form("/afs/cern.ch/work/q/qixu/private/RpA/skimTree/%s%s%sskimfile%d_%d.root",datatype.Data(), coll.Data(), algo.Data(),startfile,endfile),"recreate");
+
+   fout=new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/%s%s%sskimfile%d_%dfull.root",dataType.Data(),coll.Data(),algo.Data(),startfile,endfile),"recreate");
 
   TTree *nt = new TTree("nt","");
 
 //Jet Variables
   nt->Branch("nref",&nref, "nref/I");
+  nt->Branch("ngen",&ngen, "ngen/I");
   nt->Branch("jtpt",jtpt,"jtpt[nref]/F");
-  nt->Branch("jty",jteta,"jty[nref]/F");
   nt->Branch("jteta",jteta,"jteta[nref]/F");
   nt->Branch("jtphi",jtphi,"jtphi[nref]/F");
-  nt->Branch("rawpt",rawpt,"rawpt[nref]/F");
-if(isMC){  
-     nt->Branch("subid",subid,"subid[nref]/I");
-     nt->Branch("refpt",refpt,"refpt[nref]/F");
-     nt->Branch("refeta",refeta,"refeta[nref]/F");
-     nt->Branch("ngen",&ngen, "ngen/I");
-     nt->Branch("genpt",genpt,"genpt[ngen]/F");
-     nt->Branch("geneta",geneta,"geneta[ngen]/F");
+  nt->Branch("jtpu",jtpu,"jtpu[nref]/F");
+if(isMC)  {
+nt->Branch("subid",subid,"subid[nref]/I");
+nt->Branch("refpt",refpt,"refpt[nref]/F");
+nt->Branch("refeta",refeta,"refeta[nref]/F");
+nt->Branch("genpt",genpt,"genpt[ngen]/F");
+nt->Branch("geneta",geneta,"geneta[ngen]/F");
 }
+  nt->Branch("rawpt",rawpt,"rawpt[nref]/F");
 
 //JetID Variables
   nt->Branch("chargedN",chargedN,"chargedN[nref]/I");
@@ -289,15 +363,14 @@ if(isMC){
   nt->Branch("muSum",muSum,"muSum[nref]/F");
   nt->Branch("eSum",eSum,"eSum[nref]/F");
 
-  //track variables
-
+//track Variables
     nt->Branch("nTrk",&nTrk, "nTrk/I");
     nt->Branch("trkPt",trkPt,"trkPt[nTrk]/F");
     nt->Branch("trkPhi",trkPhi,"trkPhi[nTrk]/F");
     nt->Branch("trkEta",trkEta,"trkEta[nTrk]/F");
 
 //Event Variables
-  nt->Branch("hiBin",&bin,"hiBin/I");
+  nt->Branch("hiBin",&hiBin,"hiBin/I");
   nt->Branch("evt",&evt, "evt/I");
   nt->Branch("run",&run,"run/I");
   nt->Branch("vz",&vz,"vz/F");
@@ -323,36 +396,26 @@ if(isMC){
     nt->Branch("phfPosFilter1",&phfPosFilter1,"phfPosFilter1/I");
     nt->Branch("phfNegFilter1",&phfNegFilter1,"phfNegFilter1/I");
     nt->Branch("pHBHENoiseFilter",&pHBHENoiseFilter,"pHBHENoiseFilter/I");
-    nt->Branch("weight",&weight,"weight/F");
    if(isMC) {
 	nt->Branch("pthat",&pthat,"pthat/F");
 	nt->Branch("xSecWeight",&xSecWeight,"xSecWeight/F");
 	nt->Branch("vzWeight",&vzWeight,"vzWeight/F");
-	nt->Branch("centWeight",&centWeight,"centWeight/F");
-   }
+	nt->Branch("centWeight",&centWeight,"centWeight/F");}
+    nt->Branch("weight",&weight,"weight/F");
 
 
   std::ifstream instr(infile.c_str(), std::ifstream::in);
   std::string filename;
   vector<string> listVector;
  if(!isMC){
-    for(int ifile=0; ifile<dataFiles; ifile++){
+    for(int ifile=0; ifile<10292; ifile++){
        instr >> filename;
        listVector.push_back(filename);
     }
  } 
 
-  int nFiles=0;
-  if(isMC){
-    endfile=QCDpthatBins ;
-   startfile=0 ; 
-    nFiles=QCDpthatBins;
-  }
-  else{
-//    nFiles=dataFiles;
-   if(endfile>0 && endfile<dataFiles ) nFiles = endfile ; 
-  else nFiles = dataFiles ; 
-  }
+   if(endfile>0 && endfile<dataFiles ); 
+  else endfile = dataFiles ; 
      float w = 1.;
 
     TTree *t;
@@ -361,7 +424,7 @@ if(isMC){
     TTree *tTrk = NULL;
       TBranch* tweight;
 
-  for(int ifile = startfile; ifile<nFiles; ifile++){
+  for(int ifile = startfile; ifile<endfile; ifile++){
       if(isMC){ 
      if(( ifile<QCDpthatBins)){
         instr >> filename;
@@ -387,16 +450,14 @@ if(isMC){
     if(tTrk) t->AddFriend("ppTrack/trackTree");
      
     Long64_t nentries = t->GetEntries();
-cout<<nentries<<endl;
     t->SetBranchAddress("evt",&evt);
     t->SetBranchAddress("lumi",&lumi);
-   t->SetBranchAddress("hiBin",&bin);
+   t->SetBranchAddress("hiBin",&hiBin);
  if(!isMC)  t->SetBranchAddress("run",&run);
  if(isMC){ 
-      t->SetBranchAddress("ngen",&ngen);
-      t->SetBranchAddress("weight",&weight);
       t->SetBranchAddress("pthat",&pthat);
       t->SetBranchAddress("refpt",refpt);
+      t->SetBranchAddress("ngen",&ngen);
       t->SetBranchAddress("genpt",genpt);
       t->SetBranchAddress("subid",subid);
       t->SetBranchAddress("refeta",refeta);
@@ -412,14 +473,15 @@ cout<<nentries<<endl;
     t->SetBranchAddress("jtphi",jtphi);
       t->SetBranchAddress("jtpu",jtpu);
       t->SetBranchAddress("jty",jty);
-
+if(!isMC){
+      t->SetBranchAddress("weight",&weight);
        t->SetBranchAddress("pVertexFilterCutGplus",&pVertexFilterCutGplus);
        t->SetBranchAddress("pBeamScrapingFilter",&pBeamScrapingFilter);
        t->SetBranchAddress("pprimaryvertexFilter",&pprimaryvertexFilter);
        t->SetBranchAddress("phfPosFilter1",&phfPosFilter1);
        t->SetBranchAddress("phfNegFilter1",&phfNegFilter1);
        t->SetBranchAddress("pHBHENoiseFilter",&pHBHENoiseFilter);
-      
+      }
     t->SetBranchAddress("chargedN",chargedN);
     t->SetBranchAddress("photonN",photonN);
     t->SetBranchAddress("neutralN",neutralN);
@@ -432,12 +494,13 @@ cout<<nentries<<endl;
     t->SetBranchAddress("neutralSum",neutralSum);
     t->SetBranchAddress("muSum",muSum);
     t->SetBranchAddress("eSum",eSum);
-    
+
       t->SetBranchAddress("nTrk",&t_nTrk);
       t->SetBranchAddress("trkPt",t_trkPt);
       t->SetBranchAddress("trkPhi",t_trkPhi);
-      t->SetBranchAddress("trkEta",t_trkEta);     	   
+      t->SetBranchAddress("trkEta",t_trkEta);
 
+    if(!isMC){
       t->SetBranchAddress("HLT_PAZeroBiasPixel_SingleTrack_v1",&HLT_PAZeroBiasPixel_SingleTrack_v1);
       t->SetBranchAddress("HLT_PAJet20_NoJetID_v1",&HLT_PAJet20_NoJetID_v1);
       t->SetBranchAddress("HLT_PAJet40_NoJetID_v1",&HLT_PAJet40_NoJetID_v1);
@@ -461,6 +524,7 @@ cout<<nentries<<endl;
       t->SetBranchAddress("hiHFplusEta4", &hiHFplusEta4);
       t->SetBranchAddress("hiHFminusEta4", &hiHFminusEta4);
 	 tweight = t->GetBranch("weight");
+	}
       if(isMC){
         if(!tweight){
          if(ifile==0){
@@ -469,6 +533,7 @@ cout<<nentries<<endl;
          }
         }
 		if(!useWeight && ifile==0){
+
          MCentr = countMCevents(infile, isMC);
          for(int i=0; i<QCDpthatBins; i++){
          cout << "MCentr["<<i<<"]: " << *(MCentr+i) << endl;
@@ -483,7 +548,6 @@ cout<<nentries<<endl;
       tSkim->GetEntry(i);
       t->GetEntry(i);
       tEvt->GetEntry(i);     
-	  
 	  
 	  for(int j=0; j<5; j++){ trigObjSize[j] = HLT_PAJet_NoJetID_v1_trigObject[j]->size();}
  double trgPrescl[5] = {(double)HLT_PAJet20_NoJetID_v1_Prescl, (double)HLT_PAJet40_NoJetID_v1_Prescl, (double)HLT_PAJet60_NoJetID_v1_Prescl, (double)HLT_PAJet80_NoJetID_v1_Prescl, (double)HLT_PAJet100_NoJetID_v1_Prescl};
@@ -508,9 +572,8 @@ cout<<nentries<<endl;
        }
         w= xSecWeight ;
             vzWeight = fVz->Eval(vz);
-             centWeight = fCen->Eval(bin);
+             centWeight = fCen->Eval(hiBin);
       weight=w*vzWeight*centWeight;
-   //   weight=w;
 		 }
 
 		  // new implementation with max trigger Obj for weight calculation
@@ -539,13 +602,13 @@ cout<<nentries<<endl;
   // w*=corr_Qiao.getEventWeightHFPlus4bak(hiHFplusEta4,kTRUE); 
    weight=w;
  } //only for data weight
-	 nTrk=0;
+    nTrk=0;
          for(int itrk=0; itrk<t_nTrk; itrk++){
                 if(t_trkPt[itrk]>1 && TMath::Abs(t_trkEta[itrk]) <2.4){
                  trkPt[nTrk]=t_trkPt[itrk];
                  trkPhi[nTrk]=t_trkPhi[itrk];
                  trkEta[nTrk]=t_trkEta[itrk];
-		nTrk++;
+                nTrk++;
                 }
          }
 

@@ -25,12 +25,15 @@ else if(coll=="PbP"){
 //fCen->SetParameters(1.05408e-02, 5.27477e+00, -8.03382e-02, 3.51669e-03, -8.85332e-05, 1.08917e-06, -4.90091e-09);
 //fCen->SetParameters(1.14851e-02, 5.31172e+00, -8.52366e-02, 3.00268e-03, -6.04667e-05, 6.24105e-07, -2.43580e-09);
 fCen->SetParameters(2.89263e-02, 3.43643e+00, 5.62562e-02, -1.86555e-03, 1.97924e-06, 3.15416e-07, -1.97946e-09);//parameterize on new official MC after QM on 12/03/14
-TH1F* histodata=(TH1F*)fDataPbP->Get("Cent");
-TH1F* histo1=(TH1F*)fMCPbP->Get("Cent");
+TH1F* histo0=(TH1F*)fMCPbPpthat->Get("Cent");
+TH1F* histo1=(TH1F*)fOMCPb->Get("Cent");
 //TH1F* histo2=(TH1F*)fNMCPbP->Get("Cent");
-TH1F* histo2=(TH1F*)fMCPbP->Get("CentW");
+TH1F* histo2=(TH1F*)fMCPbP->Get("Cent");
 TString data="Proton going positive side";
 }
+cout<<"pthat: "<<histo0->GetEntries()<<endl;
+cout<<"Old: "<<histo1->GetEntries()<<endl;
+cout<<"All: "<<histo2->GetEntries()<<endl;
 histo1->SetName(Form("%sOldMC_unweighted",coll.Data()));
 histo2->SetName(Form("%sNewMC_unweighted",coll.Data()));
 histo0->SetName(Form("%spthat",coll.Data()));
@@ -56,8 +59,9 @@ histo0->SetMarkerColor(1);
 histo0->SetLineColor(1);
 
 TCanvas* c1 = new TCanvas("c1"," ",500,500);
+TCanvas* c2 = new TCanvas("c2"," ",500,500);
 makeMultiPanelCanvas(c1,1,1,-0.16,0,0.16,0.14,0.03);
-
+makeMultiPanelCanvas(c2,1,1,-0.16,0,0.16,0.14,0.03);
 TH1F* hFrame=new TH1F("","",20000,-1000,1000);
 fixedFontHist(hFrame,1.2,1.7);
 hFrame->SetTitle("");
@@ -82,7 +86,6 @@ leg2->SetFillColor(0);
 leg1->SetTextSize(0.04);
 leg2->SetTextSize(0.04);
 leg1->AddEntry(histo1,"Old MC Before CW","lp");
-//leg1->AddEntry(histo2,"New MC Before Centrality weighting","lfp");
 leg1->AddEntry(histo0,"New MC Before CW Last 2 pthat","lp");
 leg1->AddEntry(histo2,"New MC Before CW all","lp");
 leg1->Draw("same");
@@ -93,6 +96,18 @@ T1->SetTextSize(0.05);
 T1->SetTextColor(1);
 T1->SetTextFont(42);
 T1->Draw("same");
+c2->cd(1);
+hFrame->GetYaxis()->SetTitle("Ratio");
+hFrame->GetXaxis()->SetLimits(0,100);
+hFrame->GetYaxis()->SetRangeUser(0,2);
+hFrame->DrawCopy();
+TH1F* ratio = (TH1F*)histo0->Clone(Form("%sratio",coll.Data()));
+ratio->SetTitle("");
+ratio->Divide(histo2);
+ratio->Draw();
+leg2->AddEntry(ratio,"Last 2 pthat/all","lp");
+leg2->Draw("same");
+
 c1->Print(Form("Centpthat%s.png",coll.Data()));
 
 }
