@@ -98,7 +98,7 @@ void hPYphocalc(){
 		double k = gammafun[(int)Npart]->GetParameter(0);
 		double theta = gammafun[(int)Npart]->GetParameter(1);
 		double YNcollUCM = C*Ncoll;
-		double YNcollPCM = C/2.0/(*kbest)[0]/theta*(Para_nucl+Para_evt);
+		double YNcollPCM = C/2.0/(*kbest)[0]/theta*(Para_nucl+Para_nucl);
 		double YNcollVCM = C/2.0*(Para_nucl/(*kbest)[0]/theta+Ncoll);
 		yUCM[ibin] += PNcoll[(int)Ncoll]*PNcollET*YNcollUCM;
 		yPCM[ibin] += PNcoll[(int)Ncoll]*PNcollET*YNcollPCM;
