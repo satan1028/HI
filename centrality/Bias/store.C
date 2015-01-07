@@ -16,8 +16,8 @@ void store(){
 	if(Gth<nGlau) l = new GammaF(datafile,stdGlaulist[Gth],histoname,MCfitdat);
 	else l = new GammaF(datafile,stdGlaulist[0],histoname,MCfitdat);
 	var=var1;
-//	l->inittheta(bestlist1[Gth].thetabest-0.01,bestlist1[Gth].thetabest+0.01,0.001);
-//	l->initk(bestlist1[Gth].kbest-0.01,bestlist1[Gth].kbest+0.01,0.001);
+	l->inittheta(bestlist1[Gth].thetabest-0.01,bestlist1[Gth].thetabest+0.01,0.001);
+	l->initk(bestlist1[Gth].kbest-0.01,bestlist1[Gth].kbest+0.01,0.001);
 	}
         
 	else if(sth==1){
@@ -38,8 +38,8 @@ void store(){
 //	l->initk(bestlist3[Gth].kbest-0.01,bestlist3[Gth].kbest+0.01,0.001);
 	}
 
-	l->inittheta(var.thetamin,var.thetamax,var.thetastep);
-   	l->initk(var.kmin,var.kmax,var.kstep);
+//	l->inittheta(var.thetamin,var.thetamax,var.thetastep);
+//   	l->initk(var.kmin,var.kmax,var.kstep);
 
 	if(Gth<nGlau)
         	l->initx(var.xmin,var.xmax);

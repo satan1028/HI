@@ -1,4 +1,4 @@
-#include "/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/Quality/root_setting.h"
+#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 
 static const int nColor = 8;
 static const int colorCode[nColor] = {

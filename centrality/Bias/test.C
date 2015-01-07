@@ -1,6 +1,6 @@
 #include "parameter.h"
 #include "par.h"
-void Draw3modelYvsET(){
+void test(){
 	int sth=0, Gth=0;
         TFile *f = TFile::Open(outG);
         if(sth==0){TString dirname = "std";}
@@ -39,8 +39,8 @@ void Draw3modelYvsET(){
 	double kevt = (*k0)[0]-(*kbest)[0];
         gammafunevt->SetParameter(0,kevt);   //[1]: k value
         gammafunevt->SetParameter(1,theta);       //[2]: theta value
-        gammafunnucl->SetParameter(0,(*kbest)[0]);   //[1]: k value
-        gammafunnucl->SetParameter(1,theta);   //[2]: theta value
+        gammafunnucl->SetParameter(0,0.46);   //[1]: k value
+        gammafunnucl->SetParameter(1,3.91307);   //[2]: theta value
         gammafunnuclNcoll->SetParameter(0,(*kbest)[0]*xNcoll);   //[1]: k value
         gammafunnuclNcoll->SetParameter(1,theta);   //[2]: theta value
 	cout<<k<<"\t"<<theta<<endl;
@@ -67,44 +67,16 @@ void Draw3modelYvsET(){
 	leg->Draw("same");
 
 
-	TH2D *UCM = new TH2D("UCM","UCM",1000,0,100,2000,0,40);
-	TH2D *PCM = new TH2D("PCM","PCM",1000,0,100,2000,0,40);
-	TH2D *VCM = new TH2D("VCM","VCM",1000,0,100,2000,0,40);
 	TH1D *h = new TH1D("","",10000,0,100);
-	TTree *t = (TTree*)fGlauber->Get("nt_p_Pb");
-        Float_t Ncoll, Npart, B;        Long_t Nevent;
-	t->SetBranchAddress("Ncoll",&Ncoll);
-        t->SetBranchAddress("Npart",&Npart);
-        t->SetBranchAddress("B",&B);
 
-        Nevent = (Long_t) t->GetEntries();
         Long_t Ev;      Int_t Bino;     Double_t Para_nucl, Para_evt, Bi_Para_nucl, Bi_Para_evt;
         for (Ev=0; Ev<1e7; Ev++){
- //       	if(Ev%100000==0)       cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
- //       	t->GetEntry(Ev);
-//		if(Npart!=xNpart) continue;
 		//Para_nucl = 0; //make sure that Para doesn't accuthetalate through loops
 		Para_evt = 0; //make sure that Para doesn't accuthetalate through loops
-               	Para_nucl = gammafunnuclNcoll->GetRandom();
+               	Para_nucl = gammafunnucl->GetRandom();
 //                	Para_nucl += Bi_Para_nucl;
 //                }
-                for(Bino=0; Bino<xNcoll; Bino++){
-		Bi_Para_evt = gammafunevt->GetRandom();
-		Para_evt += Bi_Para_evt;
-		}
 		h->Fill(Para_nucl);
-		UCM->Fill(Para_nucl,xNcoll);
-		PCM->Fill(Para_nucl,1.0/2/(*kbest)[0]/theta*(Para_nucl+Para_evt));
-		VCM->Fill(Para_nucl,1.0/2*(Para_nucl/(*kbest)[0]/theta+xNcoll));
 	}
-	TCanvas *c2 = new TCanvas();
-	c2->SetLogz();
-	UCM->GetYaxis()->SetRangeUser(0,16.5);
-	UCM->GetXaxis()->SetRangeUser(0,75);
-	UCM->Draw("C");
-	PCM->Draw("colzsame");
-	VCM->Draw("same");
-
-	c1->Print("gammafundist.png");
-	c2->Print("paperfig2.png");
+	h->Draw();
 }
