@@ -80,8 +80,11 @@ void hPYphocalc(){
 		t->GetEntry(Ev);
 		PNcoll[(int)Ncoll]++;
 	}
-	for(int i=0;i<maxNpart;i++)
+	for(int i=0;i<maxNpart;i++){
+		cout<<PNcoll[i]<<"\t";
 		PNcoll[i]/=Nevent;
+	}
+		cout<<endl;
 	for(Ev=0;Ev<Nevent;Ev++){
 		t->GetEntry(Ev);
 		Para = gammafun[(int)Npart]->GetRandom();
