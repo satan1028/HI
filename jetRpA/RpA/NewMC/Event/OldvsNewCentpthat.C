@@ -1,12 +1,13 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 void OldvsNewCentpthat(){
 	gStyle->SetOptStat(kFALSE);
-	h1 = DrawTH1(0,"hiHFplusEta4",120);
-	h1_old = DrawTH1(1,"hiHFplusEta4",120);
+	int pthat = 15;
+	h1 = DrawTH1(0,"hiHFplusEta4",pthat);
+	h1_old = DrawTH1(1,"hiHFplusEta4",pthat);
 	h1->SetTitle("");
 	h1->GetXaxis()->SetTitleSize(0.05);
 	h1->GetYaxis()->SetTitleSize(0.05);
-	h1->GetXaxis()->SetTitle("Centrality");
+	h1->GetXaxis()->SetTitle("HF Energy #eta>4");
 	h1->GetYaxis()->SetTitle("ratio, New/Old");
 	h1->GetXaxis()->SetRangeUser(0,100);
 	h1->GetYaxis()->SetRangeUser(0,2);
@@ -28,7 +29,7 @@ void OldvsNewCentpthat(){
 	TCanvas *c1 = new TCanvas();
 	c1->cd();
 	TLegend *leg = new TLegend(0.65,0.6,0.8,0.8);
-	leg->AddEntry(h1,"pthat = 120","p");
+	leg->AddEntry(h1,Form("pthat = %d",pthat),"p");
 	leg->SetBorderSize(0);
 	leg->SetFillColor(0);
 	leg->SetTextSize(0.04);
@@ -37,7 +38,7 @@ void OldvsNewCentpthat(){
 	ratio->Draw();
 	leg->Draw("same");
 	l->Draw("same");
-	c1->Print("pthat120ratio.png");
+	c1->Print(Form("pthat%dratio.png",pthat));
 }
 
 TH1D* DrawTH1(bool isOld, TString var, int pthat){
