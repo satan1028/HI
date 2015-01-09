@@ -1,6 +1,6 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 #include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
-
+#include <iomanip>
 void pthatCent(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
@@ -71,7 +71,7 @@ hFrame->GetXaxis()->SetTitle("Centrality");
 hFrame->GetYaxis()->SetTitle("Event Fraction");
 hFrame->GetXaxis()->SetLimits(0,100);
 //hFrame->GetXaxis()->SetLimits(-3,3);
-hFrame->GetYaxis()->SetRangeUser(0,9.2e-2);
+hFrame->GetYaxis()->SetRangeUser(0,0.07);
 c1->cd(1);
 hFrame->DrawCopy();
 histo0->Draw("same");
@@ -104,6 +104,7 @@ hFrame->DrawCopy();
 TH1F* ratio = (TH1F*)histo0->Clone(Form("%sratio",coll.Data()));
 ratio->SetTitle("");
 ratio->Divide(histo2);
+
 ratio->Draw();
 leg2->AddEntry(ratio,"Last 2 pthat/all","lp");
 leg2->Draw("same");
