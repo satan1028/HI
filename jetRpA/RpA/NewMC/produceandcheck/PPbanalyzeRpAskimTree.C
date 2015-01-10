@@ -17,9 +17,8 @@ using namespace std;
 //const double deta[] = {-2.2,-1.2,-0.7,-0.3,0.3,0.7,1.2,2.2};
 const double deta[] = {-2.0,-1.5,-1.0,-0.5,0.5,1.0,1.5,2.0};
 const int netabin = sizeof(deta)/sizeof(double)-1;
-const TString JetIDName[]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN"};
+const TString JetIDName[]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","PPcut"};
 const int nJetID = sizeof(JetIDName)/sizeof(TString);
-
 TString algo="akPu3PF";//"akPu3PF"
 TString coll = "PPb";
 
@@ -67,7 +66,7 @@ hist_class::hist_class()
     jetptphi -> Sumw2(); 
     jetEtaphi = new TH2F(Form("jetEtaphi"),Form("jetEtaphi"),100,-5.,5.,200, -TMath::Pi(), TMath::Pi());
     jetEtaphi -> Sumw2(); 
-
+	
         for(int ijetid=0;ijetid<nJetID;ijetid++){
         if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
         jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 200, 0., 2.);      //Added
@@ -79,6 +78,11 @@ hist_class::hist_class()
         jetptjetid_real[ijetid] = new TH2F(Form("jetpt%s_real",JetIDName[ijetid].Data()), Form("jetpt%s_real",JetIDName[ijetid].Data()), 1000, 0., 1000., 100, 0., 100.);     //Added
         jetptjetid_fake[ijetid] = new TH2F(Form("jetpt%s_fake",JetIDName[ijetid].Data()), Form("jetpt%s_fake",JetIDName[ijetid].Data()), 1000, 0., 1000., 100, 0., 100.);     //Added
         }
+	else if(JetIDName[ijetid].Contains("PP")){
+        jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 2,0.,2.);    //Added
+        jetptjetid_real[ijetid] = new TH2F(Form("jetpt%s_real",JetIDName[ijetid].Data()), Form("jetpt%s_real",JetIDName[ijetid].Data()), 1000, 0., 1000., 2,0.,2.);     //Added
+        jetptjetid_fake[ijetid] = new TH2F(Form("jetpt%s_fake",JetIDName[ijetid].Data()), Form("jetpt%s_fake",JetIDName[ijetid].Data()), 1000, 0., 1000., 2, 0., 2.);     //Added
+	}
         else{
         jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 3000, 0., 300.);   //Added
         jetptjetid_real[ijetid] = new TH2F(Form("jetpt%s_real",JetIDName[ijetid].Data()), Form("jetpt%s_real",JetIDName[ijetid].Data()), 1000, 0., 1000., 3000, 0., 300.);    //Added
@@ -114,6 +118,10 @@ hist_class::hist_class()
         jetptjetidEtaBin[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 200, 0., 2.);    //Added
         jetptjetidEtaBin[ieta][ijetid]->Sumw2();      //Added
         }
+	if(JetIDName[ijetid].Contains("PP")){
+        jetptjetidEtaBin[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 2, 0., 2.);    //Added
+        jetptjetidEtaBin[ieta][ijetid]->Sumw2();      //Added
+	}
         }
       refjetptEtaBin[ieta] = new TH1F(Form("refjetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("refjetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
       refjetptEtaBin[ieta]->Sumw2();
@@ -131,7 +139,7 @@ void hist_class::Write()
   TString dataType;
   TString out_name;
   dataType = "MC";
-  out_name=Form("%s%s%s_useskimMLast2pthat.root",dataType.Data(),coll.Data(),algo.Data());
+  out_name=Form("%s%s%s_useskim.root",dataType.Data(),coll.Data(),algo.Data());
 
   TFile *out_file = new TFile(Form("/scratch/xuq7/RpA/NewMC/%s",out_name.Data()),"RECREATE");  
     refjetpt->Write();
@@ -156,7 +164,7 @@ void hist_class::Write()
     for(int ieta=0; ieta<netabin; ieta++){
 	 jetptEtaBin[ieta]->Write(); 
 	 for(int ijetid=0;ijetid<nJetID;ijetid++){
-        	if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
+        	if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr") || JetIDName[ijetid].Contains("PP")){
                  jetptjetidEtaBin[ieta][ijetid]->Write();
         }
         }
@@ -176,7 +184,7 @@ void PPbanalyzeRpAskimTree()
 
   cout<<"Analyzing MC!"<<endl;
 
-  TFile *f = new TFile(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimfile0_8.root",coll.Data()));
+  TFile *f = new TFile(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimfile0_10.root",coll.Data()));
   
   TTree *nt = (TTree*)f->Get("nt");
 
@@ -253,7 +261,7 @@ for(int j4i = 0; j4i < nref; j4i++){
 		double muSum = t_muSum[j4i];
 		double eSum = t_eSum[j4i];
 	 
-	double jetidv[nJetID]={chargedMax,chargedSum,neutralMax,neutralSum,photonMax,photonSum,chargedMax/jet_pt,chargedSum/jet_pt,neutralMax/jet_pt,neutralSum/jet_pt,photonMax/jet_pt,photonSum/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/raw_pt,neutralMax/TMath::Max(chargedSum,neutralSum),(double)chargedN,(double)neutralN,(double)photonN};
+	double jetidv[nJetID]={chargedMax,chargedSum,neutralMax,neutralSum,photonMax,photonSum,chargedMax/jet_pt,chargedSum/jet_pt,neutralMax/jet_pt,neutralSum/jet_pt,photonMax/jet_pt,photonSum/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/raw_pt,neutralMax/TMath::Max(chargedSum,neutralSum),(double)chargedN,(double)neutralN,(double)photonN,(double)(neutralSum/jet_pt<1.0 && eSum/jet_pt<1.0 && photonSum/jet_pt<1.0 && ((chargedSum>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) )};
 	if(TMath::Abs(ref_eta+0.465) <= 1.) {
         my_hists->refjetpt->Fill(ref_pt, weight);
        }
@@ -292,7 +300,7 @@ for(int j4i = 0; j4i < nref; j4i++){
       if(dEtaBin!=-1){
 	 my_hists->jetptEtaBin[dEtaBin]->Fill(jet_pt,weight);
 	for(int ijetid=0;ijetid<nJetID;ijetid++){
-        if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
+        if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr") || JetIDName[ijetid].Contains("PP")){
         my_hists->jetptjetidEtaBin[dEtaBin][ijetid]->Fill(jet_pt,jetidv[ijetid],weight);
         }
         }

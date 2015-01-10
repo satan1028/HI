@@ -29,7 +29,7 @@ void hPYphocalc(){
 	TVectorD* centbin = (TVectorD*)f->Get(Form("%s/%s/centbin",dirname.Data(),name.Data()));
 
         TFile *fGlauber = TFile::Open(Glaubername->GetName());
-        (*k0)[0]=1.39;  (*kbest)[0]=0.425;
+        (*k0)[0]=1.39;  (*kbest)[0]=1.225-0.425;
         (*theta0)[0]=3.41;      (*thetabest)[0]=1.30;
         TF1 *gammafun[maxNpart];
         TF1 *gammafunevt[maxNpart];
@@ -60,7 +60,7 @@ void hPYphocalc(){
         t->SetBranchAddress("B",&B);
 
         Nevent = (Long_t) t->GetEntries();
-        Long_t Ev;      Int_t Bino;     Double_t Para, Para_nucl, Para_evt, Bi_Para_nucl, Bi_Para_evt;			
+        Long_t Ev;      Int_t Bino;     Double_t Para, Para_nucl, Para_p, Para_evt, Bi_Para_nucl, Bi_Para_evt;			
 
 	double yUCM[8]={};
 	double yPCM[8]={};
@@ -68,7 +68,7 @@ void hPYphocalc(){
 	double yUCM_[200]={};
 	double yPCM_[200]={};
 	double yVCM_[200]={};
-	double C=1e-3;
+	double C=1e-4;
 	double PNcoll[maxNpart]={};
 	TH1D *histo_obs = (TH1D*)fdata->Get(histoname->GetName());
         TH1D *histo_obs_norm = (TH1D*)histo_obs->Clone();
@@ -76,19 +76,22 @@ void hPYphocalc(){
 	TH1D* hUCM = new TH1D("hUCM","hUCM",200,0,200);
 	TH1D* hPCM = new TH1D("hPCM","hPCM",200,0,200);
 	TH1D* hVCM = new TH1D("hVCM","hVCM",200,0,200);
+	TH2D* NcollvsET = new TH2D("NcollvsET","NcollvsET",100,0,100,2000,0,400);
 	for(Ev=0;Ev<Nevent;Ev++){
 		t->GetEntry(Ev);
 		PNcoll[(int)Ncoll]++;
 	}
 	for(int i=0;i<maxNpart;i++){
-		cout<<PNcoll[i]<<"\t";
 		PNcoll[i]/=Nevent;
+		cout<<PNcoll[i]<<"\t";
 	}
 		cout<<endl;
 	for(Ev=0;Ev<Nevent;Ev++){
+		if(Ev%100000==0)	cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
 		t->GetEntry(Ev);
 		Para = gammafun[(int)Npart]->GetRandom();
 		Para_nucl = gammafunnuclNcoll[(int)Npart]->GetRandom();
+		Para_p = gammafunnuclNcoll[(int)Npart]->GetRandom();
 		Para_evt = 0;
 		for(int i=0;i<N-1;i++)
 			if(Para>=(*kpoint)[i] && Para<(*kpoint)[i+1])
@@ -96,12 +99,12 @@ void hPYphocalc(){
 		for(int Bino=0;Bino<Ncoll;Bino++){
 			Bi_Para_evt = gammafunevt[(int)Npart]->GetRandom();
 			Para_evt += Bi_Para_evt;
-		}		
+		}	
 		double PNcollET = gammafun[(int)Npart]->Eval(Para);
-		double k = gammafun[(int)Npart]->GetParameter(0);
-		double theta = gammafun[(int)Npart]->GetParameter(1);
+//		double k = gammafun[(int)Npart]->GetParameter(0);
+                double theta=(*theta0)[0]+(*thetabest)[0]*TMath::Log(Npart-1);
 		double YNcollUCM = C*Ncoll;
-		double YNcollPCM = C/2.0/(*kbest)[0]/theta*(Para_nucl+Para_nucl);
+		double YNcollPCM = C/1.0/(*kbest)[0]/theta*(Para_nucl);
 		double YNcollVCM = C/2.0*(Para_nucl/(*kbest)[0]/theta+Ncoll);
 		yUCM[ibin] += PNcoll[(int)Ncoll]*PNcollET*YNcollUCM;
 		yPCM[ibin] += PNcoll[(int)Ncoll]*PNcollET*YNcollPCM;
@@ -109,6 +112,7 @@ void hPYphocalc(){
 		yUCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollUCM;
 		yPCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollPCM;
 		yVCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollVCM;
+		NcollvsET->Fill(Ncoll,Para);
 	}
 	for(int ibin=1;ibin<hUCM->GetNbinsX();ibin++){
 		hUCM->SetBinContent(ibin,yUCM_[ibin-1]);			
@@ -116,18 +120,23 @@ void hPYphocalc(){
 		hVCM->SetBinContent(ibin,yVCM_[ibin-1]);
 	}
 	TCanvas *c1 = new TCanvas();
+	TCanvas *c2 = new TCanvas();
 	c1->SetLogy();
+	c2->SetLogx();
+	c2->SetLogy();
+	c2->SetLogz();
+	c1->cd();
 	TH1D* hFrame = new TH1D("","",200,0,200);
 	hFrame->SetTitle("");
 	hFrame->GetXaxis()->SetTitle("HF #Sigma E_{T} |#eta|>4");
 	hFrame->GetYaxis()->SetTitle("Yield no units");
 	hFrame->GetXaxis()->SetRangeUser(0,150);
-	hFrame->GetYaxis()->SetRangeUser(1e-6,1);
+	hFrame->GetYaxis()->SetRangeUser(1e-6,1e2);
 	hFrame->Draw();
 	histo_obs_norm->SetMarkerStyle(20);
 	histo_obs_norm->SetMarkerSize(1.0);
 	histo_obs_norm->SetMarkerColor(1);
-	histo_obs_norm->Draw("Psame");
+	//histo_obs_norm->Draw("Psame");
 	hUCM->SetMarkerStyle(24);
 	hUCM->SetMarkerSize(1.0);
 	hUCM->SetMarkerColor(2);
@@ -152,8 +161,14 @@ void hPYphocalc(){
 	leg->AddEntry(hVCM,"hard scattering events(VCM)","lp");
 	leg->Draw("same");
 	c1->Print("paperfig3.png");
+	c2->cd();
+	gStyle->SetOptStat("nemr");
+	NcollvsET->GetXaxis()->SetTitle("Ncoll");
+	NcollvsET->GetYaxis()->SetTitle("HF #Sigma E_{T} |#eta|>4");
+	NcollvsET->Draw("colz");
+	c2->Print("NcollvsET2D.png");
 	ofstream fstr("result.dat");
-	fstr<<"i"<<"\t"<<"centbin"<<"\t"<<"kpoint"<<"\t"<<"\t"<<"UCM"<<"\t"<<"PCM"<<"\t"<<"VCM"<<"\t"<<"pho1"<<"\t"<<"pho2"<<"\t"<<"MB"<<endl;
+	fstr<<"i"<<"\t"<<"centbin"<<"\t"<<"kpoint"<<"\t"<<"UCM"<<"\t"<<"PCM"<<"\t"<<"VCM"<<"\t"<<"pho1"<<"\t"<<"pho2"<<"\t"<<"MB"<<endl;
 	for(int i=0;i<N-1;i++){
 		fstr<<i<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"% \t"<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<yUCM[i]<<"\t"<<yPCM[i]<<"\t"<<yVCM[i]<<"\t"<<yPCM[i]/yUCM[i]<<"\t"<<yVCM[i]/yUCM[i]<<"\t"<<"undetermined"<<endl;
 	}

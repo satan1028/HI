@@ -60,6 +60,7 @@ else if(ilist== 14)   {  JetID = "neutralMax/Max(neutralSum,chargedSum)";JetIDcu
 else if(ilist== 15)     JetID = "charged Multiplicity";
 else if(ilist== 16)     JetID = "neutral Multiplicity";
 else if(ilist== 17)     JetID = "photon Multiplicity";
+else if(ilist== 18)   {  JetID = "PP cut True or False";JetIDcut[0]=1;JetIDcut[1]=2;}
 else{   exit();}
 
 if(JetIDName.Contains("pt") || JetIDName=="neuMaxr"){
@@ -79,6 +80,10 @@ else if(ilist==16){
 double binbound_JetID[]={0,1,2,3,4,5,6,7,8,10};}
 else if(ilist==15){
 double binbound_JetID[]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,24,30,40};}
+Unit="";
+}
+else if(JetIDName.Contains("PP")){
+double binbound_JetID[]={0,1,2};
 Unit="";
 }
 else{
@@ -393,7 +398,7 @@ l2->SetLineColor(kBlue);
 l2->Draw("same");
 c5->Print(Form("pic/%s/ratio_jet%s_PPbvsPP.png",JetIDName.Data(),JetIDName.Data()));
 /*
-//---------------------------------------------PPb/Pb pT distribution---------------------------------------------------
+//---------------------------------------------PPb/PP pT distribution---------------------------------------------------
 
 TCanvas *c6=new TCanvas("c6");
 c6->cd();

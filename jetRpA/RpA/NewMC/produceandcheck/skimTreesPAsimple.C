@@ -43,8 +43,8 @@ typedef std::vector<trigger::TriggerObject> trigO;
 //TStopwatch timer;
 
 // ******* GLOBAL DECLARATIONS **********
-const int QCDpthatBins = 8;
-//const int QCDpthatBins = 10;
+//const int QCDpthatBins = 8;
+const int QCDpthatBins = 10;
 //const int QCDpthatBins = 1;
 const int dataFiles = 10292;
 int startfile ;
@@ -57,10 +57,8 @@ const int netabin = sizeof(deta)/sizeof(Double_t)-1 ;
 const Double_t jetPtBin[]={3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
 const int nJetPtBin = sizeof(jetPtBin)/sizeof(Double_t)-1 ;
 //const double wght[] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08, 0};
-//const int pthatbin[11] = {15,30,50,80,120,170,220,280,370,460, 9999};
-const int pthatbin[9] = {15,30,50,80,120,170,220,280, 9999};
-//const double wght[11] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08, 0};
-const double wght[9] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07,  0};
+const int pthatbin[11] = {15,30,50,80,120,170,220,280,370,460, 9999};
+const double wght[11] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08, 0};
 
 //**********************************************************
 // Count the MC events to appropriately weight the pthat bins
@@ -482,6 +480,8 @@ if(!isMC){
     t->SetBranchAddress("neutralSum",neutralSum);
     t->SetBranchAddress("muSum",muSum);
     t->SetBranchAddress("eSum",eSum);
+      t->SetBranchAddress("hiHFplusEta4", &hiHFplusEta4);
+      t->SetBranchAddress("hiHFminusEta4", &hiHFminusEta4);
     if(!isMC){
       t->SetBranchAddress("HLT_PAZeroBiasPixel_SingleTrack_v1",&HLT_PAZeroBiasPixel_SingleTrack_v1);
       t->SetBranchAddress("HLT_PAJet20_NoJetID_v1",&HLT_PAJet20_NoJetID_v1);
@@ -503,8 +503,6 @@ if(!isMC){
       t->SetBranchAddress("pPAcollisionEventSelectionPA",&pPAcollisionEventSelectionPA);
       t->SetBranchAddress("pHBHENoiseFilter",&pHBHENoiseFilter);
       t->SetBranchAddress("pprimaryvertexFilter",&pprimaryvertexFilter);
-      t->SetBranchAddress("hiHFplusEta4", &hiHFplusEta4);
-      t->SetBranchAddress("hiHFminusEta4", &hiHFminusEta4);
 	 tweight = t->GetBranch("weight");
 	}
       if(isMC){

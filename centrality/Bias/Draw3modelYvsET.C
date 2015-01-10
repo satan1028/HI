@@ -78,7 +78,7 @@ void Draw3modelYvsET(){
         t->SetBranchAddress("B",&B);
 
         Nevent = (Long_t) t->GetEntries();
-        Long_t Ev;      Int_t Bino;     Double_t Para_nucl, Para_evt, Bi_Para_nucl, Bi_Para_evt;
+        Long_t Ev;      Int_t Bino;     Double_t Para_nucl, Para_p, Para_evt, Bi_Para_nucl, Bi_Para_evt;
         for (Ev=0; Ev<1e7; Ev++){
  //       	if(Ev%100000==0)       cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
  //       	t->GetEntry(Ev);
@@ -86,6 +86,7 @@ void Draw3modelYvsET(){
 		//Para_nucl = 0; //make sure that Para doesn't accuthetalate through loops
 		Para_evt = 0; //make sure that Para doesn't accuthetalate through loops
                	Para_nucl = gammafunnuclNcoll->GetRandom();
+               	Para_p = gammafunnuclNcoll->GetRandom();
 //                	Para_nucl += Bi_Para_nucl;
 //                }
                 for(Bino=0; Bino<xNcoll; Bino++){
@@ -94,7 +95,7 @@ void Draw3modelYvsET(){
 		}
 		h->Fill(Para_nucl);
 		UCM->Fill(Para_nucl,xNcoll);
-		PCM->Fill(Para_nucl,1.0/2/(*kbest)[0]/theta*(Para_nucl+Para_evt));
+		PCM->Fill(Para_nucl,1.0/2/(*kbest)[0]/theta*(Para_nucl+Para_p));
 		VCM->Fill(Para_nucl,1.0/2*(Para_nucl/(*kbest)[0]/theta+xNcoll));
 	}
 	TCanvas *c2 = new TCanvas();
