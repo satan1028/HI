@@ -2,8 +2,8 @@
 void OldvsNewCentpthat(){
 	gStyle->SetOptStat(kFALSE);
 	int pthat = 0;
-	int hibinmin = 60;
-	int hibinmax = 90;
+	int hibinmin = 20;
+	int hibinmax = 30;
 	h1 = DrawTH1(0,"hiHFEta4",pthat,hibinmin,hibinmax,1,20);
 	h1_old = DrawTH1(1,"hiHFEta4",pthat,hibinmin,hibinmax,2,20);
 	h2 = DrawTH1(0,"hiHFplusEta4",pthat,hibinmin,hibinmax,1,24);
@@ -24,10 +24,10 @@ void OldvsNewCentpthat(){
 	h2->Draw("same");
 	h2_old->Draw("same");
 	TLegend *leg = new TLegend(0.65,0.6,0.8,0.8);
-	leg->AddEntry(h1,Form("HF #eta > 4, New"),"p");
-	leg->AddEntry(h1_old,Form("HF #eta >4, Old"),"p");
-	leg->AddEntry(h2,Form("HF |#eta| > 4, New"),"p");
-	leg->AddEntry(h2_old,Form("HF |#eta| > 4, Old"),"p");
+	leg->AddEntry(h1,Form("HF |#eta| > 4, New"),"p");
+	leg->AddEntry(h1_old,Form("HF |#eta| > 4, Old"),"p");
+	leg->AddEntry(h2,Form("HF #eta > 4, New"),"p");
+	leg->AddEntry(h2_old,Form("HF #eta > 4, Old"),"p");
 	leg->SetBorderSize(0);
 	leg->SetFillColor(0);
 	leg->SetTextSize(0.04);
