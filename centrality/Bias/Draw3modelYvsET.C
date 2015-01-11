@@ -1,6 +1,7 @@
 #include "parameter.h"
 #include "par.h"
 void Draw3modelYvsET(){
+	gStyle->SetOptStat(kFALSE);	
 	int sth=0, Gth=0;
         TFile *f = TFile::Open(outG);
         if(sth==0){TString dirname = "std";}
@@ -24,8 +25,8 @@ void Draw3modelYvsET(){
         TVectorD* kbest = (TVectorD*)f->Get(Form("%s/%s/kbest",dirname.Data(),name.Data()));
 	
 	TFile *fGlauber = TFile::Open(Glaubername->GetName());
-	(*k0)[0]=1.39;	(*kbest)[0]=0.425;
-	(*theta0)[0]=3.41;	(*thetabest)[0]=1.30;
+	//(*k0)[0]=1.39;	(*kbest)[0]=0.425;
+	//(*theta0)[0]=3.41;	(*thetabest)[0]=1.30;
 	int xNcoll = 5;
 	int xNpart = xNcoll + 1; 
         double k=(*k0)[0]+(*kbest)[0]*(xNpart-2);
@@ -80,7 +81,7 @@ void Draw3modelYvsET(){
         Nevent = (Long_t) t->GetEntries();
         Long_t Ev;      Int_t Bino;     Double_t Para_nucl, Para_p, Para_evt, Bi_Para_nucl, Bi_Para_evt;
         for (Ev=0; Ev<1e7; Ev++){
- //       	if(Ev%100000==0)       cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
+     	  	if(Ev%1000000==0)       cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
  //       	t->GetEntry(Ev);
 //		if(Npart!=xNpart) continue;
 		//Para_nucl = 0; //make sure that Para doesn't accuthetalate through loops
@@ -100,12 +101,38 @@ void Draw3modelYvsET(){
 	}
 	TCanvas *c2 = new TCanvas();
 	c2->SetLogz();
-	UCM->GetYaxis()->SetRangeUser(0,16.5);
-	UCM->GetXaxis()->SetRangeUser(0,75);
-	UCM->Draw("C");
-	PCM->Draw("colzsame");
-	VCM->Draw("same");
+	PCM->GetYaxis()->SetRangeUser(0,16.5);
+	PCM->GetYaxis()->SetTitle("Y/C");
+	PCM->GetXaxis()->SetRangeUser(0,75);
+	UCM->SetLineWidth(2);
+	PCM->GetXaxis()->SetTitle("HF #Sigma E_{T}^{j}");
+	PCM->SetTitle("");
+	UCM->SetLineStyle(4);
+	UCM->SetLineWidth(1.5);
+	PCM->Draw("colz");
+	UCM->Draw("Csame");
+	VCM->SetLineStyle(2);
+	VCM->SetLineWidth(1.5);
+	VCM->Draw("Csame");
 
-	c1->Print("gammafundist.png");
-	c2->Print("paperfig2.png");
+        TLegend *leg = new TLegend(0.56, 0.15, 0.8, 0.35);
+        leg->SetFillColor(10);
+        leg->SetFillStyle(0);
+        leg->SetBorderSize(0.035);
+        leg->SetTextFont(42);
+        leg->SetTextSize(0.04);
+        leg->AddEntry(UCM,"Uncorrelated Model","lp");
+        leg->AddEntry(PCM,"Part. Corr. Model","lp");
+        leg->AddEntry(VCM,"Var. Corr. Model","lp");
+        leg->Draw("same");
+        TLatex *tex= new TLatex(0.7,0.45,Form("Ncoll = %d",xNcoll));
+        tex->SetNDC();
+        tex->SetTextColor(1);
+        tex->SetTextSize(0.045);
+        tex->SetTextFont(42);
+        tex->Draw("same");
+
+
+	c1->Print("gammafundist_CMS.png");
+	c2->Print("paperfig2_CMS.png");
 }

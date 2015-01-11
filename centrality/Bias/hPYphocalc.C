@@ -109,9 +109,13 @@ void hPYphocalc(){
 		yUCM[ibin] += PNcoll[(int)Ncoll]*PNcollET*YNcollUCM;
 		yPCM[ibin] += PNcoll[(int)Ncoll]*PNcollET*YNcollPCM;
 		yVCM[ibin] += PNcoll[(int)Ncoll]*PNcollET*YNcollVCM;
-		yUCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollUCM;
-		yPCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollPCM;
-		yVCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollVCM;
+//		yUCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollUCM;
+//		yPCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollPCM;
+//		yVCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollVCM;
+                yUCM_[(int)Para] += PNcoll[(int)Ncoll]*YNcollUCM;
+                yPCM_[(int)Para] += PNcoll[(int)Ncoll]*YNcollPCM;
+                yVCM_[(int)Para] += PNcoll[(int)Ncoll]*YNcollVCM;
+
 		NcollvsET->Fill(Ncoll,Para);
 	}
 	for(int ibin=1;ibin<hUCM->GetNbinsX();ibin++){
