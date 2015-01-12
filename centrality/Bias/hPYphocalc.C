@@ -29,7 +29,7 @@ void hPYphocalc(){
 	TVectorD* centbin = (TVectorD*)f->Get(Form("%s/%s/centbin",dirname.Data(),name.Data()));
 
         TFile *fGlauber = TFile::Open(Glaubername->GetName());
-        (*k0)[0]=1.39;  (*kbest)[0]=1.225-0.425;
+        (*k0)[0]=1.39;  (*kbest)[0]=0.425;
         (*theta0)[0]=3.41;      (*thetabest)[0]=1.30;
         TF1 *gammafun[maxNpart];
         TF1 *gammafunevt[maxNpart];
@@ -51,6 +51,10 @@ void hPYphocalc(){
 		gammafunnucl[iNpart]->SetParameter(1,theta_);
 		gammafunnuclNcoll[iNpart]->SetParameter(0,(*kbest)[0]*(iNpart-1));
 		gammafunnuclNcoll[iNpart]->SetParameter(1,theta_);
+		if(iNpart==2){
+			gammafunnuclNcoll[iNpart]->SetNpx(1e4);
+			gammafunnuclNcoll[iNpart]->SetRange(1e-11,200);
+		}
        }
 
         TTree *t = (TTree*)fGlauber->Get("nt_p_Pb");
@@ -109,12 +113,9 @@ void hPYphocalc(){
 		yUCM[ibin] += PNcoll[(int)Ncoll]*PNcollET*YNcollUCM;
 		yPCM[ibin] += PNcoll[(int)Ncoll]*PNcollET*YNcollPCM;
 		yVCM[ibin] += PNcoll[(int)Ncoll]*PNcollET*YNcollVCM;
-//		yUCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollUCM;
-//		yPCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollPCM;
-//		yVCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollVCM;
-                yUCM_[(int)Para] += PNcoll[(int)Ncoll]*YNcollUCM;
-                yPCM_[(int)Para] += PNcoll[(int)Ncoll]*YNcollPCM;
-                yVCM_[(int)Para] += PNcoll[(int)Ncoll]*YNcollVCM;
+		yUCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollUCM;
+		yPCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollPCM;
+		yVCM_[(int)Para] += PNcoll[(int)Ncoll]*PNcollET*YNcollVCM;
 
 		NcollvsET->Fill(Ncoll,Para);
 	}
