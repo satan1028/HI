@@ -26,6 +26,7 @@ void hPYphocalc(){
         TVectorD* thetabest = (TVectorD*)f->Get(Form("%s/%s/thetabest",dirname.Data(),name.Data()));
         TVectorD* kbest = (TVectorD*)f->Get(Form("%s/%s/kbest",dirname.Data(),name.Data()));
 	TVectorD* kpoint = (TVectorD*)f->Get(Form("%s/%s/kpoint",dirname.Data(),name.Data()));
+        TVectorD* NcollAver = (TVectorD*)f->Get(Form("%s/%s/NcollAver",dirname.Data(),name.Data()));
 	TVectorD* centbin = (TVectorD*)f->Get(Form("%s/%s/centbin",dirname.Data(),name.Data()));
 
         TFile *fGlauber = TFile::Open(Glaubername->GetName());
@@ -173,8 +174,8 @@ void hPYphocalc(){
 	NcollvsET->Draw("colz");
 	c2->Print("NcollvsET2D.png");
 	ofstream fstr("result_CMS.dat");
-	fstr<<"i"<<"\t"<<"centbin"<<"\t"<<"kpoint"<<"\t"<<"UCM"<<"\t"<<"PCM"<<"\t"<<"VCM"<<"\t"<<"pho1"<<"\t"<<"pho2"<<"\t"<<"MB"<<endl;
+	fstr<<"i"<<"\t"<<"centbin"<<"\t"<<"kpoint"<<"\t"<<"NcollAver"<<"\t"<<"UCM"<<"\t"<<"PCM"<<"\t"<<"VCM"<<"\t"<<"pho1"<<"\t"<<"pho2"<<"\t"<<"MB"<<endl;
 	for(int i=0;i<N-1;i++){
-		fstr<<i<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"% \t"<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<yUCM[i]<<"\t"<<yPCM[i]<<"\t"<<yVCM[i]<<"\t"<<yPCM[i]/yUCM[i]<<"\t"<<yVCM[i]/yUCM[i]<<"\t"<<"undetermined"<<endl;
+		fstr<<i<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"% \t"<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*NcollAver)[i]<<"\t"<<yUCM[i]<<"\t"<<yPCM[i]<<"\t"<<yVCM[i]<<"\t"<<yPCM[i]/yUCM[i]<<"\t"<<yVCM[i]/yUCM[i]<<"\t"<<"undetermined"<<endl;
 	}
 }
