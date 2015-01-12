@@ -29,8 +29,8 @@ void hPYphocalc(){
 	TVectorD* centbin = (TVectorD*)f->Get(Form("%s/%s/centbin",dirname.Data(),name.Data()));
 
         TFile *fGlauber = TFile::Open(Glaubername->GetName());
-        (*k0)[0]=1.39;  (*kbest)[0]=0.425;
-        (*theta0)[0]=3.41;      (*thetabest)[0]=1.30;
+        //(*k0)[0]=1.39;  (*kbest)[0]=0.425;
+        //(*theta0)[0]=3.41;      (*thetabest)[0]=1.30;
         TF1 *gammafun[maxNpart];
         TF1 *gammafunevt[maxNpart];
         TF1 *gammafunnucl[maxNpart];
@@ -136,12 +136,12 @@ void hPYphocalc(){
 	hFrame->GetXaxis()->SetTitle("HF #Sigma E_{T} |#eta|>4");
 	hFrame->GetYaxis()->SetTitle("Yield no units");
 	hFrame->GetXaxis()->SetRangeUser(0,150);
-	hFrame->GetYaxis()->SetRangeUser(1e-6,1e2);
+	hFrame->GetYaxis()->SetRangeUser(1e-6,1);
 	hFrame->Draw();
 	histo_obs_norm->SetMarkerStyle(20);
 	histo_obs_norm->SetMarkerSize(1.0);
 	histo_obs_norm->SetMarkerColor(1);
-	//histo_obs_norm->Draw("Psame");
+	histo_obs_norm->Draw("Psame");
 	hUCM->SetMarkerStyle(24);
 	hUCM->SetMarkerSize(1.0);
 	hUCM->SetMarkerColor(2);
@@ -165,14 +165,14 @@ void hPYphocalc(){
 	leg->AddEntry(hPCM,"hard scattering events(PCM)","lp");
 	leg->AddEntry(hVCM,"hard scattering events(VCM)","lp");
 	leg->Draw("same");
-	c1->Print("paperfig3.png");
+	c1->Print("paperfig3_CMS.png");
 	c2->cd();
 	gStyle->SetOptStat("nemr");
 	NcollvsET->GetXaxis()->SetTitle("Ncoll");
 	NcollvsET->GetYaxis()->SetTitle("HF #Sigma E_{T} |#eta|>4");
 	NcollvsET->Draw("colz");
 	c2->Print("NcollvsET2D.png");
-	ofstream fstr("result.dat");
+	ofstream fstr("result_CMS.dat");
 	fstr<<"i"<<"\t"<<"centbin"<<"\t"<<"kpoint"<<"\t"<<"UCM"<<"\t"<<"PCM"<<"\t"<<"VCM"<<"\t"<<"pho1"<<"\t"<<"pho2"<<"\t"<<"MB"<<endl;
 	for(int i=0;i<N-1;i++){
 		fstr<<i<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"% \t"<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<yUCM[i]<<"\t"<<yPCM[i]<<"\t"<<yVCM[i]<<"\t"<<yPCM[i]/yUCM[i]<<"\t"<<yVCM[i]/yUCM[i]<<"\t"<<"undetermined"<<endl;
