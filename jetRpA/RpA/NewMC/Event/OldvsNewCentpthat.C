@@ -4,36 +4,56 @@ void OldvsNewCentpthat(){
 	int pthat = 0;
 	int hibinmin = 0;
 	int hibinmax = 10;
-	h1_inc = DrawTH1(0,"hiHFEta4",pthat,0,100,1,30);
+/*	h1_inc = DrawTH1(0,"hiHFEta4",pthat,0,100,1,30);
 	h1 = DrawTH1(0,"hiHFEta4",pthat,hibinmin,hibinmax,1,20);
 	h1_old = DrawTH1(1,"hiHFEta4",pthat,hibinmin,hibinmax,2,20);
 	h2 = DrawTH1(0,"hiHFplusEta4",pthat,hibinmin,hibinmax,1,24);
 	h2_inc_old = DrawTH1(1,"hiHFplusEta4",pthat,0,100,2,29);
 	h2_old = DrawTH1(1,"hiHFplusEta4",pthat,hibinmin,hibinmax,2,24);
-	h1->SetTitle("");
+*/	
+	h1_data = DrawTH1(2,"hiHFEta4",pthat,hibinmin,hibinmax,1,20);
+	h1_inc_data = DrawTH1(2,"hiHFEta4",pthat,0,100,1,30);
+	h2_data = DrawTH1(2,"hiHFplusEta4",pthat,hibinmin,hibinmax,2,24);
+	h2_inc_data = DrawTH1(2,"hiHFplusEta4",pthat,0,100,2,29);
+/*	h1->SetTitle("");
 	h1->GetXaxis()->SetTitleSize(0.05);
 	h1->GetYaxis()->SetTitleSize(0.05);
 	h1->GetXaxis()->SetTitle("HF Energy");
 	h1->GetYaxis()->SetTitle("# of Events");
 	h1->GetXaxis()->SetRangeUser(0,100);
-	h1->GetYaxis()->SetRangeUser(1e-6,1);
+	h1->GetYaxis()->SetRangeUser(1,1e7);*/
+        h1_data->SetTitle("");
+        h1_data->GetXaxis()->SetTitleSize(0.05);
+        h1_data->GetYaxis()->SetTitleSize(0.05);
+        h1_data->GetXaxis()->SetTitle("HF Energy");
+        h1_data->GetYaxis()->SetTitle("# of Events");
+        h1_data->GetXaxis()->SetRangeUser(0,100);
+        h1_data->GetYaxis()->SetRangeUser(1,1e9);
 
 	TCanvas *c1 = new TCanvas();
 	c1->cd();
 	c1->SetLogy();
-	h1->Draw();
+	//h1->Draw();
 	//h1_inc->Draw("same");
 	//h2_inc_old->Draw("same");
 	//h1_old->Draw("same");
-	h2_old->Draw("same");
-	h2->Draw("same");
+	//h2_old->Draw("same");
+	//h2->Draw("same");
+	h1_data->Draw();
+	h1_inc_data->Draw("same");
+	h2_data->Draw("same");
+	h2_inc_data->Draw("same");
 	TLegend *leg = new TLegend(0.45,0.70,0.80,0.9);
-	leg->AddEntry(h1,Form("HF |#eta| > 4, %d%% < centrality < %d%%, New",hibinmin,hibinmax),"p");
+//	leg->AddEntry(h1,Form("HF |#eta| > 4, %d%% < centrality < %d%%, New",hibinmin,hibinmax),"p");
 //	leg->AddEntry(h1_inc,Form("HF |#eta| > 4, inclusive, New"),"p");
-	leg->AddEntry(h1_old,Form("HF |#eta| > 4, %d%% < centrality < %d%%, Old",hibinmin,hibinmax),"p");
-	leg->AddEntry(h2,Form("HF #eta > 4, %d%% < centrality < %d%%, New",hibinmin,hibinmax),"p");
+//	leg->AddEntry(h1_old,Form("HF |#eta| > 4, %d%% < centrality < %d%%, Old",hibinmin,hibinmax),"p");
+//	leg->AddEntry(h2,Form("HF #eta > 4, %d%% < centrality < %d%%, New",hibinmin,hibinmax),"p");
 //	leg->AddEntry(h2_inc_old,Form("HF #eta > 4, inclusive, Old"),"p");
-	leg->AddEntry(h2_old,Form("HF #eta > 4, %d%% < centrality < %d%%, Old",hibinmin,hibinmax),"p");
+//	leg->AddEntry(h2_old,Form("HF #eta > 4, %d%% < centrality < %d%%, Old",hibinmin,hibinmax),"p");
+	leg->AddEntry(h1_data,Form("HF |#eta| > 4, %d%% < centrality < %d%%, Data",hibinmin,hibinmax),"p");
+	leg->AddEntry(h1_inc_data,Form("HF |#eta| > 4, inclusive, Data",hibinmin,hibinmax),"p");
+	leg->AddEntry(h2_data,Form("HF #eta > 4, %d%% < centrality < %d%%, Data",hibinmin,hibinmax),"p");
+	leg->AddEntry(h2_inc_data,Form("HF #eta > 4, inclusive, Data",hibinmin,hibinmax),"p");
 	leg->SetBorderSize(0);
 	leg->SetFillColor(0);
 	leg->SetTextSize(0.035);
@@ -60,22 +80,24 @@ void OldvsNewCentpthat(){
 	l->Draw("same");
 	c1->Print(Form("pthat%dratio.png",pthat));
 */
-	c1->Print(Form("OldvsNewDiffvar%d_%d_test.png",hibinmin,hibinmax));
+	c1->Print(Form("DataDiffvar%d_%d.png",hibinmin,hibinmax));
 }
 
-TH1D* DrawTH1(bool isOld, TString var, int pthat, int hibinmin, int hibinmax, int color, int marker){
+TH1D* DrawTH1(int isOld, TString var, int pthat, int hibinmin, int hibinmax, int color, int marker){
 	if(pthat!=0){
-		if(!isOld)
+		if(isOld==0)
 			TFile *f = TFile::Open(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/QCD_Pt_%d_TuneZ2_Mix_5p02TeV_pythia.root",pthat));
-		else
+		else if(isOld==1)
 			TFile *f = TFile::Open(Form("/cms/store/user/qixu/jetRpA/OldForest/pPb_Full_BTagForest%d_Fix3output.root",pthat));
 		TTree *t = (TTree*)f->Get("hiEvtAnalyzer/HiTree");
 	}
 	else{
-		if(!isOld)
+		if(isOld==0)
 			TFile *f = TFile::Open("/store/user/qixu/jetRpA/skimTree/MCPPbakPu3PFskimfile0_10.root");
-		else
+		else if(isOld==1)
 			TFile *f = TFile::Open("/store/user/qixu/jetRpA/OldForest/MCPPbakPu3PFskimfile0_8.root");
+		else if(isOld==2)
+			TFile *f = TFile::Open("/store/user/qixu/jetRpA/skimTree/DataPPbakPu3PFskimfile.root");
 		TTree *t = (TTree*)f->Get("nt");
 		
 	}
@@ -87,7 +109,9 @@ TH1D* DrawTH1(bool isOld, TString var, int pthat, int hibinmin, int hibinmax, in
 	t->SetBranchAddress("hiHFminusEta4",&hiHFminusEta4);
 	t->SetBranchAddress("vz",&vz);
 	t->SetBranchAddress("hiBin",&hiBin);
+	cout<<"Total Events="<<t->GetEntries()<<endl;
 	for(int Ev=0;Ev<t->GetEntries();Ev++){
+		if(Ev%1000000==0) cout<<"has processed "<<Ev<<endl;
 		t->GetEntry(Ev);
 		if(hiBin > hibinmax || hiBin < hibinmin) continue;
 		if(TMath::Abs(vz)>=15) continue;
@@ -100,7 +124,7 @@ TH1D* DrawTH1(bool isOld, TString var, int pthat, int hibinmin, int hibinmax, in
 	}
 //	t->Draw(Form("%s>>h",var.Data()),"TMath::Abs(vz)<15");
 //	h = (TH1D*)gDirectory->Get("h");
-	h->Scale(1.0/h->Integral());
+//	h->Scale(1.0/h->Integral());
 	h->SetMarkerColor(color);
 	h->SetMarkerStyle(marker);
 	h->SetLineColor(color);
