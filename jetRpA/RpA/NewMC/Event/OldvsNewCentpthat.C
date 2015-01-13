@@ -16,23 +16,23 @@ void OldvsNewCentpthat(){
 	h1->GetXaxis()->SetTitle("HF Energy");
 	h1->GetYaxis()->SetTitle("# of Events");
 	h1->GetXaxis()->SetRangeUser(0,100);
-	h1->GetYaxis()->SetRangeUser(1,5e6);
+	h1->GetYaxis()->SetRangeUser(1e-6,1);
 
 	TCanvas *c1 = new TCanvas();
 	c1->cd();
 	c1->SetLogy();
 	h1->Draw();
-	h1_inc->Draw("same");
-	h2_inc_old->Draw("same");
+	//h1_inc->Draw("same");
+	//h2_inc_old->Draw("same");
 	//h1_old->Draw("same");
 	h2_old->Draw("same");
-	//h2_old->Draw("same");
+	h2->Draw("same");
 	TLegend *leg = new TLegend(0.45,0.70,0.80,0.9);
 	leg->AddEntry(h1,Form("HF |#eta| > 4, %d%% < centrality < %d%%, New",hibinmin,hibinmax),"p");
-	leg->AddEntry(h1_inc,Form("HF |#eta| > 4, inclusive, New"),"p");
-	//leg->AddEntry(h1_old,Form("HF |#eta| > 4, %d%% < centrality < %d%%, Old",hibinmin,hibinmax),"p");
-	//leg->AddEntry(h2,Form("HF #eta > 4, %d%% < centrality < %d%%, New",hibinmin,hibinmax),"p");
-	leg->AddEntry(h2_inc_old,Form("HF #eta > 4, inclusive, Old"),"p");
+//	leg->AddEntry(h1_inc,Form("HF |#eta| > 4, inclusive, New"),"p");
+	leg->AddEntry(h1_old,Form("HF |#eta| > 4, %d%% < centrality < %d%%, Old",hibinmin,hibinmax),"p");
+	leg->AddEntry(h2,Form("HF #eta > 4, %d%% < centrality < %d%%, New",hibinmin,hibinmax),"p");
+//	leg->AddEntry(h2_inc_old,Form("HF #eta > 4, inclusive, Old"),"p");
 	leg->AddEntry(h2_old,Form("HF #eta > 4, %d%% < centrality < %d%%, Old",hibinmin,hibinmax),"p");
 	leg->SetBorderSize(0);
 	leg->SetFillColor(0);
@@ -60,7 +60,7 @@ void OldvsNewCentpthat(){
 	l->Draw("same");
 	c1->Print(Form("pthat%dratio.png",pthat));
 */
-	c1->Print(Form("OldvsNewDiffvarIncvs%d_%d.png",hibinmin,hibinmax));
+	c1->Print(Form("OldvsNewDiffvar%d_%d_test.png",hibinmin,hibinmax));
 }
 
 TH1D* DrawTH1(bool isOld, TString var, int pthat, int hibinmin, int hibinmax, int color, int marker){
@@ -100,7 +100,7 @@ TH1D* DrawTH1(bool isOld, TString var, int pthat, int hibinmin, int hibinmax, in
 	}
 //	t->Draw(Form("%s>>h",var.Data()),"TMath::Abs(vz)<15");
 //	h = (TH1D*)gDirectory->Get("h");
-//	h->Scale(1.0/h->Integral());
+	h->Scale(1.0/h->Integral());
 	h->SetMarkerColor(color);
 	h->SetMarkerStyle(marker);
 	h->SetLineColor(color);

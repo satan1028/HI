@@ -76,8 +76,8 @@ void getResV(){
 	}
 
 	for(int ifile=0; ifile<nFileAll; ifile++){
-		if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),ifile));
-		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),ifile));
+		if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/useweight/tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),ifile));
+		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/useweight/tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 		TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));

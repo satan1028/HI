@@ -18,8 +18,8 @@ void dofirst(){
 	int end=atoi(getenv("END"));
 	string dir=getenv("DIR");
 	for(int i=start;i<end;i++){
-		if(SumorProd=="Sum")	name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),i);
-		else	name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),i);
+		if(SumorProd=="Sum")	name=Form("/scratch/xuq7/flow/pbsjoboutput/useweight/tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),i);
+		else	name=Form("/scratch/xuq7/flow/pbsjoboutput/useweight/tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),i);
 		remove(name.Data());
 		LYZ *l = new LYZ(readline("./filelist.dat",i));
 		cout<<"start "<<i<<" th job"<<endl;
@@ -42,8 +42,8 @@ void dosecond(){
 	string dir=getenv("DIR");
         TString name;
         for(int i=start;i<end;i++){
-                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/newptbin/Anav_Prod_%d.root",dir.c_str(),i);
-                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/newptbin/Anav_Prod2_%d.root",dir.c_str(),i);
+                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/useweight/tracknormcpt03to6/%s/Anav_Prod_%d.root",dir.c_str(),i);
+                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/useweight/tracknormcpt03to6/%s/Anav_Prod2_%d.root",dir.c_str(),i);
                 remove(name.Data());
                 LYZ *l = new LYZ(readline("filelist.dat",i));
                 cout<<"start "<<i<<" th job"<<endl;
@@ -69,8 +69,8 @@ void dosecondsub(){
    	if(SumorProd=="Sum")       infname="mergedV_Sum_sub.root";
         else    infname="mergedV_Prod_sub.root";
         for(int i=start;i<end;i++){
-                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod_sub_%d.root",dir.c_str(),i);
-                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod2_sub_%d.root",dir.c_str(),i);
+                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/useweight/tracknormcpt03to6/%s/Anav_Prod_sub_%d.root",dir.c_str(),i);
+                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/useweight/tracknormcpt03to6/%s/Anav_Prod2_sub_%d.root",dir.c_str(),i);
                 remove(name.Data());
                 LYZ *l = new LYZ(readline("filelist.dat",i));
                 cout<<"start "<<i<<" th job"<<endl;

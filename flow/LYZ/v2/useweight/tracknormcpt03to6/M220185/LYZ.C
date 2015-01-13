@@ -66,7 +66,7 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
 	TComplex g[nptV][ntheta][nstepr];
 	double Q[nptV][ntheta];	double Qx[nptV];	double Qy[nptV];
 	int mult, ntrk;
-        double phi[10000], eta[10000], pt[10000];
+        double phi[10000], eta[10000], pt[10000], w[10000];
         TFile *infile = TFile::Open(filename);
         TTree* t = (TTree*)infile->Get("demo/TrackTree");
         t->SetBranchAddress("mult",&mult);
@@ -107,10 +107,11 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
 			if(ipt<0 || ipt==nptV)	continue;
                         totpt[xbin][ipt]+=pt[imult];
                         totmult[xbin][ipt]++;
-			Qx[ipt]+=1.*cos(nn*phi[imult]);
-			Qy[ipt]+=1.*sin(nn*phi[imult]);
+			w[imult] = pt[imult];
+			Qx[ipt]+=w[imult]*cos(nn*phi[imult]);
+			Qy[ipt]+=w[imult]*sin(nn*phi[imult]);
 			for(int itheta=0;itheta<ntheta;itheta++){
-                        	double temp=TMath::Cos(nn*(phi[imult]-theta[itheta]));
+                        	double temp=w[imult]*TMath::Cos(nn*(phi[imult]-theta[itheta]));
 				for(int ir=0; ir<nstepr; ir++)
 	                           if(way==0)
 					g[ipt][itheta][ir]*=TComplex(1.,r[xbin][ir]*temp);
@@ -150,9 +151,9 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
                 else
 			r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/D_%d/r0",ibin,xpt));
 	}
-		
+
         int mult, ntrk;
-        double phi[10000], eta[10000], pt[10000];
+        double phi[10000], eta[10000], pt[10000], w[10000];
         TFile *infile = TFile::Open(filename);
         TTree* t = (TTree*)infile->Get("demo/TrackTree");
         t->SetBranchAddress("mult",&mult);
@@ -193,8 +194,9 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 			if(ipt<0 || ipt==nptv)	continue;
 			totpt[xbin][ipt]+=pt[imult];
                         totmult[xbin][ipt]++;
+			w[imult] = pt[imult];
 			for(int itheta=0;itheta<ntheta;itheta++){
-                                Double_t temp=TMath::Cos(nn*(phi[imult]-theta[itheta]));
+                                Double_t temp=w[imult]*TMath::Cos(nn*(phi[imult]-theta[itheta]));
 				TComplex temp1(1.,(*r0res[xbin])[itheta]*temp);
                                 if(way==0)
 					g0[itheta]*=temp1;
