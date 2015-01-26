@@ -10,7 +10,7 @@ void DrawdNchdeta(){
     hFrame->SetTitle("");
     hFrame->GetXaxis()->SetTitle("#eta_{lab}");
     hFrame->GetYaxis()->SetTitle("#frac{1}{N_{evt}}#frac{dN_{ch}}{d#eta}");
-    hFrame->GetYaxis()->SetRangeUser(0,120);
+    hFrame->GetYaxis()->SetRangeUser(0,50);
     hFrame->GetYaxis()->SetTitleOffset(1.1);
     TLegend *leg = new TLegend(0.3,0.75,0.85,0.88);
     leg->SetBorderSize(0);
