@@ -14,9 +14,8 @@ THStack* calcNtracks(int);
 THStack* calcwtrack(int);
 TH1D* calcwevent(int);
 TH1D* calcNevtsel(int);
-void calcdNchdeta(){
+void calcdNchdeta(int type=0){ //-1 for genMC, 0 for recoMC, 1 for data
 	TH1::SetDefaultSumw2();
-	int type=0; //-1 for genMC, 0 for recoMC, 1 for data
         TString MCtype = "Hijing";
 	TString stype;
 	if(type==-1) stype=Form("%s_gen",MCtype.Data());	else if(type==0) stype=Form("%s_recoMC",MCtype.Data()); else stype="data";
@@ -107,7 +106,7 @@ THStack* calcNtracks(int type){
 		}
 		else{
 			for(int imult=0;imult<t->mult;imult++){
-				if(t->pt[imult]<=0.1 || TMath::Abs(t->eta[imult])>2.4 ) continue;
+				if(t->pt[imult]<=0.1 || TMath::Abs(t->eta[imult])>2.4 || t->chg[imult]==0 ) continue;
                                 hNtracks[xMult]->Fill(t->pt[imult],t->eta[imult]);
                         }
 		}
@@ -152,6 +151,7 @@ THStack* calcwtrack(int type){
 	}
 	if(type>=0){
 		hwtrack = (TH2F*)hR->Clone("hwtrack");
+                hwtrack->SetName("hwtrack");
 		hwtrack->Divide(heptrack);
 	}
         SKhs->Add(hF);
@@ -191,6 +191,7 @@ TH1D* calcwevent(int type){
 		TH1D* heptrig = (TH1D*)hNevent_aft->Clone("heptrig");
 		heptrig->Divide(hNevent_bef);	//notice heptrig should be less than or equal to 1, BayesDivide used
 		hwevent = (TH1D*)hNevent_bef->Clone("hwevent");
+                hwevent->SetName("hwevent");
 		TH1D* htemp = (TH1D*)hNevent_aft->Clone("htemp");
 		htemp->Multiply(hepPV);
 		hwevent->Divide(htemp);	
@@ -225,7 +226,7 @@ TH1D* calcNevtsel(int type){
         	}
 		else{
 	                for(int imult=0;imult<t->mult;imult++){
-				 if(t->pt[imult]<=0.1 || TMath::Abs(t->eta[imult])>2.4 ) continue;
+				 if(t->pt[imult]<=0.1 || TMath::Abs(t->eta[imult])>2.4 || t->chg[imult]==0 ) continue;
                                         M0++;
                         }
                         hNevtsel->Fill(M0);

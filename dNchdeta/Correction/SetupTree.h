@@ -12,6 +12,7 @@ public:
 	Float_t hiHF, vz;
 	Float_t hiHFminus4, hiHFplus4;
 	Float_t pt[20000],eta[20000];
+        Int_t chg[20000];
 	Int_t HLT_PAZeroBiasPixel_SingleTrack_v1, phltPixelClusterShapeFilter, phfPosFilter1, phfNegFilter1, pprimaryvertexFilter, pBeamScrapingFilter, pVertexFilterCutGplus;
 	Int_t nTrk, mult;
 	Bool_t highPurity[10000];
@@ -33,8 +34,8 @@ treeInt::treeInt(int _type){
 	type = _type;
 	TString filename;
 	if(type<=0)
-        //	filename = "/store/user/tuos/pPb_MC_MinBiasTree_v4_Hijing_180k.root";
-                filename = "/store/user/tuos/pPb_MC_MinBiasTree_v4_Epos_189k.root";
+        	filename = "/store/user/tuos/pPb_MC_MinBiasTree_v4_Hijing_180k.root";
+        //        filename = "/store/user/tuos/pPb_MC_MinBiasTree_v4_Epos_189k.root";
 	else	
 	        filename = "/store/user/tuos/pPb_MinBiasTree_v5_211256_json.root";
         f = TFile::Open(filename);
@@ -87,6 +88,7 @@ treeInt::Setup(){
                 gentree->SetBranchAddress("mult",&mult);
                 gentree->SetBranchAddress("pt",pt);
                 gentree->SetBranchAddress("eta",eta);
+                gentree->SetBranchAddress("chg",chg);
         }
         //f->Close();
 }
