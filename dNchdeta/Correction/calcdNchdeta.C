@@ -16,7 +16,7 @@ TH1D* calcwevent(int);
 TH1D* calcNevtsel(int);
 void calcdNchdeta(){
 	TH1::SetDefaultSumw2();
-	int type=-1; //-1 for genMC, 0 for recoMC, 1 for data
+	int type=0; //-1 for genMC, 0 for recoMC, 1 for data
         TString MCtype = "Hijing";
 	TString stype;
 	if(type==-1) stype=Form("%s_gen",MCtype.Data());	else if(type==0) stype=Form("%s_recoMC",MCtype.Data()); else stype="data";
@@ -38,7 +38,7 @@ void calcdNchdeta(){
         TH2F *hwtrack = (TH2F*)SKhs->GetStack()->At(3);
 	for(int iMult=0;iMult<nMult;iMult++){
 		TH2F* htemp1 = (TH2F*)SKNtracks->GetStack()->At(iMult);
-	//	htemp1->Multiply(hwtrack);
+		htemp1->Multiply(hwtrack);
 		TH1D* htemp2 = htemp1->ProjectionY("htemp2",0,-1,"e");
 		htemp2->Scale(hwevent->GetBinContent(iMult+1));
 		hdnom->Add(htemp2);
