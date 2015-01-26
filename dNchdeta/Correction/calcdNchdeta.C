@@ -11,7 +11,7 @@
 #include "SetupTree.h"
 using namespace std;
 THStack* calcNtracks(int);
-THStack* calcwtrack(int);
+TH2F* calcwtrack(int);
 TH1D* calcwevent(int);
 TH1D* calcNevtsel(int);
 void calcdNchdeta(int type=0){ //-1 for genMC, 0 for recoMC, 1 for data
@@ -30,11 +30,7 @@ void calcdNchdeta(int type=0){ //-1 for genMC, 0 for recoMC, 1 for data
 	cout<<"nom = "<<nom[0]<<endl;
 	double fMV = 0.;
 	THStack* SKNtracks = calcNtracks(type);
-	THStack* SKhs = calcwtrack(type);
-        TH2F *hF = (TH2F*)SKhs->GetStack()->At(0);
-        TH2F *hR = (TH2F*)SKhs->GetStack()->At(1);
-        TH2F *heptrack = (TH2F*)SKhs->GetStack()->At(2);
-        TH2F *hwtrack = (TH2F*)SKhs->GetStack()->At(3);
+	TH2F* hwtrack = calcwtrack(type);
 	for(int iMult=0;iMult<nMult;iMult++){
 		TH2F* htemp1 = (TH2F*)SKNtracks->GetStack()->At(iMult);
 		htemp1->Multiply(hwtrack);
@@ -54,9 +50,6 @@ void calcdNchdeta(int type=0){ //-1 for genMC, 0 for recoMC, 1 for data
 	hNtracks->Write();
 	hwevent->Write();
 	nom.Write("nom",TObject::kOverwrite);
-        hF->Write();
-        hR->Write();
-	heptrack->Write();
 	hwtrack->Write();
 	hNevtsel->Write();
 	SKNtracks->Write();
@@ -117,13 +110,14 @@ THStack* calcNtracks(int type){
 	return SKNtracks;
 }
 
-THStack* calcwtrack(int type){
+TH2F* calcwtrack(int type){
 	TH1::SetDefaultSumw2();
 	TString corrname1 = "/home/xuq7/HI/dNchdeta/Correction/trkEff_pp_all_42X_origin.root";
 	TString corrname2 = "/home/xuq7/HI/dNchdeta/Correction/TrackCorrections_HIJING_538_OFFICIAL_Mar24.root";
 	TFile *fcorr1 = TFile::Open(corrname1);
 //	TFile *fcorr2 = TFile::Open(corrname2);
-	THStack* SKhs = new THStack("Stackhs","");
+        TFile *fout = new TFile("trackCorr.root","Recreate");
+        fcorr1->cd();
 	TH2F* rTotalEff3D = (TH2F*)fcorr1->Get("rTotalEff3D");
 	TGraphAsymmErrors* gFakPt = (TGraphAsymmErrors*)fcorr1->Get("gFakPt");
 
@@ -154,11 +148,20 @@ THStack* calcwtrack(int type){
                 hwtrack->SetName("hwtrack");
 		hwtrack->Divide(heptrack);
 	}
-        SKhs->Add(hF);
-        SKhs->Add(hR);
-        SKhs->Add(heptrack);
-        SKhs->Add(hwtrack);
-	return SKhs;
+/*	for(int binx=0;binx<npt;binx++){
+                    for(int biny=0;biny<neta;biny++){
+                        if(binx<10 && biny<10)
+                        cout<<binx<<"\t"<<biny<<"\t"<<hF->GetBinContent(binx,biny)<<"\t"<<hR->GetBinContent(binx,biny)<<"\t"<<heptrack->GetBinContent(binx,biny)<<"\t"<<hwtrack->GetBinContent(binx,biny)<<"\t"<<rTotalEff3D->GetBinContent(binx,biny)<<endl;
+                    }
+        }
+        heptrack->Draw("colz");*/
+        fout->cd();
+        hF->Write();
+        hR->Write();
+        heptrack->Write();
+        hwtrack->Write();
+	return hwtrack;
+        fout->Close();
 
 }
 
