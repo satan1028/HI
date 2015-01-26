@@ -34,7 +34,7 @@ void calcdNchdeta(int type=0){ //-1 for genMC, 0 for recoMC, 1 for data
 	for(int iMult=0;iMult<nMult;iMult++){
 		TH2F* htemp1 = (TH2F*)SKNtracks->GetStack()->At(iMult);
 		htemp1->Multiply(hwtrack);
-		TH1D* htemp2 = htemp1->ProjectionY("htemp2",0,-1,"e");
+		TH1D* htemp2 = htemp1->ProjectionY("htemp2",htemp1->GetXaxis()->FindBin(ptmin),-1,"e");
 		htemp2->Scale(hwevent->GetBinContent(iMult+1));
 		hdnom->Add(htemp2);
 	}
@@ -44,7 +44,7 @@ void calcdNchdeta(int type=0){ //-1 for genMC, 0 for recoMC, 1 for data
 	}
 	dNchdeta->Scale(1.0/((1.+fMV)*nom[0]));
 	TH2F* hNtracks = (TH2F*)SKNtracks->GetStack()->At(1);
-	TFile *fout = new TFile(Form("Corr%s.root",stype.Data()),"Recreate");
+	TFile *fout = new TFile(Form("Corr%s_pt1.root",stype.Data()),"Recreate");
 	fout->cd();
 	dNchdeta->Write();
 	hNtracks->Write();

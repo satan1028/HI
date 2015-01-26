@@ -11,6 +11,7 @@ const int neta = 30;
 const double etabin[neta+1] = {-3,-2.8,-2.6,-2.4,-2.2,-2,-1.8,-1.6,-1.4,-1.2,-1,-0.8,-0.6,-0.4,-0.2,4.47035e-08,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6,1.8,2,2.2,2.4,2.6,2.8,3};
 const int nMult=14;
 const double Multbin[nMult+1] = {0,1,2,3,4,5,6,7,8,9,10,25,50,200,1000};
+const int ptmin = 1.0;
 //const int nMulttot=200;
 //int Multbintot[nMulttot];
 //for(int iMult=0;iMult<nMulttot;iMult++)
