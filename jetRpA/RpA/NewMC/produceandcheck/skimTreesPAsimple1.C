@@ -46,7 +46,7 @@ typedef std::vector<trigger::TriggerObject> trigO;
 //const int QCDpthatBins = 8;
 const int QCDpthatBins = 10;
 //const int QCDpthatBins = 1;
-const int dataFiles = 2886;
+const int dataFiles = 4828;
 int startfile ;
 int endfile ;
 int combinationMethod ;
@@ -56,9 +56,8 @@ const double deta[]={-2.2, -1.2, -0.7, -0.3, 0.3, 0.7,1.2,2.2} ;
 const int netabin = sizeof(deta)/sizeof(Double_t)-1 ;
 const Double_t jetPtBin[]={3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
 const int nJetPtBin = sizeof(jetPtBin)/sizeof(Double_t)-1 ;
-//const double wght[] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08, 0};
-const int pthatbin[11] = {15,30,50,80,120,170,220,280,370,460, 9999};
-const double wght[11] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08, 0};
+const int pthatbin[] = {15,30,50,80,120,170,220,280,370,460, 9999};
+const double wght[] = {5.335E-01, 3.378E-02, 3.778E-03, 4.412E-04, 6.147E-05,1.018E-05,2.477E-06,6.160E-07, 1.088E-07, 2.527E-08, 0};
 
 //**********************************************************
 // Count the MC events to appropriately weight the pthat bins
@@ -251,7 +250,7 @@ if(coll=="PPb"){
  
 if(!isMC){
      if(coll=="PPb") infile = "pAFileListKurtv4.txt";
-     if(coll=="PbP") infile = "PbpFileListYmao.txt";
+     if(coll=="PbP") infile = "PbpFileListYmaoV3.txt";
 }
 else{
      if(coll=="PPb") infile = "pPbMCKurtForest.txt";
