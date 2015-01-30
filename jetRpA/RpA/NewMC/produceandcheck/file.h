@@ -2,32 +2,34 @@ TString algo, datafile, PPfile, PPbfile;
 
 algo="akPu3PF";
 
-TString DataPPbfile="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPPbakPu3PFskimUniv.root";
-TString DataPPbJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPPbakPu3PFskimJetID.root";
-TString DataPbPJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPbPakPu3PFskimJetID.root";
-TString DataPbPfile="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPbPakPu3PFskimUniv.root";
-TString MCPPbfile="/scratch/xuq7/RpA/NewMC/MCPPbakPu3PF_useskim.root";
-TString MCPbPfile="/scratch/xuq7/RpA/NewMC/MCPbPakPu3PF_useskim.root";
-TString MCPPbxSecfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimUniv.root";
-//TString MCPbPfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimUniv.root";
+//TString DataPPbfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPPbakPu3PFskimUniv.root";
+TString DataPPbfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPbPakPu3PFskimUniv.root";
+TString DataPPbJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPPbakPu3PFskimJetID.root";
+TString DataPbPJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFskimJetID.root";
+//TString DataPbPfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFskimUniv.root";
+TString DataPbPfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPbPakPu3PFskimUniv.root";
+TString MCPPbfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim.root";
+//TString MCPbPfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PF_useskim.root";
+TString MCPbPfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPbPakPu3PF_useskim.root";
+TString MCPPbxSecfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimUniv.root";
 
-TString MCPPxSecfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPakPu3PFxSecskimUniv.root";
-TString MCPPxSecJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPakPu3PFxSecskimJetID.root";
+TString MCPPxSecfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFxSecskimUniv.root";
+TString MCPPxSecJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFxSecskimJetID.root";
 
-TString MCPPbJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFskimJetID.root";
-TString MCPPbxSecJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimJetID.root";
-TString MCPbPJetIDfile="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimJetID.root";
+TString MCPPbJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFskimJetID.root";
+TString MCPPbxSecJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimJetID.root";
+TString MCPbPJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimJetID.root";
 
-TString DataPPbfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPPbakPu3PFUniv.root";
-TString DataPbPfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPbPakPu3PFUniv.root";
-TString DataPbPJetIDfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/DATAPbPakPu3PFJetID.root";
-TString MCPPbfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFUniv.root";
-TString MCPPbJetIDfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPbakPu3PFJetID.root";
-TString MCPbPfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPbPakPu3PFUniv.root";
-TString MCPbPJetIDfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPbPakPu3PFJetID.root";
+TString DataPPbfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPPbakPu3PFUniv.root";
+TString DataPbPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFUniv.root";
+TString DataPbPJetIDfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFJetID.root";
+TString MCPPbfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFUniv.root";
+TString MCPPbJetIDfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFJetID.root";
+TString MCPbPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFUniv.root";
+TString MCPbPJetIDfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFJetID.root";
 
 //TString 
-//TString MCPPfileOld="/scratch/xuq7/RpA/fromLinux/TreeAna/MCPPakPu3PFUniv.root";
+//TString MCPPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFUniv.root";
 
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18,21,24,28,32,37,43,49,56,64,74,84,97,114,133,153,174,196,220,245,272,300,330,362,395,430,468,507,548,592,638,686,1000};
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;

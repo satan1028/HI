@@ -4,6 +4,7 @@ ibin	iptbin	itheta	r0	V	sigma2	chi	Vn Errors
 0	0	2	0.1737	0.0455	1037.0550	0.4298	0.0050
 0	0	3	0.1676	0.0472	1037.0550	0.4456	0.0052
 0	0	4	0.1721	0.0460	1037.0550	0.4339	0.0050
+					845.4181	0.4761
 
 
 ibin	iptbin	avgmult	avgpt	Vn mean	Vn mean Error

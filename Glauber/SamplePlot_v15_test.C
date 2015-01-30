@@ -1,26 +1,4 @@
 //Extremely simple plotting of some variables from the PHOBOS v1.5 Glauber Ntuple File
-// To run the macro:
-///tuos@[~/Desktop/DesktopArchive/temp/forStudent]root -l SamplePlot_v15_test.C 
-///root [0] 
-///Processing SamplePlot_v15_test.C...
-///Info in <TCanvas::Print>: GIF file c1_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c2_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c3_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c14a_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c14b_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c14c_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c14d_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c14e_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c14f_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c15a_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c15b_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c15c_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c15d_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c15e_v15.gif has been created
-///Info in <TCanvas::Print>: GIF file c15f_v15.gif has been created
-///root [1]
-///root [1] .q
-
 {
   // Setup
   gROOT->Reset();
@@ -31,11 +9,12 @@
   Int_t nFlagSaveGIFs = 1 ; // 0 = don't save,  1 = save
 
   // open ntuple from glauber
-  TFile f("Phob_Glau_PbPb_test_v15.root");
+  //TFile f("Phob_Glau_PbPb_test_v15_10k.root");
+  TFile f("Phob_Glau_PbPb_test_v15_1M.root");
 
 
   //-----------------------Npart----------------------
-
+/*
   TCanvas *c1 = new TCanvas("c1","c1",0,0,500,500);
   c1->SetLogy(1);
   c1->cd();
@@ -63,14 +42,14 @@
   nt_Pb_Pb->Project("hb","B");
   hb->Draw();
   if(nFlagSaveGIFs==1)  c3->SaveAs("c3_v15.gif");
-
-  /*
+*/
+  
   //------------------Ncoll vs Npart (scatter)----------------------
 
   TCanvas *c4 = new TCanvas("c4","c4",0,50,500,500);
   c4->SetLogz(1);
   c4->cd();
-  TH2D *hNpartNcoll = new TH2D("hNpartNcoll","Npart vs Ncoll;Npart;Ncoll",700,0,700,2500,0,2500);
+  TH2D *hNpartNcoll = new TH2D("hNpartNcoll","Npart vs Ncoll;Npart;Ncoll",400,0,400,2500,0,2500);
   nt_Pb_Pb->Project("hNpartNcoll","Ncoll:Npart");
   hNpartNcoll->Draw("colz");
   if(nFlagSaveGIFs==1)  c4->SaveAs("c4_v15.gif");
@@ -79,17 +58,32 @@
 
   TCanvas *c5 = new TCanvas("c5","c5",100,50,500,500);
   c5->cd();
-  TProfile *pNpartNcoll = new TProfile("pNpartNcoll","Profile Npart vs Ncoll;Npart;Ncoll",700,0,700);
+  TProfile *pNpartNcoll = new TProfile("pNpartNcoll","Profile Npart vs Ncoll;Npart;Ncoll",400,0,400);
   nt_Pb_Pb->Project("pNpartNcoll","Ncoll:Npart");
   pNpartNcoll->Draw();
   if(nFlagSaveGIFs==1)  c5->SaveAs("c5_v15.gif");
+
+
+  TCanvas *c5x = new TCanvas("c5x","c5x",100,50,500,500);
+  c5x->cd();
+  TH1D *pNpartNcollx = new TH1D("pNpartNcollx","Profile Npart vs Ncollx;Npart;Ncollx",400,0,400);
+  double np;
+  double nc;
+  for(int i=0;i<400;i++){
+     //cout<<"i ="<<i<<"  ncoll: "<<pNpartNcoll->GetBinContent(i)<<endl;
+  pNpartNcollx->SetBinContent(i,sqrt(pNpartNcoll->GetBinContent(i)));
+  }
+  pNpartNcollx->Draw();
+  if(nFlagSaveGIFs==1)  c5x->SaveAs("c5x_v15.gif");
+
+
 
   //------------------EccPART vs Npart (scatter)----------------------
 
   TCanvas *c6 = new TCanvas("c6","c6",0,100,500,500);
   c6->SetLogz(1);
   c6->cd();
-  TH2D *hNpartEccPART = new TH2D("hNpartEccPART","Npart vs EccPART;Npart;EccPART",700,0,700,1000,0,1);
+  TH2D *hNpartEccPART = new TH2D("hNpartEccPART","Npart vs EccPART;Npart;EccPART",400,0,400,1000,0,1);
   nt_Pb_Pb->Project("hNpartEccPART","EccPART:Npart");
   hNpartEccPART->Draw("colz");
   if(nFlagSaveGIFs==1)  c6->SaveAs("c6_v15.gif");
@@ -98,17 +92,17 @@
 
   TCanvas *c7 = new TCanvas("c7","c7",100,100,500,500);
   c7->cd();
-  TProfile *pNpartEccPART = new TProfile("pNpartEccPART","Profile Npart vs EccPART;Npart;EccPART",700,0,700);
+  TProfile *pNpartEccPART = new TProfile("pNpartEccPART","Profile Npart vs EccPART;Npart;EccPART",400,0,400);
   nt_Pb_Pb->Project("pNpartEccPART","EccPART:Npart");
   pNpartEccPART->Draw();
   if(nFlagSaveGIFs==1)  c7->SaveAs("c7_v15.gif");
 
   //------------------SPART vs Npart (scatter)----------------------
-
+/*
   TCanvas *c8 = new TCanvas("c8","c8",0,150,500,500);
   c8->SetLogz(1);
   c8->cd();
-  TH2D *hNpartSPART = new TH2D("hNpartSPART","Npart vs SPART;Npart;SPART",700,0,700,500,0,50);
+  TH2D *hNpartSPART = new TH2D("hNpartSPART","Npart vs SPART;Npart;SPART",400,0,400,500,0,50);
   nt_Pb_Pb->Project("hNpartSPART","SPART:Npart");
   hNpartSPART->Draw("colz");
   if(nFlagSaveGIFs==1)  c8->SaveAs("c8_v15.gif");
@@ -117,7 +111,7 @@
 
   TCanvas *c9 = new TCanvas("c9","c9",100,150,500,500);
   c9->cd();
-  TProfile *pNpartSPART = new TProfile("pNpartSPART","Profile Npart vs SPART;Npart;SPART",700,0,700);
+  TProfile *pNpartSPART = new TProfile("pNpartSPART","Profile Npart vs SPART;Npart;SPART",400,0,400);
   nt_Pb_Pb->Project("pNpartSPART","SPART:Npart");
   pNpartSPART->Draw();
   if(nFlagSaveGIFs==1)  c9->SaveAs("c9_v15.gif");
@@ -128,7 +122,7 @@
   TCanvas *c10 = new TCanvas("c10","c10",0,200,500,500);
   c10->SetLogz(1);
   c10->cd();
-  TH2D *hNpartS12RP_Npart = new TH2D("hNpartS12RP_Npart","Npart vs S12RP_Npart;Npart;S12RP_Npart",700,0,700,2000,0,200);
+  TH2D *hNpartS12RP_Npart = new TH2D("hNpartS12RP_Npart","Npart vs S12RP_Npart;Npart;S12RP_Npart",400,0,400,2000,0,200);
   nt_Pb_Pb->Project("hNpartS12RP_Npart","S12RP_Npart:Npart");
   hNpartS12RP_Npart->Draw("colz");
   if(nFlagSaveGIFs==1)  c10->SaveAs("c10_v15.gif");
@@ -137,7 +131,7 @@
 
   TCanvas *c11 = new TCanvas("c11","c11",100,200,500,500);
   c11->cd();
-  TProfile *pNpartS12RP_Npart = new TProfile("pNpartS12RP_Npart","Profile Npart vs S12RP_Npart;Npart;S12RP_Npart",700,0,700);
+  TProfile *pNpartS12RP_Npart = new TProfile("pNpartS12RP_Npart","Profile Npart vs S12RP_Npart;Npart;S12RP_Npart",400,0,400);
   nt_Pb_Pb->Project("pNpartS12RP_Npart","S12RP_Npart:Npart");
   pNpartS12RP_Npart->Draw();
   if(nFlagSaveGIFs==1)  c11->SaveAs("c11_v15.gif");
@@ -169,7 +163,7 @@
   if(nFlagSaveGIFs==1)  c13->SaveAs("c13_v15.gif");
   */
 
-
+/*
   //------------------Ecc1PART (1D)----------------------
 
   TCanvas *c14a = new TCanvas("c14a","c14a",0,50,500,500);
@@ -303,7 +297,7 @@
   c15f->Update();
   if(nFlagSaveGIFs==1)  c15f->SaveAs("c15f_v15.gif");
 
-
+*/
 
   /*
 
@@ -315,7 +309,7 @@
   TH2D *hNpart_Ecc1PART = new TH2D("hNpart_Ecc1PART","Ecc1PART vs Npart;Npart;Ecc1PART",500,0,500,100,0,1);
   nt_Pb_Pb->Project("hNpart_Ecc1PART","Ecc1PART:Npart","Npart>2");
   hNpart_Ecc1PART->Draw("colz");
-  TProfile *pNpartEcc1PART = new TProfile("pNpartEcc1PART","Profile Npart vs Ecc1PART;Npart;Ecc1PART",700,0,700);
+  TProfile *pNpartEcc1PART = new TProfile("pNpartEcc1PART","Profile Npart vs Ecc1PART;Npart;Ecc1PART",400,0,400);
   nt_Pb_Pb->Project("pNpartEcc1PART","Ecc1PART:Npart");
   pNpartEcc1PART->Draw("same");
   c16a->Update();
@@ -330,7 +324,7 @@
   TH2D *hNpart_Ecc2PART = new TH2D("hNpart_Ecc2PART","Ecc2PART vs Npart;Npart;Ecc2PART",500,0,500,100,0,1);
   nt_Pb_Pb->Project("hNpart_Ecc2PART","Ecc2PART:Npart","Npart>2");
   hNpart_Ecc2PART->Draw("colz");
-  TProfile *pNpartEcc2PART = new TProfile("pNpartEcc2PART","Profile Npart vs Ecc2PART;Npart;Ecc2PART",700,0,700);
+  TProfile *pNpartEcc2PART = new TProfile("pNpartEcc2PART","Profile Npart vs Ecc2PART;Npart;Ecc2PART",400,0,400);
   nt_Pb_Pb->Project("pNpartEcc2PART","Ecc2PART:Npart");
   pNpartEcc2PART->Draw("same");
   c16b->Update();
@@ -345,7 +339,7 @@
   TH2D *hNpart_Ecc3PART = new TH2D("hNpart_Ecc3PART","Ecc3PART vs Npart;Npart;Ecc3PART",500,0,500,100,0,1);
   nt_Pb_Pb->Project("hNpart_Ecc3PART","Ecc3PART:Npart","Npart>2");
   hNpart_Ecc3PART->Draw("colz");
-  TProfile *pNpartEcc3PART = new TProfile("pNpartEcc3PART","Profile Npart vs Ecc3PART;Npart;Ecc3PART",700,0,700);
+  TProfile *pNpartEcc3PART = new TProfile("pNpartEcc3PART","Profile Npart vs Ecc3PART;Npart;Ecc3PART",400,0,400);
   nt_Pb_Pb->Project("pNpartEcc3PART","Ecc3PART:Npart");
   pNpartEcc3PART->Draw("same");
   c16c->Update();
@@ -360,7 +354,7 @@
   TH2D *hNpart_Ecc4PART = new TH2D("hNpart_Ecc4PART","Ecc4PART vs Npart;Npart;Ecc4PART",500,0,500,100,0,1);
   nt_Pb_Pb->Project("hNpart_Ecc4PART","Ecc4PART:Npart","Npart>2");
   hNpart_Ecc4PART->Draw("colz");
-  TProfile *pNpartEcc4PART = new TProfile("pNpartEcc4PART","Profile Npart vs Ecc4PART;Npart;Ecc4PART",700,0,700);
+  TProfile *pNpartEcc4PART = new TProfile("pNpartEcc4PART","Profile Npart vs Ecc4PART;Npart;Ecc4PART",400,0,400);
   nt_Pb_Pb->Project("pNpartEcc4PART","Ecc4PART:Npart");
   pNpartEcc4PART->Draw("same");
   c16d->Update();
@@ -375,7 +369,7 @@
   TH2D *hNpart_Ecc5PART = new TH2D("hNpart_Ecc5PART","Ecc5PART vs Npart;Npart;Ecc5PART",500,0,500,100,0,1);
   nt_Pb_Pb->Project("hNpart_Ecc5PART","Ecc5PART:Npart","Npart>2");
   hNpart_Ecc5PART->Draw("colz");
-  TProfile *pNpartEcc5PART = new TProfile("pNpartEcc5PART","Profile Npart vs Ecc5PART;Npart;Ecc5PART",700,0,700);
+  TProfile *pNpartEcc5PART = new TProfile("pNpartEcc5PART","Profile Npart vs Ecc5PART;Npart;Ecc5PART",400,0,400);
   nt_Pb_Pb->Project("pNpartEcc5PART","Ecc5PART:Npart");
   pNpartEcc5PART->Draw("same");
   c16e->Update();
@@ -390,7 +384,7 @@
   TH2D *hNpart_Ecc6PART = new TH2D("hNpart_Ecc6PART","Ecc6PART vs Npart;Npart;Ecc6PART",500,0,500,100,0,1);
   nt_Pb_Pb->Project("hNpart_Ecc6PART","Ecc6PART:Npart","Npart>2");
   hNpart_Ecc6PART->Draw("colz");
-  TProfile *pNpartEcc6PART = new TProfile("pNpartEcc6PART","Profile Npart vs Ecc6PART;Npart;Ecc6PART",700,0,700);
+  TProfile *pNpartEcc6PART = new TProfile("pNpartEcc6PART","Profile Npart vs Ecc6PART;Npart;Ecc6PART",400,0,400);
   nt_Pb_Pb->Project("pNpartEcc6PART","Ecc6PART:Npart");
   pNpartEcc6PART->Draw("same");
   c16f->Update();
@@ -468,4 +462,84 @@
   if(nFlagSaveGIFs==1)  c17f->SaveAs("c17f_v15.gif");
   */
 
+
+  //------------------EccCum2 vs Npart (scatter)----------------------
+
+  TCanvas *c34 = new TCanvas("c34","c34",0,100,500,500);
+  c34->SetLogz(1);
+  c34->cd();
+  TH2D *hNpartEccCum2 = new TH2D("hNpartEccCum2","Npart vs EccCum2;Npart;EccCum2",400,0,400,1000,0,1);
+  nt_Pb_Pb->Project("hNpartEccCum2","EccCum2:Npart");
+  hNpartEccCum2->Draw("colz");
+  if(nFlagSaveGIFs==1)  c34->SaveAs("c34_v15.gif");
+
+  //------------------EccCum4 vs Npart (scatter)----------------------
+
+  TCanvas *c35 = new TCanvas("c35","c35",0,100,500,500);
+  c35->SetLogz(1);
+  c35->cd();
+  TH2D *hNpartEccCum4 = new TH2D("hNpartEccCum4","Npart vs EccCum4;Npart;EccCum4",400,0,400,1000,0,1);
+  nt_Pb_Pb->Project("hNpartEccCum4","EccCum4:Npart");
+  hNpartEccCum4->Draw("colz");
+  if(nFlagSaveGIFs==1)  c34->SaveAs("c34_v15.gif");
+
+  //------------------EccCum vs Npart (profile)----------------------
+  TCanvas *c34b = new TCanvas("c34b","c34b",100,100,610,500);
+  c34b->cd();
+  TProfile *pNpartEccCum2 = new TProfile("pNpartEccCum2","Profile Npart vs EccCum2;Npart;EccCum2",400,0,400);
+  nt_Pb_Pb->Project("pNpartEccCum2","EccCum2:Npart");
+  //pNpartEccCum2->Draw();
+  TH1D *pNpartEccCum2b = new TH1D("pNpartEcc3","Profile N_{part} vs #epsilon;N_{part};#epsilon",400,0,400);
+const int ReBins = 20;
+  for(int i=0;i<400;i++){
+      //if(i<200)cout<<pNpartEccCum2->GetBinContent(i)<<endl;
+      //pNpartEccCum2b->SetBinContent(i,sqrt(pNpartEccCum2->GetBinContent(i))/ReBins);
+      pNpartEccCum2b->SetBinContent(i,sqrt(pNpartEccCum2->GetBinContent(i)));
+      //pNpartEccCum2b->SetBinError(i,sqrt(pNpartEccCum2->GetBinError(i)));
+    }
+
+  TProfile *pNpartEccCum4 = new TProfile("pNpartEccCum4","Profile Npart vs EccCum4;Npart;EccCum4",400,0,400);
+  nt_Pb_Pb->Project("pNpartEccCum4","EccCum4:Npart");
+  pNpartEccCum4->Draw("same");
+  TH1D *pNpartEccCum4b = new TH1D("pNpartEccCum4b","Profile Npart vs EccCum4;Npart;EccCum4",400,0,400);
+  double temp;
+  for(int i=0;i<400;i++){
+      temp=pNpartEccCum2->GetBinContent(i);
+      if(2*temp*temp-pNpartEccCum4->GetBinContent(i)>0)
+      //pNpartEccCum4b->SetBinContent(i,pow(2*temp*temp-pNpartEccCum4->GetBinContent(i),1.0/4)/ReBins);
+      pNpartEccCum4b->SetBinContent(i,pow(2*temp*temp-pNpartEccCum4->GetBinContent(i),1.0/4));
+      //pNpartEccCum2b->SetBinError(i,sqrt(pNpartEccCum2->GetBinError(i)));
+      //cout<<pow(2*temp*temp-pNpartEccCum4->GetBinContent(i),1.0/4)<<endl;
+    }
+//////////
+  TH1D *pNpartEccPARTb = new TH1D("pNpartEccPARTb","Profile Npart vs EccPART;Npart;EccPART",400,0,400);
+  for(int i=0;i<400;i++){
+      //pNpartEccPARTb->SetBinContent(i,pNpartEccPART->GetBinContent(i)/ReBins);
+      pNpartEccPARTb->SetBinContent(i,pNpartEccPART->GetBinContent(i));
+    }
+  pNpartEccCum2b->SetStats(0);
+  //pNpartEccCum2b->GetYaxis()>CenterTitle();
+  //pNpartEccCum2b->GetXaxis()>CenterTitle();
+  //pNpartEccCum2b->Rebin(ReBins);
+  //pNpartEccPARTb->Rebin(ReBins);
+  //pNpartEccCum4b->Rebin(ReBins);
+  pNpartEccCum2b->Draw("L");
+  pNpartEccPARTb->SetLineColor(2);
+  pNpartEccPARTb->Draw("Lsame"); 
+  pNpartEccCum4b->SetLineColor(4);
+  pNpartEccCum4b->Draw("Lsame");
+
+    TLegend *leg = new TLegend(0.6,0.6,0.88,0.86);
+    leg->SetFillColor(10);
+    leg->SetBorderSize(0.035);
+    leg->SetTextFont(42);
+    //leg->SetTextColor(2);
+    leg->SetTextSize(0.055);
+    //leg->SetLineStyle(0.06);
+    leg->AddEntry(pNpartEccCum2b,"#epsilon_{part}{2}","l");
+    leg->AddEntry(pNpartEccPARTb,"#epsilon_{part}","l");
+    leg->AddEntry(pNpartEccCum4b,"#epsilon_{part}{4}","l");
+    leg->Draw();
+
+  if(nFlagSaveGIFs==1)  c34b->SaveAs("c34b_v15.gif");
 }

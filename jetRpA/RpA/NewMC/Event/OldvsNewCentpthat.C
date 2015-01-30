@@ -1,4 +1,5 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
+TString coll = "PbP";
 void OldvsNewCentpthat(){
 	gStyle->SetOptStat(kFALSE);
 	int pthat = 0;
@@ -80,7 +81,7 @@ void OldvsNewCentpthat(){
 	l->Draw("same");
 	c1->Print(Form("pthat%dratio.png",pthat));
 */
-	c1->Print(Form("DataDiffvar%d_%d.png",hibinmin,hibinmax));
+	c1->Print(Form("Data%sDiffvar%d_%d.png",coll.Data(),hibinmin,hibinmax));
 }
 
 TH1D* DrawTH1(int isOld, TString var, int pthat, int hibinmin, int hibinmax, int color, int marker){
@@ -93,11 +94,11 @@ TH1D* DrawTH1(int isOld, TString var, int pthat, int hibinmin, int hibinmax, int
 	}
 	else{
 		if(isOld==0)
-			TFile *f = TFile::Open("/store/user/qixu/jetRpA/skimTree/MCPPbakPu3PFskimfile0_10.root");
+			TFile *f = TFile::Open(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimfile0_10.root",coll.Data()));
 		else if(isOld==1)
-			TFile *f = TFile::Open("/store/user/qixu/jetRpA/OldForest/MCPPbakPu3PFskimfile0_8.root");
+			TFile *f = TFile::Open(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimfile0_8.root",coll.Data()));
 		else if(isOld==2)
-			TFile *f = TFile::Open("/store/user/qixu/jetRpA/skimTree/DataPPbakPu3PFskimfile.root");
+			TFile *f = TFile::Open(Form("/store/user/qixu/jetRpA/skimTree/DATA%sakPu3PFskimfile.root",coll.Data()));
 		TTree *t = (TTree*)f->Get("nt");
 		
 	}

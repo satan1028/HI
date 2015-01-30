@@ -14,7 +14,7 @@ THStack* calcNtracks(int);
 TH2F* calcwtrack(int);
 TH1D* calcwevent(int);
 TH1D* calcNevtsel(int);
-void calcdNchdeta(int type=0){ //-1 for genMC, 0 for recoMC, 1 for data
+void calcdNchdeta(int type=0, bool dotrack=1, bool doevent=1){ //-1 for genMC, 0 for recoMC, 1 for data
 	TH1::SetDefaultSumw2();
         TString MCtype = "Hijing";
 	TString stype;
@@ -24,27 +24,37 @@ void calcdNchdeta(int type=0){ //-1 for genMC, 0 for recoMC, 1 for data
 	TH1D* hdnom = new TH1D("hdnom","hdnom",neta,etabin);
 	TH1D* hNevtsel = calcNevtsel(type);
 	TH1D* hnom = (TH1D*)hNevtsel->Clone("hnom");
-	hnom->Multiply(hwevent);
+        if(doevent)
+            hnom->Multiply(hwevent);
 	TVectorD nom;	nom.ResizeTo(1);
 	nom[0] = hnom->Integral();
 	cout<<"nom = "<<nom[0]<<endl;
 	double fMV = 0.;
 	THStack* SKNtracks = calcNtracks(type);
 	TH2F* hwtrack = calcwtrack(type);
+	for(int ieta=0;ieta<neta;ieta++){
+            hdnom->SetBinContent(ieta,0);
+            hdnom->SetBinError(ieta,0);
+        }
 	for(int iMult=0;iMult<nMult;iMult++){
-		TH2F* htemp1 = (TH2F*)SKNtracks->GetStack()->At(iMult);
-		htemp1->Multiply(hwtrack);
-		TH1D* htemp2 = htemp1->ProjectionY("htemp2",htemp1->GetXaxis()->FindBin(ptmin),-1,"e");
-		htemp2->Scale(hwevent->GetBinContent(iMult+1));
-		hdnom->Add(htemp2);
+	    TH2F* htemp1 = (TH2F*)SKNtracks->GetStack()->At(iMult);
+            if(dotrack)
+                htemp1->Multiply(hwtrack);
+	    TH1D* htemp2 = htemp1->ProjectionY("htemp2",htemp1->GetXaxis()->FindBin(ptmin),-1,"e");
+            if(doevent)
+	        htemp2->Scale(hwevent->GetBinContent(iMult+1));
+	    hdnom->Add(htemp2);
 	}
 	for(int ieta=0;ieta<neta;ieta++){
-		dNchdeta->SetBinContent(ieta,hdnom->GetBinContent(ieta)/hdnom->GetBinWidth(ieta));
-		dNchdeta->SetBinError(ieta,hdnom->GetBinError(ieta)/hdnom->GetBinWidth(ieta));
+	    dNchdeta->SetBinContent(ieta,hdnom->GetBinContent(ieta)/hdnom->GetBinWidth(ieta));
+	    dNchdeta->SetBinError(ieta,hdnom->GetBinError(ieta)/hdnom->GetBinWidth(ieta));
 	}
 	dNchdeta->Scale(1.0/((1.+fMV)*nom[0]));
 	TH2F* hNtracks = (TH2F*)SKNtracks->GetStack()->At(1);
-	TFile *fout = new TFile(Form("Corr%s_pt1.root",stype.Data()),"Recreate");
+        if(type>=0)
+	    TFile *fout = new TFile(Form("output/Corr%s_track%d_event%d_pt%.1f.root",stype.Data(),dotrack,doevent,ptmin*10),"Recreate");
+        else
+	    TFile *fout = new TFile(Form("output/Corr%s_pt%.1f.root",stype.Data(),ptmin*10),"Recreate");
 	fout->cd();
 	dNchdeta->Write();
 	hNtracks->Write();
@@ -236,4 +246,4 @@ TH1D* calcNevtsel(int type){
 		}
 	}
 	return hNevtsel;
-}
+
