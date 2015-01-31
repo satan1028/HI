@@ -1,18 +1,18 @@
 #!/bin/bash
-nJobs=96
-i=0
+nJobs=90
+i=1
 while [ $i -le $nJobs ];
 do
-   if [[  $i == 14 || $i == 43 ]];then
-   let "start=i*50"
-   let "end=(i+1)*50"
+  # if [[  $i == 14 || $i == 43 ]];then
+   let "start=i*80"
+   let "end=(i+1)*80"
   echo "First = $start and last file = $end"
   export I=$i
   export FIRST=$start
   export LAST=$end
   #qsub -v I=$i,FIRST=$start,LAST=$end -N akPu3PF$i -z submitAnaTree.pbs
   sbatch -J akPu3PF$i -o AnaTree$i.out submitAnaTree.slurm
-  fi
+  #fi
   let "i++"
 done
 

@@ -46,12 +46,13 @@ const int QCDpthatBins = 10;
 //const int QCDpthatBins = 1;
 //const int dataFiles = 10292;
 //const int dataFiles = 6815;
-const int dataFiles = 4828;
+//const int dataFiles = 4828;
+const int dataFiles = 7213;
 int startfile ;
 int endfile ;
 int combinationMethod ;
 
-TString coll = "PbP";
+TString coll = "PPb";
 const TString algo = "akPu3PF" ;
 const double deta[]={-2.0, -1.5, -1.0, -0.5, 0.5, 1.0, 1.5, 2.0} ;
 const int netabin = sizeof(deta)/sizeof(Double_t)-1 ;
@@ -164,7 +165,8 @@ void skimTreesPAFullInfoNewForest(int isMC=0)
    int *MCentr = NULL;
 
     if(!isMC){
-        if(coll=="PPb") infile = "pAFileListKurtv4.txt";
+//        if(coll=="PPb") infile = "pAFileListKurtv4.txt";
+        if(coll=="PPb") infile = "pPbFileListYmaoV3.txt";
         if(coll=="PbP") infile = "PbpFileListYmaoV3.txt";
     }
     else{
