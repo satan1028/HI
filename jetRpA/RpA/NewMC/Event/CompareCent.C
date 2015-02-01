@@ -4,7 +4,7 @@
 void CompareCent(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
-TString coll="PbP";
+TString coll="PPb";
 bool Save=kTRUE;
 TF1 * fCen = new TF1("fCen","[0]*exp([1]+[2]*x+[3]*x*x+[4]*x*x*x+[5]*x*x*x*x+[6]*x*x*x*x*x)", 0., 100.);
 if(coll=="PPb"){
@@ -27,8 +27,8 @@ TH1F* histo1=(TH1F*)fMCPbP->Get("Cent");
 TH1F* histo2=(TH1F*)fMCPbP->Get("CentW");
 TString data="Proton going positive side";
 }
-histo1->SetName(Form("%sOldMC_unweighted",coll.Data()));
-histo2->SetName(Form("%sNewMC_unweighted",coll.Data()));
+histo1->SetName(Form("%sNewMC_unweighted",coll.Data()));
+histo2->SetName(Form("%sNewMC_weighted",coll.Data()));
 histodata->SetName(Form("%sData",coll.Data()));
 //histo1=(TH1F*)histo1->Rebin(Nbin_vz,"histo1",binbound_vz);
 //histo2=(TH1F*)histo2->Rebin(Nbin_vz,"histo2",binbound_vz);
@@ -56,7 +56,7 @@ TCanvas* c2 = new TCanvas("c2"," ",500,500);
 makeMultiPanelCanvas(c1,1,1,-0.16,0,0.16,0.14,0.03);
 makeMultiPanelCanvas(c2,1,1,-0.16,0,0.16,0.14,0.03);
 
-TH1F* hFrame=new TH1F("","",20000,-1000,1000);
+TH1F* hFrame=new TH1F("","",100,0,100);
 fixedFontHist(hFrame,1.2,1.7);
 hFrame->SetTitle("");
 hFrame->GetXaxis()->SetTitleSize(0.05);
@@ -79,9 +79,9 @@ leg1->SetFillColor(0);
 leg2->SetFillColor(0);
 leg1->SetTextSize(0.04);
 leg2->SetTextSize(0.04);
-leg1->AddEntry(histo1,"Old MC Before Centrality weighting","lp");
-//leg1->AddEntry(histo2,"New MC Before Centrality weighting","lfp");
-leg1->AddEntry(histo2,"New MC Before Centrality weighting Last 2 pthat","lfp");
+leg1->AddEntry(histo1,"Before Centrality weighting","lp");
+leg1->AddEntry(histo2,"After Centrality weighting","lfp");
+//leg1->AddEntry(histo2,"Before Centrality weighting Last 2 pthat","lfp");
 leg1->AddEntry(histodata,data,"lp");
 leg1->Draw("same");
 TLatex *T1=new TLatex(0.25,0.92,"");

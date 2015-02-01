@@ -4,7 +4,7 @@
 void CompareVz(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
-TString coll="PbP";
+TString coll="PPb";
 bool Save=kTRUE;
  TF1 * fVz = new TF1("fVx","[0]+[1]*x+[2]*TMath::Power(x,2)+[3]*TMath::Power(x,3)+[4]*TMath::Power(x,4)", -15., 15.);
 if(coll=="PPb"){
@@ -28,8 +28,8 @@ TString data="Proton going positive side";
 }
 else
 fVz->SetParameters(1.,0,0,0,0);
-histo1->SetName(Form("%sOldMC_unweighted",coll.Data()));
-histo2->SetName(Form("%sNewMC_unweighted",coll.Data()));
+histo1->SetName(Form("%sNewMC_unweighted",coll.Data()));
+histo2->SetName(Form("%sNewMC_weighted",coll.Data()));
 histodata->SetName(Form("%sData",coll.Data()));
 histo1->Rebin(5);
 histo2->Rebin(5);
@@ -61,7 +61,7 @@ TCanvas* c2 = new TCanvas("c2"," ",500,500);
 makeMultiPanelCanvas(c1,1,1,-0.16,0,0.16,0.14,0.03);
 makeMultiPanelCanvas(c2,1,1,-0.16,0,0.16,0.14,0.03);
 
-TH1F* hFrame=new TH1F("","",20000,-1000,1000);
+TH1F* hFrame=new TH1F("","",400,-20,20);
 fixedFontHist(hFrame,1.1,1.7);
 hFrame->SetTitle("");
 hFrame->GetXaxis()->SetTitleSize(0.05);
@@ -84,8 +84,8 @@ leg1->SetFillColor(0);
 leg2->SetFillColor(0);
 leg1->SetTextSize(0.04);
 leg2->SetTextSize(0.04);
-leg1->AddEntry(histo1,"New MC Before Vz weighting","lp");
-leg1->AddEntry(histo1,"New MC After Vz weighting","lp");
+leg1->AddEntry(histo1,"Before Vz weighting","lp");
+leg1->AddEntry(histo1,"After Vz weighting","lp");
 //leg1->AddEntry(histo2,"New MC Before Vz weighting","lp");
 leg1->AddEntry(histodata,data,"lp");
 leg1->Draw("same");

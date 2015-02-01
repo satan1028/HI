@@ -19,7 +19,7 @@ const int netabin = sizeof(deta)/sizeof(double)-1;
 const int ptint[] = {20,40,60,80,100,1000};
 
 TString algo="akPu3PF";//"akPu3PF"
-TString coll = "PbP";
+TString coll = "PPb";
 TString trigName[5] = {"Jet20","Jet40","Jet60","Jet80","Jet100"} ;   
 
 void DataskimTree(){

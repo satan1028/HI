@@ -1,5 +1,5 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
-TString coll = "PbP";
+TString coll = "PPb";
 void OldvsNewCentpthat(){
 	gStyle->SetOptStat(kFALSE);
 	int pthat = 0;
