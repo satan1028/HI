@@ -147,7 +147,7 @@ void getResv(){
 		for(int iptbin=0;iptbin<nptv; iptbin++){
                 fstrv<<ptbinv[iptbin]<<"-"<<ptbinv[iptbin+1]<<"\t\t"<<totmult[ibin][iptbin]<<"\t"<<totmulthisto[ibin][iptbin]<<"\t"<<totmulthistocorr[ibin][iptbin]<<endl;
 		}
-		fstrv<<"Integral\t\t"<<totmultall[ibin]<<"\t"<<hpt[ibin]->Integral(hpt[ibin]->GetXaxis()->FindBin(ptbinv[0]),hpt[ibin]->GetXaxis()->FindBin(3.0)-1)<<"\t"<<hpteffcorr[ibin]->Integral(hpteffcorr[ibin]->GetXaxis()->FindBin(ptbinv[0]),hpteffcorr[ibin]->GetXaxis()->FindBin(3.0)-1)<<endl;
+		fstrv<<"Integral\t\t"<<totmultall_[ibin]<<"\t"<<hpt[ibin]->Integral(hpt[ibin]->GetXaxis()->FindBin(ptbinv[0]),hpt[ibin]->GetXaxis()->FindBin(3.0)-1)<<"\t"<<hpteffcorr[ibin]->Integral(hpteffcorr[ibin]->GetXaxis()->FindBin(ptbinv[0]),hpteffcorr[ibin]->GetXaxis()->FindBin(3.0)-1)<<endl;
 		fstrv<<"V ref="<<(*V_mean)[ibin]<<"\t"<<"V int="<<V_int[ibin]<<"\t"<<"V int corr="<<V_intcorr[ibin]<<endl;
 		fstrv<<"V ref err="<<(*deltaV_mean)[ibin]<<"\t"<<"V int err="<<V_interr[ibin]<<"\t"<<"V int corr err="<<V_intcorrerr[ibin]<<endl;
 	}
@@ -160,12 +160,17 @@ void getResv(){
 	V_interr.Write("V_interr");
 	V_intcorr.Write("V_intcorr");
 	V_intcorrerr.Write("V_intcorrerr");
-	TDirectory *dir = fout->mkdir(Form("D_%d",ibin));
-	dir->cd();
+	TDirectory *dir0 = fout->mkdir(Form("D_%d",ibin));
+	dir0->cd();
 	avgpt[ibin].Write("avgpt");
 	totmult[ibin].Write("totmult");
 	vmean[ibin].Write("vmean");
 	deltavmean[ibin].Write("deltavmean");
+         for(int itheta=0;itheta<ntheta;itheta++){
+            TDirectory *dir1 = dir0->mkdir(Form("D_%d",itheta));dir1->cd();
+            v[ibin][itheta].Write("v");
+            deltav[ibin][itheta].Write("deltav");
+        }
 	}
 	
 	infile->Close();

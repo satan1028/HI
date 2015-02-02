@@ -160,12 +160,17 @@ void getResv(){
 	V_interr.Write("V_interr");
 	V_intcorr.Write("V_intcorr");
 	V_intcorrerr.Write("V_intcorrerr");
-	TDirectory *dir = fout->mkdir(Form("D_%d",ibin));
-	dir->cd();
+	TDirectory *dir0 = fout->mkdir(Form("D_%d",ibin));
+	dir0->cd();
 	avgpt[ibin].Write("avgpt");
 	totmult[ibin].Write("totmult");
 	vmean[ibin].Write("vmean");
 	deltavmean[ibin].Write("deltavmean");
+        for(int itheta=0;itheta<ntheta;itheta++){
+            TDirectory *dir1 = dir0->mkdir(Form("D_%d",itheta));dir1->cd();
+            v[ibin][itheta].Write("v");
+            deltav[ibin][itheta].Write("deltav");
+        }
 	}
 	
 	infile->Close();
