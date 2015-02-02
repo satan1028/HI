@@ -60,7 +60,6 @@ void plotV2vstheta(){
         l->SetLineWidth(1.2);
         lup->SetLineWidth(1.2);
         ldown->SetLineWidth(1.2);
-        cout<<TMath::RMS(ntheta,V);
         TLatex *tl = new TLatex();
  //     tl->SetNDC();
         tl->SetTextFont(42);
