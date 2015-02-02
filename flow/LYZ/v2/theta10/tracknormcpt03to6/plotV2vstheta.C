@@ -74,7 +74,7 @@ void plotV2vstheta(){
         ldown->Draw("same");
         }
         c1->cd(ntotbin+1);
-        TLatex *tlx0 = new TLatex(0.12,0.3,Form("PF candi"));
+        TLatex *tlx0 = new TLatex(0.12,0.3,Form("track"));
         TLatex *tlx1 = new TLatex(0.12,0.25,Form("%.1f<p_{T}<%.1f (GeV/c)",0.3,6.0));
         tlx0->SetNDC();
         tlx1->SetNDC();
