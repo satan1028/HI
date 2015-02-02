@@ -1,6 +1,6 @@
 #!/bin/bash
 SumorProd="Prod"
-Vorv="V"
+Vorv="v"
 
 nfilesperjob=25
 nfiles=462
@@ -19,7 +19,7 @@ root -l -b<<EOF
 EOF
 cd ..
 for i in $( seq 0 $njobs );do
-if [[ $i == 0 || $i == 16 || $i == 18 ]];then
+if [[ $i == 17 ]];then
 begin=`echo "$i*$nfilesperjob" | bc`
 end=`echo "($i+1)*$nfilesperjob" | bc`
 if [[ $i == $njobs ]];then

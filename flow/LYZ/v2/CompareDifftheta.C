@@ -20,9 +20,11 @@ const double v24err[5][npt24]={
 {0.00079,0.00057,0.00084,0.0013,0.002,0.0032,0.004,0.0075,0.012},
 };
 
-TString dirname = "PFcandpt03to6tracknormcpt03to6";
+//TString dirname = "PFcandpt03to6tracknormcpt03to6";TString name = "PFcandi03to6";
 //TString dirname = "PFcandpt01to10tracknormcpt03to6";
-//TString dirname = "tracknormcpt03to6";
+//TString dirname = "tracknormcpt03to6"; TString name = "trackpt03to6";
+TString dirname = "tracknormcpt03to3tracknormcpt03to6"; TString name = "trackpt03to3";
+
 c1 = new TCanvas("c1"," ",1200,700);
 makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
     gStyle->SetOptFit(1);
@@ -42,7 +44,8 @@ for(int i=0;i<ntotbin;i++){
 	c1->cd(i+1);
 	if(i!=ntotbin-1)
 	TGraphErrors *gr24=new TGraphErrors(npt24,pt,v24[i],0,v24err[i]);
-	TGraphErrors *grProd_theta8=plotTG(i,0,8,dirname,20,2);
+	TGraphErrors *grProd_theta8=plotTG(i,0,10,dirname,20,2);
+	TGraphErrors *grProd_theta15=plotTG(i,0,15,dirname,27,2);
 	TGraphErrors *grProd=plotTG(i,0,5,dirname,24,4);
 	gr24->SetMarkerSize(1.3);
 	gr24->SetMarkerColor(1);
@@ -50,13 +53,15 @@ for(int i=0;i<ntotbin;i++){
 	hFrame->Draw();
 	gr24->Draw("Psame");
 	grProd_theta8->Draw("Psame");
+	grProd_theta15->Draw("Psame");
 	grProd->Draw("Psame");
-	TLegend *tl = new TLegend(0.4,0.5,0.7,0.65);
+	TLegend *tl = new TLegend(0.4,0.5,0.7,0.70);
 	tl->SetFillColor(0);
 	tl->SetBorderSize(0);
 	tl->SetTextSize(0.05);
 	tl->AddEntry(gr24,"v2 4-particle cum","lp");
-	tl->AddEntry(grProd_theta8,"LYZ n_{#theta} = 8","lp");
+	tl->AddEntry(grProd_theta8,"LYZ n_{#theta} = 10","lp");
+	tl->AddEntry(grProd_theta15,"LYZ n_{#theta} = 15","lp");
 	tl->AddEntry(grProd,"LYZ n_{#theta} = 5","lp");
 	if(i==0 || i==3) 
 		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
@@ -77,22 +82,22 @@ for(int i=0;i<ntotbin;i++){
 	tlx0->Draw("same");
 	tlx1->Draw("same");
 	tl->Draw("same");
-	c1->Print("v2vspt.png");
+	c1->Print(Form("v2vspt_difftheta_%s.png",name.Data()));
 
 }
 
 TGraphErrors* plotTG(int i,bool isSum, int ntheta, TString dirname, int marker, int color){
 	if(ntheta==5){
 		if(!isSum)
-        		TFile *f = TFile::Open(Form("../%s/M%d%d/mergedv_Prod2.root",dirname.Data(),trkpointmax[i],trkpointmin[i]));
+        		TFile *f = TFile::Open(Form("%s/M%d%d/mergedv_Prod2.root",dirname.Data(),trkpointmax[i],trkpointmin[i]));
 		else
-        		TFile *f = TFile::Open(Form("../%s/M%d%d/mergedv_Prod.root",dirname.Data(),trkpointmax[i],trkpointmin[i]));
+        		TFile *f = TFile::Open(Form("%s/M%d%d/mergedv_Prod.root",dirname.Data(),trkpointmax[i],trkpointmin[i]));
 	}
 	else{
 	        if(!isSum)
-                        TFile *f = TFile::Open(Form("../theta%d/%s/M%d%d/mergedv_Prod2.root",ntheta,dirname.Data(),trkpointmax[i],trkpointmin[i]));
+                        TFile *f = TFile::Open(Form("theta%d/%s/M%d%d/mergedv_Prod2.root",ntheta,dirname.Data(),trkpointmax[i],trkpointmin[i]));
                 else
-                        TFile *f = TFile::Open(Form("../theta%d/%s/M%d%d/mergedv_Prod.root",ntheta,dirname.Data(),trkpointmax[i],trkpointmin[i]));
+                        TFile *f = TFile::Open(Form("theta%d/%s/M%d%d/mergedv_Prod.root",ntheta,dirname.Data(),trkpointmax[i],trkpointmin[i]));
 	}
 
         TVectorD *vecDv2 = (TVectorD*)f->Get(Form("D_%d/vmean",ibin));

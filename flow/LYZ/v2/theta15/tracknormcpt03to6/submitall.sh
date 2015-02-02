@@ -1,6 +1,6 @@
 #!/bin/bash
 SumorProd="Prod"
-Vorv="V"
+Vorv="v"
 
 nfilesperjob=25
 nfiles=462
@@ -10,7 +10,7 @@ echo "split into $(($njobs+1)) jobs, $nfilesperjob files per job"
 echo $SumorProd $Vorv
 
 for dir in `ls`;do
-if [[ -d $dir && $dir == M300260 ]];then
+if [[ -d $dir && $dir == M150120 ]];then
 echo $dir
 cd $dir
 rm LYZ_C*
@@ -19,7 +19,7 @@ root -l -b<<EOF
 EOF
 cd ..
 for i in $( seq 0 $njobs );do
-if [[ $i == 18 ]];then
+if [[ $i == 14 || $i == 17 ]];then
 begin=`echo "$i*$nfilesperjob" | bc`
 end=`echo "($i+1)*$nfilesperjob" | bc`
 if [[ $i == $njobs ]];then

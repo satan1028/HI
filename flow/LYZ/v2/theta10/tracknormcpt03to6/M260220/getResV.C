@@ -76,8 +76,8 @@ void getResV(){
 	}
 
 	for(int ifile=0; ifile<nFileAll; ifile++){
-		if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),ifile));
-		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),ifile));
+		if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/theta10/tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),ifile));
+		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/theta10/tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 		TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));
@@ -134,7 +134,7 @@ void getResV(){
 				else V[ibin][iptbin][itheta]=j01/r0[ibin][iptbin][itheta]; //simple method
 				r0[ibin][iptbin][itheta]=j01/V[ibin][iptbin][itheta];
 				V[ibin][iptbin][itheta]/=avgmult[ibin][iptbin];
-				sigma2[ibin][iptbin][itheta]=Q2[ibin][iptbin]/Nevent[ibin]-(Qx1[ibin][iptbin]/Nevent[ibin])*(Qx1[ibin][iptbin]/Nevent[ibin])-(Qy1[ibin][iptbin]/Nevent[ibin])*(Qy1[ibin][iptbin]/Nevent[ibin])-(V[ibin][iptbin][itheta]*avgmult[ibin][iptbin])*(V[ibin][iptbin][itheta]*avgmult[ibin][iptbin]);
+				sigma2[ibin][iptbin][itheta]=Q2[ibin][iptbin]/Nevent[ibin]-(Qx1[ibin][iptbin]/Nevent[ibin])*(Qx1[ibin][iptbin]/Nevent[ibin])-(Qy1[ibin][iptbin]/Nevent[ibin])*(Qy1[ibin][iptbin]/Nevent[ibin]);
 				sigma2_[ibin][iptbin]+=sigma2[ibin][iptbin][itheta];
 				Vmean[ibin][iptbin]+=V[ibin][iptbin][itheta];
 				chi[ibin][iptbin][itheta]=V[ibin][iptbin][itheta]*avgmult[ibin][iptbin]/TMath::Sqrt(sigma2[ibin][iptbin][itheta]);
