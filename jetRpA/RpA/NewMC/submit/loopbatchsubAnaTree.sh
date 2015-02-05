@@ -1,11 +1,11 @@
 #!/bin/bash
-nJobs=90
-i=1
+nJobs=0
+i=0
 while [ $i -le $nJobs ];
 do
   # if [[  $i == 14 || $i == 43 ]];then
-   let "start=i*80"
-   let "end=(i+1)*80"
+   let "start=i*20"
+   let "end=(i+1)*20"
   echo "First = $start and last file = $end"
   export I=$i
   export FIRST=$start

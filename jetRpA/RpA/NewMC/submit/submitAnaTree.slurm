@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes=1
-#SBATCH --mem=4G
-#SBATCH --mem-per-cpu=4G
+#SBATCH --mem=10G
+#SBATCH --mem-per-cpu=10G
 #SBATCH --time=1-00:00:00
 
 #source /gpfs21/grid/grid-app/cmssoft/cms/cmsset_default.sh

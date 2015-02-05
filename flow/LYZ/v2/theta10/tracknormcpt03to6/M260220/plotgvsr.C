@@ -3,23 +3,26 @@
 int xbin=0;	//xbin<1
 double ptmin=0.3, ptmax=6.0;
 const int nnu = 6;
-const int marker[nnu] = {20,24,27,30,31,25};
-const int color[nnu] = {1,2,4,6,7,2};
+const int marker[nnu] = {20,24,27,30,31,29};
+const int color[nnu] = {1,2,3,4,6,7};
 const int plotnu[nnu]={1,2,3,4,5,6};
 void plotgvsr(){
     gStyle->SetOptStat(kFALSE);
 TCanvas *c1 = new TCanvas();
 c1->SetLogy();
 TH1D* hFrame = new TH1D("","",1000,0,1);
-hFrame->GetYaxis()->SetRangeUser(5e-6,5e-1);
-hFrame->GetXaxis()->SetRangeUser(0.12,0.32);
+hFrame->GetYaxis()->SetRangeUser(5e-6,1e0);
+hFrame->GetXaxis()->SetRangeUser(0.12,0.35);
 hFrame->GetXaxis()->SetTitle("r");
 hFrame->GetYaxis()->SetTitle("|G^{#theta}(ir)|^{2}");
 hFrame->SetTitle("");
 hFrame->Draw();
 TGraph *gr[nnu];
+double r0_theta[nnu];
+double G2_theta[nnu];
+TLine *l[nnu];
 for(int itheta=0;itheta<nnu;itheta++){
-gr[itheta]=plotGF(0,plotnu[itheta],marker[itheta],color[itheta]);
+gr[itheta]=plotGF(0,plotnu[itheta],r0_theta+itheta,G2_theta+itheta,marker[itheta],color[itheta]);
 gr[itheta]->Draw("Psame");
 }
 TLegend *tg = new TLegend(0.75,0.70-0.10*nnu,0.90,0.70);
@@ -35,12 +38,18 @@ t->SetTextSize(0.03);
 t->SetTextFont(42);
 t->DrawLatex(0.5,0.2,Form("track, %d < mult <%d, %.1f < p_{T} < %.1f", trkbin[xbin+1],trkbin[xbin],ptmin,ptmax));
 
+for(int itheta=0;itheta<nnu;itheta++){
+l[itheta] = new TLine(r0_theta[itheta],0,r0_theta[itheta],G2_theta[itheta]);
+l[itheta]->SetLineStyle(2);
+l[itheta]->SetLineColor(color[itheta]);
+l[itheta]->Draw("same");
+}
 c1->Print("gvsr_thetas.png");
 
 
 }
 
-TGraph *plotGF(int isSum, int xtheta, int marker, int color){
+TGraph *plotGF(int isSum, int xtheta, double *r0_theta, double *G2_theta, int marker, int color){
 
 if(isSum)
 TFile *f = TFile::Open("mergedV_Sum.root");
@@ -49,9 +58,17 @@ TFile *f = TFile::Open("mergedV_Prod.root");
 
 TVectorD *vecDr = f->Get(Form("D_%d/r",xbin));
 TVectorD *vecDg2 = f->Get(Form("D_%d/D_0/D_%d/G2",xbin,xtheta));
+TVectorD *vecDr0 = f->Get(Form("D_%d/D_0/r0",xbin,xtheta));
+TVectorD *vecDr01 = f->Get(Form("D_%d/D_0/r01",xbin,xtheta));
 
 double *r = vecDr->GetMatrixArray();
 double *g2 = vecDg2->GetMatrixArray();
+double *r0 = vecDr0->GetMatrixArray();
+double *r01 = vecDr01->GetMatrixArray();
+(*r0_theta) = r0[xtheta];
+for(int ir=0;ir<nstepr;ir++)
+    if(r[ir] == r01[xtheta]) break;
+(*G2_theta) = g2[ir];
 TGraph *gr = new TGraph(nstepr,r,g2);
 gr->SetMarkerSize(0.5);
 gr->SetMarkerColor(color);

@@ -123,7 +123,7 @@ void DataskimTree(){
     nt->GetEntry(i);
 if(run>211256 && coll=="PPb") continue;//only for pPb runs at moment
 if(run<=211256 && coll=="PbP") continue;//only for Pbp runs at moment
-if((TMath::Abs(vz)>15) || (!pPAcollisionEventSelectionPA) || (!pHBHENoiseFilter)) continue;
+if((TMath::Abs(vz)>15) || (!pprimaryVertexFilter) || (!pPAcollisionEventSelectionPA) || (!pHBHENoiseFilter)) continue;
  if(!HLT_PAJet20_noJetID_v1 && !HLT_PAJet40_noJetID_v1 && !HLT_PAJet60_noJetID_v1 && !HLT_PAJet80_noJetID_v1 && !HLT_PAJet100_noJetID_v1 ) continue;
 
 	Vz->Fill(vz);

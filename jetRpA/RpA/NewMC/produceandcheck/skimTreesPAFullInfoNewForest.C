@@ -219,9 +219,9 @@ void skimTreesPAFullInfoNewForest(int isMC=0)
   Int_t pVertexFilterCutGplus;
   Int_t pPAcollisionEventSelectionPA;
   Int_t pBeamScrapingFilter;
-  Int_t pprimaryvertexFilter;
-  Int_t phfPosFilter1;
-  Int_t phfNegFilter1;
+  Int_t pprimaryVertexFilter;
+  Int_t phfPosFilter3;
+  Int_t phfNegFilter3;
   Int_t pHBHENoiseFilter;
 
   Int_t chargedN[1000];
@@ -326,9 +326,9 @@ if(isMC){
     nt->Branch("pPAcollisionEventSelectionPA",&pPAcollisionEventSelectionPA,"pPAcollisionEventSelectionPA/I");
     nt->Branch("pVertexFilterCutGplus",&pVertexFilterCutGplus,"pVertexFilterCutGplus/I");
     nt->Branch("pBeamScrapingFilter",&pBeamScrapingFilter,"pBeamScrapingFilter/I");
-    nt->Branch("pprimaryvertexFilter",&pprimaryvertexFilter,"pprimaryvertexFilter/I");
-    nt->Branch("phfPosFilter1",&phfPosFilter1,"phfPosFilter1/I");
-    nt->Branch("phfNegFilter1",&phfNegFilter1,"phfNegFilter1/I");
+    nt->Branch("pprimaryVertexFilter",&pprimaryVertexFilter,"pprimaryVertexFilter/I");
+    nt->Branch("phfPosFilter3",&phfPosFilter3,"phfPosFilter3/I");
+    nt->Branch("phfNegFilter3",&phfNegFilter3,"phfNegFilter3/I");
     nt->Branch("pHBHENoiseFilter",&pHBHENoiseFilter,"pHBHENoiseFilter/I");
  }
     nt->Branch("weight",&weight,"weight/F");
@@ -467,9 +467,9 @@ if(isMC){
       t->SetBranchAddress("pPAcollisionEventSelectionPA",&pPAcollisionEventSelectionPA);
        t->SetBranchAddress("pVertexFilterCutGplus",&pVertexFilterCutGplus);
        t->SetBranchAddress("pBeamScrapingFilter",&pBeamScrapingFilter);
-       t->SetBranchAddress("pprimaryvertexFilter",&pprimaryvertexFilter);
-       t->SetBranchAddress("phfPosFilter1",&phfPosFilter1);
-       t->SetBranchAddress("phfNegFilter1",&phfNegFilter1);
+       t->SetBranchAddress("pprimaryVertexFilter",&pprimaryVertexFilter);
+       t->SetBranchAddress("phfPosFilter3",&phfPosFilter3);
+       t->SetBranchAddress("phfNegFilter3",&phfNegFilter3);
        t->SetBranchAddress("pHBHENoiseFilter",&pHBHENoiseFilter);
       t->SetBranchAddress("hiHFplusEta4", &hiHFplusEta4);
       t->SetBranchAddress("hiHFminusEta4", &hiHFminusEta4);

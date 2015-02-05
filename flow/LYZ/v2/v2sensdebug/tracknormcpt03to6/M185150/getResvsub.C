@@ -13,9 +13,11 @@ void getResvsub(){
 
 	string SumorProd = getenv("SUMORPROD");
 	string mdir = getenv("DIR");
+        int iloop = atoi(getenv("ILOOP"));
 	ofstream fstrv;
-	if(SumorProd=="Sum")fstrv.open("v_sub.txt");
-	else fstrv.open("v_2_sub.txt");
+//	if(SumorProd=="Sum")fstrv.open("v_sub.txt");
+//	else fstrv.open("v_2_sub.txt");
+	fstrv.open(Form("v_2_sub_loop%d.txt",iloop));
 	
 	TVectorD Nevent[nbin], totmultall[nbin], totmultall_[nbin], avgavgpt[nbin];
 	TVectorD totmult[nbin], totpt[nbin];
@@ -33,18 +35,20 @@ void getResvsub(){
 	TVectorD avgpt[nbin];
 	TVectorD v[nbin][ntheta],vmean[nbin],deltav[nbin][ntheta],deltavmean[nbin];
 	TVectorD IFILE[nbin];
-	if(SumorProd=="Sum")	TFile *infile = TFile::Open("mergedV_Sum_sub.root");
-	else	TFile *infile = TFile::Open("mergedV_Prod_sub.root");
-	if(SumorProd=="Sum")TFile *fout = new TFile("mergedv_Prod_sub.root","Recreate");
-        else TFile *fout = new TFile("mergedv_Prod2_sub.root","Recreate");
+//	if(SumorProd=="Sum")	TFile *infile = TFile::Open("mSum_sub.root");
+//	else	TFile *infile = TFile::Open("mergedV_Prod_sub.root");
+	TFile *infile = TFile::Open(Form("V2in_%d.root",iloop));
+//	if(SumorProd=="Sum")TFile *fout = new TFile("mergedv_Prod_sub.root","Recreate");
+//       else TFile *fout = new TFile("mergedv_Prod2_sub.root","Recreate");
+        TFile *fout = new TFile(Form("mergedv_Prod2_sub_loop%d.root",iloop),"Recreate");
 
 	 TVectorD Nevent_;       Nevent_.ResizeTo(nbin);  Nevent_.Zero();
 	TH1D* hpt[nbin];
 	TH1D* hpteffcorr[nbin];
 	for(int ibin=0;ibin<nbin;ibin++){
         for(int ifile=0; ifile<nFileAll; ifile++){
-        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod_sub_%d.root",mdir.c_str(),ifile));
-        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod2_sub_%d.root",mdir.c_str(),ifile));
+        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/v2sensdebug/tracknormcpt03to6/loop%d/%s/Anav_Prod_%d.root",iloop,mdir.c_str(),ifile));
+        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/v2sensdebug/tracknormcpt03to6/loop%d/%s/Anav_Prod2_%d.root",iloop,mdir.c_str(),ifile));
         TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
         Nevent_[ibin]+=(*Nevent_t)[ibin];
         f[ifile]->Close();
@@ -74,10 +78,10 @@ void getResvsub(){
 		avgmult[ibin].ResizeTo(nptv);	avgpt[ibin].ResizeTo(nptv);
 		totpt[ibin].ResizeTo(nptv);	totpt[ibin].Zero();
 		vmean[ibin].ResizeTo(nptv);	deltavmean[ibin].ResizeTo(nptv);
-		V[ibin] = (TVectorD*) infile->Get(Form("D_%d/s_%d/D_0/V",ibin,isample));
-		chi[ibin] = (TVectorD*) infile->Get(Form("D_%d/s_%d/chi",ibin,isample));
-		V_mean = (TVectorD*) infile->Get(Form("D_%d/s_%d/Vmean",ibin,isample));
-		deltaV_mean = (TVectorD*) infile->Get(Form("D_%d/s_%d/deltaVmean",ibin,isample));
+		V[ibin] = (TVectorD*) infile->Get(Form("D_%d/D_0/V",ibin));
+	//	chi[ibin] = (TVectorD*) infile->Get(Form("D_%d/s_%d/chi",ibin,isample));
+		V_mean = (TVectorD*) infile->Get(Form("D_%d/Vmean",ibin));
+	//	deltaV_mean = (TVectorD*) infile->Get(Form("D_%d/s_%d/deltaVmean",ibin,isample));
 		for(int itheta=0;itheta<ntheta;itheta++){
 			v[ibin][itheta].ResizeTo(nptv);	deltav[ibin][itheta].ResizeTo(nptv);
 			dD[ibin][itheta]=0;
@@ -87,8 +91,8 @@ void getResvsub(){
 		}
 
         for(int ifile=0; ifile<nFileAll; ifile++){
-	        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod_sub_%d.root",mdir.c_str(),ifile));
-	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod2_sub_%d.root",mdir.c_str(),ifile));
+                if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/v2sensdebug/tracknormcpt03to6/loop%d/%s/Anav_Prod_%d.root",iloop,mdir.c_str(),ifile));
+                else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/v2sensdebug/tracknormcpt03to6/loop%d/%s/Anav_Prod2_%d.root",iloop,mdir.c_str(),ifile));
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
 		Nevent0[ibin] += (*Nevent_t)[ibin];
@@ -137,7 +141,7 @@ void getResvsub(){
                 hpteffcorr[ibin]->Divide(hpteff);
 		for(int iptbin=0;iptbin<nptv; iptbin++){
 			vmean[ibin][iptbin]=0;
-			deltavmean[ibin][iptbin]=0;
+	//		deltavmean[ibin][iptbin]=0;
 			avgmult[ibin][iptbin]=1.0*totmult[ibin][iptbin]/Nevent[ibin][isample];
 			avgpt[ibin][iptbin]=1.0*totpt[ibin][iptbin]/totmult[ibin][iptbin];
 			for(int itheta=0;itheta<ntheta;itheta++){
@@ -145,28 +149,28 @@ void getResvsub(){
 				TComplex Res=dN[ibin][itheta][iptbin]/dD[ibin][itheta];
 				v[ibin][itheta][iptbin]=(*V[ibin])[itheta]*avgmultall[ibin]*TMath::BesselJ1(j01)/Besselj01(mm)*Res.Re();
 				vmean[ibin][iptbin]+=v[ibin][itheta][iptbin];
-				deltav[ibin][itheta][iptbin]=TMath::Cos(mm*nn*theta[itheta])/totmult[ibin][iptbin]*(TMath::Exp(j01*j01/2./(*chi[ibin])[0]/(*chi[ibin])[0]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Power(-1,mm)*TMath::Exp(-j01*j01/2./(*chi[ibin])[0]/(*chi[ibin])[0]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.)));
-				deltavmean[ibin][iptbin]+=deltav[ibin][itheta][iptbin];
+	//			deltav[ibin][itheta][iptbin]=TMath::Cos(mm*nn*theta[itheta])/totmult[ibin][iptbin]*(TMath::Exp(j01*j01/2./(*chi[ibin])[0]/(*chi[ibin])[0]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Power(-1,mm)*TMath::Exp(-j01*j01/2./(*chi[ibin])[0]/(*chi[ibin])[0]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.)));
+	//			deltavmean[ibin][iptbin]+=deltav[ibin][itheta][iptbin];
 			//	fstrv<<itheta<<"\t"<<v[ibin][itheta][iptbin]<<"\t"<<deltav[ibin][itheta][iptbin]<<endl;
 			}
-		deltavmean[ibin][iptbin]=TMath::Sqrt(deltavmean[ibin][iptbin])/2./Besselj01(mm);
+	//	deltavmean[ibin][iptbin]=TMath::Sqrt(deltavmean[ibin][iptbin])/2./Besselj01(mm);
 		//fstrv<<endl;
 		vmean[ibin][iptbin]/=ntheta;
-		deltavmean[ibin][iptbin]/=TMath::Sqrt(ntheta);
+	//	deltavmean[ibin][iptbin]/=TMath::Sqrt(ntheta);
 		fstrv<<ptbinv[iptbin]<<"-"<<ptbinv[iptbin+1]<<"\t"<<vmean[ibin][iptbin]<<"\t"<<deltavmean[ibin][iptbin]<<endl;
 		if(ptbinv[iptbin+1]>3.0) continue;
                 totmulthisto[ibin][iptbin]=hpt[ibin]->Integral(hpt[ibin]->GetXaxis()->FindBin(ptbinv[iptbin]),hpt[ibin]->GetXaxis()->FindBin(ptbinv[iptbin+1])-1);
                 totmulthistocorr[ibin][iptbin]=hpteffcorr[ibin]->Integral(hpteffcorr[ibin]->GetXaxis()->FindBin(ptbinv[iptbin]),hpteffcorr[ibin]->GetXaxis()->FindBin(ptbinv[iptbin+1])-1);
 		V_int[ibin][isample]+=vmean[ibin][iptbin]*totmult[ibin][iptbin];
-		V_interr[ibin][isample]+=deltavmean[ibin][iptbin]*totmult[ibin][iptbin];
+	//	V_interr[ibin][isample]+=deltavmean[ibin][iptbin]*totmult[ibin][iptbin];
 		V_intcorr[ibin][isample]+=vmean[ibin][iptbin]*totmulthistocorr[ibin][iptbin];
-		V_intcorrerr[ibin][isample]+=deltavmean[ibin][iptbin]*totmulthistocorr[ibin][iptbin];
+	//	V_intcorrerr[ibin][isample]+=deltavmean[ibin][iptbin]*totmulthistocorr[ibin][iptbin];
 		totmultall_[ibin][isample]+=totmult[ibin][iptbin];
 		}
 		V_int[ibin][isample]/=totmultall_[ibin][isample];
-		V_interr[ibin][isample]/=totmultall_[ibin][isample];
+	//	V_interr[ibin][isample]/=totmultall_[ibin][isample];
 		V_intcorr[ibin][isample]/=hpteffcorr[ibin]->Integral(hpteffcorr[ibin]->GetXaxis()->FindBin(ptbinv[0]),hpteffcorr[ibin]->GetXaxis()->FindBin(3.0)-1);
-		V_intcorrerr[ibin][isample]/=hpteffcorr[ibin]->Integral(hpteffcorr[ibin]->GetXaxis()->FindBin(ptbinv[0]),hpteffcorr[ibin]->GetXaxis()->FindBin(3.0)-1);
+	//	V_intcorrerr[ibin][isample]/=hpteffcorr[ibin]->Integral(hpteffcorr[ibin]->GetXaxis()->FindBin(ptbinv[0]),hpteffcorr[ibin]->GetXaxis()->FindBin(3.0)-1);
 
         fstrv<<endl<<"pt range\t\t"<<"totmult"<<"\t\t"<<"totmult from histo"<<"\t"<<"totmult corrected"<<endl;
 		for(int iptbin=0;iptbin<nptv; iptbin++){
@@ -174,27 +178,27 @@ void getResvsub(){
 		}
 		fstrv<<"Integral\t\t"<<totmultall[ibin][isample]<<"\t"<<hpt[ibin]->Integral(hpt[ibin]->GetXaxis()->FindBin(ptbinv[0]),hpt[ibin]->GetXaxis()->FindBin(3.0)-1)<<"\t"<<hpteffcorr[ibin]->Integral(hpteffcorr[ibin]->GetXaxis()->FindBin(ptbinv[0]),hpteffcorr[ibin]->GetXaxis()->FindBin(3.0)-1)<<endl;
 		fstrv<<"V ref="<<(*V_mean)[0]<<"\t"<<"V int="<<V_int[ibin][isample]<<"\t"<<"V int corr="<<V_intcorr[ibin][isample]<<endl;
-		fstrv<<"V ref err="<<(*deltaV_mean)[0]<<"\t"<<"V int err="<<V_interr[ibin][isample]<<"\t"<<"V int corr err="<<V_intcorrerr[ibin][isample]<<endl;
+//		fstrv<<"V ref err="<<(*deltaV_mean)[0]<<"\t"<<"V int err="<<V_interr[ibin][isample]<<"\t"<<"V int corr err="<<V_intcorrerr[ibin][isample]<<endl;
 	
 	TDirectory *dirsample = dir0->mkdir(Form("s_%d",isample));
         dirsample->cd();
 	avgpt[ibin].Write("avgpt");
 	totmult[ibin].Write("totmult");
 	vmean[ibin].Write("vmean");
-	deltavmean[ibin].Write("deltavmean");
+//	deltavmean[ibin].Write("deltavmean");
 	for(int iptbin=0;iptbin<nptv; iptbin++){
 		avgavgpt[ibin][iptbin]+=avgpt[ibin][iptbin]*Nevent[ibin][isample];
 		vmeanmean[ibin][iptbin]+=vmean[ibin][iptbin]/nsamples;
-        	deltavmeanmean[ibin][iptbin]+=deltavmean[ibin][iptbin]/nsamples;
+ //       	deltavmeanmean[ibin][iptbin]+=deltavmean[ibin][iptbin]/nsamples;
 	        sigmavmeanmean[ibin][iptbin]+=TMath::Power(vmean[ibin][iptbin]/nsamples,2);
 	}
 	}//subsample loop
 	dir0->cd();
         IFILE[ibin].Write("IFILE");
 	V_int[ibin].Write("V_int");
-	V_interr[ibin].Write("V_interr");
+//	V_interr[ibin].Write("V_interr");
 	V_intcorr[ibin].Write("V_intcorr");
-	V_intcorrerr[ibin].Write("V_intcorrerr");
+//	V_intcorrerr[ibin].Write("V_intcorrerr");
 	Nevent[ibin].Write("Nevent");
 	totmultall[ibin].Write("totmultall");
 	for(int iptbin=0;iptbin<nptv; iptbin++){
@@ -203,7 +207,7 @@ void getResvsub(){
 		}
 	avgavgpt[ibin].Write("avgavgpt");
         vmeanmean[ibin].Write("vmeanmean");
-	deltavmeanmean[ibin].Write("deltavmeanmean");
+//	deltavmeanmean[ibin].Write("deltavmeanmean");
         sigmavmeanmean[ibin].Write("sigmavmeanmean");
 	}//ntrk bin loop
 	infile->Close();

@@ -18,8 +18,8 @@ void dofirst(){
 	int end=atoi(getenv("END"));
 	string dir=getenv("DIR");
 	for(int i=start;i<end;i++){
-		if(SumorProd=="Sum")	name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),i);
-		else	name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),i);
+		if(SumorProd=="Sum")	name=Form("/scratch/xuq7/flow/pbsjoboutput/v2sensdebug/tracknormcpt03to6/%s/AnaV_Sum_%d.root",dir.c_str(),i);
+		else	name=Form("/scratch/xuq7/flow/pbsjoboutput/v2sensdebug/tracknormcpt03to6/%s/AnaV_Prod_%d.root",dir.c_str(),i);
 		remove(name.Data());
 		LYZ *l = new LYZ(readline("./filelist.dat",i));
 		cout<<"start "<<i<<" th job"<<endl;
@@ -30,7 +30,7 @@ void dofirst(){
 	}
 }
 
-void dosecond(){
+void dosecond(int iloop){
         remove("dDRe.txt");
         remove("dDIm.txt");
         remove("dNRe.txt");
@@ -42,14 +42,15 @@ void dosecond(){
 	string dir=getenv("DIR");
         TString name;
         for(int i=start;i<end;i++){
-                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/newptbin/Anav_Prod_%d.root",dir.c_str(),i);
-                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/newptbin/Anav_Prod2_%d.root",dir.c_str(),i);
+                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/v2sensdebug/tracknormcpt03to6/loop%d/%s/Anav_Prod_%d.root",iloop,dir.c_str(),i);
+                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/v2sensdebug/tracknormcpt03to6/loop%d/%s/Anav_Prod2_%d.root",iloop,dir.c_str(),i);
                 remove(name.Data());
                 LYZ *l = new LYZ(readline("filelist.dat",i));
                 cout<<"start "<<i<<" th job"<<endl;
                 l->beginJob();
-                if(SumorProd=="Sum")       l->calcv("mergedV_Sum.root",0,-1);
-                else    l->calcv("mergedV_Prod.root",0,-1);
+//                if(SumorProd=="Sum")       l->calcv("mergedV_Sum.root",0,-1);
+ //               else    l->calcv("mergedV_Prod.root",0,-1);
+                l->calcv(Form("V2in_%d.root",iloop),0,-1);             
                 l->endJobv(name);
         }
 }

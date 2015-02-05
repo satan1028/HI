@@ -18,3 +18,4 @@ const int ntheta = 5;
 const int nstepr=200;
 const bool isSimple=0;
 const int nsamples=20;
+const int nV2 = 6;
