@@ -6,7 +6,7 @@ const int ndir=6;
 const int nbin = 1;
 const double j01=2.404826;
 TString dir[ndir] ={ "tracknormcpt03to6","tracknormcpt03to3","tracklcpt01to10","PFcandpt03to6tracknormcpt03to6","PFcandpt03to3tracknormcpt03to6","PFcandpt01to10tracknormcpt03to6"};
-void calcinV2(){
+void calcinpar(){
     TVectorD r00[nbin];   TVectorD V[nbin];    TVectorD Vmean[nbin];
     double V2[ndir][ntheta], V2int[ndir][ntheta];
     double r0[ndir][ntheta], r0int[ndir][ntheta];

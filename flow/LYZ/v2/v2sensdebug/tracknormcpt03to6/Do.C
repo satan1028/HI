@@ -50,7 +50,7 @@ void dosecond(int iloop){
                 l->beginJob();
 //                if(SumorProd=="Sum")       l->calcv("mergedV_Sum.root",0,-1);
  //               else    l->calcv("mergedV_Prod.root",0,-1);
-                l->calcv(Form("V2in_%d.root",iloop),0,-1);             
+                l->calcv(Form("parin_%d.root",iloop),0,-1);             
                 l->endJobv(name);
         }
 }

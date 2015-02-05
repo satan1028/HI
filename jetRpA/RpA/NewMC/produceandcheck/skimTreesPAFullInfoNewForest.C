@@ -558,9 +558,11 @@ if(isMC){
     fin->Close();
     t = NULL ;
     tEvt = NULL;
+    tSkim = NULL;
     tObj= NULL;
     tHlt = NULL;
     tweight = NULL; 
+    tTrk = NULL;
   } //! file loop
   fout->cd();
   

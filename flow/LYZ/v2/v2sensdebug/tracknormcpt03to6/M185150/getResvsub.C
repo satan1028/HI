@@ -37,7 +37,7 @@ void getResvsub(){
 	TVectorD IFILE[nbin];
 //	if(SumorProd=="Sum")	TFile *infile = TFile::Open("mSum_sub.root");
 //	else	TFile *infile = TFile::Open("mergedV_Prod_sub.root");
-	TFile *infile = TFile::Open(Form("V2in_%d.root",iloop));
+	TFile *infile = TFile::Open(Form("parin_%d.root",iloop));
 //	if(SumorProd=="Sum")TFile *fout = new TFile("mergedv_Prod_sub.root","Recreate");
 //       else TFile *fout = new TFile("mergedv_Prod2_sub.root","Recreate");
         TFile *fout = new TFile(Form("mergedv_Prod2_sub_loop%d.root",iloop),"Recreate");

@@ -6,7 +6,7 @@ cd /home/xuq7/HI/CMSSW_5_3_20/src
 eval `scramv1 runtime -sh`
 cd /home/xuq7/HI/flow/LYZ/v2/v2sensdebug/tracknormcpt03to6/
 
-iloop=3
+iloop=4
 for dir in `ls`;do
 if [[ -d $dir && $dir == M* ]];then
 cd $dir

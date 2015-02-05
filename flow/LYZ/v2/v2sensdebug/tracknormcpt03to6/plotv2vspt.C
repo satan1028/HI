@@ -3,7 +3,7 @@
 const int ntotbin=5;
 const int trkpointmin[ntotbin] = {120,150,185,220,260};
 const int trkpointmax[ntotbin] = {150,185,220,260,300};
-const int ndir = 4;
+const int ndir = 6;
 const int marker[] = {20,24,27,30,31,29};
 const int color[] = {2,3,4,6,7,8};
 int ibin=0;
@@ -60,7 +60,7 @@ for(int i=0;i<ntotbin;i++){
 	tl->SetTextSize(0.05);
 	tl->AddEntry(gr24,"v2 4-particle cumu","lp");
         for(int iloop=0;iloop<ndir;iloop++){
-            TFile *fV2 = TFile::Open(Form("M%d%d/V2in_%d.root",trkpointmax[i],trkpointmin[i],iloop));
+            TFile *fV2 = TFile::Open(Form("M%d%d/parin_%d.root",trkpointmax[i],trkpointmin[i],iloop));
             TVectorD *Vmean = (TVectorD*)fV2->Get(Form("D_%d/Vmean",ibin));
             tl->AddEntry(grProd_loop[iloop],Form("LYZ V_{2} = %.3f",(*Vmean)[0]),"lp");
         }
