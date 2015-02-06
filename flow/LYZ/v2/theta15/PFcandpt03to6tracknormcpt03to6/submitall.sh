@@ -1,6 +1,6 @@
 #!/bin/bash
-SumorProd="Prod"
-Vorv="v"
+SumorProd="Sum"
+Vorv="V"
 
 nfilesperjob=25
 if [[ $Vorv == "V" ]]; then
@@ -12,9 +12,12 @@ njobs=`echo "$nfiles/$nfilesperjob" | bc`
 echo "split into $(($njobs+1)) jobs, $nfilesperjob files per job"
 
 echo $SumorProd $Vorv
+arr=("$@")
+par1=$1
+unset arr[0]
 
 for dir in `ls`;do
-if [[ -d $dir && $dir == M220185 ]];then
+if [[ -d $dir && $dir == $par1 ]];then
 echo $dir
 cd $dir
 rm LYZPF_C*
@@ -28,7 +31,8 @@ EOF
 cd ..
 
 for i in $( seq 0 $njobs );do
-if [[ $i == 2 || $i == 13 || $i == 16 ]];then
+    for j in ${arr[@]};do
+if [[ $i == $j ]];then
 begin=`echo "$i*$nfilesperjob" | bc`
 end=`echo "($i+1)*$nfilesperjob" | bc`
 if [[ $i == $njobs ]];then
@@ -39,12 +43,12 @@ echo -e $begin "to" $end '\t'
 export I=$i 
 export BEGIN=$begin 
 export END=$end 
-export DIR=$dir 
+export DIR=$dir
 export SUMORPROD=$SumorProd 
 export VORV=$Vorv
-sbatch -J $dir$i -o $DIR/job$I$SUMORPROD.out jobsub.slurm 
+sbatch -J $par1$i -o $DIR/job$I$SUMORPROD.out jobsub.slurm jo    
 fi
 done
-
+done
 fi
 done

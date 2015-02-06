@@ -1,18 +1,22 @@
 #include "par.h"
 
 int xbin=0;	//xbin<1
+int isSum=1;
 double ptmin=0.3, ptmax=6.0;
-const int nnu = 6;
-const int marker[nnu] = {20,24,27,30,31,29};
-const int color[nnu] = {1,2,3,4,6,7};
-const int plotnu[nnu]={1,2,3,4,5,6};
+const int nnu = 4;
+//const int marker[nnu] = {20,24,27};
+const int marker[nnu] = {20,24,27,30};
+//const int color[nnu] = {1,2,3};
+const int color[nnu] = {1,2,3,4};
+//const int plotnu[nnu]={8,9,10};
+const int plotnu[nnu]={4,5,6,7};
 void plotgvsr(){
     gStyle->SetOptStat(kFALSE);
 TCanvas *c1 = new TCanvas();
 c1->SetLogy();
 TH1D* hFrame = new TH1D("","",1000,0,1);
-hFrame->GetYaxis()->SetRangeUser(5e-6,1e0);
-hFrame->GetXaxis()->SetRangeUser(0.12,0.35);
+hFrame->GetYaxis()->SetRangeUser(1e-10,1e-2);
+hFrame->GetXaxis()->SetRangeUser(0.10,0.45);
 hFrame->GetXaxis()->SetTitle("r");
 hFrame->GetYaxis()->SetTitle("|G^{#theta}(ir)|^{2}");
 hFrame->SetTitle("");
@@ -22,7 +26,7 @@ double r0_theta[nnu];
 double G2_theta[nnu];
 TLine *l[nnu];
 for(int itheta=0;itheta<nnu;itheta++){
-gr[itheta]=plotGF(0,plotnu[itheta],r0_theta+itheta,G2_theta+itheta,marker[itheta],color[itheta]);
+gr[itheta]=plotGF(isSum,plotnu[itheta],r0_theta+itheta,G2_theta+itheta,marker[itheta],color[itheta]);
 gr[itheta]->Draw("Psame");
 }
 TLegend *tg = new TLegend(0.75,0.70-0.10*nnu,0.90,0.70);
@@ -34,9 +38,13 @@ tg->AddEntry(gr[itheta],Form("#theta = #frac{%d}{%d}*#frac{#pi}{%d}",plotnu[ithe
 tg->Draw("same");
 TLatex *t= new TLatex();
 t->SetNDC();
-t->SetTextSize(0.03);
+t->SetTextSize(0.04);
 t->SetTextFont(42);
-t->DrawLatex(0.5,0.2,Form("track, %d < mult <%d, %.1f < p_{T} < %.1f", trkbin[xbin+1],trkbin[xbin],ptmin,ptmax));
+t->DrawLatex(0.3,0.7,Form("track, %d < mult <%d, %.1f < p_{T} < %.1f", trkbin[xbin+1],trkbin[xbin],ptmin,ptmax));
+if(isSum)
+t->DrawLatex(0.5,0.6,Form("LYZ Sum method"));
+else
+t->DrawLatex(0.5,0.6,Form("LYZ Prod method"));
 
 for(int itheta=0;itheta<nnu;itheta++){
 l[itheta] = new TLine(r0_theta[itheta],0,r0_theta[itheta],G2_theta[itheta]);
@@ -44,7 +52,10 @@ l[itheta]->SetLineStyle(2);
 l[itheta]->SetLineColor(color[itheta]);
 l[itheta]->Draw("same");
 }
-c1->Print("gvsr_thetas.png");
+if(isSum)
+c1->Print("gvsr_thetas_Sum.png");
+else
+c1->Print("gvsr_thetas_Prod.png");
 
 
 }
