@@ -54,7 +54,7 @@ for(int i=0;i<ntotbin;i++){
         for(int iloop=0;iloop<ndir;iloop++)
 	grProd_loop[iloop]->Draw("Psame");
 //	grProd->Draw("Psame");
-	TLegend *tl = new TLegend(0.4,0.3,0.7,0.70);
+	TLegend *tl = new TLegend(0.2,0.4,0.6,0.80);
 	tl->SetFillColor(0);
 	tl->SetBorderSize(0);
 	tl->SetTextSize(0.05);
@@ -62,7 +62,9 @@ for(int i=0;i<ntotbin;i++){
         for(int iloop=0;iloop<ndir;iloop++){
             TFile *fV2 = TFile::Open(Form("M%d%d/parin_%d.root",trkpointmax[i],trkpointmin[i],iloop));
             TVectorD *Vmean = (TVectorD*)fV2->Get(Form("D_%d/Vmean",ibin));
-            tl->AddEntry(grProd_loop[iloop],Form("LYZ V_{2} = %.3f",(*Vmean)[0]),"lp");
+            TVectorD *r0 = (TVectorD*)fV2->Get(Form("D_%d/D_0/r0",ibin));
+            double r0mean = r0->Sum()/r0->GetNrows();
+            tl->AddEntry(grProd_loop[iloop],Form("LYZ V^{mean}_{2} = %.3f, r^{mean}_{0}=%.3f",(*Vmean)[0],r0mean),"lp");
         }
 	if(i==0 || i==3) 
 		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));

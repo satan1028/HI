@@ -4,7 +4,7 @@ const int ndir = 6;
 const int trkpointmin[ntotbin] = {120,150,185,220,260};
 const int trkpointmax[ntotbin] = {150,185,220,260,300};
 const int marker[ndir] = {20,24,27,30,31,29};
-const int color[ndir] = {1,2,3,4,6,7};
+const int color[ndir] = {2,3,4,6,7,8};
 const int ntheta=5;
 void plotr0vstheta_Ntrk(){
 
