@@ -9,7 +9,7 @@ const int marker[nnu] = {20,24,27,30,29,32};
 //const int color[nnu] = {1,2,3};
 const int color[nnu] = {1,2,3,4,6,7};
 //const int plotnu[nnu]={8,9,10};
-const int plotnu[nnu]={0,1,2,3,4,5};
+const int plotnu[nnu]={2,3,4,5,6,7};
 void plotgvsr(){
     gStyle->SetOptStat(kFALSE);
 TCanvas *c1 = new TCanvas();
@@ -38,13 +38,13 @@ tg->AddEntry(gr[itheta],Form("#theta = #frac{%d}{%d}*#frac{#pi}{%d}",plotnu[ithe
 tg->Draw("same");
 TLatex *t= new TLatex();
 t->SetNDC();
-t->SetTextSize(0.03);
+t->SetTextSize(0.04);
 t->SetTextFont(42);
-t->DrawLatex(0.5,0.3,Form("PF candidate, %d < mult <%d, %.1f < p_{T} < %.1f", trkbin[xbin+1],trkbin[xbin],ptmin,ptmax));
+t->DrawLatex(0.3,0.7,Form("track, %d < mult <%d, %.1f < p_{T} < %.1f", trkbin[xbin+1],trkbin[xbin],ptmin,ptmax));
 if(isSum)
-t->DrawLatex(0.5,0.,Form("LYZ Sum method"));
+t->DrawLatex(0.5,0.6,Form("LYZ Sum method"));
 else
-t->DrawLatex(0.5,0.4,Form("LYZ Prod method"));
+t->DrawLatex(0.5,0.6,Form("LYZ Prod method"));
 
 for(int itheta=0;itheta<nnu;itheta++){
 l[itheta] = new TLine(r0_theta[itheta],0,r0_theta[itheta],G2_theta[itheta]);

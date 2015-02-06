@@ -3,7 +3,7 @@
 
 void plotr0vstheta(){
 	TFile *f;
-        int isSum=0;
+        int isSum=1;
         const int ntotbin=5;
         const int trkpointmin[ntotbin] = {120,150,185,220,260};
         const int trkpointmax[ntotbin] = {150,185,220,260,300};
@@ -23,8 +23,8 @@ void plotr0vstheta(){
         hFrame->GetXaxis()->SetTitleSize(0.04);
         hFrame->GetYaxis()->SetTitleSize(0.04);
         hFrame->GetXaxis()->SetRangeUser(0,1.5);
-        hFrame->SetMinimum(0.10);
-        hFrame->SetMaximum(0.35);
+        hFrame->SetMinimum(0.05);
+        hFrame->SetMaximum(0.50);
         for(int trkbin=0;trkbin<ntotbin; trkbin++){
 	if(isSum==0){
 	    f = TFile::Open(Form("M%d%d/mergedV_Prod.root",trkpointmax[trkbin],trkpointmin[trkbin]));
