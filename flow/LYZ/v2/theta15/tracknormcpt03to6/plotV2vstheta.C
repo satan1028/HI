@@ -3,7 +3,7 @@
 
 void plotV2vstheta(){
 	TFile *f;
-        int isSum=0;
+        int isSum=1;
         const int ntotbin=5;
         const int trkpointmin[ntotbin] = {120,150,185,220,260};
         const int trkpointmax[ntotbin] = {150,185,220,260,300};
@@ -23,8 +23,8 @@ void plotV2vstheta(){
         hFrame->GetXaxis()->SetTitleSize(0.04);
         hFrame->GetYaxis()->SetTitleSize(0.04);
         hFrame->GetXaxis()->SetRangeUser(0,1.5);
-        hFrame->SetMinimum(0.033);
-        hFrame->SetMaximum(0.063);
+        hFrame->SetMinimum(0.023);
+        hFrame->SetMaximum(0.070);
         for(int trkbin=0;trkbin<ntotbin; trkbin++){
 	if(isSum==0){
 	    f = TFile::Open(Form("M%d%d/mergedV_Prod.root",trkpointmax[trkbin],trkpointmin[trkbin]));
@@ -60,7 +60,6 @@ void plotV2vstheta(){
         l->SetLineWidth(1.2);
         lup->SetLineWidth(1.2);
         ldown->SetLineWidth(1.2);
-        cout<<TMath::RMS(ntheta,V);
         TLatex *tl = new TLatex();
  //     tl->SetNDC();
         tl->SetTextFont(42);

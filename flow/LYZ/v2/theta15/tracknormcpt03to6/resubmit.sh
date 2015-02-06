@@ -12,6 +12,6 @@ for i in `seq 0 461`;do
         fi
     fi
 done
-#echo  $idir ${arr[@]}
-./submitall.sh $idir ${arr[@]}
+echo  $idir ${arr[@]}
+#./submitall.sh $idir ${arr[@]}
 done
