@@ -16,7 +16,7 @@ export SCRAM_ARCH=slc6_amd64_gcc472
 cd /home/xuq7/HI/CMSSW_5_3_20/src
 #cmsenv
 eval `scramv1 runtime -sh`
-cd /home/xuq7/HI/flow/LYZ/v2/theta8/PFcandpt03to6tracknormcpt03to6/$DIR
+cd /home/xuq7/HI/flow/LYZ/v2/theta10/PFcandpt03to6tracknormcpt03to6/$DIR
 
 root -l -b <<EOF
 .L ../Do.C
