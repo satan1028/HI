@@ -54,16 +54,6 @@ for(int i=0;i<ntotbin;i++){
    	grPFcandpt03to3->Draw("Psame");
    	grPFcandpt01to10->Draw("Psame");
 //        if(i!=ntotbin-1) gr24->Draw("Psame");
-    if(i<3)       TLine *l = new TLine(hFrame->GetXaxis()->GetBinLowEdge(hFrame->GetXaxis()->GetFirst()),r04[startpoint+i],hFrame->GetXaxis()->GetBinUpEdge(hFrame->GetXaxis()->GetLast()),r04[startpoint+i]);
-    else if(i==3) {  
-        TLine *l = new TLine(hFrame->GetXaxis()->GetBinLowEdge(hFrame->GetXaxis()->GetFirst()),r04[startpoint+i],hFrame->GetXaxis()->GetBinUpEdge(hFrame->GetXaxis()->GetLast()),r04[startpoint+i]);
-        TLine *l_ = new TLine(hFrame->GetXaxis()->GetBinLowEdge(hFrame->GetXaxis()->GetFirst()),r04[startpoint+i+1],hFrame->GetXaxis()->GetBinUpEdge(hFrame->GetXaxis()->GetLast()),r04[startpoint+i+1]);
-        l_->SetLineStyle(2);
-        l_->Draw("same");
-    }
-    else      TLine *l = new TLine(hFrame->GetXaxis()->GetBinLowEdge(hFrame->GetXaxis()->GetFirst()),r04[startpoint+i+1],hFrame->GetXaxis()->GetBinUpEdge(hFrame->GetXaxis()->GetLast()),r04[startpoint+i+1]);
-    l->SetLineStyle(2);
-    l->Draw("same");
         if(i==0 || i==3)
                 TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
         else
