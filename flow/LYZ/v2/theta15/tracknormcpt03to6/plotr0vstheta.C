@@ -24,7 +24,7 @@ void plotr0vstheta(){
         hFrame->GetYaxis()->SetTitleSize(0.04);
         hFrame->GetXaxis()->SetRangeUser(0,1.5);
         hFrame->SetMinimum(0.05);
-        hFrame->SetMaximum(0.60);
+        hFrame->SetMaximum(0.50);
         for(int trkbin=0;trkbin<ntotbin; trkbin++){
 	if(isSum==0){
 	    f = TFile::Open(Form("M%d%d/mergedV_Prod.root",trkpointmax[trkbin],trkpointmin[trkbin]));

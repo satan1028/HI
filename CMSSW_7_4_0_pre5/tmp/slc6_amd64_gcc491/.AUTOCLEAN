@@ -1,0 +1,6 @@
+
+/bin/rm -rf tmp/slc6_amd64_gcc491/edmplugins/poison/CentralityAnalyzer/doc
+/bin/rm -rf tmp/slc6_amd64_gcc491/edmplugins/poison/CentralityAnalyzer/plugins
+/bin/rm -rf tmp/slc6_amd64_gcc491/edmplugins/poison/CentralityAnalyzer/python
+/bin/rm -rf tmp/slc6_amd64_gcc491/edmplugins/poison/CentralityAnalyzer/test
+/bin/touch tmp/common/cache/packs/changed

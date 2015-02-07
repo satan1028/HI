@@ -1,0 +1,2 @@
+ALL_SUBSYSTEMS+=CentralityTest
+subdirs_src_CentralityTest = src_CentralityTest_CentralityAnalyzer
