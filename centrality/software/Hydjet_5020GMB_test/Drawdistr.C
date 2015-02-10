@@ -3,7 +3,7 @@ void Drawdistr(){
     gStyle->SetErrorX(0);
     TString fs1 = "/cms/store/user/qixu/centrality/software/Hydjet_5020GMB_test/eventtree_checkdup.root";
     TString fs2 = "/cms/store/user/qixu/centrality/software/Hydjet_5020GMB_test/eventtree.root";
-    TString par = "hiHFplusEta4";
+    TString par = "hiHF";
     TCanvas *c1 = new TCanvas();
     if(par=="hiBin")
         c1->SetLogx();
@@ -17,7 +17,7 @@ void Drawdistr(){
     tl->AddEntry(hbin1,"check Duplicate");
     tl->AddEntry(hbin2,"non check Duplicate");
     tl->Draw("same");
-    c1->SaveAs("hHFplus4_Compare.gif");
+    c1->SaveAs(Form("%s_Compare.gif",par.Data()));
 }
 
 TH1D* Draw(TString parname, TString filename, int marker, int color){
@@ -30,7 +30,10 @@ TH1D* Draw(TString parname, TString filename, int marker, int color){
     }
     if(parname.Contains("HF")){
         Float_t par;
+        if(parname.Contains("plus") || parname.Contains("minus"))
         TH1D* h = new TH1D(Form("h%s",parname.Data()),Form("h%s",parname.Data()),150,0,150);
+        else
+        TH1D* h = new TH1D(Form("h%s",parname.Data()),Form("h%s",parname.Data()),5000,0,5000);
         h->GetXaxis()->SetTitle(parname);
     }
     tree->SetBranchAddress(parname,&par);
