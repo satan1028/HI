@@ -5,7 +5,7 @@
 #include <TF1.h>
 #include <TLegend.h>
 #include <TMath.h>
-#include "/home/xuq/Documents/HI/RpA/TreeAna/produceandcheck/file.h"
+#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 
 void CompareptSpectrapPbPbp(int ieta)
 {
@@ -13,8 +13,8 @@ void CompareptSpectrapPbPbp(int ieta)
   double EtaMin[8] = {-2.0, -1.5, -1.0, -0.5, 0.5, 1.0, 1.5, -1.0 };
   double EtaMax[8] = {-1.5, -1.0, -0.5,  0.5, 1.0, 1.5, 2.0,  1.0 };
  float etamin=EtaMin[ieta], etamax=EtaMax[ieta];
- TH2F *h1pteta = (TH2F*)fMCPPbOld->Get(Form("refptEta"));
- TH2F *h2pteta = (TH2F*)fMCPbPOld->Get(Form("refptEta"));
+ TH2F *h1pteta = (TH2F*)fMCPPb->Get(Form("refptEta"));
+ TH2F *h2pteta = (TH2F*)fMCPbP->Get(Form("refptEta"));
  TH1F *h1eta = (TH1F*)h1pteta->ProjectionX("h1eta",h1pteta->GetYaxis()->FindBin(-etamax-0.465),h1pteta->GetYaxis()->FindBin(-etamin-0.465));
  TH1F *h2eta = (TH1F*)h2pteta->ProjectionX("h2eta",h2pteta->GetYaxis()->FindBin(etamin+0.465),h2pteta->GetYaxis()->FindBin(etamax+0.465));
 h1eta=(TH1F*)h1eta->Rebin(Nbin_pt,h1eta->GetName(),binbound_pt);

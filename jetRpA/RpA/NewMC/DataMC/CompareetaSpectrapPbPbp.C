@@ -5,27 +5,38 @@
 #include <TF1.h>
 #include <TLegend.h>
 #include <TMath.h>
-#include "/home/xuq/Documents/HI/RpA/TreeAna/produceandcheck/file.h"
+#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 
 void CompareetaSpectrapPbPbp()
 {
   bool SavePlots=kTRUE;
+   double etacut[]={-3, -2.5, -2.172, -1.93, -1.74, -1.566, -1.392, -1.218,-1.044, -0.879, -0.696, -0.522, -0.348, -0.174, 0, 0.174, 0.348, 0.522, 0.696, 0.879, 1.044, 1.218, 1.392, 1.566, 1.74, 1.93, 2.172, 2.5, 3.0};
+   int netabin = sizeof(etacut)/sizeof(double)-1;
  int ptmin=50, ptmax=600;
- TH2F *h1pteta = (TH2F*)fDataPPb->Get(Form("jetptEta_woRes"));
- TH2F *h2pteta = (TH2F*)fDataPbPOld->Get(Form("jetptEta_woRes"));
+ TTree *nt1 = (TTree*)fMCPPbjetloop->Get("nt");
+ TTree *nt2 = (TTree*)fMCPbPjetloop->Get("nt");
+ TH2F *h1pteta = new TH2F("h1pteta","h1pteta",1000,0,1000,netabin,etacut);
+ TH2F *h2pteta = new TH2F("h2pteta","h2pteta",1000,0,1000,netabin,etacut);
+ h1pteta->Sumw2();
+ h2pteta->Sumw2();
+ nt1->Draw("refeta:refpt>>h1pteta","xSecWeight*(TMath::Abs(jteta)<3 && rawpt>20 && refpt > 20)");
+ nt2->Draw("refeta:refpt>>h2pteta","xSecWeight*(TMath::Abs(jteta)<3 && rawpt>20 && refpt > 20)");
+TFile *f1 = new TFile("1.root","recreate");
  TH1F *h1eta = (TH1F*)h1pteta->ProjectionY("h1eta",h1pteta->GetXaxis()->FindBin(ptmin),h1pteta->GetXaxis()->FindBin(ptmax));
  TH1F *h2eta = (TH1F*)h2pteta->ProjectionY("h2eta",h2pteta->GetXaxis()->FindBin(ptmin),h2pteta->GetXaxis()->FindBin(ptmax));
- h1eta=(TH1F*)h1eta->Rebin(4);
- h2eta=(TH1F*)h2eta->Rebin(4);
- h1eta->Scale(1./h1eta->Integral());
- h2eta->Scale(1./h2eta->Integral());
+// h1eta=(TH1F*)h1eta->Rebin(4);
+// h2eta=(TH1F*)h2eta->Rebin(4);
+// h1eta->Scale(1./h1eta->Integral());
+// h2eta->Scale(1./h2eta->Integral());
+ h1eta->Scale(1./(ptmax-ptmin));
+ h2eta->Scale(1./(ptmax-ptmin));
 TGraphErrors *g1,*g2;
 double a1eta[1000],a1y[1000],a2eta[1000],a2y[1000],a1yerr[1000],a2yerr[1000];
-// NormalizeByBinWidth(h1eta);
-// NormalizeByBinWidth(h2eta);
+ NormalizeByBinWidth(h1eta);
+ NormalizeByBinWidth(h2eta);
 int Nbin = h1eta->GetNbinsX();
 
- for(int ibin=0;ibin<Nbin;ibin++){
+ for(int ibin=1;ibin<Nbin;ibin++){
   a1y[ibin] = h1eta->GetBinContent(ibin);
   a1yerr[ibin] = h1eta->GetBinError(ibin);
   a2y[ibin] = h2eta->GetBinContent(ibin);
@@ -37,11 +48,14 @@ int Nbin = h1eta->GetNbinsX();
   a2eta[ibin]=h2eta->GetBinCenter(ibin);
   a2eta[ibin]-=0.465;
 }
+  
   g1= new TGraphErrors(Nbin,a1eta,a1y,0,a1yerr);
   g2= new TGraphErrors(Nbin,a2eta,a2y,0,a2yerr);
   TCanvas *c1 = new TCanvas("c1","c1",0,0,650,650);
+  TCanvas *c2 = new TCanvas("c2","c2",0,0,650,650);
   makeMultiPanelCanvas(c1,1,1,0.0,0.0,0.12,0.05,0.06);
-  
+  makeMultiPanelCanvas(c2,1,1,0.0,0.0,0.12,0.05,0.06);
+  f1->cd();
   gStyle->SetOptStat(0);
   
   //c1->cd(1)->SetLogy();
@@ -57,12 +71,13 @@ int Nbin = h1eta->GetNbinsX();
   TH1F *hDum =new TH1F("hdum","",200,-3,3);
   //hDum->SetMaximum(2.00E-4);
   //hDum->SetMaximum(2.00E6);
-  hDum->SetMaximum(0.2);
+  hDum->SetMaximum(5e-6);
   hDum->SetMinimum(0);
   hDum->GetXaxis()->SetRangeUser(-3,3);
   //hDum->GetXaxis()->SetTitle("generator #eta_{lab}");
   hDum->GetXaxis()->SetTitle("jet #eta_{CM}");
-  hDum->GetYaxis()->SetTitle("Event Fraction");
+  //hDum->GetYaxis()->SetTitle("Event Fraction");
+  hDum->GetYaxis()->SetTitle("d#sigma/dp_{T}");
   hDum->GetYaxis()->SetTitleSize(0.045);
   hDum->GetYaxis()->SetTitleOffset(1.2);
   hDum->GetYaxis()->SetLabelSize(0.025);
@@ -90,46 +105,71 @@ int Nbin = h1eta->GetNbinsX();
   t1->AddEntry(g2,Form("PbP (%d < p_{T} < %d (GeV/c))",ptmin,ptmax),"p");
  
   t1->Draw("same");
-  c1->Update();
+  //c1->Update();
 
 
 //-----------------------------------ratio-----------------------------------
- /* c1->cd(2);
-  TH1F *ratio1=h1eta->Clone(h1eta->GetName());
-  ratio1->Divide(h2eta);
-  ratio1->SetMarkerSize(1.2);
-  ratio1->SetMarkerStyle(21);
-  ratio1->SetMarkerColor(kBlue);
-  TH1F *hDum2 = new TH1F("hDum2","",50,StartPoint,EndPoint);
-  hDum2->SetMaximum(1.45);
-  hDum2->SetMinimum(0.65);
-  hDum2->GetXaxis()->SetTitle("p_{T}[GeV/c]");
+  TGraphErrors *ratio;
+  double ratioeta[1000], ratioy[1000];
+  c2->cd(1);
+  int Nbin_=0;
+  for(int ibin=0;ibin<Nbin;ibin++){
+        for(int jbin=0;jbin<Nbin;jbin++){
+        if(a1eta[ibin] == a2eta[jbin]){
+                ratioeta[Nbin_] = a1eta[ibin];
+                ratioy[Nbin_] = a1y[ibin]/a2y[jbin];
+                Nbin_++;
+            }
+        }
+ }
+  ratio= new TGraphErrors(Nbin_,ratioeta,ratioy,0,0);
+  ratio->SetTitle("PPb/PbP");
+  f1->cd();
+// TH1F *ratio1=h1eta->Clone(h1eta->GetName());
+//  ratio1->Divide(h2eta);
+  ratio->SetMarkerSize(1.2);
+  ratio->SetMarkerStyle(21);
+  ratio->SetMarkerColor(kBlue);
+
+  TH1F *hDum2 = new TH1F("hDum2","",netabin,etacut);
+  hDum2->SetMaximum(1.20);
+  hDum2->SetMinimum(0.80);
+  //hDum2->GetXaxis()->SetTitle("p_{T}[GeV/c]");
+  hDum->GetXaxis()->SetTitle("jet #eta_{CM}");
   hDum2->GetXaxis()->SetTitleSize(0.055);
   hDum2->GetXaxis()->SetLabelSize(0.045);
   hDum2->GetXaxis()->CenterTitle();
 
-  hDum2->GetYaxis()->SetTitle("pPb/Pbp" );
+  hDum2->GetYaxis()->SetTitle("pPb/Pbp");
   hDum2->GetYaxis()->SetTitleSize(0.055);
   hDum2->GetYaxis()->SetLabelSize(0.045);
   hDum2->GetYaxis()->CenterTitle();
 
   hDum2->DrawCopy();
-  ratio1->DrawCopy("same");
+  ratio->Draw("Psame");
 
-  c1->Update();  
+ // c2->Update();  
 
-  TLine* l1 = new TLine(StartPoint,1.,EndPoint,1.);
+  TLine* l1 = new TLine(-3,1.,3,1.);
   l1->SetLineWidth(1);
   l1->SetLineStyle(3);
   l1->SetLineColor(kBlack);
   l1->Draw();
-*/
+
 
   
   if(SavePlots) {
-    c1->SaveAs(Form("DataCompareetaSpectrapPb_PbpLabEta_%d_%d.pdf",ptmin,ptmax));
+    c1->SaveAs(Form("CompareetaSpectrapPb_PbpLabEta_%d_%d.pdf",ptmin,ptmax));
+    c2->SaveAs(Form("RatioCompareetaSpectrapPb_PbpLabEta_%d_%d.pdf",ptmin,ptmax));
    }
+f1->cd();
+h1pteta->Write();
+h2pteta->Write();
+ g2->Write("gPbPrefeta"); 
+ g1->Write("gPPbrefeta"); 
+ratio->Write("ratiogeneta");
 
+f1->Close();
 
 }
 
