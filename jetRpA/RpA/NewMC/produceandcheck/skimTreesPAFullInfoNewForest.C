@@ -566,8 +566,8 @@ if(isMC){
   } //! file loop
   fout->cd();
   
-//  nt->Write();
-  fout->Write();
+  nt->Write();
+//  fout->Write();
   
   fout->Close();
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-nJobs=0
+nJobs=180
 i=0
 while [ $i -le $nJobs ];
 do
