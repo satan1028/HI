@@ -1,6 +1,5 @@
 #!/bin/bash
 #SBATCH --nodes=1
-#SBATCH --mem=50G
 #SBATCH --time=1-00:00:00
 
 #source /gpfs21/grid/grid-app/cmssoft/cms/cmsset_default.sh

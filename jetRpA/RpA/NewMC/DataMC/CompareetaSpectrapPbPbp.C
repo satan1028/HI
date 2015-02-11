@@ -36,7 +36,7 @@ double a1eta[1000],a1y[1000],a2eta[1000],a2y[1000],a1yerr[1000],a2yerr[1000];
  NormalizeByBinWidth(h2eta);
 int Nbin = h1eta->GetNbinsX();
 
- for(int ibin=1;ibin<Nbin;ibin++){
+ for(int ibin=0;ibin<Nbin;ibin++){
   a1y[ibin] = h1eta->GetBinContent(ibin);
   a1yerr[ibin] = h1eta->GetBinError(ibin);
   a2y[ibin] = h2eta->GetBinContent(ibin);

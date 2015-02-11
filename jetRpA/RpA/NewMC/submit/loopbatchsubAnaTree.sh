@@ -1,11 +1,13 @@
 #!/bin/bash
-nJobs=180
+arr=("$@")
+nJobs=0
 i=0
-while [ $i -le $nJobs ];
-do
+while [ $i -le $nJobs ];do
+ #   for i in ${arr[@]};do
+#        if [[ $i == $j ]];then
   # if [[  $i == 14 || $i == 43 ]];then
-   let "start=i*40"
-   let "end=(i+1)*40"
+   let "start=i*50"
+   let "end=(i+1)*50"
   echo "First = $start and last file = $end"
   export I=$i
   export FIRST=$start
@@ -14,7 +16,9 @@ do
   sbatch -J akPu3PF$i -o AnaTree$i.out submitAnaTree.slurm
   #fi
   let "i++"
+#  fi
 done
+#done
 
 echo "submit all jobs!"
 
