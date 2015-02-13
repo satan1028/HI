@@ -74,7 +74,7 @@ for(int i=0;i<ntotbin;i++){
 	tlx0->Draw("same");
 	tlx1->Draw("same");
 	tl->Draw("same");
-	c1->Print("v2vseta.png");
+	c1->Print("v2vseta_coarsebin.png");
 
 }
 

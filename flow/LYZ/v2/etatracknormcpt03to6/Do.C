@@ -91,8 +91,8 @@ void dothird(){
         string dir=getenv("DIR");
         TString name;
         for(int i=start;i<end;i++){
-                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/etatracknormcpt03to6/%s/Anaveta_Prod_%d.root",dir.c_str(),i);
-                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/etatracknormcpt03to6/%s/Anaveta_Prod2_%d.root",dir.c_str(),i);
+                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/etatracknormcpt03to6/coarsebins/%s/Anaveta_Prod_%d.root",dir.c_str(),i);
+                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/etatracknormcpt03to6/coarsebins/%s/Anaveta_Prod2_%d.root",dir.c_str(),i);
                 remove(name.Data());
                 LYZ *l = new LYZ(readline("filelist.dat",i));
                 cout<<"start "<<i<<" th job"<<endl;
