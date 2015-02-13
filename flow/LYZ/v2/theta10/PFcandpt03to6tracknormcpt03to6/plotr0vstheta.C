@@ -3,7 +3,7 @@
 
 void plotr0vstheta(){
 	TFile *f;
-        int isSum=1;
+        int isSum=0;
         const int ntotbin=5;
         const int trkpointmin[ntotbin] = {120,150,185,220,260};
         const int trkpointmax[ntotbin] = {150,185,220,260,300};
@@ -73,7 +73,7 @@ void plotr0vstheta(){
         ldown->Draw("same");
         }
         c1->cd(ntotbin+1);
-        TLatex *tlx0 = new TLatex(0.12,0.3,Form("track"));
+        TLatex *tlx0 = new TLatex(0.12,0.3,Form("PF candi"));
         TLatex *tlx1 = new TLatex(0.12,0.25,Form("%.1f<p_{T}<%.1f (GeV/c)",0.3,6.0));
         tlx0->SetNDC();
         tlx1->SetNDC();

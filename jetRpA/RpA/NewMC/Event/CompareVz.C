@@ -4,7 +4,7 @@
 void CompareVz(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
-TString coll="PPb";
+TString coll="PbP";
 bool Save=kTRUE;
  TF1 * fVz = new TF1("fVx","[0]+[1]*x+[2]*TMath::Power(x,2)+[3]*TMath::Power(x,3)+[4]*TMath::Power(x,4)", -15., 15.);
 if(coll=="PPb"){

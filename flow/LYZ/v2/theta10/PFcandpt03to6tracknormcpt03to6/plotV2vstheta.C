@@ -3,7 +3,7 @@
 
 void plotV2vstheta(){
 	TFile *f;
-        int isSum=1;
+        int isSum=0;
         const int ntotbin=5;
         const int trkpointmin[ntotbin] = {120,150,185,220,260};
         const int trkpointmax[ntotbin] = {150,185,220,260,300};

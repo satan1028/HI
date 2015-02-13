@@ -23,8 +23,8 @@ void plotV2vstheta(){
         hFrame->GetXaxis()->SetTitleSize(0.04);
         hFrame->GetYaxis()->SetTitleSize(0.04);
         hFrame->GetXaxis()->SetRangeUser(0,1.5);
-        hFrame->SetMinimum(0.023);
-        hFrame->SetMaximum(0.070);
+        hFrame->SetMinimum(0.025);
+        hFrame->SetMaximum(0.078);
         for(int trkbin=0;trkbin<ntotbin; trkbin++){
 	if(isSum==0){
 	    f = TFile::Open(Form("M%d%d/mergedV_Prod.root",trkpointmax[trkbin],trkpointmin[trkbin]));

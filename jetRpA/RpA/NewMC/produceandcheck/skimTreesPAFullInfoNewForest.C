@@ -565,10 +565,10 @@ if(isMC){
     tTrk = NULL;
   } //! file loop
   fout->cd();
-  
   nt->Write();
 //  fout->Write();
-  
+  cout<<"Write successfully"<<endl;
   fout->Close();
+  cout<<"Close successfully"<<endl;
 
 }

@@ -1,5 +1,5 @@
 #!/bin/bash
-SumorProd="Sum"
+SumorProd="Prod"
 Vorv="V"
 
 nfilesperjob=25

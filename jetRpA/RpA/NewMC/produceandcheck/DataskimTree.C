@@ -19,7 +19,7 @@ const int netabin = sizeof(deta)/sizeof(double)-1;
 const int ptint[] = {20,40,60,80,100,1000};
 
 TString algo="akPu3PF";//"akPu3PF"
-TString coll = "PPb";
+TString coll = "PbP";
 TString trigName[5] = {"Jet20","Jet40","Jet60","Jet80","Jet100"} ;   
 
 void DataskimTree(){
@@ -96,6 +96,7 @@ void DataskimTree(){
   Int_t HLT_PAJet100_noJetID_v1;
 
   Int_t pPAcollisionEventSelectionPA;
+  Int_t pprimaryVertexFilter;
   Int_t pHBHENoiseFilter;
 
 
@@ -111,6 +112,7 @@ void DataskimTree(){
   nt->SetBranchAddress("HLT_PAJet100_noJetID_v1",&HLT_PAJet100_noJetID_v1);
 
   nt->SetBranchAddress("pPAcollisionEventSelectionPA",&pPAcollisionEventSelectionPA);
+  nt->SetBranchAddress("pprimaryvertexFilter",&pprimaryVertexFilter);
   nt->SetBranchAddress("pHBHENoiseFilter",&pHBHENoiseFilter);
   nt->SetBranchAddress("jtpt",jtpt);
   nt->SetBranchAddress("jteta",jteta);

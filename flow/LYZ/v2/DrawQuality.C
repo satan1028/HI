@@ -45,13 +45,13 @@ void DrawQuality(){
 	TH1D* hFrame_phi = new TH1D("hFrame_phi","",100,-4,4);
 	hFrame_phi->GetXaxis()->SetTitle("#phi");
         hFrame_phi->GetXaxis()->SetRangeUser(-4,4);
-        hFrame_phi->GetYaxis()->SetRangeUser(1,5e7);
+        hFrame_phi->GetYaxis()->SetRangeUser(1e1,1e7);
         hFrame_phi->GetYaxis()->SetTitle("# of particles");
         hFrame_phi->GetXaxis()->SetTitleOffset(1);
         hFrame_phi->Draw();
         hphi_PFon->Draw("Psame");
         hphi_t03to6->Draw("Psame");
-	TLegend *tl = new TLegend(0.3,0.7,0.6,0.8);
+	TLegend *tl = new TLegend(0.3,0.3,0.6,0.5);
 	tl->SetTextSize(0.045);
 	tl->SetBorderSize(0);
 	tl->SetFillColor(0);

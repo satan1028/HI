@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes=1
-#SBATCH --time=1-00:00:00
+#SBATCH --mem=16G
+#SBATCH --time=0-06:00:00
 
 #source /gpfs21/grid/grid-app/cmssoft/cms/cmsset_default.sh
 #eval `scramv1 runtime -sh`
@@ -15,6 +16,7 @@ echo $SLURM_JOB_NODELIST
 export SCRAM_ARCH=slc6_amd64_gcc472
 
 cd /home/xuq7/HI/CMSSW_5_3_20/src/
+#cd /home/xuq7/HI/CMSSW_7_4_0_pre6/src/
 #cmsenv
 eval `scramv1 runtime -sh`
 

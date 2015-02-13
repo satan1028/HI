@@ -1,6 +1,6 @@
 #!/bin/bash
 arr=("$@")
-nJobs=0
+nJobs=144
 i=0
 while [ $i -le $nJobs ];do
  #   for i in ${arr[@]};do
