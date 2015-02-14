@@ -4,7 +4,7 @@
 void CompareVz(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
-TString coll="PbP";
+TString coll="PPb";
 bool Save=kTRUE;
  TF1 * fVz = new TF1("fVx","[0]+[1]*x+[2]*TMath::Power(x,2)+[3]*TMath::Power(x,3)+[4]*TMath::Power(x,4)", -15., 15.);
 if(coll=="PPb"){
@@ -40,8 +40,8 @@ histo2->Scale(1/histo2->Integral());
 histodata->Scale(1/histodata->Integral());
 histo1->SetMarkerStyle(24);
 histo1->SetMarkerSize(1.2);
-histo1->SetMarkerColor(2);
-histo1->SetLineColor(2);
+histo1->SetMarkerColor(4);
+histo1->SetLineColor(4);
 histo2->SetMarkerStyle(0);
 histo2->SetMarkerColor(0);
 histo2->SetMarkerSize(0);
@@ -124,7 +124,7 @@ histo2->Write("",TObject::kOverwrite);
 histodata->Write("",TObject::kOverwrite);
 fout->Close();
 c2->Print(Form("ratio_Vz_%s.png",coll.Data()));
-c1->Print(Form("VzCompare_Data%s.png",coll.Data()));
+c1->Print(Form("VzCompare_Data%s.gif",coll.Data()));
 c1->Print(Form("VzCompare_Data%s.pdf",coll.Data()));
 }
 
