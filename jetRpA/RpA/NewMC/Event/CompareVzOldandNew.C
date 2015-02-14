@@ -127,6 +127,6 @@ c2->Print(Form("ratio_Vz_%s.png",coll.Data()));
 c1->Print(Form("VzCompare_Data%s.png",coll.Data()));
 c1->Print(Form("VzCompare_Data%s.pdf",coll.Data()));
 }
-c1->Print(Form("VzCompareOldvsNew_Data%s.png",coll.Data()));
+c1->Print(Form("VzCompareOldvsNew_Data%s.gif",coll.Data()));
 
 }
