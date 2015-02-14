@@ -26,8 +26,8 @@ cd /home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck
 #analyzeTreesPA(1, 0, 0, 1, 1, 1, 0, -1, false, 1)
 root -b > ../submit/AnaTree.log <<EOF
 .x rootlogin.C
-.L skimTreesPAsimple1.C+
-skimTreesPAsimple(1)
+.L skimTreesPAFullInfoNewForest.C+
+skimTreesPAFullInfoNewForest(0)
 .q
 EOF
 

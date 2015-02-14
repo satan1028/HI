@@ -6,7 +6,7 @@ arrindex=-1
 for i in `seq 0 461`;do
 #    if [[ ! -f /scratch/xuq7/flow/pbsjoboutput/etatracknormcpt03to6/${idir}/Anaveta_Prod2_$i.root ]];then
   #  if [[ ! -f /scratch/xuq7/flow/pbsjoboutput/etatracknormcpt03to6/${idir}/AnaV_Prod_$i.root ]];then
-    if [[ ! -f /scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/${idir}/newptbin/Anav_Prod2_$i.root ]];then
+    if [[ ! -f /scratch/xuq7/flow/pbsjoboutput/etatracknormcpt03to6/coarsebins/${idir}/Anaveta_Prod2_$i.root ]];then
         j=$((i/25))
         if [[ $arrindex == -1 || ${arr[$arrindex]} != $j ]];then
             arr=(${arr[@]} $j)
@@ -15,5 +15,7 @@ for i in `seq 0 461`;do
     fi
 done
 echo  $idir ${arr[@]}
-#./submitall.sh $idir ${arr[@]}
+#if [[ $idir == M* ]];then
+ #  ./submitall.sh $idir ${arr[@]}
+#fi
 done

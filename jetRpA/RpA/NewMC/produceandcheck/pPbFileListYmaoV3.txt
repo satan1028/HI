@@ -1060,7 +1060,6 @@
 /cms/store/user/ymao/pA5TEV/PAHighPt/HIRun2013-PromptReco-v1/HiForestV3/ForwardPb/HiForest_1447_1_z7p.root
 /cms/store/user/ymao/pA5TEV/PAHighPt/HIRun2013-PromptReco-v1/HiForestV3/ForwardPb/HiForest_1448_1_Teu.root
 /cms/store/user/ymao/pA5TEV/PAHighPt/HIRun2013-PromptReco-v1/HiForestV3/ForwardPb/HiForest_1448_1_duD.root
-/cms/store/user/ymao/pA5TEV/PAHighPt/HIRun2013-PromptReco-v1/HiForestV3/ForwardPb/HiForest_1448_1_vfP.root
 /cms/store/user/ymao/pA5TEV/PAHighPt/HIRun2013-PromptReco-v1/HiForestV3/ForwardPb/HiForest_1449_1_N75.root
 /cms/store/user/ymao/pA5TEV/PAHighPt/HIRun2013-PromptReco-v1/HiForestV3/ForwardPb/HiForest_1449_1_t1G.root
 /cms/store/user/ymao/pA5TEV/PAHighPt/HIRun2013-PromptReco-v1/HiForestV3/ForwardPb/HiForest_144_1_AqJ.root

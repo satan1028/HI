@@ -1,13 +1,13 @@
 #!/bin/bash
 arr=("$@")
-nJobs=0
-i=0
+nJobs=21
+i=21
 while [ $i -le $nJobs ];do
  #   for i in ${arr[@]};do
 #        if [[ $i == $j ]];then
   # if [[  $i == 14 || $i == 43 ]];then
-   let "start=i*1"
-   let "end=(i+1)*10"
+   let "start=i*50"
+   let "end=(i+1)*50-1"
   echo "First = $start and last file = $end"
   export I=$i
   export FIRST=$start

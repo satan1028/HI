@@ -36,19 +36,19 @@ makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
     hFrame->SetMaximum(0.2);
 
 for(int i=0;i<ntotbin;i++){
-	TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_sub.root",trkpointmax[i],trkpointmin[i]));
+	//TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_sub.root",trkpointmax[i],trkpointmin[i]));
 	TFile *fProd = TFile::Open(Form("M%d%d/mergedv_Prod2.root",trkpointmax[i],trkpointmin[i]));
-	TVectorD *vecDv2_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/vmeanmean",ibin));
-	TVectorD *vecDv2err_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/sigmavmeanmean",ibin));
-	TVectorD *vecDavgpt_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/avgavgpt",ibin));
+	//TVectorD *vecDv2_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/vmeanmean",ibin));
+	//TVectorD *vecDv2err_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/sigmavmeanmean",ibin));
+	//TVectorD *vecDavgpt_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/avgavgpt",ibin));
 	
 	TVectorD *vecDv2_Prod = (TVectorD*)fProd->Get(Form("D_%d/vmean",ibin));
 	TVectorD *vecDv2err_Prod = (TVectorD*)fProd->Get(Form("D_%d/deltavmean",ibin));
 	TVectorD *vecDavgpt_Prod = (TVectorD*)fProd->Get(Form("D_%d/avgpt",ibin));
 
-	double *avgpt_Proderr = vecDavgpt_Proderr->GetMatrixArray();
-	double *v2_Proderr = vecDv2_Proderr->GetMatrixArray();
-	double *v2err_Proderr = vecDv2err_Proderr->GetMatrixArray();
+	//double *avgpt_Proderr = vecDavgpt_Proderr->GetMatrixArray();
+	//double *v2_Proderr = vecDv2_Proderr->GetMatrixArray();
+	//double *v2err_Proderr = vecDv2err_Proderr->GetMatrixArray();
 
 	double *avgpt_Prod = vecDavgpt_Prod->GetMatrixArray();
 	double *v2_Prod = vecDv2_Prod->GetMatrixArray();
@@ -58,7 +58,7 @@ for(int i=0;i<ntotbin;i++){
 	c1->cd(i+1);
 	if(i!=ntotbin-1)
 	TGraphErrors *gr24=new TGraphErrors(npt24,pt,v24[i],0,v24err[i]);
-	TGraphErrors *grProd=new TGraphErrors(npt,avgpt_Prod,v2_Prod,0,v2err_Proderr);
+	TGraphErrors *grProd=new TGraphErrors(npt,avgpt_Prod,v2_Prod,0,v2err_Prod);
 	gr24->SetMarkerSize(1.3);
 	gr24->SetMarkerColor(1);
 	gr24->SetMarkerStyle(20);
@@ -83,14 +83,14 @@ for(int i=0;i<ntotbin;i++){
 	fProd->Close();
 	}
 	c1->cd(ntotbin+1);
-	TLatex *tlx0 = new TLatex(0.12,0.3,Form("track normal cut"));
+	TLatex *tlx0 = new TLatex(0.12,0.3,Form("track"));
         TLatex *tlx1 = new TLatex(0.12,0.25,Form("%.1f<p_{T}<%.1f (GeV/c)",0.3,6.0));
 	tlx0->SetNDC();
 	tlx1->SetNDC();
 	tlx0->SetTextSize(0.045);
 	tlx1->SetTextSize(0.045);
 	tlx2->SetTextSize(0.045);
-	hFrame->Draw();
+        hFrame->Draw();
 	tlx0->Draw("same");
 	tlx1->Draw("same");
 	tl->Draw("same");

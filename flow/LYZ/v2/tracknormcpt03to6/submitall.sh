@@ -1,6 +1,6 @@
 #!/bin/bash
 SumorProd="Prod"
-Vorv="v"
+Vorv="veta"
 
 nfilesperjob=25
 nfiles=462
