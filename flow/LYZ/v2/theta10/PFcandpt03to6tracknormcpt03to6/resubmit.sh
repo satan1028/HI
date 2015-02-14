@@ -13,5 +13,5 @@ for i in `seq 0 889`;do
     fi
 done
 echo  $idir ${arr[@]}
-#./submitall.sh $idir ${arr[@]}
+./submitall.sh $idir ${arr[@]}
 done

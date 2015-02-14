@@ -40,7 +40,7 @@ TLatex *t= new TLatex();
 t->SetNDC();
 t->SetTextSize(0.04);
 t->SetTextFont(42);
-t->DrawLatex(0.3,0.7,Form("track, %d < mult <%d, %.1f < p_{T} < %.1f", trkbin[xbin+1],trkbin[xbin],ptmin,ptmax));
+t->DrawLatex(0.3,0.7,Form("track, use weight, %d < mult <%d, %.1f < p_{T} < %.1f", trkbin[xbin+1],trkbin[xbin],ptmin,ptmax));
 if(isSum)
 t->DrawLatex(0.5,0.6,Form("LYZ Sum method"));
 else

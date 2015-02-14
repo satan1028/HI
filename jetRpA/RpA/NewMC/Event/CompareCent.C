@@ -4,12 +4,13 @@
 void CompareCent(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
-TString coll="PbP";
+TString coll="PPb";
 bool Save=kTRUE;
 TF1 * fCen = new TF1("fCen","[0]*exp([1]+[2]*x+[3]*x*x+[4]*x*x*x+[5]*x*x*x*x+[6]*x*x*x*x*x)", 0., 100.);
 if(coll=="PPb"){
 //fCen->SetParameters(1.20916e-02, 5.02157e+00, -3.38300e-02, 1.87647e-03, -6.76442e-05, 9.08602e-07, -4.01536e-09);//parameterize on 05.03 after approval
-fCen->SetParameters(7.92204e-03, 4.52005e+00, 9.77340e-02, -5.00362e-03, 9.74735e-05, -8.93897e-07, 3.39375e-09);//parameterize on new official MC after QM on 12/03/14
+//fCen->SetParameters(7.92204e-03, 4.52005e+00, 9.77340e-02, -5.00362e-03, 9.74735e-05, -8.93897e-07, 3.39375e-09);//parameterize on new official MC after QM on 12/03/14
+fCen->SetParameters(6.06918e-03, 4.84487e+00, 4.26255e-02, -1.30682e-03, 1.94753e-05, -2.53606e-07, 1.61323e-09); //! parameterize on new official MC using double side HF on 02/02/15
 TH1F* histodata=(TH1F*)fDataPPb->Get("Cent");
 TH1F* histo1=(TH1F*)fMCPPb->Get("Cent");
 //TH1F* histo2=(TH1F*)fNMCPPb->Get("Cent");
@@ -20,7 +21,8 @@ TString data="Pb going positive side";
 else if(coll=="PbP"){
 //fCen->SetParameters(1.05408e-02, 5.27477e+00, -8.03382e-02, 3.51669e-03, -8.85332e-05, 1.08917e-06, -4.90091e-09);
 //fCen->SetParameters(1.14851e-02, 5.31172e+00, -8.52366e-02, 3.00268e-03, -6.04667e-05, 6.24105e-07, -2.43580e-09);
-fCen->SetParameters(2.89263e-02, 3.43643e+00, 5.62562e-02, -1.86555e-03, 1.97924e-06, 3.15416e-07, -1.97946e-09);//parameterize on new official MC after QM on 12/03/14
+//fCen->SetParameters(2.89263e-02, 3.43643e+00, 5.62562e-02, -1.86555e-03, 1.97924e-06, 3.15416e-07, -1.97946e-09);//parameterize on new official MC after QM on 12/03/14
+fCen->SetParameters(5.10893e-03,4.88698e+00,8.37930e-02,-3.77127e-03, 7.90191e-05,-9.04877e-07, 4.26221e-09); //! parameterize on new official MC using double side HF on 02/02/15
 TH1F* histodata=(TH1F*)fDataPbP->Get("Cent");
 TH1F* histo1=(TH1F*)fMCPbP->Get("Cent");
 //TH1F* histo2=(TH1F*)fNMCPbP->Get("Cent");
@@ -37,8 +39,8 @@ histo2->Scale(1/histo2->Integral());
 histodata->Scale(1/histodata->Integral());
 histo1->SetMarkerStyle(24);
 histo1->SetMarkerSize(1.2);
-histo1->SetMarkerColor(2);
-histo1->SetLineColor(2);
+histo1->SetMarkerColor(4);
+histo1->SetLineColor(4);
 histo2->SetMarkerStyle(0);
 histo2->SetMarkerSize(0);
 histo2->SetFillStyle(3004);

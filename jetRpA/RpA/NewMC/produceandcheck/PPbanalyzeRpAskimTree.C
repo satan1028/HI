@@ -141,7 +141,7 @@ void hist_class::Write()
   dataType = "MC";
   out_name=Form("%s%s%s_useskim.root",dataType.Data(),coll.Data(),algo.Data());
 
-  TFile *out_file = new TFile(Form("/scratch/xuq7/RpA/NewMC/%s",out_name.Data()),"RECREATE");  
+  TFile *out_file = new TFile(Form("/cms/store/user/qixu/jetRpA/RpA/NewMC/%s",out_name.Data()),"RECREATE");  
     refjetpt->Write();
     genjetpt->Write();
     jetpt->Write();
