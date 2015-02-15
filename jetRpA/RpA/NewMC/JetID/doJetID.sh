@@ -15,8 +15,8 @@ for (( i=0;i<19;i++ ))
 do
 export LIST=$i
 
-#root -l -b -q ptJetID.C
-root -l -b -q overlayDataMC.C
+root -l -b -q ptJetIDOnlyPPb.C
+#root -l -b -q overlayDataMC.C
 #root -l -b -q overlayProfile.C
 #root -l -q overlayJetIDcut.C
 

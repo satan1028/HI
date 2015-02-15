@@ -13,7 +13,7 @@ for i in `seq 0 461`;do
     fi
 done
 echo  $idir ${arr[@]}
-#if [[ $idir == M300260 ]];then
-#   ./submitall.sh $idir ${arr[@]}
-#fi
+if [[ $idir == M* ]];then
+   ./submitall.sh $idir ${arr[@]}
+fi
 done
