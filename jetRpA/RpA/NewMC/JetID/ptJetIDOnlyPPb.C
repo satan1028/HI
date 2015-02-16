@@ -42,20 +42,20 @@ gStyle->SetLabelFont(70);
 double xrange_JetIDcut[2]; double JetIDcut[2];
 int ilist=atoi(getenv("LIST"));
 TString JetIDName=JetIDNameList[ilist];
-if(ilist== 0)  { JetID = "chargedMax"; JetIDcut[0]=1.1; JetIDcut[1]=200.;}
+if(ilist== 0)  { JetID = "chargedMax"; JetIDcut[0]=3; JetIDcut[1]=200.;}
 else if(ilist== 1)      JetID = "chargedSum";
 else if(ilist== 2)      JetID = "neutralMax";
 else if(ilist== 3) JetID = "neutralSum";
 else if(ilist== 4) JetID = "photonMax";
 else if(ilist== 5) JetID = "photonSum";
-else if(ilist== 6)  {    JetID = "chargedMax/p_{T}"; JetIDcut[0]=0; JetIDcut[1]=0.5;}
+else if(ilist== 6)  {    JetID = "chargedMax/p_{T}"; JetIDcut[0]=0.05; JetIDcut[1]=1;}
 else if(ilist== 7)  {    JetID = "chargedSum/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.6;}
 else if(ilist== 8)  {   JetID = "neutralMax/p_{T}"; JetIDcut[0] = 0;  JetIDcut[1]=0.08;}
 else if(ilist== 9)  {    JetID = "neutralSum/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.15;}
 else if(ilist== 10)  {   JetID = "photonMax/p_{T}";	JetIDcut[0] = 0; JetIDcut[1]=0.50;}
 else if(ilist== 11) {    JetID = "photonSum/p_{T}";	JetIDcut[0] = 0; JetIDcut[1]=0.3;}
 else if(ilist== 12) {    JetID = "(#Sigma h^{#pm}+#Sigma #gamma +#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";JetIDcut[0]=0; JetIDcut[1]=1.01;}
-else if(ilist== 13) {    JetID = "(#Sigma h^{#pm}+#Sigma #gamma +#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{raw}"; JetIDcut[0]=0;JetIDcut[1]=1.13;}
+else if(ilist== 13) {    JetID = "(#Sigma h^{#pm}+#Sigma #gamma +#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{raw}"; JetIDcut[0]=0;JetIDcut[1]=1.20;}
 else if(ilist== 14)   {  JetID = "neutralMax/Max(neutralSum,chargedSum)";JetIDcut[0]=0;JetIDcut[1]=0.975;}
 else if(ilist== 15)     JetID = "charged Multiplicity";
 else if(ilist== 16)     JetID = "neutral Multiplicity";
@@ -235,11 +235,11 @@ T7.SetTextSize(0.03);
 T7.SetTextFont(42);
 T7.DrawLatex(0.65,0.28,Form("p_{T}: %.f-%.f (GeV/c)",xrange_pt[0],xrange_pt[1]));
 T7.DrawLatex(0.25,0.33,Form("Cut :%.2f - %.2f",JetIDcut[0],JetIDcut[1]));
-T7.DrawLatex(0.25,0.28,Form("Inc removal: %.2f%%",rehisto_hPPb_JetID->Integral(0,rehisto_hPPb_JetID->FindBin(xrange_JetIDcut[0])-1)/rehisto_hPPb_JetID->Integral(0, -1)*100));
-T7.DrawLatex(0.25,0.23,Form("real removal: %.2f%%",rehisto_hPPb_JetID_real->Integral(0,rehisto_hPPb_JetID_real->FindBin(xrange_JetIDcut[0])-1)/rehisto_hPPb_JetID_real->Integral(0, -1)*100));
-T7.DrawLatex(0.25,0.18,Form("fake removal: %.2f%%",rehisto_hPPb_JetID_fake->Integral(0,rehisto_hPPb_JetID_fake->FindBin(xrange_JetIDcut[0])-1)/rehisto_hPPb_JetID_fake->Integral(0, -1)*100));
-T7.DrawLatex(0.55,0.18,Form("fake cont with cut: %.2f%%",rehisto_hPPb_JetID_fake->Integral(rehisto_hPPb_JetID_fake->FindBin(xrange_JetIDcut[0]),rehisto_hPPb_JetID_fake->FindBin(xrange_JetIDcut[1]))/rehisto_hPPb_JetID->Integral(rehisto_hPPb_JetID->FindBin(xrange_JetIDcut[0]), rehisto_hPPb_JetID->FindBin(xrange_JetIDcut[1]))*100));
-T7.DrawLatex(0.55,0.23,Form("fake cont without cut: %.2f%%",rehisto_hPPb_JetID_fake->Integral(0,-1)/rehisto_hPPb_JetID->Integral(0, -1)*100));
+T7.DrawLatex(0.25,0.28,Form("Inc removal: %.2f%%",100-hPPb_JetID->Integral(hPPb_JetID->FindBin(xrange_JetIDcut[0]),hPPb_JetID->FindBin(xrange_JetIDcut[1])-1)/hPPb_JetID->Integral(0, -1)*100));
+T7.DrawLatex(0.25,0.23,Form("real removal: %.2f%%",100-hPPb_JetID_real->Integral(hPPb_JetID_real->FindBin(xrange_JetIDcut[0]),hPPb_JetID_real->FindBin(xrange_JetIDcut[1])-1)/hPPb_JetID_real->Integral(0, -1)*100));
+T7.DrawLatex(0.25,0.18,Form("fake removal: %.2f%%",100-hPPb_JetID_fake->Integral(hPPb_JetID_fake->FindBin(xrange_JetIDcut[0]),hPPb_JetID_fake->FindBin(xrange_JetIDcut[1])-1)/hPPb_JetID_fake->Integral(0, -1)*100));
+T7.DrawLatex(0.55,0.18,Form("fake cont with cut: %.2f%%",hPPb_JetID_fake->Integral(hPPb_JetID_fake->FindBin(xrange_JetIDcut[0]),hPPb_JetID_fake->FindBin(xrange_JetIDcut[1]))/hPPb_JetID->Integral(hPPb_JetID->FindBin(xrange_JetIDcut[0]), hPPb_JetID->FindBin(xrange_JetIDcut[1]))*100));
+T7.DrawLatex(0.55,0.23,Form("fake cont without cut: %.2f%%",hPPb_JetID_fake->Integral(0,-1)/hPPb_JetID->Integral(0, -1)*100));
 /*T7.DrawLatex(0.65,0.28,Form("Inc: Mean=%.3f",hPPb_JetID->GetMean()));
 T7.DrawLatex(0.65,0.24,Form("Fake: Mean=%.3f",hPPb_JetID_fake->GetMean()));
 T7.DrawLatex(0.65,0.2,Form("Fake: RMSError=%.3f",hPPb_JetID_fake->GetRMSError()));
@@ -283,8 +283,8 @@ c6 = new TCanvas("c6"," ",600,600);
 makeMultiPanelCanvas(c6,1,1,0,0,0.1,0.15,0.03);
 c6->cd(1);
 hFrame->GetYaxis()->SetTitle(Form("%s #frac{cut}{no cut}",JetID.Data()));
-hFrame->SetMaximum(1.09);
-hFrame->SetMinimum(0.90);
+hFrame->SetMaximum(1.05);
+hFrame->SetMinimum(0.70);
 hFrame->DrawCopy();
 TH1D* ratio_hPPb_JetIDcutvsnocut_pt=(TH1D*)rehisto_hPPb_JetIDcut_pt->Clone("ratio_hPPb_JetIDcut_ptcutvsnocut_pt");
 ratio_hPPb_JetIDcutvsnocut_pt->Divide(rehisto_hPPb_pt);

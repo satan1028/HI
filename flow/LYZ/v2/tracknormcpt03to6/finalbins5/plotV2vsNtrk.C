@@ -13,7 +13,7 @@ int count=0;
 double Ntrk[Nbin], V2_Sum[Nbin], V2err_Sum[Nbin],  V2_Prod[Nbin], V2err_Prod[Nbin];
 double Ntrkavg[ntotbin], Nevent[ntotbin], Nmult[ntotbin], V2avg_Sum[ntotbin], V2erravg_Sum[ntotbin],  V2avg_Prod[ntotbin], V2erravg_Prod[ntotbin];
 for(int i=0;i<ntotbin;i++){
-TFile *mergedV_Sum = TFile::Open(Form("%s/mergedV_Sum.root",tbin[i].Data()));
+TFile *mergedV_Sum = TFile::Open(Form("%s/mergedV_Prod.root",tbin[i].Data()));
 TFile *mergedV_Prod = TFile::Open(Form("%s/mergedV_Prod.root",tbin[i].Data()));
 TVectorD *vecNtrk = (TVectorD*)mergedV_Sum->Get("tottrk");
 TVectorD *vecNtrk_back = (TVectorD*)mergedV_Prod->Get("tottrk");
@@ -22,10 +22,10 @@ TVectorD *vecNevent = (TVectorD*)mergedV_Sum->Get("Nevent");
 Ntrkavg[i]=0; Nevent[i]=0;	Nmult[i]=0; V2avg_Sum[i]=0;	V2erravg_Sum[i]=0;	V2avg_Prod[i]=0;	V2erravg_Prod[i]=0;
 for(int ibin=0;ibin<nbin[i];ibin++){
 count++;
-TVectorD *vecV2_Sum=(TVectorD*)mergedV_Sum->Get(Form("D_%d/Vmean",ibin));
-TVectorD *vecV2err_Sum=(TVectorD*)mergedV_Sum->Get(Form("D_%d/deltaVmean",ibin));
-TVectorD *vecV2_Prod=(TVectorD*)mergedV_Prod->Get(Form("D_%d/Vmean",ibin));
-TVectorD *vecV2err_Prod=(TVectorD*)mergedV_Prod->Get(Form("D_%d/deltaVmean",ibin));
+TVectorD *vecV2_Sum=(TVectorD*)mergedV_Sum->Get(Form("Vmean"));
+TVectorD *vecV2err_Sum=(TVectorD*)mergedV_Sum->Get(Form("deltaVmean"));
+TVectorD *vecV2_Prod=(TVectorD*)mergedV_Prod->Get(Form("Vmean"));
+TVectorD *vecV2err_Prod=(TVectorD*)mergedV_Prod->Get(Form("deltaVmean"));
 Ntrk[count-1]=(*vecNtrk)[ibin]/(*vecNevent)[ibin];
 Ntrkavg[i]+=(*vecNtrk)[ibin];
 Nevent[i]+=(*vecNevent)[ibin];

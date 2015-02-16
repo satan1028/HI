@@ -1,5 +1,5 @@
 #include "file.h"
-#include "/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/Quality/root_setting.h"
+#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 
 void P3overlayProfile(){
 gStyle->SetOptStat(kFALSE);
@@ -7,8 +7,8 @@ gStyle->SetErrorX(0);
 TString svar="other";
 if(svar=="Max"){
 int listsvar[]={0,2,4,6,8,10};
-double ymin1=0.1,ymax1=150;
-double ymin2=0,ymax2=0.37;
+double ymin1=0.1;double ymax1=150;
+double ymin2=0;double ymax2=0.37;
 TString svar1="Max (GeV/c)";
 TString svar2="Max / p_{T}";}
 
@@ -26,7 +26,7 @@ TString svar1="Mult (GeV/c)";}
 
 else if(svar=="other"){
 int listsvar[]={12,13,14};
-double ymin2=0;ymax2=1.6;
+double ymin2=0,ymax2=1.6;
 TString svar2="Jet ID Variables";}
 
 else exit();
@@ -50,17 +50,12 @@ int ilist=listsvar[k];
 c1->cd(k+1);
 TString JetID,Unit;     TString JetIDName=JetIDNameList[ilist];
 double xrange_pt[2]={30+1e-4,600-1e-4};
-TString filename="/scratch/xuq7/RpA/TreeAna/Datacombined.root";
-TString PPbfilename="/scratch/xuq7/RpA/TreeAna/MCPPbakPu3PF.root";
 
-TString histoname=Form("jetpt%sCombinedSpectra",JetIDName.Data());
+TString histoname=Form("jetpt%s",JetIDName.Data());
 TString PPbhistoname=Form("jetpt%s",JetIDName.Data());
 
-TFile *file=TFile::Open(filename);
-TFile *PPbfile=TFile::Open(PPbfilename);
-
-TH2F* hdata2F=(TH2F*)file->Get(histoname);
-TH2F* hPPb2F=(TH2F*)PPbfile->Get(PPbhistoname);
+TH2F* hdata2F=(TH2F*)fdataJetID->Get(histoname);
+TH2F* hPPb2F=(TH2F*)fPPb->Get(PPbhistoname);
 if(ilist== 0)   JetID = "Max p_{T}^{charged}";
 else if(ilist== 1)      JetID = "#Sigma p_{T}^{charged}";
 else if(ilist== 2)      JetID = "Max p_{T}^{neutral}";
@@ -133,6 +128,6 @@ if(k==2) leg1->Draw("same");}
 else {
 if(k==0) leg1->Draw("same");}
 }
-c1->Print(Form("/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID/pic/overlay_%s_Profile.png",svar.Data()));
-c1->Print(Form("/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID/pic/overlay_%s_Profile.pdf",svar.Data()));
+c1->Print(Form("pic/overlay_%s_Profile.png",svar.Data()));
+c1->Print(Form("pic/overlay_%s_Profile.pdf",svar.Data()));
 }

@@ -102,19 +102,19 @@ lumi->Draw();
 }
 }
 
-void fixedFontHist(TH1 * h, Float_t xoffset=1.3, Float_t yoffset=2.0)
+void fixedFontHist(TH1 * h, Float_t xoffset=1.3, Float_t yoffset=1.2)
 {
 h->SetLabelFont(43,"X");
 h->SetLabelFont(43,"Y");
 //h->SetLabelOffset(0.01);
 h->SetLabelSize(22);
-//h->SetTitleFont(44);
-h->SetTitleSize(20);
+h->SetTitleFont(43);
+h->SetTitleSize(16);
 h->SetLabelSize(18,"Y");
 h->SetLabelSize(18,"X");
-//h->SetTitleFont(43,"Y");
-//h->SetTitleFont(43,"X");
-h->SetTitleSize(22,"Y");
+h->SetTitleFont(43,"Y");
+h->SetTitleFont(43,"X");
+h->SetTitleSize(20,"Y");
 h->SetTitleSize(20,"X");
 h->SetTitleOffset(xoffset,"X");
 h->SetTitleOffset(yoffset,"Y");

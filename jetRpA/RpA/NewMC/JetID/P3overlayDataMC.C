@@ -1,4 +1,5 @@
-#include "/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/Quality/root_setting.h"
+#include "file.h"
+#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 void P3overlayDataMC(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
@@ -8,7 +9,7 @@ const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 
 double binbound_JetID[100];
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
 double xrange_pt[2]={30+1e-4,600-1e-4};
-for(int j=0;j<6;j++){
+for(int j=5;j<6;j++){
 TString svar=listsvarALL[j];
 if(svar=="Max"){
 int listsvar[]={0,2,4};
@@ -37,7 +38,7 @@ else exit();
 
 int N=sizeof(listsvar)/sizeof(int);
 c1 = new TCanvas("c1"," ",1000,400);
-makeMultiPanelCanvas(c1,3,1,0,0,0.18,0.16,0.03);
+makeMultiPanelCanvas(c1,3,1,0,0,0.2,0.20,0.02);
 
 for(int k=0;k<N;k++){
 int ilist=listsvar[k];
@@ -68,7 +69,7 @@ else if(ilist== 17)     JetID = "photon Multiplicity";
 else{   exit();}
 if(JetIDName.Contains("pt") || JetIDName=="neuMaxr"){
 if(ilist==12 || ilist==13){
-double binbound_JetID[]={0,0.84,0.86,0.88,0.9,0.92,0.94,0.96,0.98,1.0,1.02,1.04,1.06,1.1,1.15,1.2,1.3,1.4,1.6,1.8,2.}; int Nbin_JetID=20;}
+double binbound_JetID[]={0.6,0.8,0.84,0.86,0.88,0.9,0.92,0.94,0.96,0.98,1.0,1.02,1.04,1.06,1.1,1.15,1.2,1.3,1.4,1.6,1.8,2.}; int Nbin_JetID=20;}
 else if(ilist==6){
 double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.}; int Nbin_JetID=19;}
 else{
@@ -91,17 +92,11 @@ int Nbin_JetID=20;
 Unit="(GeV/c)";
 }
 
-TString filename="/scratch/xuq7/RpA/TreeAna/Datacombined.root";
-TString PPbfilename="/scratch/xuq7/RpA/TreeAna/MCPPbakPu3PF.root";
-
-TString histoname=Form("jetpt%sCombinedSpectra",JetIDName.Data());
+TString histoname=Form("jetpt%s",JetIDName.Data());
 TString PPbhistoname=Form("jetpt%s",JetIDName.Data());
 
-TFile *file=TFile::Open(filename);
-TFile *PPbfile=TFile::Open(PPbfilename);
-
-TH2F* hdata2F=(TH2F*)file->Get(histoname);
-TH2F* hPPb2F=(TH2F*)PPbfile->Get(PPbhistoname);
+TH2F* hdata2F=(TH2F*)fdataJetID->Get(histoname);
+TH2F* hPPb2F=(TH2F*)fPPb->Get(PPbhistoname);
 
 TH1D* hdata = (TH1D*)hdata2F->ProjectionY("hdata",hdata2F->GetXaxis()->FindBin(xrange_pt[0]),hdata2F->GetXaxis()->FindBin(xrange_pt[1]));
 TH1D* hPPb = (TH1D*)hPPb2F->ProjectionY("hPPb",hPPb2F->GetXaxis()->FindBin(xrange_pt[0]),hPPb2F->GetXaxis()->FindBin(xrange_pt[1]));
@@ -128,10 +123,10 @@ hFrame->GetYaxis()->SetRangeUser(ymin,ymax);
 if(k==0)	hFrame->GetYaxis()->SetTitle("Event Fraction");
 else hFrame->GetYaxis()->SetTitle(""); 
 hFrame->SetTitle("");
-fixedFontHist(hFrame,1.2,1.4);
+fixedFontHist(hFrame,1.3,1.3);
 if(svar=="other")
-hFrame->GetXaxis()->SetTitleSize(15);
-hFrame->GetXaxis()->SetTitle(Form("%s %s",JetID.Data(),Unit.Data()));
+hFrame->GetXaxis()->SetTitleSize(18);
+hFrame->GetXaxis()->SetTitle(Form("%s%s",JetID.Data(),Unit.Data()));
 hFrame->GetXaxis()->SetLimits(binbound_JetID[0],binbound_JetID[Nbin_JetID]+1e-3);
 hFrame->DrawCopy();
 //if(ilist==12 || ilist==13) 
@@ -172,7 +167,7 @@ l->SetLineColor(1);
 l->Draw("same");
 */
 }
-c1->Print(Form("/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID/pic/overlay_%s_DataMC.png",svar.Data()));
-c1->Print(Form("/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID/pic/overlay_%s_DataMC.pdf",svar.Data()));
+c1->Print(Form("pic/overlay_%s_DataMC.png",svar.Data()));
+c1->Print(Form("pic/overlay_%s_DataMC.pdf",svar.Data()));
 }
 }

@@ -1,5 +1,6 @@
 TString algo="akPu3PF";
 TString datafile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimUniv.root";
+TString dataJetIDfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimJetID.root";
 TString PPbfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim.root";
 //TString PPfile="/scratch/xuq7/RpA/TreeAna/MCPPbakPu3PF.root";
 
@@ -11,6 +12,7 @@ double xrange_JetIDcut[2];
 double JetIDcut[2];
 
 TFile *fdata=TFile::Open(datafile);
+TFile *fdataJetID=TFile::Open(dataJetIDfile);
 //TFile *fPP=TFile::Open(PPfile);
 TFile *fPPb=TFile::Open(PPbfile);
 TString JetID,Unit;

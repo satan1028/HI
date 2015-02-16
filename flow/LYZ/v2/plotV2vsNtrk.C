@@ -17,8 +17,9 @@ grv24->SetMarkerColor(1);
 grv24->SetLineColor(1);
 grv24->SetMarkerStyle(20);
 TGraphErrors *grtr03to6 = plot("tracknormcpt03to6",0,2,20,0);
-TGraphErrors *grtr03to3 = plot("tracknormcpt03to3",0,2,30,0);
-TGraphErrors *grtr01to10 = plot("tracklcpt01to10",0,2,24,0);
+TGraphErrors *grtr03to6d3 = plot("tracknormcpt03to6",0,2,30,3);
+//TGraphErrors *grtr03to3 = plot("tracknormcpt03to3",0,2,30,0);
+//TGraphErrors *grtr01to10 = plot("tracklcpt01to10",0,2,24,0);
 //TGraphErrors *gr1Sum = plot("tracknormcpt03to6",1,1,24,0);
 //TGraphErrors *gr11 = plot("tracknormcpt03to6",0,3,29,1);
 //TGraphErrors *gr12 = plot("tracknormcpt03to6",0,4,30,2);
@@ -28,8 +29,8 @@ TGraphErrors *grtr01to10 = plot("tracklcpt01to10",0,2,24,0);
 //TGraphErrors *gr2f = plot("tracknormcpt03to3/finalbins5",4,30,1);
 //TGraphErrors *gr3 = plot("tracklcpt01to10",2,34,0);
 //TGraphErrors *grpf = plot("PFcandpt01to10",4,27,0);
-TGraphErrors *grpf03to6 = plot("PFcandpt03to6",0,4,20,0);
-TGraphErrors *grpf03to3 = plot("PFcandpt03to3tracknormcpt03to6",0,4,30,0);
+//TGraphErrors *grpf03to6 = plot("PFcandpt03to6",0,4,20,0);
+//TGraphErrors *grpf03to3 = plot("PFcandpt03to3tracknormcpt03to6",0,4,30,0);
 TGraphErrors *grpf01to10 = plot("PFcandpt01to10",0,4,24,0);
 //TGraphErrors *grpfon = plot("PFcandpt01to10/OnlyCharged",4,33);
 TLegend *leg = new TLegend(0.2,0.1,0.4,0.45);
@@ -37,8 +38,8 @@ leg->SetTextSize(0.045);
 leg->SetBorderSize(0);
 leg->SetFillColor(0);
 leg->AddEntry(grtr03to6,Form("track, %.1f < p_{T} < %.1f (GeV/c)",0.3,6.0),"P");
-leg->AddEntry(grtr03to3,Form("track, %.1f < p_{T} < %.1f (GeV/c)",0.3,3.0),"P");
-leg->AddEntry(grtr01to10,Form("track, %.1f < p_{T} < %.1f (GeV/c)",0.1,10.0),"P");
+leg->AddEntry(grtr03to6d3,Form("track with sp and eff corr, %.1f < p_{T} < %.1f (GeV/c)",0.3,6.0),"P");
+//leg->AddEntry(grtr01to10,Form("track, %.1f < p_{T} < %.1f (GeV/c)",0.1,10.0),"P");
 //leg->AddEntry(gr1Sum,Form("track normal cut Sum reference"),"P");
 //leg->AddEntry(gr10,Form("%.1f < p_{T} < %.1f (GeV/c)",0.3,6.0),"");
 //leg->AddEntry(gr11,Form("track normal cut integral with v2"),"P");
@@ -50,15 +51,16 @@ leg->AddEntry(grtr01to10,Form("track, %.1f < p_{T} < %.1f (GeV/c)",0.1,10.0),"P"
 //leg->AddEntry(gr2f,Form("track normal cut final,%.1f < p_{T} < %.1f (GeV/c)",0.3,3.0),"P");
 //leg->AddEntry(gr3,Form("track loose cut,%.1f < p_{T} < %.1f (GeV/c)",0.1,10.0),"P");
 //leg->AddEntry(grpf,Form("PF full,%.1f < p_{T} < %.1f (GeV/c)",0.1,10.0),"P");
-leg->AddEntry(grpf03to6,Form("PF candidate,%.1f < p_{T} < %.1f (GeV/c)",0.3,6.0),"P");
-leg->AddEntry(grpf03to3,Form("PF candidate,%.1f < p_{T} < %.1f (GeV/c)",0.3,3.0),"P");
+//leg->AddEntry(grpf03to6,Form("PF candidate,%.1f < p_{T} < %.1f (GeV/c)",0.3,6.0),"P");
+//leg->AddEntry(grpf03to3,Form("PF candidate,%.1f < p_{T} < %.1f (GeV/c)",0.3,3.0),"P");
 leg->AddEntry(grpf01to10,Form("PF candidate,%.1f < p_{T} < %.1f (GeV/c)",0.1,10.0),"P");
 //leg->AddEntry(grpfon,Form("PF only charged,%.1f < p_{T} < %.1f (GeV/c)",0.1,10.0),"P");
 leg->AddEntry(grv24,"4-particle cumulant","P");
 grv24->Draw("AP");
 grtr03to6->Draw("Psame");
-grtr03to3->Draw("Psame");
-grtr01to10->Draw("Psame");
+grtr03to6d3->Draw("Psame");
+//grtr03to3->Draw("Psame");
+//grtr01to10->Draw("Psame");
 //gr1Sum->Draw("Psame");
 //gr11->Draw("Psame");
 //gr12->Draw("Psame");
@@ -69,8 +71,8 @@ grtr01to10->Draw("Psame");
 //gr3->Draw("Psame");
 //grpfon->Draw("Psame");
 //grpf->Draw("Psame");
-grpf03to6->Draw("Psame");
-grpf03to3->Draw("Psame");
+//grpf03to6->Draw("Psame");
+//grpf03to3->Draw("Psame");
 grpf01to10->Draw("Psame");
 leg->Draw("same");
 c1->Print("V2vsNtrk.png");
@@ -128,14 +130,19 @@ V2mean_0[i]/=nbin[i];	V2meanerr_0[i]/=nbin[i];
 }
 else{
 TVectorD *vecNtrk = (TVectorD*)mergedV->Get("avgtrk");
-TVectorD *vecNtrk_back = (TVectorD*)mergedV->Get("avgtrk");
 TVectorD *vecavgmult = (TVectorD*)mergedV->Get("avgmultall");
 TVectorD *vecNevent = (TVectorD*)mergedV->Get("Nevent");
+if(dir!="tracknormcpt03to6")
 TVectorD *vecV2mean_0=(TVectorD*)mergedV->Get(Form("D_%d/Vmean",xbin));
-vecV2_0=(TVectorD*)mergedV->Get(Form("D_%d/D_%d/V",ibin,xpt));
+else
+TVectorD *vecV2mean_0=(TVectorD*)mergedV->Get(Form("Vmean",xbin));
+//vecV2_0=(TVectorD*)mergedV->Get(Form("D_%d/D_%d/V",ibin,xpt));
 for(int itheta=0;itheta<ntheta;itheta++)
-V2_0[i][itheta]=(*vecV2_0)[itheta];
+//V2_0[i][itheta]=(*vecV2_0)[itheta];
+if(dir!="tracknormcpt03to6")
 TVectorD *vecV2meanerr_0=(TVectorD*)mergedV->Get(Form("D_%d/deltaVmean",xbin));
+else
+TVectorD *vecV2meanerr_0=(TVectorD*)mergedV->Get(Form("deltaVmean",xbin));
 Ntrk[i]=(*vecNtrk)[xbin];
 Mult[i]=(*vecavgmult)[xbin];
 Nevent[i]=(*vecNevent)[ibin];
@@ -149,8 +156,8 @@ V2_2[i]=(*vecV2_2)[0];
 V2err_2[i]=(*vecV2err_2)[0];
 V2_3[i]=(*vecV2_2)[0]*spcorr[i];
 V2err_3[i]=(*vecV2err_2)[0]*spcorr[i];
-fout<<Ntrk[i]<<"\t"<<V2_0[i]<<"\t"<<V2_1[i]<<"\t"<<V2_2[i]<<"\t"<<V2_3[i]<<endl;
-fout<<"\t"<<V2meanerr_0[i]<<"\t"<<V2err_1[i]<<"\t"<<V2err_2[i]<<"\t"<<V2err_3[i]<<endl;
+//fout<<Ntrk[i]<<"\t"<<V2_0[i]<<"\t"<<V2_1[i]<<"\t"<<V2_2[i]<<"\t"<<V2_3[i]<<endl;
+//fout<<"\t"<<V2meanerr_0[i]<<"\t"<<V2err_1[i]<<"\t"<<V2err_2[i]<<"\t"<<V2err_3[i]<<endl;
 }
 //cout<<Nevent[i]<<"\t"<<tbin[i]<<"\t"<<dir<<"\t"<<Mult[i]<<endl;
 for(int itheta=0;itheta<ntheta;itheta++){
@@ -167,7 +174,7 @@ else if(debug==1)TGraphErrors *gr=new TGraphErrors(ntotbin,Ntrk,V2_1,0,V2err_1);
 else if(debug==2)TGraphErrors *gr=new TGraphErrors(ntotbin,Ntrk,V2_2,0,V2err_2);
 else TGraphErrors *gr=new TGraphErrors(ntotbin,Ntrk,V2_3,0,0);//modify
 gr->SetMarkerColor(color);
-gr->SetMarkerSize(1.1);
+gr->SetMarkerSize(1.3);
 gr->SetLineColor(color);
 gr->SetMarkerStyle(marker);
 return gr;

@@ -1,4 +1,5 @@
-#include "/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/Quality/root_setting.h"
+#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
+#include "file.h"
 void overlayDataMC(){
 int ilist=atoi(getenv("LIST"));
 TString JetIDNameList[18]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN"};
@@ -55,17 +56,11 @@ Unit="(GeV/c)";
 }
 int Nbin_JetID=sizeof(binbound_JetID)/sizeof(double)-1;
 
-TString filename="/scratch/xuq7/RpA/TreeAna/Datacombined.root";
-TString PPbfilename="/scratch/xuq7/RpA/TreeAna/MCPPbakPu3PF.root";
-
-TString histoname=Form("jetpt%sCombinedSpectra",JetIDName.Data());
+TString histoname=Form("jetpt%s",JetIDName.Data());
 TString PPbhistoname=Form("jetpt%s",JetIDName.Data());
 
-TFile *file=TFile::Open(filename);
-TFile *PPbfile=TFile::Open(PPbfilename);
-
-TH2F* hdata2F=(TH2F*)file->Get(histoname);
-TH2F* hPPb2F=(TH2F*)PPbfile->Get(PPbhistoname);
+TH2F* hdata2F=(TH2F*)fdataJetID->Get(histoname);
+TH2F* hPPb2F=(TH2F*)fPPb->Get(PPbhistoname);
 
 TH1D* hdata=(TH1D*)hdata2F->ProjectionY("hdata",hdata2F->GetXaxis()->FindBin(xrange_pt[0]),hdata2F->GetXaxis()->FindBin(xrange_pt[1]));
 TH1D* hPPb=(TH1D*)hPPb2F->ProjectionY("hPPb",hPPb2F->GetXaxis()->FindBin(xrange_pt[0]),hPPb2F->GetXaxis()->FindBin(xrange_pt[1]));
@@ -93,7 +88,7 @@ fixedFontHist(rehPPb,1.8,2.6);
 c1 = new TCanvas("c1","",400,700);
 makeMultiPanelCanvas(c1,1,2,-0.12,0,0.18,0.16,0.05);
 
-c1->cd(1)->SetLogy();
+//c1->cd(1)->SetLogy();
 rehdata->GetXaxis()->SetTitle(JetID.Data());
 rehdata->GetXaxis()->SetRangeUser(binbound_JetID[0],binbound_JetID[Nbin_JetID]);
 //if(ilist==12 || ilist==13) 

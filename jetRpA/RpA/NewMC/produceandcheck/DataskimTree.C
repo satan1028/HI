@@ -19,7 +19,7 @@ const int netabin = sizeof(deta)/sizeof(double)-1;
 const int ptint[] = {20,40,60,80,100,1000};
 
 TString algo="akPu3PF";//"akPu3PF"
-TString coll = "PbP";
+TString coll = "PPb";
 TString trigName[5] = {"Jet20","Jet40","Jet60","Jet80","Jet100"} ;   
 
 void DataskimTree(){
@@ -72,10 +72,7 @@ void DataskimTree(){
       TFile *fcrel3 = NULL ;
      TH1D *C_rel= NULL ;
 
-     if(coll=="PPb")
-        fcrel3 = TFile::Open(Form("/home/xuq7/HI/jetRpA/RpA/OldAna/Corrections/Casym_pPb_double_hcalbins_algo_%s_pt100_140_jet80_alphahigh_20_phicut250.root", algo.Data()), "readonly");
-     if(coll=="PbP")
-        fcrel3 = TFile::Open(Form("/home/xuq7/HI/jetRpA/RpA/OldAna/Corrections/Casym_Pbp_double_hcalbins_algo_%s_pt100_140_jet80_alphahigh_20_phicut250.root", algo.Data()), "readonly");
+        fcrel3 = TFile::Open(Form("/home/xuq7/HI/jetRpA/RpA/NewMC/Corrections/CasymYaxian_%s_double_hcalbins_algo_%s_pt100_140_jet50_alphahigh_20_phicut250.root",coll.Data(),algo.Data()), "readonly");
 
      if(fcrel3)  C_rel=(TH1D*)fcrel3->Get("C_asym");
 
@@ -87,7 +84,7 @@ void DataskimTree(){
   TTree *nt = (TTree*)f->Get("nt");
 
   Float_t jtpt[1000],jteta[1000],jtphi[1000],rawpt[1000];
-  Float_t weight,vz;
+  Float_t weight,vz, pt;
   Int_t run,nref,hiBin;
   Int_t HLT_PAJet20_noJetID_v1;
   Int_t HLT_PAJet40_noJetID_v1;
@@ -105,6 +102,7 @@ void DataskimTree(){
   nt->SetBranchAddress("hiBin",&hiBin);
   nt->SetBranchAddress("nref",&nref);
   nt->SetBranchAddress("rawpt",rawpt);
+  nt->SetBranchAddress("pt",&pt);
   nt->SetBranchAddress("HLT_PAJet20_noJetID_v1",&HLT_PAJet20_noJetID_v1);
   nt->SetBranchAddress("HLT_PAJet40_noJetID_v1",&HLT_PAJet40_noJetID_v1);
   nt->SetBranchAddress("HLT_PAJet60_noJetID_v1",&HLT_PAJet60_noJetID_v1);
@@ -112,7 +110,7 @@ void DataskimTree(){
   nt->SetBranchAddress("HLT_PAJet100_noJetID_v1",&HLT_PAJet100_noJetID_v1);
 
   nt->SetBranchAddress("pPAcollisionEventSelectionPA",&pPAcollisionEventSelectionPA);
-  nt->SetBranchAddress("pprimaryvertexFilter",&pprimaryVertexFilter);
+  nt->SetBranchAddress("pprimaryVertexFilter",&pprimaryVertexFilter);
   nt->SetBranchAddress("pHBHENoiseFilter",&pHBHENoiseFilter);
   nt->SetBranchAddress("jtpt",jtpt);
   nt->SetBranchAddress("jteta",jteta);
@@ -153,9 +151,11 @@ for(int j4i = 0; j4i < nref; j4i++){
     double jet_phi = jtphi[j4i]; 
     double raw_pt = rawpt[j4i];
     double jetweight = 1.;
-    jetweight*=(fUE->Eval(jet_pt))*C_rel->GetBinContent(C_rel->FindBin(jet_eta));        
+    //jetweight*=(fUE->Eval(jet_pt))*C_rel->GetBinContent(C_rel->FindBin(jet_eta));        
+    jetweight*=C_rel->GetBinContent(C_rel->FindBin(jet_eta));        
 	 
        if(raw_pt<22) continue;
+       if(jet_pt>4*pt) continue;
         if(TMath::Abs(jet_eta)<=3){
                 jetptEta->Fill(jet_pt*jetweight,jet_eta,weight);
                 jetptEta_woRes->Fill(jet_pt,jet_eta,weight);
@@ -165,7 +165,7 @@ for(int j4i = 0; j4i < nref; j4i++){
 
       int dEtaBin = -1.;
 	if(coll=="PPb")	jet_eta = jet_eta+0.465;
-	else if(coll=="PbP")	jet_eta = jet_eta-0.465;
+	if(coll=="PbP")	jet_eta = jet_eta-0.465;
      if(TMath::Abs(jet_eta)<=3.) 
         	rawptJES->Fill(raw_pt,jet_pt/raw_pt,weight);
      if(TMath::Abs(jet_eta)<=1.) {
@@ -176,14 +176,14 @@ for(int j4i = 0; j4i < nref; j4i++){
  }
 	jetpt0->Fill(jet_pt*jetweight,weight);
  }
-/*
+
       for(int ieta =0; ieta<netabin;ieta++){
           if(jet_eta>deta[ieta]&&jet_eta<=deta[ieta+1]) dEtaBin=ieta;
       }//assign the eta bin for jets
       if(dEtaBin!=-1){
 	 jetptEtaBin[dEtaBin]->Fill(jet_pt*jetweight,weight);
 	 rawptJESEtaBin[dEtaBin]->Fill(raw_pt,jet_pt/raw_pt,weight);
-	}*/
+	}
       } //loop over jet
 }	//loop over tree
 

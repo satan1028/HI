@@ -3,9 +3,10 @@
 
 TLatex *T=new TLatex();
 const int Neta=8;
-const TString etabinname[Neta]={"12_22","7_12","3_7","-3_3","-7_-3","-12_-7","-22_-12","-10_10"};
-const double etabin[Neta]={1.0,0.5,0.4,0.6,0.4,0.5,1,2};
-const TString etastring[Neta]={"-2.2<#eta_{CM}<-1.2","-1.2<#eta_{CM}<-0.7","-0.7<#eta_{CM}<-0.3","-0.3<#eta_{CM}<0.3","0.3<#eta_{CM}<0.7","0.7<#eta_{CM}<1.2","1.2<#eta_{CM}<2.2","-1.0<#eta_{CM}<1.0"};
+const TString etabinname[Neta]={"15_20","10_15","5_10","-5_5","-10_-5","-15_-10","-20_-15",""};
+const double etabin[Neta]={0.5,0.5,0.5,1.0,0.5,0.5,0.5,2.0};
+const TString etastring[Neta]={"-2.0<#eta_{CM}<-1.5","-1.5<#eta_{CM}<-1.0","-1.0<#eta_{CM}<-0.5","-0.5<#eta_{CM}<0.5","0.5<#eta_{CM}<1.0","1.0<#eta_{CM}<1.5","1.5<#eta_{CM}<2.0","-1.0<#eta_{CM}<1.0"};
+
 int ieta=7;
 TGraphAsymmErrors* makegraph(TH1* histo1, TH1* histo2){
 const int Npoint=1000;
@@ -45,8 +46,8 @@ double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6
 int Nbin_JetID=sizeof(binbound_JetID)/sizeof(double)-1;
 
 TString JetIDName=JetIDNameList[ilist];
-TString histonameIDData=Form("jetpt%sCombinedSpectraInEtaBin%s",JetIDName.Data(),etabinname[ieta].Data());
-TH2F* hdata2F=(TH2F*)fdata->Get(histonameIDData);
+TString histonameIDData=Form("jetpt%s",JetIDName.Data(),etabinname[ieta].Data());
+TH2F* hdata2F=(TH2F*)fdataJetID->Get(histonameIDData);
 TH2F *hPPb2D= (TH2F*)fPPb->Get(Form("jetpt%s",JetIDName.Data()));
 TH2F *hPPb2D_real= (TH2F*)fPPb->Get(Form("jetpt%s_real",JetIDName.Data()));
 TH2F *hPPb2D_fake= (TH2F*)fPPb->Get(Form("jetpt%s_fake",JetIDName.Data()));
@@ -177,6 +178,6 @@ l->SetLineStyle(2);
 l->SetLineColor(1);
 l->Draw("same");
 
-c1->Print(Form("/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID/pic/overlay_JetIDcut.png"));
-c1->Print(Form("/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID/pic/overlay_JetIDcut.pdf"));
+c1->Print(Form("pic/overlay_JetIDcut.png"));
+c1->Print(Form("pic/overlay_JetIDcut.pdf"));
 }

@@ -184,7 +184,7 @@ void PPbanalyzeRpAskimTree()
 
   cout<<"Analyzing MC!"<<endl;
 
-  TFile *f = new TFile(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimfile0_10.root",coll.Data()));
+  TFile *f = new TFile(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimFullInfofile0_10.root",coll.Data()));
   
   TTree *nt = (TTree*)f->Get("nt");
 
@@ -194,9 +194,19 @@ Float_t t_chargedSum[100], t_photonSum[100], t_neutralSum[100], t_chargedMax[100
 Int_t nref,ngen,hiBin;
   Float_t weight,xSecWeight,vzWeight,centWeight;
   Float_t vz,pthat;
+  Int_t HLT_PAJet20_noJetID_v1;
+  Int_t HLT_PAJet40_noJetID_v1;
+  Int_t HLT_PAJet60_noJetID_v1;
+  Int_t HLT_PAJet80_noJetID_v1;
+  Int_t HLT_PAJet100_noJetID_v1;
 
   nt->SetBranchAddress("vz",&vz);
   nt->SetBranchAddress("hiBin",&hiBin);
+  nt->SetBranchAddress("HLT_PAJet20_noJetID_v1",&HLT_PAJet20_noJetID_v1);
+  nt->SetBranchAddress("HLT_PAJet40_noJetID_v1",&HLT_PAJet40_noJetID_v1);
+  nt->SetBranchAddress("HLT_PAJet60_noJetID_v1",&HLT_PAJet60_noJetID_v1);
+  nt->SetBranchAddress("HLT_PAJet80_noJetID_v1",&HLT_PAJet80_noJetID_v1);
+  nt->SetBranchAddress("HLT_PAJet100_noJetID_v1",&HLT_PAJet100_noJetID_v1);
   nt->SetBranchAddress("nref",&nref);
   nt->SetBranchAddress("ngen",&ngen);
   nt->SetBranchAddress("rawpt",rawpt);
@@ -231,6 +241,7 @@ Int_t nref,ngen,hiBin;
 //    for(int i=0; i<50000; i++){
     nt->GetEntry(i);
 if(TMath::Abs(vz)>15) continue;
+ if(!HLT_PAJet20_noJetID_v1 && !HLT_PAJet40_noJetID_v1 && !HLT_PAJet60_noJetID_v1 && !HLT_PAJet80_noJetID_v1 && !HLT_PAJet100_noJetID_v1 ) continue;
         
 	my_hists->Vz->Fill(vz,xSecWeight);
 	my_hists->VzW->Fill(vz,xSecWeight*vzWeight);
@@ -247,8 +258,9 @@ for(int j4i = 0; j4i < nref; j4i++){
     double jet_eta = jteta[j4i];  
     double jet_phi = jtphi[j4i]; 
     double raw_pt = rawpt[j4i];
-    int sub_id = subid[j4i];
-	if(raw_pt<20.0 || fabs(jet_eta)>5.0) continue;
+//    int sub_id = subid[j4i];
+	if(raw_pt<22.0 || fabs(jet_eta)>5.0) continue;
+        if(jet_pt>4*pthat) continue;
 		double chargedMax = t_chargedMax[j4i];
 		double chargedSum = t_chargedSum[j4i];
 		double neutralMax = t_neutralMax[j4i];
@@ -261,26 +273,34 @@ for(int j4i = 0; j4i < nref; j4i++){
 		double muSum = t_muSum[j4i];
 		double eSum = t_eSum[j4i];
 	 
-	double jetidv[nJetID]={chargedMax,chargedSum,neutralMax,neutralSum,photonMax,photonSum,chargedMax/jet_pt,chargedSum/jet_pt,neutralMax/jet_pt,neutralSum/jet_pt,photonMax/jet_pt,photonSum/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/raw_pt,neutralMax/TMath::Max(chargedSum,neutralSum),(double)chargedN,(double)neutralN,(double)photonN,(double)(neutralSum/jet_pt<1.0 && eSum/jet_pt<1.0 && photonSum/jet_pt<1.0 && ((chargedSum>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ), (double)(neutralSum/jet_pt<0.9 && eSum/jet_pt<1.0 && photonSum/jet_pt<0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ),};
-	if(TMath::Abs(ref_eta+0.465) <= 1.) {
+	double jetidv[nJetID]={chargedMax,chargedSum,neutralMax,neutralSum,photonMax,photonSum,chargedMax/jet_pt,chargedSum/jet_pt,neutralMax/jet_pt,neutralSum/jet_pt,photonMax/jet_pt,photonSum/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/raw_pt,neutralMax/TMath::Max(chargedSum,neutralSum),(double)chargedN,(double)neutralN,(double)photonN,(double)(neutralSum/jet_pt<1.0 && eSum/jet_pt<1.0 && photonSum/jet_pt<1.0 && ((chargedSum>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ), (double)(neutralSum/jet_pt<0.9 && eSum/jet_pt<1.0 && photonSum/jet_pt<0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) )};
+        if(TMath::Abs(jet_eta)<=3){
+                my_hists->jetptEta->Fill(jet_pt,jet_eta,weight);
+                my_hists->jetptphi->Fill(jet_pt,jet_phi,weight);
+                my_hists->jetEtaphi->Fill(jet_eta,jet_phi,weight);
+        } 
+        if(coll =="PPb") {
+            ref_eta = ref_eta+0.465;
+            jet_eta = jet_eta+0.465;
+        }
+        if(coll == "PbP"){
+            ref_eta = ref_eta-0.465;
+            jet_eta = jet_eta-0.465;
+        }
+	if(TMath::Abs(ref_eta) <= 1.) {
         my_hists->refjetpt->Fill(ref_pt, weight);
        }
     int dEtaBin = -1. ;
         for(Int_t ieta = 0 ; ieta <netabin; ieta++){
-               if((ref_eta+0.465)>deta[ieta]&&(ref_eta+0.465)<=deta[ieta+1]) dEtaBin = ieta ;
+               if(ref_eta>deta[ieta]&&ref_eta<=deta[ieta+1]) dEtaBin = ieta ;
          } //assign the eta bin for jets
       if(dEtaBin!=-1){
         my_hists->refjetptEtaBin[dEtaBin]->Fill(ref_pt, weight);
        }
 
-        if(sub_id==0 && TMath::Abs(jet_eta)<=3){
-                my_hists->jetptEta->Fill(jet_pt,jet_eta,weight);
-                my_hists->jetptphi->Fill(jet_pt,jet_phi,weight);
-                my_hists->jetEtaphi->Fill(jet_eta,jet_phi,weight);
-        } 
 
       dEtaBin = -1.;
-     if(TMath::Abs(jet_eta+0.465)<=1.) {
+     if(TMath::Abs(jet_eta)<=1.) {
 	for(int ijetid=0;ijetid<nJetID;ijetid++){
 	my_hists->jetptjetid[ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
 	if(ref_pt<0){	//Added
@@ -295,7 +315,7 @@ for(int j4i = 0; j4i < nref; j4i++){
 	}
 
       for(int ieta =0; ieta<netabin;ieta++){
-          if((jet_eta+0.465)>deta[ieta]&&(jet_eta+0.465)<=deta[ieta+1]) dEtaBin=ieta;
+          if(jet_eta>deta[ieta]&&jet_eta<=deta[ieta+1]) dEtaBin=ieta;
       }//assign the eta bin for jets
       if(dEtaBin!=-1){
 	 my_hists->jetptEtaBin[dEtaBin]->Fill(jet_pt,weight);
@@ -311,12 +331,16 @@ for(int j4i = 0; j4i < nref; j4i++){
 	for(int j5i = 0; j5i < ngen ; j5i++) {
     double gen_pt=genpt[j5i];
     double gen_eta=geneta[j5i];
-        if(TMath::Abs(gen_eta+0.465)<=1.) {
+        if(coll =="PPb") 
+            gen_eta = gen_eta+0.465;
+        if(coll =="PbP") 
+            gen_eta = gen_eta-0.465;
+        if(TMath::Abs(gen_eta)<=1.) {
           my_hists->genjetpt->Fill(gen_pt, weight);
        }
       int  dEtaBin=-1;
         for(Int_t ieta = 0 ; ieta <netabin; ieta++){
-               if((gen_eta+0.465)>deta[ieta]&&(gen_eta+0.465)<=deta[ieta+1]) dEtaBin = ieta ;
+               if(gen_eta>deta[ieta]&&gen_eta<=deta[ieta+1]) dEtaBin = ieta ;
          } //assign the eta bin for jets
       if(dEtaBin!=-1){
         my_hists->genjetptEtaBin[dEtaBin]->Fill(gen_pt, weight);

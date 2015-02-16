@@ -1,17 +1,16 @@
-#include "/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/Quality/root_setting.h"
+#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
+#include "file.h"
 
 const int Npoint=1000;
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
-TString filename="/scratch/xuq7/RpA/TreeAna/Datacombined.root";
-TFile *fdata=TFile::Open(filename);
 int ilist0=12, ilist1=6, ilist2=14;
 double JetIDcut[2];
 double xrange_JetIDcut[2];
 const int Neta=8;
-const TString etabinname[Neta]={"12_22","7_12","3_7","-3_3","-7_-3","-12_-7","-22_-12","-10_10"};
-const double etabin[Neta]={1.0,0.5,0.4,0.6,0.4,0.5,1,2};
-const TString etastring[Neta]={"-2.2<#eta_{CM}<-1.2","-1.2<#eta_{CM}<-0.7","-0.7<#eta_{CM}<-0.3","-0.3<#eta_{CM}<0.3","0.3<#eta_{CM}<0.7","0.7<#eta_{CM}<1.2","1.2<#eta_{CM}<2.2","-1.0<#eta_{CM}<1.0"};
+const TString etabinname[Neta]={"15_20","10_15","5_10","-5_5","-10_-5","-15_-10","-20_-15",""};
+const double etabin[Neta]={0.5,0.5,0.5,1.0,0.5,0.5,0.5,2.0};
+const TString etastring[Neta]={"-2.0<#eta_{CM}<-1.5","-1.5<#eta_{CM}<-1.0","-1.0<#eta_{CM}<-0.5","-0.5<#eta_{CM}<0.5","0.5<#eta_{CM}<1.0","1.0<#eta_{CM}<1.5","1.5<#eta_{CM}<2.0","-1.0<#eta_{CM}<1.0"};
 int ieta=7;
 TH1D* makehisto(int ilist){
 TString JetID;
@@ -35,8 +34,8 @@ else{
 double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1.};}
 //double binbound_JetID[]={0,0.025,0.05,0.075,0.1,0.125,0.15,0.175,0.2,0.225,0.25,0.275,0.3,0.325,0.35,0.375,0.4,0.425,0.45,0.475,0.5};
 int Nbin_JetID=sizeof(binbound_JetID)/sizeof(double)-1;
-TString histonameIDData=Form("jetpt%sCombinedSpectraInEtaBin%s",JetIDName.Data(),etabinname[ieta].Data());
-TH2F* hdata2F=(TH2F*)fdata->Get(histonameIDData);
+TString histonameIDData=Form("jetpt%s",JetIDName.Data());
+TH2F* hdata2F=(TH2F*)fdataJetID->Get(histonameIDData);
 
 xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
 xrange_JetIDcut[1]=JetIDcut[1]-1e-4;
@@ -105,18 +104,18 @@ T->SetTextSize(0.04);
 T->SetTextColor(1);
 T->SetTextFont(42);
 c1->cd(2);
-TH1D* ratio1=(TH1D*)histo1->Clone("ratio1");
+TH1D* ratio1=(TH1D*)histo0->Clone("ratio1");
 TH1D* ratio2=(TH1D*)histo2->Clone("ratio2");
 hFrame->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame->GetYaxis()->SetTitle(Form("Ratio"));
 hFrame->GetYaxis()->SetRangeUser(0.8,1.19);
 hFrame->DrawCopy();
-ratio1->Divide(histo0);
-ratio2->Divide(histo0);
+ratio1->Divide(histo1);
+ratio2->Divide(histo1);
 ratio1->Draw("E1same");
 ratio2->Draw("E1same");
-leg2->AddEntry(ratio1,"Cut1/Cut0","lp");
-leg2->AddEntry(ratio2,"Cut2/Cut0","lp");
+leg2->AddEntry(ratio1,"Cut0/Cut1","lp");
+leg2->AddEntry(ratio2,"Cut2/Cut1","lp");
 leg2->Draw("same");
 
 TLine *l =new TLine(30,1,600,1);
@@ -126,6 +125,6 @@ l->Draw("same");
 T->SetTextSize(0.05);
 T->DrawLatex(0.25,0.20,etastring[ieta]);
 
-c1->Print(Form("/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID/pic/DrawDiffJetID.png"));
-c1->Print(Form("/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID/pic/DrawDiffJetID.pdf"));
+c1->Print(Form("pic/DrawDiffJetID.png"));
+c1->Print(Form("pic/DrawDiffJetID.pdf"));
 }
