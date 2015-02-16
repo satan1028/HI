@@ -78,9 +78,9 @@ void getResvsub(){
 		avgmult[ibin].ResizeTo(nptv);	avgpt[ibin].ResizeTo(nptv);
 		totpt[ibin].ResizeTo(nptv);	totpt[ibin].Zero();
 		vmean[ibin].ResizeTo(nptv);	deltavmean[ibin].ResizeTo(nptv);
-		V[ibin] = (TVectorD*) infile->Get(Form("D_%d/D_0/V",ibin));
+		V[ibin] = (TVectorD*) infile->Get(Form("D_%d/D_0/Vcalc",ibin));
 	//	chi[ibin] = (TVectorD*) infile->Get(Form("D_%d/s_%d/chi",ibin,isample));
-		V_mean = (TVectorD*) infile->Get(Form("D_%d/Vmean",ibin));
+		V_mean = (TVectorD*) infile->Get(Form("D_%d/Vcalcmean",ibin));
 	//	deltaV_mean = (TVectorD*) infile->Get(Form("D_%d/s_%d/deltaVmean",ibin,isample));
 		for(int itheta=0;itheta<ntheta;itheta++){
 			v[ibin][itheta].ResizeTo(nptv);	deltav[ibin][itheta].ResizeTo(nptv);

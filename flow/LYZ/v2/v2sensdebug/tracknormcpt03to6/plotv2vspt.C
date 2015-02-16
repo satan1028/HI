@@ -39,6 +39,7 @@ makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
     hFrame->GetXaxis()->SetRangeUser(-0.3,6.3);
     hFrame->SetMaximum(0.2);
     TGraphErrors* grProd_loop[ndir];
+    TLegend *tl = new TLegend(0.2,0.4,0.6,0.80);
 for(int i=0;i<ntotbin;i++){
 	c1->cd(i+1);
 	if(i!=ntotbin-1)
@@ -54,17 +55,19 @@ for(int i=0;i<ntotbin;i++){
         for(int iloop=0;iloop<ndir;iloop++)
 	grProd_loop[iloop]->Draw("Psame");
 //	grProd->Draw("Psame");
-	TLegend *tl = new TLegend(0.2,0.4,0.6,0.80);
 	tl->SetFillColor(0);
 	tl->SetBorderSize(0);
 	tl->SetTextSize(0.05);
+            if(i==1)
 	tl->AddEntry(gr24,"v2 4-particle cumu","lp");
         for(int iloop=0;iloop<ndir;iloop++){
             TFile *fV2 = TFile::Open(Form("M%d%d/parin_%d.root",trkpointmax[i],trkpointmin[i],iloop));
             TVectorD *Vmean = (TVectorD*)fV2->Get(Form("D_%d/Vmean",ibin));
+            TVectorD *Vcalcmean = (TVectorD*)fV2->Get(Form("D_%d/Vcalcmean",ibin));
             TVectorD *r0 = (TVectorD*)fV2->Get(Form("D_%d/D_0/r0",ibin));
             double r0mean = r0->Sum()/r0->GetNrows();
-            tl->AddEntry(grProd_loop[iloop],Form("LYZ V^{mean}_{2} = %.3f, r^{mean}_{0}=%.3f",(*Vmean)[0],r0mean),"lp");
+            if(i==1)
+            tl->AddEntry(grProd_loop[iloop],Form("LYZ V^{mean}_{2} = %.3f, r^{mean}_{0}=%.3f",(*Vcalcmean)[0],r0mean),"lp");
         }
 	if(i==0 || i==3) 
 		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
@@ -72,6 +75,7 @@ for(int i=0;i<ntotbin;i++){
 		TLatex *tlx2 = new TLatex(0.1,0.8,Form("%d<Ntrkoffline<%d",trkpointmin[i],trkpointmax[i]));
 	tlx2->SetNDC();
 	tlx2->Draw("same");
+	//tl->Draw("same");
 	}
 	c1->cd(ntotbin+1);
 	TLatex *tlx0 = new TLatex(0.12,0.3,Form("%s","track"));

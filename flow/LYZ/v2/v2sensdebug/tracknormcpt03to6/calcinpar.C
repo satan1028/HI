@@ -6,8 +6,9 @@ const int ndir=6;
 const int nbin = 1;
 const double j01=2.404826;
 TString dir[ndir] ={ "tracknormcpt03to6","tracknormcpt03to3","tracklcpt01to10","PFcandpt03to6tracknormcpt03to6","PFcandpt03to3tracknormcpt03to6","PFcandpt01to10tracknormcpt03to6"};
+double *avgmult;
 void calcinpar(){
-    TVectorD r00[nbin];   TVectorD V[nbin];    TVectorD Vmean[nbin];
+    TVectorD r00[nbin];   TVectorD V[nbin];    TVectorD Vmean[nbin]; TVector Vcalc[nbin]; TVectorD Vcalcmean[nbin];
     double V2[ndir][ntheta], V2int[ndir][ntheta];
     double r0[ndir][ntheta], r0int[ndir][ntheta];
     double V2x[ndir];
@@ -20,6 +21,8 @@ void calcinpar(){
  //       avgmult[ibin] = (TVectorD*)fin->Get(Form("D_%d/avgmult",ibin));
         r00[ibin].ResizeTo(ntheta);
         Vmean[ibin].ResizeTo(1);
+        Vcalcmean[ibin].ResizeTo(1);
+        Vcalc[ibin].ResizeTo(ntheta);
         V[ibin].ResizeTo(ntheta);
         for(int idir=0;idir<ndir;idir++){
             double *V2ref = read(dir[idir],0,i,1);
@@ -46,16 +49,20 @@ void calcinpar(){
         for(int itheta=0; itheta<ntheta; itheta++){
             V[ibin][itheta] = V2int[iloop][itheta];
             r00[ibin][itheta] = r0int[iloop][itheta];
+            Vcalc[ibin][itheta] = j01/avgmult[ibin]/r0int[iloop][itheta];
  //           r0[ibin][itheta] = j01/V2int[iloop][itheta]/(*avgmult[ibin])[0];
         }
         Vmean[ibin][0] = TMath::Mean(ntheta,V2int[iloop]);
+        Vcalcmean[ibin][0] = Vcalc[ibin].Sum()/ntheta;
         TDirectory *dir0 = fout->mkdir(Form("D_%d",ibin));
         dir0->cd();
         Vmean[ibin].Write("Vmean");
+        Vcalcmean[ibin].Write("Vcalcmean");
         TDirectory *dir1 = dir0->mkdir("D_0");
         dir1->cd();
         r00[ibin].Write("r0");
         V[ibin].Write("V");
+        Vcalc[ibin].Write("Vcalc");
         fout->Close();
     }
     }
@@ -72,12 +79,21 @@ double *read(TString dir, int isSum, int i, int isV2){
     const int nn = 2;
         TVectorD *vecNtrk = (TVectorD*)f->Get("avgtrk");
         TVectorD *vecavgmult = (TVectorD*)f->Get("avgmultall");
+        if(dir=="tracknormcpt03to6"){
+        TVectorD *vecV2mean_0=(TVectorD*)f->Get(Form("Vmean",xbin));
+        TVectorD *vecV2_0=(TVectorD*)f->Get(Form("D_%d/V",xbin));
+        TVectorD *vecr0_0=(TVectorD*)f->Get(Form("D_%d/r0",xbin));
+        }
+        else{
         TVectorD *vecV2mean_0=(TVectorD*)f->Get(Form("D_%d/Vmean",xbin));
         TVectorD *vecV2_0=(TVectorD*)f->Get(Form("D_%d/D_%d/V",xbin,xpt));
         TVectorD *vecr0_0=(TVectorD*)f->Get(Form("D_%d/D_%d/r0",xbin,xpt));
+        }
       //  TVectorD *vecV2err_0=(TVectorD*)f->Get(Form("D_%d/D_%d/deltaV",xbin,xpt));
         double *V2_0=vecV2_0->GetMatrixArray();
         double *r0_0=vecr0_0->GetMatrixArray();
+        if(dir=="tracknormcpt03to6")
+        avgmult = vecavgmult->GetMatrixArray();
       //  double *V2err_0=vecV2err_0->GetMatrixArray();
         double theta[ntheta];
         for(int itheta=0;itheta<ntheta;itheta++){
