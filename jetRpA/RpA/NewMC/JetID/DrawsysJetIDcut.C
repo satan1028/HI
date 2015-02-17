@@ -1,17 +1,18 @@
-#include "/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/Quality/root_setting.h"
-
+#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
+#include "file.h"
+#include <iomanip>
+#include <iostream>
 const int Npoint=1000;
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
-TString filename="/scratch/xuq7/RpA/TreeAna/Datacombined.root";
-TFile *fdata=TFile::Open(filename);
 int ilist0=12, ilist1=6, ilist2=14;
 double JetIDcut[2];
 double xrange_JetIDcut[2];
 const int Neta=8;
-const TString etabinname[Neta]={"12_22","7_12","3_7","-3_3","-7_-3","-12_-7","-22_-12","-10_10"};
-const double etabin[Neta]={1.0,0.5,0.4,0.6,0.4,0.5,1,2};
-const TString etastring[Neta]={"-2.2<#eta_{CM}<-1.2","-1.2<#eta_{CM}<-0.7","-0.7<#eta_{CM}<-0.3","-0.3<#eta_{CM}<0.3","0.3<#eta_{CM}<0.7","0.7<#eta_{CM}<1.2","1.2<#eta_{CM}<2.2","-1.0<#eta_{CM}<1.0"};
+const TString etabinname[Neta]={"15_20","10_15","5_10","-5_5","-10_-5","-15_-10","-20_-15",""};
+const double etabin[Neta]={0.5,0.5,0.5,1.0,0.5,0.5,0.5,2.0};
+const TString etastring[Neta]={"-2.0<#eta_{CM}<-1.5","-1.5<#eta_{CM}<-1.0","-1.0<#eta_{CM}<-0.5","-0.5<#eta_{CM}<0.5","0.5<#eta_{CM}<1.0","1.0<#eta_{CM}<1.5","1.5<#eta_{CM}<2.0","-1.0<#eta_{CM}<1.0"};
+
 ofstream fstr[Neta];
 
 TH1D* makehisto(int ilist, int ieta,double cut){
@@ -36,8 +37,11 @@ else{
 double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1.};}
 //double binbound_JetID[]={0,0.025,0.05,0.075,0.1,0.125,0.15,0.175,0.2,0.225,0.25,0.275,0.3,0.325,0.35,0.375,0.4,0.425,0.45,0.475,0.5};
 int Nbin_JetID=sizeof(binbound_JetID)/sizeof(double)-1;
-TString histonameIDData=Form("jetpt%sCombinedSpectraInEtaBin%s",JetIDName.Data(),etabinname[ieta].Data());
-TH2F* hdata2F=(TH2F*)fdata->Get(histonameIDData);
+if(ieta==7)
+TString histonameIDData=Form("jetpt%s%s",JetIDName.Data(),etabinname[ieta].Data());
+else
+TString histonameIDData=Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinname[ieta].Data());
+TH2F* hdata2F=(TH2F*)fdataJetID->Get(histonameIDData);
 
 xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
 xrange_JetIDcut[1]=JetIDcut[1]-1e-4;
@@ -65,21 +69,21 @@ hFrame->GetYaxis()->SetTitle("Number of Events");
 hFrame->GetXaxis()->SetLimits(25,600);
 hFrame->GetYaxis()->SetRangeUser(2e-1,1e8);
 hFrame->DrawCopy();
-for(int i=Neta-1;i<Neta;i++){
+for(int i=0;i<Neta;i++){
 fstr[i].open(Form("jetIDsys%s.txt",etabinname[i].Data()));
 fstr[i]<<setprecision(4)<<fixed;
 TH1D* histo0 = makehisto(ilist0,i,1.01);
-TH1D* histo1 = makehisto(ilist0,i,0.99);
-TH1D* histo2 = makehisto(ilist0,i,1.03);
+TH1D* histo1 = makehisto(ilist1,i,0.99);
+TH1D* histo2 = makehisto(ilist2,i,1.03);
 for(int ibin=1;ibin<histo0->GetNbinsX();ibin++){
 if(histo0->GetBinContent(ibin)!=0 && histo0->GetBinCenter(ibin)>25 && histo0->GetBinCenter(ibin)<=600){
 fstr[i]<<histo0->GetBinCenter(ibin)<<'\t';
-fstr[i]<<100*(TMath::Abs(histo1->GetBinContent(ibin)/histo0->GetBinContent(ibin)-1)+TMath::Abs(histo2->GetBinContent(ibin)/histo0->GetBinContent(ibin)-1))/2<<endl;
+fstr[i]<<100*(TMath::Abs(histo1->GetBinContent(ibin)/histo2->GetBinContent(ibin)-1)+TMath::Abs(histo1->GetBinContent(ibin)/histo2->GetBinContent(ibin)-1))/2<<endl;
 }
 }
 }
 TString JetID0 = histo0->GetTitle();
-JetID0.Prepend("Variable: ");
+JetID0=Form("JetID systematics");
 //JetID1.Prepend("Cut1: ");
 //JetID2.Prepend("Cut2: ");
 histo0->SetMarkerStyle(20);
@@ -136,7 +140,7 @@ l->Draw("same");
 T->SetTextSize(0.05);
 T->DrawLatex(0.25,0.20,etastring[Neta-1]);
 
-c1->Print(Form("/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID/pic/JetIDcutsys.png"));
-c1->Print(Form("/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID/pic/JetIDcutsys.pdf"));
+//c1->Print(Form("/home/xuq7/HI/jetRpA/RpA/TreeAna/JetID/pic/JetIDcutsys.png"));
+//c1->Print(Form("/home/xuq7/HI/jetRpA/RpA/TreeAna/JetID/pic/JetIDcutsys.pdf"));
 
 }
