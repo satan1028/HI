@@ -1,6 +1,6 @@
 #!/bin/bash
 SumorProd="Prod"
-Vorv="v"
+Vorv="V"
 
 cd /home/xuq7/HI/CMSSW_5_3_20/src
 eval `scramv1 runtime -sh`

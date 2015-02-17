@@ -258,7 +258,6 @@ for(int j4i = 0; j4i < nref; j4i++){
     double jet_eta = jteta[j4i];  
     double jet_phi = jtphi[j4i]; 
     double raw_pt = rawpt[j4i];
-//    int sub_id = subid[j4i];
 	if(raw_pt<22.0 || fabs(jet_eta)>5.0) continue;
         if(jet_pt>4*pthat) continue;
 		double chargedMax = t_chargedMax[j4i];

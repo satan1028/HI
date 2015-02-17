@@ -9,7 +9,7 @@ const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 
 double binbound_JetID[100];
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
 double xrange_pt[2]={30+1e-4,600-1e-4};
-for(int j=5;j<6;j++){
+for(int j=1;j<2;j++){
 TString svar=listsvarALL[j];
 if(svar=="Max"){
 int listsvar[]={0,2,4};

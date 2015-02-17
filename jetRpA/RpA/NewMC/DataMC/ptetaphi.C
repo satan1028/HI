@@ -19,15 +19,15 @@ bool Save=kTRUE;
 TString histoname[2]={"jetptEta","jetptphi"};
 TString histoname_woRes[2]={"jetptEta_woRes","jetptphi"};
 void ptetaphi(){
-TString coll="PPb";
+TString coll="PbP";
 gStyle->SetPadTickY(1);
 using namespace std;
 c1 = new TCanvas("c1"," ",1000,650);
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
 makeMultiPanelCanvas(c1,3,2,0,0,0.22,0.16,0.12);
-TFile *fMCMC = new TFile("/home/maoy/Public/PPb_UnfoPriorGen_akPu3PFOfficialMCNoIDCut_MCJECv8_jtpt20_EtaBin-10_10_Inc_v6.root");
-TFile *fDataMC = new TFile("/home/maoy/Public/DATAPPbakPu3PFJetSpectraKurtCombineJetTriggerEtaWeight7EtabinJetIDCutRecoPt.root");
+//TFile *fMCMC = new TFile("/home/maoy/Public/PPb_UnfoPriorGen_akPu3PFOfficialMCNoIDCut_MCJECv8_jtpt20_EtaBin-10_10_Inc_v6.root");
+//TFile *fDataMC = new TFile("/home/maoy/Public/DATAPPbakPu3PFJetSpectraKurtCombineJetTriggerEtaWeight7EtabinJetIDCutRecoPt.root");
 for(int ivar=0;ivar<2;ivar++){
 //TH2F* hPP=(TH2F*)fMCPPxSec->Get(histoname[ivar]);
 if(coll=="PPb"){
@@ -70,18 +70,18 @@ TString Titley="Event Fraction";
 TH1D* hdata_var=hdata->ProjectionY(Form("hdata_%s",varname_.Data()),hdata->GetXaxis()->FindBin(xrange_pt[0]),hdata->GetXaxis()->FindBin(xrange_pt[1]));
 //TH1D* hdata_var_all=hdata->ProjectionY("hdata_var_all",hdata->GetXaxis()->FindBin(binbound_pt[10]+1e-4),hdata->GetXaxis()->FindBin(binbound_pt[Nbin_pt]-1e-4));
 
-//TH1D* hdata_pt=hdata->ProjectionX("hdata_pt",hdata->GetYaxis()->FindBin(xrange_var[0]),hdata->GetYaxis()->FindBin(xrange_var[1]));
+TH1D* hdata_pt=hdata->ProjectionX("hdata_pt",hdata->GetYaxis()->FindBin(xrange_var[0]),hdata->GetYaxis()->FindBin(xrange_var[1]));
 //TH1D* hdata_pt_all=hdata->ProjectionX("hdata_pt_all",hdata->GetYaxis()->FindBin(binbound_var[0]+1e-4),hdata->GetYaxis()->FindBin(binbound_var[Nbin_var]-1e-4));
 //TH1D* hdata_pt =(TH1D*)fDataPPb->Get("jetpt");
-TH1D* hdata_pt = (TH1D*)fDataMC->Get("jetptEtaBin-10_10");
+//TH1D* hdata_pt = (TH1D*)fDataMC->Get("jetptEtaBin-10_10");
 
 TH1D* hMC_var=hMC->ProjectionY(Form("hMC_%s",varname_.Data()),hMC->GetXaxis()->FindBin(xrange_pt[0]),hMC->GetXaxis()->FindBin(xrange_pt[1]));
 //TH1D* hMC_var_all=hMC->ProjectionY("hMC_var_all",hMC->GetXaxis()->FindBin(binbound_pt[10]+1e-4),hMC->GetXaxis()->FindBin(binbound_pt[Nbin_pt]-1e-4));
 
-//TH1D* hMC_pt=hMC->ProjectionX("hMC_pt",hMC->GetYaxis()->FindBin(xrange_var[0]),hMC->GetYaxis()->FindBin(xrange_var[1]));
+TH1D* hMC_pt=hMC->ProjectionX("hMC_pt",hMC->GetYaxis()->FindBin(xrange_var[0]),hMC->GetYaxis()->FindBin(xrange_var[1]));
 //TH1D* hMC_pt_all=hMC->ProjectionX("hMC_pt_all",hMC->GetYaxis()->FindBin(binbound_var[0]+1e-4),hMC->GetYaxis()->FindBin(binbound_var[Nbin_var]-1e-4));
 //TH1D* hMC_pt =(TH1D*)fMCPPb->Get("jetpt");
-TH1D* hMC_pt = (TH1D*)fMCMC->Get("hMeas0");
+//TH1D* hMC_pt = (TH1D*)fMCMC->Get("hMeas0");
 
 
 TH1D* re_hdata_pt=(TH1D*)hdata_pt->Rebin(Nbin_pt,"re_hdata_pt",binbound_pt);

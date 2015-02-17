@@ -124,7 +124,7 @@ void DataskimTree(){
 if(run>211256 && coll=="PPb") continue;//only for pPb runs at moment
 if(run<=211256 && coll=="PbP") continue;//only for Pbp runs at moment
 if((TMath::Abs(vz)>15) || (!pprimaryVertexFilter) || (!pPAcollisionEventSelectionPA) || (!pHBHENoiseFilter)) continue;
- if(!HLT_PAJet20_noJetID_v1 && !HLT_PAJet40_noJetID_v1 && !HLT_PAJet60_noJetID_v1 && !HLT_PAJet80_noJetID_v1 && !HLT_PAJet100_noJetID_v1 ) continue;
+if(!HLT_PAJet20_noJetID_v1 && !HLT_PAJet40_noJetID_v1 && !HLT_PAJet60_noJetID_v1 && !HLT_PAJet80_noJetID_v1 && !HLT_PAJet100_noJetID_v1 ) continue;
 
 	Vz->Fill(vz);
 	Cent->Fill(hiBin);
@@ -154,7 +154,7 @@ for(int j4i = 0; j4i < nref; j4i++){
     //jetweight*=(fUE->Eval(jet_pt))*C_rel->GetBinContent(C_rel->FindBin(jet_eta));        
     jetweight*=C_rel->GetBinContent(C_rel->FindBin(jet_eta));        
 	 
-       if(raw_pt<22) continue;
+       if(raw_pt<22 || fabs(jet_eta)>5) continue;
        if(jet_pt>4*pt) continue;
         if(TMath::Abs(jet_eta)<=3){
                 jetptEta->Fill(jet_pt*jetweight,jet_eta,weight);
