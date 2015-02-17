@@ -207,7 +207,7 @@ if(i==Neta-1){
 }
 
 }
-c1->Print(Form("/home/xuq7/HI/jetRpA/RpA/NewMC/JetID/pic/JetIDcutsys.png"));
+c1->Print(Form("/home/xuq7/HI/jetRpA/RpA/NewMC/JetID/pic/JetIDcutsys.gif"));
 c1->Print(Form("/home/xuq7/HI/jetRpA/RpA/NewMC/JetID/pic/JetIDcutsys.pdf"));
 
 }
