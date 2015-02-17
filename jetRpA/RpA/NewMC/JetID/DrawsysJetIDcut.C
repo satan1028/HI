@@ -200,9 +200,9 @@ if(i==Neta-1){
     TLegend *leg1=new TLegend(0.20,0.68,0.90,0.90);
     leg1->SetBorderSize(0);
     leg1->SetFillColor(0);
-    leg1->SetTextSize(0.04);
-    leg1->AddEntry(hratioPPb[i],"PPb","p");
-    leg1->AddEntry(hratioPbP[i],"PbP","p");
+    leg1->SetTextSize(0.055);
+    leg1->AddEntry(hratioPPb[i],"PbP","p");
+    leg1->AddEntry(hratioPbP[i],"PPb","p");
     leg1->Draw("same");
 }
 
