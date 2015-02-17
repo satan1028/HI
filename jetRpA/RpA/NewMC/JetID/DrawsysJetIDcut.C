@@ -84,13 +84,13 @@ hFrame->SetTitle("");
 //hFrame->GetXaxis()->SetTitle("p_{T}");
 //hFrame->GetYaxis()->SetTitle("Yield Ratio");
 hFrame->GetXaxis()->SetLimits(25,600);
-hFrame->GetYaxis()->SetRangeUser(0.82,1.19);
-TH1D* histo1PPb[Neta];
-TH1D* histo2PPb[Neta];
-TH1D* hratioPPb[Neta];
-TH1D* histo1PbP[Neta];
-TH1D* histo2PbP[Neta];
-TH1D* hratioPbP[Neta];
+hFrame->GetYaxis()->SetRangeUser(0.925,1.085);
+TH1D* histo1PPb;
+TH1D* histo2PPb;
+TH1D* hratioPPb;
+TH1D* histo1PbP;
+TH1D* histo2PbP;
+TH1D* hratioPbP;
 TLatex *T=new TLatex();
 
 for(int i=0;i<Neta;i++){
@@ -105,39 +105,39 @@ for(int i=0;i<Neta;i++){
         hFrame->GetXaxis()->SetTitle("");
 
     hFrame->DrawCopy();
-//fstr[i].open(Form("jetIDsys%s.txt",etabinname[i].Data()));
-//fstr[i]<<setprecision(4)<<fixed;
+fstr[i].open(Form("jetIDsys%s.txt",etabinname[i].Data()));
+fstr[i]<<setprecision(4)<<fixed;
 //TH1D* histo0 = makehisto(ilist0,i,1.01);
-histo1PPb[i] = makehisto(ilist1,i,0.99,"PPb");
-histo2PPb[i] = makehisto(ilist2,i,1.03,"PPb");
-hratioPPb[i] = (TH1D*)histo2PPb[i]->Clone();
-hratioPPb[i]->Divide(histo1PPb[i]);
-hratioPPb[i]->SetMarkerSize(1.2);
-hratioPPb[i]->SetMarkerStyle(30);
-hratioPPb[i]->SetMarkerColor(4);
-hratioPPb[i]->SetLineColor(4);
-histo1PbP[i] = makehisto(ilist1,i,0.99,"PbP");
-histo2PbP[i] = makehisto(ilist2,i,1.03,"PbP");
-hratioPbP[i] = (TH1D*)histo2PbP[i]->Clone();
-hratioPbP[i]->Divide(histo1PbP[i]);
-hratioPbP[i]->SetMarkerSize(1.2);
-hratioPbP[i]->SetMarkerStyle(27);
-hratioPbP[i]->SetMarkerColor(6);
-hratioPbP[i]->SetLineColor(6);
+histo1PPb = makehisto(ilist1,i,0.99,"PPb");
+histo2PPb = makehisto(ilist2,i,1.03,"PPb");
+hratioPPb = (TH1D*)histo2PPb->Clone();
+hratioPPb->Divide(histo1PPb);
+hratioPPb->SetMarkerSize(1.2);
+hratioPPb->SetMarkerStyle(30);
+hratioPPb->SetMarkerColor(4);
+hratioPPb->SetLineColor(4);
+histo1PbP = makehisto(ilist1,i,0.99,"PbP");
+histo2PbP = makehisto(ilist2,i,1.03,"PbP");
+hratioPbP = (TH1D*)histo2PbP->Clone();
+hratioPbP->Divide(histo1PbP);
+hratioPbP->SetMarkerSize(1.2);
+hratioPbP->SetMarkerStyle(27);
+hratioPbP->SetMarkerColor(6);
+hratioPbP->SetLineColor(6);
 
-hratioPPb[i]->Draw("same");
-hratioPbP[i]->Draw("same");
-/*for(int ibin=1;ibin<histo0->GetNbinsX();ibin++){
-if(histo0->GetBinContent(ibin)!=0 && histo0->GetBinCenter(ibin)>25 && histo0->GetBinCenter(ibin)<=600){
-fstr[i]<<histo0->GetBinCenter(ibin)<<'\t';
-fstr[i]<<100*(TMath::Abs(histo1->GetBinContent(ibin)/histo2->GetBinContent(ibin)-1)+TMath::Abs(histo1->GetBinContent(ibin)/histo2->GetBinContent(ibin)-1))/2<<endl;
+hratioPPb->Draw("same");
+hratioPbP->Draw("same");
+
+for(int ibin=1;ibin<histo1PPb->GetNbinsX();ibin++){
+if(histo1PPb->GetBinContent(ibin)!=0 && histo1PPb->GetBinCenter(ibin)>25 && histo1PPb->GetBinCenter(ibin)<=600){
+fstr[i]<<histo1PPb->GetBinCenter(ibin)<<'\t';
+fstr[i]<<100*(TMath::Abs(histo2PPb->GetBinContent(ibin)/histo1PPb->GetBinContent(ibin)-1)+TMath::Abs(histo2PPb->GetBinContent(ibin)/histo1PPb->GetBinContent(ibin)-1))/2<<endl;
 }
 }
-}
-TString JetID0 = histo0->GetTitle();
+/*TString JetID0 = histo0->GetTitle();
 JetID0=Form("JetID systematics");
-//JetID1.Prepend("Cut1: ");
-//JetID2.Prepend("Cut2: ");
+JetID1.Prepend("Cut1: ");
+JetID2.Prepend("Cut2: ");
 histo0->SetMarkerStyle(20);
 histo0->SetMarkerColor(1);
 histo0->SetLineColor(1);
@@ -195,15 +195,20 @@ T->SetTextSize(0.04);
 T->SetTextColor(1);
 T->SetTextFont(42);
 T->SetTextSize(0.055);
-T->DrawLatex(0.25,0.30,etastring[i]);
+if(i==0 || i ==4)
+T->DrawLatex(0.35,0.28,etastring[i]);
+else
+T->DrawLatex(0.25,0.28,etastring[i]);
 if(i==Neta-1){
-    TLegend *leg1=new TLegend(0.20,0.68,0.90,0.90);
+    TLegend *leg1=new TLegend(0.60,0.30,0.85,0.40);
     leg1->SetBorderSize(0);
     leg1->SetFillColor(0);
-    leg1->SetTextSize(0.055);
-    leg1->AddEntry(hratioPPb[i],"PbP","p");
-    leg1->AddEntry(hratioPbP[i],"PPb","p");
+    leg1->SetTextSize(0.065);
+    leg1->AddEntry(hratioPPb,"PbP","p");
+    leg1->AddEntry(hratioPbP,"PPb","p");
     leg1->Draw("same");
+    T->SetTextSize(0.065);
+    T->DrawLatex(0.35,0.80,"CMS Preliminary");
 }
 
 }
