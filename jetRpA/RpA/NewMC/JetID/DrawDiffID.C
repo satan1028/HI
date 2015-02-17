@@ -108,11 +108,11 @@ TH1D* ratio_hPPb_JetIDcutvsnocut_pt_fake[N];
 TH1D* cl_rehisto_hPP_pt_fake[N];
 TH1D* cl_rehisto_hPPb_pt_fake[N];
 //int marker_inc[N]={21,22,29,34,33,20};
-int marker_inc[N]={21,29,20};
+int marker_inc[N]={20,21,20};
 //int color[N]={2,8,7,4,6,1};
-int color[N]={2,4,1};
+int color[N]={1,4,1};
 //int marker_fake[N]={25,26,30,28,27,24};
-int marker_fake[N]={25,30,24};
+int marker_fake[N]={24,25,24};
 
 //double binbound_pt[]={30,40,50,60,70,80,90,100,110,120,140,160,180,200,220,260,300,350,500};
 //const double binbound_pt[]={0,5,10,15,20,30,45,60,75,90,105,120,140,160,180,200,220,260,300,400,600,1000};
@@ -131,8 +131,8 @@ hFrame->SetTitle("");
 hFrame->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame->GetXaxis()->SetLabelFont(42);
 hFrame->GetYaxis()->SetTitle(Form("cut efficiency"));
-hFrame->SetMaximum(1.05);
-hFrame->SetMinimum(0.70);
+hFrame->SetMaximum(1.02);
+hFrame->SetMinimum(0.88);
 hFrame->DrawCopy();
 TLegend *leg1=new TLegend(0.36,0.13,0.67,0.43);
 TLegend *leg2=new TLegend(0.73,0.13,0.88,0.43);
@@ -200,7 +200,7 @@ l3->SetLineStyle(2);
 l3->SetLineColor(kBlack);
 l3->Draw("same");
 */
-for(int j=0;j<N;j++){
+for(int j=0;j<2;j++){
 ratio_hPPb_JetIDcutvsnocut_pt[j]=(TH1D*)rehisto_hPPb_JetIDcut_pt[j]->Clone(Form("ratio_hPPb_JetIDcut_ptcutvsnocut_pt_%d",j));
 ratio_hPPb_JetIDcutvsnocut_pt[j]->Divide(rehisto_hPPb_pt[j]);
 ratio_hPPb_JetIDcutvsnocut_pt[j]->SetTitle("");
