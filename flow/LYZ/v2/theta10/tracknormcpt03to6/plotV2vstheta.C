@@ -3,7 +3,7 @@
 
 void plotV2vstheta(){
 	TFile *f;
-        int isSum=1;
+        int isSum=0;
         const int ntotbin=5;
         const int trkpointmin[ntotbin] = {120,150,185,220,260};
         const int trkpointmax[ntotbin] = {150,185,220,260,300};
@@ -34,9 +34,11 @@ void plotV2vstheta(){
 	}
 	TVectorD* vecVmean = (TVectorD*)f->Get(Form("D_%d/Vmean",xbin));
         TVectorD* vecV = (TVectorD*)f->Get(Form("D_%d/D_0/V",xbin));
+        TVectorD* vecdeltaV = (TVectorD*)f->Get(Form("D_%d/D_0/deltaV",xbin));
 
         double Vmean = (*vecVmean)[0];
         double *V = vecV->GetMatrixArray();
+        double *deltaV = vecdeltaV->GetMatrixArray();
         double theta[ntheta];
         for(int itheta=0;itheta<ntheta;itheta++){
             theta[itheta]=itheta*TMath::Pi()/ntheta/nn;
@@ -45,7 +47,7 @@ void plotV2vstheta(){
         double maxper = (double)(maxper10+1)/10;
         c1->cd(trkbin+1);
         hFrame->Draw();
-        TGraph *gV2theta = new TGraph(ntheta,theta,V);
+        TGraphErrors *gV2theta = new TGraphErrors(ntheta,theta,V,0,deltaV);
         gV2theta->SetMarkerStyle(20);
         gV2theta->SetMarkerSize(1.3);
         gV2theta->SetMarkerColor(1);
