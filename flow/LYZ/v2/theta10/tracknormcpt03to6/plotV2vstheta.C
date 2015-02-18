@@ -15,14 +15,14 @@ void plotV2vstheta(){
         gStyle->SetOptStat(0);
         gStyle->SetOptTitle(0);
         gStyle->SetErrorX(0);
-        TH1D *hFrame = new TH1D("","",100,0,2);
+        TH1D *hFrame = new TH1D("","",210,-0.1,2);
         hFrame->SetTitle("");
         hFrame->GetXaxis()->SetTitle("#theta");
         hFrame->GetYaxis()->SetTitle("reference V_{2}");
         hFrame->GetYaxis()->SetTitleOffset(1.1);
         hFrame->GetXaxis()->SetTitleSize(0.04);
         hFrame->GetYaxis()->SetTitleSize(0.04);
-        hFrame->GetXaxis()->SetRangeUser(0,1.5);
+        hFrame->GetXaxis()->SetRangeUser(-0.1,1.5);
         hFrame->SetMinimum(0.025);
         hFrame->SetMaximum(0.078);
         for(int trkbin=0;trkbin<ntotbin; trkbin++){
@@ -53,8 +53,8 @@ void plotV2vstheta(){
         gV2theta->SetMarkerColor(1);
         gV2theta->SetLineColor(1);
 	gV2theta->Draw("Psame");
-        TLine *lup = new TLine(gV2theta->GetXaxis()->GetXmin(),Vmean*(1+maxper), gV2theta->GetXaxis()->GetXmax(),Vmean*(1+maxper));
-        TLine *ldown = new TLine(gV2theta->GetXaxis()->GetXmin(),Vmean*(1-maxper), gV2theta->GetXaxis()->GetXmax(),Vmean*(1-maxper));
+        TLine *lup = new TLine(hFrame->GetXaxis()->GetXmin(),Vmean*(1+maxper), hFrame->GetXaxis()->GetXmax(),Vmean*(1+maxper));
+        TLine *ldown = new TLine(hFrame->GetXaxis()->GetXmin(),Vmean*(1-maxper), hFrame->GetXaxis()->GetXmax(),Vmean*(1-maxper));
         TLine *l = new TLine(hFrame->GetXaxis()->GetXmin(),Vmean, hFrame->GetXaxis()->GetXmax(),Vmean);
         l->SetLineStyle(2);
         lup->SetLineStyle(2);
@@ -67,8 +67,8 @@ void plotV2vstheta(){
         tl->SetTextFont(42);
         tl->SetTextSize(0.04);
  //     tl->SetBorderStyle(0);
-        tl->DrawLatex(0,Vmean*(1+maxper),Form("mean up %.f%%",maxper*100));
-        tl->DrawLatex(0,Vmean*(1-maxper),Form("mean down %.f%%",maxper*100));
+        tl->DrawLatex(-0.1,Vmean*(1+maxper),Form("mean up %.f%%",maxper*100));
+        tl->DrawLatex(-0.1,Vmean*(1-maxper),Form("mean down %.f%%",maxper*100));
         tl->SetNDC();
         tl->DrawLatex(0.7,0.85,Form("Multiplicity %d to %d",trkpointmin[trkbin],trkpointmax[trkbin]));
         l->Draw("same");
