@@ -1,11 +1,7 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
-#include "file.h"
+#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 
 TLatex *T=new TLatex();
-const int Neta=8;
-const TString etabinname[Neta]={"15_20","10_15","5_10","-5_5","-10_-5","-15_-10","-20_-15",""};
-const double etabin[Neta]={0.5,0.5,0.5,1.0,0.5,0.5,0.5,2.0};
-const TString etastring[Neta]={"-2.0<#eta_{CM}<-1.5","-1.5<#eta_{CM}<-1.0","-1.0<#eta_{CM}<-0.5","-0.5<#eta_{CM}<0.5","0.5<#eta_{CM}<1.0","1.0<#eta_{CM}<1.5","1.5<#eta_{CM}<2.0","-1.0<#eta_{CM}<1.0"};
 
 int ieta=7;
 TGraphAsymmErrors* makegraph(TH1* histo1, TH1* histo2){
@@ -46,11 +42,11 @@ double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6
 int Nbin_JetID=sizeof(binbound_JetID)/sizeof(double)-1;
 
 TString JetIDName=JetIDNameList[ilist];
-TString histonameIDData=Form("jetpt%s%s",JetIDName.Data(),etabinname[ieta].Data());
-TH2F* hdata2F=(TH2F*)fdataJetID->Get(histonameIDData);
-TH2F *hPPb2D= (TH2F*)fPPb->Get(Form("jetpt%s%s",JetIDName.Data(),etabinname[ieta].Data()));
-TH2F *hPPb2D_real= (TH2F*)fPPb->Get(Form("jetpt%s%s_real",JetIDName.Data(),etabinname[ieta].Data()));
-TH2F *hPPb2D_fake= (TH2F*)fPPb->Get(Form("jetpt%s%s_fake",JetIDName.Data(),etabinname[ieta].Data()));
+TString histonameIDData=Form("jetpt%s",JetIDName.Data());
+TH2F* hdata2F=(TH2F*)fDataPPbJetID->Get(histonameIDData);
+TH2F *hPPb2D= (TH2F*)fMCPPb->Get(Form("jetpt%s",JetIDName.Data()));
+TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("jetpt%s_real",JetIDName.Data()));
+TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("jetpt%s_fake",JetIDName.Data()));
 
 const double binbound_pt_coarse[]={0,30,70,150,200,600};
 const int Nbin_pt_coarse=sizeof(binbound_pt_coarse)/sizeof(double)-1;
@@ -58,9 +54,10 @@ const double xrange_JetID[2]={binbound_JetID[0]+1e-4,binbound_JetID[Nbin_JetID]-
 xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
 xrange_JetIDcut[1]=JetIDcut[1]-1e-4;
 
-TH1D* hPPb_pt=hPPb2D->ProjectionX("hPPb_pt",hPPb2D->GetYaxis()->FindBin(xrange_JetID[0]),hPPb2D->GetYaxis()->FindBin(xrange_JetID[1]));
-TH1D* hPPb_pt_real=hPPb2D_real->ProjectionX("hPPb_pt_real",hPPb2D_real->GetYaxis()->FindBin(xrange_JetID[0]),hPPb2D_real->GetYaxis()->FindBin(xrange_JetID[1]));
-TH1D* hPPb_pt_fake=hPPb2D_fake->ProjectionX("hPPb_pt_fake",hPPb2D_fake->GetYaxis()->FindBin(xrange_JetID[0]),hPPb2D_fake->GetYaxis()->FindBin(xrange_JetID[1]));
+//TH1D* hPPb_pt=hPPb2D->ProjectionX("hPPb_pt",hPPb2D->GetYaxis()->FindBin(xrange_JetID[0]),hPPb2D->GetYaxis()->FindBin(xrange_JetID[1]));
+TH1D* hPPb_pt=hPPb2D->ProjectionX("hPPb_pt");
+TH1D* hPPb_pt_real=hPPb2D_real->ProjectionX("hPPb_pt_real");
+TH1D* hPPb_pt_fake=hPPb2D_fake->ProjectionX("hPPb_pt_fake");
 TH1D* hPPb_JetIDcut_pt=hPPb2D->ProjectionX("hPPb_JetIDcut_pt",hPPb2D->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D->GetYaxis()->FindBin(xrange_JetIDcut[1]));
 TH1D* hPPb_JetIDcut_pt_real=hPPb2D_real->ProjectionX("hPPb_JetIDcut_pt_real",hPPb2D_real->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D_real->GetYaxis()->FindBin(xrange_JetIDcut[1]));
 TH1D* hPPb_JetIDcut_pt_fake=hPPb2D_fake->ProjectionX("hPPb_JetIDcut_pt_fake",hPPb2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[1]));
@@ -87,7 +84,7 @@ TH1D* ratio_hPPb_JetIDcutvsnocut_pt=(TH1D*)hPPb_JetIDcut_pt->Clone("ratio_hPPb_J
 ginc=makegraph(ratio_hPPb_JetIDcutvsnocut_pt,hPPb_pt);
 ginc->SetMarkerSize(1.5);
 
-TH1D* ratio_hPPb_JetIDcutvsnocut_pt_fake=(TH1D*)hPPb_JetIDcut_pt_fake->Clone("ratio_hPPb_JetIDcutvsnocut_pt_fake");
+/*TH1D* ratio_hPPb_JetIDcutvsnocut_pt_fake=(TH1D*)hPPb_JetIDcut_pt_fake->Clone("ratio_hPPb_JetIDcutvsnocut_pt_fake");
 TH1D* cl_hPPb_pt_fake=(TH1D*)hPPb_pt_fake->Clone("cl_hPPb_pt_fake");
 cl_hPPb_pt_fake=(TH1D*)cl_hPPb_pt_fake->Rebin(Nbin_pt_coarse,"cl_hPPb_pt_fake",binbound_pt_coarse);
 ratio_hPPb_JetIDcutvsnocut_pt_fake=(TH1D*)ratio_hPPb_JetIDcutvsnocut_pt_fake->Rebin(Nbin_pt_coarse,"ratio_hPPb_JetIDcutvsnocut_pt_fake",binbound_pt_coarse);
@@ -105,12 +102,16 @@ greal->SetMarkerSize(1.5);
 greal->SetMarkerStyle(29);
 greal->SetMarkerColor(4);
 greal->SetLineColor(4);
+*/
 T->SetNDC();
 T->SetTextAlign(12);
 T->SetTextSize(0.03);
 T->SetTextColor(1);
 T->SetTextFont(42);
-if(dataType==1) T->DrawLatex(0.22,0.98-ilistw*0.05,Form("Cut %d: %.2f<%s<%.2f",ilistw,JetID.Data(),xrange_JetIDcut[0],xrange_JetIDcut[1]));
+if(ilistw==2){
+if(dataType==1) T->DrawLatex(0.22,0.98-ilistw*0.05,Form("Cut %d: %.2f<%s<%.3f",ilistw,JetID.Data(),xrange_JetIDcut[0],xrange_JetIDcut[1]));}
+else{
+if(dataType==1) T->DrawLatex(0.22,0.98-ilistw*0.05,Form("Cut %d: %.2f<%s<%.2f",ilistw,JetID.Data(),xrange_JetIDcut[0],xrange_JetIDcut[1]));}
 
 if(dataType==1) return g;
 else return ginc;
@@ -124,10 +125,10 @@ makeMultiPanelCanvas(c1,1,1,-0.12,0,0.13,0.1,0.03);
 TH1F* hFrame=new TH1F("","",1000,0,1000);
 c1->cd(1);
 hFrame->SetLineColor(0);
-hFrame->GetXaxis()->SetRangeUser(25,600);
+hFrame->GetXaxis()->SetLimits(28,599.9);
 hFrame->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame->GetYaxis()->SetTitle("Cut Efficiency");
-hFrame->GetYaxis()->SetRangeUser(0.92,1.04);
+hFrame->GetYaxis()->SetRangeUser(0.92,1.02);
 fixedFontHist(hFrame,1.2,1.8);
 hFrame->DrawCopy();
 TGraphAsymmErrors *g6Data = makeJetIDcut(6,1);
@@ -139,7 +140,6 @@ TGraphAsymmErrors *g6MC = makeJetIDcut(6,0);
 g6MC->SetMarkerStyle(24);
 g6MC->SetMarkerColor(1);
 g6MC->SetLineColor(1);
-g6MC->Draw("Psame");
 /*TGraphAsymmErrors *g12Data = makeJetIDcut(12,1);
 g12Data->SetMarkerStyle(20);
 g12Data->SetMarkerColor(1);
@@ -160,6 +160,7 @@ g14MC->SetMarkerStyle(25);
 g14MC->SetMarkerColor(4);
 g14MC->SetLineColor(4);
 g14MC->Draw("Psame");
+g6MC->Draw("Psame");
 TLegend *leg1=new TLegend(0.52,0.15,0.8,0.45);
 leg1->SetBorderSize(0);
 leg1->SetFillColor(0);

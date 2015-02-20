@@ -11,7 +11,7 @@
 #include "iostream"
 #include "fstream"
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
-#include "file.h"
+#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 
 bool isMC=kTRUE;
 
@@ -34,7 +34,7 @@ rehisto->SetBinError(i,0);
 
 }
 
-rehisto->GetXaxis()->SetRangeUser(binbound[10],binbound[Nbin-1]);
+//rehisto->GetXaxis()->SetRangeUser(binbound[10],binbound[Nbin-1]);
 fixedFontHist(rehisto,1.3,1.1);
 
 return rehisto;
@@ -83,7 +83,7 @@ double xrange_JetIDcut[N][2]={
  */
 double xrange_JetIDcut[N][2]={
     {0.05+1e-4,1-1e-4},
-    {0+1e-4,0.9-1e-4},
+    {0+1e-4,0.975-1e-4},
     {0+1e-4,1.01-1e-4}
 };
 
@@ -122,25 +122,24 @@ const int Nbin_pt_coarse=sizeof(binbound_pt_coarse)/sizeof(double)-1;
 //const double xrange_JetID[2]={binbound_JetID[0]+1e-4,binbound_JetID[Nbin_JetID]-1e-4};
 
 c6 = new TCanvas("c6"," ",600,600);
-makeMultiPanelCanvas(c6,1,1,0.03,0.02,0.08,0.10,0.03);
-c6->cd(1);
+makeMultiPanelCanvas(c6,1,1,-0.12,0,0.13,0.1,0.03);
+c6->cd(1)->SetGridx();
 TH1F* hFrame=new TH1F("","",1000,0,1000);
-//fixedFontHist(hFrame,0.9,1.0);
-hFrame->GetXaxis()->SetLimits(30.1,599.9);
+fixedFontHist(hFrame,1.2,1.8);
+hFrame->GetXaxis()->SetLimits(28,599);
 hFrame->SetTitle("");
 hFrame->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
-hFrame->GetXaxis()->SetLabelFont(42);
-hFrame->GetYaxis()->SetTitle(Form("cut efficiency"));
+hFrame->GetYaxis()->SetTitle(Form("Cut efficiency"));
 hFrame->SetMaximum(1.02);
-hFrame->SetMinimum(0.88);
+hFrame->SetMinimum(0.92);
 hFrame->DrawCopy();
-TLegend *leg1=new TLegend(0.36,0.13,0.67,0.43);
-TLegend *leg2=new TLegend(0.73,0.13,0.88,0.43);
+TLegend *leg1=new TLegend(0.40,0.13,0.68,0.43);
+TLegend *leg2=new TLegend(0.72,0.13,0.88,0.43);
 
 for(int j=0;j<N;j++){
 
-hPPb2D[j]= (TH2F*)fPPb->Get(Form("jetpt%s",JetIDNameList_Simple[j].Data()));
-hPPb2D_fake[j]= (TH2F*)fPPb->Get(Form("jetpt%s_fake",JetIDNameList_Simple[j].Data()));
+hPPb2D[j]= (TH2F*)fMCPPb->Get(Form("jetpt%s",JetIDNameList_Simple[j].Data()));
+hPPb2D_fake[j]= (TH2F*)fMCPPb->Get(Form("jetpt%s_fake",JetIDNameList_Simple[j].Data()));
 
 hPPb_pt[j]=hPPb2D[j]->ProjectionX(Form("hPPb_pt_%d",j));
 hPPb_pt_fake[j]=hPPb2D_fake[j]->ProjectionX(Form("hPPb_pt_fake_%d",j));
@@ -208,7 +207,6 @@ ratio_hPPb_JetIDcutvsnocut_pt[j]->SetMarkerSize(1.5);
 ratio_hPPb_JetIDcutvsnocut_pt[j]->SetMarkerStyle(marker_inc[j]);
 ratio_hPPb_JetIDcutvsnocut_pt[j]->SetMarkerColor(color[j]);
 ratio_hPPb_JetIDcutvsnocut_pt[j]->SetLineColor(color[j]);
-ratio_hPPb_JetIDcutvsnocut_pt[j]->Draw("Psame");
 
 ratio_hPPb_JetIDcutvsnocut_pt_fake[j]=(TH1D*)rehisto_hPPb_JetIDcut_pt_fake[j]->Clone(Form("ratio_hPPb_JetIDcutvsnocut_pt_fake_%d",j));
 cl_rehisto_hPPb_pt_fake[j]=(TH1D*)rehisto_hPPb_pt_fake[j]->Clone(Form("cl_rehisto_hPPb_pt_fake_%d",j));
@@ -222,6 +220,7 @@ ratio_hPPb_JetIDcutvsnocut_pt_fake[j]->SetMarkerStyle(marker_fake[j]);
 ratio_hPPb_JetIDcutvsnocut_pt_fake[j]->SetMarkerColor(color[j]);
 ratio_hPPb_JetIDcutvsnocut_pt_fake[j]->SetLineColor(color[j]);
 ratio_hPPb_JetIDcutvsnocut_pt_fake[j]->Draw("Psame");
+ratio_hPPb_JetIDcutvsnocut_pt[j]->Draw("Psame");
 leg1->AddEntry(ratio_hPPb_JetIDcutvsnocut_pt[j],Form("%s Inc",JetIDNameList_Simple[j].Data()),"lp");
 leg2->AddEntry(ratio_hPPb_JetIDcutvsnocut_pt_fake[j],Form("%s fake",JetIDNameList_Simple[j].Data()),"lp");
 }
@@ -233,15 +232,18 @@ leg1->SetTextSize(0.03);
 leg2->SetTextSize(0.03);
 leg1->Draw("same");
 
-TLatex *T2=new TLatex(0.4,0.92,"PYTHIA+HIJING");
+TLatex *T2=new TLatex();
 T2->SetNDC();
 T2->SetTextAlign(12);
 T2->SetTextSize(0.05);
 T2->SetTextColor(1);
 T2->SetTextFont(42);
-T2->Draw("same");
+T2->DrawLatex(0.4,0.92,"PYTHIA+HIJING");
 TLine *l3 =new TLine(30,1,600,1);
+l3->SetLineStyle(2);
 l3->Draw("same");
+T2->SetTextSize(0.045);
+T2->DrawLatex(0.15,0.20,etastring[7]);
 leg2->Draw("same");
 
 c6->Print(Form("pic/ratio_jetpt_cutvsnocut.png",algo.Data()));

@@ -62,8 +62,8 @@ const double xrange_JetID[2]={binbound_JetID[0]+1e-4,binbound_JetID[Nbin_JetID]-
 xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
 xrange_JetIDcut[1]=JetIDcut[1]-1e-4;
 
-TH1D* hPPb_pt=hPPb2D->ProjectionX("hPPb_pt",hPPb2D->GetYaxis()->FindBin(xrange_JetID[0]),hPPb2D->GetYaxis()->FindBin(xrange_JetID[1]));
-TH1D* hPPb_pt_fake=hPPb2D_fake->ProjectionX("hPPb_pt_fake",hPPb2D_fake->GetYaxis()->FindBin(xrange_JetID[0]),hPPb2D_fake->GetYaxis()->FindBin(xrange_JetID[1]));
+TH1D* hPPb_pt=hPPb2D->ProjectionX("hPPb_pt");
+TH1D* hPPb_pt_fake=hPPb2D_fake->ProjectionX("hPPb_pt_fake");
 TH1D* hPPb_JetIDcut_pt=hPPb2D->ProjectionX("hPPb_JetIDcut_pt",hPPb2D->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D->GetYaxis()->FindBin(xrange_JetIDcut[1]));
 TH1D* hPPb_JetIDcut_pt_fake=hPPb2D_fake->ProjectionX("hPPb_JetIDcut_pt_fake",hPPb2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[1]));
 
@@ -117,11 +117,12 @@ c1 = new TCanvas("c1"," ",1200,600);
 makeMultiPanelCanvas(c1,4,2,0,0,0.25,0.2,0.03);
 TH1F* hFrame=new TH1F("","",1000,0,1000);
 hFrame->SetLineColor(0);
-hFrame->GetXaxis()->SetRangeUser(30,600);
+hFrame->GetXaxis()->SetLimits(28,599);
 hFrame->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame->GetYaxis()->SetTitle("Cut Efficiency");
-hFrame->GetYaxis()->SetRangeUser(0.88,1.02);
-fixedFontHist(hFrame,2.0,2.2);
+hFrame->SetMaximum(1.018);
+hFrame->SetMinimum(0.888);
+fixedFontHist(hFrame,2.0,3.0);
 hFrame->DrawCopy();
 for(int i=0;i<Neta;i++){
     c1->cd(canvas[i]+1)->SetGridx();
