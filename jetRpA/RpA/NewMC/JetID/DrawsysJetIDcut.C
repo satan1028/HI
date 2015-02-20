@@ -1,23 +1,11 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
-#include "file.h"
+#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 #include <iomanip>
 #include <iostream>
-const int Npoint=1000;
-const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
-int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
-int ilist0=12, ilist1=6, ilist2=14;
-double JetIDcut[2];
-double xrange_JetIDcut[2];
-const int Neta=8;
-const TString etabinname[Neta]={"15_20","10_15","5_10","-5_5","-10_-5","-15_-10","-20_-15",""};
-const TString etabinnameswap[Neta]={"-20_-15","-15_-10","-10_-5","-5_5","5_10","10_15","15_20",""};
-const double etabin[Neta]={0.5,0.5,0.5,1.0,0.5,0.5,0.5,2.0};
-const TString etastring[Neta]={"-2.0<#eta_{CM}<-1.5","-1.5<#eta_{CM}<-1.0","-1.0<#eta_{CM}<-0.5","-0.5<#eta_{CM}<0.5","0.5<#eta_{CM}<1.0","1.0<#eta_{CM}<1.5","1.5<#eta_{CM}<2.0","-1.0<#eta_{CM}<1.0"};
-
 ofstream fstr[Neta];
+int ilist0=12, ilist1=6, ilist2=14;
 
 TH1D* makehisto(int ilist, int i,double cut, TString coll){
-TString JetID;
 TString JetIDNameList[18]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN"};
 TString JetIDName = JetIDNameList[ilist];
 
@@ -38,21 +26,27 @@ else{
 double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1.};}
 //double binbound_JetID[]={0,0.025,0.05,0.075,0.1,0.125,0.15,0.175,0.2,0.225,0.25,0.275,0.3,0.325,0.35,0.375,0.4,0.425,0.45,0.475,0.5};
 int Nbin_JetID=sizeof(binbound_JetID)/sizeof(double)-1;
-
+TH2F* hdata2F;
 if(i==7){
-    if(coll=="PPb")
-TString histonameIDData=Form("jetpt%s%s",JetIDName.Data(),etabinname[i].Data());
-    else
-TString histonameIDData=Form("jetpt%s%s",JetIDName.Data(),etabinnameswap[i].Data());
+    if(coll=="PPb"){
+    TString histonameIDData=Form("jetpt%s",JetIDName.Data());
+    hdata2F=(TH2F*)fDataPPbJetID->Get(histonameIDData);
+    }
+    else{
+    TString histonameIDData=Form("jetpt%s",JetIDName.Data());
+    hdata2F=(TH2F*)fDataPbPJetID->Get(histonameIDData);
+    }
 }
 else{
-    if(coll=="PPb")
-TString histonameIDData=Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinname[i].Data());
-    else
-TString histonameIDData=Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[i].Data());
+    if(coll=="PPb"){
+    TString histonameIDData=Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[i].Data());
+    hdata2F=(TH2F*)fDataPPbJetID->Get(histonameIDData);
+    }
+    else{
+    TString histonameIDData=Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinname[i].Data());
+    hdata2F=(TH2F*)fDataPbPJetID->Get(histonameIDData);
+    }
 }
-    fdataJetID = TFile::Open(Form("/cms/store/user/qixu/jetRpA/RpA/NewMC/DATA%sakPu3PFskimJetID.root",coll.Data()),"ReadOnly");
-TH2F* hdata2F=(TH2F*)fdataJetID->Get(histonameIDData);
 
 xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
 xrange_JetIDcut[1]=JetIDcut[1]-1e-4;
@@ -72,19 +66,19 @@ return rehisto;
 void DrawsysJetIDcut(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
-gStyle->SetOptFit(1);
-gStyle->SetOptTitle(0);
-TH1F* hFrame=new TH1F("","",1000,0,1000);
+//gStyle->SetOptFit(1);
+//gStyle->SetOptTitle(0);
 //c1 = new TCanvas("c1","",600,1000);
 //makeMultiPanelCanvas(c1,1,2,0.03,0.03,0.1,0.12,0.03);
-c1 = new TCanvas("c1"," ",1200,700);
+c1 = new TCanvas("c1"," ",1200,600);
 makeMultiPanelCanvas(c1,4,2,0,0,0.25,0.2,0.03);
+TH1F* hFrame=new TH1F("","",1000,0,1000);
 fixedFontHist(hFrame,2.0,3.0);
 hFrame->SetTitle("");
 //hFrame->GetXaxis()->SetTitle("p_{T}");
 //hFrame->GetYaxis()->SetTitle("Yield Ratio");
-hFrame->GetXaxis()->SetLimits(25,600);
-hFrame->GetYaxis()->SetRangeUser(0.925,1.085);
+hFrame->GetXaxis()->SetLimits(30,600);
+hFrame->GetYaxis()->SetRangeUser(0.94,1.08);
 TH1D* histo1PPb;
 TH1D* histo2PPb;
 TH1D* hratioPPb;
@@ -94,12 +88,12 @@ TH1D* hratioPbP;
 TLatex *T=new TLatex();
 
 for(int i=0;i<Neta;i++){
-    c1->cd(i+1);
-    if(i==0  || i==4)
+    c1->cd(canvas[i]+1)->SetGridx();
+    if(canvas[i]==0  || canvas[i]==4)
         hFrame->GetYaxis()->SetTitle("Yield Ratio");
     else
         hFrame->GetYaxis()->SetTitle("");
-    if(i>=4)
+    if(canvas[i]>=4)
         hFrame->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
     else
         hFrame->GetXaxis()->SetTitle("");
@@ -124,14 +118,14 @@ hratioPbP->SetMarkerSize(1.2);
 hratioPbP->SetMarkerStyle(27);
 hratioPbP->SetMarkerColor(6);
 hratioPbP->SetLineColor(6);
-
+if(canvas[i]!=4){   
 hratioPPb->Draw("same");
 hratioPbP->Draw("same");
-
+}
 for(int ibin=1;ibin<histo1PPb->GetNbinsX();ibin++){
 if(histo1PPb->GetBinContent(ibin)!=0 && histo1PPb->GetBinCenter(ibin)>25 && histo1PPb->GetBinCenter(ibin)<=600){
 fstr[i]<<histo1PPb->GetBinCenter(ibin)<<'\t';
-fstr[i]<<100*(TMath::Abs(histo2PPb->GetBinContent(ibin)/histo1PPb->GetBinContent(ibin)-1)+TMath::Abs(histo2PPb->GetBinContent(ibin)/histo1PPb->GetBinContent(ibin)-1))/2<<endl;
+fstr[i]<<100*(TMath::Abs(histo2PPb->GetBinContent(ibin)/histo1PPb->GetBinContent(ibin)-1)+TMath::Abs(histo2PbP->GetBinContent(ibin)/histo1PbP->GetBinContent(ibin)-1))/2<<endl;
 }
 }
 /*TString JetID0 = histo0->GetTitle();
@@ -188,29 +182,29 @@ leg2->Draw("same");
 TLine *l =new TLine(30,1,600,1);
 l->SetLineStyle(2);
 l->SetLineColor(1);
+if(canvas[i]!=4)
 l->Draw("same");
 T->SetNDC();
 T->SetTextAlign(12);
 T->SetTextSize(0.04);
 T->SetTextColor(1);
 T->SetTextFont(42);
-T->SetTextSize(0.055);
-if(i==0 || i ==4)
-T->DrawLatex(0.35,0.28,etastring[i]);
-else
-T->DrawLatex(0.25,0.28,etastring[i]);
-if(i==Neta-1){
-    TLegend *leg1=new TLegend(0.60,0.30,0.85,0.40);
+T->SetTextSize(0.065);
+if(canvas[i]<4)
+T->DrawLatex(0.4,0.18,etastring[i]);
+else if(canvas[i]>4)
+T->DrawLatex(0.4,0.30,etastring[i]);
+else{
+    TLegend *leg1=new TLegend(0.28,0.25,0.85,0.45);
     leg1->SetBorderSize(0);
     leg1->SetFillColor(0);
-    leg1->SetTextSize(0.065);
-    leg1->AddEntry(hratioPPb,"PbP","p");
-    leg1->AddEntry(hratioPbP,"PPb","p");
+    leg1->SetTextSize(0.058);
+    leg1->AddEntry(hratioPPb,"PbP(Pb going positive)","p");
+    leg1->AddEntry(hratioPbP,"PPb(Proton going postive)","p");
     leg1->Draw("same");
     T->SetTextSize(0.065);
     T->DrawLatex(0.35,0.80,"CMS Preliminary");
 }
-
 }
 c1->Print(Form("/home/xuq7/HI/jetRpA/RpA/NewMC/JetID/pic/JetIDcutsys.gif"));
 c1->Print(Form("/home/xuq7/HI/jetRpA/RpA/NewMC/JetID/pic/JetIDcutsys.pdf"));
