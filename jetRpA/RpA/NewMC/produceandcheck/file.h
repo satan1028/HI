@@ -7,7 +7,7 @@ TString DataPPbfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimUni
 //TString DataPbPfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFskimUniv.root";
 TString DataPbPfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPbPakPu3PFskimUniv.root";
 TString DataPPbJetIDfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimJetID.root";
-TString DataPbPJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFskimJetID.root";
+TString DataPbPJetIDfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPbPakPu3PFskimJetID.root";
 TString MCPPbfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim.root";
 TString MCPbPfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPbPakPu3PF_useskim.root";
 TString MCPPbxSecfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimUniv.root";
@@ -32,15 +32,16 @@ TString MCPPbjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merg
 //TString 
 //TString MCPPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFUniv.root";
 
-const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18,21,24,28,32,37,43,49,56,64,74,84,97,114,133,153,174,196,220,245,272,300,330,362,395,430,468,507,548,592,638,686,1000};
+TString JetIDNameList[20]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","PPcut","PPcutTight"};
+const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 362, 429, 692, 1000};
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
-TString JetIDNameList[19]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","SumSum"};
+
 double xrange_pt[2]={50+1e-4,600-1e-4};
 double xrange_pt_pre[2]={47.5+1e-4,480-1e-4};
 TFile *fDataPPb=new TFile(DataPPbfile);
 TFile *fDataPbP=new TFile(DataPbPfile);
 TFile *fDataPPbJetID=new TFile(DataPPbJetIDfile);
-//TFile *fDataPbPJetID=new TFile(DataPbPJetIDfile);
+TFile *fDataPbPJetID=new TFile(DataPbPJetIDfile);
 TFile *fMCPPxSec=new TFile(MCPPxSecfile);
 TFile *fMCPPxSecJetID=new TFile(MCPPxSecJetIDfile);
 
@@ -68,6 +69,9 @@ const TString etabinname[Neta]={"-20_-15","-15_-10","-10_-5","-5_5","5_10","10_1
 const double etabin[Neta]={0.5,0.5,0.5,1.0,0.5,0.5,0.5,2.0};
 const TString etastring[Neta]={"-2.0<#eta_{CM}<-1.5","-1.5<#eta_{CM}<-1.0","-1.0<#eta_{CM}<-0.5","-0.5<#eta_{CM}<0.5","0.5<#eta_{CM}<1.0","1.0<#eta_{CM}<1.5","1.5<#eta_{CM}<2.0","-1.0<#eta_{CM}<1.0"};
 const int canvas[Neta]={0,1,2,3,6,5,4,7};
+TString JetID, Unit;
+double xrange_JetIDcut[2];
+double JetIDcut[2];
 static const int nColor = 9;
 static const int colorCode[nColor] = {
     1,2,4,46,6,7,8,1,2

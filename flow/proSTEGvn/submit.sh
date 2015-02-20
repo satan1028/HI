@@ -3,5 +3,8 @@
 mult=150
 for i in {0..299}
 do
-qsub -v MULT=$mult,IFILE=$i proSTEG.pbs
+    export MULT=$mult
+    export IFILE=$i
+#qsub -v MULT=$mult,IFILE=$i proSTEG.pbs
+sbatch proSTEG.slurm
 done

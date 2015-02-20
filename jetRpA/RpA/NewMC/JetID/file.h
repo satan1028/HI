@@ -11,6 +11,12 @@ double xrange_pt[2]={30+1e-4,600-1e-4};
 double xrange_JetIDcut[2];
 double JetIDcut[2];
 
+const int Neta=8;
+const TString etabinnameswap[Neta]={"15_20","10_15","5_10","-5_5","-10_-5","-15_-10","-20_-15","-10_10"};
+const TString etabinname[Neta]={"-20_-15","-15_-10","-10_-5","-5_5","5_10","10_15","15_20","-10_10"};
+const double etabin[Neta]={0.5,0.5,0.5,1.0,0.5,0.5,0.5,2.0};
+const TString etastring[Neta]={"-2.0<#eta_{CM}<-1.5","-1.5<#eta_{CM}<-1.0","-1.0<#eta_{CM}<-0.5","-0.5<#eta_{CM}<0.5","0.5<#eta_{CM}<1.0","1.0<#eta_{CM}<1.5","1.5<#eta_{CM}<2.0","-1.0<#eta_{CM}<1.0"};
+
 TFile *fdata=TFile::Open(datafile);
 TFile *fdataJetID=TFile::Open(dataJetIDfile);
 //TFile *fPP=TFile::Open(PPfile);
