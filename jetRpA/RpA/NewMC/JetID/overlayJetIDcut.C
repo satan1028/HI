@@ -123,7 +123,7 @@ gStyle->SetOptStat(kFALSE);
 c1 = new TCanvas("c1","",600,600);
 makeMultiPanelCanvas(c1,1,1,-0.12,0,0.13,0.1,0.03);
 TH1F* hFrame=new TH1F("","",1000,0,1000);
-c1->cd(1);
+c1->cd(1)->SetGridx();
 hFrame->SetLineColor(0);
 hFrame->GetXaxis()->SetLimits(28,599.9);
 hFrame->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
