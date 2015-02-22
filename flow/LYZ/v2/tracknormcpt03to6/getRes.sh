@@ -12,16 +12,21 @@ cd $dir
 export SUMORPROD=$SumorProd
 export DIR=$dir
 if [[ $Vorv == "V" ]];then
-root -l -q getResV.C
+root -l <<EOF
+.L getResV.C
+getResV()
+EOF
 #root -l -q getResVsub.C
 #root -l -q nsubvsV2.C
-elif [[ $Vorv == "v" ]];then
+fi
+if [[ $Vorv == "v" ]];then
 root -l <<EOF
 .L getResv.C
 getResv(1)
 EOF
+fi
 #root -l -q getResvsub.C
-else
+if [[ $Vorv == "veta" ]];then
 root -l <<EOF
 .L getResv.C
 getResv(0)
