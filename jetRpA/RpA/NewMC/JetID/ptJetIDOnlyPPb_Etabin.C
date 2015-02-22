@@ -45,15 +45,15 @@ else if(ilist== 2)      JetID = "neutralMax";
 else if(ilist== 3) JetID = "neutralSum";
 else if(ilist== 4) JetID = "photonMax";
 else if(ilist== 5) JetID = "photonSum";
-else if(ilist== 6)  {    JetID = "chargedMax/p_{T}"; JetIDcut[0]=0.05; JetIDcut[1]=1;}
-else if(ilist== 7)  {    JetID = "chargedSum/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.6;}
-else if(ilist== 8)  {   JetID = "neutralMax/p_{T}"; JetIDcut[0] = 0;  JetIDcut[1]=0.08;}
-else if(ilist== 9)  {    JetID = "neutralSum/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.15;}
-else if(ilist== 10)  {   JetID = "photonMax/p_{T}";	JetIDcut[0] = 0; JetIDcut[1]=0.50;}
-else if(ilist== 11) {    JetID = "photonSum/p_{T}";	JetIDcut[0] = 0; JetIDcut[1]=0.3;}
+else if(ilist== 6)  {    JetID = "Max h^{#pm}/p_{T}"; JetIDcut[0]=0.05; JetIDcut[1]=1;}
+else if(ilist== 7)  {    JetID = "#Sigma h^{#pm}/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.6;}
+else if(ilist== 8)  {   JetID = "Max h^{0}/p_{T}"; JetIDcut[0] = 0;  JetIDcut[1]=0.08;}
+else if(ilist== 9)  {    JetID = "#Sigma h^{0}/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.15;}
+else if(ilist== 10)  {   JetID = "Max #gamma/p_{T}";	JetIDcut[0] = 0; JetIDcut[1]=0.50;}
+else if(ilist== 11) {    JetID = "#Sigma #gamma/p_{T}";	JetIDcut[0] = 0; JetIDcut[1]=0.3;}
 else if(ilist== 12) {    JetID = "(#Sigma h^{#pm}+#Sigma #gamma +#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";JetIDcut[0]=0; JetIDcut[1]=1.01;}
 else if(ilist== 13) {    JetID = "(#Sigma h^{#pm}+#Sigma #gamma +#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{raw}"; JetIDcut[0]=0;JetIDcut[1]=1.20;}
-else if(ilist== 14)   {  JetID = "neutralMax/Max(neutralSum,chargedSum)";JetIDcut[0]=0;JetIDcut[1]=0.975;}
+else if(ilist== 14)   {  JetID = "Max h^{0}/Max(#Sigma h^{0},#Sigma h^{#pm})";JetIDcut[0]=0;JetIDcut[1]=0.975;}
 else if(ilist== 15)     JetID = "charged Multiplicity";
 else if(ilist== 16)     JetID = "neutral Multiplicity";
 else if(ilist== 17)     JetID = "photon Multiplicity";
@@ -62,12 +62,14 @@ else if(ilist== 19)   {  JetID = "PP cut Tight True or False";JetIDcut[0]=1;JetI
 else{   exit();}
 
 if(JetIDName.Contains("pt") || JetIDName=="neuMaxr"){
-if(ilist==12 || ilist==13 || ilist==14){
+if(ilist==12 || ilist==13){
 double binbound_JetID[]={0,0.4,0.8,0.84,0.86,0.88,0.9,0.92,0.94,0.96,0.98,1.0,1.02,1.04,1.06,1.1,1.15,1.2,1.3,1.4,1.6,1.8,2.};}
+//else if(ilist==14){
+//double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.6,0.7,0.8,0.84,0.88,0.92,0.96,1.02,1.15};}
 else if(ilist==8 || ilist==10){
 double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5};}
 else{
-double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.};}
+double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.,1.1};}
 
 Unit="";
 }
@@ -125,7 +127,6 @@ leg2->SetBorderSize(0);
 leg2->SetFillColor(0);
 leg2->SetLineWidth(0);
 leg2->SetTextSize(0.055);
-TLatex *T2=new TLatex();
 TLatex T1;
 T1.SetNDC();
 T1.SetTextSize(0.065);
@@ -230,13 +231,18 @@ c1->cd(canvas[i]+1)->SetGridx();
 c1->cd(canvas[i]+1)->SetLogy();
     if(canvas[i]==0  || canvas[i]==4){
         hFrame1->GetYaxis()->SetTitle("Jet Yield");
+        hFrame1->SetLabelSize(18,"Y");
     }
-    if(i>=4)
+    else{
+        hFrame1->SetLabelSize(0,"Y");
+        hFrame1->GetYaxis()->SetTitle("");
+    }
+    if(canvas[i]>=4)
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 	
    hFrame1->GetXaxis()->SetNdivisions(510);
    hFrame1->GetXaxis()->SetLimits(28,599);
-   hFrame1->SetMinimum(1e-12);
+   hFrame1->SetMinimum(2e-12);
    hFrame1->SetMaximum(5e-3);
    hFrame1->DrawCopy();
 
@@ -260,22 +266,29 @@ c2->cd(canvas[i]+1)->SetLogy();
 c2->cd(canvas[i]+1)->SetGridx();
     if(canvas[i]==0  || canvas[i]==4){
         hFrame2->GetYaxis()->SetTitle("Jet Yield");
+        hFrame2->SetLabelSize(18,"Y");
     }
-    if(i>=4)
+    else{
+        hFrame2->SetLabelSize(0,"Y");
+        hFrame2->GetYaxis()->SetTitle("");
+    }
+    if(canvas[i]>=4)
         hFrame2->GetXaxis()->SetTitle(JetID);
 hFrame2->GetXaxis()->SetNdivisions(510);
 hFrame2->GetXaxis()->SetLimits(-binbound_JetID[1]*0.7,binbound_JetID[Nbin_JetID]*1.02);
 hFrame2->SetMinimum(5e-10);
 hFrame2->SetMaximum(5e-2);
 hFrame2->DrawCopy();
-TLine *l = new TLine(JetIDcut[0],0,JetIDcut[0],rehisto_hPPb_JetID->GetMaximum());
-l->SetLineStyle(2);
-l->SetLineWidth(1.2);
 if(canvas[i]!=4){
 rehisto_hPPb_JetID->Draw("E1same");
 rehisto_hPPb_JetID_fake->Draw("E1same");
 rehisto_hPPb_JetID_real->Draw("E1same");
-l->Draw("same");
+TLine *l1 = new TLine(JetIDcut[0],0,JetIDcut[0],hFrame2->GetMaximum());
+TLine *l2 = new TLine(JetIDcut[1],0,JetIDcut[1],hFrame2->GetMaximum());
+l1->SetLineStyle(2);
+l2->SetLineStyle(2);
+l1->Draw("same");
+l2->Draw("same");
 }
 if(canvas[i]==4){
 leg2->AddEntry(rehisto_hPPb_JetID,"Inclusive","lp");
@@ -315,11 +328,17 @@ c3->cd(canvas[i]+1)->SetLogy();
 c3->cd(canvas[i]+1)->SetGridx();
     if(canvas[i]==0  || canvas[i]==4){
         hFrame2->GetYaxis()->SetTitle("Ratio");
+        hFrame2->SetLabelSize(18,"Y");
     }
-    if(i>=4)
+    else{
+        hFrame2->SetLabelSize(0,"Y");
+        hFrame2->GetYaxis()->SetTitle("");
+    }
+    if(canvas[i]>=4)
         hFrame2->GetXaxis()->SetTitle(JetID);
 hFrame2->GetXaxis()->SetNdivisions(510);
-hFrame2->GetXaxis()->SetLimits((binbound_JetID[0]-1e-3)*0.9,binbound_JetID[Nbin_JetID]*1.02);
+hFrame2->GetXaxis()->SetLimits(-binbound_JetID[1]*0.7,binbound_JetID[Nbin_JetID]*1.02);
+//hFrame2->GetXaxis()->SetLimits((binbound_JetID[0]-1e-3)*0.9,binbound_JetID[Nbin_JetID]*1.02);
 hFrame2->SetMinimum(5e-8);
 hFrame2->SetMaximum(5);
 hFrame2->DrawCopy();
@@ -331,6 +350,12 @@ ratio_hPPb_JetID_real->Divide(rehisto_hPPb_JetID);
 if(canvas[i]!=4){
 ratio_hPPb_JetID_fake->Draw("same");
 ratio_hPPb_JetID_real->Draw("same");
+TLine *l1 = new TLine(JetIDcut[0],0,JetIDcut[0],hFrame2->GetMaximum());
+TLine *l2 = new TLine(JetIDcut[1],0,JetIDcut[1],hFrame2->GetMaximum());
+l1->SetLineStyle(2);
+l2->SetLineStyle(2);
+l1->Draw("same");
+l2->Draw("same");
 T1.SetTextSize(0.065);
 T1.DrawLatex(0.4,ybase-0.06,etastring[i]);
 TLine *l = new TLine(hFrame2->GetXaxis()->GetXmin(),1,hFrame2->GetXaxis()->GetXmax(),1);
@@ -353,8 +378,13 @@ c4->cd(canvas[i]+1)->SetGridx();
     if(canvas[i]==0  || canvas[i]==4){
  //       hFrame1->GetYaxis()->SetTitle("Cut effeciency");
 	hFrame1->GetYaxis()->SetTitle(Form("#frac{cut}{no cut}"));
+        hFrame1->SetLabelSize(18,"Y");
     }
-    if(i>=4)
+    else{
+        hFrame1->SetLabelSize(0,"Y");
+        hFrame1->GetYaxis()->SetTitle("");
+    }
+    if(canvas[i]>=4)
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame1->GetXaxis()->SetLimits(28,599);
 hFrame1->SetMaximum(1.015);
@@ -402,10 +432,10 @@ l->Draw("same");
 if(canvas[i]==4){
 leg1->Draw("same");
 leg2->Draw("same");
-T1.SetTextSize(0.05);
+T1.SetTextSize(0.060);
 T1.DrawLatex(0.28,0.63,Form("Var: %s", JetID.Data()));
 T1.SetTextSize(0.065);
-T2->DrawLatex(0.65,0.2,Form("Cut: %.2f - %.2f", JetIDcut[0], JetIDcut[1]));
+T1.DrawLatex(0.28,0.73,Form("Cut: %.2f - %.2f",JetIDcut[0],JetIDcut[1]));
 }
 
 //---------------------------------------PPb pT f/i&r/i ratio before and after cut-----------------------------------
@@ -414,8 +444,13 @@ c5->cd(canvas[i]+1)->SetGridx();
 c5->cd(canvas[i]+1)->SetLogy();
     if(canvas[i]==0  || canvas[i]==4){
 	hFrame1->GetYaxis()->SetTitle(Form("Ratio"));
+        hFrame1->SetLabelSize(18,"Y");
     }
-    if(i>=4)
+    else{
+        hFrame1->SetLabelSize(0,"Y");
+        hFrame1->GetYaxis()->SetTitle("");
+    }
+    if(canvas[i]>=4)
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame1->GetXaxis()->SetLimits(28,599);
 hFrame1->SetMaximum(5);
@@ -444,7 +479,7 @@ l->SetLineStyle(2);
 l->Draw("same");
 }
 if(canvas[i]==4){
-T1.SetTextSize(0.05);
+T1.SetTextSize(0.060);
 T1.DrawLatex(0.28,0.63,Form("Var: %s", JetID.Data()));
 T1.SetTextSize(0.065);
 T1.DrawLatex(0.28,0.73,Form("Cut: %.2f - %.2f",JetIDcut[0],JetIDcut[1]));
@@ -456,9 +491,14 @@ leg3->Draw("same");
 c6->cd(canvas[i]+1)->SetGridx();
 c6->cd(canvas[i]+1)->SetLogy();
     if(canvas[i]==0  || canvas[i]==4){
-	hFrame1->GetYaxis()->SetTitle(Form("%s Ratio",JetID.Data()));
+	hFrame1->GetYaxis()->SetTitle(Form("Ratio"));
+        hFrame1->SetLabelSize(18,"Y");
     }
-    if(i>=4)
+    else{
+        hFrame1->SetLabelSize(0,"Y");
+        hFrame1->GetYaxis()->SetTitle("");
+    }
+    if(canvas[i]>=4)
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame1->GetXaxis()->SetLimits(28,599);
 hFrame1->SetMaximum(5);
@@ -497,8 +537,13 @@ c7->cd(canvas[i]+1)->SetGridx();
 c7->cd(canvas[i]+1)->SetLogy();
     if(canvas[i]==0  || canvas[i]==4){
 	hFrame1->GetYaxis()->SetTitle(Form("Jet Yield"));
+        hFrame1->SetLabelSize(18,"Y");
     }
-    if(i>=4)
+    else{
+        hFrame1->SetLabelSize(0,"Y");
+	hFrame1->GetYaxis()->SetTitle("");
+    }
+    if(canvas[i]>=4)
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 	
    hFrame1->GetXaxis()->SetNdivisions(510);
@@ -533,7 +578,10 @@ c8->cd(canvas[i]+1)->SetGridx();
 c8->cd(canvas[i]+1)->SetLogy();
     if(canvas[i]==0  || canvas[i]==4){
 	hFrame1->GetYaxis()->SetTitle(Form("Jet Yield"));
+        hFrame1->SetLabelSize(18,"Y");
     }
+    else
+        hFrame1->SetLabelSize(0,"Y");
     if(i>=4)
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 	
@@ -561,7 +609,7 @@ rehisto_hPPb_JetIDcut_pt_real->Draw("E1same");
 rehisto_hPPb_JetIDcut_pt_fake->Draw("E1same");
 }
 if(canvas[i]==4){
-T1.SetTextSize(0.05);
+T1.SetTextSize(0.060);
 T1.DrawLatex(0.28,0.63,Form("Var: %s", JetID.Data()));
 T1.SetTextSize(0.065);
 T1.DrawLatex(0.28,0.73,Form("Cut: %.2f - %.2f",JetIDcut[0],JetIDcut[1]));
@@ -573,8 +621,13 @@ leg2->Draw("same");
 c9->cd(canvas[i]+1)->SetGridx();
     if(canvas[i]==0  || canvas[i]==4){
 	hFrame1->GetYaxis()->SetTitle(Form("%s %s",JetID.Data(), Unit.Data()));
+        hFrame1->SetLabelSize(18,"Y");
     }
-    if(i>=4)
+    else{
+        hFrame1->SetLabelSize(0,"Y");
+        hFrame1->GetXaxis()->SetTitle("");
+    }
+    if(canvas[i]>=4)
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 	
    hFrame1->GetXaxis()->SetNdivisions(510);
@@ -589,12 +642,12 @@ T1.DrawLatex(0.4,ybase-0.06,etastring[i]);
 rehisto_hProfPPb->Draw("same");
 rehisto_hProfPPb_fake->Draw("same");
 rehisto_hProfPPb_real->Draw("same");
-if(JetIDcut[0]==0)
-TLine *l = new TLine(hFrame1->GetXaxis()->GetXmin(),JetIDcut[1],hFrame1->GetXaxis()->GetXmax(),JetIDcut[1]);
-else
-TLine *l = new TLine(hFrame1->GetXaxis()->GetXmin(),JetIDcut[0],hFrame1->GetXaxis()->GetXmax(),JetIDcut[0]);
-l->SetLineStyle(5);
-l->Draw("same");
+TLine *l1 = new TLine(hFrame1->GetXaxis()->GetXmin(),JetIDcut[0],hFrame1->GetXaxis()->GetXmax(),JetIDcut[0]);
+TLine *l2 = new TLine(hFrame1->GetXaxis()->GetXmin(),JetIDcut[1],hFrame1->GetXaxis()->GetXmax(),JetIDcut[1]);
+l1->SetLineStyle(5);
+l2->SetLineStyle(5);
+l1->Draw("same");
+l2->Draw("same");
 }
 if(canvas[i]==4){
 T1.DrawLatex(0.28,0.73,Form("Cut: %.2f - %.2f",JetIDcut[0],JetIDcut[1]));
