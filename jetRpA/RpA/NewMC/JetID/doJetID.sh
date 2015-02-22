@@ -1,21 +1,13 @@
 #!/bin/sh
-export SCRAM_ARCH=slc6_amd64_gcc472
+#cd /home/xuq7/HI/jetRpA/RpA/NewMC/JetID
 
-cd /home/xuq7/HI/CMSSW_5_3_20/src
-#cmsenv
-eval `scramv1 runtime -sh`
-
-#rm /home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/Quality/pic/JetIDcut/merged/*.png
-
-cd /home/xuq7/HI/jetRpA/RpA/NewMC/JetID
-
-for (( i=0;i<20;i++ )) 
+for i in 6 7 8 9 10 11 12 13 14 18 19
 #for (( i=0;i<1;i++ )) 
-
 do
 export LIST=$i
 
-root -l -b -q ptJetIDOnlyPPb.C
+root -l -b -q ptJetIDOnlyPPb_Etabin.C
+#root -l -b -q ptJetIDOnlyPPb.C
 #root -l -b -q overlayDataMC.C
 #root -l -b -q overlayProfile.C
 #root -l -q overlayJetIDcut.C

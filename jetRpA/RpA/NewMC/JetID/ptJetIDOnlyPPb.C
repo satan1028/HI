@@ -10,8 +10,8 @@
 #include "TObject.h"
 #include "iostream"
 #include "fstream"
-#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
-#include "file.h"
+#include "../../Quality/root_setting.h"
+#include "../produceandcheck/file.h"
 
 TH1* myRebin(TH1* histo,int Nbin, double binbound[]){
 //rehisto->Scale(1/rehisto->Integral());
@@ -93,9 +93,9 @@ Unit="(GeV/c)";
 }
 int Nbin_JetID=sizeof(binbound_JetID)/sizeof(double)-1;
 
-TH2F *hPPb2D= (TH2F*)fPPb->Get(Form("jetpt%s",JetIDName.Data()));
-TH2F *hPPb2D_real= (TH2F*)fPPb->Get(Form("jetpt%s_real",JetIDName.Data()));
-TH2F *hPPb2D_fake= (TH2F*)fPPb->Get(Form("jetpt%s_fake",JetIDName.Data()));
+TH2F *hPPb2D= (TH2F*)fMCPPb->Get(Form("jetpt%s",JetIDName.Data()));
+TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("jetpt%s_real",JetIDName.Data()));
+TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("jetpt%s_fake",JetIDName.Data()));
 
 const double binbound_pt_coarse[]={0,30,70,150,200,600};
 const int Nbin_pt_coarse=sizeof(binbound_pt_coarse)/sizeof(double)-1;
