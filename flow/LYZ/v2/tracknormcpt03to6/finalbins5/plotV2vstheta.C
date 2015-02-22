@@ -8,7 +8,7 @@ void plotV2vstheta(){
         const int nbin[ntotbin] = {6,7,7,8,8};
         const int trkpointmin[ntotbin] = {120,150,185,220,260};
         const int trkpointmax[ntotbin] = {150,185,220,260,300};
-        int trkbin=0;
+        int trkbin=3;
 	int xbin=0;
         c1 = new TCanvas("c1"," ",1200,700);
         makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
@@ -24,8 +24,8 @@ void plotV2vstheta(){
         hFrame->GetXaxis()->SetTitleSize(0.04);
         hFrame->GetYaxis()->SetTitleSize(0.04);
         hFrame->GetXaxis()->SetRangeUser(-0.2,1.4);
-        hFrame->SetMinimum(0.043);
-        hFrame->SetMaximum(0.066);
+        hFrame->SetMinimum(0.033);
+        hFrame->SetMaximum(0.076);
         for(int ibin=0;ibin<nbin[trkbin]; ibin++){
 	if(isSum==0){
 	    f = TFile::Open(Form("M%d%d/mergedV_Prod.root",trkpointmax[trkbin],trkpointmin[trkbin]));
