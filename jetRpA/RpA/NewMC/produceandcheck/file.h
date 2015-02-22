@@ -2,35 +2,35 @@ TString algo, datafile, PPfile, PPbfile;
 
 algo="akPu3PF";
 
-//TString DataPPbfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPPbakPu3PFskimUniv.root";
-TString DataPPbfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimUniv.root";
-//TString DataPbPfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFskimUniv.root";
-TString DataPbPfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPbPakPu3PFskimUniv.root";
-TString DataPPbJetIDfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimJetID.root";
-TString DataPbPJetIDfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPbPakPu3PFskimJetID.root";
-TString MCPPbfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim.root";
-TString MCPbPfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPbPakPu3PF_useskim.root";
-TString MCPPbxSecfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimUniv.root";
+//TString DataPPbfile="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/DATAPPbakPu3PFskimUniv.root";
+TString DataPPbfile="/home/qiao/scratch/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimUniv.root";
+//TString DataPbPfile="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFskimUniv.root";
+TString DataPbPfile="/home/qiao/scratch/jetRpA/RpA/NewMC/DATAPbPakPu3PFskimUniv.root";
+TString DataPPbJetIDfile="/home/qiao/scratch/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimJetID.root";
+TString DataPbPJetIDfile="/home/qiao/scratch/jetRpA/RpA/NewMC/DATAPbPakPu3PFskimJetID.root";
+TString MCPPbfile="/home/qiao/scratch/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim.root";
+TString MCPbPfile="/home/qiao/scratch/jetRpA/RpA/NewMC/MCPbPakPu3PF_useskim.root";
+TString MCPPbxSecfile="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimUniv.root";
 
-TString MCPPxSecfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFxSecskimUniv.root";
-TString MCPPxSecJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFxSecskimJetID.root";
+TString MCPPxSecfile="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFxSecskimUniv.root";
+TString MCPPxSecJetIDfile="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFxSecskimJetID.root";
 
-TString MCPPbJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFskimJetID.root";
-TString MCPPbxSecJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimJetID.root";
-TString MCPbPJetIDfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimJetID.root";
+TString MCPPbJetIDfile="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFskimJetID.root";
+TString MCPPbxSecJetIDfile="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimJetID.root";
+TString MCPbPJetIDfile="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimJetID.root";
 
-TString DataPPbfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPPbakPu3PFUniv.root";
-TString DataPbPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFUniv.root";
-TString DataPbPJetIDfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFJetID.root";
-TString MCPPbfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFskimUniv.root";
-TString MCPPbJetIDfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFJetID.root";
-TString MCPbPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimUniv.root";
-TString MCPbPJetIDfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFJetID.root";
+TString DataPPbfileOld="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/DATAPPbakPu3PFUniv.root";
+TString DataPbPfileOld="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFUniv.root";
+TString DataPbPJetIDfileOld="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/DATAPbPakPu3PFJetID.root";
+TString MCPPbfileOld="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFskimUniv.root";
+TString MCPPbJetIDfileOld="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFJetID.root";
+TString MCPbPfileOld="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimUniv.root";
+TString MCPbPJetIDfileOld="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFJetID.root";
 
 TString MCPbPjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/PbPMCOfficialForestNewVzWeight_ppReco_akPu3PF_QCDjetTrigJECv19_JetPt0noIPupperCut.root";
 TString MCPPbjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/PPbMCOfficialForestNewVzWeight_ppReco_akPu3PF_QCDjetTrigJECv8_JetPt0noIPupperCut.root";
 //TString 
-//TString MCPPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFUniv.root";
+//TString MCPPfileOld="/home/qiao/scratch/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFUniv.root";
 
 TString JetIDNameList[20]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","PPcut","PPcutTight"};
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 362, 429, 692, 1000};

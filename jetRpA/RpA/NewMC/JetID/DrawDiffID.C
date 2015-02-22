@@ -10,8 +10,8 @@
 #include "TObject.h"
 #include "iostream"
 #include "fstream"
-#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
-#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
+#include "/home/qiao/HI/jetRpA/RpA/Quality/root_setting.h"
+#include "/home/qiao/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 
 bool isMC=kTRUE;
 
