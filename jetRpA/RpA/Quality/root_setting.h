@@ -140,3 +140,10 @@ histo->SetBinError(i,error/histo->GetBinWidth(i));
 }
 return histo ;
 }
+
+TH1* getRidYError(TH1 *histo){
+for(int i = 1; i <= histo->GetNbinsX(); i++) {
+histo->SetBinError(i,0);
+}
+return histo ;
+}

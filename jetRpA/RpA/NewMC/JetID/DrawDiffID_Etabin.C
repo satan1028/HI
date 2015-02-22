@@ -10,12 +10,10 @@
 #include "TObject.h"
 #include "iostream"
 #include "fstream"
-#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
-#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
+#include "../../Quality/root_setting.h"
+#include "../produceandcheck/file.h"
 
 bool isMC=kTRUE;
-
-
 
 void WriteBins(TH1D *histo){
 cout<<"points:"<<endl;
@@ -138,17 +136,6 @@ for(int i=0;i<Neta;i++){
     if(i==0  || i==6){
         hFrame->GetYaxis()->SetTitle("Cut Effciency");
         hFrame->GetXaxis()->SetNdivisions(510);
- //       hFrame->GetXaxis()->SetLimits(47.5,299);
-    }
-    else{
- //       hFrame->GetXaxis()->SetNdivisions(505);
- /*       if(i==1 || i==5)
-            hFrame->GetXaxis()->SetLimits(47.5,360);
-        else if(i==2 || i==4)
-            hFrame->GetXaxis()->SetLimits(47.5,420);
-        else
-            hFrame->GetXaxis()->SetLimits(47.5,455);
-            */
     }
     if(i>=4)
         hFrame->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");

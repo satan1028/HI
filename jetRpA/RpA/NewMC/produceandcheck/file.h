@@ -27,14 +27,16 @@ TString MCPPbJetIDfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCP
 TString MCPbPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimUniv.root";
 TString MCPbPJetIDfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFJetID.root";
 
-TString MCPbPjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/PbPMCOfficialForestNewVzWeight_ppReco_akPu3PF_QCDjetTrigJECv19_JetPt0noIPupperCut.root";
-TString MCPPbjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/PPbMCOfficialForestNewVzWeight_ppReco_akPu3PF_QCDjetTrigJECv8_JetPt0noIPupperCut.root";
+//TString MCPbPjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/PbPMCOfficialForestNewVzWeight_ppReco_akPu3PF_QCDjetTrigJECv19_JetPt0noIPupperCut.root";
+//TString MCPPbjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/PPbMCOfficialForestNewVzWeight_ppReco_akPu3PF_QCDjetTrigJECv8_JetPt0noIPupperCut.root";
 //TString 
 //TString MCPPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFUniv.root";
 
 TString JetIDNameList[20]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","PPcut","PPcutTight"};
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 362, 429, 692, 1000};
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
+const double binbound_pt_coarse[]={0,30,70,150,200,600};
+const int Nbin_pt_coarse=sizeof(binbound_pt_coarse)/sizeof(double)-1;
 
 double xrange_pt[2]={50+1e-4,600-1e-4};
 double xrange_pt_pre[2]={47.5+1e-4,480-1e-4};
@@ -61,8 +63,8 @@ TFile *fMCPPbJetIDOld=new TFile(MCPPbJetIDfileOld);
 TFile *fMCPbPOld=new TFile(MCPbPfileOld);
 TFile *fMCPbPJetIDOld=new TFile(MCPbPJetIDfileOld);
 
-TFile *fMCPPbjetloop=new TFile(MCPPbjetloopfile);
-TFile *fMCPbPjetloop=new TFile(MCPbPjetloopfile);
+//TFile *fMCPPbjetloop=new TFile(MCPPbjetloopfile);
+//TFile *fMCPbPjetloop=new TFile(MCPbPjetloopfile);
 const int Neta=8;
 const TString etabinnameswap[Neta]={"15_20","10_15","5_10","-5_5","-10_-5","-15_-10","-20_-15","-10_10"};
 const TString etabinname[Neta]={"-20_-15","-15_-10","-10_-5","-5_5","5_10","10_15","15_20","-10_10"};
