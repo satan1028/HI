@@ -10,12 +10,10 @@
 #include "TObject.h"
 #include "iostream"
 #include "fstream"
-#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
+#include <~/HI/jetRpA/RpA/Quality/root_setting.h>
 #include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 
 bool isMC=kTRUE;
-
-
 
 void WriteBins(TH1D *histo){
 cout<<"points:"<<endl;
