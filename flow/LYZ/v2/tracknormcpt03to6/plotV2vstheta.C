@@ -15,16 +15,16 @@ void plotV2vstheta(){
         gStyle->SetOptStat(0);
         gStyle->SetOptTitle(0);
         gStyle->SetErrorX(0);
-        TH1D *hFrame = new TH1D("","",100,0,2);
+        TH1D *hFrame = new TH1D("","",220,-0.2,2);
         hFrame->SetTitle("");
         hFrame->GetXaxis()->SetTitle("#theta");
         hFrame->GetYaxis()->SetTitle("reference V_{2}");
         hFrame->GetYaxis()->SetTitleOffset(1.1);
         hFrame->GetXaxis()->SetTitleSize(0.04);
         hFrame->GetYaxis()->SetTitleSize(0.04);
-        hFrame->GetXaxis()->SetRangeUser(0,1.5);
+        hFrame->GetXaxis()->SetRangeUser(-0.2,1.4);
         hFrame->SetMinimum(0.033);
-        hFrame->SetMaximum(0.063);
+        hFrame->SetMaximum(0.076);
         for(int trkbin=0;trkbin<ntotbin; trkbin++){
 	if(isSum==0){
 	    f = TFile::Open(Form("M%d%d/mergedV_Prod.root",trkpointmax[trkbin],trkpointmin[trkbin]));
@@ -32,11 +32,13 @@ void plotV2vstheta(){
 	else{
 	    f = TFile::Open(Form("M%d%d/mergedV_Sum.root",trkpointmax[trkbin],trkpointmin[trkbin]));
 	}
-	TVectorD* vecVmean = (TVectorD*)f->Get(Form("D_%d/Vmean",xbin));
-        TVectorD* vecV = (TVectorD*)f->Get(Form("D_%d/D_0/V",xbin));
+	TVectorD* vecVmean = (TVectorD*)f->Get(Form("Vmean",xbin));
+        TVectorD* vecV = (TVectorD*)f->Get(Form("D_%d/V",xbin));
+        TVectorD* vecdeltaV = (TVectorD*)f->Get(Form("D_%d/deltaV",xbin));
 
         double Vmean = (*vecVmean)[0];
         double *V = vecV->GetMatrixArray();
+        double *deltaV = vecdeltaV->GetMatrixArray();
         double theta[ntheta];
         for(int itheta=0;itheta<ntheta;itheta++){
             theta[itheta]=itheta*TMath::Pi()/ntheta/nn;
@@ -45,7 +47,7 @@ void plotV2vstheta(){
         double maxper = (double)(maxper10+1)/10;
         c1->cd(trkbin+1);
         hFrame->Draw();
-        TGraph *gV2theta = new TGraph(ntheta,theta,V);
+        TGraphErrors *gV2theta = new TGraphErrors(ntheta,theta,V,0,deltaV);
         gV2theta->SetMarkerStyle(20);
         gV2theta->SetMarkerSize(1.3);
         gV2theta->SetMarkerColor(1);
@@ -68,7 +70,7 @@ void plotV2vstheta(){
         tl->DrawLatex(0,Vmean*(1+maxper),Form("mean up %.f%%",maxper*100));
         tl->DrawLatex(0,Vmean*(1-maxper),Form("mean down %.f%%",maxper*100));
         tl->SetNDC();
-        tl->DrawLatex(0.7,0.85,Form("Multiplicity %d to %d",trkpointmin[trkbin],trkpointmax[trkbin]));
+        tl->DrawLatex(0.5,0.85,Form("Multiplicity %d to %d",trkpointmin[trkbin],trkpointmax[trkbin]));
         l->Draw("same");
         lup->Draw("same");
         ldown->Draw("same");
