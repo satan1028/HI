@@ -8,7 +8,7 @@ void plotV2vstheta(){
         const int nbin[ntotbin] = {6,7,7,8,8};
         const int trkpointmin[ntotbin] = {120,150,185,220,260};
         const int trkpointmax[ntotbin] = {150,185,220,260,300};
-        int trkbin=3;
+        int trkbin=0;
 	int xbin=0;
         c1 = new TCanvas("c1"," ",1200,700);
         makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
