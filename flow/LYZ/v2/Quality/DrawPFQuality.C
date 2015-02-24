@@ -62,7 +62,7 @@ void DrawPFQuality(){
         for(int iID=4;iID<nID;iID++){
 	tl2->AddEntry(hpt_PF[iID],particleleg[iID],"p");
         }
-	tl2->AddEntry(hpt_tr03to6,"tracks 0.3<p_{T}<6.0 (GeV/c)","p");
+	tl2->AddEntry(hpt_tr03to6,"tracks 0.1<p_{T}<10.0 (GeV/c)","p");
 	tl1->Draw("same");
 	tl2->Draw("same");
 //	TH1D* ratio = (TH1D*)hpt_PFon->Clone();
