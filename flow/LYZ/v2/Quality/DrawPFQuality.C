@@ -1,7 +1,8 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 void DrawPFQuality(){
 	TString mult = "M150120";
-        TString dir1 = "PFcandpt03to6tracknormcpt03to6";
+        TString dir10 = "PFcandpt03to6tracknormcpt03to6";
+        TString dir1 = "PFcandpt01to10tracknormcpt03to6";
         TString dir2 = "tracknormcpt03to6";
         const int nID=6;
         const int marker[nID] = {20,24,27,30,29,32};
@@ -12,11 +13,11 @@ void DrawPFQuality(){
         TH1D* hphi_PF[nID];
         TH1D* hid_PF;
         for(int iID=0;iID<nID;iID++){
-            hpt_PF[iID]=plot(dir1,mult,iID,"pt",color[iID],marker[iID]);
-            heta_PF[iID]=plot(dir1,mult,iID,"eta",color[iID],marker[iID]);
-            hphi_PF[iID]=plot(dir1,mult,iID,"phi",color[iID],marker[iID]);
+            hpt_PF[iID]=plot(dir10,mult,iID,"pt",color[iID],marker[iID]);
+            heta_PF[iID]=plot(dir10,mult,iID,"eta",color[iID],marker[iID]);
+            hphi_PF[iID]=plot(dir10,mult,iID,"phi",color[iID],marker[iID]);
         }
-            hid_PF=plot(dir1,mult,-1,"id",color[0],marker[0]);
+            hid_PF=plot(dir10,mult,-1,"id",color[0],marker[0]);
         TH1D* hpt_tr03to6 = plot(dir2,mult,-1,"pt",2,20);
         TH1D* heta_tr03to6 = plot(dir2,mult,-1,"eta",2,20);
         TH1D* hphi_tr03to6 = plot(dir2,mult,-1,"phi",2,20);
@@ -24,9 +25,9 @@ void DrawPFQuality(){
 	c1 = new TCanvas("c1"," ",800,800);
 	c2 = new TCanvas("c2"," ",800,800);
 	c3 = new TCanvas("c3"," ",800,800);
-	c4 = new TCanvas("c4"," ",400,400);
+	c4 = new TCanvas("c4"," ",600,600);
         TLatex *tl = new TLatex();
-        tl->SetTextSize(0.05);
+        tl->SetTextSize(0.04);
         tl->SetNDC();
 //        c1->Divide(3,1);
 	c1->cd()->SetLogy();
@@ -51,7 +52,7 @@ void DrawPFQuality(){
 	tl1->SetTextSize(0.022);
 	tl1->SetBorderSize(0);
 	tl1->SetFillColor(0);
-	tl2->SetTextSize(0.015);
+	tl2->SetTextSize(0.022);
 	tl2->SetBorderSize(0);
 	tl2->SetFillColor(0);
 	//tl->AddEntry(hpt_PFon,"PFcandidate charged","p");
@@ -82,7 +83,7 @@ void DrawPFQuality(){
         heta_tr03to6->Draw("Psame");
 	tl1->Draw("same");
 	tl2->Draw("same");
-        tl->DrawLatex(0.4,0.9,"0.3<p_{T}<6.0(GeV/c)");
+        tl->DrawLatex(0.4,0.8,"0.3<p_{T}<6.0(GeV/c)");
         c3->cd()->SetLogy();
 	TH1D* hFrame_phi = new TH1D("hFrame_phi","",100,-4,4);
 	hFrame_phi->GetXaxis()->SetTitle("#phi");
@@ -97,16 +98,16 @@ void DrawPFQuality(){
         hphi_tr03to6->Draw("Psame");
 	tl1->Draw("same");
 	tl2->Draw("same");
-        tl->DrawLatex(0.4,0.9,"0.3<p_{T}<6.0(GeV/c)");
+        tl->DrawLatex(0.4,0.8,"0.3<p_{T}<6.0(GeV/c)");
         c4->cd()->SetLogy();
 	hid_PF->GetXaxis()->SetTitle("particle id");
         hid_PF->GetYaxis()->SetRangeUser(1e1,3e9);
         hid_PF->GetYaxis()->SetTitle("# of particles");
         hid_PF->GetXaxis()->SetTitleOffset(1);
         hid_PF->Draw();
-	c1->SaveAs("PFQualify_particlespt.png");
-	c2->SaveAs("PFQualify_particleseta.png");
-	c3->SaveAs("PFQualify_particlesphi.png");
+	c1->SaveAs(Form("PFQualify_particlespt_%s.png",dir10.Data()));
+	c2->SaveAs(Form("PFQualify_particleseta_%s.png",dir10.Data()));
+	c3->SaveAs(Form("PFQualify_particlesphi_%s.png",dir10.Data()));
 	c4->SaveAs("PFQualify_particlesid.png");
 
 }
@@ -114,7 +115,7 @@ void DrawPFQuality(){
 TH1D* plot(TString dir, TString Tmult, int id, TString var,int color, int marker){
 	TString pf;
 	int xbin=0;
-	TFile *fhisto = TFile::Open(Form("%s/%s/histomerged.root",dir.Data(),Tmult.Data()));
+	TFile *fhisto = TFile::Open(Form("../%s/%s/histomerged.root",dir.Data(),Tmult.Data()));
         if(id>=0){
 	TH1D* histo = (TH1D*)fhisto->Get(Form("D_%d/h%s_%d",xbin,var.Data(),id));
         }

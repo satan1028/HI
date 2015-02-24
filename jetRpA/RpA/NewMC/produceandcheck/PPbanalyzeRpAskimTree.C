@@ -29,6 +29,10 @@ public:
     TH1F * refjetpt;
     TH1F * genjetpt;
     TH1F * jetpt;
+    TH1F * jetpt_fake;
+    TH1F * jetpt_real;
+    TH1F * jetpt_selfmatch_fake;
+    TH1F * jetpt_selfmatch_real;
     TH2F * jetptEta;
     TH2F * jetptphi;
     TH2F * jetEtaphi;
@@ -37,6 +41,8 @@ public:
     TH2F * jetptjetid_fake[nJetID];
     TH2F * rawptJES;
     TH2F * refptJES;
+    TH1D * hNmatched;
+    TH1D * hdeltaR;
     TH1F * Vz;
     TH1F * VzW;
     TH1F * Cent;
@@ -52,6 +58,10 @@ public:
     TH2F * jetptjetidEtaBin_real[netabin][nJetID];
     TH2F * refptJESEtaBin[netabin];
     TH1F * jetptEtaBin[netabin];
+    TH1F * jetptEtaBin_fake[netabin];
+    TH1F * jetptEtaBin_real[netabin];
+    TH1F * jetptEtaBin_selfmatch_fake[netabin];
+    TH1F * jetptEtaBin_selfmatch_real[netabin];
 };
 
 hist_class::hist_class()
@@ -62,6 +72,15 @@ hist_class::hist_class()
     genjetpt -> Sumw2(); 
     jetpt = new TH1F(Form("jetpt"),Form("jetpt"),1000,0.,1000.);
     jetpt -> Sumw2(); 
+    jetpt_fake = new TH1F(Form("jetpt_fake"),Form("jetpt_fake"),1000,0.,1000.);
+    jetpt_fake -> Sumw2(); 
+    jetpt_real = new TH1F(Form("jetpt_real"),Form("jetpt_real"),1000,0.,1000.);
+    jetpt_real -> Sumw2(); 
+    jetpt_selfmatch_fake = new TH1F(Form("jetpt_selfmatch_fake"),Form("jetpt_selfmatch_fake"),1000,0.,1000.);
+    jetpt_selfmatch_fake -> Sumw2(); 
+    jetpt_selfmatch_real = new TH1F(Form("jetpt_selfmatch_real"),Form("jetpt_selfmatch_real"),1000,0.,1000.);
+    jetpt_selfmatch_real -> Sumw2(); 
+
     jetptEta = new TH2F(Form("jetptEta"),Form("jetptEta"),1000,0.,1000.,100,-5.,5.);
     jetptEta -> Sumw2(); 
     jetptphi = new TH2F(Form("jetptphi"),Form("jetptphi"),1000,0.,1000.,200, -TMath::Pi(), TMath::Pi());
@@ -99,6 +118,10 @@ hist_class::hist_class()
     rawptJES -> Sumw2(); 
     refptJES = new TH2F(Form("refptJES"),Form("refptJES"),1000,0.,1000.,200,0.,2.);
     refptJES -> Sumw2(); 
+    hNmatched = new TH1D(Form("hNmatched"),Form("hNmatched"),5,0.,5.);
+    hNmatched -> Sumw2();
+    hdeltaR = new TH1D(Form("hdeltaR"),Form("hdeltaR"),1000,0.,10.);
+    hdeltaR -> Sumw2();
     Vz = new TH1F(Form("Vz"),Form("Vz"),600,-30.,30.);
     Vz-> Sumw2(); 
     VzW = new TH1F(Form("VzW"),Form("VzW"),600,-30.,30.);
@@ -115,6 +138,14 @@ hist_class::hist_class()
     for(int ieta=0; ieta < netabin; ieta++){
       jetptEtaBin[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
       jetptEtaBin[ieta]->Sumw2();
+      jetptEtaBin_fake[ieta] = new TH1F(Form("jetptEtaBin_fake%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_fake%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_fake[ieta]->Sumw2();
+      jetptEtaBin_real[ieta] = new TH1F(Form("jetptEtaBin_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_real[ieta]->Sumw2();
+      jetptEtaBin_selfmatch_fake[ieta] = new TH1F(Form("jetptEtaBin_selfmatch_fake%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_selfmatch_fake%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_selfmatch_fake[ieta]->Sumw2();
+      jetptEtaBin_selfmatch_real[ieta] = new TH1F(Form("jetptEtaBin_selfmatch_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_selfmatch_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_selfmatch_real[ieta]->Sumw2();
        for(int ijetid=0;ijetid<nJetID;ijetid++){
         if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
         jetptjetidEtaBin[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 200, 0., 2.);    //Added
@@ -155,6 +186,10 @@ void hist_class::Write()
     refjetpt->Write();
     genjetpt->Write();
     jetpt->Write();
+    jetpt_fake->Write();
+    jetpt_real->Write();
+    jetpt_selfmatch_fake->Write();
+    jetpt_selfmatch_real->Write();
     jetptEta->Write();
     jetptphi->Write();
     jetEtaphi->Write();
@@ -165,6 +200,8 @@ void hist_class::Write()
         }
     rawptJES->Write();
     refptJES->Write();
+    hNmatched->Write();
+    hdeltaR->Write();
     Vz->Write();
     VzW->Write();
     Cent->Write();
@@ -173,6 +210,10 @@ void hist_class::Write()
     PthatAfXw->Write();
     for(int ieta=0; ieta<netabin; ieta++){
 	 jetptEtaBin[ieta]->Write(); 
+         jetptEtaBin_fake[ieta]->Write();
+         jetptEtaBin_real[ieta]->Write();
+         jetptEtaBin_selfmatch_fake[ieta]->Write();
+         jetptEtaBin_selfmatch_real[ieta]->Write();
 	 for(int ijetid=0;ijetid<nJetID;ijetid++){
         	if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr") || JetIDName[ijetid].Contains("PP")){
                  jetptjetidEtaBin[ieta][ijetid]->Write();
@@ -200,7 +241,7 @@ void PPbanalyzeRpAskimTree()
   
   TTree *nt = (TTree*)f->Get("nt");
 
-  Float_t jtpt[100],jteta[100],geneta[100],jtphi[100],rawpt[100],refpt[100],refeta[100],genpt[100];
+  Float_t jtpt[100],jteta[100],geneta[100],genphi[100],jtphi[100],rawpt[100],refpt[100],refeta[100],genpt[100];
 	Int_t t_chargedN[100], t_neutralN[100], t_photonN[100],subid[100];
 Float_t t_chargedSum[100], t_photonSum[100], t_neutralSum[100], t_chargedMax[100], t_neutralMax[100], t_photonMax[100], t_eSum[100], t_muSum[100];
 Int_t nref,ngen,hiBin;
@@ -229,6 +270,7 @@ Int_t nref,ngen,hiBin;
   nt->SetBranchAddress("subid",subid);
   nt->SetBranchAddress("jteta",jteta);
   nt->SetBranchAddress("geneta",geneta);
+  nt->SetBranchAddress("genphi",genphi);
   nt->SetBranchAddress("jtphi",jtphi);
     nt->SetBranchAddress("chargedN",t_chargedN);
     nt->SetBranchAddress("photonN",t_photonN);
@@ -298,6 +340,20 @@ for(int j4i = 0; j4i < nref; j4i++){
             ref_eta = ref_eta-0.465;
             jet_eta = jet_eta-0.465;
         }
+        int matchflag=0;
+	for(int j5i = 0; j5i < ngen ; j5i++) {
+    double gen_eta=geneta[j5i];
+    double gen_phi=genphi[j5i];
+        if(coll =="PPb") 
+            gen_eta = gen_eta+0.465;
+        if(coll =="PbP") 
+            gen_eta = gen_eta-0.465;
+        double deltaR = TMath::Sqrt(TMath::Power(gen_eta-jet_eta,2)+TMath::Power(gen_phi-jet_phi,2));
+        my_hists->hdeltaR->Fill(deltaR);
+        if(deltaR<0.3) matchflag++;
+        }
+        my_hists->hNmatched->Fill(matchflag);
+
 	if(TMath::Abs(ref_eta) <= 1.) {
         my_hists->refjetpt->Fill(ref_pt, weight);
        }
@@ -314,16 +370,22 @@ for(int j4i = 0; j4i < nref; j4i++){
      if(TMath::Abs(jet_eta)<=1.) {
 	for(int ijetid=0;ijetid<nJetID;ijetid++){
 	my_hists->jetptjetid[ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
-	if(ref_pt<0){	//Added
+	if(ref_pt<0)	//Added
 	  my_hists->jetptjetid_fake[ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
-	}
-	else{
+	else
 	  my_hists->jetptjetid_real[ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
+        }
+	if(ref_pt<0)	//Added
+          my_hists->jetpt_fake->Fill(jet_pt,weight);
+	else
+          my_hists->jetpt_real->Fill(jet_pt,weight);
+        if(matchflag==0)    //self-matching fake
+          my_hists->jetpt_selfmatch_fake->Fill(jet_pt,weight);
+        else
+          my_hists->jetpt_selfmatch_real->Fill(jet_pt,weight);
+	my_hists->jetpt->Fill(jet_pt,weight);
+       	my_hists->rawptJES->Fill(raw_pt,jet_pt/raw_pt,weight);
 	}	
-	}	
-		my_hists->jetpt->Fill(jet_pt,weight);
-        	my_hists->rawptJES->Fill(raw_pt,jet_pt/raw_pt,weight);
-	}
 
       for(int ieta =0; ieta<netabin;ieta++){
           if(jet_eta>deta[ieta]&&jet_eta<=deta[ieta+1]) dEtaBin=ieta;
@@ -339,6 +401,14 @@ for(int j4i = 0; j4i < nref; j4i++){
                 my_hists->jetptjetidEtaBin_real[dEtaBin][ijetid]->Fill(jet_pt,jetidv[ijetid],weight);
         }
         }
+         if(ref_pt<0)
+            my_hists->jetptEtaBin_fake[dEtaBin]->Fill(jet_pt,weight);
+         else
+            my_hists->jetptEtaBin_real[dEtaBin]->Fill(jet_pt,weight);
+         if(matchflag==0)
+            my_hists->jetptEtaBin_selfmatch_fake[dEtaBin]->Fill(jet_pt,weight);
+         else
+            my_hists->jetptEtaBin_selfmatch_real[dEtaBin]->Fill(jet_pt,weight);
 	 my_hists->rawptJESEtaBin[dEtaBin]->Fill(raw_pt,jet_pt/raw_pt,weight);
 	}
       } //loop over jet
