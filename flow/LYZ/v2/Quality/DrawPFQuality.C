@@ -13,9 +13,9 @@ void DrawPFQuality(){
         TH1D* hphi_PF[nID];
         TH1D* hid_PF;
         for(int iID=0;iID<nID;iID++){
-            hpt_PF[iID]=plot(dir10,mult,iID,"pt",color[iID],marker[iID]);
-            heta_PF[iID]=plot(dir10,mult,iID,"eta",color[iID],marker[iID]);
-            hphi_PF[iID]=plot(dir10,mult,iID,"phi",color[iID],marker[iID]);
+            hpt_PF[iID]=plot(dir1,mult,iID,"pt",color[iID],marker[iID]);
+            heta_PF[iID]=plot(dir1,mult,iID,"eta",color[iID],marker[iID]);
+            hphi_PF[iID]=plot(dir1,mult,iID,"phi",color[iID],marker[iID]);
         }
             hid_PF=plot(dir10,mult,-1,"id",color[0],marker[0]);
         TH1D* hpt_tr03to6 = plot(dir2,mult,-1,"pt",2,20);
@@ -83,7 +83,7 @@ void DrawPFQuality(){
         heta_tr03to6->Draw("Psame");
 	tl1->Draw("same");
 	tl2->Draw("same");
-        tl->DrawLatex(0.4,0.8,"0.3<p_{T}<6.0(GeV/c)");
+        tl->DrawLatex(0.4,0.8,"0.1<p_{T}<10.0(GeV/c)");
         c3->cd()->SetLogy();
 	TH1D* hFrame_phi = new TH1D("hFrame_phi","",100,-4,4);
 	hFrame_phi->GetXaxis()->SetTitle("#phi");
@@ -98,16 +98,16 @@ void DrawPFQuality(){
         hphi_tr03to6->Draw("Psame");
 	tl1->Draw("same");
 	tl2->Draw("same");
-        tl->DrawLatex(0.4,0.8,"0.3<p_{T}<6.0(GeV/c)");
+        tl->DrawLatex(0.4,0.8,"0.1<p_{T}<10.0(GeV/c)");
         c4->cd()->SetLogy();
 	hid_PF->GetXaxis()->SetTitle("particle id");
         hid_PF->GetYaxis()->SetRangeUser(1e1,3e9);
         hid_PF->GetYaxis()->SetTitle("# of particles");
         hid_PF->GetXaxis()->SetTitleOffset(1);
         hid_PF->Draw();
-	c1->SaveAs(Form("PFQualify_particlespt_%s.png",dir10.Data()));
-	c2->SaveAs(Form("PFQualify_particleseta_%s.png",dir10.Data()));
-	c3->SaveAs(Form("PFQualify_particlesphi_%s.png",dir10.Data()));
+	c1->SaveAs(Form("PFQualify_particlespt_%s.png",dir1.Data()));
+	c2->SaveAs(Form("PFQualify_particleseta_%s.png",dir1.Data()));
+	c3->SaveAs(Form("PFQualify_particlesphi_%s.png",dir1.Data()));
 	c4->SaveAs("PFQualify_particlesid.png");
 
 }
