@@ -23,10 +23,11 @@ void Drawselfmatch(){
 	c1->cd()->SetLogy();
 	hFrame = new TH1D("hFrame","hFrame",1000,0,1000);
 	hFrame->SetTitle("");
+	fixedFontHist(hFrame,1.2,1.3);
 	hFrame->GetXaxis()->SetTitle("matched gen");
-	hFrame->GetYaxis()->SetTitle("Number of jets");
+	hFrame->GetYaxis()->SetTitle("jet cross section");
 	hFrame->GetXaxis()->SetRangeUser(0,4);
-	hFrame->GetYaxis()->SetRangeUser(1,1e9);
+	hFrame->GetYaxis()->SetRangeUser(1e-9,1);
 	hFrame->DrawCopy();
 	fixedFontHist(hFrame,1.2,1.4);
 	hNmatched->SetMarkerSize(1.2);
@@ -34,12 +35,12 @@ void Drawselfmatch(){
 	hNmatched->Draw("Psame");
 	c2->cd()->SetLogy();
 	hFrame1 = new TH1D("hFrame1","hFrame1",100,0,10);
-	fixedFontHist(hFrame1,1.2,1.4);
+	fixedFontHist(hFrame1,1.2,1.3);
 	hFrame1->SetTitle("");
 	hFrame1->GetXaxis()->SetTitle("#Delta R");
-	hFrame1->GetYaxis()->SetTitle("Number of jets");
+	hFrame1->GetYaxis()->SetTitle("jet cross section");
 	hFrame1->GetXaxis()->SetRangeUser(0,10);
-	hFrame1->GetYaxis()->SetRangeUser(1,1e9);
+	hFrame1->GetYaxis()->SetRangeUser(1e-9,1);
 	hFrame1->DrawCopy();
 	hdeltaR->SetMarkerSize(1.2);
 	hdeltaR->SetMarkerStyle(20);
@@ -73,20 +74,7 @@ void Drawselfmatch(){
 	tl.DrawLatex(0.5,0.3,"One jet matched case");
 
 	hptgenptmatch1->Draw("colz same");
-	/*
-	c5->cd()->SetLogz();
-	c5->SetRightMargin(0.12);
-	hFrame4 = new TH1D("hFrame4","hFrame4",1000,0,1000);
-	fixedFontHist(hFrame2,1.2,1.3);
-	hFrame4->SetTitle("");
-	hFrame4->GetXaxis()->SetTitle("p^{reco}_{T}");
-	hFrame4->GetYaxis()->SetTitle("cross section");
-	hFrame4->GetXaxis()->SetRangeUser(0,1000);
-	hFrame4->GetYaxis()->SetRangeUser(1e-9,1e-2);
-	hFrame4->DrawCopy();
 
-	jetpt_fake->Draw("colz same");
-*/
 	c1->Print("pic/hNmatched.png");
 	c2->Print("pic/hdeltaR.png");
 	c3->Print("pic/ptvsdeltaptfraction.png");

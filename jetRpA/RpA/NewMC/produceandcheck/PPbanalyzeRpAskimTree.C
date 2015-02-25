@@ -43,6 +43,17 @@ public:
     TH2F * refptJES;
     TH1D * hNmatched;
     TH1D * hdeltaR;
+    TH2F * hptdeltaptfrc;
+    TH2F * hptdeltaptfrcmatch1;
+    TH2F * hptdeltaptfrcmatch20;
+    TH2F * hptdeltaptfrcmatch21;
+    TH2F * hptgenpt;
+    TH2F * hptgenptmatch1;
+    TH2F * hptgenptmatch20;
+    TH2F * hptgenptmatch21;
+    TH2F * hdeltaRdeltaptfrcmatch1;
+    TH2F * hdeltaRdeltaptfrcmatch20;
+    TH2F * hdeltaRdeltaptfrcmatch21;
     TH1F * Vz;
     TH1F * VzW;
     TH1F * Cent;
@@ -118,10 +129,32 @@ hist_class::hist_class()
     rawptJES -> Sumw2(); 
     refptJES = new TH2F(Form("refptJES"),Form("refptJES"),1000,0.,1000.,200,0.,2.);
     refptJES -> Sumw2(); 
-    hNmatched = new TH1D(Form("hNmatched"),Form("hNmatched"),5,0.,5.);
+    hNmatched = new TH1D(Form("hNmatched"),Form("hNmatched"),20,0.,20.);
     hNmatched -> Sumw2();
     hdeltaR = new TH1D(Form("hdeltaR"),Form("hdeltaR"),1000,0.,10.);
     hdeltaR -> Sumw2();
+    hptdeltaptfrc = new TH2F(Form("hptdeltaptfrc"),Form("hptdeltaptfrc"),1000,0.,1000.,1000,0.,10.);
+    hptdeltaptfrc -> Sumw2();
+    hptdeltaptfrcmatch1 = new TH2F(Form("hptdeltaptfrcmatch1"),Form("hdeltaptfrcmatch1"),1000,0.,1000.,1000,0.,10.);
+    hptdeltaptfrcmatch1 -> Sumw2();
+    hptdeltaptfrcmatch20 = new TH2F(Form("hptdeltaptfrcmatch20"),Form("hptdeltaptfrcmatch20"),1000,0.,1000.,1000,0.,10.);
+    hptdeltaptfrcmatch20 -> Sumw2();
+    hptdeltaptfrcmatch21 = new TH2F(Form("hptdeltaptfrcmatch21"),Form("hptdeltaptfrcmatch21"),1000,0.,1000.,1000,0.,10.);
+    hptdeltaptfrcmatch21 -> Sumw2();
+    hptgenpt = new TH2F(Form("hptgenpt"),Form("hptgenpt"),1000,0.,1000.,1000,0.,1000.);
+    hptgenpt -> Sumw2();
+    hptgenptmatch1 = new TH2F(Form("hptgenptmatch1"),Form("hptgenptmatch1"),1000,0.,1000.,1000,0.,1000.);
+    hptgenptmatch1 -> Sumw2();
+    hptgenptmatch20 = new TH2F(Form("hptgenptmatch20"),Form("hptgenptmatch20"),1000,0.,1000.,1000,0.,1000.);
+    hptgenptmatch20 -> Sumw2();
+    hptgenptmatch21 = new TH2F(Form("hptgenptmatch21"),Form("hptgenptmatch21"),1000,0.,1000.,1000,0.,1000.);
+    hptgenptmatch21 -> Sumw2();
+    hdeltaRdeltaptfrcmatch1 = new TH2F(Form("hdeltaRdeltaptfrcmatch1"),Form("hdeltaRdeltaptfrcmatch1"),1000,0.,10.,1000,0.,10.);
+    hdeltaRdeltaptfrcmatch1 -> Sumw2();
+    hdeltaRdeltaptfrcmatch20 = new TH2F(Form("hdeltaRdeltaptfrcmatch20"),Form("hdeltaRdeltaptfrcmatch20"),1000,0.,10.,1000,0.,10.);
+    hdeltaRdeltaptfrcmatch20 -> Sumw2();
+    hdeltaRdeltaptfrcmatch21 = new TH2F(Form("hdeltaRdeltaptfrcmatch21"),Form("hdeltaRdeltaptfrcmatch21"),1000,0.,10.,1000,0.,10.);
+    hdeltaRdeltaptfrcmatch21 -> Sumw2();
     Vz = new TH1F(Form("Vz"),Form("Vz"),600,-30.,30.);
     Vz-> Sumw2(); 
     VzW = new TH1F(Form("VzW"),Form("VzW"),600,-30.,30.);
@@ -138,13 +171,13 @@ hist_class::hist_class()
     for(int ieta=0; ieta < netabin; ieta++){
       jetptEtaBin[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
       jetptEtaBin[ieta]->Sumw2();
-      jetptEtaBin_fake[ieta] = new TH1F(Form("jetptEtaBin_fake%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_fake%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_fake[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f_fake",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_fake%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
       jetptEtaBin_fake[ieta]->Sumw2();
-      jetptEtaBin_real[ieta] = new TH1F(Form("jetptEtaBin_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_real[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f_real",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
       jetptEtaBin_real[ieta]->Sumw2();
-      jetptEtaBin_selfmatch_fake[ieta] = new TH1F(Form("jetptEtaBin_selfmatch_fake%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_selfmatch_fake%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_selfmatch_fake[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f_selfmatch_fake",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin%.f_%.f_selfmatch_fake",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
       jetptEtaBin_selfmatch_fake[ieta]->Sumw2();
-      jetptEtaBin_selfmatch_real[ieta] = new TH1F(Form("jetptEtaBin_selfmatch_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_selfmatch_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_selfmatch_real[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f_selfmatch_real",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin%.f_%.f_selfmatch_real",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
       jetptEtaBin_selfmatch_real[ieta]->Sumw2();
        for(int ijetid=0;ijetid<nJetID;ijetid++){
         if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
@@ -202,6 +235,17 @@ void hist_class::Write()
     refptJES->Write();
     hNmatched->Write();
     hdeltaR->Write();
+    hptdeltaptfrc->Write();
+    hptdeltaptfrcmatch1->Write();
+    hptdeltaptfrcmatch20->Write();
+    hptdeltaptfrcmatch21->Write();
+    hptgenpt->Write();
+    hptgenptmatch1->Write();
+    hptgenptmatch20->Write();
+    hptgenptmatch21->Write();
+    hdeltaRdeltaptfrcmatch1->Write();
+    hdeltaRdeltaptfrcmatch20->Write();
+    hdeltaRdeltaptfrcmatch21->Write();
     Vz->Write();
     VzW->Write();
     Cent->Write();
@@ -237,7 +281,8 @@ void PPbanalyzeRpAskimTree()
 
   cout<<"Analyzing MC!"<<endl;
 
-  TFile *f = new TFile(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimFullInfofile0_10.root",coll.Data()));
+//  TFile *f = new TFile(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimFullInfofile0_10.root",coll.Data()));
+  TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimfile0_10.root",coll.Data()));
   
   TTree *nt = (TTree*)f->Get("nt");
 
@@ -341,18 +386,47 @@ for(int j4i = 0; j4i < nref; j4i++){
             jet_eta = jet_eta-0.465;
         }
         int matchflag=0;
+        double deltaptfrc[10];
+        double genpt_match[10];
+        double deltaR_[10];
 	for(int j5i = 0; j5i < ngen ; j5i++) {
-    double gen_eta=geneta[j5i];
-    double gen_phi=genphi[j5i];
+        double gen_pt=genpt[j5i];
+        double gen_eta=geneta[j5i];
+        double gen_phi=genphi[j5i];
         if(coll =="PPb") 
             gen_eta = gen_eta+0.465;
         if(coll =="PbP") 
             gen_eta = gen_eta-0.465;
-        double deltaR = TMath::Sqrt(TMath::Power(gen_eta-jet_eta,2)+TMath::Power(gen_phi-jet_phi,2));
-        my_hists->hdeltaR->Fill(deltaR);
-        if(deltaR<0.3) matchflag++;
+        TVector3 jetVec, genVec;
+        jetVec.SetPtEtaPhi(jet_pt,jet_eta,jet_phi);
+        genVec.SetPtEtaPhi(gen_pt,gen_eta,gen_phi);
+        double deltaR = jetVec.DeltaR(genVec);
+        my_hists->hdeltaR->Fill(deltaR,weight);
+        my_hists->hptdeltaptfrc->Fill(jet_pt,TMath::Abs(jet_pt-gen_pt)/jet_pt,weight);
+        my_hists->hptgenpt->Fill(jet_pt,gen_pt,weight);
+        if(deltaR<0.3){ 
+        deltaR_[matchflag]=deltaR;
+        genpt_match[matchflag]=gen_pt;
+        deltaptfrc[matchflag]=TMath::Abs(jet_pt-gen_pt)/jet_pt;
+        matchflag++;
         }
-        my_hists->hNmatched->Fill(matchflag);
+        }
+        my_hists->hNmatched->Fill(matchflag,weight);
+        if(matchflag==1){
+        my_hists->hptdeltaptfrcmatch1->Fill(jet_pt,deltaptfrc[0],weight);
+        my_hists->hdeltaRdeltaptfrcmatch1->Fill(deltaR_[0],deltaptfrc[0],weight);
+        my_hists->hptgenptmatch1->Fill(jet_pt,genpt_match[0],weight);
+        }
+        if(matchflag==2){
+          int  i0 = deltaR_[0]<deltaR_[1]?0:1;
+          int  i1 = deltaR_[0]<deltaR_[1]?1:0;
+        my_hists->hptdeltaptfrcmatch20->Fill(jet_pt,deltaptfrc[i0],weight);
+        my_hists->hptdeltaptfrcmatch21->Fill(jet_pt,deltaptfrc[i1],weight);
+        my_hists->hptgenptmatch20->Fill(jet_pt,genpt_match[i0],weight);
+        my_hists->hptgenptmatch21->Fill(jet_pt,genpt_match[i1],weight);
+        my_hists->hdeltaRdeltaptfrcmatch20->Fill(deltaR_[i0],deltaptfrc[i0],weight);
+        my_hists->hdeltaRdeltaptfrcmatch21->Fill(deltaR_[i1],deltaptfrc[i1],weight);
+        }
 
 	if(TMath::Abs(ref_eta) <= 1.) {
         my_hists->refjetpt->Fill(ref_pt, weight);

@@ -30,7 +30,7 @@ void proSTEGvn()
   int ifile = atoi(getenv("IFILE")); 
 
   //simple toy event generator
-  TFile f(Form("/lio/lfs/cms/store/user/qixu/flow/NewSTEG/pPbDataV205m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
+  TFile f(Form("/lio/lfs/cms/store/user/qixu/flow/STEG/pPbDataV205m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
   //TFile f(Form("vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
   TTree *tree = new TTree("tree","Event tree with a few branches");
   tree->Branch("npg", &b_npg, "npg/I");   // # of particles;
@@ -75,10 +75,10 @@ void proSTEGvn()
     n = 0;
   
     for(int j=0; j<b_npg;j++ ){
-      //mypt = PtDistr->GetRandom();
-      mypt = GetRandom1(PtDistr);
-      //myeta =  EtaDistr->GetRandom();
-      myeta = GetRandom1(EtaDistr);
+      mypt = PtDistr->GetRandom();
+      //mypt = GetRandom1(PtDistr);
+      myeta =  EtaDistr->GetRandom();
+      //myeta = GetRandom1(EtaDistr);
 
       //v1=V1vsEta->Eval(myeta);
       v2=V2vsPt->Eval(mypt);
@@ -92,8 +92,8 @@ void proSTEGvn()
       //PhiDistr->SetParameters(v1,v2,v3,v4,v5,v6);
       PhiDistr->SetParameters(v2,v3,v4,v5,v6);
       
-      //myphi = PhiDistr->GetRandom(); // randon selection dn/dphi
-      myphi = GetRandom1(PhiDistr); // randon selection dn/dphi
+      myphi = PhiDistr->GetRandom(); // randon selection dn/dphi
+      //myphi = GetRandom1(PhiDistr); // randon selection dn/dphi
 
       myphi = myphi+Psi; // angle in lab frame -- needed for correct cumulant v2
       if (myphi>PI2) myphi=myphi-PI2; // 0 - 2*Pi

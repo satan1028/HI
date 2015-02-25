@@ -96,7 +96,7 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
 		for(int imult=0;imult<mult;imult++){
 			if(eta[imult]<-2.40||eta[imult]>2.40) continue;
                         if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection
-                        if(phi[imult]>0 && phi[mult]<TMath::Pi()/20) continue; //Hole
+                        if(phi[imult]>0 && phi[imult]<TMath::Pi()/20) continue; //Hole
 			Qx+=1.*cos(nn*phi[imult]);
 			Qy+=1.*sin(nn*phi[imult]);
 			for(int itheta=0;itheta<ntheta;itheta++){
@@ -136,11 +136,11 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 	TFile *fres = TFile::Open(res);
 	for(int ibin=0;ibin<nbin;ibin++){
 		if(isample>=0)
-                	r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/s_%d/r0",ibin,isample));
+                	r0res[ibin] = (TVectorD*)fres->Get(Form("s_%d/r0",isample));
                 else if(isample==-1)
-			r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/r0",ibin));
+			r0res[ibin] = (TVectorD*)fres->Get(Form("r0"));
                 else
-		        r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/r02",ibin));
+		        r0res[ibin] = (TVectorD*)fres->Get(Form("r02"));
 	}
 		
         int mult, ntrk;
@@ -168,7 +168,7 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
                         	g0[itheta]=0.;
                         dDsum[itheta]=0.;
                 }
-		int ntrk = mult; int nTracks = ntrk;	int xbin=-1;
+		ntrk = mult; int nTracks = ntrk;	int xbin=-1;
 		for(int j=0;j<nbin;j++)
                 	if(nTracks<trkbin[j]&&nTracks>=trkbin[j+1])
                 	        xbin=j;
@@ -177,6 +177,7 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 		for(int imult=0;imult<mult;imult++){
 			if(eta[imult]<-2.40||eta[imult]>2.40) continue;
 			if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection	
+                        if(phi[imult]>0 && phi[imult]<TMath::Pi()/20) continue; //Hole
 			int xv=-1;
 			for(int ivbin=0;ivbin<nvv; ivbin++){
                             if(ispt && pt[imult]>binv[ivbin] && pt[imult]<=binv[ivbin+1])

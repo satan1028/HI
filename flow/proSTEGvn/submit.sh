@@ -1,10 +1,10 @@
 #!/bin/sh
 
-mult=150
-for i in {0..299}
+mult=100
+for i in {0..23}
 do
     export MULT=$mult
     export IFILE=$i
 #qsub -v MULT=$mult,IFILE=$i proSTEG.pbs
-sbatch proSTEG.slurm
+sbatch -o job$i.out proSTEG.slurm
 done

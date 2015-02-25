@@ -27,7 +27,7 @@ cd /home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck
 root -b > ../submit/AnaTree.log <<EOF
 .x rootlogin.C
 .L skimTreesPAFullInfoNewForest.C+
-skimTreesPAFullInfoNewForest(0)
+skimTreesPAFullInfoNewForest(1)
 .q
 EOF
 
