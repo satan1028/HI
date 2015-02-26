@@ -1,0 +1,198 @@
+#include "../../../Quality/root_setting.h"
+#include "../../produceandcheck/file.h"
+void Drawselfmatch(){
+        const int ndeltaR=160;
+        double deltaRbin[ndeltaR];
+        for(int ibin=0;ibin<20;ibin++)
+            deltaRbin[ibin]=ibin*0.01;
+        for(int ibin=20;ibin<100;ibin++)
+            deltaRbin[ibin]=0.2+(ibin-20)*0.05;
+        for(int ibin=100;ibin<ndeltaR;ibin++)
+            deltaRbin[ibin]=4.2+(ibin-100)*0.1;
+	gStyle->SetOptStat(kFALSE);
+	gStyle->SetOptFit(kFALSE);
+	gStyle->SetErrorX(0);
+	TH1D* hNmatched = (TH1D*)fMCPPbSm->Get("hNmatched");
+	TH1D* hNmatched1 = (TH1D*)fMCPPbSm->Get("hNmatched1");
+	TH1D* hNmatchedWideEta = (TH1D*)fMCPPb->Get("hNmatched");
+	TH1D* hdeltaR = (TH1D*)fMCPPbSm->Get("hdeltaR");
+	TH1D* hdeltaRWideEta = (TH1D*)fMCPPb->Get("hdeltaR");
+	TH1D* hdeltaR5 = (TH1D*)fMC5PPbSm->Get("hdeltaR");
+	TH2F* hptdeltaptfrcmatch1 = (TH2F*)fMCPPbSm->Get("hptdeltaptfrcmatch1");
+	TH2F* hptdeltaptfrcmatch20 = (TH2F*)fMCPPbSm->Get("hptdeltaptfrcmatch20");
+	TH2F* hptdeltaptfrcmatch21 = (TH2F*)fMCPPbSm->Get("hptdeltaptfrcmatch21");
+	TH2F* hptgenptmatch1 = (TH2F*)fMCPPbSm->Get("hptgenptmatch1");
+	TH2F* hptgenptmatch20 = (TH2F*)fMCPPbSm->Get("hptgenptmatch20");
+	TH2F* hptgenptmatch21 = (TH2F*)fMCPPbSm->Get("hptgenptmatch21");
+	TH2F* hdeltaRdeltaptfrcmatch1 = (TH2F*)fMCPPbSm->Get("hdeltaRdeltaptfrcmatch1");
+	TH2F* hdeltaRdeltaptfrcmatch20 = (TH2F*)fMCPPbSm->Get("hdeltaRdeltaptfrcmatch20");
+	TH2F* hdeltaRdeltaptfrcmatch21 = (TH2F*)fMCPPbSm->Get("hdeltaRdeltaptfrcmatch21");
+	TCanvas *c1 = new TCanvas("c1","c1",1200,600);
+	TCanvas *c2 = new TCanvas("c2","c2",1200,600);
+	TCanvas *c3 = new TCanvas("c3","c3",1200,1200);
+	TCanvas *c4 = new TCanvas("c4","c4",1200,600);
+	TCanvas *c5 = new TCanvas("c5","c5",600,600);
+        hdeltaR = (TH1D*)hdeltaR->Rebin(ndeltaR-1,"hdeltaR",deltaRbin);
+        normalizeByBinWidth(hdeltaR);
+        hdeltaR->Scale(0.01);
+        hdeltaRWideEta = (TH1D*)hdeltaRWideEta->Rebin(ndeltaR-1,"hdeltaRWideEta",deltaRbin);
+        normalizeByBinWidth(hdeltaRWideEta);
+        hdeltaRWideEta->Scale(0.01);
+        hdeltaR5 = (TH1D*)hdeltaR5->Rebin(ndeltaR-1,"hdeltaR5",deltaRbin);
+        normalizeByBinWidth(hdeltaR5);
+        hdeltaR5->Scale(0.01);
+	TLatex tl;
+	tl.SetNDC();
+	tl.SetTextSize(0.04);
+        c1->Divide(2,1);
+	c1->cd(1)->SetLogy();
+	hFrame = new TH1D("hFrame","hFrame",1000,0,1000);
+	hFrame->SetTitle("");
+	fixedFontHist(hFrame,1.2,1.3);
+	hFrame->GetXaxis()->SetTitle("matched gen");
+	hFrame->GetYaxis()->SetTitle("jet cross section");
+	hFrame->GetXaxis()->SetRangeUser(0,4);
+	hFrame->GetYaxis()->SetRangeUser(1e-11,1);
+	hFrame->DrawCopy();
+	fixedFontHist(hFrame,1.2,1.4);
+	hNmatched->SetMarkerSize(1.2);
+	hNmatched->SetMarkerColor(2);
+	hNmatched->SetMarkerStyle(20);
+	hNmatched1->SetMarkerSize(1.2);
+	hNmatched->SetMarkerColor(1);
+	hNmatched1->SetMarkerStyle(24);
+	hNmatchedWideEta->SetMarkerSize(1.2);
+	hNmatchedWideEta->SetMarkerColor(4);
+	hNmatchedWideEta->SetMarkerStyle(28);
+	hNmatched->Draw("Psame");
+	hNmatched1->Draw("Psame");
+	hNmatchedWideEta->Draw("Psame");
+        TLegend *tg = new TLegend(0.4,0.6,0.6,0.85);
+        tg->SetBorderSize(0);
+        tg->SetFillColor(0);
+        tg->SetTextSize(0.04);
+        tg->AddEntry(hNmatched,"match |#eta_{lab}|<2","lp");
+        tg->AddEntry(hNmatched1,"match + #frac{#Delta p_{T}}{p^{reco}_{T}}<0.5 |#eta_{lab}<2|");
+	tg->AddEntry(hNmatchedWideEta,"match, |#eta_{lab}|<3");
+	tg->AddEntry(hdeltaR5,"match, |#eta_{lab}|<2, akPu5PF");
+        tg->Draw("same");
+	c1->cd(2)->SetLogy();
+	hFrame1 = new TH1D("hFrame1","hFrame1",100,0,10);
+	fixedFontHist(hFrame1,1.2,1.3);
+	hFrame1->SetTitle("");
+	hFrame1->GetXaxis()->SetTitle("#Delta R");
+	hFrame1->GetYaxis()->SetTitle("jet cross section");
+	hFrame1->GetXaxis()->SetRangeUser(0,5);
+	hFrame1->GetYaxis()->SetRangeUser(1e-11,1);
+	hFrame1->DrawCopy();
+	hdeltaR->SetMarkerSize(1.1);
+	hdeltaR->SetMarkerStyle(20);
+        hdeltaRWideEta->SetMarkerSize(1.1);
+        hdeltaRWideEta->SetMarkerStyle(28);
+        hdeltaRWideEta->SetMarkerColor(4);
+        hdeltaRWideEta->Draw("Psame");
+	hdeltaR5->SetMarkerSize(1.1);
+	hdeltaR5->SetMarkerStyle(30);
+	hdeltaR5->SetMarkerColor(6);
+	hdeltaR->Draw("Psame");
+	hdeltaR5->Draw("Psame");
+	TLine *l = new TLine(0.3,0,0.3,1);
+	l->SetLineStyle(2);
+	l->Draw("same");	
+/*	c2->SetRightMargin(0.12);
+	hFrame2 = new TH2F("hFrame2","hFrame2",1000,0,1000,100,0.,10.);
+	fixedFontHist(hFrame2,1.2,1.3);
+	hFrame2->SetTitle("");
+	hFrame2->GetXaxis()->SetTitle("p^{reco}_{T}");
+	hFrame2->GetYaxis()->SetTitle("|p^{reco}_{T}-p^{gen}_{T}|/p^{reco}_{T}");
+	hFrame2->GetXaxis()->SetRangeUser(0,1000);
+	hFrame2->GetYaxis()->SetRangeUser(0,10);
+	hFrame2->DrawCopy();
+	tl.DrawLatex(0.4,0.4,"One jet matched case");
+	hptdeltaptfrcmatch1->Draw("colz same");
+        */
+
+        c2->Divide(2,1);
+	c2->cd(1)->SetLogz();
+	c2->SetRightMargin(0.15);
+	hFrame3 = new TH2F("hFrame3","hFrame3",1000,0,1000,100,0.,1000.);
+	fixedFontHist(hFrame3,1.2,1.3);
+	hFrame3->SetTitle("");
+	hFrame3->GetXaxis()->SetTitle("p^{reco}_{T}");
+	hFrame3->GetYaxis()->SetTitle("p^{gen}_{T}");
+	hFrame3->GetXaxis()->SetRangeUser(20,400);
+	hFrame3->GetYaxis()->SetRangeUser(20,400);
+	hFrame3->DrawCopy();
+	tl.DrawLatex(0.5,0.3,"One jet matched case");
+	hptgenptmatch1->Draw("colz same");
+	
+        c2->cd(2)->SetLogz();
+ //       c2->cd(2)->SetLogx();
+ //       c2->cd(2)->SetLogy();
+	c2->SetRightMargin(0.15);
+	hFrame4 = new TH2F("hFrame4","hFrame4",1000,0,10.,1000,0.,10.);
+	fixedFontHist(hFrame4,1.2,1.3);
+	hFrame4->SetTitle("");
+	hFrame4->GetXaxis()->SetTitle("#Delta R");
+	hFrame4->GetYaxis()->SetTitle("|p^{reco}_{T}-p^{gen}_{T}|/p^{reco}_{T}");
+	hFrame4->GetXaxis()->SetRangeUser(1e-2,0.5);
+	hFrame4->GetYaxis()->SetRangeUser(1e-2,1);
+	hFrame4->DrawCopy();
+        hdeltaRdeltaptfrcmatch1->Draw("colz same");
+	tl.DrawLatex(0.5,0.3,"One jet matched case");
+
+        c3->Divide(2,2);
+	c3->cd(1)->SetLogz();
+	c3->SetRightMargin(0.15);
+	fixedFontHist(hFrame3,1.5,1.7);
+	hFrame3->DrawCopy();
+	hptgenptmatch20->Draw("colz same");
+	tl.DrawLatex(0.5,0.3,"Two jet matched, smaller #DeltaR");
+	
+        c3->cd(2)->SetLogz();
+	c3->SetRightMargin(0.15);
+	hFrame3->DrawCopy();
+	hptgenptmatch21->Draw("colz same");
+	tl.DrawLatex(0.5,0.3,"Two jet matched, larger #DeltaR");
+
+	c3->cd(3)->SetLogz();
+//	c3->cd(3)->SetLogx();
+//	c3->cd(3)->SetLogy();
+	c3->SetRightMargin(0.15);
+	fixedFontHist(hFrame4,1.5,1.7);
+	hFrame4->DrawCopy();
+	hdeltaRdeltaptfrcmatch20->Draw("colz same");
+	tl.DrawLatex(0.5,0.3,"Two jet matched, smaller #DeltaR");
+	
+        c3->cd(4)->SetLogz();
+//	c3->cd(4)->SetLogx();
+//	c3->cd(4)->SetLogy();
+	c3->SetRightMargin(0.15);
+	hFrame4->DrawCopy();
+	hdeltaRdeltaptfrcmatch21->Draw("colz same");
+	tl.DrawLatex(0.5,0.3,"Two jet matched, larger #DeltaR");
+
+        c4->Divide(2,1);
+        c4->cd(1);
+        TProfile *dRdptfrcmatch20 = (TProfile*)hdeltaRdeltaptfrcmatch20->ProfileX();
+	c4->SetRightMargin(0.15);
+	fixedFontHist(hFrame3,1.5,1.7);
+	hFrame3->DrawCopy();
+	dRdptfrcmatch20->Draw("Psame");
+	tl.DrawLatex(0.5,0.3,"Two jet matched, smaller #DeltaR");
+        c4->cd(2);
+        TProfile *dRdptfrcmatch21 = (TProfile*)hdeltaRdeltaptfrcmatch21->ProfileX();
+	c4->SetRightMargin(0.15);
+	fixedFontHist(hFrame3,1.5,1.7);
+	hFrame3->DrawCopy();
+	dRdptfrcmatch21->Draw("Psame");
+	tl.DrawLatex(0.5,0.3,"Two jet matched, larger #DeltaR");
+
+
+	c1->Print("MatchQuality.png");
+        c2->Print("match1.png");
+	c3->Print("match2.png");
+        c4->Print("match1Prof.png");
+        c4->Print("match2Prof.png");
+}
+

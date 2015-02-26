@@ -27,6 +27,8 @@ TString MCPPbJetIDfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCP
 TString MCPbPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFskimUniv.root";
 TString MCPbPJetIDfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPbPakPu3PFJetID.root";
 
+TString MCPPbfileSm="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskimSelfmatch.root";
+TString MC5PPbfileSm="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu5PF_useskimSelfmatch.root";
 //TString MCPbPjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/PbPMCOfficialForestNewVzWeight_ppReco_akPu3PF_QCDjetTrigJECv19_JetPt0noIPupperCut.root";
 //TString MCPPbjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/PPbMCOfficialForestNewVzWeight_ppReco_akPu3PF_QCDjetTrigJECv8_JetPt0noIPupperCut.root";
 //TString 
@@ -63,6 +65,8 @@ TFile *fMCPPbJetIDOld=new TFile(MCPPbJetIDfileOld);
 TFile *fMCPbPOld=new TFile(MCPbPfileOld);
 TFile *fMCPbPJetIDOld=new TFile(MCPbPJetIDfileOld);
 
+TFile *fMCPPbSm=new TFile(MCPPbfileSm);
+TFile *fMC5PPbSm=new TFile(MC5PPbfileSm);
 //TFile *fMCPPbjetloop=new TFile(MCPPbjetloopfile);
 //TFile *fMCPbPjetloop=new TFile(MCPbPjetloopfile);
 const int Neta=8;
