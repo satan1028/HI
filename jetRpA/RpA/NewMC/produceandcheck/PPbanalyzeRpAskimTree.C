@@ -31,12 +31,16 @@ public:
     TH1F * jetpt;
     TH1F * jetpt_fake;
     TH1F * jetpt_real;
+    TH1F * jetpt_fake1;
+    TH1F * jetpt_real1;
     TH2F * jetptEta;
     TH2F * jetptphi;
     TH2F * jetEtaphi;
     TH2F * jetptjetid[nJetID];
     TH2F * jetptjetid_real[nJetID];
     TH2F * jetptjetid_fake[nJetID];
+    TH2F * jetptjetid_real1[nJetID];
+    TH2F * jetptjetid_fake1[nJetID];
     TH2F * rawptJES;
     TH2F * refptJES;
     TH1F * Vz;
@@ -52,10 +56,14 @@ public:
     TH2F * jetptjetidEtaBin[netabin][nJetID];
     TH2F * jetptjetidEtaBin_fake[netabin][nJetID];
     TH2F * jetptjetidEtaBin_real[netabin][nJetID];
+    TH2F * jetptjetidEtaBin_fake1[netabin][nJetID];
+    TH2F * jetptjetidEtaBin_real1[netabin][nJetID];
     TH2F * refptJESEtaBin[netabin];
     TH1F * jetptEtaBin[netabin];
     TH1F * jetptEtaBin_fake[netabin];
     TH1F * jetptEtaBin_real[netabin];
+    TH1F * jetptEtaBin_fake1[netabin];
+    TH1F * jetptEtaBin_real1[netabin];
 };
 
 hist_class::hist_class()
@@ -70,6 +78,10 @@ hist_class::hist_class()
     jetpt_fake -> Sumw2(); 
     jetpt_real = new TH1F(Form("jetpt_real"),Form("jetpt_real"),1000,0.,1000.);
     jetpt_real -> Sumw2(); 
+    jetpt_fake1 = new TH1F(Form("jetpt_fake1"),Form("jetpt_fake1"),1000,0.,1000.);
+    jetpt_fake1 -> Sumw2(); 
+    jetpt_real1 = new TH1F(Form("jetpt_real1"),Form("jetpt_real1"),1000,0.,1000.);
+    jetpt_real1 -> Sumw2(); 
     jetptEta = new TH2F(Form("jetptEta"),Form("jetptEta"),1000,0.,1000.,100,-5.,5.);
     jetptEta -> Sumw2(); 
     jetptphi = new TH2F(Form("jetptphi"),Form("jetptphi"),1000,0.,1000.,200, -TMath::Pi(), TMath::Pi());
@@ -82,25 +94,35 @@ hist_class::hist_class()
         jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 200, 0., 2.);      //Added
         jetptjetid_real[ijetid] = new TH2F(Form("jetpt%s_real",JetIDName[ijetid].Data()), Form("jetpt%s_real",JetIDName[ijetid].Data()), 1000, 0., 1000., 200, 0., 2.);       //Added
         jetptjetid_fake[ijetid] = new TH2F(Form("jetpt%s_fake",JetIDName[ijetid].Data()), Form("jetpt%s_fake",JetIDName[ijetid].Data()), 1000, 0., 1000., 200, 0., 2.);       //Added
+        jetptjetid_real1[ijetid] = new TH2F(Form("jetpt%s_real1",JetIDName[ijetid].Data()), Form("jetpt%s_real1",JetIDName[ijetid].Data()), 1000, 0., 1000., 200, 0., 2.);       //Added
+        jetptjetid_fake1[ijetid] = new TH2F(Form("jetpt%s_fake1",JetIDName[ijetid].Data()), Form("jetpt%s_fake1",JetIDName[ijetid].Data()), 1000, 0., 1000., 200, 0., 2.);       //Added
         }
         else if(JetIDName[ijetid].Contains("N")){
         jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 100, 0., 100.);    //Added
         jetptjetid_real[ijetid] = new TH2F(Form("jetpt%s_real",JetIDName[ijetid].Data()), Form("jetpt%s_real",JetIDName[ijetid].Data()), 1000, 0., 1000., 100, 0., 100.);     //Added
         jetptjetid_fake[ijetid] = new TH2F(Form("jetpt%s_fake",JetIDName[ijetid].Data()), Form("jetpt%s_fake",JetIDName[ijetid].Data()), 1000, 0., 1000., 100, 0., 100.);     //Added
+        jetptjetid_real1[ijetid] = new TH2F(Form("jetpt%s_real1",JetIDName[ijetid].Data()), Form("jetpt%s_real1",JetIDName[ijetid].Data()), 1000, 0., 1000., 100, 0., 100.);     //Added
+        jetptjetid_fake1[ijetid] = new TH2F(Form("jetpt%s_fake1",JetIDName[ijetid].Data()), Form("jetpt%s_fake1",JetIDName[ijetid].Data()), 1000, 0., 1000., 100, 0., 100.);     //Added
         }
 	else if(JetIDName[ijetid].Contains("PP")){
         jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 2,0.,2.);    //Added
         jetptjetid_real[ijetid] = new TH2F(Form("jetpt%s_real",JetIDName[ijetid].Data()), Form("jetpt%s_real",JetIDName[ijetid].Data()), 1000, 0., 1000., 2,0.,2.);     //Added
         jetptjetid_fake[ijetid] = new TH2F(Form("jetpt%s_fake",JetIDName[ijetid].Data()), Form("jetpt%s_fake",JetIDName[ijetid].Data()), 1000, 0., 1000., 2, 0., 2.);     //Added
+        jetptjetid_real1[ijetid] = new TH2F(Form("jetpt%s_real1",JetIDName[ijetid].Data()), Form("jetpt%s_real1",JetIDName[ijetid].Data()), 1000, 0., 1000., 2,0.,2.);     //Added
+        jetptjetid_fake1[ijetid] = new TH2F(Form("jetpt%s_fake1",JetIDName[ijetid].Data()), Form("jetpt%s_fake1",JetIDName[ijetid].Data()), 1000, 0., 1000., 2, 0., 2.);     //Added
 	}
         else{
         jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 3000, 0., 300.);   //Added
         jetptjetid_real[ijetid] = new TH2F(Form("jetpt%s_real",JetIDName[ijetid].Data()), Form("jetpt%s_real",JetIDName[ijetid].Data()), 1000, 0., 1000., 3000, 0., 300.);    //Added
         jetptjetid_fake[ijetid] = new TH2F(Form("jetpt%s_fake",JetIDName[ijetid].Data()), Form("jetpt%s_fake",JetIDName[ijetid].Data()), 1000, 0., 1000., 3000, 0., 300.);    //Added
+        jetptjetid_real1[ijetid] = new TH2F(Form("jetpt%s_real1",JetIDName[ijetid].Data()), Form("jetpt%s_real1",JetIDName[ijetid].Data()), 1000, 0., 1000., 3000, 0., 300.);    //Added
+        jetptjetid_fake1[ijetid] = new TH2F(Form("jetpt%s_fake1",JetIDName[ijetid].Data()), Form("jetpt%s_fake1",JetIDName[ijetid].Data()), 1000, 0., 1000., 3000, 0., 300.);    //Added
         }
         jetptjetid[ijetid]->Sumw2();      //Added
         jetptjetid_real[ijetid]->Sumw2(); //Added
         jetptjetid_fake[ijetid]->Sumw2(); //Added
+        jetptjetid_real1[ijetid]->Sumw2(); //Added
+        jetptjetid_fake1[ijetid]->Sumw2(); //Added
         }
 
     rawptJES = new TH2F(Form("rawptJES"),Form("rawptJES"),1000,0.,1000.,200,0.,2.);
@@ -127,22 +149,34 @@ hist_class::hist_class()
       jetptEtaBin_fake[ieta]->Sumw2();
       jetptEtaBin_real[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f_real",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
       jetptEtaBin_real[ieta]->Sumw2();
+      jetptEtaBin_fake1[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f_fake1",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_fake1%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_fake1[ieta]->Sumw2();
+      jetptEtaBin_real1[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f_real1",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_real1%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_real1[ieta]->Sumw2();
        for(int ijetid=0;ijetid<nJetID;ijetid++){
         if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
         jetptjetidEtaBin[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 200, 0., 2.);    //Added
         jetptjetidEtaBin_fake[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f_fake",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f_fake",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 200, 0., 2.);    //Added
         jetptjetidEtaBin_real[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f_real",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f_real",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 200, 0., 2.);    //Added
+        jetptjetidEtaBin_fake1[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f_fake1",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f_fake1",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 200, 0., 2.);    //Added
+        jetptjetidEtaBin_real1[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f_real1",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f_real1",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 200, 0., 2.);    //Added
         jetptjetidEtaBin[ieta][ijetid]->Sumw2();      //Added
         jetptjetidEtaBin_fake[ieta][ijetid]->Sumw2();      //Added
         jetptjetidEtaBin_real[ieta][ijetid]->Sumw2();      //Added
+        jetptjetidEtaBin_fake1[ieta][ijetid]->Sumw2();      //Added
+        jetptjetidEtaBin_real1[ieta][ijetid]->Sumw2();      //Added
         }
 	if(JetIDName[ijetid].Contains("PP")){
         jetptjetidEtaBin[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 2, 0., 2.);    //Added
         jetptjetidEtaBin_fake[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f_fake",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f_fake",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 2, 0., 2.);    //Added
         jetptjetidEtaBin_real[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f_real",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f_real",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 2, 0., 2.);    //Added
+        jetptjetidEtaBin_fake1[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f_fake1",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f_fake1",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 2, 0., 2.);    //Added
+        jetptjetidEtaBin_real1[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f_real1",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f_real1",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 2, 0., 2.);    //Added
         jetptjetidEtaBin[ieta][ijetid]->Sumw2();      //Added
         jetptjetidEtaBin_fake[ieta][ijetid]->Sumw2();      //Added
         jetptjetidEtaBin_real[ieta][ijetid]->Sumw2();      //Added
+        jetptjetidEtaBin_fake1[ieta][ijetid]->Sumw2();      //Added
+        jetptjetidEtaBin_real1[ieta][ijetid]->Sumw2();      //Added
 	}
         }
       refjetptEtaBin[ieta] = new TH1F(Form("refjetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("refjetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
@@ -169,6 +203,8 @@ void hist_class::Write()
     jetpt->Write();
     jetpt_fake->Write();
     jetpt_real->Write();
+    jetpt_fake1->Write();
+    jetpt_real1->Write();
     jetptEta->Write();
     jetptphi->Write();
     jetEtaphi->Write();
@@ -176,6 +212,8 @@ void hist_class::Write()
         jetptjetid[ijetid]->Write();
         jetptjetid_real[ijetid]->Write();
         jetptjetid_fake[ijetid]->Write();
+        jetptjetid_real1[ijetid]->Write();
+        jetptjetid_fake1[ijetid]->Write();
         }
     rawptJES->Write();
     refptJES->Write();
@@ -189,11 +227,15 @@ void hist_class::Write()
 	 jetptEtaBin[ieta]->Write(); 
          jetptEtaBin_fake[ieta]->Write();
          jetptEtaBin_real[ieta]->Write();
+         jetptEtaBin_fake1[ieta]->Write();
+         jetptEtaBin_real1[ieta]->Write();
 	 for(int ijetid=0;ijetid<nJetID;ijetid++){
         	if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr") || JetIDName[ijetid].Contains("PP")){
                  jetptjetidEtaBin[ieta][ijetid]->Write();
                  jetptjetidEtaBin_fake[ieta][ijetid]->Write();
                  jetptjetidEtaBin_real[ieta][ijetid]->Write();
+                 jetptjetidEtaBin_fake1[ieta][ijetid]->Write();
+                 jetptjetidEtaBin_real1[ieta][ijetid]->Write();
         }
         }
 	 genjetptEtaBin[ieta]->Write(); 
@@ -213,7 +255,7 @@ void PPbanalyzeRpAskimTree()
   cout<<"Analyzing MC!"<<endl;
 
 //  TFile *f = new TFile(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimFullInfofile0_10.root",coll.Data()));
-  TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimfile0_10.root",coll.Data()));
+  TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10.root",coll.Data(),algo.Data()));
   
   TTree *nt = (TTree*)f->Get("nt");
 
@@ -309,6 +351,26 @@ for(int j4i = 0; j4i < nref; j4i++){
                 my_hists->jetEtaphi->Fill(jet_eta,jet_phi,weight);
         }
 
+        int matchflag=0;
+        int matchflag1=0;
+        if(TMath::Abs(jet_eta)<=2){
+	for(int j5i = 0; j5i < ngen ; j5i++) {
+        double gen_pt=genpt[j5i];
+        double gen_eta=geneta[j5i];
+        double gen_phi=genphi[j5i];
+        TVector3 jetVec, genVec;
+        jetVec.SetPtEtaPhi(jet_pt,jet_eta,jet_phi);
+        genVec.SetPtEtaPhi(gen_pt,gen_eta,gen_phi);
+        double deltaR = jetVec.DeltaR(genVec);
+        if(deltaR<0.3){ 
+        matchflag++;
+        }
+        if(deltaR<0.3 && TMath::Abs(jet_pt-gen_pt)/jet_pt < 0.5){
+           matchflag1++; 
+        }
+        }
+        }
+
         if(coll =="PPb") {
             ref_eta = ref_eta+0.465;
             jet_eta = jet_eta+0.465;
@@ -317,7 +379,6 @@ for(int j4i = 0; j4i < nref; j4i++){
             ref_eta = ref_eta-0.465;
             jet_eta = jet_eta-0.465;
         }
-
 
 	if(TMath::Abs(ref_eta) <= 1.) {
         my_hists->refjetpt->Fill(ref_pt, weight);
@@ -339,11 +400,19 @@ for(int j4i = 0; j4i < nref; j4i++){
 	  my_hists->jetptjetid_fake[ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
 	else
 	  my_hists->jetptjetid_real[ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
+	if(matchflag1==0)	//Added
+	  my_hists->jetptjetid_fake1[ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
+	else
+	  my_hists->jetptjetid_real1[ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
         }
 	if(ref_pt<0)	//Added
           my_hists->jetpt_fake->Fill(jet_pt,weight);
 	else
           my_hists->jetpt_real->Fill(jet_pt,weight);
+	if(matchflag1==0)	//Added
+          my_hists->jetpt_fake1->Fill(jet_pt,weight);
+	else
+          my_hists->jetpt_real1->Fill(jet_pt,weight);
 	my_hists->jetpt->Fill(jet_pt,weight);
        	my_hists->rawptJES->Fill(raw_pt,jet_pt/raw_pt,weight);
 	}	
@@ -360,12 +429,20 @@ for(int j4i = 0; j4i < nref; j4i++){
                 my_hists->jetptjetidEtaBin_fake[dEtaBin][ijetid]->Fill(jet_pt,jetidv[ijetid],weight);
             else
                 my_hists->jetptjetidEtaBin_real[dEtaBin][ijetid]->Fill(jet_pt,jetidv[ijetid],weight);
+            if(matchflag1==0)
+                my_hists->jetptjetidEtaBin_fake1[dEtaBin][ijetid]->Fill(jet_pt,jetidv[ijetid],weight);
+            else
+                my_hists->jetptjetidEtaBin_real1[dEtaBin][ijetid]->Fill(jet_pt,jetidv[ijetid],weight);
         }
         }
          if(ref_pt<0)
             my_hists->jetptEtaBin_fake[dEtaBin]->Fill(jet_pt,weight);
          else
             my_hists->jetptEtaBin_real[dEtaBin]->Fill(jet_pt,weight);
+         if(matchflag1==0)
+            my_hists->jetptEtaBin_fake1[dEtaBin]->Fill(jet_pt,weight);
+         else
+            my_hists->jetptEtaBin_real1[dEtaBin]->Fill(jet_pt,weight);
 	 my_hists->rawptJESEtaBin[dEtaBin]->Fill(raw_pt,jet_pt/raw_pt,weight);
 	}
       } //loop over jet

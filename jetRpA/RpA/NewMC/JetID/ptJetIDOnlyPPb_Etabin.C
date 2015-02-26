@@ -690,8 +690,6 @@ c2->Print(Form("pic/%s/jetid_Etabin.png",JetIDName.Data()));
 c3->Print(Form("pic/%s/ratio_jetid_Etabin.png",JetIDName.Data()));
 c4->Print(Form("pic/%s/ratio_jetpt_cutvsnocut_Etabin.png",JetIDName.Data()));
 c5->Print(Form("pic/%s/ratio_jetpt_aftcut_%s_Etabin.png",JetIDName.Data(),JetIDName.Data()));
-c6->Print(Form("pic/ratio_jetpt_befcut_%s_Etabin.png",JetIDName.Data(),JetIDName.Data()));
-c7->Print(Form("pic/jetpt_befcut_Etabin.png",JetIDName.Data()));
 c8->Print(Form("pic/%s/jetpt_aftcut_Etabin.png",JetIDName.Data()));
 c9->Print(Form("pic/%s/Profile_Etabin.png",JetIDName.Data()));
 }

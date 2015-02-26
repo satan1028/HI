@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mult=100
-for i in {0..23}
+mult=50
+for i in {0..299}
 do
     export MULT=$mult
     export IFILE=$i
