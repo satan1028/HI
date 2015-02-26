@@ -280,6 +280,7 @@ else{
   Float_t refpt[1000];
   Float_t genpt[1000];
   Float_t geneta[1000];
+  Float_t genphi[1000];
   Float_t refeta[1000];
   Float_t refy[1000];
   Float_t refphi[1000];
@@ -338,8 +339,10 @@ if(isMC)  {
 nt->Branch("subid",subid,"subid[nref]/I");
 nt->Branch("refpt",refpt,"refpt[nref]/F");
 nt->Branch("refeta",refeta,"refeta[nref]/F");
+nt->Branch("refphi",refphi,"refphi[nref]/F");
 nt->Branch("genpt",genpt,"genpt[ngen]/F");
 nt->Branch("geneta",geneta,"geneta[ngen]/F");
+nt->Branch("genphi",genphi,"genphi[ngen]/F");
 }
   nt->Branch("rawpt",rawpt,"rawpt[nref]/F");
 
@@ -450,6 +453,7 @@ nt->Branch("geneta",geneta,"geneta[ngen]/F");
       t->SetBranchAddress("subid",subid);
       t->SetBranchAddress("refeta",refeta);
       t->SetBranchAddress("geneta",geneta);
+      t->SetBranchAddress("genphi",genphi);
       t->SetBranchAddress("refy",refy);
       t->SetBranchAddress("refphi",refphi);
  }
@@ -484,13 +488,13 @@ if(!isMC){
     t->SetBranchAddress("eSum",eSum);
       t->SetBranchAddress("hiHFplusEta4", &hiHFplusEta4);
       t->SetBranchAddress("hiHFminusEta4", &hiHFminusEta4);
-    if(!isMC){
-      t->SetBranchAddress("HLT_PAZeroBiasPixel_SingleTrack_v1",&HLT_PAZeroBiasPixel_SingleTrack_v1);
       t->SetBranchAddress("HLT_PAJet20_NoJetID_v1",&HLT_PAJet20_NoJetID_v1);
       t->SetBranchAddress("HLT_PAJet40_NoJetID_v1",&HLT_PAJet40_NoJetID_v1);
       t->SetBranchAddress("HLT_PAJet60_NoJetID_v1",&HLT_PAJet60_NoJetID_v1);
       t->SetBranchAddress("HLT_PAJet80_NoJetID_v1",&HLT_PAJet80_NoJetID_v1);
       t->SetBranchAddress("HLT_PAJet100_NoJetID_v1",&HLT_PAJet100_NoJetID_v1);
+    if(!isMC){
+      t->SetBranchAddress("HLT_PAZeroBiasPixel_SingleTrack_v1",&HLT_PAZeroBiasPixel_SingleTrack_v1);
       t->SetBranchAddress("HLT_PAZeroBiasPixel_SingleTrack_v1_Prescl",&HLT_PAZeroBiasPixel_SingleTrack_v1_Prescl);
       t->SetBranchAddress("HLT_PAJet20_NoJetID_v1_Prescl",&HLT_PAJet20_NoJetID_v1_Prescl);
       t->SetBranchAddress("HLT_PAJet40_NoJetID_v1_Prescl",&HLT_PAJet40_NoJetID_v1_Prescl);

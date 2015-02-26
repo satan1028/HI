@@ -1,15 +1,12 @@
 #!/bin/bash
-#PBS -l nodes=1
-#PBS -l mem=8000mb
-#PBS -l pmem=8000mb
-#PBS -l walltime=24:00:00
-#PBS -o 1.out
-#PBS -j oe
+#SBATCH --nodes=1
+#SBATCH --mem=4G
+#SBATCH --mem-per-cpu=4G
+#SBATCH --time=1-00:00:00
 
-cd $PBS_O_WORKDIR
-pwd
-echo $PBS_NODEFILE
-echo $HOSTNAME
+echo $SLURM_JOB_ID
+echo $SLURM_JOB_NAME
+echo $SLURM_JOB_NODELIST
 
 #source /gpfs21/grid/grid-app/cmssoft/cms/cmsset_default.sh
 #eval `scramv1 runtime -sh`
