@@ -35,7 +35,7 @@ gStyle->SetErrorX(0);
 gStyle->SetLabelFont(70);
 
 //------------------------------------------------------------Get Histograms---------------------------------------------
-
+int isMatch=1;
 double xrange_JetIDcut[2]; double JetIDcut[2];
 int ilist=atoi(getenv("LIST"));
 TString JetIDName=JetIDNameList[ilist];
@@ -132,7 +132,6 @@ T1.SetNDC();
 T1.SetTextSize(0.065);
 T1.SetTextFont(42);
 
-
 for(int i=0;i<Neta;i++){
 	if(canvas[i]==0){
 		double ybase=0.15;	double xbase=0.28;
@@ -143,26 +142,42 @@ for(int i=0;i<Neta;i++){
 	else{
 		double ybase=0.15;	double xbase=0.05;
 	}
+if(isMatch){
+    if(i==7){
+	TH2F *hPPb2D= (TH2F*)fMCPPb->Get(Form("jetpt%s",JetIDName.Data()));
+	TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("jetpt%s_real1",JetIDName.Data()));
+	TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("jetpt%s_fake1",JetIDName.Data()));
+	TH1F *hPPb_pt= (TH1F*)fMCPPb->Get(Form("jetpt"));
+	TH1F *hPPb_pt_real= (TH1F*)fMCPPb->Get(Form("jetpt_real1"));
+	TH1F *hPPb_pt_fake= (TH1F*)fMCPPb->Get(Form("jetpt_fake1"));
+    }
+    else{
+	TH2F *hPPb2D= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[i].Data()));
+	TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s_real1",JetIDName.Data(),etabinnameswap[i].Data()));
+	TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s_fake1",JetIDName.Data(),etabinnameswap[i].Data()));
+	TH1F *hPPb_pt= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s",etabinnameswap[i].Data()));
+	TH1F *hPPb_pt_real= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s_real1",etabinnameswap[i].Data()));
+	TH1F *hPPb_pt_fake= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s_fake1",etabinnameswap[i].Data()));
+    }
+	}
+else{
     if(i==7){
 	TH2F *hPPb2D= (TH2F*)fMCPPb->Get(Form("jetpt%s",JetIDName.Data()));
 	TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("jetpt%s_real",JetIDName.Data()));
 	TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("jetpt%s_fake",JetIDName.Data()));
 	TH1F *hPPb_pt= (TH1F*)fMCPPb->Get(Form("jetpt"));
 	TH1F *hPPb_pt_real= (TH1F*)fMCPPb->Get(Form("jetpt_real"));
-	TH1F *hPPb_pt_sm_real= (TH1F*)fMCPPb->Get(Form("jetpt_selfmatch_real"));
 	TH1F *hPPb_pt_fake= (TH1F*)fMCPPb->Get(Form("jetpt_fake"));
-	TH1F *hPPb_pt_sm_fake= (TH1F*)fMCPPb->Get(Form("jetpt_selfmatch_fake"));
     }
     else{
 	TH2F *hPPb2D= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[i].Data()));
 	TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s_real",JetIDName.Data(),etabinnameswap[i].Data()));
 	TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s_fake",JetIDName.Data(),etabinnameswap[i].Data()));
 	TH1F *hPPb_pt= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s",etabinnameswap[i].Data()));
-	TH1F *hPPb_pt_real= (TH1F*)fMCPPb->Get(Form("jetptEtaBin_real%s",etabinnameswap[i].Data()));
-	TH1F *hPPb_pt_sm_real= (TH1F*)fMCPPb->Get(Form("jetptEtaBin_selfmatch_real%s",etabinnameswap[i].Data()));
-	TH1F *hPPb_pt_fake= (TH1F*)fMCPPb->Get(Form("jetptEtaBin_fake%s",etabinnameswap[i].Data()));
-	TH1F *hPPb_pt_sm_fake= (TH1F*)fMCPPb->Get(Form("jetptEtaBin_selfmatch_fake%s",etabinnameswap[i].Data()));
+	TH1F *hPPb_pt_real= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s_real",etabinnameswap[i].Data()));
+	TH1F *hPPb_pt_fake= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s_fake",etabinnameswap[i].Data()));
     }
+}
 
 double xrange_JetID[2]={binbound_JetID[0]+1e-4,binbound_JetID[Nbin_JetID]-1e-4};
 xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
@@ -186,8 +201,6 @@ TProfile *hProfPPb_real=(TProfile*)hPPb2D_real->ProfileX("hProfPPb_real",1,-1);
 TH1F* rehisto_hPPb_pt=(TH1F*)myRebin(hPPb_pt,Nbin_pt,binbound_pt);
 TH1F* rehisto_hPPb_pt_real=(TH1F*)myRebin(hPPb_pt_real,Nbin_pt,binbound_pt);
 TH1F* rehisto_hPPb_pt_fake=(TH1F*)myRebin(hPPb_pt_fake,Nbin_pt,binbound_pt);
-
-TH1F* rehisto_hPPb_pt_sm_fake=(TH1F*)myRebin(hPPb_pt_sm_fake,Nbin_pt,binbound_pt);
 
 TH1F* rehisto_hPPb_JetIDcut_pt=(TH1F*)myRebin(hPPb_JetIDcut_pt,Nbin_pt,binbound_pt);
 TH1F* rehisto_hPPb_JetIDcut_pt_real=(TH1F*)myRebin(hPPb_JetIDcut_pt_real,Nbin_pt,binbound_pt);
@@ -270,11 +283,6 @@ leg1->Draw("same");
 }
 //-------------------------------------------------PP&PPb JetID distribution---------------------------------------------
 
-/*T4.DrawLatex(0.65,0.28,Form("Inc: Mean=%.3f",hPP_JetID->GetMean()));
-T4.DrawLatex(0.65,0.24,Form("Fake: Mean=%.3f",rehisto_hPP_JetID_fake->GetMean()));
-T4.DrawLatex(0.65,0.2,Form("Fake: RMSError=%.3f",hPP_JetID_fake->GetRMSError()));
-T4.DrawLatex(0.65,0.16,Form("Fake: MeanError=%.3f",hPP_JetID_fake->GetMeanError()));
-T4.DrawLatex(0.65,0.12,Form("Fake: RMS=%.3f",hPP_JetID_fake->GetRMS()));*/
 c2->cd(canvas[i]+1)->SetLogy();
 c2->cd(canvas[i]+1)->SetGridx();
     if(canvas[i]==0  || canvas[i]==4){
@@ -323,18 +331,6 @@ T1.DrawLatex(xbase+0.45,ybase,Form("fake wo cut: %.2f%%",hPPb_JetID_fake->Integr
 T1.SetTextSize(0.065);
 T1.DrawLatex(0.4,ybase-0.06,etastring[i]);
 }
-/*
-T1.DrawLatex(0.65,0.28,Form("Inc: Mean=%.3f",hPPb_JetID->GetMean()));
-T1.DrawLatex(0.65,0.24,Form("Fake: Mean=%.3f",hPPb_JetID_fake->GetMean()));
-T1.DrawLatex(0.65,0.2,Form("Fake: RMSError=%.3f",hPPb_JetID_fake->GetRMSError()));
-T1.DrawLatex(0.65,0.16,Form("Fake: MeanError=%.3f",hPPb_JetID_fake->GetMeanError()));
-T1.DrawLatex(0.65,0.12,Form("Fake: RMS=%.3f",hPPb_JetID_fake->GetRMS()));
-T2->SetTextAlign(12);
-T2->SetTextSize(0.05);
-T2->SetTextColor(1);
-T2->SetTextFont(42);
-T2->Draw("same");
-*/
 
 //---------------------------------------PPb JetID f/i&r/i ratio before cut ------------------------------------------ 
 c3->cd(canvas[i]+1)->SetLogy();
@@ -525,14 +521,6 @@ ratio_hPPb_pt_fakevsInc->SetMarkerSize(1.5);
 ratio_hPPb_pt_fakevsInc->SetMarkerColor(2);
 ratio_hPPb_pt_fakevsInc->SetLineColor(2);
 
-TH1F* ratio_hPPb_pt_sm_fakevsInc=(TH1F*)rehisto_hPPb_pt_sm_fake->Clone("ratio_hPPb_pt_sm_fakevsInc");
-ratio_hPPb_pt_sm_fakevsInc->Divide(rehisto_hPPb_pt);
-ratio_hPPb_pt_sm_fakevsInc->SetTitle("");
-ratio_hPPb_pt_sm_fakevsInc->SetMarkerStyle(28);
-ratio_hPPb_pt_sm_fakevsInc->SetMarkerSize(1.5);
-ratio_hPPb_pt_sm_fakevsInc->SetMarkerColor(4);
-ratio_hPPb_pt_sm_fakevsInc->SetLineColor(4);
-
 TH1F* ratio_hPPb_pt_realvsInc=(TH1F*)rehisto_hPPb_pt_real->Clone("ratio_hPPb_pt_realvsInc");
 ratio_hPPb_pt_realvsInc->Divide(rehisto_hPPb_pt);
 ratio_hPPb_pt_realvsInc->SetMarkerStyle(29);
@@ -543,13 +531,11 @@ if(canvas[i]!=4){
 T1.DrawLatex(0.4,ybase-0.06,etastring[i]);
 ratio_hPPb_pt_fakevsInc->Draw("same");
 ratio_hPPb_pt_realvsInc->Draw("same");
-ratio_hPPb_pt_sm_fakevsInc->Draw("same");
 l->Draw("same");
 }
 if(canvas[i]==4){
 T1.DrawLatex(0.28,0.73,Form("No Cut"));
 leg1->Draw("same");
-leg3->AddEntry(rehisto_hPPb_pt_sm_fake,"fake self-match/Inc","lp");
 leg3->Draw("same");
 }
 
@@ -584,22 +570,15 @@ rehisto_hPPb_pt_fake->SetMarkerColor(2);
 rehisto_hPPb_pt_fake->SetLineColor(2);
 rehisto_hPPb_pt_fake->SetMarkerSize(1.5);
 
-rehisto_hPPb_pt_sm_fake->SetMarkerStyle(28);
-rehisto_hPPb_pt_sm_fake->SetMarkerColor(4);
-rehisto_hPPb_pt_sm_fake->SetLineColor(4);
-rehisto_hPPb_pt_sm_fake->SetMarkerSize(1.5);
-
 if(canvas[i]!=4){
 T1.DrawLatex(0.4,ybase-0.06,etastring[i]);
 rehisto_hPPb_pt->Draw("E1same");
 rehisto_hPPb_pt_real->Draw("E1same");
 rehisto_hPPb_pt_fake->Draw("E1same");
-rehisto_hPPb_pt_sm_fake->Draw("E1same");
 }
 if(canvas[i]==4){
 T1.DrawLatex(0.28,0.73,Form("No Cut"));
 leg1->Draw("same");
-leg2->AddEntry(rehisto_hPPb_pt_sm_fake,"fake self-match","lp");
 leg2->Draw("same");
 }
 
@@ -685,11 +664,26 @@ leg2->Draw("same");
 }
 }
 
+if(isMatch){
+c1->Print(Form("pic/%s/jetpt_PPb_Etabin_cut1.png",JetIDName.Data()));
+c2->Print(Form("pic/%s/jetid_Etabin_cut1.png",JetIDName.Data()));
+c3->Print(Form("pic/%s/ratio_jetid_Etabin_cut1.png",JetIDName.Data()));
+c4->Print(Form("pic/%s/ratio_jetpt_cutvsnocut_Etabin_cut1.png",JetIDName.Data()));
+c5->Print(Form("pic/%s/ratio_jetpt_aftcut_%s_Etabin_cut1.png",JetIDName.Data(),JetIDName.Data()));
+c6->Print(Form("pic/%s/ratio_jetpt_befcut_Etabin_cut1.png",JetIDName.Data(),JetIDName.Data()));
+c7->Print(Form("pic/%s/jetpt_befcut_Etabin_cut1.png",JetIDName.Data()));
+c8->Print(Form("pic/%s/jetpt_aftcut_Etabin_cut1.png",JetIDName.Data()));
+c9->Print(Form("pic/%s/Profile_Etabin_cut1.png",JetIDName.Data()));
+}
+else{
 c1->Print(Form("pic/%s/jetpt_PPb_Etabin.png",JetIDName.Data()));
 c2->Print(Form("pic/%s/jetid_Etabin.png",JetIDName.Data()));
 c3->Print(Form("pic/%s/ratio_jetid_Etabin.png",JetIDName.Data()));
 c4->Print(Form("pic/%s/ratio_jetpt_cutvsnocut_Etabin.png",JetIDName.Data()));
 c5->Print(Form("pic/%s/ratio_jetpt_aftcut_%s_Etabin.png",JetIDName.Data(),JetIDName.Data()));
+c6->Print(Form("pic/%s/ratio_jetpt_befcut_Etabin.png",JetIDName.Data(),JetIDName.Data()));
+c7->Print(Form("pic/%s/jetpt_befcut_Etabin.png",JetIDName.Data()));
 c8->Print(Form("pic/%s/jetpt_aftcut_Etabin.png",JetIDName.Data()));
 c9->Print(Form("pic/%s/Profile_Etabin.png",JetIDName.Data()));
+}
 }
