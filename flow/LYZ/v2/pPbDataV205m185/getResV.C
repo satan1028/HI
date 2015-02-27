@@ -72,8 +72,8 @@ void getResV(){
 	}
 
 	for(int ifile=0; ifile<nFileAll; ifile++){
-		if(isSum) f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m185/AnaV_Sum_%d.root",ifile));
-		else f[ifile] = TFile::Open(Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m185/AnaV_Prod_%d.root",ifile));
+		if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m185/AnaV_Sum_%d.root",ifile));
+		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m185/AnaV_Prod_%d.root",ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 		TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
 		for(int ibin=0;ibin<nbin;ibin++){

@@ -19,7 +19,7 @@ bool Save=kTRUE;
 TString histoname[2]={"jetptEta","jetptphi"};
 TString histoname_woRes[2]={"jetptEta_woRes","jetptphi"};
 void ptetaphi(){
-TString coll="PbP";
+TString coll="PPb";
 gStyle->SetPadTickY(1);
 using namespace std;
 c1 = new TCanvas("c1"," ",1000,650);

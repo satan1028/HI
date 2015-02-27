@@ -11,8 +11,8 @@ void dosecond(){
         int end=atoi(getenv("END"));
         TString name;
 	for(int i=start;i<end;i++){	
-		if(isSum)	name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m185/Anav_Prod_%d.root",i);
-		else		name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m185/Anav_Prod2_%d.root",i);
+		if(isSum)	name=Form("/scratch/xuq7/flow/pbsjoboutput/ToyMCHole/pPbDataV205m185/Anav_Prod_%d.root",i);
+		else		name=Form("/scratch/xuq7/flow/pbsjoboutput/ToyMCHole/pPbDataV205m185/Anav_Prod2_%d.root",i);
 		remove(name.Data());
 		LYZ *l = new LYZ(Form("%s/vndata_50k_%d.root",dir.Data(),i));
 		cout<<"start "<<i<<" th job"<<endl;

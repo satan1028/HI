@@ -39,13 +39,13 @@ int isMatch=1;
 double xrange_JetIDcut[2]; double JetIDcut[2];
 int ilist=atoi(getenv("LIST"));
 TString JetIDName=JetIDNameList[ilist];
-if(ilist== 0)  { JetID = "chargedMax"; JetIDcut[0]=3; JetIDcut[1]=200.;}
+if(ilist== 0)  { JetID = "chargedMax"; JetIDcut[0]=4; JetIDcut[1]=9999;}
 else if(ilist== 1)      JetID = "chargedSum";
 else if(ilist== 2)      JetID = "neutralMax";
 else if(ilist== 3) JetID = "neutralSum";
 else if(ilist== 4) JetID = "photonMax";
 else if(ilist== 5) JetID = "photonSum";
-else if(ilist== 6)  {    JetID = "Max h^{#pm}/p_{T}"; JetIDcut[0]=0.05; JetIDcut[1]=1;}
+else if(ilist== 6)  {    JetID = "Max h^{#pm}/p_{T}"; JetIDcut[0]=0.05; JetIDcut[1]=2;}
 else if(ilist== 7)  {    JetID = "#Sigma h^{#pm}/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.6;}
 else if(ilist== 8)  {   JetID = "Max h^{0}/p_{T}"; JetIDcut[0] = 0;  JetIDcut[1]=0.08;}
 else if(ilist== 9)  {    JetID = "#Sigma h^{0}/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.15;}
@@ -69,7 +69,7 @@ double binbound_JetID[]={0,0.4,0.8,0.84,0.86,0.88,0.9,0.92,0.94,0.96,0.98,1.0,1.
 else if(ilist==8 || ilist==10){
 double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5};}
 else{
-double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.,1.1};}
+double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.,1.1,1.5,2};}
 
 Unit="";
 }
@@ -294,10 +294,10 @@ c2->cd(canvas[i]+1)->SetGridx();
         hFrame2->GetYaxis()->SetTitle("");
     }
     if(canvas[i]>=4)
-        hFrame2->GetXaxis()->SetTitle(JetID);
+        hFrame2->GetXaxis()->SetTitle(Form("%s %s",JetID.Data(),Unit.Data()));
 hFrame2->GetXaxis()->SetNdivisions(510);
 hFrame2->GetXaxis()->SetLimits(-binbound_JetID[1]*0.7,binbound_JetID[Nbin_JetID]*1.02);
-hFrame2->SetMinimum(5e-10);
+hFrame2->SetMinimum(1e-11);
 hFrame2->SetMaximum(5e-2);
 hFrame2->DrawCopy();
 if(canvas[i]!=4){

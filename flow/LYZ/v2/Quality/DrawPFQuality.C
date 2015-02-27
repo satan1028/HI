@@ -1,8 +1,8 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
 void DrawPFQuality(){
 	TString mult = "M150120";
-        TString dir10 = "PFcandpt03to6tracknormcpt03to6";
-        TString dir1 = "PFcandpt01to10tracknormcpt03to6";
+        TString dir10 = "PFcandpt01to10tracknormcpt03to6";
+        TString dir1 = "PFcandpt03to6tracknormcpt03to6";
         TString dir2 = "tracknormcpt03to6";
         const int nID=6;
         const int marker[nID] = {20,24,27,30,29,32};
@@ -17,7 +17,7 @@ void DrawPFQuality(){
             heta_PF[iID]=plot(dir1,mult,iID,"eta",color[iID],marker[iID]);
             hphi_PF[iID]=plot(dir1,mult,iID,"phi",color[iID],marker[iID]);
         }
-            hid_PF=plot(dir10,mult,-1,"id",color[0],marker[0]);
+            hid_PF=plot(dir1,mult,-1,"id",color[0],marker[0]);
         TH1D* hpt_tr03to6 = plot(dir2,mult,-1,"pt",2,20);
         TH1D* heta_tr03to6 = plot(dir2,mult,-1,"eta",2,20);
         TH1D* hphi_tr03to6 = plot(dir2,mult,-1,"phi",2,20);
@@ -83,7 +83,7 @@ void DrawPFQuality(){
         heta_tr03to6->Draw("Psame");
 	tl1->Draw("same");
 	tl2->Draw("same");
-        tl->DrawLatex(0.4,0.8,"0.1<p_{T}<10.0(GeV/c)");
+        tl->DrawLatex(0.4,0.8,"0.3<p_{T}<6.0(GeV/c)");
         c3->cd()->SetLogy();
 	TH1D* hFrame_phi = new TH1D("hFrame_phi","",100,-4,4);
 	hFrame_phi->GetXaxis()->SetTitle("#phi");
@@ -98,7 +98,7 @@ void DrawPFQuality(){
         hphi_tr03to6->Draw("Psame");
 	tl1->Draw("same");
 	tl2->Draw("same");
-        tl->DrawLatex(0.4,0.8,"0.1<p_{T}<10.0(GeV/c)");
+        tl->DrawLatex(0.4,0.8,"0.3<p_{T}<6.0(GeV/c)");
         c4->cd()->SetLogy();
 	hid_PF->GetXaxis()->SetTitle("particle id");
         hid_PF->GetYaxis()->SetRangeUser(1e1,3e9);
@@ -130,6 +130,6 @@ TH1D* plot(TString dir, TString Tmult, int id, TString var,int color, int marker
         histo->SetLineColor(color);
         histo->SetMarkerStyle(marker);
         histo->SetMarkerSize(1);
-	cout<<histo->GetEntries()<<endl;
+        cout<<histo->GetEntries()<<endl;
 	return histo;
 }
