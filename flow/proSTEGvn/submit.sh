@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mult=80
+mult=300
 for i in {0..299}
 do
     export MULT=$mult
