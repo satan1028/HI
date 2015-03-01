@@ -16,10 +16,10 @@ export SCRAM_ARCH=slc6_amd64_gcc472
 cd /home/xuq7/HI/CMSSW_5_3_20/src
 #cmsenv
 eval `scramv1 runtime -sh`
-cd /home/xuq7/HI/flow/LYZ/v2/ToyMCHole/pPbDataV205m185
+cd /home/xuq7/HI/flow/LYZ/v2/ToyMCHole/pPbDataV205m300
 
-root -l -b dofirst.C
-#root -l -b dosecond.C
+#root -l -b dofirst.C
+root -l -b dosecond.C
 #root -l -b dosecondsub.C
 echo "Done!"
 

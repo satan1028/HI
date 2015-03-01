@@ -1,5 +1,5 @@
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
-#include "file.h"
+#include "../produceandcheck/file.h"
 
 const int Npoint=1000;
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
@@ -82,7 +82,7 @@ histo1->SetLineColor(2);
 histo2->SetMarkerStyle(29);
 histo2->SetMarkerColor(4);
 histo2->SetLineColor(4);
-//histo0->Draw("E1same");
+histo0->Draw("E1same");
 histo1->Draw("E1same");
 histo2->Draw("E1same");
 TLegend *leg1=new TLegend(0.20,0.70,0.90,0.90);
@@ -93,7 +93,7 @@ leg1->SetFillColor(0);
 leg2->SetFillColor(0);
 leg1->SetTextSize(0.03);
 leg2->SetTextSize(0.04);
-//leg1->AddEntry(histo0,JetID0,"lp");
+leg1->AddEntry(histo0,JetID0,"lp");
 leg1->AddEntry(histo1,JetID1,"lp");
 leg1->AddEntry(histo2,JetID2,"lp");
 leg1->Draw("same");
@@ -112,9 +112,9 @@ hFrame->GetYaxis()->SetRangeUser(0.8,1.19);
 hFrame->DrawCopy();
 ratio1->Divide(histo1);
 ratio2->Divide(histo1);
-//ratio1->Draw("E1same");
+ratio1->Draw("E1same");
 ratio2->Draw("E1same");
-//leg2->AddEntry(ratio1,"Cut0/Cut1","lp");
+leg2->AddEntry(ratio1,"Cut0/Cut1","lp");
 leg2->AddEntry(ratio2,"Cut2/Cut1","lp");
 leg2->Draw("same");
 

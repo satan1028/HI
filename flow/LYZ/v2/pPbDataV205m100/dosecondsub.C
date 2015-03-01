@@ -6,14 +6,14 @@ void dosecondsub(){
 	remove("dNRe.txt");
 	remove("dNIm.txt");
 	remove("mult_.txt");
-	gROOT->ProcessLine(".L ../LYZ.C+");
+	gROOT->ProcessLine(".L LYZ.C+");
         int start=atoi(getenv("START"));
         int end=atoi(getenv("END"));
         int subsample = (int)(nFileAll/nsamples);
         TString name;
 	for(int i=start;i<end;i++){	
-		if(isSum)	name=Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m185/Anav_Prod_sub_%d.root",i);
-		else		name=Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m185/Anav_Prod2_sub_%d.root",i);
+		if(isSum)	name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m100/Anav_Prod_sub_%d.root",i);
+		else		name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m100/Anav_Prod2_sub_%d.root",i);
 		remove(name.Data());
 		LYZ *l = new LYZ(Form("%s/vndata_50k_%d.root",dir.Data(),i));
 		cout<<"start "<<i<<" th job"<<endl;

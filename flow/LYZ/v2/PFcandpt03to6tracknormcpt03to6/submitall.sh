@@ -1,6 +1,6 @@
 #!/bin/bash
 SumorProd="Prod"
-Vorv="v"
+Vorv="V"
 
 nfilesperjob=25
 if [[ $Vorv == "V" ]]; then

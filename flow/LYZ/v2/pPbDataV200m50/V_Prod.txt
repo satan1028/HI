@@ -1,0 +1,14 @@
+ibin	itheta	r0	V	sigma2	chi	Vn Errors
+0	0	0.0475	1.0126	2499.9995	1.0126	-nan
+0	1	0.0475	1.0126	2499.9995	1.0126	-nan
+0	2	0.0475	1.0126	2499.9995	1.0126	-nan
+0	3	0.0475	1.0126	2499.9995	1.0126	-nan
+0	4	0.0475	1.0126	2499.9995	1.0126	-nan
+					-63.1863	-nan
+
+ibin	avgmult	avgpt	avgeta	Vn mean	Vn mean Error
+0	50.0000	0.9154	0.0010	1.0126	-nan
+
+ibin	Nevent	totmultall	avgmultall	avgtrk
+0	15000000.0000	750000000.0000	50.0000	50.0000
+

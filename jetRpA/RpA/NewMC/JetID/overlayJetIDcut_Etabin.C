@@ -143,29 +143,23 @@ TGraphAsymmErrors *g6Data = makeJetIDcut(6,1,i);
 g6Data->SetMarkerStyle(20);
 g6Data->SetMarkerColor(1);
 g6Data->SetLineColor(1);
-if(canvas[i]!=4)
-g6Data->Draw("Psame");
 TGraphAsymmErrors *g6MC = makeJetIDcut(6,0,i);
 g6MC->SetMarkerStyle(24);
 g6MC->SetMarkerColor(1);
 g6MC->SetLineColor(1);
 //g6MC->Draw("Psame");
-/*TGraphAsymmErrors *g12Data = makeJetIDcut(12,1);
+TGraphAsymmErrors *g12Data = makeJetIDcut(12,1,i);
 g12Data->SetMarkerStyle(20);
 g12Data->SetMarkerColor(1);
 g12Data->SetLineColor(1);
-//g12Data->Draw("Psame");
-TGraphAsymmErrors *g12MC = makeJetIDcut(12,0);
+TGraphAsymmErrors *g12MC = makeJetIDcut(12,0,i);
 g12MC->SetMarkerStyle(24);
 g12MC->SetMarkerColor(1);
 g12MC->SetLineColor(1);
-//g12MC->Draw("Psame");*/
 TGraphAsymmErrors *g14Data = makeJetIDcut(14,1,i);
 g14Data->SetMarkerStyle(28);
 g14Data->SetMarkerColor(4);
 g14Data->SetLineColor(4);
-if(canvas[i]!=4)
-g14Data->Draw("Psame");
 TGraphAsymmErrors *g14MC = makeJetIDcut(14,0,i);
 g14MC->SetMarkerStyle(25);
 g14MC->SetMarkerColor(4);
@@ -175,13 +169,19 @@ TLegend *leg1=new TLegend(0.42,0.35,0.72,0.75);
 leg1->SetBorderSize(0);
 leg1->SetFillColor(0);
 leg1->SetTextSize(0.05);
+if(canvas[i]!=4){
+g14Data->Draw("Psame");
+g12Data->Draw("Psame");
+g6Data->Draw("Psame");
+g12MC->Draw("Psame");
+}
 if(canvas[i]==4){
 leg1->AddEntry(g6Data,"cut 1 Data","lp");
 leg1->AddEntry(g6MC,"cut 1 PYTHIA+HIJING","lp");
 leg1->AddEntry(g14Data,"cut 2 Data","lp");
 leg1->AddEntry(g14MC,"cut 2 PYTHIA+HIJING","lp");
-//leg1->AddEntry(g12Data,"cut 3 Data","lp");
-//leg1->AddEntry(g12MC,"cut 3 PYTHIA+HIJING","lp");
+leg1->AddEntry(g12Data,"cut 3 Data","lp");
+leg1->AddEntry(g12MC,"cut 3 PYTHIA+HIJING","lp");
 leg1->Draw("same");
 }
 T->SetTextSize(0.065);

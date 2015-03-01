@@ -135,17 +135,17 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 	TFile *fres = TFile::Open(res);
 	for(int ibin=0;ibin<nbin;ibin++){
 		if(isample>=0)
-                	r0res[ibin] = (TVectorD*)fres->Get(Form("s_%d/r0",isample));
+                	r0res[ibin] = (TVectorD*)fres->Get(Form("s_%d/D_%d/r0",isample,ibin));
                 else if(isample==-1)
-			r0res[ibin] = (TVectorD*)fres->Get(Form("r0"));
+			r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/r0",ibin));
                 else
-		        r0res[ibin] = (TVectorD*)fres->Get(Form("r02"));
+		        r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/r02",ibin));
 	}
 		
         int mult, ntrk;
         Float_t phi[10000], eta[10000], pt[10000];
         TFile *infile = TFile::Open(filename);
-        TTree* t = (TTree*)infile->Get("demo/TrackTree");
+        TTree* t = (TTree*)infile->Get("tree");
         t->SetBranchAddress("n",&mult);
         t->SetBranchAddress("ptg",pt);
         t->SetBranchAddress("phig",phi);

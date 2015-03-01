@@ -6,8 +6,8 @@ TLegend *leg = new TLegend(0.2,0.1,0.4,0.4);
 leg->SetTextSize(0.05);
 leg->SetBorderSize(0);
 leg->SetFillColor(0);
-const int ntotbin=5;
-const int multbin[ntotbin]={150,185,220,260,300};
+const int ntotbin=7;
+const int multbin[ntotbin]={50,100,150,185,220,260,300};
 int xbin=0;
 TString dir;
 double V2_Prod[ntotbin],V2err_Prod[ntotbin],Mult[ntotbin],V2sp[ntotbin];
@@ -22,8 +22,14 @@ for(int i=0;i<ntotbin;i++){
 	TFile *mergedV_Prod = TFile::Open(Form("%s/mergedV_Prod.root",dir.Data()));
 	TVectorD *vecMult = (TVectorD*)mergedV_Prod->Get("totmultall");
 	TVectorD *vecNevent = (TVectorD*)mergedV_Prod->Get("Nevent");
+        if(i>2){
 	TVectorD *vecV2_Prod=(TVectorD*)mergedV_Prod->Get(Form("D_%d/Vmean",xbin));
 	TVectorD *vecV2err_Prod=(TVectorD*)mergedV_Prod->Get(Form("D_%d/deltaVmean",xbin));
+        }
+        else{
+	TVectorD *vecV2_Prod=(TVectorD*)mergedV_Prod->Get(Form("Vmean",xbin));
+	TVectorD *vecV2err_Prod=(TVectorD*)mergedV_Prod->Get(Form("deltaVmean",xbin));
+        }
 	Mult[i]=(*vecMult)[xbin]/(*vecNevent)[xbin];
 	V2_Prod[i]=(*vecV2_Prod)[xbin];
 	V2err_Prod[i]=(*vecV2err_Prod)[xbin];
@@ -31,11 +37,11 @@ for(int i=0;i<ntotbin;i++){
 	cout<<V2sp[i]<<"\t";
 	}
 cout<<endl<<InV2<<endl;
-TH1D* hFrame = new TH1D("","",150,100,400);
+TH1D* hFrame = new TH1D("","",400,0,400);
 hFrame->GetXaxis()->SetTitle("Ntrkoffline");
 hFrame->GetYaxis()->SetTitle("Real V2/Calc V2");
-hFrame->GetXaxis()->SetRangeUser(130,320);
-hFrame->GetYaxis()->SetRangeUser(0.9,1.1);
+hFrame->GetXaxis()->SetRangeUser(40,320);
+hFrame->GetYaxis()->SetRangeUser(0.5,1.1);
 hFrame->Draw();
 TGraphErrors *grProd=new TGraphErrors(ntotbin,Mult,V2_Prod,0,V2err_Prod);
 TGraph *grsp = new TGraph(ntotbin,Mult,V2sp);
@@ -50,6 +56,6 @@ grProd->SetMarkerStyle(20);
 grsp->Draw("Psame");
 l->Draw("same");
 c1->SaveAs("spflow.gif");
-//grProd->Draw("AP");
+grProd->Draw("AP");
 }
 

@@ -153,7 +153,6 @@ void getResVsub(){
 			fstrV<<ibin<<"\t"<<avgmult[ibin]<<"\t"<<avgpt[ibin]<<"\t"<<Vmean[ibin]<<"\t"<<deltaVmean[ibin]<<endl;
 		}
 		fstrV<<endl;
-	}
 	
         TDirectory *dirsample = outf->mkdir(Form("s_%d",isample));
         dirsample->cd();
@@ -185,6 +184,7 @@ void getResVsub(){
                         	Gmod2[ibin][itheta].Write(Form("G2"));
                 	}
         	}
+        }
 	fstrV<<"ibin"<<"\t"<<"Vn mean mean"<<"\t"<<"Vn mean mean Error"<<"\t"<<"Vn mean deviation"<<endl;
 	for(int ibin=0;ibin<nbin;ibin++){
 		sigmaVmeanmean[ibin]=TMath::Sqrt(sigmaVmeanmean[ibin]*nsamples-Vmeanmean[ibin]*Vmeanmean[ibin]);

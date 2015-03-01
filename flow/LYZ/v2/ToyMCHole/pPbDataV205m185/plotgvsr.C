@@ -24,6 +24,13 @@ TGraph *gr[nnu];
 double r0_theta[nnu];
 double G2_theta[nnu];
 TLine *l[nnu];
+TF1 *gcl = new TF1("gcl","TMath::Power(exp(-[0]*x*x/4)*TMath::BesselJ0([1]*x),2)",0,1);
+TF1 *gclProd = new TF1("gclProd","TMath::Power(exp(-[0]*x*x/4)*TMath::BesselJ0([1]*x),2)",0,1);
+//gcl->SetParameters(sigma2[xtheta],V[xtheta]*sigma2[xtheta]);
+//gcl->SetParameters(300,0.065*300);
+cout<<sigma2[xtheta]<<"\t"<<V[xtheta]<<"\t"<<avgmult[xbin]<<endl;
+gcl->SetParameters(sigma2[xtheta]+V[xtheta]*V[xtheta]*avgmult[xbin]*avgmult[xbin]-inV2*inV2*avgmult[xbin]*avgmult[xbin],inV2*avgmult[xbin]);
+gclProd->SetParameters(sigma2_[xtheta]+V_[xtheta]*V_[xtheta]*avgmult_[xbin]*avgmult_[xbin]-inV2*inV2*avgmult_[xbin]*avgmult_[xbin],inV2*avgmult_[xbin]);
 for(int itheta=0;itheta<nnu;itheta++){
 gr[itheta]=plotGF(0,plotnu[itheta],r0_theta+itheta,G2_theta+itheta,marker[itheta],color[itheta]);
 gr[itheta]->Draw("Psame");
