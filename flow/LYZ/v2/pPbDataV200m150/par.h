@@ -23,6 +23,6 @@ const int isSum=0;
 const double j01=2.404826;
 const int ntheta = 5;
 const int nstepr=200;
-const bool isSimple=1;
+const bool isSimple=0;
 const int nsamples=20;
 const double inV2=0;

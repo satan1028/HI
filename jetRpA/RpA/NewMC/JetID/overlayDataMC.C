@@ -5,7 +5,7 @@ int ilist=atoi(getenv("LIST"));
 TString JetIDNameList[18]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN"};
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
-double xrange_pt[2]={30+1e-4,600-1e-4};
+double xrange_pt[2]={50+1e-4,600-1e-4};
 TString JetID, Unit;
 TString JetIDName = JetIDNameList[ilist];
 

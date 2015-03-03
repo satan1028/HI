@@ -19,7 +19,16 @@ unset arr[0]
 for dir in `ls`;do
 if [[ -d $dir && $dir == $par1 ]];then
 echo $dir
-
+cd $dir
+rm LYZPF_C*
+rm LYZtrack_C*
+root -l <<EOF
+.L LYZPF.C+
+EOF
+root -l <<EOF
+.L LYZtrack.C+
+EOF
+cd ..
 for i in $( seq 0 $njobs );do
 #if [[ $i != 0 ]];then
     for j in ${arr[@]};do

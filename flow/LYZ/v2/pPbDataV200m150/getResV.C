@@ -29,7 +29,7 @@ void getResV(){
 		    r[ibin].ResizeTo(nstepr);
                     for(int ir=0; ir<nstepr; ir++){
                         if(isSimple==0)  r[ibin][ir]=j01/(Vmax[ibin]-eps[ibin]*ir);	
-	                else		 r[ibin][ir]=0.00025*1*(ir+1);
+	                else		 r[ibin][ir]=0.00025*20*(ir+1);
 		    }
         }
                 
@@ -71,8 +71,8 @@ void getResV(){
 	}
 
         for(int ifile=0; ifile<nFileAll; ifile++){
-		if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m50/AnaV_Sum_%d.root",ifile));
-		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m50/AnaV_Prod_%d.root",ifile));
+		if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV200m150/AnaV_Sum_%d.root",ifile));
+		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV200m150/AnaV_Prod_%d.root",ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 		TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));

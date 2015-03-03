@@ -14,8 +14,8 @@ void plotgvsr(){
 TCanvas *c1 = new TCanvas();
 c1->SetLogy();
 TH1D* hFrame = new TH1D("","",1000,0,1);
-hFrame->GetYaxis()->SetRangeUser(5e-6,1);
-hFrame->GetXaxis()->SetRangeUser(0.20,0.8);
+hFrame->GetYaxis()->SetRangeUser(5e-8,1);
+hFrame->GetXaxis()->SetRangeUser(0.0,0.8);
 hFrame->GetXaxis()->SetTitle("r");
 hFrame->GetYaxis()->SetTitle("|G^{#theta}(ir)|^{2}");
 hFrame->SetTitle("");

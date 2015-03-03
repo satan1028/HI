@@ -1,5 +1,5 @@
-#include "file.h"
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
+#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 void P3overlayDataMC(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
@@ -8,8 +8,8 @@ TString JetIDNameList[18]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoS
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 429, 692, 1000};
 double binbound_JetID[100];
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
-double xrange_pt[2]={30+1e-4,600-1e-4};
-for(int j=1;j<2;j++){
+double xrange_pt[2]={50+1e-4,600-1e-4};
+for(int j=0;j<6;j++){
 TString svar=listsvarALL[j];
 if(svar=="Max"){
 int listsvar[]={0,2,4};
@@ -94,17 +94,15 @@ Unit="(GeV/c)";
 
 TString histoname=Form("jetpt%s",JetIDName.Data());
 TString PPbhistoname=Form("jetpt%s",JetIDName.Data());
-
-TH2F* hdata2F=(TH2F*)fdataJetID->Get(histoname);
-TH2F* hPPb2F=(TH2F*)fPPb->Get(PPbhistoname);
-
-TH1D* hdata = (TH1D*)hdata2F->ProjectionY("hdata",hdata2F->GetXaxis()->FindBin(xrange_pt[0]),hdata2F->GetXaxis()->FindBin(xrange_pt[1]));
-TH1D* hPPb = (TH1D*)hPPb2F->ProjectionY("hPPb",hPPb2F->GetXaxis()->FindBin(xrange_pt[0]),hPPb2F->GetXaxis()->FindBin(xrange_pt[1]));
+TH2F* hdata2F=(TH2F*)fDataPPbJetID->Get(histoname);
+TH2F* hPPb2F=(TH2F*)fMCPPb->Get(PPbhistoname);
+hdata = (TH1D*)hdata2F->ProjectionY(Form("hdata_%d",ilist),hdata2F->GetXaxis()->FindBin(xrange_pt[0]),hdata2F->GetXaxis()->FindBin(xrange_pt[1]));
+hPPb = (TH1D*)hPPb2F->ProjectionY(Form("hPPb_%d",ilist),hPPb2F->GetXaxis()->FindBin(xrange_pt[0]),hPPb2F->GetXaxis()->FindBin(xrange_pt[1]));
 
 rehdata=(TH1D*)hdata->Clone("rehdata");
 rehPPb=(TH1D*)hPPb->Clone("rehPPb");
-rehdata=(TH1D*)hdata->Rebin(Nbin_JetID,"rehdata",binbound_JetID);
-rehPPb=(TH1D*)hPPb->Rebin(Nbin_JetID,"rehPPb",binbound_JetID);
+rehdata=(TH1D*)rehdata->Rebin(Nbin_JetID,"rehdata",binbound_JetID);
+rehPPb=(TH1D*)rehPPb->Rebin(Nbin_JetID,"rehPPb",binbound_JetID);
 normalizeByBinWidth(rehdata);
 normalizeByBinWidth(rehPPb);
 rehdata->Scale(1./rehdata->Integral(rehdata->FindBin(binbound_JetID[0]),rehdata->FindBin(binbound_JetID[Nbin_JetID])));

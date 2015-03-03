@@ -33,7 +33,7 @@ for(int ivar=0;ivar<2;ivar++){
 if(coll=="PPb"){
 TH2F* hMC=(TH2F*)fMCPPb->Get(histoname[ivar]);
 TH2F* hdata=(TH2F*)fDataPPb->Get(histoname[ivar]);
-TH2F* hdata_woRes=(TH2F*)fDataPPb->Get(histoname[ivar]);
+TH2F* hdata_woRes=(TH2F*)fDataPPb->Get(histoname_woRes[ivar]);
 }
 if(coll=="PbP"){
 TH2F* hMC=(TH2F*)fMCPbP->Get(histoname[ivar]);
@@ -67,10 +67,10 @@ double ratiomin=0.8, ratiomax=1.32;
 
 TString Titley="Event Fraction";
 
-TH1D* hdata_var=hdata->ProjectionY(Form("hdata_%s",varname_.Data()),hdata->GetXaxis()->FindBin(xrange_pt[0]),hdata->GetXaxis()->FindBin(xrange_pt[1]));
+TH1D* hdata_var=hdata_woRes->ProjectionY(Form("hdata_%s",varname_.Data()),hdata->GetXaxis()->FindBin(xrange_pt[0]),hdata->GetXaxis()->FindBin(xrange_pt[1]));
 //TH1D* hdata_var_all=hdata->ProjectionY("hdata_var_all",hdata->GetXaxis()->FindBin(binbound_pt[10]+1e-4),hdata->GetXaxis()->FindBin(binbound_pt[Nbin_pt]-1e-4));
 
-TH1D* hdata_pt=hdata->ProjectionX("hdata_pt",hdata->GetYaxis()->FindBin(xrange_var[0]),hdata->GetYaxis()->FindBin(xrange_var[1]));
+TH1D* hdata_pt=hdata_woRes->ProjectionX("hdata_pt",hdata->GetYaxis()->FindBin(xrange_var[0]),hdata->GetYaxis()->FindBin(xrange_var[1]));
 //TH1D* hdata_pt_all=hdata->ProjectionX("hdata_pt_all",hdata->GetYaxis()->FindBin(binbound_var[0]+1e-4),hdata->GetYaxis()->FindBin(binbound_var[Nbin_var]-1e-4));
 //TH1D* hdata_pt =(TH1D*)fDataPPb->Get("jetpt");
 //TH1D* hdata_pt = (TH1D*)fDataMC->Get("jetptEtaBin-10_10");

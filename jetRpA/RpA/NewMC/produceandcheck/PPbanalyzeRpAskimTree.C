@@ -41,6 +41,9 @@ public:
     TH2F * jetptjetid_fake[nJetID];
     TH2F * jetptjetid_real1[nJetID];
     TH2F * jetptjetid_fake1[nJetID];
+    TH2F * jetid6jetid14;
+    TH2F * jetid6jetid14_fake1;
+    TH2F * jetid6jetid14_real1;
     TH2F * rawptJES;
     TH2F * refptJES;
     TH1F * Vz;
@@ -88,6 +91,14 @@ hist_class::hist_class()
     jetptphi -> Sumw2(); 
     jetEtaphi = new TH2F(Form("jetEtaphi"),Form("jetEtaphi"),100,-5.,5.,200, -TMath::Pi(), TMath::Pi());
     jetEtaphi -> Sumw2(); 
+
+    jetid6jetid14 = new TH2F(Form("jetid6jetid14"),Form("jetid6jetid14"),200,0.,2.,200,0.,2.);//Added
+    jetid6jetid14 -> Sumw2();
+    jetid6jetid14_fake1 = new TH2F(Form("jetid6jetid14_fake1"),Form("jetid6jetid14_fake1"),200,0.,2.,200,0.,2.);//Added
+    jetid6jetid14_fake1 -> Sumw2();
+    jetid6jetid14_real1 = new TH2F(Form("jetid6jetid14_real1"),Form("jetid6jetid14_real1"),200,0.,2.,200,0.,2.);//Added
+    jetid6jetid14_real1 -> Sumw2();
+
 	
         for(int ijetid=0;ijetid<nJetID;ijetid++){
         if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
@@ -220,6 +231,9 @@ void hist_class::Write()
     jetptEta->Write();
     jetptphi->Write();
     jetEtaphi->Write();
+    jetid6jetid14 -> Write();
+    jetid6jetid14_fake1 -> Write();
+    jetid6jetid14_real1 -> Write();
         for(int ijetid=0;ijetid<nJetID;ijetid++){
         jetptjetid[ijetid]->Write();
         jetptjetid_real[ijetid]->Write();
@@ -406,6 +420,11 @@ for(int j4i = 0; j4i < nref; j4i++){
 
       dEtaBin = -1.;
      if(TMath::Abs(jet_eta)<=1.) {
+	  my_hists->jetid6jetid14->Fill(jetidv[6], jetidv[14], weight);	//Added
+	if(matchflag1==0)	//Added
+	  my_hists->jetid6jetid14_fake1->Fill(jetidv[6], jetidv[14], weight);	//Added
+        else
+	  my_hists->jetid6jetid14_real1->Fill(jetidv[6], jetidv[14], weight);	//Added
 	for(int ijetid=0;ijetid<nJetID;ijetid++){
 	my_hists->jetptjetid[ijetid]->Fill(jet_pt, jetidv[ijetid], weight);	//Added
 	if(ref_pt<0)	//Added

@@ -1,10 +1,10 @@
-#include "file.h"
 #include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
+#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 
 void P3overlayProfile(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
-TString svar="other";
+TString svar="Sum";
 if(svar=="Max"){
 int listsvar[]={0,2,4,6,8,10};
 double ymin1=0.1;double ymax1=150;
@@ -54,8 +54,8 @@ double xrange_pt[2]={30+1e-4,600-1e-4};
 TString histoname=Form("jetpt%s",JetIDName.Data());
 TString PPbhistoname=Form("jetpt%s",JetIDName.Data());
 
-TH2F* hdata2F=(TH2F*)fdataJetID->Get(histoname);
-TH2F* hPPb2F=(TH2F*)fPPb->Get(PPbhistoname);
+TH2F* hdata2F=(TH2F*)fDataPPbJetID->Get(histoname);
+TH2F* hPPb2F=(TH2F*)fMCPPb->Get(PPbhistoname);
 if(ilist== 0)   JetID = "Max p_{T}^{charged}";
 else if(ilist== 1)      JetID = "#Sigma p_{T}^{charged}";
 else if(ilist== 2)      JetID = "Max p_{T}^{neutral}";
@@ -93,7 +93,7 @@ rehdata->SetMarkerColor(1);
 //cout<<rehdata->GetBinContent(i)<<endl;
 //}
 hFrame->GetXaxis()->SetLimits(xrange_pt[0],xrange_pt[1]);
-if(JetID.Contains("p_{T}")&&svar!="Mult"){
+if(JetID.Contains("p_{T}^{jet}")&&svar!="Mult"){
 hFrame->GetYaxis()->SetRangeUser(ymin2,ymax2);
 hFrame->GetYaxis()->SetTitle(Form("%s",svar2.Data()));}
 else{
