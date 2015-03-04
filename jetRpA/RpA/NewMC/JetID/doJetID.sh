@@ -1,8 +1,7 @@
 #!/bin/sh
 #cd /home/xuq7/HI/jetRpA/RpA/NewMC/JetID
 
-for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 18 19
-#for (( i=0;i<1;i++ )) 
+for (( i=0;i<21;i++ )) 
 do
 export LIST=$i
 

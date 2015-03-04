@@ -67,10 +67,10 @@ double ratiomin=0.8, ratiomax=1.32;
 
 TString Titley="Event Fraction";
 
-TH1D* hdata_var=hdata_woRes->ProjectionY(Form("hdata_%s",varname_.Data()),hdata->GetXaxis()->FindBin(xrange_pt[0]),hdata->GetXaxis()->FindBin(xrange_pt[1]));
+TH1D* hdata_var=hdata->ProjectionY(Form("hdata_%s",varname_.Data()),hdata->GetXaxis()->FindBin(xrange_pt[0]),hdata->GetXaxis()->FindBin(xrange_pt[1]));
 //TH1D* hdata_var_all=hdata->ProjectionY("hdata_var_all",hdata->GetXaxis()->FindBin(binbound_pt[10]+1e-4),hdata->GetXaxis()->FindBin(binbound_pt[Nbin_pt]-1e-4));
 
-TH1D* hdata_pt=hdata_woRes->ProjectionX("hdata_pt",hdata->GetYaxis()->FindBin(xrange_var[0]),hdata->GetYaxis()->FindBin(xrange_var[1]));
+TH1D* hdata_pt=hdata->ProjectionX("hdata_pt",hdata->GetYaxis()->FindBin(xrange_var[0]),hdata->GetYaxis()->FindBin(xrange_var[1]));
 //TH1D* hdata_pt_all=hdata->ProjectionX("hdata_pt_all",hdata->GetYaxis()->FindBin(binbound_var[0]+1e-4),hdata->GetYaxis()->FindBin(binbound_var[Nbin_var]-1e-4));
 //TH1D* hdata_pt =(TH1D*)fDataPPb->Get("jetpt");
 //TH1D* hdata_pt = (TH1D*)fDataMC->Get("jetptEtaBin-10_10");
@@ -94,10 +94,12 @@ normalizeByBinWidth(re_hMC_pt);
 normalizeByBinWidth(re_hdata_var);
 normalizeByBinWidth(re_hMC_var);
 
-re_hdata_pt->Scale(1./re_hdata_pt->Integral(re_hdata_pt->GetXaxis()->FindBin(xrange_pt[0]),re_hdata_pt->GetXaxis()->FindBin(xrange_pt[1])));
-re_hdata_var->Scale(1./re_hdata_var->Integral(re_hdata_var->GetXaxis()->FindBin(xrange_var[0]),re_hdata_var->GetXaxis()->FindBin(xrange_var[1])));
-re_hMC_pt->Scale(1./re_hMC_pt->Integral(re_hMC_pt->GetXaxis()->FindBin(xrange_pt[0]),re_hMC_pt->GetXaxis()->FindBin(xrange_pt[1])));
-re_hMC_var->Scale(1./re_hMC_var->Integral(re_hMC_var->GetXaxis()->FindBin(xrange_var[0]),re_hMC_var->GetXaxis()->FindBin(xrange_var[1])));
+//re_hdata_pt->Scale(1./re_hdata_pt->Integral(re_hdata_pt->GetXaxis()->FindBin(xrange_pt[0]),re_hdata_pt->GetXaxis()->FindBin(xrange_pt[1])));
+re_hdata_pt->Scale(1.0/20.4*1e-6/208);
+//re_hdata_var->Scale(1./re_hdata_var->Integral(re_hdata_var->GetXaxis()->FindBin(xrange_var[0]),re_hdata_var->GetXaxis()->FindBin(xrange_var[1])));
+re_hdata_var->Scale(1.0/20.4*1e-6/208);
+//re_hMC_pt->Scale(1./re_hMC_pt->Integral(re_hMC_pt->GetXaxis()->FindBin(xrange_pt[0]),re_hMC_pt->GetXaxis()->FindBin(xrange_pt[1])));
+//re_hMC_var->Scale(1./re_hMC_var->Integral(re_hMC_var->GetXaxis()->FindBin(xrange_var[0]),re_hMC_var->GetXaxis()->FindBin(xrange_var[1])));
 double scale = re_hdata_pt->Integral(re_hdata_pt->GetXaxis()->FindBin(xrange_pt[0]),re_hdata_pt->GetXaxis()->FindBin(xrange_pt[1]))/re_hdata_pt->Integral(re_hdata_pt->GetXaxis()->FindBin(xrange_pt_pre[0]),re_hdata_pt->GetXaxis()->FindBin(xrange_pt_pre[1]));
 //re_hdata_pt->Scale((double)scale);
 //re_hMC_pt->Scale((double)scale);
@@ -153,7 +155,7 @@ hFrame->GetXaxis()->SetTitle("");
 hFrame->GetXaxis()->SetNdivisions(505);
 //hFrame->GetXaxis()->SetRangeUser(27,692);
 hFrame->GetXaxis()->SetRangeUser(xrange_pt_pre[0],xrange_pt_pre[1]);
-hFrame->GetYaxis()->SetRangeUser(1.01e-8,1);
+hFrame->GetYaxis()->SetRangeUser(1.01e-10,1e-2);
 hFrame->DrawCopy();
 re_hdata_pt->Draw("E1same");
 re_hMC_pt->Draw("E1 HISTsame");
@@ -185,7 +187,7 @@ c1->cd(ivar+2);
 hFrame1->GetYaxis()->SetLabelSize(0.06);
 hFrame1->GetXaxis()->SetRangeUser(xrange_var_pre[0]-2e-1,xrange_var_pre[1]+2e-1);
 hFrame1->GetYaxis()->SetTitle("");
-hFrame1->GetYaxis()->SetRangeUser(1e-4,1e-1);
+hFrame1->GetYaxis()->SetRangeUser(1e-6,1e-2);
 fixedFontHist(hFrame,1.4,2.0);
 if(varname=="#eta_{lab}^{jet}"){
 hFrame1->DrawCopy();
