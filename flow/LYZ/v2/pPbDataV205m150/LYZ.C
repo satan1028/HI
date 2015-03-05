@@ -174,8 +174,8 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
         	if(xbin<0 || xbin == nbin) continue;
 		tottrk[xbin]+=ntrk;
 		for(int imult=0;imult<mult;imult++){
-			if(eta[imult]<-2.40||eta[imult]>2.40) continue;
-			if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection	
+	//		if(eta[imult]<-2.40||eta[imult]>2.40) continue;
+	//		if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection	
 			int xv=-1;
 			for(int ivbin=0;ivbin<nvv; ivbin++){
                             if(ispt && pt[imult]>binv[ivbin] && pt[imult]<=binv[ivbin+1])
