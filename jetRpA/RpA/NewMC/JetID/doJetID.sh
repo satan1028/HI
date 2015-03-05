@@ -1,7 +1,7 @@
 #!/bin/sh
 #cd /home/xuq7/HI/jetRpA/RpA/NewMC/JetID
 
-for (( i=0;i<21;i++ )) 
+for (( i=20;i<22;i++ )) 
 do
 export LIST=$i
 

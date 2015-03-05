@@ -59,8 +59,9 @@ else if(ilist== 16)     JetID = "neutral Multiplicity";
 else if(ilist== 17)     JetID = "photon Multiplicity";
 else if(ilist== 18)   {  JetID = "PP cut True or False";JetIDcut[0]=1;JetIDcut[1]=2;}
 else if(ilist== 19)   {  JetID = "PP cut Tight True or False";JetIDcut[0]=1;JetIDcut[1]=2;}
-else if(ilist== 20)   {  JetID = "Max h^{0}/#Sigma h^{#pm}";JetIDcut[0]=0;JetIDcut[1]=2;}
+else if(ilist== 20)   {  JetID = "PP cut Tighter True or False";JetIDcut[0]=1;JetIDcut[1]=2;}
 else if(ilist== 21)   {  JetID = "Max h^{0}/#Sigma h^{#pm}";JetIDcut[0]=0;JetIDcut[1]=2;}
+else if(ilist== 22) {    JetID = "(#Sigma h^{#pm}+#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";JetIDcut[0]=0; JetIDcut[1]=0.80;}
 else{   exit();}
 
 if(JetIDName.Contains("pt") || JetIDName=="neuMaxr"){
@@ -327,10 +328,10 @@ c2->cd(canvas[i]+1)->SetGridx();
         hFrame2->GetXaxis()->SetTitle(Form("%s %s",JetID.Data(),Unit.Data()));
 hFrame2->GetXaxis()->SetNdivisions(510);
 hFrame2->GetXaxis()->SetLimits(-binbound_JetID[1]*0.7,binbound_JetID[Nbin_JetID]*1.02);
-//hFrame2->SetMinimum(1e-11);
-hFrame2->SetMinimum(8e-5);
-//hFrame2->SetMaximum(1);
-hFrame2->SetMaximum(2e-1);
+hFrame2->SetMinimum(1e-11);
+//hFrame2->SetMinimum(8e-5);
+hFrame2->SetMaximum(1);
+//hFrame2->SetMaximum(2e-1);
 hFrame2->DrawCopy();
 if(canvas[i]!=4){
 rehisto_hPPb_JetID->Draw("E1same");
@@ -371,7 +372,7 @@ if(i==7){
         hFrame2->GetXaxis()->SetLimits(-binbound_JetID[1]*0.7,binbound_JetID[Nbin_JetID]*1.02);
         hFrame2->SetMinimum(1e-11);
         hFrame2->SetMaximum(1);
-        fixedFontHist(hFrame2,1.6,2.1);
+        fixedFontHist(hFrame2,1.5,1.8);
         for(int ipt=0;ipt<Nbin_pt_coarse;ipt++){
         c2_->cd(ipt+1)->SetLogy();
         hFrame2->DrawCopy();
@@ -380,8 +381,8 @@ if(i==7){
         rehisto_hPPb_JetID_ptbin_real[ipt]->Draw("E1same");
         T1.SetTextSize(0.050);
         if(ipt==0)
-        T1.DrawLatex(0.25,0.4,etastring[i]);
-        T1.DrawLatex(0.25,0.9,Form("%.f < p_{T} < %.f (GeV/c)",binbound_pt_coarse[ipt],binbound_pt_coarse[ipt+1]));
+        T1.DrawLatex(0.28,0.4,etastring[i]);
+        T1.DrawLatex(0.28,0.9,Form("%.f < p_{T} < %.f (GeV/c)",binbound_pt_coarse[ipt],binbound_pt_coarse[ipt+1]));
         T1.DrawLatex(0.25,0.28,Form("Inc: Mean=%.3f",rehisto_hPPb_JetID_ptbin[ipt]->GetMean()));
         T1.DrawLatex(0.25,0.24,Form("Real: Mean=%.3f",rehisto_hPPb_JetID_ptbin_real[ipt]->GetMean()));
         T1.DrawLatex(0.25,0.20,Form("Fake: Mean=%.3f",rehisto_hPPb_JetID_ptbin_fake[ipt]->GetMean()));
