@@ -6,9 +6,13 @@ echo "split into $njobs jobs, $nfileperjob files per job"
 for i in `seq 1 $njobs`
 do
 #if [[ $i == 1 ]];then
-#echo $i
+echo $i
 start=`echo "($i-1)*$nfileperjob" | bc`
 end=`echo "$i*$nfileperjob" | bc`
-qsub -v I=$i,START=$start,END=$end -N jobsub$i -z jobsub.sh
+export I=$i
+export START=$start
+export END=$end
+#qsub -v I=$i,START=$start,END=$end -N jobsub$i -z jobsub.sh
+sbatch -J ToyMC$i -o job$i.out jobsub.slurm
 #fi
 done

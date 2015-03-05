@@ -13,7 +13,7 @@ void dofirst(){
 	TString name;
 	for(int i=start;i<end;i++){
 		if(isSum)	name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/AnaV_Sum_%d.root",i);
-		else	name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/AnaV_Prod_%d.root",i);
+		else	        name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/AnaV_Prod_%d.root",i);
 		remove(name.Data());
 		LYZ *l = new LYZ(Form("%s/vndata_50k_%d.root",dir.Data(),i));
 		cout<<"start "<<i<<" th job"<<endl;
