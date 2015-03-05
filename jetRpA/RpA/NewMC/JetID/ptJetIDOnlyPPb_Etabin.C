@@ -60,6 +60,7 @@ else if(ilist== 17)     JetID = "photon Multiplicity";
 else if(ilist== 18)   {  JetID = "PP cut True or False";JetIDcut[0]=1;JetIDcut[1]=2;}
 else if(ilist== 19)   {  JetID = "PP cut Tight True or False";JetIDcut[0]=1;JetIDcut[1]=2;}
 else if(ilist== 20)   {  JetID = "Max h^{0}/#Sigma h^{#pm}";JetIDcut[0]=0;JetIDcut[1]=2;}
+else if(ilist== 21)   {  JetID = "Max h^{0}/#Sigma h^{#pm}";JetIDcut[0]=0;JetIDcut[1]=2;}
 else{   exit();}
 
 if(JetIDName.Contains("pt") || JetIDName=="neuMaxr"){
