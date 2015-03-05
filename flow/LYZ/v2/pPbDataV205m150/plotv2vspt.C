@@ -36,16 +36,16 @@ V2vsPt->Draw();
 TGraphErrors *gr=new TGraphErrors(nptv,avgpt,v2corr,0,v2err);
 
 TGraphErrors *grProd=new TGraphErrors(nptv,avgpt_,v2corr_,0,v2err_);
-gr->SetTitle("v_{2} vs momentum");
-gr->GetXaxis()->SetTitle("p_{T} (GeV/c)");
-gr->GetYaxis()->SetTitle("v_{2}");
+grProd->SetTitle("v_{2} vs momentum");
+grProd->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+grProd->GetYaxis()->SetTitle("v_{2}");
 gr->SetMarkerSize(1.3);
 gr->SetMarkerColor(1);
 gr->SetMarkerStyle(20);
 
 grProd->SetMarkerStyle(29);
 grProd->SetMarkerColor(4);
-gr->Draw("Psame");
+//gr->Draw("Psame");
 grProd->Draw("Psame");
 TLegend *tl = new TLegend(0.6,0.2,0.8,0.35);
 
@@ -53,7 +53,7 @@ tl->SetFillColor(0);
 tl->SetBorderSize(0);
 tl->SetTextSize(0.05);
 tl->AddEntry(V2vsPt,"input v_{2}","lp");
-tl->AddEntry(gr,"LYZ Prod method inV2","lp");
+//tl->AddEntry(gr,"LYZ Prod method inV2","lp");
 tl->AddEntry(grProd,"LYZ Prod method","lp");
 tl->Draw("same");
 TLatex *tlx = new TLatex(0.2,0.3,Form("STEG, 15M events, mult=%d",(trkbin[0]+trkbin[1])/2));
