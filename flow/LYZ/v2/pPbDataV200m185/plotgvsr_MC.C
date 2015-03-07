@@ -23,7 +23,7 @@ TGraph *gr[nnu];
 double r0[nnu];
 double G2[nnu];
 TLine *l[nnu];
-for(int i=0;i<nnu-1;i++){
+for(int i=0;i<nnu;i++){
 gr[i]=plotGF(i,xtheta,r0+i,G2+i,marker[i],color[i]);
 gr[i]->Draw("Psame");
 }
@@ -32,7 +32,7 @@ TLegend *tg = new TLegend(0.75,0.70-0.10*nnu,0.90,0.70);
 tg->SetFillColor(0);
 tg->SetBorderSize(0);
 tg->SetTextSize(0.04);
-for(int i=0;i<nnu-1;i++)
+for(int i=0;i<nnu;i++)
 if(i==0)
 tg->AddEntry(gr[i],Form("Prod"),"lp");
 else
@@ -88,7 +88,7 @@ for(int ir=0;ir<nstepr;ir++)
     if(r[ir] == r01[xtheta]) break;
 (*G2_theta) = g2[ir];
 TGraph *gr = new TGraph(nstepr,r,g2);
-if(!isSum){
+if(isSum){
 gcl->SetNpx(100000);
 gcl->SetParameters(sigma2[xtheta]-inV2*inV2*avgmult[xbin]*avgmult[xbin],inV2*avgmult[xbin]);
 linv->SetX1(j01/avgmult[xbin]/inV2);
