@@ -58,17 +58,15 @@ else{
 xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
 xrange_JetIDcut[1]=JetIDcut[1]-1e-4;
 TH1D* histo=new TH1D("","",1000,0.,1000.);
-cout<<ilist<<"\t"<<cut<<"\t"<<i<<endl;
+histo->Sumw2();
 if(ilist==21) {
 	for(int ibin=1;ibin<h2F->GetYaxis()->GetNbins();ibin++){
 		double binxcenter = h2F->GetYaxis()->GetBinCenter(ibin);
 		TVectorD* vecx2 = (TVectorD*)extract(binxcenter);
-		TH1D* histo_=(TH1D*)h2F->ProjectionX(Form("histo_"),ibin,ibin);
-		cout<<ibin<<"\t"<<binxcenter<<"\t"<<histo_->GetEntries()<<endl;
-		histo_->Draw();
+		TH1D* histo_=(TH1D*)h2F->ProjectionX(Form("histo_%d",ibin),ibin,ibin);
 		if((*vecx2)[(int)cut]!=0 && histo_->GetEntries()!=0)
-		//cout<<ibin<<"\t"<<binxcenter<<"\t"<<(*vecx2)[0]<<endl;
-		histo=histo->Add(histo_);
+		histo->Add(histo_);
+		//histo=histo_;
 	}
 }
 else histo=(TH1D*)h2F->ProjectionX(Form("histo"),h2F->GetYaxis()->FindBin(xrange_JetIDcut[0]),h2F->GetYaxis()->FindBin(xrange_JetIDcut[1]));
@@ -90,18 +88,19 @@ gStyle->SetErrorX(0);
 //gStyle->SetOptTitle(0);
 //c1 = new TCanvas("c1","",600,1000);
 //makeMultiPanelCanvas(c1,1,2,0.03,0.03,0.1,0.12,0.03);
-//c1 = new TCanvas("c1"," ",1200,600);
-//makeMultiPanelCanvas(c1,4,2,0,0,0.25,0.2,0.03);
+c1 = new TCanvas("c1"," ",1200,600);
+makeMultiPanelCanvas(c1,4,2,0,0,0.25,0.2,0.03);
 TH1F* hFrame=new TH1F("","",1000,0,1000);
 fixedFontHist(hFrame,2.0,3.0);
 hFrame->SetTitle("");
 //hFrame->GetYaxis()->SetTitle("Yield Ratio");
 hFrame->GetXaxis()->SetLimits(30,600);
-hFrame->GetYaxis()->SetRangeUser(0.94,1.08);
+hFrame->GetYaxis()->SetRangeUser(0.96,1.04);
 TLatex T;
 
 for(int i=0;i<Neta;i++){
- //   c1->cd(canvas[i]+1)->SetGridx();
+    c1->cd(canvas[i]+1)->SetGridx();
+    c1->cd(canvas[i]+1)->SetGridy();
     if(canvas[i]==0  || canvas[i]==4)
         hFrame->GetYaxis()->SetTitle("Yield Ratio");
     else
@@ -115,7 +114,7 @@ for(int i=0;i<Neta;i++){
 //fstr[i].open(Form("jetIDsys%s.txt",etabinname[i].Data()));
 //fstr[i]<<setprecision(4)<<fixed;
 //TH1D* histo0 = makehisto(ilist0,i,1.01);
-TString coll="MCPPb";
+TString coll="MCPPb_real";
 TH1D* histo1PPb = makehisto(ilist0,i,0,coll);
 TH1D* histo2PPb = makehisto(ilist0,i,1,coll);
 TH1D* histo3PPb = makehisto(ilist0,i,2,coll);
@@ -240,8 +239,16 @@ else{
     T.SetTextSize(0.065);
     if(coll.Contains("Data"))
     T.DrawLatex(0.35,0.80,"CMS Preliminary");
-    else
+    else{
     T.DrawLatex(0.35,0.80,"CMS Simulation");
+	if(coll.Contains("fake"))
+    T.DrawLatex(0.35,0.72,"Fake jets");
+	else if(coll.Contains("real"))
+    T.DrawLatex(0.35,0.72,"Real jets");
+	else
+    T.DrawLatex(0.35,0.72,"Inclusive");
+
+    }
 }
 }
 c1->Print(Form("pic/JetIDcutsys_%s_Etabin.gif",coll.Data()));
