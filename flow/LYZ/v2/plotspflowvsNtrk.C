@@ -6,8 +6,8 @@ TLegend *leg = new TLegend(0.2,0.1,0.4,0.4);
 leg->SetTextSize(0.05);
 leg->SetBorderSize(0);
 leg->SetFillColor(0);
-const int ntotbin=7;
-const int multbin[ntotbin]={50,100,150,185,220,260,300};
+const int ntotbin=9;
+const int multbin[ntotbin]={50,80,100,120,150,185,220,260,300};
 int xbin=0;
 TString dir;
 double V2_Prod[ntotbin],V2err_Prod[ntotbin],Mult[ntotbin],V2sp[ntotbin];
@@ -22,14 +22,8 @@ for(int i=0;i<ntotbin;i++){
 	TFile *mergedV_Prod = TFile::Open(Form("%s/mergedV_Prod.root",dir.Data()));
 	TVectorD *vecMult = (TVectorD*)mergedV_Prod->Get("totmultall");
 	TVectorD *vecNevent = (TVectorD*)mergedV_Prod->Get("Nevent");
-        if(i>2){
-	TVectorD *vecV2_Prod=(TVectorD*)mergedV_Prod->Get(Form("D_%d/Vmean",xbin));
-	TVectorD *vecV2err_Prod=(TVectorD*)mergedV_Prod->Get(Form("D_%d/deltaVmean",xbin));
-        }
-        else{
 	TVectorD *vecV2_Prod=(TVectorD*)mergedV_Prod->Get(Form("Vmean",xbin));
 	TVectorD *vecV2err_Prod=(TVectorD*)mergedV_Prod->Get(Form("deltaVmean",xbin));
-        }
 	Mult[i]=(*vecMult)[xbin]/(*vecNevent)[xbin];
 	V2_Prod[i]=(*vecV2_Prod)[xbin];
 	V2err_Prod[i]=(*vecV2err_Prod)[xbin];

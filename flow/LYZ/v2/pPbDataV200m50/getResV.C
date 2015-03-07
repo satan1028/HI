@@ -9,8 +9,8 @@ void getResV(){
 	
         double Vmax[nbin], eps[nbin];
         for(int ibin=0; ibin<nbin ;ibin++){
-            Vmax[ibin]=2.00*(trkbin[ibin]+30);
-            eps[ibin]=0.0030*(trkbin[ibin]+30);
+            Vmax[ibin]=0.065*(trkbin[ibin]+30);
+            eps[ibin]=0.00025*(trkbin[ibin]+30);
         }
 	ofstream  fstrV;
 	double theta[ntheta];
@@ -29,7 +29,7 @@ void getResV(){
 		    r[ibin].ResizeTo(nstepr);
                     for(int ir=0; ir<nstepr; ir++){
                         if(isSimple==0)  r[ibin][ir]=j01/(Vmax[ibin]-eps[ibin]*ir);	
-	                else		 r[ibin][ir]=0.00025*2*(ir+1);
+	                else		 r[ibin][ir]=0.00025*20*(ir+1);
 		    }
         }
                 

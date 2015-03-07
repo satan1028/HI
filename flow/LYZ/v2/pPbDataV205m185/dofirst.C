@@ -7,13 +7,13 @@ void dofirst(){
 	remove("Qx1.txt");
 	remove("Qy1.txt");
 	remove("mult.txt");
-	gROOT->ProcessLine(".L ../LYZ.C+");
+	gROOT->ProcessLine(".L LYZ.C+");
 	int start=atoi(getenv("START"));
 	int end=atoi(getenv("END"));
 	TString name;
 	for(int i=start;i<end;i++){
-		if(isSum)	name=Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m185/AnaV_Sum_%d.root",i);
-		else	name=Form("/lio/lfs/cms/store/user/qixu/flow/pbsjoboutput/pPbDataV205m185/AnaV_Prod_%d.root",i);
+		if(isSum)	name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m185/AnaV_Sum_%d.root",i);
+		else	name=Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m185/AnaV_Prod_%d.root",i);
 		remove(name.Data());
 		LYZ *l = new LYZ(Form("%s/vndata_50k_%d.root",dir.Data(),i));
 		cout<<"start "<<i<<" th job"<<endl;

@@ -29,7 +29,8 @@ void proSTEGvn()
   int ifile = atoi(getenv("IFILE")); 
 
   //simple toy event generator
-  TFile f(Form("/lio/lfs/cms/store/user/qixu/flow/NewSTEG/pPbDataV205m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
+  //TFile f(Form("/lio/lfs/cms/store/user/qixu/flow/NewSTEG/pPbDataV205m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
+  TFile f(Form("/tmp/xuq7/pPbDataV205m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
   //TFile f(Form("vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
   TTree *tree = new TTree("tree","Event tree with a few branches");
 //  tree->Branch("npg", &b_npg, "npg/I");   // # of particles;

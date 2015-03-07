@@ -94,8 +94,8 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
         	if(xbin<0 || xbin==nbin) continue;	
                 tottrk[xbin]+=ntrk;
 		for(int imult=0;imult<mult;imult++){
-			if(eta[imult]<-2.40||eta[imult]>2.40) continue;
-                        if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection
+		//	if(eta[imult]<-2.40||eta[imult]>2.40) continue;
+                //        if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection
 			Qx+=1.*cos(nn*phi[imult]);
 			Qy+=1.*sin(nn*phi[imult]);
 			for(int itheta=0;itheta<ntheta;itheta++){
@@ -221,8 +221,8 @@ LYZ::beginJob(int ispt_)
 {
   double Vmax[nbin], eps[nbin];
   for(int ibin=0; ibin<nbin ;ibin++){
-        Vmax[ibin]=2.00*(trkbin[ibin]+30);
-        eps[ibin]=0.00800*(trkbin[ibin]+30);
+        Vmax[ibin]=0.065*(trkbin[ibin]+30);
+        eps[ibin]=0.00025*(trkbin[ibin]+30);
   }
     ispt = ispt_;
     if(ispt_){             nvv = nptv;       binv = ptbinv;}
@@ -247,7 +247,7 @@ LYZ::beginJob(int ispt_)
 	for(int ibin=0; ibin<nbin; ibin++){
         	    for(int ir=0; ir<nstepr; ir++)
                         if(isSimple==0)	r[ibin][ir]=j01/(Vmax[ibin]-eps[ibin]*ir);
-                	else	r[ibin][ir]=0.00025*2*(ir+1);
+                	else	r[ibin][ir]=0.00025*20*(ir+1);
                 totmultv[ibin].ResizeTo(nvv);	totmultv[ibin].Zero();  
                 totptv[ibin].ResizeTo(nvv);	totptv[ibin].Zero();  
                 totetav[ibin].ResizeTo(nvv);	totetav[ibin].Zero();  
