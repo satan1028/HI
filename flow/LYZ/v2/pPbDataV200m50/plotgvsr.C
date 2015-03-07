@@ -13,9 +13,9 @@ void plotgvsr(){
     gStyle->SetOptStat(kFALSE);
 TCanvas *c1 = new TCanvas();
 c1->SetLogy();
-TH1D* hFrame = new TH1D("","",1000,0,1);
-hFrame->GetYaxis()->SetRangeUser(5e-6,1);
-hFrame->GetXaxis()->SetRangeUser(0.0,0.1);
+TH1D* hFrame = new TH1D("","",2000,0,2);
+hFrame->GetYaxis()->SetRangeUser(5e-6,1e3);
+hFrame->GetXaxis()->SetRangeUser(0.4,1.9);
 hFrame->GetXaxis()->SetTitle("r");
 hFrame->GetYaxis()->SetTitle("|G^{#theta}(ir)|^{2}");
 hFrame->SetTitle("");

@@ -1,6 +1,8 @@
 #/bin/bash
 TMPDIR=/tmp/${USER}
+if [[ ! -d $TMPDIR ]] ;then
 mkdir $TMPDIR
+fi
 
 # run your macro storing the output in the tmp directory
 root -l << EOF
@@ -13,5 +15,5 @@ export X509_USER_CERT=/home/xuq7/.globus/usercert.pem
 /usr/local/cms-stageout/vandyCp.sh ${TMPDIR}/*.root /cms/store/user/qixu/jetRpA/RpA/NewMC/
 
 # finally, clean up your tmp directory
-#rm -r $TMPDIR
+rm -rf $TMPDIR
 
