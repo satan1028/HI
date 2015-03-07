@@ -51,7 +51,14 @@ grProd->SetMarkerStyle(20);
 grsp->Draw("Psame");
 l->Draw("same");
 c1->SaveAs("spflow.gif");
-grProd->Draw("AP");
+hFrame->GetYaxis()->SetTitle("Calc V2");
+hFrame->GetXaxis()->SetRangeUser(25,320);
+hFrame->GetYaxis()->SetRangeUser(0.045,0.1);
+hFrame->Draw();
+grProd->Draw("Psame");
+TLine *l = new TLine(25,0.0502,320,0.0502);
+l->SetLineStyle(2);
+l->Draw("same");
 c1->SaveAs("V205_Ntrk.gif");
 }
 
