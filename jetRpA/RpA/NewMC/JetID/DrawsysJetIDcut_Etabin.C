@@ -58,17 +58,14 @@ else{
 xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
 xrange_JetIDcut[1]=JetIDcut[1]-1e-4;
 TH1D* histo=new TH1D("","",1000,0.,1000.);
-cout<<ilist<<"\t"<<cut<<"\t"<<i<<endl;
-if(ilist==21) {
+if(ilist==21){
 	for(int ibin=1;ibin<h2F->GetYaxis()->GetNbins();ibin++){
 		double binxcenter = h2F->GetYaxis()->GetBinCenter(ibin);
 		TVectorD* vecx2 = (TVectorD*)extract(binxcenter);
 		TH1D* histo_=(TH1D*)h2F->ProjectionX(Form("histo_"),ibin,ibin);
-		cout<<ibin<<"\t"<<binxcenter<<"\t"<<histo_->GetEntries()<<endl;
-		histo_->Draw();
 		if((*vecx2)[(int)cut]!=0 && histo_->GetEntries()!=0)
-		//cout<<ibin<<"\t"<<binxcenter<<"\t"<<(*vecx2)[0]<<endl;
-		histo=histo->Add(histo_);
+		//histo=histo->Add(histo_);
+		histo=histo_;
 	}
 }
 else histo=(TH1D*)h2F->ProjectionX(Form("histo"),h2F->GetYaxis()->FindBin(xrange_JetIDcut[0]),h2F->GetYaxis()->FindBin(xrange_JetIDcut[1]));
@@ -90,8 +87,8 @@ gStyle->SetErrorX(0);
 //gStyle->SetOptTitle(0);
 //c1 = new TCanvas("c1","",600,1000);
 //makeMultiPanelCanvas(c1,1,2,0.03,0.03,0.1,0.12,0.03);
-//c1 = new TCanvas("c1"," ",1200,600);
-//makeMultiPanelCanvas(c1,4,2,0,0,0.25,0.2,0.03);
+c1 = new TCanvas("c1"," ",1200,600);
+makeMultiPanelCanvas(c1,4,2,0,0,0.25,0.2,0.03);
 TH1F* hFrame=new TH1F("","",1000,0,1000);
 fixedFontHist(hFrame,2.0,3.0);
 hFrame->SetTitle("");
@@ -101,7 +98,7 @@ hFrame->GetYaxis()->SetRangeUser(0.94,1.08);
 TLatex T;
 
 for(int i=0;i<Neta;i++){
- //   c1->cd(canvas[i]+1)->SetGridx();
+    c1->cd(canvas[i]+1)->SetGridx();
     if(canvas[i]==0  || canvas[i]==4)
         hFrame->GetYaxis()->SetTitle("Yield Ratio");
     else
