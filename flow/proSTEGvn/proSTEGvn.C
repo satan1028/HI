@@ -30,7 +30,7 @@ void proSTEGvn()
 
   //simple toy event generator
   //TFile f(Form("/lio/lfs/cms/store/user/qixu/flow/NewSTEG/pPbDataV205m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
-  TFile f(Form("/tmp/xuq7/pPbDataV205m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
+  TFile f(Form("/tmp/xuq7/pPbDataV203m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
   //TFile f(Form("vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
   TTree *tree = new TTree("tree","Event tree with a few branches");
 //  tree->Branch("npg", &b_npg, "npg/I");   // # of particles;
@@ -53,7 +53,7 @@ void proSTEGvn()
   //TF1 *V2vsPt = new TF1("V2vsPt","((x/[0])^[1]/(1+(x/[2])^[3]))*(.00005+(1/x)^[4])",0.1,10);
  //	V2vsPt->SetParameters(4.81159,1.80783,3.69272,3.11889,0.931485);	//Real data V~0.05
   //	V2vsPt->SetParameters(5,1.8,3,1.8,0.8); //V~0.06
-  TF1 *V2vsPt = new TF1("V2vsPt","((x/3.31699)^2.35142/(1+(x/3.49188)^3.54429))*(.00005+(1/x)^1.50600)",0.3,6.0);
+  TF1 *V2vsPt = new TF1("V2vsPt","0.6*((x/3.31699)^2.35142/(1+(x/3.49188)^3.54429))*(.00005+(1/x)^1.50600)",0.3,6.0);
   TF1 *V3vsPt = new TF1("V3vsPt","((x/3.2)^2.3/(1+(x/3.4)^2.1))*(.00005+(1/x)^1.4)",0.3,6.0);
   TF1 *V4vsPt = new TF1("V4vsPt","((x/4.8)^2.1/(1+(x/3.4)^2.1))*(.00005+(1/x)^1.4)",0.3,6.0);
   TF1 *V5vsPt = new TF1("V5vsPt","((x/6.0)^3.2/(1+(x/11.4)^2.1))*(.00005+(1/x)^1.4)",0.3,6.0);

@@ -58,14 +58,14 @@ else{
 xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
 xrange_JetIDcut[1]=JetIDcut[1]-1e-4;
 TH1D* histo=new TH1D("","",1000,0.,1000.);
+histo->Sumw2();
 if(ilist==21){
 	for(int ibin=1;ibin<h2F->GetYaxis()->GetNbins();ibin++){
 		double binxcenter = h2F->GetYaxis()->GetBinCenter(ibin);
 		TVectorD* vecx2 = (TVectorD*)extract(binxcenter);
 		TH1D* histo_=(TH1D*)h2F->ProjectionX(Form("histo_"),ibin,ibin);
 		if((*vecx2)[(int)cut]!=0 && histo_->GetEntries()!=0)
-		//histo=histo->Add(histo_);
-		histo=histo_;
+		histo->Add(histo_);
 	}
 }
 else histo=(TH1D*)h2F->ProjectionX(Form("histo"),h2F->GetYaxis()->FindBin(xrange_JetIDcut[0]),h2F->GetYaxis()->FindBin(xrange_JetIDcut[1]));
@@ -93,8 +93,8 @@ TH1F* hFrame=new TH1F("","",1000,0,1000);
 fixedFontHist(hFrame,2.0,3.0);
 hFrame->SetTitle("");
 //hFrame->GetYaxis()->SetTitle("Yield Ratio");
-hFrame->GetXaxis()->SetLimits(30,600);
-hFrame->GetYaxis()->SetRangeUser(0.94,1.08);
+hFrame->GetXaxis()->SetLimits(27.5,600);
+hFrame->GetYaxis()->SetRangeUser(0.98,1.01);
 TLatex T;
 
 for(int i=0;i<Neta;i++){
@@ -112,7 +112,7 @@ for(int i=0;i<Neta;i++){
 //fstr[i].open(Form("jetIDsys%s.txt",etabinname[i].Data()));
 //fstr[i]<<setprecision(4)<<fixed;
 //TH1D* histo0 = makehisto(ilist0,i,1.01);
-TString coll="MCPPb";
+TString coll="MCPPb_real";
 TH1D* histo1PPb = makehisto(ilist0,i,0,coll);
 TH1D* histo2PPb = makehisto(ilist0,i,1,coll);
 TH1D* histo3PPb = makehisto(ilist0,i,2,coll);
@@ -225,20 +225,32 @@ T.DrawLatex(0.4,0.18,etastring[i]);
 else if(canvas[i]>4)
 T.DrawLatex(0.4,0.30,etastring[i]);
 else{
-    TLegend *leg1=new TLegend(0.20,0.25,0.85,0.45);
+    TLegend *leg1=new TLegend(0.28,0.25,0.85,0.45);
     leg1->SetBorderSize(0);
     leg1->SetFillColor(0);
-    leg1->SetTextSize(0.058);
+    leg1->SetTextSize(0.050);
     leg1->AddEntry(hratioPPb2,"nF<0.7,eF<0.8/nF<0.8,eF<0.8","p");
     leg1->AddEntry(hratioPPb3,"nF<0.6,eF<0.8/nF<0.8,eF<0.8","p");
     leg1->AddEntry(hratioPPb4,"nF<0.7,eF<0.7/nF<0.8,eF<0.8","p");
-//    leg1->AddEntry(hratioPbP,"PPb(Proton going postive)","p");
     leg1->Draw("same");
     T.SetTextSize(0.065);
-    if(coll.Contains("Data"))
-    T.DrawLatex(0.35,0.80,"CMS Preliminary");
+    if(coll.Contains("MC")){
+    if(coll.Contains("fake"))
+    T.DrawLatex(0.35,0.64,"Fake jets");
+        else if(coll.Contains("real"))
+    T.DrawLatex(0.35,0.64,"Real jets");
+        else
+    T.DrawLatex(0.35,0.64,"Inclusvie jets");
+    }
+    T.SetTextSize(0.065);
+    if(coll.Contains("PPb"))
+    T.DrawLatex(0.35,0.76,"PbP(Pb going postive)");
     else
-    T.DrawLatex(0.35,0.80,"CMS Simulation");
+    T.DrawLatex(0.35,0.76,"PPb(Proton going postive)");
+    if(coll.Contains("Data"))
+    T.DrawLatex(0.35,0.88,"CMS Preliminary");
+    else
+    T.DrawLatex(0.35,0.88,"CMS Simulation");
 }
 }
 c1->Print(Form("pic/JetIDcutsys_%s_Etabin.gif",coll.Data()));

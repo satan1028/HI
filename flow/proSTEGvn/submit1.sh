@@ -1,12 +1,12 @@
 #!/bin/sh
 
-mult=40
-for i in {0..299}
+mult=185
+for i in 151 152 153 154 174 212 213
 do
     export MULT=$mult
     export IFILE=$i
 #qsub -v MULT=$mult,IFILE=$i proSTEG.pbs
 #sbatch -o /dev/null proSTEG1.slurm
-#sbatch -o job$i.out -J pro1_$i_$mult proSTEG1.slurm
-root -l -b -q proSTEGvn1.C
+sbatch -o /dev/null -J pro1_${i}_${mult} proSTEG1.slurm
+#root -l -b -q proSTEGvn1.C
 done
