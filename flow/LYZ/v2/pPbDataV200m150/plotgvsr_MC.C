@@ -13,7 +13,7 @@ gStyle->SetOptStat(kFALSE);
 TCanvas *c1 = new TCanvas();
 c1->SetLogy();
 TH1D* hFrame = new TH1D("","",2000,0,2);
-hFrame->GetYaxis()->SetRangeUser(5e-9,1);
+hFrame->GetYaxis()->SetRangeUser(5e-13,1);
 hFrame->GetXaxis()->SetRangeUser(0.2,0.8);
 hFrame->GetXaxis()->SetTitle("r");
 hFrame->GetYaxis()->SetTitle("|G^{#theta}(ir)|^{2}");
@@ -23,7 +23,7 @@ TGraph *gr[nnu];
 double r0[nnu];
 double G2[nnu];
 TLine *l[nnu];
-for(int i=0;i<nnu-1;i++){
+for(int i=0;i<nnu;i++){
 gr[i]=plotGF(i,xtheta,r0+i,G2+i,marker[i],color[i]);
 gr[i]->Draw("Psame");
 }
@@ -32,7 +32,7 @@ TLegend *tg = new TLegend(0.75,0.70-0.10*nnu,0.90,0.70);
 tg->SetFillColor(0);
 tg->SetBorderSize(0);
 tg->SetTextSize(0.04);
-for(int i=0;i<nnu-1;i++)
+for(int i=0;i<nnu;i++)
 if(i==0)
 tg->AddEntry(gr[i],Form("Prod"),"lp");
 else

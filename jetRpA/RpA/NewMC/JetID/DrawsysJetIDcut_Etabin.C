@@ -64,7 +64,7 @@ if(ilist==21){
 		double binxcenter = h2F->GetYaxis()->GetBinCenter(ibin);
 		TVectorD* vecx2 = (TVectorD*)extract(binxcenter);
 		TH1D* histo_=(TH1D*)h2F->ProjectionX(Form("histo_"),ibin,ibin);
-		if((*vecx2)[(int)cut]!=0 && histo_->GetEntries()!=0)
+		if((*vecx2)[(int)cut]!=0)
 		histo->Add(histo_);
 	}
 }

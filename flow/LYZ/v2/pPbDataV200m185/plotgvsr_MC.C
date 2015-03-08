@@ -13,7 +13,7 @@ gStyle->SetOptStat(kFALSE);
 TCanvas *c1 = new TCanvas();
 c1->SetLogy();
 TH1D* hFrame = new TH1D("","",2000,0,2);
-hFrame->GetYaxis()->SetRangeUser(5e-9,1);
+hFrame->GetYaxis()->SetRangeUser(5e-13,1);
 hFrame->GetXaxis()->SetRangeUser(0.1,0.6);
 hFrame->GetXaxis()->SetTitle("r");
 hFrame->GetYaxis()->SetTitle("|G^{#theta}(ir)|^{2}");
