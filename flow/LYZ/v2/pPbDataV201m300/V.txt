@@ -1,0 +1,4 @@
+ibin	itheta	r0	V	sigma	chi	Vn Errors
+
+ibin	avgmult	Vn mean	Vn mean Error
+0	0.0000	0.0000	0.0000

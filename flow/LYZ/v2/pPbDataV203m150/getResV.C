@@ -9,8 +9,8 @@ void getResV(){
 	
         double Vmax[nbin], eps[nbin];
         for(int ibin=0; ibin<nbin ;ibin++){
-            Vmax[ibin]=0.065*(trkbin[ibin]+30);
-            eps[ibin]=0.00025*(trkbin[ibin]+30);
+            Vmax[ibin]=0.045*(trkbin[ibin]+30);
+            eps[ibin]=0.00015*(trkbin[ibin]+30);
         }
 	ofstream  fstrV;
 	double theta[ntheta];
@@ -71,8 +71,8 @@ void getResV(){
 	}
 
         for(int ifile=0; ifile<nFileAll; ifile++){
-		if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV200m150/AnaV_Sum_%d.root",ifile));
-		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV200m150/AnaV_Prod_%d.root",ifile));
+		if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV203m150/AnaV_Sum_%d.root",ifile));
+		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV203m150/AnaV_Prod_%d.root",ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 		TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));

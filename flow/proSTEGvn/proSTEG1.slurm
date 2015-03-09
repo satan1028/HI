@@ -2,7 +2,7 @@
 #SBATCH --nodes=1
 #SBATCH --mem=4G
 #SBATCH --mem-per-cpu=4G
-#SBATCH --time=0-02:00:00
+#SBATCH --time=1-00:00:00
 
 echo $SLURM_JOB_ID
 echo $SLURM_JOB_NAME
@@ -18,7 +18,7 @@ cd /home/xuq7/HI/CMSSW_5_3_20/src
 #cmsenv
 eval `scramv1 runtime -sh`
 
-TMPDIR=/tmp/xuq7/pPbDataV200m$MULT
+TMPDIR=/tmp/xuq7/pPbDataV201m$MULT
 if [[ ! -d $TMPDIR ]]; then
 mkdir /tmp/xuq7
 mkdir $TMPDIR
@@ -27,11 +27,11 @@ cd /home/xuq7/HI/flow/proSTEGvn
 
 root -l -b proSTEGvn1.C
 echo "Done!"
-if [[ ! -d /cms/store/user/qixu/flow/STEG/pPbDataV200m$MULT ]]; then
-   mkdir /cms/store/user/qixu/flow/STEG/pPbDataV200m$MULT
+if [[ ! -d /cms/store/user/qixu/flow/STEG/pPbDataV201m$MULT ]]; then
+   mkdir /cms/store/user/qixu/flow/STEG/pPbDataV201m$MULT
 fi
 export X509_USER_CERT=/home/xuq7/.globus/usercert.pem
-/usr/local/cms-stageout/vandyCp.sh $TMPDIR/vndata_50k_$IFILE.root /cms/store/user/qixu/flow/STEG/pPbDataV200m$MULT/
+/usr/local/cms-stageout/vandyCp.sh $TMPDIR/vndata_50k_$IFILE.root /cms/store/user/qixu/flow/STEG/pPbDataV201m$MULT/
 rm -r $TMPDIR/vndata_50k_$IFILE.root
 if [[ "$(ls -A $TMPDIR)" ]];then
     echo "NOT EMPTY!"
