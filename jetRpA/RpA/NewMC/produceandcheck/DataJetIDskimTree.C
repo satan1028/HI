@@ -153,7 +153,8 @@ for(int j4i = 0; j4i < nref; j4i++){
 		double muSum = t_muSum[j4i];
 		double eSum = t_eSum[j4i];
                 jet_pt = jet_pt*jetweight;
-	double PPTighter0 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt < 1.0 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
+        if((chargedN == 0 || chargedSum == 0) && TMath::Abs(jet_eta)< 2.4) continue;  // jet id selection
+	double PPTighter0 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt<1.0);
 	double PPTighter1 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
 	double PPTighter2 = (double)(neutralSum/jet_pt < 0.6 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
 	double PPTighter3 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.7 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
@@ -187,9 +188,9 @@ for(int j4i = 0; j4i < nref; j4i++){
   TString dataType;
   TString out_name;
   dataType = "DATA";
-  out_name=Form("%s%s%sskimJetID.root",dataType.Data(),coll.Data(),algo.Data());
+  out_name=Form("%s%s%sskimJetID_ids.root",dataType.Data(),coll.Data(),algo.Data());
 
-  TFile *out_file = new TFile(Form("/cms/store/user/qixu/jetRpA/RpA/NewMC/%s",out_name.Data()),"RECREATE");  
+  TFile *out_file = new TFile(Form("/tmp/xuq7/%s",out_name.Data()),"RECREATE");  
 
     for(int ijetid=0;ijetid<nJetID;ijetid++){
         jetptjetid[ijetid]->Write();

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mult=300
-for i in {0..299}
+for i in 226
 do
     export MULT=$mult
     export IFILE=$i

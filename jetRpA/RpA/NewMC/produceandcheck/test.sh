@@ -5,9 +5,13 @@ mkdir $TMPDIR
 fi
 
 # run your macro storing the output in the tmp directory
+#root -l << EOF
+#.L PPbanalyzeRpAskimTree.C+
+#PPbanalyzeRpAskimTree()
+#EOF
 root -l << EOF
-.L PPbanalyzeRpAskimTree.C+
-PPbanalyzeRpAskimTree()
+.L DataJetIDskimTree.C+
+DataJetIDskimTree()
 EOF
 
 # Now call vandyCp.sh to move the file to LStore

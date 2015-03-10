@@ -9,6 +9,7 @@ TString DataPbPfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPbPakPu3PFskimUni
 TString DataPPbJetIDfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimJetID.root";
 TString DataPbPJetIDfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPbPakPu3PFskimJetID.root";
 TString MCPPbfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim.root";
+TString MCPPbfileids="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim_ids.root";
 TString MCPbPfile="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPbPakPu3PF_useskim.root";
 TString MCPPbxSecfile="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPbakPu3PFxSecskimUniv.root";
 
@@ -52,6 +53,7 @@ TFile *fMCPPxSec=new TFile(MCPPxSecfile);
 TFile *fMCPPxSecJetID=new TFile(MCPPxSecJetIDfile);
 
 TFile *fMCPPb=new TFile(MCPPbfile);
+TFile *fMCPPbids=new TFile(MCPPbfileids);
 TFile *fMCPPbxSec=new TFile(MCPPbxSecfile);
 TFile *fMCPPbJetID=new TFile(MCPPbJetIDfile);
 TFile *fMCPPbxSecJetID=new TFile(MCPPbxSecJetIDfile);

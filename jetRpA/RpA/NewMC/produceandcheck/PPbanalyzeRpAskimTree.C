@@ -203,7 +203,7 @@ void hist_class::Write()
   TString dataType;
   TString out_name;
   dataType = "MC";
-  out_name=Form("%s%s%s_useskim.root",dataType.Data(),coll.Data(),algo.Data());
+  out_name=Form("%s%s%s_useskim_ids.root",dataType.Data(),coll.Data(),algo.Data());
 
   TFile *out_file = new TFile(Form("/tmp/xuq7/%s",out_name.Data()),"RECREATE");  
     refjetpt->Write();
@@ -354,7 +354,8 @@ for(int j4i = 0; j4i < nref; j4i++){
 		int photonN = t_photonN[j4i];
 		double muSum = t_muSum[j4i];
 		double eSum = t_eSum[j4i];
-	double PPTighter0 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt<1.0 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
+        if((chargedN == 0 || chargedSum == 0) && TMath::Abs(jet_eta)< 2.4) continue;  // jet id selection
+	double PPTighter0 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt<1.0);
 	double PPTighter1 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
 	double PPTighter2 = (double)(neutralSum/jet_pt < 0.6 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
 	double PPTighter3 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.7 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
