@@ -46,12 +46,12 @@ else if(ilist== 3) JetID = "neutralSum";
 else if(ilist== 4) JetID = "photonMax";
 else if(ilist== 5) JetID = "photonSum";
 else if(ilist== 6)  {    JetID = "Max h^{#pm}/p_{T}"; JetIDcut[0]=0.05; JetIDcut[1]=2;}
-else if(ilist== 7)  {    JetID = "#Sigma h^{#pm}/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.6;}
+else if(ilist== 7)  {    JetID = "#Sigma h^{#pm}/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.8;}
 else if(ilist== 8)  {   JetID = "Max h^{0}/p_{T}"; JetIDcut[0] = 0;  JetIDcut[1]=0.08;}
-else if(ilist== 9)  {    JetID = "#Sigma h^{0}/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.15;}
+else if(ilist== 9)  {    JetID = "#Sigma h^{0}/p_{T}"; JetIDcut[0] = 0; JetIDcut[1]=0.8;}
 else if(ilist== 10)  {   JetID = "Max #gamma/p_{T}";	JetIDcut[0] = 0; JetIDcut[1]=0.50;}
 else if(ilist== 11) {    JetID = "#Sigma #gamma/p_{T}";	JetIDcut[0] = 0; JetIDcut[1]=0.3;}
-else if(ilist== 12) {    JetID = "#Sigma electron/p_{T}";	JetIDcut[0] = 0; JetIDcut[1]=0.2;}
+else if(ilist== 12) {    JetID = "#Sigma electron/p_{T}";	JetIDcut[0] = 0; JetIDcut[1]=0.8;}
 else if(ilist== 13) {    JetID = "(#Sigma h^{#pm}+#Sigma #gamma +#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";JetIDcut[0]=0; JetIDcut[1]=1.01;}
 else if(ilist== 14) {    JetID = "(#Sigma h^{#pm}+#Sigma #gamma +#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{raw}"; JetIDcut[0]=0;JetIDcut[1]=1.20;}
 else if(ilist== 15)   {  JetID = "Max h^{0}/Max(#Sigma h^{0},#Sigma h^{#pm})";JetIDcut[0]=0;JetIDcut[1]=0.975;}
@@ -62,7 +62,7 @@ else if(ilist== 19)   {  JetID = "PP cut True or False";JetIDcut[0]=1;JetIDcut[1
 else if(ilist== 20)   {  JetID = "PP cut Tight True or False";JetIDcut[0]=1;JetIDcut[1]=2;}
 else if(ilist== 21)   {  JetID = "PP cut Tighter True or False";JetIDcut[0]=8;JetIDcut[1]=16;}
 //else if(ilist== 22)   {  JetID = "Max h^{0}/#Sigma h^{#pm}";JetIDcut[0]=0;JetIDcut[1]=2;}
-//else if(ilist== 23) {    JetID = "(#Sigma h^{#pm}+#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";JetIDcut[0]=0; JetIDcut[1]=0.80;}
+else if(ilist== 22) {    JetID = "(#Sigma h^{#pm}+#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";JetIDcut[0]=0; JetIDcut[1]=0.80;}
 else{   exit();}
 
 if(JetIDName.Contains("pt") || JetIDName=="neuMaxr"){
@@ -70,8 +70,10 @@ if(ilist==13 || ilist==14){
 double binbound_JetID[]={0,0.4,0.8,0.84,0.86,0.88,0.9,0.92,0.94,0.96,0.98,1.0,1.02,1.04,1.06,1.1,1.15,1.2,1.3,1.4,1.6,1.8,2.};}
 else if(ilist==15){
 double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.6,0.7,0.8,0.84,0.88,0.92,0.96,1.02};}
-else if(ilist==8 || ilist==10){
-double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5};}
+//else if(ilist==8 || ilist==10){
+//double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5};}
+else if(ilist==22){
+double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8};}
 else{
 //double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.,1.1,1.5,2};}
 double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.0};}
@@ -370,9 +372,9 @@ T1.SetTextSize(0.065);
 T1.DrawLatex(0.4,ybase-0.06,etastring[i]);
 }
 
-if(i==7){
+if(i==1){
         hFrame2->GetXaxis()->SetTitle(Form("%s %s",JetID.Data(),Unit.Data()));
-        hFrame2->GetXaxis()->SetNdivisions(520);
+        hFrame2->GetXaxis()->SetNdivisions(510);
         hFrame2->GetXaxis()->SetLimits(-binbound_JetID[1]*0.7,binbound_JetID[Nbin_JetID]*1.02);
         fixedFontHist(hFrame2,2.0,3.0);
         for(int ipt=0;ipt<Nbin_pt_coarse;ipt++){
@@ -486,7 +488,7 @@ c4->cd(canvas[i]+1)->SetGridx();
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame1->GetXaxis()->SetLimits(28,599);
 hFrame1->SetMaximum(1.015);
-hFrame1->SetMinimum(0.915);
+hFrame1->SetMinimum(0.);
 hFrame1->DrawCopy();
 TH1F* ratio_hPPb_JetIDcutvsnocut_pt=(TH1F*)rehisto_hPPb_JetIDcut_pt->Clone("ratio_hPPb_JetIDcut_ptcutvsnocut_pt");
 ratio_hPPb_JetIDcutvsnocut_pt->Divide(rehisto_hPPb_pt);
@@ -519,9 +521,9 @@ ratio_hPPb_JetIDcutvsnocut_pt_real->SetMarkerColor(4);
 ratio_hPPb_JetIDcutvsnocut_pt_real->SetLineColor(4);
 getRidYError(ratio_hPPb_JetIDcutvsnocut_pt_real);
 if(canvas[i]!=4){
-ratio_hPPb_JetIDcutvsnocut_pt->Draw("Psame");
 ratio_hPPb_JetIDcutvsnocut_pt_fake->Draw("Psame");
 ratio_hPPb_JetIDcutvsnocut_pt_real->Draw("Psame");
+ratio_hPPb_JetIDcutvsnocut_pt->Draw("Psame");
 T1.DrawLatex(0.4,ybase-0.06,etastring[i]);
 TLine *l =new TLine(28,1,600,1);
 l->SetLineStyle(2);
