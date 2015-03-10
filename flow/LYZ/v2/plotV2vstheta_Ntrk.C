@@ -19,7 +19,6 @@ makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
     gStyle->SetOptTitle(0);
     gStyle->SetErrorX(0);
     TH1D *hFrame = new TH1D("","",300,-1,2);
-    hFrame->SetTitle("v_{2} vs momentum");
     hFrame->GetXaxis()->SetTitle("#theta");
     hFrame->GetYaxis()->SetTitle("referenceV_{2}");	
     hFrame->GetXaxis()->SetTitleSize(0.04);

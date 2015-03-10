@@ -221,8 +221,8 @@ LYZ::beginJob(int ispt_)
 {
   double Vmax[nbin], eps[nbin];
   for(int ibin=0; ibin<nbin ;ibin++){
-        Vmax[ibin]=0.05*(trkbin[ibin]+30);
-        eps[ibin]=0.0001*(trkbin[ibin]+30);
+        Vmax[ibin]=0.040*(trkbin[ibin]+30);
+        eps[ibin]=0.00015*(trkbin[ibin]+30);
   }
     ispt = ispt_;
     if(ispt_){             nvv = nptv;       binv = ptbinv;}
