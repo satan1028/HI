@@ -1,5 +1,5 @@
-#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
-#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
+#include "../../Quality/root_setting.h"
+#include "../produceandcheck/file.h"
 
 TLatex *T=new TLatex();
 
@@ -34,6 +34,7 @@ else if(ilist== 11) {    JetID = "#Sum p_{T}^{photons}/p_{T}^{jet}";     JetIDcu
 else if(ilist== 12) {    JetID = "(#Sigma p_{T}^{charged}+#Sigma p_{T}^{photons}+#Sigma p_{T}^{neutral}+#Sigma p_{T}^{#mu}+#Sigma p_{T}^{e})/p_{T}^{jet}";JetIDcut[0]=0; JetIDcut[1]=1.01; ilistw=3;}
 else if(ilist== 13) {    JetID = "(#Sigma p_{T}^{charged}+#Sigma p_{T}^{photons}+#Sigma p_{T}^{neutral}+#Sigma p_{T}^{#mu}+#Sigma p_{T}^{e})/p_{T}^{raw}"; JetIDcut[0]=0;JetIDcut[1]=1.13;}
 else if(ilist== 14) {  JetID = "Max p_{T}^{neutral} /Max(#Sigma p_{T}^{charged},#Sigma p_{T}^{neutral})";JetIDcut[0]=0;JetIDcut[1]=0.975;ilistw=2;}
+else if(ilist== 21)   {  JetID = "PP cut Tighter True or False";JetIDcut[0]=8;JetIDcut[1]=16;}
 
 if(ilist==12 || ilist==13 || ilist==14 ){
 double binbound_JetID[]={0,0.2,0.4,0.6,0.7,0.8,0.84,0.86,0.88,0.9,0.92,0.94,0.96,0.98,1.0,1.02,1.04,1.06,1.1,1.15,1.2,1.3,1.4,1.6,1.8,2.};}
@@ -103,8 +104,8 @@ T->SetTextAlign(12);
 T->SetTextSize(0.05);
 T->SetTextColor(1);
 T->SetTextFont(42);
-if(canvas[ieta]==4)
-if(dataType==1) T->DrawLatex(0.22,0.98-ilistw*0.05,Form("Cut %d: %.2f<%s<%.2f",ilistw,JetID.Data(),xrange_JetIDcut[0],xrange_JetIDcut[1]));
+//if(canvas[ieta]==4)
+//if(dataType==1) T->DrawLatex(0.22,0.78,Form("%.2f<%s<%.2f",xrange_JetIDcut[0],JetID.Data(),xrange_JetIDcut[1]));
 
 if(dataType==1) return g;
 else return ginc;
@@ -120,10 +121,14 @@ hFrame->SetLineColor(0);
 hFrame->GetXaxis()->SetLimits(28,599);
 hFrame->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame->GetYaxis()->SetTitle("Cut Efficiency");
-hFrame->SetMaximum(1.018);
-hFrame->SetMinimum(0.888);
+hFrame->SetMaximum(1.005);
+hFrame->SetMinimum(0.980);
 fixedFontHist(hFrame,2.0,3.0);
 hFrame->DrawCopy();
+TLegend *leg1=new TLegend(0.42,0.35,0.72,0.75);
+leg1->SetBorderSize(0);
+leg1->SetFillColor(0);
+leg1->SetTextSize(0.05);
 for(int i=0;i<Neta;i++){
     c1->cd(canvas[i]+1)->SetGridx();
     if(i==0  || i==6){
@@ -164,33 +169,41 @@ TGraphAsymmErrors *g14MC = makeJetIDcut(14,0,i);
 g14MC->SetMarkerStyle(25);
 g14MC->SetMarkerColor(4);
 g14MC->SetLineColor(4);
+TGraphAsymmErrors *g21Data = makeJetIDcut(21,1,i);
+g21Data->SetMarkerStyle(28);
+g21Data->SetMarkerColor(4);
+g21Data->SetLineColor(4);
+TGraphAsymmErrors *g21MC = makeJetIDcut(21,0,i);
+g21MC->SetMarkerStyle(25);
+g21MC->SetMarkerColor(4);
+g21MC->SetLineColor(4);
 //g14MC->Draw("Psame");
-TLegend *leg1=new TLegend(0.42,0.35,0.72,0.75);
-leg1->SetBorderSize(0);
-leg1->SetFillColor(0);
-leg1->SetTextSize(0.05);
+TLine *l =new TLine(30,1,600,1);
+l->SetLineStyle(2);
+l->SetLineColor(1);
 if(canvas[i]!=4){
-g14Data->Draw("Psame");
-g12Data->Draw("Psame");
-g6Data->Draw("Psame");
-g12MC->Draw("Psame");
+//g14Data->Draw("Psame");
+//g12Data->Draw("Psame");
+//g6Data->Draw("Psame");
+//g12MC->Draw("Psame");
+g21Data->Draw("Psame");
+g21MC->Draw("Psame");
+l->Draw("same");
 }
 if(canvas[i]==4){
-leg1->AddEntry(g6Data,"cut 1 Data","lp");
-leg1->AddEntry(g6MC,"cut 1 PYTHIA+HIJING","lp");
-leg1->AddEntry(g14Data,"cut 2 Data","lp");
-leg1->AddEntry(g14MC,"cut 2 PYTHIA+HIJING","lp");
-leg1->AddEntry(g12Data,"cut 3 Data","lp");
-leg1->AddEntry(g12MC,"cut 3 PYTHIA+HIJING","lp");
+//leg1->AddEntry(g6Data,"cut 1 Data","lp");
+//leg1->AddEntry(g6MC,"cut 1 PYTHIA+HIJING","lp");
+//leg1->AddEntry(g14Data,"cut 2 Data","lp");
+//leg1->AddEntry(g14MC,"cut 2 PYTHIA+HIJING","lp");
+//leg1->AddEntry(g12Data,"cut 3 Data","lp");
+//leg1->AddEntry(g12MC,"cut 3 PYTHIA+HIJING","lp");
+leg1->AddEntry(g21Data,"PP cut Data","lp");
+leg1->AddEntry(g21MC,"PP cut PYTHIA+HIJING","lp");
 leg1->Draw("same");
 }
 T->SetTextSize(0.065);
 if(canvas[i]!=4)
 T->DrawLatex(0.40,0.30,etastring[i]);
-TLine *l =new TLine(30,1,600,1);
-l->SetLineStyle(2);
-l->SetLineColor(1);
-l->Draw("same");
 }
 c1->Print(Form("pic/overlay_JetIDcut_Etabin.png"));
 c1->Print(Form("pic/overlay_JetIDcut_Etabin.pdf"));
