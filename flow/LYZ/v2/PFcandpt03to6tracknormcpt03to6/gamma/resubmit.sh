@@ -15,7 +15,7 @@ for i in `seq 0 889`;do
     fi
 done
 echo  $idir ${arr[@]}
-if [[ $idir == M* ]];then
-   ./submitall.sh $idir ${arr[@]}
-fi
+#if [[ $idir == M* ]];then
+#   ./submitall.sh $idir ${arr[@]}
+#fi
 done

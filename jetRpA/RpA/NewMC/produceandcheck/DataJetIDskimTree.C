@@ -17,7 +17,7 @@ using namespace std;
 //const double deta[] = {-2.2,-1.2,-0.7,-0.3,0.3,0.7,1.2,2.2};
 const double deta[] = {-2.0,-1.5,-1.0,-0.5,0.5,1.0,1.5,2.0};
 const int netabin = sizeof(deta)/sizeof(double)-1;
-const TString JetIDName[]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","PPcut","PPcutTight"};
+const TString JetIDName[]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","eSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","PPcut","PPcutTight","PPcutTighter","SumSumpt1"};
 const int nJetID = sizeof(JetIDName)/sizeof(TString);
 
 
@@ -30,11 +30,8 @@ void DataJetIDskimTree(){
         if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
         jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 200, 0., 2.);      //Added
         }
-        else if(JetIDName[ijetid].Contains("N")){
+        else if(JetIDName[ijetid].Contains("N") || JetIDName[ijetid].Contains("PP")){
         jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 100, 0., 100.);    //Added
-        }
-        else if(JetIDName[ijetid].Contains("PP")){
-        jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 2,0.,2.);    //Added
         }
         else{
         jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 3000, 0., 300.);   //Added
@@ -50,7 +47,7 @@ void DataJetIDskimTree(){
         jetptjetidEtaBin[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 200, 0., 2.);    //Added
         jetptjetidEtaBin[ieta][ijetid]->Sumw2();      //Added
         }
-        if(JetIDName[ijetid].Contains("PP")){
+        if(JetIDName[ijetid].Contains("PP") || JetIDName[ijetid].Contains("N")){
         jetptjetidEtaBin[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 2, 0., 2.);    //Added
         jetptjetidEtaBin[ieta][ijetid]->Sumw2();      //Added
         }
@@ -155,7 +152,13 @@ for(int j4i = 0; j4i < nref; j4i++){
 		int photonN = t_photonN[j4i];
 		double muSum = t_muSum[j4i];
 		double eSum = t_eSum[j4i];
-	double jetidv[nJetID]={chargedMax,chargedSum,neutralMax,neutralSum,photonMax,photonSum,chargedMax/(jet_pt*jetweight),chargedSum/(jet_pt*jetweight),neutralMax/(jet_pt*jetweight),neutralSum/(jet_pt*jetweight),photonMax/(jet_pt*jetweight),photonSum/(jet_pt*jetweight),(chargedSum+neutralSum+photonSum+muSum+eSum)/(jet_pt*jetweight),(chargedSum+neutralSum+photonSum+muSum+eSum)/raw_pt,neutralMax/TMath::Max(chargedSum,neutralSum),(double)chargedN,(double)neutralN,(double)photonN,(double)(neutralSum/(jet_pt*jetweight)<1.0 && eSum/(jet_pt*jetweight)<1.0 && photonSum/(jet_pt*jetweight)<1.0 && ((chargedSum>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ), (double)(neutralSum/(jet_pt*jetweight)<0.9 && eSum/(jet_pt*jetweight)<1.0 && photonSum/(jet_pt*jetweight)<0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) )};
+                jet_pt = jet_pt*jetweight;
+	double PPTighter0 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt < 1.0 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
+	double PPTighter1 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
+	double PPTighter2 = (double)(neutralSum/jet_pt < 0.6 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
+	double PPTighter3 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.7 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
+        double PPTighter = PPTighter0*TMath::Power(2,3)+PPTighter1*TMath::Power(2,2)+PPTighter2*TMath::Power(2,1)+PPTighter3*TMath::Power(2,0)+0.5;
+	double jetidv[nJetID]={chargedMax,chargedSum,neutralMax,neutralSum,photonMax,photonSum,chargedMax/jet_pt,chargedSum/jet_pt,neutralMax/jet_pt,neutralSum/jet_pt,photonMax/jet_pt,photonSum/jet_pt,eSum/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/raw_pt,neutralMax/TMath::Max(chargedSum,neutralSum),(double)chargedN,(double)neutralN,(double)photonN,(double)(neutralSum/jet_pt<1.0 && eSum/jet_pt<1.0 && photonSum/jet_pt<1.0 && ((chargedSum>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ), (double)(neutralSum/jet_pt<0.9 && eSum/jet_pt<1.0 && photonSum/jet_pt<0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ),PPTighter,(chargedSum+neutralSum+muSum+eSum)/jet_pt};
 	 if(raw_pt<22 || fabs(jet_eta)>5) continue;
        if(jet_pt>4*pt) continue;
 
@@ -164,7 +167,7 @@ for(int j4i = 0; j4i < nref; j4i++){
 	if(coll=="PbP")	jet_eta=jet_eta-0.465;
      if(TMath::Abs(jet_eta)<=1.) {
 	for(int ijetid=0;ijetid<nJetID;ijetid++){
-            jetptjetid[ijetid]->Fill(jet_pt*jetweight, jetidv[ijetid],weight);     //Added
+            jetptjetid[ijetid]->Fill(jet_pt, jetidv[ijetid],weight);     //Added
 	}	
     }
       for(int ieta =0; ieta<netabin;ieta++){
@@ -172,8 +175,8 @@ for(int j4i = 0; j4i < nref; j4i++){
       }//assign the eta bin for jets
       if(dEtaBin!=-1){
 	for(int ijetid=0;ijetid<nJetID;ijetid++){
-        if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr") || JetIDName[ijetid].Contains("PP")){
-        jetptjetidEtaBin[dEtaBin][ijetid]->Fill(jet_pt*jetweight,jetidv[ijetid],weight);
+        if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr") || JetIDName[ijetid].Contains("PP") || JetIDName[ijetid].Contains("N")){
+        jetptjetidEtaBin[dEtaBin][ijetid]->Fill(jet_pt,jetidv[ijetid],weight);
 	}
         }
       }
@@ -193,7 +196,7 @@ for(int j4i = 0; j4i < nref; j4i++){
     }
     for(int ieta=0; ieta<netabin; ieta++){
         for(int ijetid=0;ijetid<nJetID;ijetid++){
-          if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr") || JetIDName[ijetid].Contains("PP")){
+          if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr") || JetIDName[ijetid].Contains("PP") || JetIDName[ijetid].Contains("N")){
          jetptjetidEtaBin[ieta][ijetid]->Write();
         }
         }

@@ -34,11 +34,11 @@ TString MC5PPbfileSm="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu5PF_useskim
 //TString 
 //TString MCPPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFUniv.root";
 
-TString JetIDNameList[]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","eSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","PPcut","PPcutTight","PPcutTighter"};
+TString JetIDNameList[]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","eSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","PPcut","PPcutTight","PPcutTighter","SumSumpt1"};
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 362, 429, 692, 1000};
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
 //const double binbound_pt_coarse[]={0,30,70,150,200,600};
-const double binbound_pt_coarse[]={30,50,80,100,600};
+const double binbound_pt_coarse[]={30,50,80,100,150};
 //const int Nbin_pt_coarse=sizeof(binbound_pt_coarse)/sizeof(double)-1;
 const int Nbin_pt_coarse=4;
 
