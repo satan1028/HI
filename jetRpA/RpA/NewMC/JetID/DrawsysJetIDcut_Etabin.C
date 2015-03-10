@@ -58,6 +58,7 @@ else{
 xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
 xrange_JetIDcut[1]=JetIDcut[1]-1e-4;
 TH1D* histo=new TH1D("","",1000,0.,1000.);
+<<<<<<< HEAD
 histo->Sumw2();
 if(ilist==21) {
 	for(int ibin=1;ibin<h2F->GetYaxis()->GetNbins();ibin++){
@@ -67,6 +68,16 @@ if(ilist==21) {
 		if((*vecx2)[(int)cut]!=0 && histo_->GetEntries()!=0)
 		histo->Add(histo_);
 		//histo=histo_;
+=======
+if(ilist==21){
+	for(int ibin=1;ibin<h2F->GetYaxis()->GetNbins();ibin++){
+		double binxcenter = h2F->GetYaxis()->GetBinCenter(ibin);
+		TVectorD* vecx2 = (TVectorD*)extract(binxcenter);
+		TH1D* histo_=(TH1D*)h2F->ProjectionX(Form("histo_"),ibin,ibin);
+		if((*vecx2)[(int)cut]!=0 && histo_->GetEntries()!=0)
+		//histo=histo->Add(histo_);
+		histo=histo_;
+>>>>>>> ec83d636e7bb31bc10dedc2c5a7ec395320e5ec2
 	}
 }
 else histo=(TH1D*)h2F->ProjectionX(Form("histo"),h2F->GetYaxis()->FindBin(xrange_JetIDcut[0]),h2F->GetYaxis()->FindBin(xrange_JetIDcut[1]));
@@ -100,7 +111,10 @@ TLatex T;
 
 for(int i=0;i<Neta;i++){
     c1->cd(canvas[i]+1)->SetGridx();
+<<<<<<< HEAD
     c1->cd(canvas[i]+1)->SetGridy();
+=======
+>>>>>>> ec83d636e7bb31bc10dedc2c5a7ec395320e5ec2
     if(canvas[i]==0  || canvas[i]==4)
         hFrame->GetYaxis()->SetTitle("Yield Ratio");
     else

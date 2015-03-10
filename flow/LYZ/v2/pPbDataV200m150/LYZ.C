@@ -94,10 +94,8 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
         	if(xbin<0 || xbin==nbin) continue;	
                 tottrk[xbin]+=ntrk;
 		for(int imult=0;imult<mult;imult++){
-                        if(eta[imult]-2.4<=1e-6 && eta[imult]-2.4>0) eta[imult]=2.4;
-                        if(-2.4-eta[imult]<=1e-6 && -2.4-eta[imult]>0) eta[imult]=-2.4;
-			if(eta[imult]<-2.40||eta[imult]>2.40) continue;
-                        if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection
+		//	if(eta[imult]<-2.40||eta[imult]>2.40) continue;
+                //        if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection
 			Qx+=1.*cos(nn*phi[imult]);
 			Qy+=1.*sin(nn*phi[imult]);
 			for(int itheta=0;itheta<ntheta;itheta++){
