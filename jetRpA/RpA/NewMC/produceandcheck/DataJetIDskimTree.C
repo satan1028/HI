@@ -25,7 +25,16 @@ TString algo="akPu3PF";//"akPu3PF"
 TString coll = "PPb";
     
 void DataJetIDskimTree(){
-    TH2F * jetptjetid[nJetID];
+    TH2F* jetptjetid[nJetID];
+    TH1F* jetpt;
+    TH2F* Spikeetaphi;
+    TH2F* Spikeetapt;
+        jetpt = new TH1F(Form("jetpt"),Form("jetpt"),1000,0.,1000.);
+        jetpt -> Sumw2(); 
+        Spikeetaphi = new TH2F(Form("Spikeetaphi"),Form("Spikeetaphi"),200,-5.,5.,200, -TMath::Pi(), TMath::Pi());
+        Spikeetaphi -> Sumw2();
+        Spikeetapt = new TH2F(Form("Spikeetapt"),Form("Spikeetapt"),200,-5.,5.,1000,0.,1000.);
+        Spikeetapt -> Sumw2();
    for(int ijetid=0;ijetid<nJetID;ijetid++){
         if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
         jetptjetid[ijetid] = new TH2F(Form("jetpt%s",JetIDName[ijetid].Data()), Form("jetpt%s",JetIDName[ijetid].Data()), 1000, 0., 1000., 200, 0., 2.);      //Added
@@ -40,8 +49,11 @@ void DataJetIDskimTree(){
         }
 
     TH2F * jetptjetidEtaBin[netabin][nJetID];
+    TH1F * jetptEtaBin[netabin];
 		
     for(int ieta=0; ieta < netabin; ieta++){
+        jetptEtaBin[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+        jetptEtaBin[ieta]->Sumw2();
        for(int ijetid=0;ijetid<nJetID;ijetid++){
         if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
         jetptjetidEtaBin[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 200, 0., 2.);    //Added
@@ -63,7 +75,7 @@ void DataJetIDskimTree(){
      TFile *fcrel3 = NULL ;
      TH1D *C_rel= NULL ;
 
-        fcrel3 = TFile::Open(Form("/home/xuq7/HI/jetRpA/RpA/NewMC/Corrections/CasymYaxian_%s_double_hcalbins_algo_%s_pt100_140_jet50_alphahigh_20_phicut250.root",coll.Data(),algo.Data()), "readonly");
+        fcrel3 = TFile::Open(Form("/cms/store/user/qixu/jetRpA/RpA/NewMC/Corrections/CasymYaxian_%s_double_hcalbins_algo_%s_pt100_140_jet50_alphahigh_20_phicut250.root",coll.Data(),algo.Data()), "readonly");
      if(fcrel3)  C_rel=(TH1D*)fcrel3->Get("C_asym");
 
    TF1 * fUE = new TF1("fUE","1-[0]/pow(x,[1])",20,600);
@@ -136,6 +148,7 @@ if((TMath::Abs(vz)>15) || (!pPAcollisionEventSelectionPA) || (!pprimaryVertexFil
 for(int j4i = 0; j4i < nref; j4i++){
     double jet_pt = jtpt[j4i];
     double jet_eta = jteta[j4i];  
+    double jet_phi = jtphi[j4i];  
     double raw_pt = rawpt[j4i];
     double jetweight = 1.;
  //       jetweight*=(fUE->Eval(jet_pt))*C_rel->GetBinContent(C_rel->FindBin(jet_eta));
@@ -152,7 +165,6 @@ for(int j4i = 0; j4i < nref; j4i++){
 		int photonN = t_photonN[j4i];
 		double muSum = t_muSum[j4i];
 		double eSum = t_eSum[j4i];
-                jet_pt = jet_pt*jetweight;
         if((chargedN == 0 || chargedSum == 0) && TMath::Abs(jet_eta)< 2.4) continue;  // jet id selection
 	double PPTighter0 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt<1.0);
 	double PPTighter1 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
@@ -160,13 +172,23 @@ for(int j4i = 0; j4i < nref; j4i++){
 	double PPTighter3 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.7 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
         double PPTighter = PPTighter0*TMath::Power(2,3)+PPTighter1*TMath::Power(2,2)+PPTighter2*TMath::Power(2,1)+PPTighter3*TMath::Power(2,0)+0.5;
 	double jetidv[nJetID]={chargedMax,chargedSum,neutralMax,neutralSum,photonMax,photonSum,chargedMax/jet_pt,chargedSum/jet_pt,neutralMax/jet_pt,neutralSum/jet_pt,photonMax/jet_pt,photonSum/jet_pt,eSum/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/raw_pt,neutralMax/TMath::Max(chargedSum,neutralSum),(double)chargedN,(double)neutralN,(double)photonN,(double)(neutralSum/jet_pt<1.0 && eSum/jet_pt<1.0 && photonSum/jet_pt<1.0 && ((chargedSum>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ), (double)(neutralSum/jet_pt<0.9 && eSum/jet_pt<1.0 && photonSum/jet_pt<0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ),PPTighter,(chargedSum+neutralSum+muSum+eSum)/jet_pt};
-	 if(raw_pt<22 || fabs(jet_eta)>5) continue;
+       if(raw_pt<22 || fabs(jet_eta)>5) continue;
        if(jet_pt>4*pt) continue;
-
+    //if(neutralSum/jet_pt > 0.8 && chargedSum/jet_pt < 0.1) {
+    if(neutralSum/jet_pt > 0.8) {
+        Spikeetaphi->Fill(jet_eta,jet_phi, weight);
+        Spikeetapt->Fill(jet_eta,jet_pt, weight);
+    }
+       
+        jet_pt = jet_pt*jetweight;
+        
       int dEtaBin = -1;
 	if(coll=="PPb")	jet_eta=jet_eta+0.465;
 	if(coll=="PbP")	jet_eta=jet_eta-0.465;
+
+
      if(TMath::Abs(jet_eta)<=1.) {
+         jetpt->Fill(jet_pt,weight);
 	for(int ijetid=0;ijetid<nJetID;ijetid++){
             jetptjetid[ijetid]->Fill(jet_pt, jetidv[ijetid],weight);     //Added
 	}	
@@ -175,6 +197,7 @@ for(int j4i = 0; j4i < nref; j4i++){
           if(jet_eta>deta[ieta]&&jet_eta<=deta[ieta+1]) dEtaBin=ieta;
       }//assign the eta bin for jets
       if(dEtaBin!=-1){
+         jetptEtaBin[dEtaBin]->Fill(jet_pt,weight);
 	for(int ijetid=0;ijetid<nJetID;ijetid++){
         if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr") || JetIDName[ijetid].Contains("PP") || JetIDName[ijetid].Contains("N")){
         jetptjetidEtaBin[dEtaBin][ijetid]->Fill(jet_pt,jetidv[ijetid],weight);
@@ -192,6 +215,9 @@ for(int j4i = 0; j4i < nref; j4i++){
 
   TFile *out_file = new TFile(Form("/tmp/xuq7/%s",out_name.Data()),"RECREATE");  
 
+    jetpt->Write();
+    Spikeetaphi->Write();
+    Spikeetapt->Write();
     for(int ijetid=0;ijetid<nJetID;ijetid++){
         jetptjetid[ijetid]->Write();
     }
@@ -201,6 +227,7 @@ for(int j4i = 0; j4i < nref; j4i++){
          jetptjetidEtaBin[ieta][ijetid]->Write();
         }
         }
+         jetptEtaBin[ieta]->Write();
      }
   out_file->Close();
   cout<<"Output file: "<<Form("%s",out_name.Data())<<endl;

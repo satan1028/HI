@@ -1,4 +1,4 @@
-// Generated at Mon Nov 10 01:53:28 2014. Do not modify it
+// Generated at Tue Mar 10 15:38:31 2015. Do not modify it
 
 /*
 GCC-XML version 0.9.0
@@ -41,15 +41,15 @@ namespace {
   ::Reflex::Type type_68 = ::Reflex::TypeBuilder(Reflex::Literal("int"));
   ::Reflex::Type type_271 = ::Reflex::TypeBuilder(Reflex::Literal("long"));
   ::Reflex::Type type_void = ::Reflex::TypeBuilder(Reflex::Literal("void"));
-  ::Reflex::Type type_1438 = ::Reflex::TypeBuilder(Reflex::Literal("bool"));
-  ::Reflex::Type type_1235 = ::Reflex::TypeBuilder(Reflex::Literal("void"));
+  ::Reflex::Type type_1439 = ::Reflex::TypeBuilder(Reflex::Literal("bool"));
+  ::Reflex::Type type_1236 = ::Reflex::TypeBuilder(Reflex::Literal("void"));
   ::Reflex::Type type_102 = ::Reflex::TypeBuilder(Reflex::Literal("double"));
   ::Reflex::Type type_297 = ::Reflex::TypeBuilder(Reflex::Literal("unsigned long"));
-  ::Reflex::Type type_6498 = ::Reflex::TypeBuilder(Reflex::Literal("pat::HeavyIon"));
+  ::Reflex::Type type_6508 = ::Reflex::TypeBuilder(Reflex::Literal("pat::HeavyIon"));
   ::Reflex::Type type_429 = ::Reflex::TypeBuilder(Reflex::Literal("std::type_info"));
   ::Reflex::Type type_4215 = ::Reflex::TypeBuilder(Reflex::Literal("edm::ProductID"));
-  ::Reflex::Type type_5958 = ::Reflex::TypeBuilder(Reflex::Literal("reco::EvtPlane"));
-  ::Reflex::Type type_5959 = ::Reflex::TypeBuilder(Reflex::Literal("reco::Centrality"));
+  ::Reflex::Type type_5968 = ::Reflex::TypeBuilder(Reflex::Literal("reco::EvtPlane"));
+  ::Reflex::Type type_5969 = ::Reflex::TypeBuilder(Reflex::Literal("reco::Centrality"));
   ::Reflex::Type type_2286 = ::Reflex::TypeBuilder(Reflex::Literal("std::basic_string<char>"));
   ::Reflex::Type type_2706 = ::Reflex::TypeBuilder(Reflex::Literal("std::vector<const void*>"));
   ::Reflex::Type type_2707 = ::Reflex::TypeBuilder(Reflex::Literal("std::vector<unsigned long>"));
@@ -85,43 +85,43 @@ namespace {
   ::Reflex::Type type_3097 = ::Reflex::TypeBuilder(Reflex::Literal("std::reverse_iterator<__gnu_cxx::__normal_iterator<reco::Centrality*,std::vector<reco::Centrality> > >"));
   ::Reflex::Type type_3094 = ::Reflex::TypeBuilder(Reflex::Literal("std::reverse_iterator<__gnu_cxx::__normal_iterator<const reco::EvtPlane*,std::vector<reco::EvtPlane> > >"));
   ::Reflex::Type type_3096 = ::Reflex::TypeBuilder(Reflex::Literal("std::reverse_iterator<__gnu_cxx::__normal_iterator<const reco::Centrality*,std::vector<reco::Centrality> > >"));
-  ::Reflex::Type type_5960 = ::Reflex::TypedefTypeBuilder(Reflex::Literal("reco::CentralityCollection"), type_2726);
-  ::Reflex::Type type_5961 = ::Reflex::TypedefTypeBuilder(Reflex::Literal("reco::EvtPlaneCollection"), type_2725);
-  ::Reflex::Type type_26307 = ::Reflex::ReferenceBuilder(type_6498);
-  ::Reflex::Type type_6498c = ::Reflex::ConstBuilder(type_6498);
-  ::Reflex::Type type_26308 = ::Reflex::ReferenceBuilder(type_6498c);
-  ::Reflex::Type type_5960c = ::Reflex::ConstBuilder(type_5960);
-  ::Reflex::Type type_26309 = ::Reflex::ReferenceBuilder(type_5960c);
-  ::Reflex::Type type_5961c = ::Reflex::ConstBuilder(type_5961);
-  ::Reflex::Type type_26310 = ::Reflex::ReferenceBuilder(type_5961c);
-  ::Reflex::Type type_25652 = ::Reflex::PointerBuilder(type_6498c);
+  ::Reflex::Type type_5970 = ::Reflex::TypedefTypeBuilder(Reflex::Literal("reco::CentralityCollection"), type_2726);
+  ::Reflex::Type type_5971 = ::Reflex::TypedefTypeBuilder(Reflex::Literal("reco::EvtPlaneCollection"), type_2725);
+  ::Reflex::Type type_26307 = ::Reflex::ReferenceBuilder(type_6508);
+  ::Reflex::Type type_6508c = ::Reflex::ConstBuilder(type_6508);
+  ::Reflex::Type type_26308 = ::Reflex::ReferenceBuilder(type_6508c);
+  ::Reflex::Type type_5970c = ::Reflex::ConstBuilder(type_5970);
+  ::Reflex::Type type_26309 = ::Reflex::ReferenceBuilder(type_5970c);
+  ::Reflex::Type type_5971c = ::Reflex::ConstBuilder(type_5971);
+  ::Reflex::Type type_26310 = ::Reflex::ReferenceBuilder(type_5971c);
+  ::Reflex::Type type_25652 = ::Reflex::PointerBuilder(type_6508c);
   ::Reflex::Type type_429c = ::Reflex::ConstBuilder(type_429);
-  ::Reflex::Type type_5956 = ::Reflex::ReferenceBuilder(type_429c);
-  ::Reflex::Type type_25653 = ::Reflex::PointerBuilder(type_6498);
+  ::Reflex::Type type_5966 = ::Reflex::ReferenceBuilder(type_429c);
+  ::Reflex::Type type_25653 = ::Reflex::PointerBuilder(type_6508);
   ::Reflex::Type type_4184c = ::Reflex::ConstBuilder(type_4184);
   ::Reflex::Type type_25654 = ::Reflex::PointerBuilder(type_4184c);
   ::Reflex::Type type_4215c = ::Reflex::ConstBuilder(type_4215);
   ::Reflex::Type type_16806 = ::Reflex::ReferenceBuilder(type_4215c);
   ::Reflex::Type type_21493 = ::Reflex::ReferenceBuilder(type_2706);
   ::Reflex::Type type_25599 = ::Reflex::ReferenceBuilder(type_3908);
-  ::Reflex::Type type_1235c = ::Reflex::ConstBuilder(type_1235);
-  ::Reflex::Type type_3334 = ::Reflex::PointerBuilder(type_1235c);
+  ::Reflex::Type type_1236c = ::Reflex::ConstBuilder(type_1236);
+  ::Reflex::Type type_3334 = ::Reflex::PointerBuilder(type_1236c);
   ::Reflex::Type type_7588 = ::Reflex::ReferenceBuilder(type_3334);
   ::Reflex::Type type_2707c = ::Reflex::ConstBuilder(type_2707);
   ::Reflex::Type type_21494 = ::Reflex::ReferenceBuilder(type_2707c);
   ::Reflex::Type type_2287 = ::Reflex::TypedefTypeBuilder(Reflex::Literal("std::string"), type_2286);
-  ::Reflex::Type type_10863 = ::Reflex::ReferenceBuilder(type_5959);
-  ::Reflex::Type type_5959c = ::Reflex::ConstBuilder(type_5959);
-  ::Reflex::Type type_10865 = ::Reflex::ReferenceBuilder(type_5959c);
-  ::Reflex::Type type_10861 = ::Reflex::PointerBuilder(type_5959c);
-  ::Reflex::Type type_7129 = ::Reflex::PointerBuilder(type_5959);
+  ::Reflex::Type type_10863 = ::Reflex::ReferenceBuilder(type_5969);
+  ::Reflex::Type type_5969c = ::Reflex::ConstBuilder(type_5969);
+  ::Reflex::Type type_10865 = ::Reflex::ReferenceBuilder(type_5969c);
+  ::Reflex::Type type_10861 = ::Reflex::PointerBuilder(type_5969c);
+  ::Reflex::Type type_7129 = ::Reflex::PointerBuilder(type_5969);
   ::Reflex::Type type_4187c = ::Reflex::ConstBuilder(type_4187);
   ::Reflex::Type type_25667 = ::Reflex::PointerBuilder(type_4187c);
-  ::Reflex::Type type_10798 = ::Reflex::ReferenceBuilder(type_5958);
-  ::Reflex::Type type_5958c = ::Reflex::ConstBuilder(type_5958);
-  ::Reflex::Type type_10800 = ::Reflex::ReferenceBuilder(type_5958c);
-  ::Reflex::Type type_10796 = ::Reflex::PointerBuilder(type_5958c);
-  ::Reflex::Type type_7110 = ::Reflex::PointerBuilder(type_5958);
+  ::Reflex::Type type_10798 = ::Reflex::ReferenceBuilder(type_5968);
+  ::Reflex::Type type_5968c = ::Reflex::ConstBuilder(type_5968);
+  ::Reflex::Type type_10800 = ::Reflex::ReferenceBuilder(type_5968c);
+  ::Reflex::Type type_10796 = ::Reflex::PointerBuilder(type_5968c);
+  ::Reflex::Type type_7110 = ::Reflex::PointerBuilder(type_5968);
   ::Reflex::Type type_4188c = ::Reflex::ConstBuilder(type_4188);
   ::Reflex::Type type_25670 = ::Reflex::PointerBuilder(type_4188c);
   ::Reflex::Type type_2924 = ::Reflex::TypedefTypeBuilder(Reflex::Literal("std::size_t"), type_297);
@@ -276,30 +276,30 @@ class __edm__Wrapper_std__vector_reco__Centrality_s_ {
 #endif // __CINT__
 namespace {
 //------Stub functions for class HeavyIon -------------------------------
-static  void operator_20441( void* retaddr, void* o, const std::vector<void*>& arg, void*)
+static  void operator_20452( void* retaddr, void* o, const std::vector<void*>& arg, void*)
 {
   if (retaddr) *(void**)retaddr = (void*)&(((::pat::HeavyIon*)o)->operator=)(*(const ::pat::HeavyIon*)arg[0]);
   else   (((::pat::HeavyIon*)o)->operator=)(*(const ::pat::HeavyIon*)arg[0]);
 }
 
-static void constructor_20442( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
+static void constructor_20453( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
   if (retaddr) *(void**)retaddr = ::new(mem) ::pat::HeavyIon(*(const ::pat::HeavyIon*)arg[0]);
   else ::new(mem) ::pat::HeavyIon(*(const ::pat::HeavyIon*)arg[0]);
 }
 
-static void constructor_20443( void* retaddr, void* mem, const std::vector<void*>&, void*) {
+static void constructor_20454( void* retaddr, void* mem, const std::vector<void*>&, void*) {
   if (retaddr) *(void**)retaddr = ::new(mem) ::pat::HeavyIon();
   else ::new(mem) ::pat::HeavyIon();
 }
 
-static void constructor_20444( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
+static void constructor_20455( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
   if (retaddr) *(void**)retaddr = ::new(mem) ::pat::HeavyIon(*(const ::reco::CentralityCollection*)arg[0],
       *(const ::reco::EvtPlaneCollection*)arg[1]);
   else ::new(mem) ::pat::HeavyIon(*(const ::reco::CentralityCollection*)arg[0],
       *(const ::reco::EvtPlaneCollection*)arg[1]);
 }
 
-static void constructor_20445( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
+static void constructor_20456( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
   if (retaddr) *(void**)retaddr = ::new(mem) ::pat::HeavyIon(*(const ::reco::CentralityCollection*)arg[0],
       *(const ::reco::EvtPlaneCollection*)arg[1],
       *(double*)arg[2],
@@ -316,52 +316,52 @@ static void constructor_20445( void* retaddr, void* mem, const std::vector<void*
       *(double*)arg[6]);
 }
 
-static void destructor_20446(void*, void * o, const std::vector<void*>&, void *) {
+static void destructor_20457(void*, void * o, const std::vector<void*>&, void *) {
 (((::pat::HeavyIon*)o)->::pat::HeavyIon::~HeavyIon)();
 }
-static  void method_20447( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_20458( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) *(void**)retaddr = (void*)&(((const ::pat::HeavyIon*)o)->getCentralityCollection)();
   else   (((const ::pat::HeavyIon*)o)->getCentralityCollection)();
 }
 
-static  void method_20448( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_20459( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (bool)((((const ::pat::HeavyIon*)o)->isMC)());
   else   (((const ::pat::HeavyIon*)o)->isMC)();
 }
 
-static  void method_20449( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_20460( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::pat::HeavyIon*)o)->generatedB)());
   else   (((const ::pat::HeavyIon*)o)->generatedB)();
 }
 
-static  void method_20450( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_20461( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (int)((((const ::pat::HeavyIon*)o)->generatedNpart)());
   else   (((const ::pat::HeavyIon*)o)->generatedNpart)();
 }
 
-static  void method_20451( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_20462( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (int)((((const ::pat::HeavyIon*)o)->generatedNcoll)());
   else   (((const ::pat::HeavyIon*)o)->generatedNcoll)();
 }
 
-static  void method_20452( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_20463( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (int)((((const ::pat::HeavyIon*)o)->generatedNhard)());
   else   (((const ::pat::HeavyIon*)o)->generatedNhard)();
 }
 
-static  void method_20453( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_20464( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::pat::HeavyIon*)o)->generatedEvtPlane)());
   else   (((const ::pat::HeavyIon*)o)->generatedEvtPlane)();
 }
 
-static void method_newdel_6498( void* retaddr, void*, const std::vector<void*>&, void*)
+static void method_newdel_6508( void* retaddr, void*, const std::vector<void*>&, void*)
 {
   static ::Reflex::NewDelFunctions s_funcs;
   s_funcs.fNew         = ::Reflex::NewDelFunctionsT< ::pat::HeavyIon >::new_T;
@@ -380,13 +380,13 @@ Reflex::GenreflexMemberBuilder __pat__HeavyIon_funcmem_bld(&__pat__HeavyIon_db_f
 void __pat__HeavyIon_dict() {
   ::Reflex::ClassBuilder(Reflex::Literal("pat::HeavyIon"), typeid(::pat::HeavyIon), sizeof(::pat::HeavyIon), ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::VIRTUAL, ::Reflex::CLASS)
   .AddProperty(Reflex::Literal("ClassVersion"), "10")
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_26307, type_26308), Reflex::Literal("operator="), operator_20441, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::OPERATOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_26308), Reflex::Literal("HeavyIon"), constructor_20442, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::CONSTRUCTOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("HeavyIon"), constructor_20443, 0, 0, ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_26309, type_26310), Reflex::Literal("HeavyIon"), constructor_20444, 0, "c;e", ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_26309, type_26310, type_102, type_68, type_68, type_68, type_102), Reflex::Literal("HeavyIon"), constructor_20445, 0, "c;e;b;npart;ncoll;nhard;phi", ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("~HeavyIon"), destructor_20446, 0, 0, ::Reflex::PUBLIC | ::Reflex::VIRTUAL | ::Reflex::DESTRUCTOR )
-  .AddFunctionMember<void*(void)>(Reflex::Literal("__getNewDelFunctions"), method_newdel_6498, 0, 0, ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_26307, type_26308), Reflex::Literal("operator="), operator_20452, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::OPERATOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_26308), Reflex::Literal("HeavyIon"), constructor_20453, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::CONSTRUCTOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("HeavyIon"), constructor_20454, 0, 0, ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_26309, type_26310), Reflex::Literal("HeavyIon"), constructor_20455, 0, "c;e", ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_26309, type_26310, type_102, type_68, type_68, type_68, type_102), Reflex::Literal("HeavyIon"), constructor_20456, 0, "c;e;b;npart;ncoll;nhard;phi", ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("~HeavyIon"), destructor_20457, 0, 0, ::Reflex::PUBLIC | ::Reflex::VIRTUAL | ::Reflex::DESTRUCTOR )
+  .AddFunctionMember<void*(void)>(Reflex::Literal("__getNewDelFunctions"), method_newdel_6508, 0, 0, ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL)
   .AddOnDemandDataMemberBuilder(&__pat__HeavyIon_datamem_bld)
   .AddOnDemandFunctionMemberBuilder(&__pat__HeavyIon_funcmem_bld);
 }
@@ -394,9 +394,9 @@ void __pat__HeavyIon_dict() {
 //------Delayed data member builder for class HeavyIon -------------------
 void __pat__HeavyIon_db_datamem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
-  .AddDataMember(type_5960, Reflex::Literal("cents_"), OffsetOf(__shadow__::__pat__HeavyIon, cents_), ::Reflex::PRIVATE)
-  .AddDataMember(type_5961, Reflex::Literal("planes_"), OffsetOf(__shadow__::__pat__HeavyIon, planes_), ::Reflex::PRIVATE)
-  .AddDataMember(type_1438, Reflex::Literal("isMC_"), OffsetOf(__shadow__::__pat__HeavyIon, isMC_), ::Reflex::PRIVATE)
+  .AddDataMember(type_5970, Reflex::Literal("cents_"), OffsetOf(__shadow__::__pat__HeavyIon, cents_), ::Reflex::PRIVATE)
+  .AddDataMember(type_5971, Reflex::Literal("planes_"), OffsetOf(__shadow__::__pat__HeavyIon, planes_), ::Reflex::PRIVATE)
+  .AddDataMember(type_1439, Reflex::Literal("isMC_"), OffsetOf(__shadow__::__pat__HeavyIon, isMC_), ::Reflex::PRIVATE)
   .AddDataMember(type_102, Reflex::Literal("b_"), OffsetOf(__shadow__::__pat__HeavyIon, b_), ::Reflex::PRIVATE)
   .AddDataMember(type_68, Reflex::Literal("npart_"), OffsetOf(__shadow__::__pat__HeavyIon, npart_), ::Reflex::PRIVATE)
   .AddDataMember(type_68, Reflex::Literal("ncoll_"), OffsetOf(__shadow__::__pat__HeavyIon, ncoll_), ::Reflex::PRIVATE)
@@ -406,13 +406,13 @@ void __pat__HeavyIon_db_datamem(Reflex::Class* cl) {
 //------Delayed function member builder for class HeavyIon -------------------
 void __pat__HeavyIon_db_funcmem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_26309), Reflex::Literal("getCentralityCollection"), method_20447, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1438), Reflex::Literal("isMC"), method_20448, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("generatedB"), method_20449, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_68), Reflex::Literal("generatedNpart"), method_20450, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_68), Reflex::Literal("generatedNcoll"), method_20451, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_68), Reflex::Literal("generatedNhard"), method_20452, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("generatedEvtPlane"), method_20453, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_26309), Reflex::Literal("getCentralityCollection"), method_20458, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1439), Reflex::Literal("isMC"), method_20459, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("generatedB"), method_20460, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_68), Reflex::Literal("generatedNpart"), method_20461, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_68), Reflex::Literal("generatedNcoll"), method_20462, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_68), Reflex::Literal("generatedNhard"), method_20463, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("generatedEvtPlane"), method_20464, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
 }
 //------Stub functions for class Wrapper<pat::HeavyIon> -------------------------------
 static void constructor_16641( void* retaddr, void* mem, const std::vector<void*>&, void*) {
@@ -520,8 +520,8 @@ Reflex::GenreflexMemberBuilder __edm__Wrapper_pat__HeavyIon__datamem_bld(&__edm_
 Reflex::GenreflexMemberBuilder __edm__Wrapper_pat__HeavyIon__funcmem_bld(&__edm__Wrapper_pat__HeavyIon__db_funcmem);
 void __edm__Wrapper_pat__HeavyIon__dict() {
   ::Reflex::ClassBuilder(Reflex::Literal("edm::Wrapper<pat::HeavyIon>"), typeid(::edm::Wrapper<pat::HeavyIon>), sizeof(::edm::Wrapper<pat::HeavyIon>), ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL, ::Reflex::CLASS)
-  .AddTypedef(type_6498, Reflex::Literal("edm::Wrapper<pat::HeavyIon>::value_type"))
-  .AddTypedef(type_6498, Reflex::Literal("edm::Wrapper<pat::HeavyIon>::wrapped_type"))
+  .AddTypedef(type_6508, Reflex::Literal("edm::Wrapper<pat::HeavyIon>::value_type"))
+  .AddTypedef(type_6508, Reflex::Literal("edm::Wrapper<pat::HeavyIon>::wrapped_type"))
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("Wrapper"), constructor_16641, 0, 0, ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_2486), Reflex::Literal("Wrapper"), constructor_16642, 0, "ptr", ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("~Wrapper"), destructor_16643, 0, 0, ::Reflex::PUBLIC | ::Reflex::DESTRUCTOR )
@@ -534,37 +534,37 @@ void __edm__Wrapper_pat__HeavyIon__dict() {
 //------Delayed data member builder for class Wrapper<pat::HeavyIon> -------------------
 void __edm__Wrapper_pat__HeavyIon__db_datamem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
-  .AddDataMember(type_1438, Reflex::Literal("present"), OffsetOf(__shadow__::__edm__Wrapper_pat__HeavyIon_, present), ::Reflex::PRIVATE)
-  .AddDataMember(type_6498, Reflex::Literal("obj"), OffsetOf(__shadow__::__edm__Wrapper_pat__HeavyIon_, obj), ::Reflex::PRIVATE);
+  .AddDataMember(type_1439, Reflex::Literal("present"), OffsetOf(__shadow__::__edm__Wrapper_pat__HeavyIon_, present), ::Reflex::PRIVATE)
+  .AddDataMember(type_6508, Reflex::Literal("obj"), OffsetOf(__shadow__::__edm__Wrapper_pat__HeavyIon_, obj), ::Reflex::PRIVATE);
 }
 //------Delayed function member builder for class Wrapper<pat::HeavyIon> -------------------
 void __edm__Wrapper_pat__HeavyIon__db_funcmem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25652), Reflex::Literal("product"), method_16644, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25652), Reflex::Literal("operator->"), operator_16645, 0, 0, ::Reflex::PUBLIC | ::Reflex::OPERATOR | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("productTypeInfo"), method_16646, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("typeInfo"), method_16647, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("productTypeInfo"), method_16646, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("typeInfo"), method_16647, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25654), Reflex::Literal("getInterface"), method_16649, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_16806, type_21493, type_25599), Reflex::Literal("fillView"), method_16650, 0, "id;pointers;helpers", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_5956, type_297, type_7588), Reflex::Literal("setPtr"), method_16651, 0, "iToType;iIndex;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_5956, type_21494, type_21493), Reflex::Literal("fillPtrVector"), method_16652, 0, "iToType;iIndices;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("dynamicTypeInfo"), method_16653, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1438), Reflex::Literal("isPresent"), method_16654, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("dynamicTypeInfo_"), method_16655, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_16806, type_21493, type_25599), Reflex::Literal("fillView"), method_16650, 0, "id;pointers;helpers", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_5966, type_297, type_7588), Reflex::Literal("setPtr"), method_16651, 0, "iToType;iIndex;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_5966, type_21494, type_21493), Reflex::Literal("fillPtrVector"), method_16652, 0, "iToType;iIndices;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("dynamicTypeInfo"), method_16653, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1439), Reflex::Literal("isPresent"), method_16654, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("dynamicTypeInfo_"), method_16655, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
 }
 //------Stub functions for class Centrality -------------------------------
-static  void operator_19422( void* retaddr, void* o, const std::vector<void*>& arg, void*)
+static  void operator_19433( void* retaddr, void* o, const std::vector<void*>& arg, void*)
 {
   if (retaddr) *(void**)retaddr = (void*)&(((::reco::Centrality*)o)->operator=)(*(const ::reco::Centrality*)arg[0]);
   else   (((::reco::Centrality*)o)->operator=)(*(const ::reco::Centrality*)arg[0]);
 }
 
-static void constructor_19423( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
+static void constructor_19434( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
   if (retaddr) *(void**)retaddr = ::new(mem) ::reco::Centrality(*(const ::reco::Centrality*)arg[0]);
   else ::new(mem) ::reco::Centrality(*(const ::reco::Centrality*)arg[0]);
 }
 
-static void constructor_19424( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
+static void constructor_19435( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
   if ( arg.size() == 0 ) {
     if (retaddr) *(void**)retaddr = ::new(mem) ::reco::Centrality();
   else ::new(mem) ::reco::Centrality();
@@ -581,190 +581,190 @@ static void constructor_19424( void* retaddr, void* mem, const std::vector<void*
   }
 }
 
-static void destructor_19425(void*, void * o, const std::vector<void*>&, void *) {
+static void destructor_19436(void*, void * o, const std::vector<void*>&, void *) {
 (((::reco::Centrality*)o)->::reco::Centrality::~Centrality)();
 }
-static  void method_19426( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19437( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->raw)());
   else   (((const ::reco::Centrality*)o)->raw)();
 }
 
-static  void method_19427( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19438( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (std::string)((((const ::reco::Centrality*)o)->label)());
   else   (((const ::reco::Centrality*)o)->label)();
 }
 
-static  void method_19428( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19439( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtHFhitSum)());
   else   (((const ::reco::Centrality*)o)->EtHFhitSum)();
 }
 
-static  void method_19429( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19440( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtHFhitSumPlus)());
   else   (((const ::reco::Centrality*)o)->EtHFhitSumPlus)();
 }
 
-static  void method_19430( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19441( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtHFhitSumMinus)());
   else   (((const ::reco::Centrality*)o)->EtHFhitSumMinus)();
 }
 
-static  void method_19431( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19442( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtHFtowerSum)());
   else   (((const ::reco::Centrality*)o)->EtHFtowerSum)();
 }
 
-static  void method_19432( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19443( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtHFtowerSumPlus)());
   else   (((const ::reco::Centrality*)o)->EtHFtowerSumPlus)();
 }
 
-static  void method_19433( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19444( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtHFtowerSumMinus)());
   else   (((const ::reco::Centrality*)o)->EtHFtowerSumMinus)();
 }
 
-static  void method_19434( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19445( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtHFtruncated)());
   else   (((const ::reco::Centrality*)o)->EtHFtruncated)();
 }
 
-static  void method_19435( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19446( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtHFtruncatedPlus)());
   else   (((const ::reco::Centrality*)o)->EtHFtruncatedPlus)();
 }
 
-static  void method_19436( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19447( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtHFtruncatedMinus)());
   else   (((const ::reco::Centrality*)o)->EtHFtruncatedMinus)();
 }
 
-static  void method_19437( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19448( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtEESum)());
   else   (((const ::reco::Centrality*)o)->EtEESum)();
 }
 
-static  void method_19438( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19449( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtEESumPlus)());
   else   (((const ::reco::Centrality*)o)->EtEESumPlus)();
 }
 
-static  void method_19439( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19450( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtEESumMinus)());
   else   (((const ::reco::Centrality*)o)->EtEESumMinus)();
 }
 
-static  void method_19440( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19451( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtEEtruncated)());
   else   (((const ::reco::Centrality*)o)->EtEEtruncated)();
 }
 
-static  void method_19441( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19452( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtEEtruncatedPlus)());
   else   (((const ::reco::Centrality*)o)->EtEEtruncatedPlus)();
 }
 
-static  void method_19442( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19453( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtEEtruncatedMinus)());
   else   (((const ::reco::Centrality*)o)->EtEEtruncatedMinus)();
 }
 
-static  void method_19443( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19454( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtEBSum)());
   else   (((const ::reco::Centrality*)o)->EtEBSum)();
 }
 
-static  void method_19444( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19455( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtEBtruncated)());
   else   (((const ::reco::Centrality*)o)->EtEBtruncated)();
 }
 
-static  void method_19445( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19456( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtEcalSum)());
   else   (((const ::reco::Centrality*)o)->EtEcalSum)();
 }
 
-static  void method_19446( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19457( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtEcaltruncated)());
   else   (((const ::reco::Centrality*)o)->EtEcaltruncated)();
 }
 
-static  void method_19447( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19458( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->multiplicityPixel)());
   else   (((const ::reco::Centrality*)o)->multiplicityPixel)();
 }
 
-static  void method_19448( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19459( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->Ntracks)());
   else   (((const ::reco::Centrality*)o)->Ntracks)();
 }
 
-static  void method_19449( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19460( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->NtracksPtCut)());
   else   (((const ::reco::Centrality*)o)->NtracksPtCut)();
 }
 
-static  void method_19450( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19461( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->NtracksEtaCut)());
   else   (((const ::reco::Centrality*)o)->NtracksEtaCut)();
 }
 
-static  void method_19451( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19462( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->NtracksEtaPtCut)());
   else   (((const ::reco::Centrality*)o)->NtracksEtaPtCut)();
 }
 
-static  void method_19452( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19463( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->NpixelTracks)());
   else   (((const ::reco::Centrality*)o)->NpixelTracks)();
 }
 
-static  void method_19453( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19464( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->zdcSum)());
   else   (((const ::reco::Centrality*)o)->zdcSum)();
 }
 
-static  void method_19454( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19465( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->zdcSumPlus)());
   else   (((const ::reco::Centrality*)o)->zdcSumPlus)();
 }
 
-static  void method_19455( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19466( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->zdcSumMinus)());
   else   (((const ::reco::Centrality*)o)->zdcSumMinus)();
 }
 
-static  void method_19456( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19467( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::Centrality*)o)->EtMidRapiditySum)());
   else   (((const ::reco::Centrality*)o)->EtMidRapiditySum)();
@@ -775,7 +775,7 @@ static void constructor_x2( void* retaddr, void* mem, const std::vector<void*>&,
   else ::new(mem) ::reco::Centrality();
 }
 
-static void method_newdel_5959( void* retaddr, void*, const std::vector<void*>&, void*)
+static void method_newdel_5969( void* retaddr, void*, const std::vector<void*>&, void*)
 {
   static ::Reflex::NewDelFunctions s_funcs;
   s_funcs.fNew         = ::Reflex::NewDelFunctionsT< ::reco::Centrality >::new_T;
@@ -794,12 +794,12 @@ Reflex::GenreflexMemberBuilder __reco__Centrality_funcmem_bld(&__reco__Centralit
 void __reco__Centrality_dict() {
   ::Reflex::ClassBuilder(Reflex::Literal("reco::Centrality"), typeid(::reco::Centrality), sizeof(::reco::Centrality), ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::VIRTUAL, ::Reflex::CLASS)
   .AddProperty(Reflex::Literal("ClassVersion"), "10")
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10863, type_10865), Reflex::Literal("operator="), operator_19422, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::OPERATOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_10865), Reflex::Literal("Centrality"), constructor_19423, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::CONSTRUCTOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_102, type_2287), Reflex::Literal("Centrality"), constructor_19424, 0, "d=0;label=\"\"", ::Reflex::PUBLIC | ::Reflex::CONSTRUCTOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("~Centrality"), destructor_19425, 0, 0, ::Reflex::PUBLIC | ::Reflex::VIRTUAL | ::Reflex::DESTRUCTOR )
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10863, type_10865), Reflex::Literal("operator="), operator_19433, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::OPERATOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_10865), Reflex::Literal("Centrality"), constructor_19434, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::CONSTRUCTOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_102, type_2287), Reflex::Literal("Centrality"), constructor_19435, 0, "d=0;label=\"\"", ::Reflex::PUBLIC | ::Reflex::CONSTRUCTOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("~Centrality"), destructor_19436, 0, 0, ::Reflex::PUBLIC | ::Reflex::VIRTUAL | ::Reflex::DESTRUCTOR )
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("Centrality"), constructor_x2, 0, 0, ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::CONSTRUCTOR)
-  .AddFunctionMember<void*(void)>(Reflex::Literal("__getNewDelFunctions"), method_newdel_5959, 0, 0, ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL)
+  .AddFunctionMember<void*(void)>(Reflex::Literal("__getNewDelFunctions"), method_newdel_5969, 0, 0, ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL)
   .AddOnDemandDataMemberBuilder(&__reco__Centrality_datamem_bld)
   .AddOnDemandFunctionMemberBuilder(&__reco__Centrality_funcmem_bld);
 }
@@ -834,37 +834,37 @@ void __reco__Centrality_db_datamem(Reflex::Class* cl) {
 //------Delayed function member builder for class Centrality -------------------
 void __reco__Centrality_db_funcmem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("raw"), method_19426, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_2287), Reflex::Literal("label"), method_19427, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFhitSum"), method_19428, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFhitSumPlus"), method_19429, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFhitSumMinus"), method_19430, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtowerSum"), method_19431, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtowerSumPlus"), method_19432, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtowerSumMinus"), method_19433, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtruncated"), method_19434, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtruncatedPlus"), method_19435, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtruncatedMinus"), method_19436, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEESum"), method_19437, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEESumPlus"), method_19438, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEESumMinus"), method_19439, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEEtruncated"), method_19440, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEEtruncatedPlus"), method_19441, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEEtruncatedMinus"), method_19442, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEBSum"), method_19443, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEBtruncated"), method_19444, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEcalSum"), method_19445, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEcaltruncated"), method_19446, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("multiplicityPixel"), method_19447, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("Ntracks"), method_19448, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("NtracksPtCut"), method_19449, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("NtracksEtaCut"), method_19450, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("NtracksEtaPtCut"), method_19451, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("NpixelTracks"), method_19452, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("zdcSum"), method_19453, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("zdcSumPlus"), method_19454, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("zdcSumMinus"), method_19455, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtMidRapiditySum"), method_19456, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("raw"), method_19437, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_2287), Reflex::Literal("label"), method_19438, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFhitSum"), method_19439, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFhitSumPlus"), method_19440, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFhitSumMinus"), method_19441, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtowerSum"), method_19442, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtowerSumPlus"), method_19443, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtowerSumMinus"), method_19444, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtruncated"), method_19445, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtruncatedPlus"), method_19446, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtHFtruncatedMinus"), method_19447, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEESum"), method_19448, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEESumPlus"), method_19449, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEESumMinus"), method_19450, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEEtruncated"), method_19451, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEEtruncatedPlus"), method_19452, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEEtruncatedMinus"), method_19453, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEBSum"), method_19454, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEBtruncated"), method_19455, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEcalSum"), method_19456, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtEcaltruncated"), method_19457, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("multiplicityPixel"), method_19458, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("Ntracks"), method_19459, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("NtracksPtCut"), method_19460, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("NtracksEtaCut"), method_19461, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("NtracksEtaPtCut"), method_19462, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("NpixelTracks"), method_19463, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("zdcSum"), method_19464, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("zdcSumPlus"), method_19465, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("zdcSumMinus"), method_19466, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("EtMidRapiditySum"), method_19467, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
 }
 //------Stub functions for class Wrapper<reco::Centrality> -------------------------------
 static void constructor_16704( void* retaddr, void* mem, const std::vector<void*>&, void*) {
@@ -972,8 +972,8 @@ Reflex::GenreflexMemberBuilder __edm__Wrapper_reco__Centrality__datamem_bld(&__e
 Reflex::GenreflexMemberBuilder __edm__Wrapper_reco__Centrality__funcmem_bld(&__edm__Wrapper_reco__Centrality__db_funcmem);
 void __edm__Wrapper_reco__Centrality__dict() {
   ::Reflex::ClassBuilder(Reflex::Literal("edm::Wrapper<reco::Centrality>"), typeid(::edm::Wrapper<reco::Centrality>), sizeof(::edm::Wrapper<reco::Centrality>), ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL, ::Reflex::CLASS)
-  .AddTypedef(type_5959, Reflex::Literal("edm::Wrapper<reco::Centrality>::value_type"))
-  .AddTypedef(type_5959, Reflex::Literal("edm::Wrapper<reco::Centrality>::wrapped_type"))
+  .AddTypedef(type_5969, Reflex::Literal("edm::Wrapper<reco::Centrality>::value_type"))
+  .AddTypedef(type_5969, Reflex::Literal("edm::Wrapper<reco::Centrality>::wrapped_type"))
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("Wrapper"), constructor_16704, 0, 0, ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_2489), Reflex::Literal("Wrapper"), constructor_16705, 0, "ptr", ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("~Wrapper"), destructor_16706, 0, 0, ::Reflex::PUBLIC | ::Reflex::DESTRUCTOR )
@@ -986,37 +986,37 @@ void __edm__Wrapper_reco__Centrality__dict() {
 //------Delayed data member builder for class Wrapper<reco::Centrality> -------------------
 void __edm__Wrapper_reco__Centrality__db_datamem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
-  .AddDataMember(type_1438, Reflex::Literal("present"), OffsetOf(__shadow__::__edm__Wrapper_reco__Centrality_, present), ::Reflex::PRIVATE)
-  .AddDataMember(type_5959, Reflex::Literal("obj"), OffsetOf(__shadow__::__edm__Wrapper_reco__Centrality_, obj), ::Reflex::PRIVATE);
+  .AddDataMember(type_1439, Reflex::Literal("present"), OffsetOf(__shadow__::__edm__Wrapper_reco__Centrality_, present), ::Reflex::PRIVATE)
+  .AddDataMember(type_5969, Reflex::Literal("obj"), OffsetOf(__shadow__::__edm__Wrapper_reco__Centrality_, obj), ::Reflex::PRIVATE);
 }
 //------Delayed function member builder for class Wrapper<reco::Centrality> -------------------
 void __edm__Wrapper_reco__Centrality__db_funcmem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10861), Reflex::Literal("product"), method_16707, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10861), Reflex::Literal("operator->"), operator_16708, 0, 0, ::Reflex::PUBLIC | ::Reflex::OPERATOR | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("productTypeInfo"), method_16709, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("typeInfo"), method_16710, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("productTypeInfo"), method_16709, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("typeInfo"), method_16710, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25667), Reflex::Literal("getInterface"), method_16712, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_16806, type_21493, type_25599), Reflex::Literal("fillView"), method_16713, 0, "id;pointers;helpers", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_5956, type_297, type_7588), Reflex::Literal("setPtr"), method_16714, 0, "iToType;iIndex;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_5956, type_21494, type_21493), Reflex::Literal("fillPtrVector"), method_16715, 0, "iToType;iIndices;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("dynamicTypeInfo"), method_16716, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1438), Reflex::Literal("isPresent"), method_16717, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("dynamicTypeInfo_"), method_16718, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_16806, type_21493, type_25599), Reflex::Literal("fillView"), method_16713, 0, "id;pointers;helpers", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_5966, type_297, type_7588), Reflex::Literal("setPtr"), method_16714, 0, "iToType;iIndex;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_5966, type_21494, type_21493), Reflex::Literal("fillPtrVector"), method_16715, 0, "iToType;iIndices;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("dynamicTypeInfo"), method_16716, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1439), Reflex::Literal("isPresent"), method_16717, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("dynamicTypeInfo_"), method_16718, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
 }
 //------Stub functions for class EvtPlane -------------------------------
-static  void operator_19391( void* retaddr, void* o, const std::vector<void*>& arg, void*)
+static  void operator_19402( void* retaddr, void* o, const std::vector<void*>& arg, void*)
 {
   if (retaddr) *(void**)retaddr = (void*)&(((::reco::EvtPlane*)o)->operator=)(*(const ::reco::EvtPlane*)arg[0]);
   else   (((::reco::EvtPlane*)o)->operator=)(*(const ::reco::EvtPlane*)arg[0]);
 }
 
-static void constructor_19392( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
+static void constructor_19403( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
   if (retaddr) *(void**)retaddr = ::new(mem) ::reco::EvtPlane(*(const ::reco::EvtPlane*)arg[0]);
   else ::new(mem) ::reco::EvtPlane(*(const ::reco::EvtPlane*)arg[0]);
 }
 
-static void constructor_19393( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
+static void constructor_19404( void* retaddr, void* mem, const std::vector<void*>& arg, void*) {
   if ( arg.size() == 0 ) {
     if (retaddr) *(void**)retaddr = ::new(mem) ::reco::EvtPlane();
   else ::new(mem) ::reco::EvtPlane();
@@ -1051,28 +1051,28 @@ static void constructor_19393( void* retaddr, void* mem, const std::vector<void*
   }
 }
 
-static void destructor_19394(void*, void * o, const std::vector<void*>&, void *) {
+static void destructor_19405(void*, void * o, const std::vector<void*>&, void *) {
 (((::reco::EvtPlane*)o)->::reco::EvtPlane::~EvtPlane)();
 }
-static  void method_19395( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19406( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::EvtPlane*)o)->angle)());
   else   (((const ::reco::EvtPlane*)o)->angle)();
 }
 
-static  void method_19396( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19407( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::EvtPlane*)o)->sumSin)());
   else   (((const ::reco::EvtPlane*)o)->sumSin)();
 }
 
-static  void method_19397( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19408( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (double)((((const ::reco::EvtPlane*)o)->sumCos)());
   else   (((const ::reco::EvtPlane*)o)->sumCos)();
 }
 
-static  void method_19398( void* retaddr, void* o, const std::vector<void*>&, void*)
+static  void method_19409( void* retaddr, void* o, const std::vector<void*>&, void*)
 {
   if (retaddr) new (retaddr) (std::string)((((const ::reco::EvtPlane*)o)->label)());
   else   (((const ::reco::EvtPlane*)o)->label)();
@@ -1083,7 +1083,7 @@ static void constructor_x5( void* retaddr, void* mem, const std::vector<void*>&,
   else ::new(mem) ::reco::EvtPlane();
 }
 
-static void method_newdel_5958( void* retaddr, void*, const std::vector<void*>&, void*)
+static void method_newdel_5968( void* retaddr, void*, const std::vector<void*>&, void*)
 {
   static ::Reflex::NewDelFunctions s_funcs;
   s_funcs.fNew         = ::Reflex::NewDelFunctionsT< ::reco::EvtPlane >::new_T;
@@ -1102,12 +1102,12 @@ Reflex::GenreflexMemberBuilder __reco__EvtPlane_funcmem_bld(&__reco__EvtPlane_db
 void __reco__EvtPlane_dict() {
   ::Reflex::ClassBuilder(Reflex::Literal("reco::EvtPlane"), typeid(::reco::EvtPlane), sizeof(::reco::EvtPlane), ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::VIRTUAL, ::Reflex::CLASS)
   .AddProperty(Reflex::Literal("ClassVersion"), "10")
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10798, type_10800), Reflex::Literal("operator="), operator_19391, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::OPERATOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_10800), Reflex::Literal("EvtPlane"), constructor_19392, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::CONSTRUCTOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_102, type_102, type_102, type_2287), Reflex::Literal("EvtPlane"), constructor_19393, 0, "planeA=0;sumSin=0;sumCos=0;label=\"\"", ::Reflex::PUBLIC | ::Reflex::CONSTRUCTOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("~EvtPlane"), destructor_19394, 0, 0, ::Reflex::PUBLIC | ::Reflex::VIRTUAL | ::Reflex::DESTRUCTOR )
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10798, type_10800), Reflex::Literal("operator="), operator_19402, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::OPERATOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_10800), Reflex::Literal("EvtPlane"), constructor_19403, 0, "", ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::CONSTRUCTOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_102, type_102, type_102, type_2287), Reflex::Literal("EvtPlane"), constructor_19404, 0, "planeA=0;sumSin=0;sumCos=0;label=\"\"", ::Reflex::PUBLIC | ::Reflex::CONSTRUCTOR)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("~EvtPlane"), destructor_19405, 0, 0, ::Reflex::PUBLIC | ::Reflex::VIRTUAL | ::Reflex::DESTRUCTOR )
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("EvtPlane"), constructor_x5, 0, 0, ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL | ::Reflex::CONSTRUCTOR)
-  .AddFunctionMember<void*(void)>(Reflex::Literal("__getNewDelFunctions"), method_newdel_5958, 0, 0, ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL)
+  .AddFunctionMember<void*(void)>(Reflex::Literal("__getNewDelFunctions"), method_newdel_5968, 0, 0, ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL)
   .AddOnDemandDataMemberBuilder(&__reco__EvtPlane_datamem_bld)
   .AddOnDemandFunctionMemberBuilder(&__reco__EvtPlane_funcmem_bld);
 }
@@ -1123,10 +1123,10 @@ void __reco__EvtPlane_db_datamem(Reflex::Class* cl) {
 //------Delayed function member builder for class EvtPlane -------------------
 void __reco__EvtPlane_db_funcmem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("angle"), method_19395, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("sumSin"), method_19396, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("sumCos"), method_19397, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_2287), Reflex::Literal("label"), method_19398, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("angle"), method_19406, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("sumSin"), method_19407, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_102), Reflex::Literal("sumCos"), method_19408, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_2287), Reflex::Literal("label"), method_19409, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
 }
 //------Stub functions for class Wrapper<reco::EvtPlane> -------------------------------
 static void constructor_16725( void* retaddr, void* mem, const std::vector<void*>&, void*) {
@@ -1234,8 +1234,8 @@ Reflex::GenreflexMemberBuilder __edm__Wrapper_reco__EvtPlane__datamem_bld(&__edm
 Reflex::GenreflexMemberBuilder __edm__Wrapper_reco__EvtPlane__funcmem_bld(&__edm__Wrapper_reco__EvtPlane__db_funcmem);
 void __edm__Wrapper_reco__EvtPlane__dict() {
   ::Reflex::ClassBuilder(Reflex::Literal("edm::Wrapper<reco::EvtPlane>"), typeid(::edm::Wrapper<reco::EvtPlane>), sizeof(::edm::Wrapper<reco::EvtPlane>), ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL, ::Reflex::CLASS)
-  .AddTypedef(type_5958, Reflex::Literal("edm::Wrapper<reco::EvtPlane>::value_type"))
-  .AddTypedef(type_5958, Reflex::Literal("edm::Wrapper<reco::EvtPlane>::wrapped_type"))
+  .AddTypedef(type_5968, Reflex::Literal("edm::Wrapper<reco::EvtPlane>::value_type"))
+  .AddTypedef(type_5968, Reflex::Literal("edm::Wrapper<reco::EvtPlane>::wrapped_type"))
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("Wrapper"), constructor_16725, 0, 0, ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void, type_2490), Reflex::Literal("Wrapper"), constructor_16726, 0, "ptr", ::Reflex::PUBLIC | ::Reflex::EXPLICIT | ::Reflex::CONSTRUCTOR)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_void), Reflex::Literal("~Wrapper"), destructor_16727, 0, 0, ::Reflex::PUBLIC | ::Reflex::DESTRUCTOR )
@@ -1248,23 +1248,23 @@ void __edm__Wrapper_reco__EvtPlane__dict() {
 //------Delayed data member builder for class Wrapper<reco::EvtPlane> -------------------
 void __edm__Wrapper_reco__EvtPlane__db_datamem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
-  .AddDataMember(type_1438, Reflex::Literal("present"), OffsetOf(__shadow__::__edm__Wrapper_reco__EvtPlane_, present), ::Reflex::PRIVATE)
-  .AddDataMember(type_5958, Reflex::Literal("obj"), OffsetOf(__shadow__::__edm__Wrapper_reco__EvtPlane_, obj), ::Reflex::PRIVATE);
+  .AddDataMember(type_1439, Reflex::Literal("present"), OffsetOf(__shadow__::__edm__Wrapper_reco__EvtPlane_, present), ::Reflex::PRIVATE)
+  .AddDataMember(type_5968, Reflex::Literal("obj"), OffsetOf(__shadow__::__edm__Wrapper_reco__EvtPlane_, obj), ::Reflex::PRIVATE);
 }
 //------Delayed function member builder for class Wrapper<reco::EvtPlane> -------------------
 void __edm__Wrapper_reco__EvtPlane__db_funcmem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10796), Reflex::Literal("product"), method_16728, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10796), Reflex::Literal("operator->"), operator_16729, 0, 0, ::Reflex::PUBLIC | ::Reflex::OPERATOR | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("productTypeInfo"), method_16730, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("typeInfo"), method_16731, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("productTypeInfo"), method_16730, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("typeInfo"), method_16731, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25670), Reflex::Literal("getInterface"), method_16733, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_16806, type_21493, type_25599), Reflex::Literal("fillView"), method_16734, 0, "id;pointers;helpers", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_5956, type_297, type_7588), Reflex::Literal("setPtr"), method_16735, 0, "iToType;iIndex;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_5956, type_21494, type_21493), Reflex::Literal("fillPtrVector"), method_16736, 0, "iToType;iIndices;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("dynamicTypeInfo"), method_16737, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1438), Reflex::Literal("isPresent"), method_16738, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("dynamicTypeInfo_"), method_16739, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_16806, type_21493, type_25599), Reflex::Literal("fillView"), method_16734, 0, "id;pointers;helpers", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_5966, type_297, type_7588), Reflex::Literal("setPtr"), method_16735, 0, "iToType;iIndex;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_5966, type_21494, type_21493), Reflex::Literal("fillPtrVector"), method_16736, 0, "iToType;iIndices;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("dynamicTypeInfo"), method_16737, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1439), Reflex::Literal("isPresent"), method_16738, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("dynamicTypeInfo_"), method_16739, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
 }
 //------Stub functions for class vector<reco::Centrality,std::allocator<reco::Centrality> > -------------------------------
 static void constructor_10874( void* retaddr, void* mem, const std::vector<void*>&, void*) {
@@ -1526,11 +1526,11 @@ Reflex::GenreflexMemberBuilder __std__vector_reco__Centrality__funcmem_bld(&__st
 void __std__vector_reco__Centrality__dict() {
   ::Reflex::ClassBuilder(Reflex::Literal("std::vector<reco::Centrality>"), typeid(::std::vector<reco::Centrality>), sizeof(::std::vector<reco::Centrality>), ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL, ::Reflex::CLASS)
   .AddBase(type_2275, ::Reflex::BaseOffset< ::std::vector<reco::Centrality>, ::std::_Vector_base<reco::Centrality,std::allocator<reco::Centrality> > >::Get(), ::Reflex::PROTECTED)
-  .AddTypedef(type_5959, Reflex::Literal("std::vector<reco::Centrality>::_Alloc_value_type"))
+  .AddTypedef(type_5969, Reflex::Literal("std::vector<reco::Centrality>::_Alloc_value_type"))
   .AddTypedef(type_2275, Reflex::Literal("std::vector<reco::Centrality>::_Base"))
   .AddTypedef(type_2974, Reflex::Literal("std::vector<reco::Centrality>::_Tp_alloc_type"))
   .AddTypedef(type_4871, Reflex::Literal("std::vector<reco::Centrality>::_Alloc_traits"))
-  .AddTypedef(type_5959, Reflex::Literal("std::vector<reco::Centrality>::value_type"))
+  .AddTypedef(type_5969, Reflex::Literal("std::vector<reco::Centrality>::value_type"))
   .AddTypedef(type_7129, Reflex::Literal("std::vector<reco::Centrality>::pointer"))
   .AddTypedef(type_10861, Reflex::Literal("std::vector<reco::Centrality>::const_pointer"))
   .AddTypedef(type_10863, Reflex::Literal("std::vector<reco::Centrality>::reference"))
@@ -1561,17 +1561,17 @@ void __std__vector_reco__Centrality__db_datamem(Reflex::Class*) {
 void __std__vector_reco__Centrality__db_funcmem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_21540, type_21539), Reflex::Literal("operator="), operator_10879, 0, "__x", ::Reflex::PUBLIC | ::Reflex::OPERATOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_2924, type_10865), Reflex::Literal("assign"), method_10880, 0, "__n;__val", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_2924, type_10865), Reflex::Literal("assign"), method_10880, 0, "__n;__val", ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4800), Reflex::Literal("begin"), method_10881, 0, 0, ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4801), Reflex::Literal("begin"), method_10882, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4800), Reflex::Literal("end"), method_10883, 0, 0, ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4801), Reflex::Literal("end"), method_10884, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_2924), Reflex::Literal("size"), method_10889, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_2924), Reflex::Literal("max_size"), method_10890, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_2924, type_5959), Reflex::Literal("resize"), method_10891, 0, "__new_size;__x=_Tp()", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_2924, type_5969), Reflex::Literal("resize"), method_10891, 0, "__new_size;__x=_Tp()", ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_2924), Reflex::Literal("capacity"), method_10892, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1438), Reflex::Literal("empty"), method_10893, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_2924), Reflex::Literal("reserve"), method_10894, 0, "__n", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1439), Reflex::Literal("empty"), method_10893, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_2924), Reflex::Literal("reserve"), method_10894, 0, "__n", ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10863, type_2924), Reflex::Literal("operator[]"), operator_10895, 0, "__n", ::Reflex::PUBLIC | ::Reflex::OPERATOR)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10865, type_2924), Reflex::Literal("operator[]"), operator_10896, 0, "__n", ::Reflex::PUBLIC | ::Reflex::OPERATOR | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10863, type_2924), Reflex::Literal("at"), method_10898, 0, "__n", ::Reflex::PUBLIC)
@@ -1582,14 +1582,14 @@ void __std__vector_reco__Centrality__db_funcmem(Reflex::Class* cl) {
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10865), Reflex::Literal("back"), method_10903, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_7129), Reflex::Literal("data"), method_10904, 0, 0, ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10861), Reflex::Literal("data"), method_10905, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_10865), Reflex::Literal("push_back"), method_10906, 0, "__x", ::Reflex::PUBLIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235), Reflex::Literal("pop_back"), method_10907, 0, 0, ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_10865), Reflex::Literal("push_back"), method_10906, 0, "__x", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236), Reflex::Literal("pop_back"), method_10907, 0, 0, ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4800, type_4800, type_10865), Reflex::Literal("insert"), method_10908, 0, "__position;__x", ::Reflex::PUBLIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_4800, type_2924, type_10865), Reflex::Literal("insert"), method_10909, 0, "__position;__n;__x", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_4800, type_2924, type_10865), Reflex::Literal("insert"), method_10909, 0, "__position;__n;__x", ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4800, type_4800), Reflex::Literal("erase"), method_10910, 0, "__position", ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4800, type_4800, type_4800), Reflex::Literal("erase"), method_10911, 0, "__first;__last", ::Reflex::PUBLIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_21540), Reflex::Literal("swap"), method_10912, 0, "__x", ::Reflex::PUBLIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235), Reflex::Literal("clear"), method_10913, 0, 0, ::Reflex::PUBLIC);
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_21540), Reflex::Literal("swap"), method_10912, 0, "__x", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236), Reflex::Literal("clear"), method_10913, 0, 0, ::Reflex::PUBLIC);
 }
 //------Stub functions for class vector<reco::EvtPlane,std::allocator<reco::EvtPlane> > -------------------------------
 static void constructor_10809( void* retaddr, void* mem, const std::vector<void*>&, void*) {
@@ -1851,11 +1851,11 @@ Reflex::GenreflexMemberBuilder __std__vector_reco__EvtPlane__funcmem_bld(&__std_
 void __std__vector_reco__EvtPlane__dict() {
   ::Reflex::ClassBuilder(Reflex::Literal("std::vector<reco::EvtPlane>"), typeid(::std::vector<reco::EvtPlane>), sizeof(::std::vector<reco::EvtPlane>), ::Reflex::PUBLIC | ::Reflex::ARTIFICIAL, ::Reflex::CLASS)
   .AddBase(type_2274, ::Reflex::BaseOffset< ::std::vector<reco::EvtPlane>, ::std::_Vector_base<reco::EvtPlane,std::allocator<reco::EvtPlane> > >::Get(), ::Reflex::PROTECTED)
-  .AddTypedef(type_5958, Reflex::Literal("std::vector<reco::EvtPlane>::_Alloc_value_type"))
+  .AddTypedef(type_5968, Reflex::Literal("std::vector<reco::EvtPlane>::_Alloc_value_type"))
   .AddTypedef(type_2274, Reflex::Literal("std::vector<reco::EvtPlane>::_Base"))
   .AddTypedef(type_2973, Reflex::Literal("std::vector<reco::EvtPlane>::_Tp_alloc_type"))
   .AddTypedef(type_4870, Reflex::Literal("std::vector<reco::EvtPlane>::_Alloc_traits"))
-  .AddTypedef(type_5958, Reflex::Literal("std::vector<reco::EvtPlane>::value_type"))
+  .AddTypedef(type_5968, Reflex::Literal("std::vector<reco::EvtPlane>::value_type"))
   .AddTypedef(type_7110, Reflex::Literal("std::vector<reco::EvtPlane>::pointer"))
   .AddTypedef(type_10796, Reflex::Literal("std::vector<reco::EvtPlane>::const_pointer"))
   .AddTypedef(type_10798, Reflex::Literal("std::vector<reco::EvtPlane>::reference"))
@@ -1886,17 +1886,17 @@ void __std__vector_reco__EvtPlane__db_datamem(Reflex::Class*) {
 void __std__vector_reco__EvtPlane__db_funcmem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_21537, type_21536), Reflex::Literal("operator="), operator_10814, 0, "__x", ::Reflex::PUBLIC | ::Reflex::OPERATOR)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_2924, type_10800), Reflex::Literal("assign"), method_10815, 0, "__n;__val", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_2924, type_10800), Reflex::Literal("assign"), method_10815, 0, "__n;__val", ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4798), Reflex::Literal("begin"), method_10816, 0, 0, ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4799), Reflex::Literal("begin"), method_10817, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4798), Reflex::Literal("end"), method_10818, 0, 0, ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4799), Reflex::Literal("end"), method_10819, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_2924), Reflex::Literal("size"), method_10824, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_2924), Reflex::Literal("max_size"), method_10825, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_2924, type_5958), Reflex::Literal("resize"), method_10826, 0, "__new_size;__x=_Tp()", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_2924, type_5968), Reflex::Literal("resize"), method_10826, 0, "__new_size;__x=_Tp()", ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_2924), Reflex::Literal("capacity"), method_10827, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1438), Reflex::Literal("empty"), method_10828, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_2924), Reflex::Literal("reserve"), method_10829, 0, "__n", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1439), Reflex::Literal("empty"), method_10828, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_2924), Reflex::Literal("reserve"), method_10829, 0, "__n", ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10798, type_2924), Reflex::Literal("operator[]"), operator_10830, 0, "__n", ::Reflex::PUBLIC | ::Reflex::OPERATOR)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10800, type_2924), Reflex::Literal("operator[]"), operator_10831, 0, "__n", ::Reflex::PUBLIC | ::Reflex::OPERATOR | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10798, type_2924), Reflex::Literal("at"), method_10833, 0, "__n", ::Reflex::PUBLIC)
@@ -1907,14 +1907,14 @@ void __std__vector_reco__EvtPlane__db_funcmem(Reflex::Class* cl) {
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10800), Reflex::Literal("back"), method_10838, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_7110), Reflex::Literal("data"), method_10839, 0, 0, ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_10796), Reflex::Literal("data"), method_10840, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_10800), Reflex::Literal("push_back"), method_10841, 0, "__x", ::Reflex::PUBLIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235), Reflex::Literal("pop_back"), method_10842, 0, 0, ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_10800), Reflex::Literal("push_back"), method_10841, 0, "__x", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236), Reflex::Literal("pop_back"), method_10842, 0, 0, ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4798, type_4798, type_10800), Reflex::Literal("insert"), method_10843, 0, "__position;__x", ::Reflex::PUBLIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_4798, type_2924, type_10800), Reflex::Literal("insert"), method_10844, 0, "__position;__n;__x", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_4798, type_2924, type_10800), Reflex::Literal("insert"), method_10844, 0, "__position;__n;__x", ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4798, type_4798), Reflex::Literal("erase"), method_10845, 0, "__position", ::Reflex::PUBLIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_4798, type_4798, type_4798), Reflex::Literal("erase"), method_10846, 0, "__first;__last", ::Reflex::PUBLIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_21537), Reflex::Literal("swap"), method_10847, 0, "__x", ::Reflex::PUBLIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235), Reflex::Literal("clear"), method_10848, 0, 0, ::Reflex::PUBLIC);
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_21537), Reflex::Literal("swap"), method_10847, 0, "__x", ::Reflex::PUBLIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236), Reflex::Literal("clear"), method_10848, 0, 0, ::Reflex::PUBLIC);
 }
 //------Stub functions for class Wrapper<std::vector<reco::EvtPlane, std::allocator<reco::EvtPlane> > > -------------------------------
 static void constructor_16662( void* retaddr, void* mem, const std::vector<void*>&, void*) {
@@ -2037,7 +2037,7 @@ void __edm__Wrapper_std__vector_reco__EvtPlane_s__dict() {
 //------Delayed data member builder for class Wrapper<std::vector<reco::EvtPlane, std::allocator<reco::EvtPlane> > > -------------------
 void __edm__Wrapper_std__vector_reco__EvtPlane_s__db_datamem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
-  .AddDataMember(type_1438, Reflex::Literal("present"), OffsetOf(__shadow__::__edm__Wrapper_std__vector_reco__EvtPlane_s_, present), ::Reflex::PRIVATE)
+  .AddDataMember(type_1439, Reflex::Literal("present"), OffsetOf(__shadow__::__edm__Wrapper_std__vector_reco__EvtPlane_s_, present), ::Reflex::PRIVATE)
   .AddDataMember(type_2725, Reflex::Literal("obj"), OffsetOf(__shadow__::__edm__Wrapper_std__vector_reco__EvtPlane_s_, obj), ::Reflex::PRIVATE);
 }
 //------Delayed function member builder for class Wrapper<std::vector<reco::EvtPlane, std::allocator<reco::EvtPlane> > > -------------------
@@ -2045,15 +2045,15 @@ void __edm__Wrapper_std__vector_reco__EvtPlane_s__db_funcmem(Reflex::Class* cl) 
   ::Reflex::ClassBuilder(cl)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25657), Reflex::Literal("product"), method_16665, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25657), Reflex::Literal("operator->"), operator_16666, 0, 0, ::Reflex::PUBLIC | ::Reflex::OPERATOR | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("productTypeInfo"), method_16667, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("typeInfo"), method_16668, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("productTypeInfo"), method_16667, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("typeInfo"), method_16668, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25659), Reflex::Literal("getInterface"), method_16670, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_16806, type_21493, type_25599), Reflex::Literal("fillView"), method_16671, 0, "id;pointers;helpers", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_5956, type_297, type_7588), Reflex::Literal("setPtr"), method_16672, 0, "iToType;iIndex;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_5956, type_21494, type_21493), Reflex::Literal("fillPtrVector"), method_16673, 0, "iToType;iIndices;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("dynamicTypeInfo"), method_16674, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1438), Reflex::Literal("isPresent"), method_16675, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("dynamicTypeInfo_"), method_16676, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_16806, type_21493, type_25599), Reflex::Literal("fillView"), method_16671, 0, "id;pointers;helpers", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_5966, type_297, type_7588), Reflex::Literal("setPtr"), method_16672, 0, "iToType;iIndex;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_5966, type_21494, type_21493), Reflex::Literal("fillPtrVector"), method_16673, 0, "iToType;iIndices;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("dynamicTypeInfo"), method_16674, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1439), Reflex::Literal("isPresent"), method_16675, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("dynamicTypeInfo_"), method_16676, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
 }
 //------Stub functions for class Wrapper<std::vector<reco::Centrality, std::allocator<reco::Centrality> > > -------------------------------
 static void constructor_16683( void* retaddr, void* mem, const std::vector<void*>&, void*) {
@@ -2176,7 +2176,7 @@ void __edm__Wrapper_std__vector_reco__Centrality_s__dict() {
 //------Delayed data member builder for class Wrapper<std::vector<reco::Centrality, std::allocator<reco::Centrality> > > -------------------
 void __edm__Wrapper_std__vector_reco__Centrality_s__db_datamem(Reflex::Class* cl) {
   ::Reflex::ClassBuilder(cl)
-  .AddDataMember(type_1438, Reflex::Literal("present"), OffsetOf(__shadow__::__edm__Wrapper_std__vector_reco__Centrality_s_, present), ::Reflex::PRIVATE)
+  .AddDataMember(type_1439, Reflex::Literal("present"), OffsetOf(__shadow__::__edm__Wrapper_std__vector_reco__Centrality_s_, present), ::Reflex::PRIVATE)
   .AddDataMember(type_2726, Reflex::Literal("obj"), OffsetOf(__shadow__::__edm__Wrapper_std__vector_reco__Centrality_s_, obj), ::Reflex::PRIVATE);
 }
 //------Delayed function member builder for class Wrapper<std::vector<reco::Centrality, std::allocator<reco::Centrality> > > -------------------
@@ -2184,15 +2184,15 @@ void __edm__Wrapper_std__vector_reco__Centrality_s__db_funcmem(Reflex::Class* cl
   ::Reflex::ClassBuilder(cl)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25662), Reflex::Literal("product"), method_16686, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25662), Reflex::Literal("operator->"), operator_16687, 0, 0, ::Reflex::PUBLIC | ::Reflex::OPERATOR | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("productTypeInfo"), method_16688, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("typeInfo"), method_16689, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("productTypeInfo"), method_16688, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("typeInfo"), method_16689, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
   .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_25664), Reflex::Literal("getInterface"), method_16691, 0, 0, ::Reflex::PUBLIC | ::Reflex::STATIC)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_16806, type_21493, type_25599), Reflex::Literal("fillView"), method_16692, 0, "id;pointers;helpers", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_5956, type_297, type_7588), Reflex::Literal("setPtr"), method_16693, 0, "iToType;iIndex;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1235, type_5956, type_21494, type_21493), Reflex::Literal("fillPtrVector"), method_16694, 0, "iToType;iIndices;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("dynamicTypeInfo"), method_16695, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1438), Reflex::Literal("isPresent"), method_16696, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
-  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5956), Reflex::Literal("dynamicTypeInfo_"), method_16697, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_16806, type_21493, type_25599), Reflex::Literal("fillView"), method_16692, 0, "id;pointers;helpers", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_5966, type_297, type_7588), Reflex::Literal("setPtr"), method_16693, 0, "iToType;iIndex;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1236, type_5966, type_21494, type_21493), Reflex::Literal("fillPtrVector"), method_16694, 0, "iToType;iIndices;oPtr", ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("dynamicTypeInfo"), method_16695, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_1439), Reflex::Literal("isPresent"), method_16696, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST)
+  .AddFunctionMember(::Reflex::FunctionTypeBuilder(type_5966), Reflex::Literal("dynamicTypeInfo_"), method_16697, 0, 0, ::Reflex::PUBLIC | ::Reflex::CONST);
 }
 namespace {
   struct Dictionaries {
@@ -2210,11 +2210,11 @@ namespace {
       __edm__Wrapper_std__vector_reco__Centrality_s__dict(); 
     }
     ~Dictionaries() {
-      type_6498.Unload(); // class pat::HeavyIon 
+      type_6508.Unload(); // class pat::HeavyIon 
       type_4151.Unload(); // class edm::Wrapper<pat::HeavyIon> 
-      type_5959.Unload(); // class reco::Centrality 
+      type_5969.Unload(); // class reco::Centrality 
       type_4154.Unload(); // class edm::Wrapper<reco::Centrality> 
-      type_5958.Unload(); // class reco::EvtPlane 
+      type_5968.Unload(); // class reco::EvtPlane 
       type_4155.Unload(); // class edm::Wrapper<reco::EvtPlane> 
       type_2726.Unload(); // class std::vector<reco::Centrality> 
       type_2725.Unload(); // class std::vector<reco::EvtPlane> 

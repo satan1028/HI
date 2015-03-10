@@ -53,9 +53,9 @@ else{
     histonameID = Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[ieta].Data());
 }
 
-TH2F* hdata2F=(TH2F*)fDataPPbJetID->Get(histonameID);
-TH2F *hPPb2D= (TH2F*)fMCPPb->Get(histonameID);
-TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("%s_fake",histonameID.Data()));
+TH2F* hdata2F=(TH2F*)fDataPPbJetIDids->Get(histonameID);
+TH2F *hPPb2D= (TH2F*)fMCPPbids->Get(histonameID);
+TH2F *hPPb2D_fake= (TH2F*)fMCPPbids->Get(Form("%s_fake",histonameID.Data()));
 
 const double binbound_pt_coarse[]={0,30,70,150,200,600};
 const int Nbin_pt_coarse=sizeof(binbound_pt_coarse)/sizeof(double)-1;
@@ -170,13 +170,13 @@ g14MC->SetMarkerStyle(25);
 g14MC->SetMarkerColor(4);
 g14MC->SetLineColor(4);
 TGraphAsymmErrors *g21Data = makeJetIDcut(21,1,i);
-g21Data->SetMarkerStyle(28);
+g21Data->SetMarkerStyle(29);
 g21Data->SetMarkerColor(4);
 g21Data->SetLineColor(4);
 TGraphAsymmErrors *g21MC = makeJetIDcut(21,0,i);
 g21MC->SetMarkerStyle(25);
-g21MC->SetMarkerColor(4);
-g21MC->SetLineColor(4);
+g21MC->SetMarkerColor(2);
+g21MC->SetLineColor(2);
 //g14MC->Draw("Psame");
 TLine *l =new TLine(30,1,600,1);
 l->SetLineStyle(2);
@@ -206,5 +206,4 @@ if(canvas[i]!=4)
 T->DrawLatex(0.40,0.30,etastring[i]);
 }
 c1->Print(Form("pic/overlay_JetIDcut_Etabin.png"));
-c1->Print(Form("pic/overlay_JetIDcut_Etabin.pdf"));
 }

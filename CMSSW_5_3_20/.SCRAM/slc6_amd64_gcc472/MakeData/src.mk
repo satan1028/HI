@@ -44,7 +44,7 @@ endif
 endif
 LIBTYPE:= 
 
-subdirs_src+=$(filter-out Documentation, src_myAnalyzers src_V0Eff src_GeneratorInterface src_myProducers src_DataFormats src_V0Scripts src_Appeltel src_myFilters src_flowAnalysis src_RecoHI src_Tutorial src_EffAna src_HeavyIonsAnalysis src_dNchdeta)
+subdirs_src+=$(filter-out Documentation, src_Appeltel src_DataFormats src_EffAna src_GeneratorInterface src_HeavyIonsAnalysis src_RecoHI src_Tutorial src_V0Eff src_V0Scripts src_dNchdeta src_flowAnalysis src_myAnalyzers src_myFilters src_myProducers)
 
 COND_SERIALIZATION:=$(SCRAM_SOURCEDIR)/CondFormats/Serialization/python/condformats_serialization_generate.py
 EDM_WRITE_CONFIG:=edmWriteConfigs

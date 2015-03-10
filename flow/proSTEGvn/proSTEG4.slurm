@@ -31,7 +31,7 @@ if [[ ! -d /cms/store/user/qixu/flow/NewSTEG/pPbDataV204m$MULT ]]; then
     mkdir /cms/store/user/qixu/flow/NewSTEG/pPbDataV204m$MULT
 fi
 export X509_USER_CERT=/home/xuq7/.globus/usercert.pem
-/usr/local/cms-stageout/vandyCp.sh $TMPDIR/vndata_50k_$IFILE.root /cms/store/user/qixu/flow/NewSTEG/pPbDataV204m$MULT/
+/usr/local/cms-stageout/vandyCp.sh $TMPDIR/vndata_50k_$IFILE.root /cms/store/user/qixu/flow/NewSTEG/pPbDataV204m$MULT/vndata_50k_$IFILE.root
 rm -r $TMPDIR/vndata_50k_$IFILE.root
 if [[ "$(ls -A $TMPDIR)" ]];then
     echo "NOT EMPTY!"
