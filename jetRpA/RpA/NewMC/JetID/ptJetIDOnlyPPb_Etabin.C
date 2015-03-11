@@ -142,7 +142,6 @@ T1.SetNDC();
 T1.SetTextSize(0.065);
 T1.SetTextFont(42);
 
- //   fMCPPbids  = fMCPPbidsids;
 for(int i=0;i<Neta;i++){
 	if(canvas[i]==0){
 		double ybase=0.15;	double xbase=0.28;
@@ -155,38 +154,38 @@ for(int i=0;i<Neta;i++){
 	}
 if(isMatch){
     if(i==7){
-	TH2F *hPPb2D= (TH2F*)fMCPPbids->Get(Form("jetpt%s",JetIDName.Data()));
-	TH2F *hPPb2D_real= (TH2F*)fMCPPbids->Get(Form("jetpt%s_real1",JetIDName.Data()));
-	TH2F *hPPb2D_fake= (TH2F*)fMCPPbids->Get(Form("jetpt%s_fake1",JetIDName.Data()));
-	TH1F *hPPb_pt= (TH1F*)fMCPPbids->Get(Form("jetpt"));
-	TH1F *hPPb_pt_real= (TH1F*)fMCPPbids->Get(Form("jetpt_real1"));
-	TH1F *hPPb_pt_fake= (TH1F*)fMCPPbids->Get(Form("jetpt_fake1"));
+	TH2F *hPPb2D= (TH2F*)fMCPPb->Get(Form("jetpt%s",JetIDName.Data()));
+	TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("jetpt%s_real1",JetIDName.Data()));
+	TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("jetpt%s_fake1",JetIDName.Data()));
+	TH1F *hPPb_pt= (TH1F*)fMCPPb->Get(Form("jetpt"));
+	TH1F *hPPb_pt_real= (TH1F*)fMCPPb->Get(Form("jetpt_real1"));
+	TH1F *hPPb_pt_fake= (TH1F*)fMCPPb->Get(Form("jetpt_fake1"));
     }
     else{
-	TH2F *hPPb2D= (TH2F*)fMCPPbids->Get(Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[i].Data()));
-	TH2F *hPPb2D_real= (TH2F*)fMCPPbids->Get(Form("jetpt%sEtaBin%s_real1",JetIDName.Data(),etabinnameswap[i].Data()));
-	TH2F *hPPb2D_fake= (TH2F*)fMCPPbids->Get(Form("jetpt%sEtaBin%s_fake1",JetIDName.Data(),etabinnameswap[i].Data()));
-	TH1F *hPPb_pt= (TH1F*)fMCPPbids->Get(Form("jetptEtaBin%s",etabinnameswap[i].Data()));
-	TH1F *hPPb_pt_real= (TH1F*)fMCPPbids->Get(Form("jetptEtaBin%s_real1",etabinnameswap[i].Data()));
-	TH1F *hPPb_pt_fake= (TH1F*)fMCPPbids->Get(Form("jetptEtaBin%s_fake1",etabinnameswap[i].Data()));
+	TH2F *hPPb2D= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[i].Data()));
+	TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s_real1",JetIDName.Data(),etabinnameswap[i].Data()));
+	TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s_fake1",JetIDName.Data(),etabinnameswap[i].Data()));
+	TH1F *hPPb_pt= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s",etabinnameswap[i].Data()));
+	TH1F *hPPb_pt_real= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s_real1",etabinnameswap[i].Data()));
+	TH1F *hPPb_pt_fake= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s_fake1",etabinnameswap[i].Data()));
     }
 	}
 else{
     if(i==7){
-	TH2F *hPPb2D= (TH2F*)fMCPPbids->Get(Form("jetpt%s",JetIDName.Data()));
-	TH2F *hPPb2D_real= (TH2F*)fMCPPbids->Get(Form("jetpt%s_real",JetIDName.Data()));
-	TH2F *hPPb2D_fake= (TH2F*)fMCPPbids->Get(Form("jetpt%s_fake",JetIDName.Data()));
-	TH1F *hPPb_pt= (TH1F*)fMCPPbids->Get(Form("jetpt"));
-	TH1F *hPPb_pt_real= (TH1F*)fMCPPbids->Get(Form("jetpt_real"));
-	TH1F *hPPb_pt_fake= (TH1F*)fMCPPbids->Get(Form("jetpt_fake"));
+	TH2F *hPPb2D= (TH2F*)fMCPPb->Get(Form("jetpt%s",JetIDName.Data()));
+	TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("jetpt%s_real",JetIDName.Data()));
+	TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("jetpt%s_fake",JetIDName.Data()));
+	TH1F *hPPb_pt= (TH1F*)fMCPPb->Get(Form("jetpt"));
+	TH1F *hPPb_pt_real= (TH1F*)fMCPPb->Get(Form("jetpt_real"));
+	TH1F *hPPb_pt_fake= (TH1F*)fMCPPb->Get(Form("jetpt_fake"));
     }
     else{
-	TH2F *hPPb2D= (TH2F*)fMCPPbids->Get(Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[i].Data()));
-	TH2F *hPPb2D_real= (TH2F*)fMCPPbids->Get(Form("jetpt%sEtaBin%s_real",JetIDName.Data(),etabinnameswap[i].Data()));
-	TH2F *hPPb2D_fake= (TH2F*)fMCPPbids->Get(Form("jetpt%sEtaBin%s_fake",JetIDName.Data(),etabinnameswap[i].Data()));
-	TH1F *hPPb_pt= (TH1F*)fMCPPbids->Get(Form("jetptEtaBin%s",etabinnameswap[i].Data()));
-	TH1F *hPPb_pt_real= (TH1F*)fMCPPbids->Get(Form("jetptEtaBin%s_real",etabinnameswap[i].Data()));
-	TH1F *hPPb_pt_fake= (TH1F*)fMCPPbids->Get(Form("jetptEtaBin%s_fake",etabinnameswap[i].Data()));
+	TH2F *hPPb2D= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[i].Data()));
+	TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s_real",JetIDName.Data(),etabinnameswap[i].Data()));
+	TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("jetpt%sEtaBin%s_fake",JetIDName.Data(),etabinnameswap[i].Data()));
+	TH1F *hPPb_pt= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s",etabinnameswap[i].Data()));
+	TH1F *hPPb_pt_real= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s_real",etabinnameswap[i].Data()));
+	TH1F *hPPb_pt_fake= (TH1F*)fMCPPb->Get(Form("jetptEtaBin%s_fake",etabinnameswap[i].Data()));
     }
 }
 

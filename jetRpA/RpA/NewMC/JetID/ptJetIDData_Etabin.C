@@ -36,7 +36,7 @@ gStyle->SetLabelFont(70);
 
 //------------------------------------------------------------Get Histograms---------------------------------------------
 int isMatch=1;
-bool Save = 0;
+bool Save = 1;
 double xrange_JetIDcut[2]; double JetIDcut[2];
 int ilist=atoi(getenv("LIST"));
 TString JetIDName=JetIDNameList[ilist];
@@ -147,12 +147,12 @@ for(int i=0;i<Neta;i++){
 		double ybase=0.15;	double xbase=0.05;
 	}
     if(i==7){
-	TH2F *hPPb2D= (TH2F*)fDataPPbJetIDids->Get(Form("jetpt%s",JetIDName.Data()));
-	TH1F *hPPb_pt= (TH1F*)fDataPPbJetIDids->Get(Form("jetpt"));
+	TH2F *hPPb2D= (TH2F*)fDataPPbJetID->Get(Form("jetpt%s",JetIDName.Data()));
+	TH1F *hPPb_pt= (TH1F*)fDataPPbJetID->Get(Form("jetpt"));
     }
     else{
-	TH2F *hPPb2D= (TH2F*)fDataPPbJetIDids->Get(Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[i].Data()));
-	TH1F *hPPb_pt= (TH1F*)fDataPPbJetIDids->Get(Form("jetptEtaBin%s",etabinnameswap[i].Data()));
+	TH2F *hPPb2D= (TH2F*)fDataPPbJetID->Get(Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[i].Data()));
+	TH1F *hPPb_pt= (TH1F*)fDataPPbJetID->Get(Form("jetptEtaBin%s",etabinnameswap[i].Data()));
     }
 
 double xrange_JetID[2]={binbound_JetID[0]+1e-4,binbound_JetID[Nbin_JetID]-1e-4};
@@ -450,22 +450,22 @@ gPad->RedrawAxis();
 
 if(Save){
 if(isMatch){
-c1->Print(Form("pic/%s/jetpt_PPb_Etabin_cut1.png",JetIDName.Data()));
-c2->Print(Form("pic/%s/jetid_Etabin_cut1.png",JetIDName.Data()));
-c2_->Print(Form("pic/%s/jetid_Etabin_ptbin_cut1.png",JetIDName.Data()));
-c3->Print(Form("pic/%s/ratio_jetpt_cutvsnocut_Etabin_cut1.png",JetIDName.Data()));
-c4->Print(Form("pic/%s/jetpt_befcut_Etabin_cut1.png",JetIDName.Data()));
-c5->Print(Form("pic/%s/jetpt_aftcut_Etabin_cut1.png",JetIDName.Data()));
-c6->Print(Form("pic/%s/Profile_Etabin_cut1.png",JetIDName.Data()));
+c1->Print(Form("pic/%s/Data_jetpt_PPb_Etabin_cut1.png",JetIDName.Data()));
+c2->Print(Form("pic/%s/Data_jetid_Etabin_cut1.png",JetIDName.Data()));
+c2_->Print(Form("pic/%s/Data_jetid_Etabin_ptbin_cut1.png",JetIDName.Data()));
+c3->Print(Form("pic/%s/Data_ratio_jetpt_cutvsnocut_Etabin_cut1.png",JetIDName.Data()));
+c4->Print(Form("pic/%s/Data_jetpt_befcut_Etabin_cut1.png",JetIDName.Data()));
+c5->Print(Form("pic/%s/Data_jetpt_aftcut_Etabin_cut1.png",JetIDName.Data()));
+c6->Print(Form("pic/%s/Data_Profile_Etabin_cut1.png",JetIDName.Data()));
 }
 else{
-c1->Print(Form("pic/%s/jetpt_PPb_Etabin.png",JetIDName.Data()));
-c2->Print(Form("pic/%s/jetid_Etabin.png",JetIDName.Data()));
-c2_->Print(Form("pic/%s/jetid_Etabin_ptbin.png",JetIDName.Data()));
-c3->Print(Form("pic/%s/ratio_jetpt_cutvsnocut_Etabin.png",JetIDName.Data()));
-c4->Print(Form("pic/%s/jetpt_befcut_Etabin.png",JetIDName.Data()));
-c5->Print(Form("pic/%s/jetpt_aftcut_Etabin.png",JetIDName.Data()));
-c6->Print(Form("pic/%s/Profile_Etabin.png",JetIDName.Data()));
+c1->Print(Form("pic/%s/Data_jetpt_PPb_Etabin.png",JetIDName.Data()));
+c2->Print(Form("pic/%s/Data_jetid_Etabin.png",JetIDName.Data()));
+c2_->Print(Form("pic/%s/Data_jetid_Etabin_ptbin.png",JetIDName.Data()));
+c3->Print(Form("pic/%s/Data_ratio_jetpt_cutvsnocut_Etabin.png",JetIDName.Data()));
+c4->Print(Form("pic/%s/Data_jetpt_befcut_Etabin.png",JetIDName.Data()));
+c5->Print(Form("pic/%s/Data_jetpt_aftcut_Etabin.png",JetIDName.Data()));
+c6->Print(Form("pic/%s/Data_Profile_Etabin.png",JetIDName.Data()));
 }
 }
 
