@@ -54,6 +54,12 @@ public:
     TH1F * CentW;
     TH1F * Pthat;
     TH1F * PthatAfXw;
+    TH2F* Spikeetaphi;
+    TH2F* Spikeetapt;
+    TH2F* Spikeetaphi_real;
+    TH2F* Spikeetapt_real;
+    TH2F* Spikeetaphi_fake;
+    TH2F* Spikeetapt_fake;
 
     TH2F * rawptJESEtaBin[netabin];
     TH1F * refjetptEtaBin[netabin];
@@ -101,6 +107,18 @@ hist_class::hist_class()
     jetid12jetid14_real1[ipt] = new TH2F(Form("jetid12jetid14_%d_real1",ipt),Form("jetid12jetid14_%d_real1",ipt),200,0.,2.,200,0.,2.);//Added
     jetid12jetid14_real1[ipt] -> Sumw2();
     }
+        Spikeetaphi = new TH2F(Form("Spikeetaphi"),Form("Spikeetaphi"),200,-5.,5.,200, -TMath::Pi(), TMath::Pi());
+        Spikeetaphi -> Sumw2();
+        Spikeetapt = new TH2F(Form("Spikeetapt"),Form("Spikeetapt"),200,-5.,5.,1000,0.,1000.);
+        Spikeetapt -> Sumw2();
+        Spikeetaphi_real = new TH2F(Form("Spikeetaphi_real1"),Form("Spikeetaphi_real1"),200,-5.,5.,200, -TMath::Pi(), TMath::Pi());
+        Spikeetaphi_real -> Sumw2();
+        Spikeetapt_real = new TH2F(Form("Spikeetapt_real1"),Form("Spikeetapt_real1"),200,-5.,5.,1000,0.,1000.);
+        Spikeetapt_real -> Sumw2();
+        Spikeetaphi_fake = new TH2F(Form("Spikeetaphi_fake1"),Form("Spikeetaphi_fake1"),200,-5.,5.,200, -TMath::Pi(), TMath::Pi());
+        Spikeetaphi_fake -> Sumw2();
+        Spikeetapt_fake = new TH2F(Form("Spikeetapt_fake1"),Form("Spikeetapt_fake1"),200,-5.,5.,1000,0.,1000.);
+        Spikeetapt_fake -> Sumw2();
 	
         for(int ijetid=0;ijetid<nJetID;ijetid++){
         if(JetIDName[ijetid].Contains("pt") || JetIDName[ijetid].Contains("Maxr")){
@@ -203,7 +221,7 @@ void hist_class::Write()
   TString dataType;
   TString out_name;
   dataType = "MC";
-  out_name=Form("%s%s%s_useskim_ids.root",dataType.Data(),coll.Data(),algo.Data());
+  out_name=Form("%s%s%s_useskim.root",dataType.Data(),coll.Data(),algo.Data());
 
   TFile *out_file = new TFile(Form("/tmp/xuq7/%s",out_name.Data()),"RECREATE");  
     refjetpt->Write();
@@ -216,6 +234,12 @@ void hist_class::Write()
     jetptEta->Write();
     jetptphi->Write();
     jetEtaphi->Write();
+    Spikeetaphi->Write();
+    Spikeetapt->Write();
+    Spikeetaphi_real->Write();
+    Spikeetapt_real->Write();
+    Spikeetaphi_fake->Write();
+    Spikeetapt_fake->Write();
     for(int ipt=0;ipt<Nbin_pt_coarse;ipt++){ 
     jetid12jetid14[ipt] -> Write();
     jetid12jetid14_fake1[ipt] -> Write();
@@ -354,8 +378,8 @@ for(int j4i = 0; j4i < nref; j4i++){
 		int photonN = t_photonN[j4i];
 		double muSum = t_muSum[j4i];
 		double eSum = t_eSum[j4i];
-        if((chargedN == 0 || chargedSum == 0) && TMath::Abs(jet_eta)< 2.4) continue;  // jet id selection
-	double PPTighter0 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt<1.0);
+      //  if((chargedN == 0 || chargedSum == 0) && TMath::Abs(jet_eta)< 2.4) continue;  // jet id selection
+	double PPTighter0 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt<1.0 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4));
 	double PPTighter1 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
 	double PPTighter2 = (double)(neutralSum/jet_pt < 0.6 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
 	double PPTighter3 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.7 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
@@ -384,6 +408,19 @@ for(int j4i = 0; j4i < nref; j4i++){
         if(deltaR<0.3 && TMath::Abs(jet_pt-gen_pt)/jet_pt < 0.5){
            matchflag1++; 
         }
+        }
+        }
+        
+        if(neutralSum/jet_pt > 0.8) {
+            my_hists->Spikeetaphi->Fill(jet_eta,jet_phi, weight);
+            my_hists->Spikeetapt->Fill(jet_eta,jet_pt, weight);
+	if(matchflag1==0){	//Added
+            my_hists->Spikeetaphi_fake->Fill(jet_eta,jet_phi, weight);
+            my_hists->Spikeetapt_fake->Fill(jet_eta,jet_pt, weight);
+        }
+        else{
+            my_hists->Spikeetaphi_real->Fill(jet_eta,jet_phi, weight);
+            my_hists->Spikeetapt_real->Fill(jet_eta,jet_pt, weight);
         }
         }
 

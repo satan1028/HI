@@ -3,6 +3,7 @@
 #SBATCH --mem=4G
 #SBATCH --mem-per-cpu=4G
 #SBATCH --time=1-00:00:00
+#SBATCH --reservation=xuq7_1
 
 echo $SLURM_JOB_ID
 echo $SLURM_JOB_NAME

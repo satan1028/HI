@@ -1,5 +1,4 @@
 #!/bin/sh
-#SBATCH --reservation=xuq7_1
 
 mult=300
 for i in 226

@@ -5,18 +5,21 @@ mkdir $TMPDIR
 fi
 
 # run your macro storing the output in the tmp directory
-#root -l << EOF
-#.L PPbanalyzeRpAskimTree.C+
-#PPbanalyzeRpAskimTree()
-#EOF
+
 root -l << EOF
-.L DataJetIDskimTree.C+
-DataJetIDskimTree()
+.L PPbanalyzeRpAskimTree.C+
+PPbanalyzeRpAskimTree()
 EOF
+
+#root -l << EOF
+#.L DataJetIDskimTree.C+
+#DataJetIDskimTree()
+#EOF
 
 # Now call vandyCp.sh to move the file to LStore
 export X509_USER_CERT=/home/xuq7/.globus/usercert.pem
-/usr/local/cms-stageout/vandyCp.sh ${TMPDIR}/*.root /cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimJetID_ids.root
+/usr/local/cms-stageout/vandyCp.sh ${TMPDIR}/*.root /cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim.root
+#/usr/local/cms-stageout/vandyCp.sh ${TMPDIR}/*.root /cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimJetID.root
 
 # finally, clean up your tmp directory
 rm -rf $TMPDIR
