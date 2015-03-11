@@ -3,8 +3,12 @@
 void DrawSpike(){
     TString coll = "Data";
     gStyle->SetOptStat(0);
-    TCanvas *c1  = new TCanvas();
-    TCanvas *c2  = new TCanvas();
+    TCanvas *c1  = new TCanvas("c1","c1",650,600);
+    c1->SetRightMargin(0.14);
+    c1->SetLeftMargin(0.08);
+    TCanvas *c2  = new TCanvas("c2","c2",650,600);
+    c2->SetRightMargin(0.14);
+    c2->SetLeftMargin(0.13);
     if(coll.Contains("Data")){
     TH2F* Spikeetaphi = (TH2F*)fDataPPbJetID->Get("Spikeetaphi");
     TH2F* Spikeetapt = (TH2F*)fDataPPbJetID->Get("Spikeetapt");
@@ -46,6 +50,7 @@ void DrawSpike(){
     c2->SetLogz();
     c2->SetLogy();
     Spikeetapt->SetTitle("");
+    Spikeetapt->GetYaxis()->SetTitleOffset(1.5);
     Spikeetapt->Rebin2D(10,10);
     Spikeetapt->GetXaxis()->SetTitle("jet_#eta");
     Spikeetapt->GetYaxis()->SetTitle("jet_p_{T}");
@@ -58,8 +63,8 @@ void DrawSpike(){
     Spikeetapt->Draw("colz");
     bool save=1;
     if(save){
-        c1->Print(Form("Spikeetaphi_%s.gif",coll.Data()));
-        c2->Print(Form("Spikeetapt_%s.gif",coll.Data()));
+        c1->Print(Form("Spikeetaphi_%s.png",coll.Data()));
+        c2->Print(Form("Spikeetapt_%s.png",coll.Data()));
     }
 }
 

@@ -36,7 +36,7 @@ gStyle->SetLabelFont(70);
 
 //------------------------------------------------------------Get Histograms---------------------------------------------
 int isMatch=1;
-bool Save = 0;
+bool Save = 1;
 double xrange_JetIDcut[2]; double JetIDcut[2];
 int ilist=atoi(getenv("LIST"));
 TString JetIDName=JetIDNameList[ilist];
@@ -63,7 +63,7 @@ else if(ilist== 19)   {  JetID = "PP cut True or False";JetIDcut[0]=1;JetIDcut[1
 else if(ilist== 20)   {  JetID = "PP cut Tight True or False";JetIDcut[0]=1;JetIDcut[1]=2;}
 else if(ilist== 21)   {  JetID = "PP cut Tighter True or False";JetIDcut[0]=8;JetIDcut[1]=16;}
 //else if(ilist== 22)   {  JetID = "Max h^{0}/#Sigma h^{#pm}";JetIDcut[0]=0;JetIDcut[1]=2;}
-else if(ilist== 22) {    JetID = "(#Sigma h^{#pm}+#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";JetIDcut[0]=0; JetIDcut[1]=0.80;}
+else if(ilist== 22) {    JetID = "(#Sigma h^{#pm}+#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";JetIDcut[0]=0; JetIDcut[1]=1.0;}
 else{   exit();}
 
 if(JetIDName.Contains("pt") || JetIDName=="neuMaxr"){
