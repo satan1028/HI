@@ -166,7 +166,7 @@ void PPbanalyzeRpAskimTree()
   cout<<"Analyzing MC!"<<endl;
 
 //  TFile *f = new TFile(Form("/store/user/qixu/jetRpA/skimTree/MC%sakPu3PFskimFullInfofile0_10.root",coll.Data()));
-  TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10.root",coll.Data(),algo.Data()));
+  TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10final.root",coll.Data(),algo.Data()));
   
   TTree *nt = (TTree*)f->Get("nt");
 

@@ -21,13 +21,15 @@ cd /home/xuq7/HI/CMSSW_5_3_20/src/
 eval `scramv1 runtime -sh`
 
 cd /home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck
+if [[ ! -d /tmp/xuq7 ]];then
+mkdir /tmp/xuq7
+fi
 #  echo "First = $FIRST and last file = $LAST"   
 #.L analyzeTreesPA.C+
 #analyzeTreesPA(1, 0, 0, 1, 1, 1, 0, -1, false, 1)
 root -b > ../submit/AnaTree.log <<EOF
-.x rootlogin.C
-.L skimTreesPAFullInfoNewForest.C+
-skimTreesPAFullInfoNewForest(1)
+.L skimTreesPAsimple.C+
+skimTreesPAsimple(1)
 .q
 EOF
 

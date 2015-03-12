@@ -18,7 +18,7 @@ EOF
 
 # Now call vandyCp.sh to move the file to LStore
 export X509_USER_CERT=/home/xuq7/.globus/usercert.pem
-/usr/local/cms-stageout/vandyCp.sh ${TMPDIR}/MCPPbakPu3PF_useskim_YX.root /cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim_YX.root
+/usr/local/cms-stageout/vandyCp.sh ${TMPDIR}/MCPPbakPu3PF_useskim.root /cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim.root
 #/usr/local/cms-stageout/vandyCp.sh ${TMPDIR}/*.root /cms/store/user/qixu/jetRpA/RpA/NewMC/DATAPPbakPu3PFskimJetID.root
 
 # finally, clean up your tmp directory

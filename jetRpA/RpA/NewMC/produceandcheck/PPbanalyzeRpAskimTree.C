@@ -221,7 +221,7 @@ void hist_class::Write()
   TString dataType;
   TString out_name;
   dataType = "MC";
-  out_name=Form("%s%s%s_useskim_YX.root",dataType.Data(),coll.Data(),algo.Data());
+  out_name=Form("%s%s%s_useskim.root",dataType.Data(),coll.Data(),algo.Data());
 
   TFile *out_file = new TFile(Form("/tmp/xuq7/%s",out_name.Data()),"RECREATE");  
     refjetpt->Write();
@@ -290,8 +290,8 @@ void PPbanalyzeRpAskimTree()
   cout<<"Analyzing MC!"<<endl;
  TString user = getenv("USER");
  // TFile *f = new TFile(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/%sMCOfficialForestNewVzWeightAddHLT_ppReco_akPu3PF_QCDjetTrigJECv8_JetPt0pthatLowerCut.root",coll.Data()));
-//  TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10.root",coll.Data(),algo.Data()))
-  TFile *f = new TFile(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/MC%s%sskimFullInfoLowerpthatCutfile0_10.root",coll.Data(),algo.Data()));
+  TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10final.root",coll.Data(),algo.Data()));
+//  TFile *f = new TFile(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/MC%s%sskimFullInfoLowerpthatCutfile0_10.root",coll.Data(),algo.Data()));
   
   TTree *nt = (TTree*)f->Get("nt");
 
@@ -323,8 +323,8 @@ Int_t nref,ngen,hiBin;
   nt->SetBranchAddress("genpt",genpt);
   nt->SetBranchAddress("subid",subid);
   nt->SetBranchAddress("jteta",jteta);
- // nt->SetBranchAddress("geneta",geneta);
- // nt->SetBranchAddress("genphi",genphi);
+  nt->SetBranchAddress("geneta",geneta);
+  nt->SetBranchAddress("genphi",genphi);
   nt->SetBranchAddress("jtphi",jtphi);
     nt->SetBranchAddress("chargedN",t_chargedN);
     nt->SetBranchAddress("photonN",t_photonN);
@@ -397,11 +397,11 @@ for(int j4i = 0; j4i < nref; j4i++){
         if(TMath::Abs(jet_eta)<=2){
 	for(int j5i = 0; j5i < ngen ; j5i++) {
         double gen_pt=genpt[j5i];
-       // double gen_eta=geneta[j5i];
-       // double gen_phi=genphi[j5i];
+        double gen_eta=geneta[j5i];
+        double gen_phi=genphi[j5i];
         TVector3 jetVec, genVec;
         jetVec.SetPtEtaPhi(jet_pt,jet_eta,jet_phi);
-        genVec.SetPtEtaPhi(gen_pt,jet_eta,jet_phi);
+        genVec.SetPtEtaPhi(gen_pt,gen_eta,gen_phi);
         double deltaR = jetVec.DeltaR(genVec);
         if(deltaR<0.3){ 
         matchflag++;

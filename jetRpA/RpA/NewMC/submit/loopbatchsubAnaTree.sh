@@ -13,7 +13,7 @@ while [ $i -le $nJobs ];do
   export FIRST=$start
   export LAST=$end
   #qsub -v I=$i,FIRST=$start,LAST=$end -N akPu3PF$i -z submitAnaTree.pbs
-  sbatch -J akPu5PF$i -o AnaTree$i.out submitAnaTree.slurm
+  sbatch -J akPu3PF$i -o AnaTree$i.out submitAnaTree.slurm
   #fi
   let "i++"
 #  fi
