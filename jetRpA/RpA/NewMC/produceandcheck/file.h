@@ -33,8 +33,9 @@ TString MCPPbfileSm="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskimS
 TString MC5PPbfileSm="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu5PF_useskimSelfmatch.root";
 //TString MCPbPjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/PbPMCOfficialForestNewVzWeight_ppReco_akPu3PF_QCDjetTrigJECv19_JetPt0noIPupperCut.root";
 //TString MCPPbjetloopfile = "/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/PPbMCOfficialForestNewVzWeight_ppReco_akPu3PF_QCDjetTrigJECv8_JetPt0noIPupperCut.root";
-//TString 
 //TString MCPPfileOld="/cms/store/user/qixu/jetRpA/RpA/fromLinux/TreeAna/MCPPakPu3PFUniv.root";
+TString MCPPbfileYX="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim_YX.root";
+TString MCPPfile = "/cms/store/user/qixu/jetRpA/RpA/NewMC/Corrections/AnaGENJetR357_5020GeV_Apr15_Z2Combined.root";
 
 TString JetIDNameList[]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","eSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","PPcut","PPcutTight","PPcutTighter","SumSumpt1"};
 const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 362, 429, 692, 1000};
@@ -75,9 +76,12 @@ TFile *fMCPPbSm=new TFile(MCPPbfileSm);
 TFile *fMC5PPbSm=new TFile(MC5PPbfileSm);
 //TFile *fMCPPbjetloop=new TFile(MCPPbjetloopfile);
 //TFile *fMCPbPjetloop=new TFile(MCPbPjetloopfile);
+TFile *fMCPPbYX=new TFile(MCPPbfileYX);
+TFile *fMCPP = new TFile(MCPPfile);
 const int Neta=8;
 const TString etabinnameswap[Neta]={"15_20","10_15","5_10","-5_5","-10_-5","-15_-10","-20_-15","-10_10"};
 const TString etabinname[Neta]={"-20_-15","-15_-10","-10_-5","-5_5","5_10","10_15","15_20","-10_10"};
+const TString etabinnamesym[Neta/2]={"00_05","05_10","10_15","15_20"};
 const double etabin[Neta]={0.5,0.5,0.5,1.0,0.5,0.5,0.5,2.0};
 const TString etastring[Neta]={"-2.0<#eta_{CM}<-1.5","-1.5<#eta_{CM}<-1.0","-1.0<#eta_{CM}<-0.5","-0.5<#eta_{CM}<0.5","0.5<#eta_{CM}<1.0","1.0<#eta_{CM}<1.5","1.5<#eta_{CM}<2.0","-1.0<#eta_{CM}<1.0"};
 const int canvas[Neta]={0,1,2,3,6,5,4,7};

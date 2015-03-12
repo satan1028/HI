@@ -25,13 +25,13 @@ mkdir $TMPDIR
 fi
 cd /home/xuq7/HI/flow/proSTEGvn
 
-root -l -b "proSTEGvn4.C(\"${TMPDIR}/vndata_50k_${IFILE}.root\")"
+root -l -b "proSTEGvn0.C(\"${TMPDIR}/vndata_50k_${IFILE}.root\")"
 echo "Done!"
-if [[ ! -d /cms/store/user/qixu/flow/NewSTEG/pPbDataV204m$MULT ]]; then
-    mkdir /cms/store/user/qixu/flow/NewSTEG/pPbDataV204m$MULT
+if [[ ! -d /cms/store/user/qixu/flow/STEG/pPbDataV200m$MULT ]]; then
+    mkdir /cms/store/user/qixu/flow/STEG/pPbDataV200m$MULT
 fi
 export X509_USER_CERT=/home/xuq7/.globus/usercert.pem
-/usr/local/cms-stageout/vandyCp.sh $TMPDIR/vndata_50k_$IFILE.root /cms/store/user/qixu/flow/NewSTEG/pPbDataV204m$MULT/vndata_50k_$IFILE.root
+/usr/local/cms-stageout/vandyCp.sh $TMPDIR/vndata_50k_$IFILE.root /cms/store/user/qixu/flow/STEG/pPbDataV200m$MULT/vndata_50k_$IFILE.root
 rm -r $TMPDIR/vndata_50k_$IFILE.root
 if [[ "$(ls -A $TMPDIR)" ]];then
     echo "NOT EMPTY!"

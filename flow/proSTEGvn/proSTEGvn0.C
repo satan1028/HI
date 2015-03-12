@@ -17,7 +17,7 @@ Int_t b_npg, b_n, n;
 Float_t b_phirg;
 Float_t b_ptg[maxnh], b_etag[maxnh], b_phig[maxnh];
 
-void proSTEGvn1()
+void proSTEGvn0(string outfile)
 {
   
   int mult = atoi(getenv("MULT"));
@@ -30,7 +30,7 @@ void proSTEGvn1()
 
   //simple toy event generator
   //TFile f(Form("/lio/lfs/cms/store/user/qixu/flow/STEG/pPbDataV200m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
-  TFile f(Form("/tmp/xuq7/pPbDataV200m%d/vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
+  TFile f(Form("%s",outfile.c_str()), "RECREATE","ROOT file with histograms & tree");
   //TFile f(Form("vndata_50k_%d.root",mult,ifile), "RECREATE","ROOT file with histograms & tree");
   TTree *tree = new TTree("tree","Event tree with a few branches");
   //tree->Branch("npg", &b_npg, "npg/I");   // # of particles;

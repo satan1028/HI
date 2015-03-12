@@ -60,7 +60,7 @@ void DataJetIDskimTree(){
         jetptjetidEtaBin[ieta][ijetid]->Sumw2();      //Added
         }
         if(JetIDName[ijetid].Contains("PP") || JetIDName[ijetid].Contains("N")){
-        jetptjetidEtaBin[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 2, 0., 2.);    //Added
+        jetptjetidEtaBin[ieta][ijetid] = new TH2F(Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), Form("jetpt%sEtaBin%.f_%.f",JetIDName[ijetid].Data(),deta[ieta]*10,deta[ieta+1]*10), 1000, 0., 1000., 100, 0., 100.);    //Added
         jetptjetidEtaBin[ieta][ijetid]->Sumw2();      //Added
         }
         }
@@ -166,10 +166,10 @@ for(int j4i = 0; j4i < nref; j4i++){
 		double muSum = t_muSum[j4i];
 		double eSum = t_eSum[j4i];
   //      if((chargedN == 0 || chargedSum == 0) && TMath::Abs(jet_eta)< 2.4) continue;  // jet id selection
-	double PPTighter0 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt<1.0 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
-	double PPTighter1 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
-	double PPTighter2 = (double)(neutralSum/jet_pt < 0.6 && eSum/jet_pt < 0.8 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
-	double PPTighter3 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.7 && photonSum/jet_pt < 0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
+	double PPTighter0 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt < 1.0 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
+	double PPTighter1 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt < 1.0 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
+	double PPTighter2 = (double)(neutralSum/jet_pt < 0.6 && eSum/jet_pt < 0.8 && (chargedSum+neutralSum+muSum+eSum)/jet_pt < 1.0 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
+	double PPTighter3 = (double)(neutralSum/jet_pt < 0.7 && eSum/jet_pt < 0.7 && (chargedSum+neutralSum+muSum+eSum)/jet_pt < 1.0 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
         double PPTighter = PPTighter0*TMath::Power(2,3)+PPTighter1*TMath::Power(2,2)+PPTighter2*TMath::Power(2,1)+PPTighter3*TMath::Power(2,0)+0.5;
 	double jetidv[nJetID]={chargedMax,chargedSum,neutralMax,neutralSum,photonMax,photonSum,chargedMax/jet_pt,chargedSum/jet_pt,neutralMax/jet_pt,neutralSum/jet_pt,photonMax/jet_pt,photonSum/jet_pt,eSum/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/raw_pt,neutralMax/TMath::Max(chargedSum,neutralSum),(double)chargedN,(double)neutralN,(double)photonN,(double)(neutralSum/jet_pt<1.0 && eSum/jet_pt<1.0 && photonSum/jet_pt<1.0 && ((chargedSum>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ), (double)(neutralSum/jet_pt<0.9 && eSum/jet_pt<1.0 && photonSum/jet_pt<0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ),PPTighter,(chargedSum+neutralSum+muSum+eSum)/jet_pt};
        if(raw_pt<22 || fabs(jet_eta)>5) continue;

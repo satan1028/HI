@@ -44,17 +44,17 @@ using namespace std;
 const int QCDpthatBins = 10;
 //const int QCDpthatBins = 9;
 //const int QCDpthatBins = 1;
-//const int dataFiles = 10292;
-//const int dataFiles = 6815;
+const int dataFiles = 7210;
 //const int dataFiles = 4828;
-const int dataFiles = 7213;
+
 int startfile ;
 int endfile ;
 int combinationMethod ;
 
 TString coll = "PPb";
-const TString algo = "akPu5PF" ;
-const double deta[]={-2.0, -1.5, -1.0, -0.5, 0.5, 1.0, 1.5, 2.0} ;
+const TString algo = "akPu3Calo" ;
+//const double deta[]={-2.5, -2.0, -1.5, -1.0, -0.5, 0.5, 1.0, 1.5} ;
+const double deta[]={-1.5, -1.0, -0.5, 0.5, 1.0, 1.5, 2.0, 2.5} ;
 const int netabin = sizeof(deta)/sizeof(Double_t)-1 ;
 const double jetPtBin[]={ 3, 4, 5, 7, 9, 12, 15, 18,21,24,28,32,37,43,49,56,64,74,84,97,114,133,153,174,196,220,245,272,300,330,362,395,430,468,507,548,592,638,686,1000};
 const int nJetPtBin = sizeof(jetPtBin)/sizeof(Double_t)-1 ;
@@ -152,12 +152,12 @@ void skimTreesPAFullInfoNewForest(int isMC=0)
     if(coll=="PPb")
      //   fCen->SetParameters(8.68073e-03, 5.09356e+00, -1.33053e-02, 1.46904e-03, -6.99681e-05, 1.06721e-06, -5.21398e-09);
 //  fCen->SetParameters(1.20916e-02, 5.02157e+00, -3.38300e-02, 1.87647e-03, -6.76442e-05, 9.08602e-07, -4.01536e-09);//parameterize on 05.03 after approval
-         //fCen->SetParameters(7.92204e-03, 4.52005e+00, 9.77340e-02, -5.00362e-03, 9.74735e-05, -8.93897e-07, 3.39375e-09);//parameterize on new official MC after QM on 12/03/14
-         fCen->SetParameters(6.06918e-03, 4.84487e+00, 4.26255e-02, -1.30682e-03, 1.94753e-05, -2.53606e-07, 1.61323e-09); //! parameterize on new official MC using double side HF on 02/02/15
+    //     fCen->SetParameters(7.92204e-03, 4.52005e+00, 9.77340e-02, -5.00362e-03, 9.74735e-05, -8.93897e-07, 3.39375e-09);//parameterize on new official MC after QM on 12/03/14
+           fCen->SetParameters(6.06918e-03, 4.84487e+00, 4.26255e-02, -1.30682e-03, 1.94753e-05, -2.53606e-07, 1.61323e-09); //! parameterize on new official MC using double side HF on 02/02/15
     else if(coll=="PbP")
     //    fCen->SetParameters(1.05408e-02, 5.27477e+00, -8.03382e-02, 3.51669e-03, -8.85332e-05, 1.08917e-06, -4.90091e-09);
-     //  fCen->SetParameters(2.89263e-02, 3.43643e+00, 5.62562e-02, -1.86555e-03, 1.97924e-06, 3.15416e-07, -1.97946e-09);//parameterize on new official MC after QM on 12/03/14
-      fCen->SetParameters(5.10893e-03,4.88698e+00,8.37930e-02,-3.77127e-03, 7.90191e-05,-9.04877e-07, 4.26221e-09); //! parameterize on new official MC using double side HF on 02/02/15
+    //   fCen->SetParameters(2.89263e-02, 3.43643e+00, 5.62562e-02, -1.86555e-03, 1.97924e-06, 3.15416e-07, -1.97946e-09);//parameterize on new official MC after QM on 12/03/14
+     fCen->SetParameters(5.10893e-03,4.88698e+00,8.37930e-02,-3.77127e-03, 7.90191e-05,-9.04877e-07, 4.26221e-09); //! parameterize on new official MC using double side HF on 02/02/15
     else
         fCen->SetParameters(1, 0, 0, 0, 0, 0, 0);
     
@@ -167,14 +167,15 @@ void skimTreesPAFullInfoNewForest(int isMC=0)
    int *MCentr = NULL;
 
     if(!isMC){
-//        if(coll=="PPb") infile = "pAFileListKurtv4.txt";
-        if(coll=="PPb") infile = "pPbFileListYmaoV3.txt";
-        if(coll=="PbP") infile = "PbpFileListYmaoV3.txt";
+             if(coll=="PPb")   infile = "ForwardPbDataFile.txt";
+      // if(coll=="PPb")   infile = "test.txt";
+              else  infile = "BackwardPbDataFile.txt";
     }
     else{
-        if(coll=="PPb") infile = "pPbMCKurtForest.txt";
-        if(coll=="PP") infile = "ppMCKurtForest.txt";
-        if(coll=="PbP") infile = "PbpMCKurtForest.txt";
+          if(coll=="PPb") infile = "OfficialMCForwardPb.txt";
+      else if(coll=="PbP") infile = "OfficialMCBackwardPb.txt";
+    //  else if(coll=="PbP") infile = "test.txt";
+              else infile = "ppMCKurtForest.txt"; 
     }
  
   //Declaration of leaves types
@@ -199,7 +200,6 @@ void skimTreesPAFullInfoNewForest(int isMC=0)
   Float_t refeta[1000];
   Float_t genpt[1000];
   Float_t geneta[1000];
-  Float_t genphi[1000];
   Float_t refy[1000];
   Float_t refphi[1000];
     Float_t pt;
@@ -218,7 +218,7 @@ void skimTreesPAFullInfoNewForest(int isMC=0)
   Int_t          HLT_PAJet60_NoJetID_v1_Prescl;
   Int_t          HLT_PAJet80_NoJetID_v1_Prescl;
   Int_t          HLT_PAJet100_NoJetID_v1_Prescl;
-//  Int_t pVertexFilterCutGplusUpsPP;
+  Int_t pVertexFilterCutGplusUpsPP;
   Int_t pVertexFilterCutGplus;
   Int_t pPAcollisionEventSelectionPA;
   Int_t pBeamScrapingFilter;
@@ -262,7 +262,10 @@ void skimTreesPAFullInfoNewForest(int isMC=0)
   TString datatype ;
   if(isMC) datatype = "MC";
   else datatype = "DATA";
-   fout=new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/%s%s%sskimfile%d_%d.root",datatype.Data(),coll.Data(),algo.Data(),startfile,endfile),"recreate");
+  if(isMC)
+   fout=new TFile(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/%s%s%sskimFullInfoLowerpthatCutfile%d_%d.root",datatype.Data(), coll.Data(), algo.Data(),startfile,endfile),"recreate");
+   else 
+   fout=new TFile(Form("/cms/store/user/ymao/pA5TEV/PAHighPt/HIRun2013-PromptReco-v1/skimfile/ForwardPb/%s%s%sskimFullInfofile%d_%d.root",datatype.Data(), coll.Data(), algo.Data(),startfile,endfile),"recreate");
 
   TTree *nt = new TTree("nt","");
 
@@ -278,10 +281,8 @@ if(isMC){
      nt->Branch("subid",subid,"subid[nref]/I");
      nt->Branch("refpt",refpt,"refpt[nref]/F");
      nt->Branch("refeta",refeta,"refeta[nref]/F");
-     nt->Branch("refphi",refphi,"refphi[nref]/F");
      nt->Branch("genpt",genpt,"genpt[ngen]/F");
      nt->Branch("geneta",geneta,"geneta[ngen]/F");
-     nt->Branch("genphi",genphi,"genphi[ngen]/F");
 }
 
 //JetID Variables
@@ -312,16 +313,17 @@ if(isMC){
   nt->Branch("vz",&vz,"vz/F");
   nt->Branch("hiHFplusEta4",&hiHFplusEta4,"hiHFplusEta4/F");
   nt->Branch("hiHFminusEta4",&hiHFminusEta4,"hiHFminusEta4/F");
+ if(!isMC){
+    nt->Branch("pt",&pt,"pt/F");
+    nt->Branch("eta",&eta,"eta/F");
+    nt->Branch("phi",&phi,"phi/F");
+    }
+    nt->Branch("HLT_PAZeroBiasPixel_SingleTrack_v1 ",&HLT_PAZeroBiasPixel_SingleTrack_v1,"HLT_PAZeroBiasPixel_SingleTrack_v1/I");
     nt->Branch("HLT_PAJet20_noJetID_v1",&HLT_PAJet20_NoJetID_v1,"HLT_PAJet20_noJetID_v1/I");
     nt->Branch("HLT_PAJet40_noJetID_v1",&HLT_PAJet40_NoJetID_v1,"HLT_PAJet40_noJetID_v1/I");
     nt->Branch("HLT_PAJet60_noJetID_v1",&HLT_PAJet60_NoJetID_v1,"HLT_PAJet60_noJetID_v1/I");
     nt->Branch("HLT_PAJet80_noJetID_v1",&HLT_PAJet80_NoJetID_v1,"HLT_PAJet80_noJetID_v1/I");
     nt->Branch("HLT_PAJet100_noJetID_v1",&HLT_PAJet100_NoJetID_v1,"HLT_PAJet100_noJetID_v1/I");
- if(!isMC){
-    nt->Branch("pt",&pt,"pt/F");
-    nt->Branch("eta",&eta,"eta/F");
-    nt->Branch("phi",&phi,"phi/F");
-    nt->Branch("HLT_PAZeroBiasPixel_SingleTrack_v1 ",&HLT_PAZeroBiasPixel_SingleTrack_v1,"HLT_PAZeroBiasPixel_SingleTrack_v1/I");
     nt->Branch("HLT_PAZeroBiasPixel_SingleTrack_v1_Prescl ",&HLT_PAZeroBiasPixel_SingleTrack_v1_Prescl,"HLT_PAZeroBiasPixel_SingleTrack_v1_Prescl/I");
     nt->Branch("HLT_PAJet20_noJetID_v1_Prescl",&HLT_PAJet20_NoJetID_v1_Prescl,"HLT_PAJet20_noJetID_v1_Prescl/I");
     nt->Branch("HLT_PAJet40_noJetID_v1_Prescl",&HLT_PAJet40_NoJetID_v1_Prescl,"HLT_PAJet40_noJetID_v1_Prescl/I");
@@ -331,11 +333,10 @@ if(isMC){
     nt->Branch("pPAcollisionEventSelectionPA",&pPAcollisionEventSelectionPA,"pPAcollisionEventSelectionPA/I");
     nt->Branch("pVertexFilterCutGplus",&pVertexFilterCutGplus,"pVertexFilterCutGplus/I");
     nt->Branch("pBeamScrapingFilter",&pBeamScrapingFilter,"pBeamScrapingFilter/I");
-    nt->Branch("pprimaryVertexFilter",&pprimaryVertexFilter,"pprimaryVertexFilter/I");
-    nt->Branch("phfPosFilter3",&phfPosFilter3,"phfPosFilter3/I");
-    nt->Branch("phfNegFilter3",&phfNegFilter3,"phfNegFilter3/I");
+    nt->Branch("pprimaryvertexFilter",&pprimaryVertexFilter,"pprimaryVertexFilter/I");
+    nt->Branch("phfPosFilter1",&phfPosFilter3,"phfPosFilter3/I");
+    nt->Branch("phfNegFilter1",&phfNegFilter3,"phfNegFilter3/I");
     nt->Branch("pHBHENoiseFilter",&pHBHENoiseFilter,"pHBHENoiseFilter/I");
- }
     nt->Branch("weight",&weight,"weight/F");
    if(isMC) {
 	nt->Branch("pthat",&pthat,"pthat/F");
@@ -354,7 +355,12 @@ if(isMC){
        listVector.push_back(filename);
     }
  } 
-
+else {
+   for(int ifile=0; ifile<QCDpthatBins; ifile++){
+       instr >> filename;
+       listVector.push_back(filename);
+    }
+ } 
   int nFiles=0;
   if(isMC){
     endfile=QCDpthatBins ;
@@ -373,10 +379,11 @@ if(isMC){
     TTree *tHlt = NULL;
     TTree *tObj = NULL;
     TTree *tTrk = NULL;
+    TTree *tSkim = NULL;
       TBranch* tweight;
 
   for(int ifile = startfile; ifile<nFiles; ifile++){
-      if(isMC){ 
+/*      if(isMC){ 
      if(( ifile<QCDpthatBins)){
         instr >> filename;
       }
@@ -384,15 +391,15 @@ if(isMC){
    std::cout << "File: " << filename.c_str() << std::endl;
    }
   else { 
-      fin = TFile::Open(listVector.at(ifile).c_str(), "readonly");
+*/      fin = TFile::Open(listVector.at(ifile).c_str(), "readonly");
    std::cout << "File: " << listVector.at(ifile).c_str() << std::endl;
-    }
+//    }
 
        t = (TTree*) fin->Get(Form("%sJetAnalyzer/t", algo.Data()));
-    TTree *tSkim = (TTree*) fin->Get("skimanalysis/HltTree");
+    tSkim = (TTree*) fin->Get("skimanalysis/HltTree");
     tEvt = (TTree*) fin->Get("hiEvtAnalyzer/HiTree");
     tHlt = (TTree*) fin->Get("hltanalysis/HltTree");
-      tObj = (TTree*) fin->Get("hltobject/jetObjTree");
+      if(!isMC)tObj = (TTree*) fin->Get("hltobject/jetObjTree");
     tTrk = (TTree*) fin->Get("ppTrack/trackTree");
     if(!t || !tSkim || (!tEvt) || (!tHlt)){ cout << "Error! Can't find one of the trees!" << endl; exit(0);}
      
@@ -417,7 +424,6 @@ if(isMC){
       t->SetBranchAddress("subid",subid);
       t->SetBranchAddress("refeta",refeta);
       t->SetBranchAddress("geneta",geneta);
-      t->SetBranchAddress("genphi",genphi);
       t->SetBranchAddress("refy",refy);
       t->SetBranchAddress("refphi",refphi);
  }
@@ -453,17 +459,18 @@ if(isMC){
       t->SetBranchAddress("trkDzError1",trkDzError1);     	   
       t->SetBranchAddress("trkDxy1",trkDxy1);     	   
       t->SetBranchAddress("trkDxyError1",trkDxyError1);     	   
-      t->SetBranchAddress("HLT_PAJet20_NoJetID_v1",&HLT_PAJet20_NoJetID_v1);
-      t->SetBranchAddress("HLT_PAJet40_NoJetID_v1",&HLT_PAJet40_NoJetID_v1);
-      t->SetBranchAddress("HLT_PAJet60_NoJetID_v1",&HLT_PAJet60_NoJetID_v1);
-      t->SetBranchAddress("HLT_PAJet80_NoJetID_v1",&HLT_PAJet80_NoJetID_v1);
-      t->SetBranchAddress("HLT_PAJet100_NoJetID_v1",&HLT_PAJet100_NoJetID_v1);
       if(!isMC){
 
       t->SetBranchAddress("pt",&pt);
       t->SetBranchAddress("eta",&eta);
       t->SetBranchAddress("phi",&phi);
+      }
       t->SetBranchAddress("HLT_PAZeroBiasPixel_SingleTrack_v1",&HLT_PAZeroBiasPixel_SingleTrack_v1);
+      t->SetBranchAddress("HLT_PAJet20_NoJetID_v1",&HLT_PAJet20_NoJetID_v1);
+      t->SetBranchAddress("HLT_PAJet40_NoJetID_v1",&HLT_PAJet40_NoJetID_v1);
+      t->SetBranchAddress("HLT_PAJet60_NoJetID_v1",&HLT_PAJet60_NoJetID_v1);
+      t->SetBranchAddress("HLT_PAJet80_NoJetID_v1",&HLT_PAJet80_NoJetID_v1);
+      t->SetBranchAddress("HLT_PAJet100_NoJetID_v1",&HLT_PAJet100_NoJetID_v1);
       t->SetBranchAddress("HLT_PAZeroBiasPixel_SingleTrack_v1_Prescl",&HLT_PAZeroBiasPixel_SingleTrack_v1_Prescl);
       t->SetBranchAddress("HLT_PAJet20_NoJetID_v1_Prescl",&HLT_PAJet20_NoJetID_v1_Prescl);
       t->SetBranchAddress("HLT_PAJet40_NoJetID_v1_Prescl",&HLT_PAJet40_NoJetID_v1_Prescl);
@@ -479,7 +486,6 @@ if(isMC){
        t->SetBranchAddress("pHBHENoiseFilter",&pHBHENoiseFilter);
       t->SetBranchAddress("hiHFplusEta4", &hiHFplusEta4);
       t->SetBranchAddress("hiHFminusEta4", &hiHFminusEta4);
-      }
 	 tweight = t->GetBranch("weight");
       if(isMC){
         if(!tweight){
@@ -498,25 +504,19 @@ if(isMC){
 
     for (Long64_t i=0; i<nentries;i++) {
        
-      if (i%100000==0) cout<<" i = "<<i<<" out of "<<nentries<<" ("<<(Float_t)(100*(Float_t)i/(Float_t)nentries)<<"%)"<<endl;
+      if (i%100000==0) cout <<" ifile ="<< ifile <<" i = "<<i<<" out of "<<nentries<<" ("<<(Float_t)(100*(Float_t)i/(Float_t)nentries)<<"%)"<<endl;
       
       tSkim->GetEntry(i);
       t->GetEntry(i);
-      tEvt->GetEntry(i);     
-     if(isMC){
-//	for(int j = 0 ; j <QCDpthatBins; j++){
-          if(pthat<pthatbin[ifile]) continue ;  
-	  if(ifile<QCDpthatBins-1 && pthat>pthatbin[ifile+1]) continue ;
-  //      } 
-      }
+      tEvt->GetEntry(i);
+      //  if(!isMC)tObj->GetEntry(i);
  double trgPrescl[5] = {(double)HLT_PAJet20_NoJetID_v1_Prescl, (double)HLT_PAJet40_NoJetID_v1_Prescl, (double)HLT_PAJet60_NoJetID_v1_Prescl, (double)HLT_PAJet80_NoJetID_v1_Prescl, (double)HLT_PAJet100_NoJetID_v1_Prescl};
  bool trgDec[5] = {(bool)HLT_PAJet20_NoJetID_v1, (bool)HLT_PAJet40_NoJetID_v1, (bool)HLT_PAJet60_NoJetID_v1, (bool)HLT_PAJet80_NoJetID_v1, (bool)HLT_PAJet100_NoJetID_v1};
-     if(!isMC){
+  //   if(!isMC){
        if(!HLT_PAJet20_NoJetID_v1 && !HLT_PAJet40_NoJetID_v1 && !HLT_PAJet60_NoJetID_v1 && !HLT_PAJet80_NoJetID_v1 && !HLT_PAJet100_NoJetID_v1 ) continue;
-      }
+ //     }
 
-
-	     if(isMC){
+    if(isMC){
         vzWeight=1;
         int j=0;
         
@@ -527,12 +527,14 @@ if(isMC){
          else 
           xSecWeight = ((wght[j-1]-wght[j])/MCentr[j-1]);
        }
-        w= xSecWeight ;
+          if(pthat<pthatbin[ifile]) continue ;  
+	 // if(ifile<QCDpthatBins-1 && pthat>pthatbin[ifile+1]) continue ;
+          w= xSecWeight ;
             vzWeight = fVz->Eval(vz);
              centWeight = fCen->Eval(bin);
       weight=w*vzWeight*centWeight;
    //   weight=w;
-		 }
+    }
 
 		  // new implementation with max trigger Obj for weight calculation
     double maxTrgPt =0;
@@ -565,16 +567,17 @@ if(isMC){
     t = NULL ;
     tEvt = NULL;
     tSkim = NULL;
+    tTrk = NULL;
     tObj= NULL;
     tHlt = NULL;
     tweight = NULL; 
-    tTrk = NULL;
   } //! file loop
   fout->cd();
-  nt->Write();
-//  fout->Write();
-  cout<<"Write successfully"<<endl;
+  
+//  nt->Write();
+   fout->Write();
+ 
   fout->Close();
-  cout<<"Close successfully"<<endl;
-
+  cout << "work done!!!" <<endl ;
+  nt = NULL ;
 }
