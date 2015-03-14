@@ -58,11 +58,13 @@ TString varname_ = "phi";
 }
 if(varname=="#eta_{lab}^{jet}"){
 //double xrange_var[2]={-1-0.465+1e-3,1-0.465-1e-3};
-double xrange_var[2]={-3+1e-3,3-1e-3};
-double xrange_var_pre[2]={-3,3};
+double xrange_var[2]={-2.4+1e-3,2.4-1e-3};
+double xrange_var_pre[2]={-2.6,2.7};
 }
 else{
-double xrange_var[2]={binbound_var[0]+1e-3,binbound_var[Nbin_var]-1e-3};}
+double xrange_var[2]={binbound_var[0]+1e-3,binbound_var[Nbin_var]-1e-3};
+double xrange_var_pre[2]={-3.4,3.4};
+}
 double ratiomin=0.8, ratiomax=1.32;
 
 TString Titley="Event Fraction";
@@ -87,7 +89,6 @@ TH1D* hMC_pt=hMC->ProjectionX("hMC_pt",hMC->GetYaxis()->FindBin(xrange_var[0]),h
 //        TH1F *hMC_pt = (TH1F*)hPP_pt1->Clone();
 //        hMC_pt->Add(hPP_pt2);
 
-
 TH1D* re_hdata_pt=(TH1D*)hdata_pt->Rebin(Nbin_pt,"re_hdata_pt",binbound_pt);
 TH1D* re_hMC_pt=(TH1D*)hMC_pt->Rebin(Nbin_pt,"re_hMC_pt",binbound_pt);
 TH1D* re_hdata_var=(TH1D*)hdata_var->Rebin(Nbin_var,"re_hdata_var",binbound_var);
@@ -98,12 +99,14 @@ normalizeByBinWidth(re_hMC_pt);
 normalizeByBinWidth(re_hdata_var);
 normalizeByBinWidth(re_hMC_var);
 
-//re_hdata_pt->Scale(1./re_hdata_pt->Integral(re_hdata_pt->GetXaxis()->FindBin(xrange_pt[0]),re_hdata_pt->GetXaxis()->FindBin(xrange_pt[1])));
-re_hdata_pt->Scale(1.0/20.4*1e-6/208);
-//re_hdata_var->Scale(1./re_hdata_var->Integral(re_hdata_var->GetXaxis()->FindBin(xrange_var[0]),re_hdata_var->GetXaxis()->FindBin(xrange_var[1])));
-re_hdata_var->Scale(1.0/20.4*1e-6/208);
-//re_hMC_pt->Scale(1./re_hMC_pt->Integral(re_hMC_pt->GetXaxis()->FindBin(xrange_pt[0]),re_hMC_pt->GetXaxis()->FindBin(xrange_pt[1])));
-//re_hMC_var->Scale(1./re_hMC_var->Integral(re_hMC_var->GetXaxis()->FindBin(xrange_var[0]),re_hMC_var->GetXaxis()->FindBin(xrange_var[1])));
+re_hdata_pt->Scale(1./re_hdata_pt->Integral(re_hdata_pt->GetXaxis()->FindBin(xrange_pt[0]),re_hdata_pt->GetXaxis()->FindBin(xrange_pt[1])));
+re_hdata_var->Scale(1./re_hdata_var->Integral(re_hdata_var->GetXaxis()->FindBin(xrange_var[0]),re_hdata_var->GetXaxis()->FindBin(xrange_var[1])));
+re_hMC_pt->Scale(1./re_hMC_pt->Integral(re_hMC_pt->GetXaxis()->FindBin(xrange_pt[0]),re_hMC_pt->GetXaxis()->FindBin(xrange_pt[1])));
+re_hMC_var->Scale(1./re_hMC_var->Integral(re_hMC_var->GetXaxis()->FindBin(xrange_var[0]),re_hMC_var->GetXaxis()->FindBin(xrange_var[1])));
+
+
+//re_hdata_var->Scale(1.0/20.4*1e-6/208);
+//re_hdata_pt->Scale(1.0/20.4*1e-6/208);
 //double scale = re_hdata_pt->Integral(re_hdata_pt->GetXaxis()->FindBin(xrange_pt[0]),re_hdata_pt->GetXaxis()->FindBin(xrange_pt[1]))/re_hdata_pt->Integral(re_hdata_pt->GetXaxis()->FindBin(xrange_pt_pre[0]),re_hdata_pt->GetXaxis()->FindBin(xrange_pt_pre[1]));
 //re_hdata_pt->Scale((double)scale);
 //re_hMC_pt->Scale((double)scale);
@@ -159,7 +162,8 @@ hFrame->GetXaxis()->SetTitle("");
 hFrame->GetXaxis()->SetNdivisions(505);
 //hFrame->GetXaxis()->SetRangeUser(27,692);
 hFrame->GetXaxis()->SetRangeUser(xrange_pt_pre[0],xrange_pt_pre[1]);
-hFrame->GetYaxis()->SetRangeUser(1.01e-10,1e-2);
+//hFrame->GetYaxis()->SetRangeUser(1.01e-10,1e-2);
+hFrame->GetYaxis()->SetRangeUser(1.01e-7,1);
 hFrame->DrawCopy();
 re_hdata_pt->Draw("E1same");
 re_hMC_pt->Draw("E1 HISTsame");
@@ -191,7 +195,8 @@ c1->cd(ivar+2);
 hFrame1->GetYaxis()->SetLabelSize(0.06);
 hFrame1->GetXaxis()->SetRangeUser(xrange_var_pre[0],xrange_var_pre[1]);
 hFrame1->GetYaxis()->SetTitle("");
-hFrame1->GetYaxis()->SetRangeUser(1e-6,1e-2);
+//hFrame1->GetYaxis()->SetRangeUser(1e-6,1e-2);
+hFrame1->GetYaxis()->SetRangeUser(1e-4,1e-1);
 fixedFontHist(hFrame,1.4,2.0);
 if(varname=="#eta_{lab}^{jet}"){
 hFrame1->DrawCopy();

@@ -1,9 +1,9 @@
 TVectorD* extract(double x){
 	x=x-0.5;
 	if(x<0) exit();
-	else if(x==0) int n=4;
+	else if(x==0) int n=5;
 	else int n  = (int)TMath::Log2(x)+1;
-	n=(n>4?n:4);
+	n=(n>5?n:5);
 	TVectorD* x2 = new TVectorD(); TVectorD* x2_ = new TVectorD();
 	x2->ResizeTo(n);x2_->ResizeTo(n);
 	x2->Zero();

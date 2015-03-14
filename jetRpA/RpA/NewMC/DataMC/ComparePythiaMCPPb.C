@@ -37,17 +37,18 @@ for(int i=0;i<Neta;i++){
 		double ybase=0.15;	double xbase=0.05;
 	}
     if(i==7){
-	TH1F *hPPb_pt= (TH1F*)fMCPPbYX->Get(Form("%spt",jettype.Data()));
+	TH1F *hPPb_pt=  (TH1F*)fMCPPb->Get(Form("%spt",jettype.Data()));
         TH1F *hPP_pt1 = (TH1F*)fMCPP->Get(Form("ak3GenJetSpectrum_QCD10001_%s/JetSpectrum_Fine",etabinnamesym[0].Data()));
         TH1F *hPP_pt2 = (TH1F*)fMCPP->Get(Form("ak3GenJetSpectrum_QCD10001_%s/JetSpectrum_Fine",etabinnamesym[1].Data()));
         TH1F *hPP_pt = (TH1F*)hPP_pt1->Clone();
         hPP_pt->Add(hPP_pt2);
     }
     else{
-	TH1F *hPPb_pt= (TH1F*)fMCPPbYX->Get(Form("%sptEtaBin%s",jettype.Data(),etabinnameswap[i].Data()));
+	TH1F *hPPb_pt= (TH1F*)fMCPPb->Get(Form("%sptEtaBin%s",jettype.Data(),etabinnameswap[i].Data()));
         hPPb_pt->Scale(1.0/etabin[i]);
 	TH1F *hPP_pt= (TH1F*)fMCPP->Get(Form("ak3GenJetSpectrum_QCD10001_%s/JetSpectrum_Fine",etabinnamesym[TMath::Abs(i-3)].Data()));
     }
+    hPPb_pt->Scale(1/0.87);
     c1->cd(canvas[i]+1)->SetGridx();
     if(canvas[i]==0  || canvas[i]==4){
         hFrame1->GetYaxis()->SetTitle("Pythia+Hijing/Pythia");

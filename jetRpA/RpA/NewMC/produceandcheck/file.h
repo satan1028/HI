@@ -45,8 +45,8 @@ const double binbound_pt_coarse[]={30,50,80,100,150};
 //const int Nbin_pt_coarse=sizeof(binbound_pt_coarse)/sizeof(double)-1;
 const int Nbin_pt_coarse=4;
 
-double xrange_pt[2]={50+1e-4,600-1e-4};
-double xrange_pt_pre[2]={27.5+1e-4,480-1e-4};
+double xrange_pt[2]={60+1e-4,600-1e-4};
+double xrange_pt_pre[2]={55.5+1e-4,480-1e-4};
 TFile *fDataPPb=new TFile(DataPPbfile);
 TFile *fDataPbP=new TFile(DataPbPfile);
 TFile *fDataPPbJetID=new TFile(DataPPbJetIDfile);
@@ -87,10 +87,9 @@ const TString etastring[Neta]={"-2.0<#eta_{CM}<-1.5","-1.5<#eta_{CM}<-1.0","-1.0
 const int canvas[Neta]={0,1,2,3,6,5,4,7};
 TString JetID, Unit;
 double xrange_JetIDcut[2];
-double JetIDcut[2];
 static const int nColor = 9;
 static const int colorCode[nColor] = {
-    1,2,4,46,6,7,8,1,2
+    1,2,4,46,2,7,8,1,2
 //    2, 4, 6, 7, 8, 9, 46,1,2
 //    1,2,4,1,4,2,1,1    //for spectra and Asy
  //   2, 4, 6, 7, 8, 9, 46,1
@@ -98,8 +97,11 @@ static const int colorCode[nColor] = {
 //    4, 9, 8, 1, 6, 4, 2,1  //for RpA color
 //    2, 7, 9, 1, 6, 4, 46,1  //for kEtaDep
 };
+static const int colorCode1[nColor] = {
+    2,4,46,6,7,8,1,2,4
+};
 static const int markerCode[nColor] = {
-//   33, 34, 29, 21, 30, 28,27,20
+//  33, 34, 29, 21, 30, 28,27,20
     20,34,33,25,27,28,24,21,33
 //   34,29,20,25,27,28,30,20   //for asymmetry kAsy
 //    29,34,33,25,27,28,30,20   //for spectrum marker
@@ -107,4 +109,8 @@ static const int markerCode[nColor] = {
  //   20,34,33,25,27,28,30,20
  //   33, 34, 30, 20, 29, 28,27,20   //for Forward-backward Asymmetry, kEtaDep,
  //   27, 28, 30, 20, 29, 34,33,20  //for RpA
+};
+static const int markerCode1[nColor] = {
+    24,,33, 34, 29, 20, 30, 28,27,20
+//    20,34,33,25,27,28,24,21,33
 };

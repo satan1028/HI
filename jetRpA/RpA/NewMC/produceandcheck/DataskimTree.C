@@ -72,7 +72,7 @@ void DataskimTree(){
       TFile *fcrel3 = NULL ;
      TH1D *C_rel= NULL ;
 
-        fcrel3 = TFile::Open(Form("/home/xuq7/HI/jetRpA/RpA/NewMC/Corrections/CasymYaxian_%s_double_hcalbins_algo_%s_pt100_140_jet50_alphahigh_20_phicut250.root",coll.Data(),algo.Data()), "readonly");
+        fcrel3 = TFile::Open(Form("/cms/store/user/qixu/jetRpA/RpA/NewMC/Corrections/CasymYaxian_%s_double_hcalbins_algo_%s_pt100_140_jet50_alphahigh_20_phicut250.root",coll.Data(),algo.Data()), "readonly");
 
      if(fcrel3)  C_rel=(TH1D*)fcrel3->Get("C_asym");
 
@@ -156,7 +156,7 @@ for(int j4i = 0; j4i < nref; j4i++){
 	 
        if(raw_pt<22 || fabs(jet_eta)>5) continue;
        if(jet_pt>4*pt) continue;
-        if(TMath::Abs(jet_eta)<=3){
+        if(TMath::Abs(jet_eta)<=2.4){
                 jetptEta->Fill(jet_pt*jetweight,jet_eta,weight);
                 jetptEta_woRes->Fill(jet_pt,jet_eta,weight);
                 jetptphi->Fill(jet_pt*jetweight,jet_phi,weight);
@@ -192,7 +192,7 @@ for(int j4i = 0; j4i < nref; j4i++){
   dataType = "DATA";
   out_name=Form("%s%s%sskimUniv.root",dataType.Data(),coll.Data(),algo.Data());
 
-  TFile *out_file = new TFile(Form("/cms/store/user/qixu/jetRpA/RpA/NewMC/%s",out_name.Data()),"RECREATE");  
+  TFile *out_file = new TFile(Form("/tmp/xuq7/%s",out_name.Data()),"RECREATE");  
 
 	
     jetpt0->Write();
