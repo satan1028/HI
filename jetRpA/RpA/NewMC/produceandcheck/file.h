@@ -89,7 +89,7 @@ TString JetID, Unit;
 double xrange_JetIDcut[2];
 static const int nColor = 9;
 static const int colorCode[nColor] = {
-    1,2,4,46,2,7,8,1,2
+    1,2,2,9,6,4,8,1,2
 //    2, 4, 6, 7, 8, 9, 46,1,2
 //    1,2,4,1,4,2,1,1    //for spectra and Asy
  //   2, 4, 6, 7, 8, 9, 46,1
@@ -98,11 +98,11 @@ static const int colorCode[nColor] = {
 //    2, 7, 9, 1, 6, 4, 46,1  //for kEtaDep
 };
 static const int colorCode1[nColor] = {
-    2,4,46,6,7,8,1,2,4
+    4,9,46,6,1,2,1,2,4
 };
 static const int markerCode[nColor] = {
 //  33, 34, 29, 21, 30, 28,27,20
-    20,34,33,25,27,28,24,21,33
+    20,34,33,24,27,28,24,21,33
 //   34,29,20,25,27,28,30,20   //for asymmetry kAsy
 //    29,34,33,25,27,28,30,20   //for spectrum marker
 //    27,28,24,21,20,34,33,20   //for
@@ -111,6 +111,6 @@ static const int markerCode[nColor] = {
  //   27, 28, 30, 20, 29, 34,33,20  //for RpA
 };
 static const int markerCode1[nColor] = {
-    24,,33, 34, 29, 20, 30, 28,27,20
+    34,33,24,27,28,30,28,27,20
 //    20,34,33,25,27,28,24,21,33
 };

@@ -61,7 +61,7 @@ else if(ilist== 17)     JetID = "neutral Multiplicity";
 else if(ilist== 18)     JetID = "photon Multiplicity";
 else if(ilist== 19)   {  JetID = "PP cut True or False";double JetIDcut[][2]={{1,2}};   }
 else if(ilist== 20)   {  JetID = "PP cut Tight True or False";double JetIDcut[][2]={{1,2}}; }
-else if(ilist== 21)   {  JetID = "PP cut Tighter True or False";double JetIDcut[][2]={{16,32},{0,0},{1,1},{2,2},{3,3},{4,4}};  }
+else if(ilist== 21)   {  JetID = "PP cut Tighter True or False";double JetIDcut[][2]={{16,32},{0,0},{1,1},{2,2},{3,3},{4,4},{5,5}};  }
 //else if(ilist== 22)   {  JetID = "Max h^{0}/#Sigma h^{#pm}";JetIDcut[0]=0;JetIDcut[1]=2;}
 else if(ilist== 22) {    JetID = "(#Sigma h^{#pm}+#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";double JetIDcut[][2]={{0,1.0}};}
 else{   exit();}
@@ -74,10 +74,12 @@ double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.6,0.7,
 //else if(ilist==8 || ilist==10){
 //double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5};}
 else if(ilist==22){
-double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8};}
+double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8};
+}
 else{
 //double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.,1.1,1.5,2};}
-double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.0};}
+double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8};}
+//double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.0,1.1};}
 
 Unit="";
 }
@@ -113,6 +115,7 @@ c7 = new TCanvas("c7"," ",1200,600);
 c8 = new TCanvas("c8"," ",1200,600);
 c9 = new TCanvas("c9"," ",1200,600);
 c10 = new TCanvas("c10"," ",1200,600);
+c11 = new TCanvas("c11"," ",1200,600);
 makeMultiPanelCanvas(c1,4,2,0,0,0.25,0.2,0.03);
 makeMultiPanelCanvas(c2,4,2,0,0,0.25,0.2,0.03);
 makeMultiPanelCanvas(c2_,4,2,0,0,0.25,0.2,0.03);
@@ -124,6 +127,7 @@ makeMultiPanelCanvas(c7,4,2,0,0,0.25,0.2,0.03);
 makeMultiPanelCanvas(c8,4,2,0,0,0.25,0.2,0.03);
 makeMultiPanelCanvas(c9,4,2,0,0,0.25,0.2,0.03);
 makeMultiPanelCanvas(c10,4,2,0,0,0.25,0.2,0.03);
+makeMultiPanelCanvas(c11,4,2,0,0,0.25,0.2,0.03);
 TH1F* hFrame1=new TH1F("","",1000,0,1000);
 TH1F* hFrame2=new TH1F("","",500,0,5);
 fixedFontHist(hFrame1,2.0,3.0);
@@ -590,7 +594,7 @@ leg3->Draw("same");
 
 
 c6->cd(canvas[i]+1)->SetGridx();
-//c6->cd(canvas[i]+1)->SetLogy();
+c6->cd(canvas[i]+1)->SetLogy();
     if(canvas[i]==0  || canvas[i]==4){
 	hFrame1->GetYaxis()->SetTitle(Form("Ratio"));
         hFrame1->SetLabelSize(18,"Y");
@@ -601,9 +605,9 @@ c6->cd(canvas[i]+1)->SetGridx();
     }
     if(canvas[i]>=4)
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
-hFrame1->GetXaxis()->SetLimits(56,599);
-hFrame1->SetMaximum(0.15);
-hFrame1->SetMinimum(0);
+hFrame1->GetXaxis()->SetLimits(28,599);
+hFrame1->SetMaximum(0.4);
+hFrame1->SetMinimum(1e-5);
 hFrame1->DrawCopy();
 TH1F* ratio_hPPb_pt_fakevsInc=(TH1F*)rehisto_hPPb_pt_fake->Clone("ratio_hPPb_pt_fakevsInc");
 ratio_hPPb_pt_fakevsInc->Divide(rehisto_hPPb_pt);
@@ -777,14 +781,23 @@ c10->cd(canvas[i]+1)->SetGridx();
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame1->GetXaxis()->SetLimits(28,599);
 hFrame1->SetMaximum(1.01);
-hFrame1->SetMinimum(0.92);
+hFrame1->SetMinimum(0.8);
 hFrame1->DrawCopy();
 TLegend* leg4 = new TLegend(*leg2);
 leg4->Clear();
 leg4->SetX1(0.45);
 leg4->SetX2(0.9);
+c11->cd(canvas[i]+1)->SetGridx();
+
+hFrame1->GetXaxis()->SetLimits(28,299);
+hFrame1->SetMaximum(1.05);
+hFrame1->SetMinimum(0.80);
+c10->cd(canvas[i]+1)->cd();
+hFrame1->DrawCopy();
+c11->cd(canvas[i]+1)->cd();
+hFrame1->DrawCopy();
 for(int j=1;j<Ntune;j++){
-    if(j!=1 && j!=5 ) continue;
+    if(j!=5 && j!=6 ) continue;
 hPPb_JetIDcut_pt_real = new TH1D(Form("hPPb_JetIDcut_pt_real_%d_%d",i,j),"",1000,0.,1000.);
 hPPb_JetIDcut_pt_real->Sumw2();
 hPPb_JetIDcut_pt = new TH1D(Form("hPPb_JetIDcut_pt_%d_%d",i,j),"",1000,0.,1000.);
@@ -826,30 +839,35 @@ ratio_hPPb_JetIDcut_pt_realvsInc->SetMarkerSize(1.5);
 ratio_hPPb_JetIDcut_pt_realvsInc->SetMarkerColor(colorCode1[j-1]);
 ratio_hPPb_JetIDcut_pt_realvsInc->SetLineColor(colorCode1[j-1]);
 getRidYError(ratio_hPPb_JetIDcut_pt_realvsInc);
+
+TH1F* corr_hPPb = (TH1F*)ratio_hPPb_JetIDcut_pt_realvsInc->Clone("corr_hPPb");
+corr_hPPb->Divide(ratio_hPPb_JetIDcutvsnocut_pt_real);
+
 if(canvas[i]!=4){
 T1.DrawLatex(0.4,ybase-0.06,etastring[i]);
 TLine *l = new TLine(hFrame1->GetXaxis()->GetXmin(),1,hFrame1->GetXaxis()->GetXmax(),1);
 l->SetLineStyle(2);
+c10->cd(canvas[i]+1)->cd();
 l->Draw("same");
 ratio_hPPb_JetIDcutvsnocut_pt_real->DrawCopy("Psame");
 ratio_hPPb_JetIDcut_pt_realvsInc->DrawCopy("Psame");
+c11->cd(canvas[i]+1)->cd();
+l->Draw("same");
+corr_hPPb->Draw("Psame");
 }
 
 if(canvas[i]==4){
 T1.SetTextSize(0.05);
-if(j==1)
-T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d: nF<0.8, cF>0, SumSumF<1",j));
-if(j==2)
-T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d: nF<0.7, cF>0, SumSumF<1",j));
-if(j==3)
-T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d: nF<0.8, cF>0, SumSumF<0.9",j));
-if(j==4)
-T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d: nF<0.8, SumSumF+photon<1",j));
-if(j==5)
-T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d: nF<0.8, eF<0.6",j));
+T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d",j));
 leg4->AddEntry(ratio_hPPb_JetIDcutvsnocut_pt_real,Form("Real cuteff, cut%d",j),"lp");
 leg4->AddEntry(ratio_hPPb_JetIDcut_pt_realvsInc,Form("Real contri, cut%d",j),"lp");
+
+c10->cd(canvas[i]+1)->cd();
 leg4->Draw("same");
+T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d",j));
+c11->cd(canvas[i]+1)->cd();
+leg4->Draw("same");
+T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d",j));
 }
 }
 
