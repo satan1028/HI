@@ -22,7 +22,7 @@ const int nJetID = sizeof(JetIDName)/sizeof(TString);
 const double binbound_pt_coarse[]={30,50,80,100,600};
 const int Nbin_pt_coarse=sizeof(binbound_pt_coarse)/sizeof(double)-1;
 TString algo="akPu3PF";//"akPu3PF"
-TString coll = "PPb";
+TString coll = "PbP";
 
 class hist_class{
 public:
@@ -290,8 +290,9 @@ void PPbanalyzeRpAskimTree()
   cout<<"Analyzing MC!"<<endl;
  TString user = getenv("USER");
  // TFile *f = new TFile(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/%sMCOfficialForestNewVzWeightAddHLT_ppReco_akPu3PF_QCDjetTrigJECv8_JetPt0pthatLowerCut.root",coll.Data()));
-  TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10final.root",coll.Data(),algo.Data()));
-//  TFile *f = new TFile(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/MC%s%sskimFullInfoLowerpthatCutfile0_10.root",coll.Data(),algo.Data()));
+ // TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10final.root",coll.Data(),algo.Data()));
+ // TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10.root",coll.Data(),algo.Data()));
+  TFile *f = new TFile(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/MC%s%sskimFullInfoLowerpthatCutfile0_10.root",coll.Data(),algo.Data()));
   
   TTree *nt = (TTree*)f->Get("nt");
 
@@ -318,14 +319,14 @@ Int_t nref,ngen,hiBin;
   nt->SetBranchAddress("ngen",&ngen);
   nt->SetBranchAddress("rawpt",rawpt);
   nt->SetBranchAddress("jtpt",jtpt);
-  nt->SetBranchAddress("jtpu",jtpu);
+//  nt->SetBranchAddress("jtpu",jtpu);
   nt->SetBranchAddress("refpt",refpt);
   nt->SetBranchAddress("refeta",refeta);
   nt->SetBranchAddress("genpt",genpt);
   nt->SetBranchAddress("subid",subid);
   nt->SetBranchAddress("jteta",jteta);
   nt->SetBranchAddress("geneta",geneta);
-  nt->SetBranchAddress("genphi",genphi);
+//  nt->SetBranchAddress("genphi",genphi);
   nt->SetBranchAddress("jtphi",jtphi);
     nt->SetBranchAddress("chargedN",t_chargedN);
     nt->SetBranchAddress("photonN",t_photonN);
@@ -349,6 +350,7 @@ Int_t nref,ngen,hiBin;
   for(int i=0; i<nentries; i++){
 //    for(int i=0; i<50000; i++){
     nt->GetEntry(i);
+    if(i%10000==1)    cout<<"analyzing "<< i <<" th event"<<endl;  
 if(TMath::Abs(vz)>15) continue;
  if(!HLT_PAJet20_noJetID_v1 && !HLT_PAJet40_noJetID_v1 && !HLT_PAJet60_noJetID_v1 && !HLT_PAJet80_noJetID_v1 && !HLT_PAJet100_noJetID_v1 ) continue;
         
@@ -359,10 +361,9 @@ if(TMath::Abs(vz)>15) continue;
 	my_hists->Pthat->Fill(pthat);
 	my_hists->PthatAfXw->Fill(pthat,xSecWeight);
 
-    if(i%10000==1)    cout<<"analyzing "<< i <<" th event"<<endl;  
 for(int j4i = 0; j4i < nref; j4i++){
     double jet_pt = jtpt[j4i];
-    double jet_pu = jtpu[j4i];
+ //   double jet_pu = jtpu[j4i];
     double ref_pt = refpt[j4i];
     double ref_eta = refeta[j4i];
     double jet_eta = jteta[j4i];  
@@ -389,7 +390,7 @@ for(int j4i = 0; j4i < nref; j4i++){
 	double PPTighter4 = (double)(neutralSum/jet_pt < 0.9 && eSum/jet_pt < 1.0 && photonSum/jet_pt < 1.0 && (chargedSum+neutralSum+muSum+eSum)/jet_pt < 0.95 && chargedSum/jet_pt < 0.95 && ((chargedSum/jet_pt>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
 	double PPTighter5 = (double)(neutralSum/jet_pt < 0.8 && eSum/jet_pt < 1.0 && photonSum/jet_pt < 1.0 && (chargedSum+neutralSum+muSum+eSum)/jet_pt < 0.95 && chargedSum/jet_pt < 0.95 && ((chargedSum/jet_pt>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) );
         double PPTighter = PPTighter0*TMath::Power(2,5)+PPTighter1*TMath::Power(2,4)+PPTighter2*TMath::Power(2,3)+PPTighter3*TMath::Power(2,2)+PPTighter4*TMath::Power(2,1)+PPTighter5*TMath::Power(2,0)+0.5;
-	double jetidv[nJetID]={chargedMax,chargedSum,neutralMax,neutralSum,photonMax,photonSum,chargedMax/jet_pt,chargedSum/jet_pt,neutralMax/jet_pt,neutralSum/jet_pt,photonMax/jet_pt,photonSum/jet_pt,eSum/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum-jet_pu)/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum-jet_pu)/raw_pt,neutralMax/TMath::Max(chargedSum,neutralSum),(double)chargedN,(double)neutralN,(double)photonN,(double)(neutralSum/jet_pt<1.0 && eSum/jet_pt<1.0 && photonSum/jet_pt<1.0 && ((chargedSum>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ), (double)(neutralSum/jet_pt<0.9 && eSum/jet_pt<1.0 && photonSum/jet_pt<0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ),PPTighter,(chargedSum+neutralSum+muSum+eSum)/jet_pt};
+	double jetidv[nJetID]={chargedMax,chargedSum,neutralMax,neutralSum,photonMax,photonSum,chargedMax/jet_pt,chargedSum/jet_pt,neutralMax/jet_pt,neutralSum/jet_pt,photonMax/jet_pt,photonSum/jet_pt,eSum/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/jet_pt,(chargedSum+neutralSum+photonSum+muSum+eSum)/raw_pt,neutralMax/TMath::Max(chargedSum,neutralSum),(double)chargedN,(double)neutralN,(double)photonN,(double)(neutralSum/jet_pt<1.0 && eSum/jet_pt<1.0 && photonSum/jet_pt<1.0 && ((chargedSum>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ), (double)(neutralSum/jet_pt<0.9 && eSum/jet_pt<1.0 && photonSum/jet_pt<0.9 && ((chargedSum>0 && chargedN>0 && TMath::Abs(jet_eta)<2.4) || TMath::Abs(jet_eta) >=2.4) ),PPTighter,(chargedSum+neutralSum+muSum+eSum)/jet_pt};
         if(TMath::Abs(jet_eta)<=2.4){
                 my_hists->jetptEta->Fill(jet_pt,jet_eta,weight);
                 my_hists->jetptphi->Fill(jet_pt,jet_phi,weight);
@@ -401,11 +402,11 @@ for(int j4i = 0; j4i < nref; j4i++){
         if(TMath::Abs(jet_eta)<=2){
 	for(int j5i = 0; j5i < ngen ; j5i++) {
         double gen_pt=genpt[j5i];
-        double gen_eta=geneta[j5i];
-        double gen_phi=genphi[j5i];
+//        double gen_eta=geneta[j5i];
+//        double gen_phi=genphi[j5i];
         TVector3 jetVec, genVec;
         jetVec.SetPtEtaPhi(jet_pt,jet_eta,jet_phi);
-        genVec.SetPtEtaPhi(gen_pt,gen_eta,gen_phi);
+        genVec.SetPtEtaPhi(jet_pt,jet_eta,jet_phi);
         double deltaR = jetVec.DeltaR(genVec);
         if(deltaR<0.3){ 
         matchflag++;

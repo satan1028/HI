@@ -38,7 +38,8 @@ TString MCPPbfileYX="/cms/store/user/qixu/jetRpA/RpA/NewMC/MCPPbakPu3PF_useskim_
 TString MCPPfile = "/cms/store/user/qixu/jetRpA/RpA/NewMC/Corrections/AnaGENJetR357_5020GeV_Apr15_Z2Combined.root";
 
 TString JetIDNameList[]={"chMax", "chSum", "neuMax", "neuSum", "phoMax", "phoSum", "chMaxpt", "chSumpt", "neuMaxpt", "neuSumpt", "phoMaxpt", "phoSumpt","eSumpt","SumSumpt","SumSumrawpt","neuMaxr","chN","neuN","phoN","PPcut","PPcutTight","PPcutTighter","SumSumpt1"};
-const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 362, 429, 692, 1000};
+//const double binbound_pt[]={ 3, 4, 5, 7, 9, 12, 15, 18, 22, 27, 33, 39, 47, 55, 64,74, 84, 97, 114, 133, 153, 174, 196, 220, 245, 272, 300, 362, 429, 692, 1000}; 
+const double binbound_pt[]={3, 4, 5, 7, 9, 12, 15, 18,21,24,28,32,37,43,49,56,64,74,84,97,114,133,153,174,196,220,245,272,300,330,362,395,430,468,507,548,592,638,686,1000};
 int Nbin_pt=sizeof(binbound_pt)/sizeof(double)-1;
 //const double binbound_pt_coarse[]={0,30,70,150,200,600};
 const double binbound_pt_coarse[]={30,50,80,100,150};

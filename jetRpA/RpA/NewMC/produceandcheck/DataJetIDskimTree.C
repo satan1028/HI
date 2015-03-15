@@ -22,7 +22,7 @@ const int nJetID = sizeof(JetIDName)/sizeof(TString);
 
 
 TString algo="akPu3PF";//"akPu3PF"
-TString coll = "PPb";
+TString coll = "PbP";
     
 void DataJetIDskimTree(){
     TH2F* jetptjetid[nJetID];

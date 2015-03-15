@@ -52,50 +52,50 @@ if(ieta==7){
     histoname = Form("jetpt");
 }
 else{
-    histonameID = Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinnameswap[ieta].Data());
-    histoname = Form("jetptEtaBin%s",etabinnameswap[ieta].Data());
+    histonameID = Form("jetpt%sEtaBin%s",JetIDName.Data(),etabinname[ieta].Data());
+    histoname = Form("jetptEtaBin%s",etabinname[ieta].Data());
 }
 
-TH2F* hdata2F=(TH2F*)fDataPPbJetID->Get(histonameID);
-TH2F *hPPb2D= (TH2F*)fMCPPb->Get(histonameID);
-TH2F *hPPb2D_real= (TH2F*)fMCPPb->Get(Form("%s_real1",histonameID.Data()));
-TH2F *hPPb2D_fake= (TH2F*)fMCPPb->Get(Form("%s_fake1",histonameID.Data()));
-TH1D* hdata_pt=(TH1D*)fDataPPbJetID->Get(histoname);
-TH1D *hPPb_pt= (TH1D*)fMCPPb->Get(histoname);
-TH1D *hPPb_pt_real= (TH1D*)fMCPPb->Get(Form("%s_real1",histoname.Data()));
-TH1D *hPPb_pt_fake= (TH1D*)fMCPPb->Get(Form("%s_fake1",histoname.Data()));
+TH2F* hdata2F=(TH2F*)fDataPbPJetID->Get(histonameID);
+TH2F *hPbP2D= (TH2F*)fMCPbP->Get(histonameID);
+TH2F *hPbP2D_real= (TH2F*)fMCPbP->Get(Form("%s_real1",histonameID.Data()));
+TH2F *hPbP2D_fake= (TH2F*)fMCPbP->Get(Form("%s_fake1",histonameID.Data()));
+TH1D* hdata_pt=(TH1D*)fDataPbPJetID->Get(histoname);
+TH1D *hPbP_pt= (TH1D*)fMCPbP->Get(histoname);
+TH1D *hPbP_pt_real= (TH1D*)fMCPbP->Get(Form("%s_real1",histoname.Data()));
+TH1D *hPbP_pt_fake= (TH1D*)fMCPbP->Get(Form("%s_fake1",histoname.Data()));
 if(dataType==2 || dataType == 4){
-TH1D* hPPb_JetIDcut_pt_real = new TH1D(Form("hPPb_JetIDcut_pt_real_%d_%d",ieta,dataType),Form("hPPb_JetIDcut_pt_real_%d",ieta),1000,0.,1000.);
-hPPb_JetIDcut_pt_real->Sumw2();
+TH1D* hPbP_JetIDcut_pt_real = new TH1D(Form("hPbP_JetIDcut_pt_real_%d_%d",ieta,dataType),Form("hPbP_JetIDcut_pt_real_%d",ieta),1000,0.,1000.);
+hPbP_JetIDcut_pt_real->Sumw2();
 }
 if(dataType==3){
-TH1D* hPPb_JetIDcut_pt_fake = new TH1D(Form("hPPb_JetIDcut_pt_fake_%d_%d",ieta,dataType),Form("hPPb_JetIDcut_pt_fake_%d",ieta),1000,0.,1000.);
-hPPb_JetIDcut_pt_fake->Sumw2();
+TH1D* hPbP_JetIDcut_pt_fake = new TH1D(Form("hPbP_JetIDcut_pt_fake_%d_%d",ieta,dataType),Form("hPbP_JetIDcut_pt_fake_%d",ieta),1000,0.,1000.);
+hPbP_JetIDcut_pt_fake->Sumw2();
 }
 if(dataType==1 || dataType == 4){
-TH1D* hPPb_JetIDcut_pt = new TH1D(Form("hPPb_JetIDcut_pt_%d_%d",ieta,dataType),Form("hPPb_JetIDcut_pt_%d",ieta),1000,0.,1000.);
-hPPb_JetIDcut_pt->Sumw2();
+TH1D* hPbP_JetIDcut_pt = new TH1D(Form("hPbP_JetIDcut_pt_%d_%d",ieta,dataType),Form("hPbP_JetIDcut_pt_%d",ieta),1000,0.,1000.);
+hPbP_JetIDcut_pt->Sumw2();
 }
 if(dataType==0){
 TH1D* hdata_JetIDcut_pt = new TH1D(Form("hdata_JetIDcut_pt_%d_%d",ieta,dataType),Form("hdata_JetIDcut_pt_%d",ieta),1000,0.,1000.);
 hdata_JetIDcut_pt->Sumw2();
 }
 if(ilist==21){
-for(int ibin=1;ibin<hPPb2D_real->GetYaxis()->GetNbins();ibin++){
-	double binxcenter = hPPb2D_real->GetYaxis()->GetBinCenter(ibin);
+for(int ibin=1;ibin<hPbP2D_real->GetYaxis()->GetNbins();ibin++){
+	double binxcenter = hPbP2D_real->GetYaxis()->GetBinCenter(ibin);
 		TVectorD* vecx2 = (TVectorD*)extract(binxcenter);
-                TH1D* histo_1=hPPb2D_real->ProjectionX(Form("histo1_%d",ibin),ibin,ibin);
-                TH1D* histo_2=hPPb2D_fake->ProjectionX(Form("histo2_%d",ibin),ibin,ibin);
-                TH1D* histo_0=hPPb2D->ProjectionX(Form("histo0_%d",ibin),ibin,ibin);
+                TH1D* histo_1=hPbP2D_real->ProjectionX(Form("histo1_%d",ibin),ibin,ibin);
+                TH1D* histo_2=hPbP2D_fake->ProjectionX(Form("histo2_%d",ibin),ibin,ibin);
+                TH1D* histo_0=hPbP2D->ProjectionX(Form("histo0_%d",ibin),ibin,ibin);
                 TH1D* datahisto=hdata2F->ProjectionX(Form("datahisto0_%d",ibin),ibin,ibin);
                 int a=(int)(JetIDcut[0]);
 		if((*vecx2)[a]!=0){
                 if(dataType==2 || dataType ==4)
-		hPPb_JetIDcut_pt_real->Add(histo_1);
+		hPbP_JetIDcut_pt_real->Add(histo_1);
                 if(dataType==3)
-		hPPb_JetIDcut_pt_fake->Add(histo_2);
+		hPbP_JetIDcut_pt_fake->Add(histo_2);
                 if(dataType==1 || dataType ==4 )
-		hPPb_JetIDcut_pt->Add(histo_0);
+		hPbP_JetIDcut_pt->Add(histo_0);
                 if(dataType==0)
 		hdata_JetIDcut_pt->Add(datahisto);
                 }
@@ -105,9 +105,9 @@ else{
     double xrange_JetID[2];
     xrange_JetIDcut[0]=JetIDcut[0]+1e-4;
     xrange_JetIDcut[1]=JetIDcut[1]-1e-4;
-    TH1D* hPPb_JetIDcut_pt_real=hPPb2D_real->ProjectionX(Form("hPPb_JetIDcut_pt_real_%d",ieta),hPPb2D_real->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D_real->GetYaxis()->FindBin(xrange_JetIDcut[1]));
-    TH1D* hPPb_JetIDcut_pt_fake=hPPb2D_fake->ProjectionX(Form("hPPb_JetIDcut_pt_fake_%d",ieta),hPPb2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[1]));
-    TH1D* hPPb_JetIDcut_pt=hPPb2D->ProjectionX(Form("hPPb_JetIDcut_pt_%d",ieta),hPPb2D->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPPb2D->GetYaxis()->FindBin(xrange_JetIDcut[1]));
+    TH1D* hPbP_JetIDcut_pt_real=hPbP2D_real->ProjectionX(Form("hPbP_JetIDcut_pt_real_%d",ieta),hPbP2D_real->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPbP2D_real->GetYaxis()->FindBin(xrange_JetIDcut[1]));
+    TH1D* hPbP_JetIDcut_pt_fake=hPbP2D_fake->ProjectionX(Form("hPbP_JetIDcut_pt_fake_%d",ieta),hPbP2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPbP2D_fake->GetYaxis()->FindBin(xrange_JetIDcut[1]));
+    TH1D* hPbP_JetIDcut_pt=hPbP2D->ProjectionX(Form("hPbP_JetIDcut_pt_%d",ieta),hPbP2D->GetYaxis()->FindBin(xrange_JetIDcut[0]),hPbP2D->GetYaxis()->FindBin(xrange_JetIDcut[1]));
     TH1D* hdata_JetIDcut_pt=hdata2F->ProjectionX(Form("hdata_JetIDcut_pt_%d",ieta),hdata2F->GetYaxis()->FindBin(xrange_JetIDcut[0]),hdata2F->GetYaxis()->FindBin(xrange_JetIDcut[1]));
 }
 */
@@ -119,31 +119,31 @@ hdata_JetIDcutvsnocut_pt->Divide(hdata_pt);
 getRidYError(hdata_JetIDcutvsnocut_pt);
 }
 if(dataType==1 || dataType ==4){
-hPPb_JetIDcut_pt = (TH1D*)hPPb_JetIDcut_pt->Rebin(Nbin_pt,hPPb_JetIDcut_pt->GetName(),binbound_pt);
-hPPb_JetIDcutvsnocut_pt = (TH1D*)hPPb_JetIDcut_pt->Clone("hPPb_JetIDcutvsnocut_pt");
-hPPb_pt = (TH1D*)hPPb_pt->Rebin(Nbin_pt,hPPb_pt->GetName(),binbound_pt);
-hPPb_JetIDcutvsnocut_pt->Divide(hPPb_pt);
-getRidYError(hPPb_JetIDcutvsnocut_pt);
+hPbP_JetIDcut_pt = (TH1D*)hPbP_JetIDcut_pt->Rebin(Nbin_pt,hPbP_JetIDcut_pt->GetName(),binbound_pt);
+hPbP_JetIDcutvsnocut_pt = (TH1D*)hPbP_JetIDcut_pt->Clone("hPbP_JetIDcutvsnocut_pt");
+hPbP_pt = (TH1D*)hPbP_pt->Rebin(Nbin_pt,hPbP_pt->GetName(),binbound_pt);
+hPbP_JetIDcutvsnocut_pt->Divide(hPbP_pt);
+getRidYError(hPbP_JetIDcutvsnocut_pt);
 }
 if(dataType==2 || dataType==4){
-hPPb_JetIDcut_pt_real = (TH1D*)hPPb_JetIDcut_pt_real->Rebin(Nbin_pt,hPPb_JetIDcut_pt_real->GetName(),binbound_pt);
-hPPb_JetIDcutvsnocut_pt_real = (TH1D*)hPPb_JetIDcut_pt_real->Clone("hPPb_JetIDcutvsnocut_pt_real");
-hPPb_pt_real = (TH1D*)hPPb_pt_real->Rebin(Nbin_pt,hPPb_pt_real->GetName(),binbound_pt);
-hPPb_JetIDcutvsnocut_pt_real->Divide(hPPb_pt_real);
-getRidYError(hPPb_JetIDcutvsnocut_pt_real);
+hPbP_JetIDcut_pt_real = (TH1D*)hPbP_JetIDcut_pt_real->Rebin(Nbin_pt,hPbP_JetIDcut_pt_real->GetName(),binbound_pt);
+hPbP_JetIDcutvsnocut_pt_real = (TH1D*)hPbP_JetIDcut_pt_real->Clone("hPbP_JetIDcutvsnocut_pt_real");
+hPbP_pt_real = (TH1D*)hPbP_pt_real->Rebin(Nbin_pt,hPbP_pt_real->GetName(),binbound_pt);
+hPbP_JetIDcutvsnocut_pt_real->Divide(hPbP_pt_real);
+getRidYError(hPbP_JetIDcutvsnocut_pt_real);
 }
 
 if(dataType==3){
-hPPb_JetIDcut_pt_fake = (TH1D*)hPPb_JetIDcut_pt_fake->Rebin(Nbin_pt,hPPb_JetIDcut_pt_fake->GetName(),binbound_pt);
-hPPb_JetIDcutvsnocut_pt_fake = (TH1D*)hPPb_JetIDcut_pt_fake->Clone("hPPb_JetIDcutvsnocut_pt_fake");
-hPPb_pt_fake = (TH1D*)hPPb_pt_fake->Rebin(Nbin_pt,hPPb_pt_fake->GetName(),binbound_pt);
-hPPb_JetIDcutvsnocut_pt_fake->Divide(hPPb_pt_fake);
-getRidYError(hPPb_JetIDcutvsnocut_pt_fake);
+hPbP_JetIDcut_pt_fake = (TH1D*)hPbP_JetIDcut_pt_fake->Rebin(Nbin_pt,hPbP_JetIDcut_pt_fake->GetName(),binbound_pt);
+hPbP_JetIDcutvsnocut_pt_fake = (TH1D*)hPbP_JetIDcut_pt_fake->Clone("hPbP_JetIDcutvsnocut_pt_fake");
+hPbP_pt_fake = (TH1D*)hPbP_pt_fake->Rebin(Nbin_pt,hPbP_pt_fake->GetName(),binbound_pt);
+hPbP_JetIDcutvsnocut_pt_fake->Divide(hPbP_pt_fake);
+getRidYError(hPbP_JetIDcutvsnocut_pt_fake);
 }
 if(dataType==4){
-TH1D* ratio_hPPb_JetIDcut_pt_realvsInc = (TH1D*)hPPb_JetIDcut_pt_real->Clone("ratio_hPPb_JetIDcut_pt_realvsInc");
-ratio_hPPb_JetIDcut_pt_realvsInc->Divide(hPPb_JetIDcut_pt);
-getRidYError(ratio_hPPb_JetIDcut_pt_realvsInc);
+TH1D* ratio_hPbP_JetIDcut_pt_realvsInc = (TH1D*)hPbP_JetIDcut_pt_real->Clone("ratio_hPbP_JetIDcut_pt_realvsInc");
+ratio_hPbP_JetIDcut_pt_realvsInc->Divide(hPbP_JetIDcut_pt);
+getRidYError(ratio_hPbP_JetIDcut_pt_realvsInc);
 
 }
 
@@ -151,18 +151,18 @@ getRidYError(ratio_hPPb_JetIDcut_pt_realvsInc);
 
 if(dataType==0) return hdata_JetIDcutvsnocut_pt;
     //g=makegraph(hdata_JetIDcut_pt,hdata_pt);   
-else if(dataType==1) return hPPb_JetIDcutvsnocut_pt;
-    //g=makegraph(hPPb_JetIDcut_pt,hPPb_pt);
-else if(dataType==2) return hPPb_JetIDcutvsnocut_pt_real;
-    //g=makegraph(hPPb_JetIDcut_pt_real,hPPb_pt_real);
-else if(dataType==3) return hPPb_JetIDcutvsnocut_pt_fake;
-    //g=makegraph(hPPb_JetIDcut_pt_fake,hPPb_pt_fake);
-else if(dataType==4) return ratio_hPPb_JetIDcut_pt_realvsInc;
+else if(dataType==1) return hPbP_JetIDcutvsnocut_pt;
+    //g=makegraph(hPbP_JetIDcut_pt,hPbP_pt);
+else if(dataType==2) return hPbP_JetIDcutvsnocut_pt_real;
+    //g=makegraph(hPbP_JetIDcut_pt_real,hPbP_pt_real);
+else if(dataType==3) return hPbP_JetIDcutvsnocut_pt_fake;
+    //g=makegraph(hPbP_JetIDcut_pt_fake,hPbP_pt_fake);
+else if(dataType==4) return ratio_hPbP_JetIDcut_pt_realvsInc;
 else exit();
 }
 
 
-void overlayJetIDcut_Etabin(){
+void overlayJetIDcut_PbP_Etabin(){
 gStyle->SetOptStat(kFALSE);
 c1 = new TCanvas("c1"," ",1200,600);
 c2 = new TCanvas("c2"," ",1200,600);
@@ -302,6 +302,6 @@ if(canvas[i]!=4){
     T->DrawLatex(0.40,0.30,etastring[i]);
 }
 }
-c1->Print(Form("pic/overlay_JetIDcut_Etabin.png"));
+c1->Print(Form("pic/overlay_JetIDcut_PbP_Etabin.png"));
 }
 
