@@ -106,7 +106,7 @@ Unit="(GeV/c)";
 int Nbin_JetID=sizeof(binbound_JetID)/sizeof(double)-1;
 int Ntune = sizeof(JetIDcut)/sizeof(double)/2;
 
-TFile *fjetidcorr = new TFile("fjetidcorrPPb.root","Recreate");
+TFile *fjetidcorr = new TFile("fjetidcorrPPb_self.root","Recreate");
 TFile *ftemp = new TFile("ftempPPb.root","Update");
 
 //--------------------------------------------------------SetUp canvas---------------------------------------------------
@@ -879,8 +879,8 @@ leg4->Draw("same");
 T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d",j));
 }
 fjetidcorr->cd();
-if(canvas[i]==4) corr_hPPb->Write(Form("jetidcorr_%s","20_25"));
-else
+//if(canvas[i]==4) corr_hPPb->Write(Form("jetidcorr_%s","20_25"));
+//else
 corr_hPPb->Write(Form("jetidcorr_%s",etabinnameswap[i].Data()));
 }
 

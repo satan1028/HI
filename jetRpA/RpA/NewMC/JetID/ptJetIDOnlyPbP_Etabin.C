@@ -880,7 +880,7 @@ leg4->Draw("same");
 T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d",j));
 }
 fjetidcorr->cd();
-if(canvas[i]==4) corr_hPbP->Write(Form("jetidcorr_%s","20_25"));
+if(canvas[i]==4) corr_hPbP->Write(Form("jetidcorr_%s","-25_-20"));
 else
 corr_hPbP->Write(Form("jetidcorr_%s",etabinname[i].Data()));
 }

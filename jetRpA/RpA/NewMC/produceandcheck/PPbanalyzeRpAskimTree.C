@@ -22,7 +22,7 @@ const int nJetID = sizeof(JetIDName)/sizeof(TString);
 const double binbound_pt_coarse[]={30,50,80,100,600};
 const int Nbin_pt_coarse=sizeof(binbound_pt_coarse)/sizeof(double)-1;
 TString algo="akPu3PF";//"akPu3PF"
-TString coll = "PbP";
+TString coll = "PPb";
 
 class hist_class{
 public:
@@ -31,6 +31,7 @@ public:
     TH1F * refjetpt;
     TH1F * genjetpt;
     TH1F * jetpt;
+    TH1F * jetpt_jetidclosure;
     TH1F * jetpt_fake;
     TH1F * jetpt_real;
     TH1F * jetpt_fake1;
@@ -71,6 +72,7 @@ public:
     TH2F * jetptjetidEtaBin_real1[netabin][nJetID];
     TH2F * refptJESEtaBin[netabin];
     TH1F * jetptEtaBin[netabin];
+    TH1F * jetptEtaBin_jetidclosure[netabin];
     TH1F * jetptEtaBin_fake[netabin];
     TH1F * jetptEtaBin_real[netabin];
     TH1F * jetptEtaBin_fake1[netabin];
@@ -85,6 +87,8 @@ hist_class::hist_class()
     genjetpt -> Sumw2(); 
     jetpt = new TH1F(Form("jetpt"),Form("jetpt"),1000,0.,1000.);
     jetpt -> Sumw2(); 
+    jetpt_jetidclosure = new TH1F(Form("jetpt_jetidclosure"),Form("jetpt_jetidclosure"),1000,0.,1000.);
+    jetpt_jetidclosure -> Sumw2(); 
     jetpt_fake = new TH1F(Form("jetpt_fake"),Form("jetpt_fake"),1000,0.,1000.);
     jetpt_fake -> Sumw2(); 
     jetpt_real = new TH1F(Form("jetpt_real"),Form("jetpt_real"),1000,0.,1000.);
@@ -169,6 +173,8 @@ hist_class::hist_class()
     for(int ieta=0; ieta < netabin; ieta++){
       jetptEtaBin[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
       jetptEtaBin[ieta]->Sumw2();
+      jetptEtaBin_jetidclosure[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f_jetidclosure",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin%.f_%.f_jetidclosure",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
+      jetptEtaBin_jetidclosure[ieta]->Sumw2();
       jetptEtaBin_fake[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f_fake",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_fake%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
       jetptEtaBin_fake[ieta]->Sumw2();
       jetptEtaBin_real[ieta] = new TH1F(Form("jetptEtaBin%.f_%.f_real",deta[ieta]*10,deta[ieta+1]*10),Form("jetptEtaBin_real%.f_%.f",deta[ieta]*10,deta[ieta+1]*10),1000,0.,1000.);
@@ -227,6 +233,8 @@ void hist_class::Write()
     refjetpt->Write();
     genjetpt->Write();
     jetpt->Write();
+    jetpt_jetidclosure->Write();
+    jetpt_fake->Write();
     jetpt_fake->Write();
     jetpt_real->Write();
     jetpt_fake1->Write();
@@ -262,6 +270,7 @@ void hist_class::Write()
     PthatAfXw->Write();
     for(int ieta=0; ieta<netabin; ieta++){
 	 jetptEtaBin[ieta]->Write(); 
+	 jetptEtaBin_jetidclosure[ieta]->Write(); 
          jetptEtaBin_fake[ieta]->Write();
          jetptEtaBin_real[ieta]->Write();
          jetptEtaBin_fake1[ieta]->Write();
@@ -290,11 +299,17 @@ void PPbanalyzeRpAskimTree()
   cout<<"Analyzing MC!"<<endl;
  TString user = getenv("USER");
  // TFile *f = new TFile(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/%sMCOfficialForestNewVzWeightAddHLT_ppReco_akPu3PF_QCDjetTrigJECv8_JetPt0pthatLowerCut.root",coll.Data()));
- // TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10final.root",coll.Data(),algo.Data()));
+  TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10final.root",coll.Data(),algo.Data()));
  // TFile *f = new TFile(Form("/cms/store/user/qixu/jetRpA/skimTree/MC%s%sskimfile0_10.root",coll.Data(),algo.Data()));
-  TFile *f = new TFile(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/MC%s%sskimFullInfoLowerpthatCutfile0_10.root",coll.Data(),algo.Data()));
+ // TFile *f = new TFile(Form("/cms/store/user/ymao/pA5TEV/Mixing/STARTHI53V27/merged/MC%s%sskimFullInfoLowerpthatCutfile0_10.root",coll.Data(),algo.Data()));
   
   TTree *nt = (TTree*)f->Get("nt");
+  TFile *fjetidcorr = TFile::Open(Form("../JetID/fjetidcorr%s_self.root",coll.Data()));
+  TH1D* hjetidcorr = (TH1D*)fjetidcorr->Get("jetidcorr_-10_10");
+    TH1D* hjetidcorrEtaBin[netabin];
+  for(int ieta=0;ieta<netabin;ieta++){
+    hjetidcorrEtaBin[ieta] = (TH1D*)fjetidcorr->Get(Form("jetidcorr_%.f_%.f",deta[ieta]*10,deta[ieta+1]*10));
+  }
 
   Float_t jtpt[100],jtpu[100],jteta[100],geneta[100],genphi[100],jtphi[100],rawpt[100],refpt[100],refeta[100],genpt[100];
 	Int_t t_chargedN[100], t_neutralN[100], t_photonN[100],subid[100];
@@ -482,6 +497,8 @@ for(int j4i = 0; j4i < nref; j4i++){
 	else
           my_hists->jetpt_real1->Fill(jet_pt,weight);
 	my_hists->jetpt->Fill(jet_pt,weight);
+        if((int)PPTighter2)
+	my_hists->jetpt_jetidclosure->Fill(jet_pt,weight*hjetidcorr->GetBinContent(hjetidcorr->FindBin(jet_pt)));
        	my_hists->rawptJES->Fill(raw_pt,jet_pt/raw_pt,weight);
 	}	
 
@@ -490,6 +507,8 @@ for(int j4i = 0; j4i < nref; j4i++){
       }//assign the eta bin for jets
       if(dEtaBin!=-1){
 	 my_hists->jetptEtaBin[dEtaBin]->Fill(jet_pt,weight);
+        if((int)PPTighter2)
+	my_hists->jetptEtaBin_jetidclosure[dEtaBin]->Fill(jet_pt,weight*hjetidcorrEtaBin[dEtaBin]->GetBinContent(hjetidcorrEtaBin[dEtaBin]->FindBin(jet_pt)));
 	for(int ijetid=0;ijetid<nJetID;ijetid++){
             my_hists->jetptjetidEtaBin[dEtaBin][ijetid]->Fill(jet_pt,jetidv[ijetid],weight);
             if(ref_pt<0)
