@@ -151,10 +151,14 @@ if(Save){
 if(isMatch){
 c1->Print(Form("pic/JetIDclosure_cut1.png"));
 c1->Print(Form("pic/JetIDclosure_cut1.pdf"));
+c2->Print(Form("pic/JetIDclosureratio_cut1.pdf"));
+c2->Print(Form("pic/JetIDclosureratio_cut1.pdf"));
 }
 else{
 c1->Print(Form("pic/JetIDclosure.png"));
 c1->Print(Form("pic/JetIDclosure.pdf"));
+c2->Print(Form("pic/JetIDclosureratio.pdf"));
+c2->Print(Form("pic/JetIDclosureratio.pdf"));
 }
 }
 
