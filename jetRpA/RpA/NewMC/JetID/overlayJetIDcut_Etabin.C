@@ -35,7 +35,7 @@ else if(ilist== 11) {    JetID = "#Sum p_{T}^{photons}/p_{T}^{jet}";     JetIDcu
 else if(ilist== 12) {    JetID = "(#Sigma p_{T}^{charged}+#Sigma p_{T}^{photons}+#Sigma p_{T}^{neutral}+#Sigma p_{T}^{#mu}+#Sigma p_{T}^{e})/p_{T}^{jet}";JetIDcut[0]=0; JetIDcut[1]=1.01; ilistw=3;}
 else if(ilist== 13) {    JetID = "(#Sigma p_{T}^{charged}+#Sigma p_{T}^{photons}+#Sigma p_{T}^{neutral}+#Sigma p_{T}^{#mu}+#Sigma p_{T}^{e})/p_{T}^{raw}"; JetIDcut[0]=0;JetIDcut[1]=1.13;}
 else if(ilist== 14) {  JetID = "Max p_{T}^{neutral} /Max(#Sigma p_{T}^{charged},#Sigma p_{T}^{neutral})";JetIDcut[0]=0;JetIDcut[1]=0.975;ilistw=2;}
-else if(ilist== 21)   {  JetID = "PP cut Tighter True or False";JetIDcut[0]=2;JetIDcut[1]=5;}
+else if(ilist== 21)   {  JetID = "PP cut Tighter True or False";JetIDcut[0]=2;JetIDcut[1]=2;}
 
 if(ilist==12 || ilist==13 || ilist==14 ){
 double binbound_JetID[]={0,0.2,0.4,0.6,0.7,0.8,0.84,0.86,0.88,0.9,0.92,0.94,0.96,0.98,1.0,1.02,1.04,1.06,1.1,1.15,1.2,1.3,1.4,1.6,1.8,2.};}
@@ -296,6 +296,17 @@ if(canvas[i]==4){
 //leg2->AddEntry(ratio,"double ratio Data/MC","lp");
 //leg2->Draw("same");
 }
+if(canvas[i]==4){
+    TLegend *leg = new TLegend(*leg1);
+    leg->Clear();
+    leg->SetY1(0.6);
+    leg->SetY2(0.8);
+    leg->AddEntry(ratio,"Cut efficiency double ratio","lp");
+    leg->Draw("same");
+    T->SetTextSize(0.05);
+    T->DrawLatex(0.3,0.45,Form("JetID cut: #frac{#Sigma h^{0}+#Sigma h^{#pm}+#Sigma e+#Sigma #mu}{p_{T}^{jet}}<1.0"));
+    T->DrawLatex(0.3,0.30,Form("&& #frac{#Sigma h^{0}}{p_{T}^{jet}}<0.9 && #frac{#Sigma h^{#pm}}{p_{T}^{jet}}>0 && #frac{#Sigma #gamma}{p_{T}^{jet}}<1.0"));
+}
 if(canvas[i]!=4){
     ratio->Draw("Psame");
     l->Draw("same");
@@ -303,5 +314,6 @@ if(canvas[i]!=4){
 }
 }
 c1->Print(Form("pic/overlay_JetIDcut_Etabin.png"));
+c2->Print(Form("pic/overlay_JetIDcutratio_Etabin.png"));
 }
 

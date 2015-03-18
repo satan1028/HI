@@ -37,7 +37,7 @@ gStyle->SetLabelFont(70);
 
 //------------------------------------------------------------Get Histograms---------------------------------------------
 int isMatch=0;
-bool Save = 0;
+bool Save = 1;
 int ilist=atoi(getenv("LIST"));
 TString JetIDName=JetIDNameList[ilist];
 if(ilist== 0)  { JetID = "chargedMax"; double JetIDcut[][2]={{4,9999}};}
@@ -792,15 +792,18 @@ hFrame1->DrawCopy();
 TLegend* leg4 = new TLegend(*leg2);
 leg4->Clear();
 leg4->SetX1(0.45);
-leg4->SetX2(0.9);
+leg4->SetX2(0.75);
+leg4->SetY1(0.23);
+leg4->SetY2(0.43);
 c11->cd(canvas[i]+1)->SetGridx();
 
 hFrame1->GetXaxis()->SetLimits(32,299);
-hFrame1->SetMaximum(1.052);
+hFrame1->SetMaximum(1.012);
 hFrame1->SetMinimum(0.902);
 c10->cd(canvas[i]+1)->cd();
 hFrame1->DrawCopy();
 c11->cd(canvas[i]+1)->cd();
+hFrame1->GetYaxis()->SetTitle(Form("Correction Factor"));
 hFrame1->DrawCopy();
 for(int j=1;j<Ntune;j++){
     if(j!=3 ) continue;
@@ -867,16 +870,19 @@ corr_hPPb->Draw("Psame");
 
 if(canvas[i]==4){
 T1.SetTextSize(0.05);
-T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d",j));
-leg4->AddEntry(ratio_hPPb_JetIDcutvsnocut_pt_real,Form("Real cuteff, cut%d",j),"lp");
-leg4->AddEntry(ratio_hPPb_JetIDcut_pt_realvsInc,Form("Real contri, cut%d",j),"lp");
+//T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form(""));
+leg4->AddEntry(ratio_hPPb_JetIDcutvsnocut_pt_real,Form("Real cuteff",j),"lp");
+leg4->AddEntry(ratio_hPPb_JetIDcut_pt_realvsInc,Form("Real contri",j),"lp");
 
 c10->cd(canvas[i]+1)->cd();
 leg4->Draw("same");
-T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d",j));
+T1.DrawLatex(0.4,ybase+0.5+j*0.07,Form("CMS simulation"));
+T1.DrawLatex(0.3,ybase+0.30+j*0.07,Form("cut: #frac{#Sigma h^{0}+#Sigma h^{#pm}+#Sigma e+#Sigma #mu}{p_{T}^{jet}}<1.0",j));
+T1.DrawLatex(0.3,ybase+0.20+j*0.07,Form("&& #frac{#Sigma h^{0}}{p_{T}^{jet}}<0.9 && #frac{#Sigma h^{#pm}}{p_{T}^{jet}}>0 && #frac{#Sigma #gamma}{p_{T}^{jet}}<1.0",j));
 c11->cd(canvas[i]+1)->cd();
-leg4->Draw("same");
-T1.DrawLatex(0.3,ybase+0.4+j*0.07,Form("cut%d",j));
+T1.DrawLatex(0.4,ybase+0.5+j*0.07,Form("CMS simulation"));
+T1.DrawLatex(0.3,ybase+0.35+j*0.07,Form("cut: #frac{#Sigma h^{0}+#Sigma h^{#pm}+#Sigma e+#Sigma #mu}{p_{T}^{jet}}<1.0",j));
+T1.DrawLatex(0.3,ybase+0.20+j*0.07,Form("&& #frac{#Sigma h^{0}}{p_{T}^{jet}}<0.9 && #frac{#Sigma h^{#pm}}{p_{T}^{jet}}>0 && #frac{#Sigma #gamma}{p_{T}^{jet}}<1.0",j));
 }
 fjetidcorr->cd();
 //if(canvas[i]==4) corr_hPPb->Write(Form("jetidcorr_%s","20_25"));
@@ -911,7 +917,7 @@ c4->Print(Form("pic/%s/ratio_jetpt_cutvsnocut_Etabin.png",JetIDName.Data()));
 c5->Print(Form("pic/%s/ratio_jetpt_aftcut_%s_Etabin.png",JetIDName.Data(),JetIDName.Data()));
 c6->Print(Form("pic/%s/ratio_jetpt_befcut_Etabin.png",JetIDName.Data(),JetIDName.Data()));
 c7->Print(Form("pic/%s/jetpt_befcut_Etabin.png",JetIDName.Data()));
-c8->Print(Form("pic/%s/_aftcut_Etabin.png",JetIDName.Data()));
+c8->Print(Form("pic/%s/jetpt_aftcut_Etabin.png",JetIDName.Data()));
 c9->Print(Form("pic/%s/Corr_Etabin.png",JetIDName.Data()));
 c10->Print(Form("pic/%s/ratio_Etabin.png",JetIDName.Data()));
 c11->Print(Form("pic/%s/Corr_Etabin.png",JetIDName.Data()));
