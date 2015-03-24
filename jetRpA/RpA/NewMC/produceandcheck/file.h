@@ -46,8 +46,8 @@ const double binbound_pt_coarse[]={30,50,80,100,150};
 //const int Nbin_pt_coarse=sizeof(binbound_pt_coarse)/sizeof(double)-1;
 const int Nbin_pt_coarse=4;
 
-double xrange_pt[2]={60+1e-4,600-1e-4};
-double xrange_pt_pre[2]={55.5+1e-4,480-1e-4};
+double xrange_pt[2]={65+1e-4,600-1e-4};
+double xrange_pt_pre[2]={65+1e-4,480-1e-4};
 TFile *fDataPPb=new TFile(DataPPbfile);
 TFile *fDataPbP=new TFile(DataPbPfile);
 TFile *fDataPPbJetID=new TFile(DataPPbJetIDfile);

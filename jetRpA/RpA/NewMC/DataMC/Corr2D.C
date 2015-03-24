@@ -1,5 +1,5 @@
-#include "/home/xuq/Documents/HI/RpA/Quality/root_setting.h"
-#include "/home/xuq/Documents/HI/RpA/TreeAna/produceandcheck/file.h"
+#include "/home/xuq7/HI/jetRpA/RpA/Quality/root_setting.h"
+#include "/home/xuq7/HI/jetRpA/RpA/NewMC/produceandcheck/file.h"
 void Corr2D(){
 gStyle->SetOptStat(kFALSE);
     gStyle->SetOptFit(1);

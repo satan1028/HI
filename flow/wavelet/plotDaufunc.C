@@ -3,7 +3,7 @@ void plotDaufunc(){
     const int N=2;
     Dauwave dau(N);
     const int np=1000;
-    int m=30;
+    int m=100;
     int n = (int)np/m;
     double x[np],yphi[np],ypsi[np];
     for(int i=0;i<m;i++){

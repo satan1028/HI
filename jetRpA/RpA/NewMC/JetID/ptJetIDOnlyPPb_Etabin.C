@@ -36,7 +36,7 @@ gStyle->SetErrorX(0);
 gStyle->SetLabelFont(70);
 
 //------------------------------------------------------------Get Histograms---------------------------------------------
-int isMatch=0;
+int isMatch=1;
 bool Save = 1;
 int ilist=atoi(getenv("LIST"));
 TString JetIDName=JetIDNameList[ilist];
@@ -63,7 +63,7 @@ else if(ilist== 19)   {  JetID = "PP cut True or False";double JetIDcut[][2]={{1
 else if(ilist== 20)   {  JetID = "PP cut Tight True or False";double JetIDcut[][2]={{1,2}}; }
 else if(ilist== 21)   {  JetID = "PP cut Tighter True or False";double JetIDcut[][2]={{16,32},{0,0},{1,1},{2,2},{3,3},{4,4},{5,5}};  }
 //else if(ilist== 22)   {  JetID = "Max h^{0}/#Sigma h^{#pm}";JetIDcut[0]=0;JetIDcut[1]=2;}
-//else if(ilist== 22) {    JetID = "(#Sigma h^{#pm}+#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";double JetIDcut[][2]={{0,1.0}}; }
+else if(ilist== 22) {    JetID = "(#Sigma h^{#pm}+#Sigma h^{0}+#Sigma #mu+#Sigma e)/p_{T}^{jet}";double JetIDcut[][2]={{0,1.0}}; }
 else {}; // exit();}
 
 if(JetIDName.Contains("pt") || JetIDName=="neuMaxr"){
@@ -80,7 +80,7 @@ double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6
 }
 else{
 //double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.,1.1,1.5,2};}
-double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8};
+double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.0,1.1,1.2};
 }
 //double binbound_JetID[]={0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,1.0,1.1};}
 
@@ -305,7 +305,7 @@ rehisto_hProfPPb_real->SetLineColor(4);
 c1->cd(canvas[i]+1)->SetGridx();
 c1->cd(canvas[i]+1)->SetLogy();
     if(canvas[i]==0  || canvas[i]==4){
-        hFrame1->GetYaxis()->SetTitle("Jet Yield");
+        hFrame1->GetYaxis()->SetTitle("d#sigma/dp_{T}");
         hFrame1->SetLabelSize(18,"Y");
     }
     else{
@@ -335,7 +335,7 @@ leg1->Draw("same");
 c2->cd(canvas[i]+1)->SetLogy();
 c2->cd(canvas[i]+1)->SetGridx();
     if(canvas[i]==0  || canvas[i]==4){
-        hFrame2->GetYaxis()->SetTitle("Jet Yield");
+        hFrame2->GetYaxis()->SetTitle("d#sigma/dp_{T}");
         hFrame2->SetLabelSize(18,"Y");
     }
     else{
@@ -392,7 +392,7 @@ if(i==1){
         fixedFontHist(hFrame2,2.0,3.0);
         for(int ipt=0;ipt<Nbin_pt_coarse;ipt++){
     	if(ipt==0){
-        hFrame2->GetYaxis()->SetTitle("Jet Yield");
+        hFrame2->GetYaxis()->SetTitle("d#sigma/dp_{T}");
         hFrame2->SetLabelSize(18,"Y");
     	}
     	else{
@@ -404,7 +404,7 @@ if(i==1){
         hFrame2->GetXaxis()->SetTitle("");
         c2_->cd(ipt+1)->SetLogy();
         c2_->cd(ipt+1)->SetGridx();
-        hFrame2->GetYaxis()->SetTitle("Jet Yield");
+        hFrame2->GetYaxis()->SetTitle("d#sigma/dp_{T}");
         hFrame2->DrawCopy();
         rehisto_hPPb_JetID_ptbin[ipt]->Draw("E1same");
         rehisto_hPPb_JetID_ptbin_fake[ipt]->Draw("E1same");
@@ -613,7 +613,7 @@ c6->cd(canvas[i]+1)->SetLogy();
         hFrame1->GetXaxis()->SetTitle("p_{T}^{jet} (GeV/c)");
 hFrame1->GetXaxis()->SetLimits(28,599);
 hFrame1->SetMaximum(0.4);
-hFrame1->SetMinimum(1e-5);
+hFrame1->SetMinimum(4e-6);
 hFrame1->DrawCopy();
 TH1F* ratio_hPPb_pt_fakevsInc=(TH1F*)rehisto_hPPb_pt_fake->Clone("ratio_hPPb_pt_fakevsInc");
 ratio_hPPb_pt_fakevsInc->Divide(rehisto_hPPb_pt);
@@ -645,7 +645,7 @@ leg3->Draw("same");
 c7->cd(canvas[i]+1)->SetGridx();
 c7->cd(canvas[i]+1)->SetLogy();
     if(canvas[i]==0  || canvas[i]==4){
-	hFrame1->GetYaxis()->SetTitle(Form("Jet Yield"));
+	hFrame1->GetYaxis()->SetTitle(Form("d#sigma/dp_{T}"));
         hFrame1->SetLabelSize(18,"Y");
     }
     else{
@@ -687,7 +687,7 @@ leg2->Draw("same");
 c8->cd(canvas[i]+1)->SetGridx();
 c8->cd(canvas[i]+1)->SetLogy();
     if(canvas[i]==0  || canvas[i]==4){
-	hFrame1->GetYaxis()->SetTitle(Form("Jet Yield"));
+	hFrame1->GetYaxis()->SetTitle(Form("d#sigma/dp_{T}"));
         hFrame1->SetLabelSize(18,"Y");
     }
     else
@@ -897,16 +897,16 @@ if(Save){
 if(isMatch){
 c1->Print(Form("pic/%s/jetpt_PPb_Etabin_cut1.png",JetIDName.Data()));
 c2->Print(Form("pic/%s/jetid_Etabin_cut1.png",JetIDName.Data()));
-c2_->Print(Form("pic/%s/jetid_Etabin_ptbin_cut1.png",JetIDName.Data()));
+c2_->Print(Form("pic/%s/jetid_Etabin_ptbin_cut1.pdf",JetIDName.Data()));
 c3->Print(Form("pic/%s/ratio_jetid_Etabin_cut1.png",JetIDName.Data()));
 c4->Print(Form("pic/%s/ratio_jetpt_cutvsnocut_Etabin_cut1.png",JetIDName.Data()));
 c5->Print(Form("pic/%s/ratio_jetpt_aftcut_%s_Etabin_cut1.png",JetIDName.Data(),JetIDName.Data()));
-c6->Print(Form("pic/%s/ratio_jetpt_befcut_Etabin_cut1.png",JetIDName.Data(),JetIDName.Data()));
+c6->Print(Form("pic/%s/ratio_jetpt_befcut_Etabin_cut1.pdf",JetIDName.Data(),JetIDName.Data()));
 c7->Print(Form("pic/%s/jetpt_befcut_Etabin_cut1.png",JetIDName.Data()));
 c8->Print(Form("pic/%s/jetpt_aftcut_Etabin_cut1.png",JetIDName.Data()));
 c9->Print(Form("pic/%s/Profile_Etabin_cut1.png",JetIDName.Data()));
-c10->Print(Form("pic/%s/ratio_Etabin_cut1.png",JetIDName.Data()));
-c11->Print(Form("pic/%s/Corr_Etabin_cut1.png",JetIDName.Data()));
+c10->Print(Form("pic/%s/ratio_Etabin_cut1.pdf",JetIDName.Data()));
+c11->Print(Form("pic/%s/Corr_Etabin_cut1.pdf",JetIDName.Data()));
 }
 else{
 c1->Print(Form("pic/%s/jetpt_PPb_Etabin.png",JetIDName.Data()));

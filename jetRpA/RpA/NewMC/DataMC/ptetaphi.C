@@ -19,7 +19,7 @@ bool Save=kTRUE;
 TString histoname[2]={"jetptEta","jetptphi"};
 TString histoname_woRes[2]={"jetptEta_woRes","jetptphi"};
 void ptetaphi(){
-TString coll="PPb";
+TString coll="PbP";
 gStyle->SetPadTickY(1);
 using namespace std;
 c1 = new TCanvas("c1"," ",1000,650);
@@ -65,14 +65,16 @@ else{
 double xrange_var[2]={binbound_var[0]+1e-3,binbound_var[Nbin_var]-1e-3};
 double xrange_var_pre[2]={-3.4,3.4};
 }
-double ratiomin=0.8, ratiomax=1.32;
+double ratiomin=0.7, ratiomax=1.52;
 
 TString Titley="Event Fraction";
+//TString Titley="Jet cross section d#sigma/dp_{T}";
 
 TH1D* hdata_var=hdata->ProjectionY(Form("hdata_%s",varname_.Data()),hdata->GetXaxis()->FindBin(xrange_pt[0]),hdata->GetXaxis()->FindBin(xrange_pt[1]));
 //TH1D* hdata_var_all=hdata->ProjectionY("hdata_var_all",hdata->GetXaxis()->FindBin(binbound_pt[10]+1e-4),hdata->GetXaxis()->FindBin(binbound_pt[Nbin_pt]-1e-4));
 
 TH1D* hdata_pt=hdata->ProjectionX("hdata_pt",hdata->GetYaxis()->FindBin(xrange_var[0]),hdata->GetYaxis()->FindBin(xrange_var[1]));
+//TH1D* hdata_pt=hdata->ProjectionX("hdata_pt",0,-1);
 //TH1D* hdata_pt_all=hdata->ProjectionX("hdata_pt_all",hdata->GetYaxis()->FindBin(binbound_var[0]+1e-4),hdata->GetYaxis()->FindBin(binbound_var[Nbin_var]-1e-4));
 //TH1D* hdata_pt =(TH1D*)fDataPPb->Get("jetpt");
 //TH1D* hdata_pt = (TH1D*)fDataMC->Get("jetptEtaBin-10_10");
@@ -81,8 +83,9 @@ TH1D* hMC_var=hMC->ProjectionY(Form("hMC_%s",varname_.Data()),hMC->GetXaxis()->F
 //TH1D* hMC_var_all=hMC->ProjectionY("hMC_var_all",hMC->GetXaxis()->FindBin(binbound_pt[10]+1e-4),hMC->GetXaxis()->FindBin(binbound_pt[Nbin_pt]-1e-4));
 
 TH1D* hMC_pt=hMC->ProjectionX("hMC_pt",hMC->GetYaxis()->FindBin(xrange_var[0]),hMC->GetYaxis()->FindBin(xrange_var[1]));
+//TH1D* hMC_pt=hMC->ProjectionX("hMC_pt",0,-1);
 //TH1D* hMC_pt_all=hMC->ProjectionX("hMC_pt_all",hMC->GetYaxis()->FindBin(binbound_var[0]+1e-4),hMC->GetYaxis()->FindBin(binbound_var[Nbin_var]-1e-4));
-//TH1D* hMC_pt =(TH1D*)fMCPPbYX->Get("jetpt");
+//TH1D* hMC_pt =(TH1D*)fMCPPb->Get("jetpt");
 //TH1D* hMC_pt = (TH1D*)fMCMC->Get("hMeas0");
 //        TH1F *hPP_pt1 = (TH1F*)fMCPP->Get(Form("ak3GenJetSpectrum_QCD10001_%s/JetSpectrum_Fine",etabinnamesym[0].Data()));
 //        TH1F *hPP_pt2 = (TH1F*)fMCPP->Get(Form("ak3GenJetSpectrum_QCD10001_%s/JetSpectrum_Fine",etabinnamesym[1].Data()));
@@ -160,10 +163,11 @@ c1->cd(1)->SetLogy();
 hFrame->GetYaxis()->SetTitle(Titley);
 hFrame->GetXaxis()->SetTitle("");
 hFrame->GetXaxis()->SetNdivisions(505);
+fixedFontHist(hFrame,1.6,2.2);
 //hFrame->GetXaxis()->SetRangeUser(27,692);
 hFrame->GetXaxis()->SetRangeUser(xrange_pt_pre[0],xrange_pt_pre[1]);
 //hFrame->GetYaxis()->SetRangeUser(1.01e-10,1e-2);
-hFrame->GetYaxis()->SetRangeUser(1.01e-7,1);
+hFrame->GetYaxis()->SetRangeUser(1.01e-7,1e1);
 hFrame->DrawCopy();
 re_hdata_pt->Draw("E1same");
 re_hMC_pt->Draw("E1 HISTsame");
@@ -196,23 +200,25 @@ hFrame1->GetYaxis()->SetLabelSize(0.06);
 hFrame1->GetXaxis()->SetRangeUser(xrange_var_pre[0],xrange_var_pre[1]);
 hFrame1->GetYaxis()->SetTitle("");
 //hFrame1->GetYaxis()->SetRangeUser(1e-6,1e-2);
-hFrame1->GetYaxis()->SetRangeUser(1e-4,1e-1);
-fixedFontHist(hFrame,1.4,2.0);
+//hFrame1->GetYaxis()->SetRangeUser(1.01e-4,1e-3);
+hFrame1->GetYaxis()->SetRangeUser(0.008,1e-1);
+fixedFontHist(hFrame1,1.9,1.2);
 if(varname=="#eta_{lab}^{jet}"){
 hFrame1->DrawCopy();
-T.DrawLatex(0.34,0.80,Form("%.f < p_{T}^{jet} < %.f (GeV/c)",xrange_pt[0],xrange_pt[1]));}
+T.DrawLatex(0.34,0.80,Form("%.f < p_{T}^{jet} < %.f (GeV/c)",xrange_pt_pre[0],xrange_pt_pre[1]));
+}
 else{
 hFrame1->DrawCopy("Y+");
 }
 re_hdata_var->DrawCopy("E1same");
 leg1->AddEntry(re_hdata_var,"Pb going positive Data","lp");
-/*
-if(varname!="#eta_{lab}^{jet}"){
-fixedFontHist(hFrame1,1.9,1.2);
-hFrame1->DrawCopy("Y+");
-}
-hFrame1->DrawCopy();
-*/
+
+//if(varname!="#eta_{lab}^{jet}"){
+//fixedFontHist(hFrame1,1.9,1.2);
+//hFrame1->DrawCopy("Y+");
+//}
+//hFrame1->DrawCopy();
+
 leg1->AddEntry(re_hMC_var,"PYTHIA+HIJING","lp");
 re_hMC_var->DrawCopy("E1HISTsame");
 if(varname!="#eta_{lab}^{jet}")
@@ -229,7 +235,7 @@ l2->SetLineStyle(2);
 l2->SetLineColor(1);
 	TH1D* ratio_DatavsMC_var=(TH1D*)re_hdata_var->Clone("ratio_DatavsMC_var");
 	ratio_DatavsMC_var->Divide(re_hMC_var);
-	hFrame1->GetYaxis()->SetTitle("");
+//	hFrame1->GetYaxis()->SetTitle("");
 	if(varname=="#eta_{lab}^{jet}") 
 	hFrame1->DrawCopy();	
 	else{

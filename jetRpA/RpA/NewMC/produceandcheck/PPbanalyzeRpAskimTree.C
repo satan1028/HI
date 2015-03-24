@@ -463,6 +463,7 @@ for(int j4i = 0; j4i < nref; j4i++){
          } //assign the eta bin for jets
       if(dEtaBin!=-1){
         my_hists->refjetptEtaBin[dEtaBin]->Fill(ref_pt, weight);
+       	my_hists->refptJES->Fill(ref_pt,jet_pt/ref_pt,weight);
        }
 
 
@@ -529,6 +530,7 @@ for(int j4i = 0; j4i < nref; j4i++){
          else
             my_hists->jetptEtaBin_real1[dEtaBin]->Fill(jet_pt,weight);
 	 my_hists->rawptJESEtaBin[dEtaBin]->Fill(raw_pt,jet_pt/raw_pt,weight);
+       	 my_hists->refptJESEtaBin[dEtaBin]->Fill(ref_pt,jet_pt/ref_pt,weight);
 	}
       } //loop over jet
 	
