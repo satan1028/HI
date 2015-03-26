@@ -147,3 +147,13 @@ histo->SetBinError(i,0);
 }
 return histo ;
 }
+
+TH1 * multiplyByBinCenter(TH1 *histo) {
+for(int i = 1; i <= histo->GetNbinsX(); i++) {
+float content = histo->GetBinContent(i);
+float error = histo->GetBinError(i);
+histo->SetBinContent(i,content*histo->GetBinCenter(i));
+histo->SetBinError(i,error*histo->GetBinCenter(i));
+}
+return histo ;
+}

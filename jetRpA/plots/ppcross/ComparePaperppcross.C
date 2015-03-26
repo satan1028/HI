@@ -17,7 +17,7 @@ void ComparePaperppcross(){
     std::string inname2 ;
     
     bool Save=1;
-    int conesize=5;
+    int conesize=7;
 if(conesize==5) TString ref1 = "QCD-10-011";//    "PRL107(2011)132001"
 if(conesize==7) TString ref1 = "QCD-11-004";//    "PRD87 (2012)112002"
 TString ref2 =  "SMP-13-002"; //"PRD90 (2014)072006 
@@ -253,6 +253,8 @@ for(int ieta=0;ieta<4;ieta++){
 
 if(Save){
 c1->Print(Form("ppR%dcs.png",conesize));
+c1->Print(Form("ppR%dcs.pdf",conesize));
 c2->Print(Form("ppR%dcsratio.png",conesize));
+c2->Print(Form("ppR%dcsratio.pdf",conesize));
 }
 }

@@ -73,7 +73,6 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
         int nevent = t->GetEntries();
         for(int ievt=0; ievt<nevent; ievt++){
                 t->GetEntry(ievt);
-
 		for(int itheta=0;itheta<ntheta;itheta++){
        			Q[itheta]=0;
                 for(int ir=0; ir<nstepr; ir++)
