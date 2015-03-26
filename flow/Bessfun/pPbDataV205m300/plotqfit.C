@@ -83,7 +83,7 @@ hqy_cp->Fit(Form("f1fit"),"R","",0,10);
 f1fit0->SetParameters(f1fit->GetParameter(0),0,f1fit->GetParameter(2),f1fit->GetParameter(3));
 f1fit0->Draw("same");
 t->DrawLatex(0.5,0.2,Form("mult = %.f,input v_{2} = %.3f", avgmult[xbin], inV2));
-c1->Print("hqx_fit.png");
-c2->Print("hqy_fit.png");
+c2->Print("hqx_fit.png");
+c3->Print("hqy_fit.png");
 }
 
