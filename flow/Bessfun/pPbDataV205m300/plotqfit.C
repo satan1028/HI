@@ -67,6 +67,7 @@ TCanvas *c3 = new TCanvas("c3","c3",500,1000);
 c3->Divide(1,2);
 c3->cd(1)->SetLogy();
 fixedFontHist(hqy,1.6,2.0);
+hqx->SetTitle("");
 hqy->GetXaxis()->SetTitle("q_{y}");
 hqy->GetYaxis()->SetTitle("#frac{dN}{q_{y}dq_{y}}");
 hqy->GetYaxis()->SetRangeUser(1,1e6);
