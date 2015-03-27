@@ -44,7 +44,7 @@ void MHATfunc(){
     t->SetBranchAddress("phig",phi);
     t->SetBranchAddress("n",&n);
     //Int_t N = t->GetEntries();
-    Int_t N = 1000;
+    Int_t N = 10000;
     double Wg2[nbinx][nbiny] = {};
     double W2g2[nbinx][nbiny] = {};
     double EWg2[nbinx] = {};
@@ -83,9 +83,10 @@ void MHATfunc(){
     	W[i][j] += 1./n*TMath::Sqrt(1./ia)*MHATg2((eta[imult]-ib)/ia);
 =======
         if(ia==0)continue;
+        if(ia!=a)continue;
     	for(double ib=bmin; ib<=bmax;ib+=bstep){
     for(int ievt=0;ievt<N;ievt++){
-   // if(ievt%50000==0)        cout<<"Processing "<<ievt<<" events"<<endl;
+    if(ievt%50000==0)        cout<<"Processing "<<ievt<<" events"<<endl;
       t->GetEntry(ievt);
        for(int imult = 0;imult<n; imult++){
     //    h->Fill(eta[imult],phi[imult]);

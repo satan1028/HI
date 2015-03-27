@@ -35,14 +35,14 @@ void getResV(){
                 
 	TVectorD Nevent;	Nevent.ResizeTo(nbin);  Nevent.Zero();
         TVectorD totmultall;	totmultall.ResizeTo(nbin);      totmultall.Zero();
-        TVectorD totwall1;	totwall1.ResizeTo(nbin);      totwall1.Zero();
+        TVectorD totwall;	totwall.ResizeTo(nbin);      totwall.Zero();
         TVectorD avgmultall;	avgmultall.ResizeTo(nbin);      avgmultall.Zero();
         TVectorD tottrk;	tottrk.ResizeTo(nbin);      tottrk.Zero();
 	TVectorD totptall;      totptall.ResizeTo(nbin);    totptall.Zero();
 	TVectorD totetaall;      totetaall.ResizeTo(nbin);    totetaall.Zero();
         TVectorD avgtrk;	avgtrk.ResizeTo(nbin);      avgtrk.Zero();
 	TVectorD avgmult;       avgmult.ResizeTo(nbin);
-	TVectorD avgw1;       avgw1.ResizeTo(nbin);
+	TVectorD avgw;       avgw.ResizeTo(nbin);
         TVectorD deltaVmean;    deltaVmean.ResizeTo(nbin);	
         TVectorD Vmean;         Vmean.ResizeTo(nbin);
         TVectorD avgpt;         avgpt.ResizeTo(nbin);
@@ -77,7 +77,7 @@ void getResV(){
 		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/useweight/pPbDataV205m150/AnaV_Prod_%d.root",ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 		TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
-		TVectorD* totwall1_t =  (TVectorD*)f[ifile]->Get(Form("totwall1"));
+		TVectorD* totwall_t =  (TVectorD*)f[ifile]->Get(Form("totwall"));
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));
 		TVectorD* totptall_t =  (TVectorD*)f[ifile]->Get(Form("totptall"));
 		TVectorD* totetaall_t =  (TVectorD*)f[ifile]->Get(Form("totetaall"));
@@ -100,7 +100,7 @@ void getResV(){
 				totetaall[ibin] += (*totetaall_t)[ibin];
 			        Nevent[ibin] += (*Nevent_t)[ibin];
 			        totmultall[ibin] += (*totmultall_t)[ibin];	
-			        totwall1[ibin] += (*totwall1_t)[ibin];	
+			        totwall[ibin] += (*totwall_t)[ibin];	
 			        tottrk[ibin] += (*tottrk_t)[ibin];	
 		}
 		f[ifile]->Close();
@@ -111,6 +111,7 @@ void getResV(){
 	for(int ibin=0;ibin<nbin;ibin++){
 		avgmultall[ibin]=totmultall[ibin]/Nevent[ibin];
 		avgtrk[ibin]=tottrk[ibin]/Nevent[ibin];
+		avgw[ibin]=totwall[ibin]/Nevent[ibin];
 			for(int itheta=0;itheta<ntheta;itheta++){
 				for(ir=0; ir<nstepr; ir++){
 					G[ibin][itheta][ir]=TComplex(GRe[ibin][itheta][ir],GIm[ibin][itheta][ir]);	
@@ -125,11 +126,11 @@ void getResV(){
 				avgmult[ibin]=1.0*totmultall[ibin]/Nevent[ibin];
 				avgpt[ibin]=1.0*totptall[ibin]/totmultall[ibin];
 				avgeta[ibin]=1.0*totetaall[ibin]/totmultall[ibin];
-		                avgw1[ibin]=TMath::Sqrt(totwall1[ibin]/totmultall[ibin]);
 				if(isSimple==0)	V[ibin][itheta]=Vmax[ibin]-ir*eps[ibin]+eps[ibin]*(Gmod2[ibin][itheta][ir+1]-Gmod2[ibin][itheta][ir-1])/2./(Gmod2[ibin][itheta][ir-1]-2*Gmod2[ibin][itheta][ir]+Gmod2[ibin][itheta][ir+1]);
 				else V[ibin][itheta]=j01/r0[ibin][itheta]; //simple method
 				r0[ibin][itheta]=j01/V[ibin][itheta];
-				V[ibin][itheta]/=avgmult[ibin]*avgw1[ibin];
+				V[ibin][itheta]/=avgw[ibin];
+				//V[ibin][itheta]/=avgmult[ibin]/(avgw[ibin]/avgmult[ibin]);
 				sigma2[ibin][itheta]=Q2[ibin]/Nevent[ibin]-(Qx1[ibin]/Nevent[ibin])*(Qx1[ibin]/Nevent[ibin])-(Qy1[ibin]/Nevent[ibin])*(Qy1[ibin]/Nevent[ibin]);
 				sigma2_[ibin]+=sigma2[ibin][itheta];
 				Vmean[ibin]+=V[ibin][itheta];

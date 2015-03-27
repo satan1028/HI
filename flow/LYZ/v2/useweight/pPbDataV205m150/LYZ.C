@@ -29,7 +29,7 @@ class LYZ {
             
         int nvv, ispt;
         const double *binv;
-	TVectorD Nevent, totmultall, tottrk, totptall,totetaall,totwall, totwall1, Qx1, Qy1, Q2;
+	TVectorD Nevent, totmultall, tottrk, totptall,totetaall,totwall, Qx1, Qy1, Q2;
 	TString filename;
 	double Qx2[nbin],Qy2[nbin];
 	double theta[ntheta];
@@ -77,8 +77,6 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
         for(int ievt=0; ievt<nevent; ievt++){
                 t->GetEntry(ievt);
 	//	if(ievt%10000==0) cout<<"has processed "<<ievt<<" events"<<endl;
-            double w2 = 0;
-            int nmult = 0;
 			for(int itheta=0;itheta<ntheta;itheta++){
        			Q[itheta]=0;
                 	for(int ir=0; ir<nstepr; ir++)
@@ -113,9 +111,7 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
                         totptall[xbin]+=pt[imult];
                         totetaall[xbin]+=eta[imult];
 			totmultall[xbin]++;
-                        w2+=w[imult]*w[imult];
-                        nmult++;
-                        totwall1[xbin]+=w[imult]*w[imult];
+                        totwall[xbin]+=w[imult]*w[imult];
 		}
 			Qx1[xbin]+=Qx;	Qy1[xbin]+=Qy;
 			Qx2[xbin]+=Qx*Qx;	Qy2[xbin]+=Qy*Qy;
@@ -127,7 +123,6 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
 					GIm[xbin][itheta][ir]+=g[itheta][ir].Im();
 				}
 		}
-                totwall[xbin]+=TMath::Sqrt(w2/nmult);
 		Nevent[xbin]++;
 	}
 	infile->Close();
@@ -235,9 +230,9 @@ LYZ::beginJob(int ispt_)
     if(ispt_){             nvv = nptv;       binv = ptbinv;}
     else{             nvv = netav;          binv = etabinv;}
 
-	Nevent.ResizeTo(nbin);	totmultall.ResizeTo(nbin), tottrk.ResizeTo(nbin), totptall.ResizeTo(nbin), totetaall.ResizeTo(nbin); totwall.ResizeTo(nbin); totwall1.ResizeTo(nbin);
+	Nevent.ResizeTo(nbin);	totmultall.ResizeTo(nbin), tottrk.ResizeTo(nbin), totptall.ResizeTo(nbin), totetaall.ResizeTo(nbin); totwall.ResizeTo(nbin); 
 		Qx1.ResizeTo(nbin);	Qy1.ResizeTo(nbin);	Q2.ResizeTo(nbin);
-	Nevent.Zero();	totmultall.Zero(); totwall.Zero(); totwall1.Zero();	tottrk.Zero(); totptall.Zero(); totetaall.Zero();
+	Nevent.Zero();	totmultall.Zero(); totwall.Zero(); tottrk.Zero(); totptall.Zero(); totetaall.Zero();
 		Qx1.Zero();	Qy1.Zero();	Q2.Zero();
 	for(int ibin=0; ibin<nbin; ibin++){
         		Qx2[ibin]=0;  Qy2[ibin]=0;
@@ -312,7 +307,6 @@ LYZ::endJobV(TString outstr)
 	Nevent.Write("Nevent");
 	totmultall.Write("totmultall");
 	totwall.Write("totwall");
-	totwall1.Write("totwall1");
 	totptall.Write("totptall");
 	totetaall.Write("totetaall");
 	tottrk.Write("tottrk");

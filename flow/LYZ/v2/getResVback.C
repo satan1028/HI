@@ -138,7 +138,7 @@ void getResV(){
 				avgmult[ibin][ietabin]=1.0*totmult[ibin][ietabin]/Nevent[ibin];
 				avgpt[ibin][ietabin]=1.0*totpt[ibin][ietabin]/totmult[ibin][ietabin];
 				if(isSimple==0)	V[ibin][ietabin][itheta]=Vmax[ibin][ietabin]-ir*eps[ibin][ietabin]+eps[ibin][ietabin]*(Gmod2[ibin][ietabin][itheta][ir+1]-Gmod2[ibin][ietabin][itheta][ir-1])/2./(Gmod2[ibin][ietabin][itheta][ir-1]-2*Gmod2[ibin][ietabin][itheta][ir]+Gmod2[ibin][ietabin][itheta][ir+1]);
-				else V[ibin][ietabin][itheta]=j01/r0[ibin][ietabin][itheta]; //simple method
+				else V[ibin][ietabin][itheta]=j01/r01[ibin][ietabin][itheta]; //simple method
 				r0[ibin][ietabin][itheta]=j01/V[ibin][ietabin][itheta];
 				V[ibin][ietabin][itheta]/=avgmult[ibin][ietabin];
 				sigma2[ibin][ietabin][itheta]=Q2[ibin][ietabin]/Nevent[ibin]-(Qx1[ibin][ietabin]/Nevent[ibin])*(Qx1[ibin][ietabin]/Nevent[ibin])-(Qy1[ibin][ietabin]/Nevent[ibin])*(Qy1[ibin][ietabin]/Nevent[ibin]);
