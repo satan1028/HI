@@ -4,7 +4,7 @@
 void CompareVz(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
-TString coll="PPb";
+TString coll="PbP";
 bool Save=kTRUE;
  TF1 * fVz = new TF1("fVx","[0]+[1]*x+[2]*TMath::Power(x,2)+[3]*TMath::Power(x,3)+[4]*TMath::Power(x,4)", -15., 15.);
 if(coll=="PPb"){
@@ -84,7 +84,7 @@ leg2->SetFillColor(0);
 leg1->SetTextSize(0.04);
 leg2->SetTextSize(0.04);
 leg1->AddEntry(histo1,"Before Vz weighting","lp");
-leg1->AddEntry(histo1,"After Vz weighting","lp");
+leg1->AddEntry(histo2,"After Vz weighting","lpf");
 //leg1->AddEntry(histo2,"New MC Before Vz weighting","lp");
 leg1->AddEntry(histodata,data,"lp");
 leg1->Draw("same");

@@ -35,9 +35,9 @@ void getResv(){
 		avgmult[ibin].ResizeTo(nptv);	avgpt[ibin].ResizeTo(nptv);
 		totpt[ibin].ResizeTo(nptv);	totpt[ibin].Zero();
 		vmean[ibin].ResizeTo(nptv);	deltavmean[ibin].ResizeTo(nptv);
-		V[ibin] = (TVectorD*) infile->Get(Form("D_%d/D_0/V",ibin));
-		chi[ibin] = (TVectorD*) infile->Get(Form("D_%d/chi",ibin));
-		V_mean = (TVectorD*) infile->Get(Form("D_%d/Vmean",ibin));
+		V[ibin] = (TVectorD*) infile->Get(Form("D_%d/V",ibin));
+		chi[ibin] = (TVectorD*) infile->Get(Form("chi"));
+		V_mean = (TVectorD*) infile->Get(Form("Vmean"));
 		for(int itheta=0;itheta<ntheta;itheta++){
 			v[ibin][itheta].ResizeTo(nptv);	deltav[ibin][itheta].ResizeTo(nptv);
 			dD[ibin][itheta]=0;

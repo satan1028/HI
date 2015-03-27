@@ -4,7 +4,7 @@
 void CompareCent(){
 gStyle->SetOptStat(kFALSE);
 gStyle->SetErrorX(0);
-TString coll="PPb";
+TString coll="PbP";
 bool Save=kTRUE;
 TF1 * fCen = new TF1("fCen","[0]*exp([1]+[2]*x+[3]*x*x+[4]*x*x*x+[5]*x*x*x*x+[6]*x*x*x*x*x)", 0., 100.);
 if(coll=="PPb"){

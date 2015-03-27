@@ -313,7 +313,7 @@ if(canvas[i]!=4){
     T->DrawLatex(0.40,0.30,etastring[i]);
 }
 }
-c1->Print(Form("pic/overlay_JetIDcut_Etabin.png"));
-c2->Print(Form("pic/overlay_JetIDcutratio_Etabin.png"));
+c1->Print(Form("pic/overlay_JetIDcut_Etabin.pdf"));
+c2->Print(Form("pic/overlay_JetIDcutratio_Etabin.pdf"));
 }
 
