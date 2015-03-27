@@ -1,7 +1,3 @@
-#include "TVectorD.h"
-#include "TMath.h"
-#include "TMatrixT.h"
-#include "TMatrixDEigen.h"
 #define sq2 1.41421356237309515
 
 class Dauwave{
@@ -21,7 +17,6 @@ class Dauwave{
 Dauwave::Dauwave(int N_){
 	if(N_<=0) exit(0);
 	N = N_;
-        double h_[]={};;
 	if(N_==1){
 	//    double phi0[] = {1,0};
     	    double h[] = 
@@ -51,6 +46,18 @@ Dauwave::Dauwave(int N_){
              0.035226291882100656
             };
 	}
+        else if(N_==4){
+            double h[]=
+            {0.23037781330885523,
+            0.7148465705525415,
+            0.6308807679295904,
+            -0.02798376941698385,
+            -0.18703481171888114,
+            0.030841381835986965,
+            0.032883011666982945,
+            -0.010597401784997278
+            };
+        }
         else if(N_==8){
             double h[]=
             {-0.00011747678400228192,
@@ -72,10 +79,13 @@ Dauwave::Dauwave(int N_){
             };
         }
         else exit(0);
-        memcpy(h_, h, 2*N); 
-        vecphi0=GetInit(h_,N_);
+	TVectorD vecphi0_tmp(2*N-2);
+        vecphi0_tmp=GetInit(h,N_);
+        vecphi0_tmp.Print();
+	vecphi0.ResizeTo(2*N);
+        vecphi0.Zero();
+        vecphi0.SetSub(1,vecphi0_tmp);
         vecphi0.Print();
-//	vecphi0.ResizeTo(2*N);
 //	vecphi0.SetElements(phi0);
 	vech.ResizeTo(2*N);
 	vech.SetElements(h);
@@ -109,6 +119,7 @@ TVectorD Dauwave::GetInit(double* h, int N_){
                 a(i,j)=0;
         }
     }
+    a.Print();
     TVectorD ev;
     a.EigenVectors(ev);
     ev.Print();
