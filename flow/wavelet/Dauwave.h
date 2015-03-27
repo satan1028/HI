@@ -3,6 +3,7 @@
 #include "TMatrixT.h"
 #include "TMatrixDEigen.h"
 #define sq2 1.41421356237309515
+using namespace std;
 
 class Dauwave{
     public:
@@ -21,7 +22,6 @@ class Dauwave{
 Dauwave::Dauwave(int N_){
 	if(N_<=0) exit(0);
 	N = N_;
-        double h_[]={};;
 	if(N_==1){
 	//    double phi0[] = {1,0};
     	    double h[] = 
@@ -72,13 +72,12 @@ Dauwave::Dauwave(int N_){
             };
         }
         else exit(0);
-        memcpy(h_, h, 2*N); 
-        vecphi0=GetInit(h_,N_);
+	vech.ResizeTo(2*N);
+	vech.SetElements(h);
+        vecphi0=GetInit(h,N_);
         vecphi0.Print();
 //	vecphi0.ResizeTo(2*N);
 //	vecphi0.SetElements(phi0);
-	vech.ResizeTo(2*N);
-	vech.SetElements(h);
 }
 
 double Dauwave::phi(int m, int n){ //x = m * 2^(-n)
@@ -109,6 +108,7 @@ TVectorD Dauwave::GetInit(double* h, int N_){
                 a(i,j)=0;
         }
     }
+    a.Print();
     TVectorD ev;
     a.EigenVectors(ev);
     ev.Print();
