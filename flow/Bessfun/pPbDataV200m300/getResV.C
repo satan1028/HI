@@ -1,12 +1,9 @@
 #include <iomanip>
 #include <iostream>
 #include <fstream>
-#include "../../../jetRpA/RpA/Quality/root_setting.h"
 #include "par.h"
 
 void getResV(){
-    gStyle->SetOptStat(kFALSE);
-    gStyle->SetOptFit(1);
 
 //------------------------Deal with the number and get the output stored in txt files and root files
 	
@@ -75,17 +72,15 @@ void getResV(){
 				GRe[ibin][itheta].Zero();
 				GIm[ibin][itheta].ResizeTo(nstepr);
 				GIm[ibin][itheta].Zero();
-                                hq[ibin][itheta] = new TH1D(Form("hq_%d_%d",ibin,itheta),Form("hq_%d_%d",ibin,itheta),1000,-5,5);
-                                ffit0[ibin][itheta] = new TF1(Form("ffit_%d_%d",ibin,itheta),"[3]/(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",-5,5);
-			}
-                        ffit[ibin] = new TF1(Form("ffit_%d",ibin),"[3]/(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",-5,5);
-                        hqx[ibin] = new TH1D(Form("hqx_%d",ibin),Form("hqx_%d",ibin),1000,-5,5);
-                        hqy[ibin] = new TH1D(Form("hqy_%d",ibin),Form("hqy_%d",ibin),1000,-5,5);
+                                hq[ibin][itheta] = new TH1D(Form("hq"),Form("hq"),1000,0,10);
+                        }
+                        hqx[ibin] = new TH1D(Form("hqx"),Form("hqx"),1000,0,10);
+                        hqy[ibin] = new TH1D(Form("hqy"),Form("hqy"),1000,0,10);
 	}
 
         for(int ifile=0; ifile<nFileAll; ifile++){
-		if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/Bessfun/pPbDataV200m300/AnaV_Sum_%d.root",ifile));
-		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/Bessfun/pPbDataV200m300/AnaV_Prod_%d.root",ifile));
+		if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/Bessfun/pPbDataV205m300/AnaV_Sum_%d.root",ifile));
+		else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/Bessfun/pPbDataV205m300/AnaV_Prod_%d.root",ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 		TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));
@@ -126,12 +121,6 @@ void getResV(){
 	for(int ibin=0;ibin<nbin;ibin++){
 		avgmultall[ibin]=totmultall[ibin]/Nevent[ibin];
 		avgtrk[ibin]=tottrk[ibin]/Nevent[ibin];
-                                hqx[ibin]->Scale(1./hqx[ibin]->Integral(hqx[ibin]->FindBin(0),-1));
-                                //multiplyByBinCenter(hqx[ibin]);
-                                normalizeByBinWidth(hqx[ibin]);
-                                hqy[ibin]->Scale(1./hqy[ibin]->Integral(hqy[ibin]->FindBin(0),-1));
-                                //multiplyByBinCenter(hqy[ibin]);
-                                normalizeByBinWidth(hqy[ibin]);
 			for(int itheta=0;itheta<ntheta;itheta++){
 				for(ir=0; ir<nstepr; ir++){
 					G[ibin][itheta][ir]=TComplex(GRe[ibin][itheta][ir],GIm[ibin][itheta][ir]);	
@@ -154,9 +143,6 @@ void getResV(){
 				sigma2_[ibin]+=sigma2[ibin][itheta];
 				Vmean[ibin]+=V[ibin][itheta];
 				chi[ibin][itheta]=V[ibin][itheta]*avgmult[ibin]/TMath::Sqrt(sigma2[ibin][itheta]);
-                                hq[ibin][itheta]->Scale(1./hq[ibin][itheta]->Integral(hq[ibin][itheta]->FindBin(0),-1));
-                               // multiplyByBinCenter(hq[ibin][itheta]);
-                                normalizeByBinWidth(hq[ibin][itheta]);
 				}
 			//deltaVmean[ibin]+=TMath::Exp(j01*j01/2./chi[ibin][itheta]/chi[ibin][itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Exp(-j01*j01/2./chi[ibin][itheta]/chi[ibin][itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.));
 			sigma2_[ibin]/=ntheta;
@@ -217,14 +203,7 @@ void getResV(){
                         	GIm[ibin][itheta].Write(Form("GIm"));
                         	Gmod2[ibin][itheta].Write(Form("G2"));
                                 hq[ibin][itheta]->Write();
-                                ffit0[ibin][itheta]->SetParameters(0.3,1e-3,avgmult[ibin],0.5);
-                                ffit0[ibin][itheta]->FixParameter(2,avgmult[ibin]);
-                                hq[ibin][itheta]->Fit(Form("ffit_%d_%d",ibin,itheta),"R","P",0,5);
-                	}
-                                ffit[ibin]->SetParameters(0.3,1e-3,avgmult[ibin],0.5);
-                                ffit[ibin]->FixParameter(2,avgmult[ibin]);
-                                hqx[ibin]->Fit(Form("ffit_%d",ibin),"R","P",0,5);
-                                hqy[ibin]->Fit(Form("ffit_%d",ibin),"R","P",0,5);
+                        }
         	}
 	outf->Close();
 }
