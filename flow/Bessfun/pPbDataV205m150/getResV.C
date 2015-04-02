@@ -1,12 +1,9 @@
 #include <iomanip>
 #include <iostream>
 #include <fstream>
-#include "../../../jetRpA/RpA/Quality/root_setting.h"
 #include "par.h"
 
 void getResV(){
-    gStyle->SetOptStat(kFALSE);
-    gStyle->SetOptFit(1);
 
 //------------------------Deal with the number and get the output stored in txt files and root files
 	
@@ -25,6 +22,7 @@ void getResV(){
 	TVectorD GIm[nbin][ntheta]; TVectorD* GIm_t[nbin][ntheta];
 	TComplex G[nbin][ntheta][nstepr];
         TF1 *ffit[nbin];
+        TF1 *ffit0[nbin][ntheta];
 	if(isSum)	fstrV.open("V_Sum.txt");
 	else	fstrV.open("V_Prod.txt"); 
 	TFile *f[nFileAll];
@@ -44,7 +42,6 @@ void getResV(){
 	TVectorD totptall;      totptall.ResizeTo(nbin);    totptall.Zero();
 	TVectorD totetaall;      totetaall.ResizeTo(nbin);    totetaall.Zero();
         TVectorD avgtrk;	avgtrk.ResizeTo(nbin);      avgtrk.Zero();
-	TVectorD avgmult;       avgmult.ResizeTo(nbin);
         TVectorD deltaVmean;    deltaVmean.ResizeTo(nbin);	
         TVectorD Vmean;         Vmean.ResizeTo(nbin);
         TVectorD avgpt;         avgpt.ResizeTo(nbin);
@@ -57,6 +54,8 @@ void getResV(){
         TH1D* hq[nbin][ntheta];
         TH1D* hqx[nbin];
         TH1D* hqy[nbin];
+        TH1D* hq2[nbin];
+        TH1D* hq2nonf[nbin];
 	
 	for(int itheta=0;itheta<ntheta;itheta++)
         	theta[itheta]=itheta*TMath::Pi()/ntheta/nn;
@@ -74,11 +73,12 @@ void getResV(){
 				GRe[ibin][itheta].Zero();
 				GIm[ibin][itheta].ResizeTo(nstepr);
 				GIm[ibin][itheta].Zero();
-                                hq[ibin][itheta] = new TH1D(Form("hq_%d_%d",ibin,itheta),Form("hq_%d_%d",ibin,itheta),200,-5,5);
-			}
-                        ffit[ibin] = new TF1(Form("ffit_%d",ibin),"[3]*x/(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",-5,5);
-                        hqx[ibin] = new TH1D(Form("hqx_%d",ibin),Form("hqx_%d",ibin),200,-5,5);
-                        hqy[ibin] = new TH1D(Form("hqy_%d",ibin),Form("hqy_%d",ibin),200,-5,5);
+                                hq[ibin][itheta] = new TH1D(Form("hq"),Form("hq"),1000,0,10);
+                        }
+                        hqx[ibin] = new TH1D(Form("hqx"),Form("hqx"),1000,0,10);
+                        hqy[ibin] = new TH1D(Form("hqy"),Form("hqy"),1000,0,10);
+                        hq2[ibin] = new TH1D(Form("hq2"),Form("hq2"),1000,0,10);
+                        hq2nonf[ibin] = new TH1D(Form("hq2nonf"),Form("hq2nonf"),1000,0,10);
 	}
 
         for(int ifile=0; ifile<nFileAll; ifile++){
@@ -97,6 +97,10 @@ void getResV(){
                                 hqx[ibin]->Add(hqx_t);
                                 TH1D* hqy_t = (TH1D*)f[ifile]->Get(Form("hqy_%d",ibin));
                                 hqy[ibin]->Add(hqy_t);
+                                TH1D* hq2_t = (TH1D*)f[ifile]->Get(Form("hq2_%d",ibin));
+                                hq2[ibin]->Add(hq2_t);
+                                TH1D* hq2nonf_t = (TH1D*)f[ifile]->Get(Form("hq2nonf_%d",ibin));
+                                hq2nonf[ibin]->Add(hq2nonf_t);
 				for(int itheta=0;itheta<ntheta;itheta++){
 				    GRe_t[ibin][itheta] = (TVectorD*)f[ifile]->Get(Form("GRe_%d_%d",ibin,itheta));
 				    GIm_t[ibin][itheta] = (TVectorD*)f[ifile]->Get(Form("GIm_%d_%d",ibin,itheta));
@@ -124,43 +128,33 @@ void getResV(){
 	for(int ibin=0;ibin<nbin;ibin++){
 		avgmultall[ibin]=totmultall[ibin]/Nevent[ibin];
 		avgtrk[ibin]=tottrk[ibin]/Nevent[ibin];
-                                hqx[ibin]->Scale(1./hqx[ibin]->Integral(hqx[ibin]->FindBin(0),-1));
-                                multiplyByBinCenter(hqx[ibin]);
-                                normalizeByBinWidth(hqx[ibin]);
-                                hqy[ibin]->Scale(1./hqy[ibin]->Integral(hqy[ibin]->FindBin(0),-1));
-                                multiplyByBinCenter(hqy[ibin]);
-                                normalizeByBinWidth(hqy[ibin]);
 			for(int itheta=0;itheta<ntheta;itheta++){
 				for(ir=0; ir<nstepr; ir++){
 					G[ibin][itheta][ir]=TComplex(GRe[ibin][itheta][ir],GIm[ibin][itheta][ir]);	
 					G[ibin][itheta][ir]/=Nevent[ibin];
-				        Gmod2[ibin][itheta][ir]=TMath::Power(TComplex::Abs(G[ibin][itheta][ir]),2);
+					Gmod2[ibin][itheta][ir]=TMath::Power(TComplex::Abs(G[ibin][itheta][ir]),2);
 				}
 				for(ir=0; ir<nstepr-1; ir++)
 					if(ir!=0 && Gmod2[ibin][itheta][ir]<=Gmod2[ibin][itheta][ir-1] && Gmod2[ibin][itheta][ir]<=Gmod2[ibin][itheta][ir+1]) break;
 				if(ir!=0 && ir<nstepr-1)	r01[ibin][itheta]=r[ibin][ir];
 				else if(ir==0)	{cout<<"ibin="<<ibin<<"\t"<<"itheta="<<itheta<<"\tminimum lies on ir = 0, please select proper range!"<<endl;	continue;}
 				else 	{cout<<"ibin="<<ibin<<"\t"<<"itheta="<<itheta<<"\tminimum lies on ir = maximum "<<nstepr-1<<", please select proper range!"<<endl;	continue;}
-				avgmult[ibin]=1.0*totmultall[ibin]/Nevent[ibin];
 				avgpt[ibin]=1.0*totptall[ibin]/totmultall[ibin];
 				avgeta[ibin]=1.0*totetaall[ibin]/totmultall[ibin];
 				if(isSimple==0)	V[ibin][itheta]=Vmax[ibin]-ir*eps[ibin]+eps[ibin]*(Gmod2[ibin][itheta][ir+1]-Gmod2[ibin][itheta][ir-1])/2./(Gmod2[ibin][itheta][ir-1]-2*Gmod2[ibin][itheta][ir]+Gmod2[ibin][itheta][ir+1]);
 				else V[ibin][itheta]=j01/r01[ibin][itheta]; //simple method
 				r0[ibin][itheta]=j01/V[ibin][itheta];
-				V[ibin][itheta]/=avgmult[ibin];
+				V[ibin][itheta]/=avgmultall[ibin];
 				sigma2[ibin][itheta]=Q2[ibin]/Nevent[ibin]-(Qx1[ibin]/Nevent[ibin])*(Qx1[ibin]/Nevent[ibin])-(Qy1[ibin]/Nevent[ibin])*(Qy1[ibin]/Nevent[ibin]);
 				sigma2_[ibin]+=sigma2[ibin][itheta];
 				Vmean[ibin]+=V[ibin][itheta];
-				chi[ibin][itheta]=V[ibin][itheta]*avgmult[ibin]/TMath::Sqrt(sigma2[ibin][itheta]);
-                                hq[ibin][itheta]->Scale(1./hq[ibin][itheta]->Integral(hq[ibin][itheta]->FindBin(0),-1));
-                                multiplyByBinCenter(hq[ibin][itheta]);
-                                normalizeByBinWidth(hq[ibin][itheta]);
+				chi[ibin][itheta]=V[ibin][itheta]*avgmultall[ibin]/TMath::Sqrt(sigma2[ibin][itheta]);
 				}
 			//deltaVmean[ibin]+=TMath::Exp(j01*j01/2./chi[ibin][itheta]/chi[ibin][itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Exp(-j01*j01/2./chi[ibin][itheta]/chi[ibin][itheta]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.));
 			sigma2_[ibin]/=ntheta;
                         Vmean[ibin]/=ntheta;
-                        sigma2_[ibin]-=TMath::Power(Vmean[ibin]*avgmult[ibin],2);
-                        chi_[ibin]=Vmean[ibin]*avgmult[ibin]/TMath::Sqrt(sigma2_[ibin]);
+                        sigma2_[ibin]-=TMath::Power(Vmean[ibin]*avgmultall[ibin],2);
+                        chi_[ibin]=Vmean[ibin]*avgmultall[ibin]/TMath::Sqrt(sigma2_[ibin]);
                         for(int itheta=0;itheta<ntheta;itheta++){
 				deltaV[ibin][itheta]=V[ibin][itheta]/j01/TMath::BesselJ1(j01)*TMath::Sqrt((TMath::Exp(j01*j01/2./chi_[ibin]/chi_[ibin])+TMath::Exp(-j01*j01/2./chi_[ibin]/chi_[ibin])*TMath::BesselJ0(2*j01))/2./Nevent[ibin]);
                         	deltaVmean[ibin]+=TMath::Exp(j01*j01/2./chi_[ibin]/chi_[ibin]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Exp(-j01*j01/2./chi_[ibin]/chi_[ibin]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.));
@@ -173,7 +167,7 @@ void getResV(){
 
 	fstrV<<"ibin"<<"\t"<<"avgmult"<<"\t"<<"avgpt"<<"\t"<<"avgeta"<<"\t"<<"Vn mean"<<"\t"<<"Vn mean Error"<<endl;
 	for(int ibin=0;ibin<nbin;ibin++){
-			fstrV<<ibin<<"\t"<<avgmult[ibin]<<"\t"<<avgpt[ibin]<<"\t"<<avgeta[ibin]<<"\t"<<Vmean[ibin]<<"\t"<<deltaVmean[ibin]<<endl;
+			fstrV<<ibin<<"\t"<<avgmultall[ibin]<<"\t"<<avgpt[ibin]<<"\t"<<avgeta[ibin]<<"\t"<<Vmean[ibin]<<"\t"<<deltaVmean[ibin]<<endl;
 		fstrV<<endl;
 	}
 	
@@ -194,7 +188,6 @@ void getResV(){
 	Qx1.Write("Qx1");
         Qy1.Write("Qy1");
         Q2.Write("Q2");
-        avgmult.Write("avgmult");
         avgpt.Write("avgpt");
         avgeta.Write("avgeta");
         Vmean.Write("Vmean");
@@ -207,7 +200,7 @@ void getResV(){
 		r[ibin].Write("r");
 		sigma2[ibin].Write("sigma2");	chi[ibin].Write("chi0");	deltaV[ibin].Write("deltaV");
 		r0[ibin].Write("r0");	r01[ibin].Write("r01");	V[ibin].Write("V");
-                hqx[ibin]->Write(); hqy[ibin]->Write();
+                hqx[ibin]->Write(); hqy[ibin]->Write();hq2[ibin]->Write();hq2nonf[ibin]->Write();
 
         		for(int itheta=0;itheta<ntheta;itheta++){
                         	TDirectory *dir1 = dir0->mkdir(Form("D_%d",itheta));dir1->cd();
@@ -215,10 +208,7 @@ void getResV(){
                         	GIm[ibin][itheta].Write(Form("GIm"));
                         	Gmod2[ibin][itheta].Write(Form("G2"));
                                 hq[ibin][itheta]->Write();
-                	}
-                                ffit[ibin]->SetParameters(0.5,0.05,avgmult[ibin],1.);
-                                ffit[ibin]->FixParameter(2,avgmult[ibin]);
-                                hqy[ibin]->Fit(Form("ffit_%d",ibin),"R","P",0,5);
+                        }
         	}
 	outf->Close();
 }

@@ -45,6 +45,8 @@ class Bessfun {
         TH1D* hq[nbin][ntheta];
         TH1D* hqx[nbin];
         TH1D* hqy[nbin];
+        TH1D* hq2[nbin];
+        TH1D* hq2nonf[nbin];
 
 };
 
@@ -67,6 +69,8 @@ Bessfun::~Bessfun(){
         }
         delete   hqx[ibin];
         delete   hqy[ibin];
+        delete   hq2[ibin];
+        delete   hq2nonf[ibin];
     }
 }
 
@@ -139,6 +143,8 @@ Bessfun::calcV(int way)	//way=0: Prod way=1: Sum
 		}
                 hqx[xbin]->Fill(TMath::Abs(Qx)/TMath::Sqrt(mult));
                 hqy[xbin]->Fill(TMath::Abs(Qy)/TMath::Sqrt(mult));
+                hq2[xbin]->Fill(TMath::Sqrt(Qx*Qx+Qy*Qy)/TMath::Sqrt(mult));
+                hq2nonf[xbin]->Fill(TMath::Sqrt(2)*TMath::Sqrt(Qx*Qx+Qy*Qy)/TMath::Sqrt(mult));
 		Nevent[xbin]++;
 	}
 	infile->Close();
@@ -279,8 +285,12 @@ Bessfun::beginJob(int ispt_)
                 }
                 hqx[ibin] = new TH1D(Form("hqx_%d",ibin),Form("hqx_%d",ibin),1000,0,10);
                 hqy[ibin] = new TH1D(Form("hqy_%d",ibin),Form("hqy_%d",ibin),1000,0,10);
+                hq2[ibin] = new TH1D(Form("hq2_%d",ibin),Form("hq2_%d",ibin),1000,0,10);
+                hq2nonf[ibin] = new TH1D(Form("hq2nonf_%d",ibin),Form("hq2nonf_%d",ibin),1000,0,10);
                 hqx[ibin]->Sumw2();
                 hqy[ibin]->Sumw2();
+                hq2[ibin]->Sumw2();
+                hq2nonf[ibin]->Sumw2();
         }
 }
 
@@ -342,6 +352,8 @@ Bessfun::endJobV(TString outstr)
 		}
                 hqx[ibin]->Write();
                 hqy[ibin]->Write();
+                hq2[ibin]->Write();
+                hq2nonf[ibin]->Write();
 	}
 	fs->Close();
 }
