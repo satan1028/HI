@@ -1,0 +1,1186 @@
+<FrameworkJobReport Status="Success">
+	<ExitCode Value="50117"/>
+	<InputFile>
+		<EventsRead>
+			6674
+		</EventsRead>
+		<Runs>
+			{182609: [984, 985, 986, 987, 988, 989, 990, 991, 992, 993]}
+		</Runs>
+		<ModuleLabel>
+			source
+		</ModuleLabel>
+		<FileType>
+			EDM
+		</FileType>
+		<LFN>
+			/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1802_1_Gva.root
+		</LFN>
+		<PFN>
+			file:/mnt/hadoop/cms/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1802_1_Gva.root
+		</PFN>
+		<MergedBySize>
+			False
+		</MergedBySize>
+		<Catalog/>
+		<Checksums>
+			{}
+		</Checksums>
+		<GUID>
+			402DAD8A-B4BF-E411-BB24-003048F1C4AC
+		</GUID>
+		<State Value="closed"/>
+		<Runs>
+			<Run ID="182609">
+				<LumiSection ID="984"/>
+				<LumiSection ID="985"/>
+				<LumiSection ID="986"/>
+				<LumiSection ID="987"/>
+				<LumiSection ID="988"/>
+				<LumiSection ID="989"/>
+				<LumiSection ID="990"/>
+				<LumiSection ID="991"/>
+				<LumiSection ID="992"/>
+				<LumiSection ID="993"/>
+			</Run>
+		</Runs>
+		<Branches>
+			<Branch>
+				CaloTowersSorted_towerMaker__ppRECO.
+			</Branch>
+			<Branch>
+				CaloTowersSorted_towerMaker__reRECO.
+			</Branch>
+			<Branch>
+				L1GlobalTriggerReadoutRecord_gtDigis__reRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ANASKIM.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__HLT.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ppRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__reRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__ppRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__reRECO.
+			</Branch>
+			<Branch>
+				recoConversions_conversions__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmi__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmiLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoMuons_muons__ppRECO.
+			</Branch>
+			<Branch>
+				recoMuons_muons__reRECO.
+			</Branch>
+			<Branch>
+				recoPFJets_ak5PFJets__ppRECO.
+			</Branch>
+			<Branch>
+				recoPFMETs_pfMet__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__reRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracks__ppRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracksLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Kshort_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Lambda_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVertices__ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt_WithBS_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesWithBS__ppRECO.
+			</Branch>
+		</Branches>
+	</InputFile>
+	<InputFile>
+		<EventsRead>
+			6448
+		</EventsRead>
+		<Runs>
+			{182609: [994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003]}
+		</Runs>
+		<ModuleLabel>
+			source
+		</ModuleLabel>
+		<FileType>
+			EDM
+		</FileType>
+		<LFN>
+			/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1803_1_Fau.root
+		</LFN>
+		<PFN>
+			file:/mnt/hadoop/cms/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1803_1_Fau.root
+		</PFN>
+		<MergedBySize>
+			False
+		</MergedBySize>
+		<Catalog/>
+		<Checksums>
+			{}
+		</Checksums>
+		<GUID>
+			2419FD88-B4BF-E411-A5B5-00A0D1E94412
+		</GUID>
+		<State Value="closed"/>
+		<Runs>
+			<Run ID="182609">
+				<LumiSection ID="994"/>
+				<LumiSection ID="995"/>
+				<LumiSection ID="996"/>
+				<LumiSection ID="997"/>
+				<LumiSection ID="998"/>
+				<LumiSection ID="999"/>
+				<LumiSection ID="1000"/>
+				<LumiSection ID="1001"/>
+				<LumiSection ID="1002"/>
+				<LumiSection ID="1003"/>
+			</Run>
+		</Runs>
+		<Branches>
+			<Branch>
+				CaloTowersSorted_towerMaker__ppRECO.
+			</Branch>
+			<Branch>
+				CaloTowersSorted_towerMaker__reRECO.
+			</Branch>
+			<Branch>
+				L1GlobalTriggerReadoutRecord_gtDigis__reRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ANASKIM.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__HLT.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ppRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__reRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__ppRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__reRECO.
+			</Branch>
+			<Branch>
+				recoConversions_conversions__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmi__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmiLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoMuons_muons__ppRECO.
+			</Branch>
+			<Branch>
+				recoMuons_muons__reRECO.
+			</Branch>
+			<Branch>
+				recoPFJets_ak5PFJets__ppRECO.
+			</Branch>
+			<Branch>
+				recoPFMETs_pfMet__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__reRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracks__ppRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracksLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Kshort_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Lambda_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVertices__ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt_WithBS_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesWithBS__ppRECO.
+			</Branch>
+		</Branches>
+	</InputFile>
+	<InputFile>
+		<EventsRead>
+			6539
+		</EventsRead>
+		<Runs>
+			{182609: [1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013]}
+		</Runs>
+		<ModuleLabel>
+			source
+		</ModuleLabel>
+		<FileType>
+			EDM
+		</FileType>
+		<LFN>
+			/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1804_1_Dym.root
+		</LFN>
+		<PFN>
+			file:/mnt/hadoop/cms/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1804_1_Dym.root
+		</PFN>
+		<MergedBySize>
+			False
+		</MergedBySize>
+		<Catalog/>
+		<Checksums>
+			{}
+		</Checksums>
+		<GUID>
+			342069CE-B4BF-E411-9531-003048F1C490
+		</GUID>
+		<State Value="closed"/>
+		<Runs>
+			<Run ID="182609">
+				<LumiSection ID="1004"/>
+				<LumiSection ID="1005"/>
+				<LumiSection ID="1006"/>
+				<LumiSection ID="1007"/>
+				<LumiSection ID="1008"/>
+				<LumiSection ID="1009"/>
+				<LumiSection ID="1010"/>
+				<LumiSection ID="1011"/>
+				<LumiSection ID="1012"/>
+				<LumiSection ID="1013"/>
+			</Run>
+		</Runs>
+		<Branches>
+			<Branch>
+				CaloTowersSorted_towerMaker__ppRECO.
+			</Branch>
+			<Branch>
+				CaloTowersSorted_towerMaker__reRECO.
+			</Branch>
+			<Branch>
+				L1GlobalTriggerReadoutRecord_gtDigis__reRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ANASKIM.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__HLT.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ppRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__reRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__ppRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__reRECO.
+			</Branch>
+			<Branch>
+				recoConversions_conversions__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmi__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmiLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoMuons_muons__ppRECO.
+			</Branch>
+			<Branch>
+				recoMuons_muons__reRECO.
+			</Branch>
+			<Branch>
+				recoPFJets_ak5PFJets__ppRECO.
+			</Branch>
+			<Branch>
+				recoPFMETs_pfMet__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__reRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracks__ppRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracksLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Kshort_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Lambda_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVertices__ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt_WithBS_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesWithBS__ppRECO.
+			</Branch>
+		</Branches>
+	</InputFile>
+	<InputFile>
+		<EventsRead>
+			6384
+		</EventsRead>
+		<Runs>
+			{182609: [1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023]}
+		</Runs>
+		<ModuleLabel>
+			source
+		</ModuleLabel>
+		<FileType>
+			EDM
+		</FileType>
+		<LFN>
+			/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1805_1_e8M.root
+		</LFN>
+		<PFN>
+			file:/mnt/hadoop/cms/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1805_1_e8M.root
+		</PFN>
+		<MergedBySize>
+			False
+		</MergedBySize>
+		<Catalog/>
+		<Checksums>
+			{}
+		</Checksums>
+		<GUID>
+			E86BF4F3-F9BF-E411-8A22-0025901C0736
+		</GUID>
+		<State Value="closed"/>
+		<Runs>
+			<Run ID="182609">
+				<LumiSection ID="1014"/>
+				<LumiSection ID="1015"/>
+				<LumiSection ID="1016"/>
+				<LumiSection ID="1017"/>
+				<LumiSection ID="1018"/>
+				<LumiSection ID="1019"/>
+				<LumiSection ID="1020"/>
+				<LumiSection ID="1021"/>
+				<LumiSection ID="1022"/>
+				<LumiSection ID="1023"/>
+			</Run>
+		</Runs>
+		<Branches>
+			<Branch>
+				CaloTowersSorted_towerMaker__ppRECO.
+			</Branch>
+			<Branch>
+				CaloTowersSorted_towerMaker__reRECO.
+			</Branch>
+			<Branch>
+				L1GlobalTriggerReadoutRecord_gtDigis__reRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ANASKIM.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__HLT.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ppRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__reRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__ppRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__reRECO.
+			</Branch>
+			<Branch>
+				recoConversions_conversions__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmi__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmiLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoMuons_muons__ppRECO.
+			</Branch>
+			<Branch>
+				recoMuons_muons__reRECO.
+			</Branch>
+			<Branch>
+				recoPFJets_ak5PFJets__ppRECO.
+			</Branch>
+			<Branch>
+				recoPFMETs_pfMet__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__reRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracks__ppRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracksLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Kshort_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Lambda_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVertices__ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt_WithBS_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesWithBS__ppRECO.
+			</Branch>
+		</Branches>
+	</InputFile>
+	<InputFile>
+		<EventsRead>
+			6470
+		</EventsRead>
+		<Runs>
+			{182609: [1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033]}
+		</Runs>
+		<ModuleLabel>
+			source
+		</ModuleLabel>
+		<FileType>
+			EDM
+		</FileType>
+		<LFN>
+			/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1806_1_lOY.root
+		</LFN>
+		<PFN>
+			file:/mnt/hadoop/cms/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1806_1_lOY.root
+		</PFN>
+		<MergedBySize>
+			False
+		</MergedBySize>
+		<Catalog/>
+		<Checksums>
+			{}
+		</Checksums>
+		<GUID>
+			8C118A3C-B4BF-E411-99FA-003048F1C458
+		</GUID>
+		<State Value="closed"/>
+		<Runs>
+			<Run ID="182609">
+				<LumiSection ID="1024"/>
+				<LumiSection ID="1025"/>
+				<LumiSection ID="1026"/>
+				<LumiSection ID="1027"/>
+				<LumiSection ID="1028"/>
+				<LumiSection ID="1029"/>
+				<LumiSection ID="1030"/>
+				<LumiSection ID="1031"/>
+				<LumiSection ID="1032"/>
+				<LumiSection ID="1033"/>
+			</Run>
+		</Runs>
+		<Branches>
+			<Branch>
+				CaloTowersSorted_towerMaker__ppRECO.
+			</Branch>
+			<Branch>
+				CaloTowersSorted_towerMaker__reRECO.
+			</Branch>
+			<Branch>
+				L1GlobalTriggerReadoutRecord_gtDigis__reRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ANASKIM.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__HLT.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ppRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__reRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__ppRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__reRECO.
+			</Branch>
+			<Branch>
+				recoConversions_conversions__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmi__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmiLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoMuons_muons__ppRECO.
+			</Branch>
+			<Branch>
+				recoMuons_muons__reRECO.
+			</Branch>
+			<Branch>
+				recoPFJets_ak5PFJets__ppRECO.
+			</Branch>
+			<Branch>
+				recoPFMETs_pfMet__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__reRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracks__ppRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracksLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Kshort_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Lambda_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVertices__ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt_WithBS_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesWithBS__ppRECO.
+			</Branch>
+		</Branches>
+	</InputFile>
+	<InputFile>
+		<EventsRead>
+			6370
+		</EventsRead>
+		<Runs>
+			{182609: [1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043]}
+		</Runs>
+		<ModuleLabel>
+			source
+		</ModuleLabel>
+		<FileType>
+			EDM
+		</FileType>
+		<LFN>
+			/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1807_1_BKT.root
+		</LFN>
+		<PFN>
+			file:/mnt/hadoop/cms/store/user/davidlw/HIMinBiasUPC/PR2011_MBPPRereco_TRKANASKIM_v6/ccf03100d177f42de0f9cdc7627799d3/pPb_HM_1807_1_BKT.root
+		</PFN>
+		<MergedBySize>
+			False
+		</MergedBySize>
+		<Catalog/>
+		<Checksums>
+			{}
+		</Checksums>
+		<GUID>
+			34E34688-B4BF-E411-9474-00A0D1E95308
+		</GUID>
+		<State Value="closed"/>
+		<Runs>
+			<Run ID="182609">
+				<LumiSection ID="1034"/>
+				<LumiSection ID="1035"/>
+				<LumiSection ID="1036"/>
+				<LumiSection ID="1037"/>
+				<LumiSection ID="1038"/>
+				<LumiSection ID="1039"/>
+				<LumiSection ID="1040"/>
+				<LumiSection ID="1041"/>
+				<LumiSection ID="1042"/>
+				<LumiSection ID="1043"/>
+			</Run>
+		</Runs>
+		<Branches>
+			<Branch>
+				CaloTowersSorted_towerMaker__ppRECO.
+			</Branch>
+			<Branch>
+				CaloTowersSorted_towerMaker__reRECO.
+			</Branch>
+			<Branch>
+				L1GlobalTriggerReadoutRecord_gtDigis__reRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ANASKIM.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__HLT.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__ppRECO.
+			</Branch>
+			<Branch>
+				edmTriggerResults_TriggerResults__reRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__ppRECO.
+			</Branch>
+			<Branch>
+				recoBeamSpot_offlineBeamSpot__reRECO.
+			</Branch>
+			<Branch>
+				recoConversions_conversions__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmi__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxDiscrimASmiLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxHarmonic2LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40__ppRECO.
+			</Branch>
+			<Branch>
+				recoDeDxDataedmValueMap_dedxTruncated40LowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoMuons_muons__ppRECO.
+			</Branch>
+			<Branch>
+				recoMuons_muons__reRECO.
+			</Branch>
+			<Branch>
+				recoPFJets_ak5PFJets__ppRECO.
+			</Branch>
+			<Branch>
+				recoPFMETs_pfMet__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__ppRECO.
+			</Branch>
+			<Branch>
+				recoPhotons_photons__reRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracks__ppRECO.
+			</Branch>
+			<Branch>
+				recoTracks_generalTracksLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Kshort_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0Candidates_Lambda_ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesLowPt_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_D0_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Kshort_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Lambda_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Omega_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexCompositeCandidates_generalV0CandidatesNew_Xi_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVertices__ppRECO.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt__ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesLowPt_WithBS_ANASKIM.
+			</Branch>
+			<Branch>
+				recoVertexs_offlinePrimaryVerticesWithBS__ppRECO.
+			</Branch>
+		</Branches>
+	</InputFile>
+	<AnalysisFile>
+		<SEName Value="se1.accre.vanderbilt.edu"/>
+		<LFN Value="/store/user/qixu/flow/PACorrHM/skim/PbPb2011Data/skimTreeTrack_294_1_TjF.root"/>
+		<PFN Value="srm://se1.accre.vanderbilt.edu:6288/srm/v2/server?SFN=/lio/lfs/cms/store/user/qixu/flow/PACorrHM/skim/PbPb2011Data/skimTreeTrack_294_1_TjF.root"/>
+		<Source Value="TFileService"/>
+		<PNN Value="T2_US_Vanderbilt"/>
+		<FileName>
+			/export/data1/condor/execute/dir_24394/glide_lEzP74/execute/dir_4286/cms_6Jk1j7C449do/CMSSW_5_3_20/skimTreeTrack.root
+		</FileName>
+		<SurlForGrid Value="srm://se1.accre.vanderbilt.edu:6288/srm/v2/server?SFN=/lio/lfs/cms/store/user/qixu/flow/PACorrHM/skim/PbPb2011Data/skimTreeTrack_294_1_TjF.root"/>
+	</AnalysisFile>
+	<FrameworkError ExitStatus="0" Type="WrapperExitCode"/>
+	<FrameworkError ExitStatus="0" Type="ExeExitCode"/>
+	<TimingService/>
+	<ReadBranches>
+		<Branch Name="recoTracks_generalTracks__ppRECO." ReadCount="37280"/>
+		<Branch Name="recoVertexs_offlinePrimaryVertices__ppRECO." ReadCount="38885"/>
+	</ReadBranches>
+	<GeneratorInfo/>
+	<PerformanceReport>
+		<CPU/>
+		<Memory/>
+		<PerformanceSummary Metric="CrabTiming">
+			<Metric Name="ExeTime" Value="171"/>
+			<Metric Name="WrapperTime" Value="600"/>
+			<Metric Name="CpuTime" Value="&quot;82.21 4.76 51%&quot;"/>
+			<Metric Name="StageoutTime" Value="49"/>
+		</PerformanceSummary>
+		<PerformanceSummary Metric="StorageStatistics">
+			<Metric Name="Timing-tstoragefile-writeActual-totalMegabytes" Value="100.544"/>
+			<Metric Name="Timing-file-readv-numSuccessfulOperations" Value="143"/>
+			<Metric Name="ROOT-tfile-read-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-file-readv-maxMsecs" Value="4985.45"/>
+			<Metric Name="Timing-tstoragefile-readActual-totalMegabytes" Value="967.762"/>
+			<Metric Name="Timing-file-write-numOperations" Value="1037"/>
+			<Metric Name="Timing-file-destruct-totalMsecs" Value="0.087808"/>
+			<Metric Name="Timing-file-position-numSuccessfulOperations" Value="14453"/>
+			<Metric Name="Timing-tstoragefile-close-maxMsecs" Value="0.222208"/>
+			<Metric Name="Timing-file-writev-numSuccessfulOperations" Value="0"/>
+			<Metric Name="Timing-tstoragefile-writeActual-numOperations" Value="1037"/>
+			<Metric Name="Timing-tstoragefile-write-numSuccessfulOperations" Value="1037"/>
+			<Metric Name="Timing-tstoragefile-read-maxMsecs" Value="5063.97"/>
+			<Metric Name="Timing-file-read-minMsecs" Value="0.000768"/>
+			<Metric Name="Timing-file-construct-totalMsecs" Value="0.010752"/>
+			<Metric Name="Timing-tstoragefile-writeViaCache-totalMsecs" Value="0"/>
+			<Metric Name="Timing-file-open-numOperations" Value="7"/>
+			<Metric Name="Timing-file-stagein-numSuccessfulOperations" Value="6"/>
+			<Metric Name="Timing-file-writev-totalMsecs" Value="0"/>
+			<Metric Name="Timing-file-position-numOperations" Value="14453"/>
+			<Metric Name="Timing-tstoragefile-seek-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-file-readv-totalMsecs" Value="54558.2"/>
+			<Metric Name="Timing-file-construct-minMsecs" Value="0.000256"/>
+			<Metric Name="Timing-file-read-numSuccessfulOperations" Value="108"/>
+			<Metric Name="Timing-tstoragefile-writeViaCache-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-tstoragefile-readViaCache-totalMegabytes" Value="938.454"/>
+			<Metric Name="Timing-file-close-minMsecs" Value="0.071168"/>
+			<Metric Name="ROOT-tfile-write-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-tstoragefile-readActual-numOperations" Value="251"/>
+			<Metric Name="Timing-file-stagein-maxMsecs" Value="0.000512"/>
+			<Metric Name="Timing-tstoragefile-writeActual-totalMsecs" Value="150.725"/>
+			<Metric Name="Timing-tstoragefile-flush-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-tstoragefile-writeViaCache-numOperations" Value="1037"/>
+			<Metric Name="Timing-file-writev-numOperations" Value="0"/>
+			<Metric Name="Timing-tstoragefile-close-numOperations" Value="6"/>
+			<Metric Name="Timing-tstoragefile-readAsync-minMsecs" Value="0"/>
+			<Metric Name="Timing-file-stagein-numOperations" Value="6"/>
+			<Metric Name="Timing-tstoragefile-readActual-maxMsecs" Value="4985.45"/>
+			<Metric Name="Timing-file-readv-numOperations" Value="143"/>
+			<Metric Name="Timing-file-prefetch-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-tstoragefile-close-totalMsecs" Value="0.715776"/>
+			<Metric Name="Timing-tstoragefile-readActual-numSuccessfulOperations" Value="251"/>
+			<Metric Name="Timing-file-write-totalMegabytes" Value="100.544"/>
+			<Metric Name="Timing-file-open-numSuccessfulOperations" Value="7"/>
+			<Metric Name="Timing-file-position-minMsecs" Value="0.000256"/>
+			<Metric Name="Timing-file-read-maxMsecs" Value="48.6487"/>
+			<Metric Name="Timing-file-prefetch-minMsecs" Value="0"/>
+			<Metric Name="Timing-file-flush-maxMsecs" Value="544.451"/>
+			<Metric Name="Timing-tstoragefile-read-totalMegabytes" Value="940.343"/>
+			<Metric Name="Timing-tstoragefile-readAsync-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-tstoragefile-close-numSuccessfulOperations" Value="6"/>
+			<Metric Name="Timing-file-stagein-totalMsecs" Value="0.002048"/>
+			<Metric Name="Timing-tstoragefile-close-minMsecs" Value="0.082944"/>
+			<Metric Name="Timing-file-writev-minMsecs" Value="0"/>
+			<Metric Name="Timing-tstoragefile-read-minMsecs" Value="0.000512"/>
+			<Metric Name="Timing-tstoragefile-seek-maxMsecs" Value="5.01197"/>
+			<Metric Name="Timing-tstoragefile-seek-minMsecs" Value="0.000256"/>
+			<Metric Name="Timing-file-construct-numOperations" Value="7"/>
+			<Metric Name="Timing-tstoragefile-write-numOperations" Value="1037"/>
+			<Metric Name="Timing-file-close-numSuccessfulOperations" Value="6"/>
+			<Metric Name="Timing-tstoragefile-readViaCache-maxMsecs" Value="5063.97"/>
+			<Metric Name="Timing-file-destruct-minMsecs" Value="0.003072"/>
+			<Metric Name="Timing-tstoragefile-writeViaCache-maxMsecs" Value="0"/>
+			<Metric Name="Timing-file-close-maxMsecs" Value="0.129792"/>
+			<Metric Name="Timing-file-close-totalMsecs" Value="0.549376"/>
+			<Metric Name="Timing-file-destruct-numOperations" Value="6"/>
+			<Metric Name="Timing-tstoragefile-writeActual-minMsecs" Value="0.004096"/>
+			<Metric Name="Timing-file-stagein-minMsecs" Value="0.000256"/>
+			<Metric Name="Timing-file-write-minMsecs" Value="0.004096"/>
+			<Metric Name="Timing-tstoragefile-readActual-minMsecs" Value="0.00128"/>
+			<Metric Name="Timing-tstoragefile-stat-numSuccessfulOperations" Value="12"/>
+			<Metric Name="Timing-tstoragefile-flush-maxMsecs" Value="544.457"/>
+			<Metric Name="Timing-file-readv-minMsecs" Value="0.005888"/>
+			<Metric Name="Timing-tstoragefile-readAsync-maxMsecs" Value="0"/>
+			<Metric Name="Timing-tstoragefile-stat-totalMsecs" Value="71.6436"/>
+			<Metric Name="Timing-file-writev-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-file-flush-totalMsecs" Value="1097.21"/>
+			<Metric Name="Timing-file-position-totalMsecs" Value="107.643"/>
+			<Metric Name="Timing-tstoragefile-read-numOperations" Value="13368"/>
+			<Metric Name="Timing-file-destruct-numSuccessfulOperations" Value="6"/>
+			<Metric Name="Timing-file-open-maxMsecs" Value="1366.37"/>
+			<Metric Name="Timing-file-close-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-tstoragefile-construct-totalMsecs" Value="2780.29"/>
+			<Metric Name="Timing-tstoragefile-seek-numOperations" Value="14405"/>
+			<Metric Name="Timing-tstoragefile-readActual-totalMsecs" Value="55217"/>
+			<Metric Name="Timing-file-read-totalMegabytes" Value="1.88822"/>
+			<Metric Name="Parameter-untracked-string-readHint" Value="auto-detect"/>
+			<Metric Name="Timing-file-destruct-maxMsecs" Value="0.069376"/>
+			<Metric Name="Timing-tstoragefile-construct-numSuccessfulOperations" Value="7"/>
+			<Metric Name="Timing-tstoragefile-writeActual-maxMsecs" Value="11.1877"/>
+			<Metric Name="Timing-file-position-maxMsecs" Value="53.6753"/>
+			<Metric Name="Timing-tstoragefile-seek-totalMsecs" Value="45.8158"/>
+			<Metric Name="Timing-tstoragefile-flush-numOperations" Value="3"/>
+			<Metric Name="Timing-tstoragefile-flush-minMsecs" Value="91.4271"/>
+			<Metric Name="Timing-file-prefetch-totalMsecs" Value="0"/>
+			<Metric Name="Timing-file-open-minMsecs" Value="0.163584"/>
+			<Metric Name="Timing-file-close-numOperations" Value="6"/>
+			<Metric Name="Timing-tstoragefile-flush-totalMsecs" Value="1097.23"/>
+			<Metric Name="Timing-tstoragefile-construct-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-file-destruct-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-file-write-totalMsecs" Value="150.083"/>
+			<Metric Name="Timing-file-write-numSuccessfulOperations" Value="1037"/>
+			<Metric Name="Timing-file-flush-numOperations" Value="3"/>
+			<Metric Name="Timing-file-read-totalMsecs" Value="658.348"/>
+			<Metric Name="Timing-tstoragefile-writeViaCache-numSuccessfulOperations" Value="0"/>
+			<Metric Name="Timing-tstoragefile-stat-numOperations" Value="12"/>
+			<Metric Name="Timing-file-read-numOperations" Value="108"/>
+			<Metric Name="Timing-tstoragefile-seek-numSuccessfulOperations" Value="14405"/>
+			<Metric Name="Timing-tstoragefile-readViaCache-numOperations" Value="13260"/>
+			<Metric Name="Timing-file-position-totalMegabytes" Value="0"/>
+			<Metric Name="Parameter-untracked-bool-enabled" Value="true"/>
+			<Metric Name="Timing-tstoragefile-readAsync-numSuccessfulOperations" Value="0"/>
+			<Metric Name="Timing-tstoragefile-writeViaCache-minMsecs" Value="0"/>
+			<Metric Name="Timing-tstoragefile-construct-maxMsecs" Value="1940.88"/>
+			<Metric Name="Timing-file-prefetch-numSuccessfulOperations" Value="0"/>
+			<Metric Name="Timing-file-write-maxMsecs" Value="11.1857"/>
+			<Metric Name="Timing-file-construct-maxMsecs" Value="0.00896"/>
+			<Metric Name="Timing-tstoragefile-readViaCache-minMsecs" Value="0.000256"/>
+			<Metric Name="Timing-tstoragefile-read-totalMsecs" Value="55946.5"/>
+			<Metric Name="Timing-file-prefetch-maxMsecs" Value="0"/>
+			<Metric Name="Timing-file-readv-totalMegabytes" Value="965.874"/>
+			<Metric Name="Parameter-untracked-string-cacheHint" Value="application-only"/>
+			<Metric Name="Timing-tstoragefile-write-totalMsecs" Value="151.32"/>
+			<Metric Name="Timing-file-writev-maxMsecs" Value="0"/>
+			<Metric Name="Timing-tstoragefile-construct-numOperations" Value="7"/>
+			<Metric Name="Parameter-untracked-bool-stats" Value="true"/>
+			<Metric Name="Timing-tstoragefile-stat-maxMsecs" Value="53.6911"/>
+			<Metric Name="Timing-tstoragefile-write-totalMegabytes" Value="100.544"/>
+			<Metric Name="Timing-tstoragefile-readAsync-numOperations" Value="30"/>
+			<Metric Name="Timing-tstoragefile-construct-minMsecs" Value="82.1924"/>
+			<Metric Name="Timing-tstoragefile-close-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-tstoragefile-stat-minMsecs" Value="0.002048"/>
+			<Metric Name="Timing-file-open-totalMsecs" Value="1614.85"/>
+			<Metric Name="Timing-tstoragefile-stat-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-tstoragefile-readAsync-totalMsecs" Value="0"/>
+			<Metric Name="Timing-file-flush-minMsecs" Value="91.425"/>
+			<Metric Name="Timing-file-flush-numSuccessfulOperations" Value="3"/>
+			<Metric Name="Timing-tstoragefile-writeActual-numSuccessfulOperations" Value="1037"/>
+			<Metric Name="Timing-tstoragefile-readViaCache-totalMsecs" Value="55284.3"/>
+			<Metric Name="Timing-file-prefetch-numOperations" Value="0"/>
+			<Metric Name="Timing-tstoragefile-readViaCache-numSuccessfulOperations" Value="13260"/>
+			<Metric Name="Timing-file-construct-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-tstoragefile-flush-numSuccessfulOperations" Value="3"/>
+			<Metric Name="Timing-tstoragefile-write-maxMsecs" Value="11.1885"/>
+			<Metric Name="Timing-tstoragefile-write-minMsecs" Value="0.004608"/>
+			<Metric Name="Timing-tstoragefile-read-numSuccessfulOperations" Value="13368"/>
+			<Metric Name="Timing-file-open-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-file-construct-numSuccessfulOperations" Value="7"/>
+			<Metric Name="Timing-file-stagein-totalMegabytes" Value="0"/>
+			<Metric Name="Timing-file-flush-totalMegabytes" Value="0"/>
+		</PerformanceSummary>
+	</PerformanceReport>
+</FrameworkJobReport>
