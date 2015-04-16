@@ -94,7 +94,6 @@ void NBD::fit(){
 	int xbinmin=(int)((xmin[0]-Minx)/binsize);
 	int xbinmax=(int)((xmax[0]-Minx)/binsize);
 	TH1D *histo_exp = new TH1D("histo_exp","Simulated distribution;Multiplicity;# of events",binnum,Minx,Maxx);
-        histo_exp->Sumw2();
 	TF1 *NBD_fun = new TF1("NBD_fun","[0]*TMath::Gamma(x+[1])/(TMath::Gamma(x+1)*TMath::Gamma([1]))*TMath::Power([2]/[1],x)/TMath::Power([2]/[1]+1,x+[1])",0,100);
 	int ibin;
 	TH1D *histo_obs_norm = (TH1D*)histo_obs->Clone();
@@ -104,12 +103,12 @@ void NBD::fit(){
 		Bin_obs[ibin] = histo_obs->GetBinContent(ibin);
 		Bin_obs_norm[ibin]= histo_obs_norm->GetBinContent(ibin);
 	}
-	int npar=0, ncounts=0;
-        //Double_t chi_square_min[4], chi_square_max[4], kfit[4], mufit[4];
+	int npar=0;
+        Double_t chi_square_min[4], chi_square_max[4], kfit[4], mufit[4];
         Double_t chi_add[4], chi_square[4];
+	int ncounts=0, ncounts_=0;
 	double mu,k;
-	std::vector<double> muvector, kvector, chisvector;//, ndfvector;
-       // double chi_square; int ndf, igood;
+	std::vector<double> muvector, kvector, chisvector;
 	UInt_t iniseed = gRandom->GetSeed();	// reproduce the "random" numbers
 	//ofstream fout("chis3.txt");
 	for(mu=mumin;mu<=mumax;mu+=mustep){
@@ -118,7 +117,7 @@ void NBD::fit(){
 			NBD_fun->SetParameter(0,1);	//[0]: Normalized constant
 			NBD_fun->SetParameter(1,k);	//[1]: k value
 			NBD_fun->SetParameter(2,mu);	//[2]: mu value
-			TTree *t = (TTree*)fGlauber->Get("nt_Pb_Pb");
+			TTree *t = (TTree*)fGlauber->Get("nt_p_Pb");
 
 			Float_t Ncoll, Npart, B;	Long_t Nevent;
 
@@ -160,26 +159,22 @@ void NBD::fit(){
 				Bin_exp[ibin] = histo_exp->GetBinContent(ibin);
 			}
 			for(int i=0;i<4;i++)	chi_square[i]=0;
-			ncounts=0;
+			ncounts_=0;
 			for(ibin=xbinmin;ibin<xbinmax;ibin++){	
 				if(Bin_exp_norm[ibin]==0);
 				else {	chi_add[0] = TMath::Power((Bin_obs[ibin]-histo_obs->Integral(xbinmin,xbinmax)*Bin_exp_norm[ibin]),2)/(histo_obs->Integral(xbinmin,xbinmax)*Bin_exp_norm[ibin]);	chi_square[0]+=chi_add[0];}
 				if(Bin_obs[ibin]==0);
 				else{ chi_add[1] = TMath::Power((Bin_obs[ibin]-histo_obs->Integral(xbinmin,xbinmax)*Bin_exp_norm[ibin]),2)/Bin_obs[ibin];	chi_square[1]+=chi_add[1];}
 				if(Bin_obs_norm[ibin]==0);
-				else{ ncounts++; chi_add[2] = TMath::Power((histo_exp->Integral(xbinmin,xbinmax)*Bin_obs_norm[ibin]-Bin_exp[ibin]),2)/(histo_exp->Integral(xbinmin,xbinmax)*Bin_obs_norm[ibin]); chi_square[2]+=chi_add[2];}
+				else{ ncounts_++; chi_add[2] = TMath::Power((histo_exp->Integral(xbinmin,xbinmax)*Bin_obs_norm[ibin]-Bin_exp[ibin]),2)/(histo_exp->Integral(xbinmin,xbinmax)*Bin_obs_norm[ibin]); chi_square[2]+=chi_add[2];}
 				if(Bin_exp[ibin]==0);
 				else{ chi_add[3] = TMath::Power((histo_exp->Integral(xbinmin,xbinmax)*Bin_obs_norm[ibin] - Bin_exp[ibin]),2)/Bin_exp[ibin]; 	chi_square[3]+=chi_add[3];}
 			}
-                        //double p = histo_exp_norm->Chi2TestX(histo_obs_norm,chi_square,ndf,igood,"");
-                        //chi_square = histo_obs_norm->KolmogorovTest(histo_exp_norm,"M");
-                                cout<<mu<<"\t"<<k<<"\t"<<chi_square[2]<<endl;//<<"\t"<<ndf<<"\t"<<p<<endl;
+			cout<<mu<<"\t"<<k<<"\t"<<chi_square[2]<<endl;
 				muvector.push_back(mu);
 				kvector.push_back(k);
 				chisvector.push_back(chi_square[2]);
-				//chisvector.push_back(chi_square);
-				//ndfvector.push_back(ndf);
-		/*	for(int i=0;i<4;i++){
+			for(int i=0;i<4;i++){
 				if(npar==0){
 					chi_square_min[i]=chi_square[i];
 					chi_square_max[i]=chi_square[i];
@@ -195,7 +190,7 @@ void NBD::fit(){
 				else{
 					chi_square_max[i]=chi_square[i];
 				}
-			}*/
+			}
 			npar++;
 			histo_exp->Reset("M");
 			histo_exp_norm->Reset("M");
@@ -204,22 +199,13 @@ void NBD::fit(){
 	double *amu = &muvector[0];
 	double *ak = &kvector[0];
 	double *achis = &chisvector[0];
-        int loc = TMath::LocMin(chisvector.size(),achis);
-        mubest[0] = muvector[loc];
-        kbest[0] = kvector[loc];
-        chis[0] = chisvector[loc];
-	Ndf[0]=ncounts-3;
-       // Ndf[0] = ndfvector[loc];
-	cout<<"{"<<mubest[0]<<","<<kbest[0]<<"}"<<endl;
-	cout<<chis[0]<<"\t"<<Ndf[0]<<endl;
-	/*if(chi_square_max[2]>=chi_square_min[2]){
+	if(chi_square_max[2]>=chi_square_min[2]){
 	cout<<"{"<<mufit[2]<<","<<kfit[2]<<"}"<<endl;
 	cout<<chi_square_min[2]<<"\t"<<ncounts-3<<endl;
 	mubest[0]=mufit[2];kbest[0]=kfit[2];
 	chis[0]=chi_square_min[2];
 	Ndf[0]=ncounts-3;
-	}*/
-
+	}
 	Grgrid = new TGraph2D("Grgrid","",chisvector.size(),amu,ak,achis);
 }
 
@@ -242,7 +228,7 @@ void NBD::calcvar(){
      	NBD_fun->SetParameter(0,1);
         NBD_fun->SetParameter(1,kbest[0]);
         NBD_fun->SetParameter(2,mubest[0]);
-	TTree *t = (TTree*) fGlauber ->Get("nt_Pb_Pb");
+	TTree *t = (TTree*) fGlauber ->Get("nt_p_Pb");
 	Float_t Ncoll, Npart, B;
 	Long_t Nevent;
 

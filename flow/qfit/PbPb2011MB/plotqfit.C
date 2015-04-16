@@ -65,10 +65,10 @@ f1fit->FixParameter(1,V24[k]);
 ffit->FixParameter(2,avgmult[ibin]);
 f1fit->FixParameter(2,avgmult[ibin]);
 hq->Fit(Form("f1fit"),"R","P",0,10);
-TCanvas *c2 = new TCanvas("c2","c2",500,1000);
-c2->Divide(1,2);
+TCanvas *c2 = new TCanvas("c2","c2",1000,500);
+c2->Divide(2,1);
 c2->cd(1)->SetLogy();
-fixedFontHist(hqx,1.6,2.0);
+fixedFontHist(hqx,1.0,2.0);
 hqx->SetTitle("");
 hqx->GetXaxis()->SetTitle("q_{x}");
 hqx->GetYaxis()->SetTitle("#frac{dN}{dq_{x}}");
@@ -76,17 +76,17 @@ hqx->GetYaxis()->SetRangeUser(1e-10,1);
 hqx->Fit(Form("f1fit"),"R","",0,10);
 c2->cd(2)->SetLogy();
 TH1D* hqx_cp = (TH1D*)hqx->Clone("hqx_cp");
-fixedFontHist(hqx_cp,1.6,2.0);
+fixedFontHist(hqx_cp,1.0,2.0);
 divideByBinCenter(hqx_cp);
 hqx_cp->GetYaxis()->SetTitle("#frac{dN}{q_{x}dq_{x}}");
 hqx_cp->GetYaxis()->SetRangeUser(1e-10,10);
 hqx_cp->Fit(Form("ffit"),"R","",0,10);
 t->DrawLatex(0.5,0.2,Form("N_{trk}^{offline} = %.2f", avgtrk[ibin]));
 
-TCanvas *c3 = new TCanvas("c3","c3",500,1000);
-c3->Divide(1,2);
+TCanvas *c3 = new TCanvas("c3","c3",1000,500);
+c3->Divide(2,1);
 c3->cd(1);
-fixedFontHist(hqy,1.6,2.0);
+fixedFontHist(hqy,1.0,2.0);
 hqy->SetTitle("");
 hqy->GetXaxis()->SetTitle("q_{y}");
 hqy->GetYaxis()->SetTitle("#frac{dN}{dq_{y}}");
@@ -97,7 +97,7 @@ hqy->Fit(Form("f1fit"),"R","",0,10);
 hqy->Draw("Psame");
 c3->cd(2)->SetLogy();
 TH1D* hqy_cp = (TH1D*)hqy->Clone("hqy_cp");
-fixedFontHist(hqy_cp,1.6,2.0);
+fixedFontHist(hqy_cp,1.0,2.0);
 divideByBinCenter(hqy_cp);
 hqy_cp->GetYaxis()->SetTitle("#frac{dN}{q_{y}dq_{y}}");
 hqy_cp->GetYaxis()->SetRangeUser(1e-10,10);
@@ -107,10 +107,10 @@ hqy_cp->Fit(Form("ffit"),"R","",0,10);
 hqy_cp->Draw("Psame");
 t->DrawLatex(0.5,0.2,Form("N_{trk}^{offline} = %.2f",avgtrk[ibin]));
 
-TCanvas *c4 = new TCanvas("c4","c4",500,1000);
-c4->Divide(1,2);
+TCanvas *c4 = new TCanvas("c4","c4",1000,500);
+c4->Divide(2,1);
 c4->cd(1);
-fixedFontHist(hq2,1.6,2.0);
+fixedFontHist(hq2,1.0,2.0);
 hq2->SetTitle("");
 hq2->GetXaxis()->SetTitle("q_{2}");
 hq2->GetYaxis()->SetTitle("#frac{dN}{dq_{2}}");
@@ -131,7 +131,7 @@ vecr[5]=avgtrk[ibin];
 hq2->Draw("Psame");
 c4->cd(2)->SetLogy();
 TH1D* hq2_cp = (TH1D*)hq2->Clone("hq2_cp");
-fixedFontHist(hq2_cp,1.6,2.0);
+fixedFontHist(hq2_cp,1.0,2.0);
 divideByBinCenter(hq2_cp);
 hq2_cp->GetYaxis()->SetTitle("#frac{dN}{q_{2}dq_{2}}");
 hq2_cp->GetYaxis()->SetRangeUser(1e-10,10);
@@ -143,10 +143,10 @@ hq2_cp->Fit(Form("ffit"),"R","",0,10);
 hq2_cp->Draw("Psame");
 t->DrawLatex(0.5,0.2,Form("N_{trk}^{offline} = %.2f", avgtrk[ibin]));
 
-TCanvas *c5 = new TCanvas("c5","c5",500,1000);
-c5->Divide(1,2);
+TCanvas *c5 = new TCanvas("c5","c5",1000,500);
+c5->Divide(2,1);
 c5->cd(1);
-fixedFontHist(hq2nonf,1.6,2.0);
+fixedFontHist(hq2nonf,1.0,2.0);
 hq2nonf->SetTitle("");
 hq2nonf->GetXaxis()->SetTitle("q_{2}");
 hq2nonf->GetYaxis()->SetTitle("#frac{dN}{dq_{2}}");
@@ -177,7 +177,7 @@ vecrnonf[5]=avgtrk[ibin];
 hq2nonf->Draw("Psame");
 c5->cd(2)->SetLogy();
 TH1D* hq2nonf_cp = (TH1D*)hq2nonf->Clone("hq2nonf_cp");
-fixedFontHist(hq2nonf_cp,1.6,2.0);
+fixedFontHist(hq2nonf_cp,1.0,2.0);
 divideByBinCenter(hq2nonf_cp);
 hq2nonf_cp->GetYaxis()->SetTitle("#frac{dN}{q_{2}dq_{2}}");
 hq2nonf_cp->GetYaxis()->SetRangeUser(1e-10,10);
@@ -197,13 +197,10 @@ vecr[7]=g2calc;
 fout->cd();
 vecr.Write(Form("r_%d_%d",ibin,fixv2),TObject::kOverwrite);
 vecrnonf.Write(Form("rnonf_%d_%d",ibin,fixv2),TObject::kOverwrite);
+if(ibin==0)
+c4->Print("hq2_fit_0.png");
 }
-/*
-c2->Print("hqx_fit.png");
-c3->Print("hqy_fit.png");
-c4->Print("hq2_fit.png");
-c5->Print("hq2nonf_fit.png");
-*/
+//c5->Print("hq2nonf_fit.png");
 }
 
 

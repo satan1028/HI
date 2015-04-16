@@ -8,7 +8,7 @@
 
 cd /home/xuq7/HI/CMSSW_5_3_20/src/
 eval `scramv1 runtime -sh`
-cd /home/xuq7/HI/centrality/NBD/double_side
+cd /home/xuq7/HI/centrality/NBD/pPb/double_side
 root -l -b <<EOF
 .x store.C
 EOF

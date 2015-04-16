@@ -8,7 +8,7 @@ TString datafile="/scratch/xuq7/Centrality/PbPbHistPlusEta4.root";
 
 TString histoname="hHFEnergy";
 
-struct para1 var1={3,4000,	0.01,2,0.1,	0.01,2,0.1};
+struct para1 var1={3,4000,	2,10,0.5,	0.01,2.11,0.1};
 	
 struct para1 var2={15,70,	1.00,2.01,0.10,	2.01,5.01,0.10};
 

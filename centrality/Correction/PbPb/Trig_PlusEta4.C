@@ -1,21 +1,20 @@
 {
 
-Char_t *HiForestFile = "/store/user/qixu/centrality/MinBias_Merged.root";
-Char_t *outfile="./PbPbHistPlusEta4.root";
+TString HiForestFile = "/store/user/qixu/centrality/MinBias_Merged.root";
+TString outfile="./PbPbHistPlusEta4.root";
 
 TFile *foutput = TFile::Open(outfile,"update");//outfile;
 TFile *hHiForestFile = TFile::Open(HiForestFile);
 
-TTree *tree;
-tree=(TTree*)hiEvtAnalyzer->Get("HiTree");
+TTree *tree=(TTree*)hiEvtAnalyzer->Get("HiTree");
 //Char_t *tr2 = "pptracks/trackTree";
-Char_t *tr3 = "skimanalysis/HltTree";
-Char_t *tr4 = "hltanalysis/HltTree";
+TString tr3 = "skimanalysis/HltTree";
+TString tr4 = "hltanalysis/HltTree";
 //Char_t *tr5 = "hfrechits/hfTree";
 
 //tree.AddFriend(tr2);
-tree.AddFriend(tr3);
-tree.AddFriend(tr4);
+tree->AddFriend(tr3);
+tree->AddFriend(tr4);
 //tree.AddFriend(tr5);
 
 Float_t hiHF, vz;
@@ -45,8 +44,8 @@ tree->SetBranchAddress("pcollisionEventSelection",&pcollisionEventSelection);
 //-------------------------------------------------------------
 //Event Selection
 
-TH1D* hNtrack = new TH1D("hNtrack","hNtrack;track hits;# of events",500,0,1500);
-TH1F* hHFEnergy = new TH1F("hHFEnergy","hHF Deposit Energy;Energy;# of events",500,0,5000);
+TH1D* hNtrack = new TH1D("hNtrack","hNtrack;track hits;# of events",500,0,1500);hNtrack->Sumw2();
+TH1F* hHFEnergy = new TH1F("hHFEnergy","hHF Deposit Energy;Energy;# of events",500,0,5000);hHFEnergy->Sumw2();
 //TH1F* hHFEnergy4 = new TH1F("hHFEnergy4","hHF Deposit Energy;Energy;# of events",1000,0,100);
 //TH1F* hHFEnergyPlus4 = new TH1F("hHFEnergyPlus4","hHF Deposit Energy eta range;Energy;# of events",1000,0,100);
 //TH1F* hHFEnergyPlus4_Rebin = new TH1F("hHFEnergyPlus4_Rebin","hHF Deposit Energy eta range;Energy;# of events",100,0,100);

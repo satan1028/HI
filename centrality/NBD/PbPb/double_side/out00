@@ -1,25 +1,41 @@
-1302238
+1306302
 jobsub.slurm
-vmp1135
-In file included from input_line_24:1:
-/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/double_side/store.C:7:2: error: unknown type name 'NBD'
-        NBD *l;
-        ^
-/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/double_side/store.C:13:24: error: unknown type name 'NBD'
-        if(Gth<nGlau) l = new NBD(datafile,stdGlaulist[Gth],histoname);
-                              ^
-/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/double_side/store.C:14:15: error: unknown type name 'NBD'
-        else l = new NBD(datafile,stdGlaulist[0],histoname);
-                     ^
-/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/double_side/store.C:22:24: error: unknown type name 'NBD'
-        if(Gth<nGlau) l = new NBD(datafile,Gri055Glaulist[Gth],histoname);
-                              ^
-/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/double_side/store.C:23:15: error: unknown type name 'NBD'
-        else l = new NBD(datafile,Gri055Glaulist[0],histoname);
-                     ^
-/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/double_side/store.C:31:24: error: unknown type name 'NBD'
-        if(Gth<nGlau) l = new NBD(datafile,Gri101Glaulist[Gth],histoname);
-                              ^
-/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/double_side/store.C:32:15: error: unknown type name 'NBD'
-        else l = new NBD(datafile,Gri101Glaulist[0],histoname);
-                     ^
+vmp1097
+**** Following environment variables are going to be unset.
+       XDAQ_DOCUMENT_ROOT
+       XDAQ_OS
+       G4NEUTRONXS
+       LHAPATH
+       XDAQ_PLATFORM
+       XDAQ_ROOT
+2	0.01	2.94756e+06
+2	0.11	3.29392e+06
+2	0.21	3.27437e+06
+2	0.31	3.2862e+06
+2	0.41	3.14586e+06
+2	0.51	3.07517e+06
+2	0.61	3.09419e+06
+2	0.71	3.0323e+06
+2	0.81	3.13439e+06
+2	0.91	3.02518e+06
+2	1.01	3.01587e+06
+2	1.11	3.05499e+06
+2	1.21	3.01435e+06
+2	1.31	2.88622e+06
+2	1.41	3.06525e+06
+2	1.51	2.94056e+06
+2	1.61	2.91748e+06
+2	1.71	2.95583e+06
+2	1.81	2.88708e+06
+2	1.91	2.9365e+06
+2	2.01	2.96755e+06
+2.5	0.01	2.92753e+06
+2.5	0.11	3.20413e+06
+2.5	0.21	3.23419e+06
+2.5	0.31	3.18096e+06
+2.5	0.41	3.15735e+06
+2.5	0.51	3.14869e+06
+2.5	0.61	3.25836e+06
+2.5	0.71	3.25629e+06
+2.5	0.81	3.2251e+06
+2.5	0.91	3.23949e+06

@@ -1,4 +1,4 @@
-#include "/afs/cern.ch/user/q/qixu/CMSSW_6_2_5/src/Centrality/NBD_Glauber_fit/NBD/parameter.h"
+#include "../parameter.h"
 #include "par.h"
 void Draw(){ 
  TCanvas *c1 = new TCanvas("c1","c1",1,1,550,460);

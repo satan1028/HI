@@ -2,7 +2,7 @@
 #SBATCH --nodes=1
 #SBATCH --mem=4G
 #SBATCH --mem-per-cpu=4G
-#SBATCH --time=0-01:00:00
+#SBATCH --time=0-10:00:00
 
 #source /gpfs21/grid/grid-app/cmssoft/cms/cmsset_default.sh
 #eval `scramv1 runtime -sh`
@@ -20,5 +20,6 @@ eval `scramv1 runtime -sh`
 cd /home/xuq7/HI/centrality/NBD/PbPb/double_side
 
 root -l -b <<EOF
+.L /home/xuq7/HI/centrality/NBD/PbPb/NBDclass.C+
 .x store.C
 EOF

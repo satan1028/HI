@@ -1,5 +1,5 @@
-const double bin[]={0,12.61,18.99,23.23,29.50,150};	//G0.root
-//const double bin[]={1.0,0.5,0.3,0.2,0.1,0};	//G1.root
+const double bin[]={0,12.61,18.99,23.23,29.50,150};	//G1.root
+//const double bin[]={1.0,0.5,0.3,0.2,0.1,0};	//G0.root
 //const double bin[]={1.0,0};	//G2.root
 int N=(int)(sizeof(bin)/sizeof(double));
 int method=1;
@@ -8,7 +8,7 @@ const TString datafile="/scratch/xuq7/Centrality/pPbHistEta4.root";
 
 const TString histoname="hHFEnergy4";
 
-struct para1 var1={10,70,	0.90,1.30,0.01,	0.30,0.60,0.01};
+struct para1 var1={10,70,	1.00,1.30,0.01,	0.30,0.60,0.01};
 	
 struct para1 var2={15,70,	1.00,2.01,0.10,	2.01,5.01,0.10};
 
@@ -35,4 +35,4 @@ struct para2 bestlist3[nGlau+2]=
 {{1.3,2.419},{1.3,2.918},{1.4,3.919},{1.3,2.419},{1.3,2.419},{1.3,3.42},{1.4,3.418},{1.5,3.92},{1.2,2.22},{1.4,3.82},{1.3,2.419}};
 
 
-TString outG = "G0.root";
+TString outG = Form("G%d.root",method);

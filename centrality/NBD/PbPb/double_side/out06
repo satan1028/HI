@@ -1,294 +1,38 @@
-1295554
+1306308
 jobsub.slurm
-vmp1082
-Warning in <TStreamerInfo::BuildCheck>: 
-   The StreamerInfo for version 1 of class TObject read from the file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root
-   has a different checksum than the previously loaded StreamerInfo.
-   Reading objects of type TObject from the file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root 
-   (and potentially other files) might not work correctly.
-   Most likely the version number of the class was not properly
-   updated [See ClassDef(TObject,1)].
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 1 of class 'TObject' differs from 
-the in-memory layout version 1:
-   unsigned int fUniqueID; //
-vs
-   UInt_t fUniqueID; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 1 of class 'TObject' differs from 
-the in-memory layout version 1:
-   unsigned int fBits; //
-vs
-   UInt_t fBits; //
-Warning in <TStreamerInfo::BuildCheck>: 
-   The StreamerInfo for version 3 of class TCollection read from the file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root
-   has a different checksum than the previously loaded StreamerInfo.
-   Reading objects of type TCollection from the file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root 
-   (and potentially other files) might not work correctly.
-   Most likely the version number of the class was not properly
-   updated [See ClassDef(TCollection,3)].
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 3 of class 'TCollection' differs from 
-the in-memory layout version 3:
-   int fSize; //
-vs
-   Int_t fSize; //
-Warning in <TStreamerInfo::BuildCheck>: 
-   The StreamerInfo of class TNtuple read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root
-   has the same version (=2) as the active class but a different checksum.
-   You should update the version to ClassDef(TNtuple,3).
-   Do not try to write objects with the current class definition,
-   the files will not be readable.
-
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 2 of class 'TNtuple' differs from 
-the in-memory layout version 2:
-   int fNvar; //
-vs
-   Int_t fNvar; //
-Warning in <TStreamerInfo::BuildCheck>: 
-   The StreamerInfo of class TTree read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root
-   has the same version (=19) as the active class but a different checksum.
-   You should update the version to ClassDef(TTree,20).
-   Do not try to write objects with the current class definition,
-   the files will not be readable.
-
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 19 of class 'TTree' differs from 
-the in-memory layout version 19:
-   double fWeight; //
-vs
-   Double_t fWeight; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 19 of class 'TTree' differs from 
-the in-memory layout version 19:
-   int fTimerInterval; //
-vs
-   Int_t fTimerInterval; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 19 of class 'TTree' differs from 
-the in-memory layout version 19:
-   int fScanField; //
-vs
-   Int_t fScanField; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 19 of class 'TTree' differs from 
-the in-memory layout version 19:
-   int fUpdate; //
-vs
-   Int_t fUpdate; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 19 of class 'TTree' differs from 
-the in-memory layout version 19:
-   int fDefaultEntryOffsetLen; //
-vs
-   Int_t fDefaultEntryOffsetLen; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 19 of class 'TTree' differs from 
-the in-memory layout version 19:
-   int fNClusterRange; //
-vs
-   Int_t fNClusterRange; //
-Warning in <TStreamerInfo::BuildCheck>: 
-   The StreamerInfo of class TBranch read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root
-   has the same version (=12) as the active class but a different checksum.
-   You should update the version to ClassDef(TBranch,13).
-   Do not try to write objects with the current class definition,
-   the files will not be readable.
-
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 12 of class 'TBranch' differs from 
-the in-memory layout version 12:
-   int fCompress; //
-vs
-   Int_t fCompress; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 12 of class 'TBranch' differs from 
-the in-memory layout version 12:
-   int fBasketSize; //
-vs
-   Int_t fBasketSize; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 12 of class 'TBranch' differs from 
-the in-memory layout version 12:
-   int fEntryOffsetLen; //
-vs
-   Int_t fEntryOffsetLen; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 12 of class 'TBranch' differs from 
-the in-memory layout version 12:
-   int fWriteBasket; //
-vs
-   Int_t fWriteBasket; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 12 of class 'TBranch' differs from 
-the in-memory layout version 12:
-   int fOffset; //
-vs
-   Int_t fOffset; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 12 of class 'TBranch' differs from 
-the in-memory layout version 12:
-   int fMaxBaskets; //
-vs
-   Int_t fMaxBaskets; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 12 of class 'TBranch' differs from 
-the in-memory layout version 12:
-   int fSplitLevel; //
-vs
-   Int_t fSplitLevel; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 12 of class 'TBranch' differs from 
-the in-memory layout version 12:
-   int* fBasketBytes; //fMaxBaskets
-vs
-   Int_t* fBasketBytes; //fMaxBaskets
-Warning in <TStreamerInfo::BuildCheck>: 
-   The StreamerInfo of class TLeafF read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root
-   has the same version (=1) as the active class but a different checksum.
-   You should update the version to ClassDef(TLeafF,2).
-   Do not try to write objects with the current class definition,
-   the files will not be readable.
-
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 1 of class 'TLeafF' differs from 
-the in-memory layout version 1:
-   float fMinimum; //
-vs
-   Float_t fMinimum; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 1 of class 'TLeafF' differs from 
-the in-memory layout version 1:
-   float fMaximum; //
-vs
-   Float_t fMaximum; //
-Warning in <TStreamerInfo::BuildCheck>: 
-   The StreamerInfo of class TLeaf read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root
-   has the same version (=2) as the active class but a different checksum.
-   You should update the version to ClassDef(TLeaf,3).
-   Do not try to write objects with the current class definition,
-   the files will not be readable.
-
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 2 of class 'TLeaf' differs from 
-the in-memory layout version 2:
-   int fLen; //
-vs
-   Int_t fLen; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 2 of class 'TLeaf' differs from 
-the in-memory layout version 2:
-   int fLenType; //
-vs
-   Int_t fLenType; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 2 of class 'TLeaf' differs from 
-the in-memory layout version 2:
-   int fOffset; //
-vs
-   Int_t fOffset; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 2 of class 'TLeaf' differs from 
-the in-memory layout version 2:
-   bool fIsRange; //
-vs
-   Bool_t fIsRange; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 2 of class 'TLeaf' differs from 
-the in-memory layout version 2:
-   bool fIsUnsigned; //
-vs
-   Bool_t fIsUnsigned; //
-Warning in <TStreamerInfo::BuildCheck>: 
-   The StreamerInfo of class TRefTable read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root
-   has the same version (=3) as the active class but a different checksum.
-   You should update the version to ClassDef(TRefTable,4).
-   Do not try to write objects with the current class definition,
-   the files will not be readable.
-
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 3 of class 'TRefTable' differs from 
-the in-memory layout version 3:
-   int fSize; //
-vs
-   Int_t fSize; //
-Warning in <TStreamerInfo::BuildCheck>: 
-   The StreamerInfo of class TObjArray read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root
-   has the same version (=3) as the active class but a different checksum.
-   You should update the version to ClassDef(TObjArray,4).
-   Do not try to write objects with the current class definition,
-   the files will not be readable.
-
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 3 of class 'TObjArray' differs from 
-the in-memory layout version 3:
-   int fLowerBound; //
-vs
-   Int_t fLowerBound; //
-Warning in <TStreamerInfo::CompareContent>: The following data member of
-the on-file layout version 3 of class 'TObjArray' differs from 
-the in-memory layout version 3:
-   int fLast; //
-vs
-   Int_t fLast; //
-
- *** Break *** segmentation violation
-
-
-
-===========================================================
-There was a crash.
-This is the entire stack trace of all threads:
-===========================================================
-#0  0x0000003769eac61e in waitpid () from /lib64/libc.so.6
-#1  0x0000003769e3e609 in do_system () from /lib64/libc.so.6
-#2  0x00007f17cb34e81c in TUnixSystem::StackTrace() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#3  0x00007f17cb351003 in TUnixSystem::DispatchSignals(ESignals) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#4  <signal handler called>
-#5  0x00007f17ca0ffd07 in NBD::fit() () from /home/xuq7/HI/centrality/NBD/PbPb/NBDclass_C.so
-#6  0x00007f17ca100eb9 in NBD::calcvar() () from /home/xuq7/HI/centrality/NBD/PbPb/NBDclass_C.so
-#7  0x00007f17ca102e91 in G__NBDclass_C_ACLiC_dict_3306_0_9(G__value*, char const*, G__param*, int) () from /home/xuq7/HI/centrality/NBD/PbPb/NBDclass_C.so
-#8  0x00007f17ca75e767 in Cint::G__ExceptionWrapper(int (*)(G__value*, char const*, G__param*, int), G__value*, char*, G__param*, int) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#9  0x00007f17ca8075f1 in G__execute_call () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#10 0x00007f17ca8079be in G__call_cppfunc () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#11 0x00007f17ca7ec9b3 in G__interpret_func () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#12 0x00007f17ca7d65d4 in G__getfunction () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#13 0x00007f17ca8b2c4c in G__getstructmem(int, G__FastAllocString&, char*, int, char*, int*, G__var_array*, int) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#14 0x00007f17ca8aa518 in G__getvariable () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#15 0x00007f17ca7b1257 in G__getitem () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#16 0x00007f17ca7b7f1a in G__getexpr () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#17 0x00007f17ca83768c in G__exec_statement () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#18 0x00007f17ca7eaaea in G__interpret_func () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#19 0x00007f17ca7d6639 in G__getfunction () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#20 0x00007f17ca7b19b2 in G__getitem () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#21 0x00007f17ca7b7f1a in G__getexpr () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#22 0x00007f17ca7c332d in G__calc_internal () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#23 0x00007f17ca844e60 in G__process_cmd () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
-#24 0x00007f17cb31b4f1 in TCint::ProcessLine(char const*, TInterpreter::EErrorCode*) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#25 0x00007f17cb312023 in TCint::ProcessLineSynch(char const*, TInterpreter::EErrorCode*) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#26 0x00007f17cb286ddd in TApplication::ExecuteFile(char const*, int*, bool) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#27 0x00007f17cb285b9a in TApplication::ProcessLine(char const*, bool, int*) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#28 0x00007f17cb89cb49 in TRint::HandleTermInput() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libRint.so
-#29 0x00007f17cb34ffed in TUnixSystem::CheckDescriptors() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#30 0x00007f17cb351738 in TUnixSystem::DispatchOneEvent(bool) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#31 0x00007f17cb2d8a86 in TSystem::InnerLoop() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#32 0x00007f17cb2da654 in TSystem::Run() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#33 0x00007f17cb283b1f in TApplication::Run(bool) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
-#34 0x00007f17cb89d817 in TRint::Run(bool) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libRint.so
-#35 0x0000000000400f8c in main ()
-===========================================================
-
-
-The lines below might hint at the cause of the crash.
-If they do not help you then please submit a bug report at
-http://root.cern.ch/bugs. Please post the ENTIRE stack trace
-from above as an attachment in addition to anything else
-that might help us fixing this issue.
-===========================================================
-#5  0x00007f17ca0ffd07 in NBD::fit() () from /home/xuq7/HI/centrality/NBD/PbPb/NBDclass_C.so
-#6  0x00007f17ca100eb9 in NBD::calcvar() () from /home/xuq7/HI/centrality/NBD/PbPb/NBDclass_C.so
-===========================================================
-
-
-Function store() busy flag cleared
+vmp1121
+**** Following environment variables are going to be unset.
+       XDAQ_DOCUMENT_ROOT
+       XDAQ_OS
+       G4NEUTRONXS
+       LHAPATH
+       XDAQ_PLATFORM
+       XDAQ_ROOT
+2	0.01	2.9932e+06
+2	0.11	3.08345e+06
+2	0.21	3.07963e+06
+2	0.31	3.24653e+06
+2	0.41	3.15317e+06
+2	0.51	3.18037e+06
+2	0.61	3.19781e+06
+2	0.71	3.03097e+06
+2	0.81	3.06454e+06
+2	0.91	3.0518e+06
+2	1.01	3.11197e+06
+2	1.11	2.99994e+06
+2	1.21	2.97139e+06
+2	1.31	3.03601e+06
+2	1.41	2.93231e+06
+2	1.51	3.08643e+06
+2	1.61	3.0299e+06
+2	1.71	3.04029e+06
+2	1.81	3.11245e+06
+2	1.91	2.99442e+06
+2	2.01	2.99988e+06
+2.5	0.01	2.98286e+06
+2.5	0.11	3.08422e+06
+2.5	0.21	3.18236e+06
+2.5	0.31	3.09869e+06
+2.5	0.41	3.22016e+06
+2.5	0.51	3.25163e+06
+2.5	0.61	3.10942e+06

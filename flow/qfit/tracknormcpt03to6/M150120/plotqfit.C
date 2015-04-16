@@ -175,11 +175,8 @@ fout->cd();
 vecr.Write(Form("r_%d",ibin));
 vecrnonf.Write(Form("rnonf_%d",ibin));
 }
-/*
-c2->Print("hqx_fit.png");
-c3->Print("hqy_fit.png");
+
 c4->Print("hq2_fit.png");
-c5->Print("hq2nonf_fit.png");
-*/
+
 }
 

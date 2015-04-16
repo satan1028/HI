@@ -1,12 +1,13 @@
-#include "/afs/cern.ch/user/q/qixu/CMSSW_6_2_5/src/Centrality/NBD_Glauber_fit/NBD/parameter.h"
+#include "../parameter.h"
 #include "par.h"
 #include <vector>
 void Drawfit(){
-	int sth=1, Gth=0;
+	int sth=0, Gth=0;
 	TFile *f = TFile::Open(outG);
-	if(sth==0){TString dirname = "std";}
-        else if(sth==1){TString dirname ="Gri055";}
-        else {TString dirname ="Gri101";}
+        TString dirname;
+	if(sth==0){dirname = "std";}
+        else if(sth==1){dirname ="Gri055";}
+        else { dirname ="Gri101";}
         TObjString* dataname = (TObjString*)f->Get(Form("dataname"));
         TObjString* histoname = (TObjString*)f->Get(Form("histoname"));
 	        TString name;
@@ -90,7 +91,7 @@ void Drawfit(){
         TLegend *leg = new TLegend(0.56, 0.7, 0.8, 0.9);
         leg->SetFillColor(10);
         leg->SetFillStyle(0);
-        leg->SetBorderSize(0.035);
+        leg->SetBorderSize(0);
         leg->SetTextFont(42);
         leg->SetTextSize(0.045);
         leg->AddEntry(histo_obs_norm,"CMS pPb real data","p");
@@ -115,5 +116,6 @@ void Drawfit(){
                 h2_Clone->GetXaxis()->SetRangeUser((*kpoint)[i],(*kpoint)[i+1]);
 		h2_Clone->Draw("same");
                 }
+	histo_obs_norm->Draw("Psame");
 	c1->SaveAs(Form("%sfit.png",dirname.Data()));	
 }
