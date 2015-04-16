@@ -11,8 +11,8 @@ int xtheta=0;
     gStyle->SetOptFit(1111);
 TFile *f = TFile::Open("mergedV_Sum.root");
 TFile *fout = TFile::Open("qfitV.root","Update");
-TVectorD *vecDavgmult = f->Get(Form("avgmultall"));
-TVectorD *vecDavgtrk = f->Get(Form("avgtrk"));
+TVectorD *vecDavgmult = (TVectorD*)f->Get(Form("avgmultall"));
+TVectorD *vecDavgtrk = (TVectorD*)f->Get(Form("avgtrk"));
 double *avgmult = vecDavgmult->GetMatrixArray();
 double *avgtrk = vecDavgtrk->GetMatrixArray();
 TLatex *t= new TLatex();
@@ -25,7 +25,8 @@ TH1D* hqx = (TH1D*)f->Get(Form("D_%d/hqx",ibin));
 TH1D* hqy = (TH1D*)f->Get(Form("D_%d/hqy",ibin));
 TH1D* hq2 = (TH1D*)f->Get(Form("D_%d/hq2",ibin));
 TH1D* hq2nonf = (TH1D*)f->Get(Form("D_%d/hq2nonf",ibin));
-for(int k=0;k<nbin24;k++){
+int k;
+for(k=0;k<nbin24;k++){
     if(avgtrk[ibin]>avgtrkbin[k]&& avgtrk[ibin]<=avgtrkbin[k+1])
         break;
 }
@@ -40,8 +41,8 @@ for(int k=0;k<nbin24;k++){
         //normalizeByBinWidth(hqy);
         hq2->Scale(1./hq2->Integral(0,-1,"width"));
         hq2nonf->Scale(1./hq2nonf->Integral(0,-1,"width"));
-ffit = new TF1(Form("ffit"),"1./(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",0,10);
-f1fit = new TF1(Form("f1fit"),"x/(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",0,10);
+TF1 *ffit = new TF1(Form("ffit"),"1./(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",0,10);
+TF1* f1fit = new TF1(Form("f1fit"),"x/(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",0,10);
 //ffit = new TF1(Form("ffit"),"1./([0])*TMath::Exp(-([1]*[1]*[2]+x*x)/(2*[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/([0]))",0,10);
 //f1fit = new TF1(Form("f1fit"),"x/([0])*TMath::Exp(-([1]*[1]*[2]+x*x)/(2*[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/([0]))",0,10);
 ffit->SetParNames("g2","v2","M");
@@ -184,8 +185,8 @@ hq2nonf_cp->Draw("Psame");
 t->DrawLatex(0.5,0.2,Form("N_{trk}^{offline} = %.2f", avgtrk[ibin]*2));
 
 fout->cd();
-vecr.Write(Form("r_%d_%d",ibin,fixv2));
-vecrnonf.Write(Form("rnonf_%d_%d",ibin,fixv2));
+vecr.Write(Form("r_%d_%d",ibin,fixv2),TObject::kOverwrite);
+vecrnonf.Write(Form("rnonf_%d_%d",ibin,fixv2),TObject::kOverwrite);
 }
 /*
 c2->Print("hqx_fit.png");
