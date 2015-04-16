@@ -186,5 +186,6 @@ c3->Print("hqy_fit.png");
 c4->Print("hq2_fit.png");
 c5->Print("hq2nonf_fit.png");
 */
+c4->Print("hq2_fit.png");
 }
 
