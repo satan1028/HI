@@ -29,6 +29,10 @@ void plotallbins(){
     TGraphErrors *grg = new TGraphErrors(nbin,avgtrk[0],g2[0],0,g2err[0]);
     TGraphErrors *grgnonf = new TGraphErrors(nbin,avgtrk[0],g2[1],0,g2err[1]);
     TGraphErrors *grgcalc = new TGraphErrors(nbin,avgtrk[0],g2calc[0],0,g2err[0]);
+    TLegend *tl = new TLegend(0.40,0.62,0.80,0.88);
+    tl->SetTextSize(0.035);
+    tl->SetBorderSize(0);
+    tl->SetFillColor(0);
 
     TCanvas *c1 = new TCanvas("c1","c1",600,600);
     grv->SetTitle("");
@@ -43,9 +47,12 @@ void plotallbins(){
     grvcalc->SetMarkerStyle(29);
     grvcalc->SetMarkerColor(4);
     grvcalc->SetLineColor(4);
+    tl->AddEntry(grv,"result by fitting","lp");
+    tl->AddEntry(grvcalc,"result by calculating","lp");
     grv->Draw("AP");
-    grvnonf->Draw("Psame");
+    //grvnonf->Draw("Psame");
     grvcalc->Draw("Psame");
+    tl->Draw("same");
 
     TCanvas *c2 = new TCanvas("c2","c2",600,600);
     grg->SetTitle("");
@@ -61,8 +68,9 @@ void plotallbins(){
     grgcalc->SetMarkerColor(4);
     grgcalc->SetLineColor(4);
     grg->Draw("AP");
-    grgnonf->Draw("Psame");
+    //grgnonf->Draw("Psame");
     grgcalc->Draw("Psame");
+    tl->Draw("same");
 
     c1->Print("v2vsNtrk.png");
     c2->Print("g2vsNtrk.png");
