@@ -10,8 +10,8 @@ void plotqdisallbins(){
     gStyle->SetOptFit(1111);
     const int ntotbins = 5;
     const int nnonf = 2;
-    TCanvas *c4 = new TCanvas("c4","c4",500,1000);
-    c4->Divide(1,2);
+    TCanvas *c4 = new TCanvas("c4","c4",1000,500);
+    c4->Divide(2,1);
     TLegend *tl = new TLegend(0.60,0.42,0.80,0.88);
     tl->SetTextSize(0.035);
     tl->SetBorderSize(0);
@@ -25,7 +25,7 @@ void plotqdisallbins(){
         double *avgtrk = vecDavgtrk->GetMatrixArray();
         int counter=0;
         for(int ibin=0;ibin<nbin;ibin++){	//ibin<1
-            if(ibin!=10) continue;
+     //       if(ibin!=10) continue;
             TH1D* hq = (TH1D*)f->Get(Form("D_%d/D_%d/hq",ibin,xtheta));
             TH1D* hqx = (TH1D*)f->Get(Form("D_%d/hqx",ibin));
             TH1D* hqy = (TH1D*)f->Get(Form("D_%d/hqy",ibin));
@@ -184,6 +184,6 @@ c3->Print("hqy_fit.png");
 c4->Print("hq2_fit.png");
 c5->Print("hq2nonf_fit.png");
 */
-c4->Print("hq2_fit_10.png");
+c4->Print("hq2_fit.png");
 }
 
