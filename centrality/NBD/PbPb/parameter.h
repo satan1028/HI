@@ -21,7 +21,7 @@ const int marker[nGlau+2]={29,20,24,21,25,27,33,28,34,20,24};
 const int color_[10]={2,3,4,5,6,7,8,9,10};
 
 TString stdGlaulist[nGlau]={
- "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_Default_1M.root",
+/* "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_Default_1M.root",
  "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_SkinDepth536fm_1M.root",
  "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_SkinDepth556fm_1M.root",
  "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_dMin00fm_1M.root",
@@ -29,7 +29,16 @@ TString stdGlaulist[nGlau]={
  "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_NuclearRadius656fm_1M.root",
  "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_NuclearRadius668fm_1M.root",
  "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_SigmaInelNN65mb_1M.root",
- "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_SigmaInelNN75mb_1M.root"
+ "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_SigmaInelNN75mb_1M.root"*/
+"/store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_Default_1M.root",
+"/store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_R649_1M.root",
+"/store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_R675_1M.root",
+"/store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SD4914_1M.root",
+"/store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SD6006_1M.root",
+"/store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN59_1M.root",
+"/store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_SigmaNN69_1M.root",
+"/store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root",
+"/store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin08_1M.root"
 };
 
 TString Gri055Glaulist[nGlau]={

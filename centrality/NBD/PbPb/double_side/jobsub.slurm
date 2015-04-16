@@ -11,9 +11,10 @@ echo $SLURM_JOB_NAME
 echo $SLURM_JOB_NODELIST
 
 #source /cvmfs/cms.cern.ch/cmsset_default.sh
-export SCRAM_ARCH=slc6_amd64_gcc472
+export SCRAM_ARCH=slc6_amd64_gcc491
 
-cd /home/xuq7/HI/CMSSW_5_3_20/src
+#cd /home/xuq7/HI/CMSSW_5_3_20/src
+cd /home/xuq7/HI/CMSSW_7_5_0_pre2/src
 #cmsenv
 eval `scramv1 runtime -sh`
 cd /home/xuq7/HI/centrality/NBD/PbPb/double_side

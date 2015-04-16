@@ -117,7 +117,7 @@ void NBD::fit(){
 			NBD_fun->SetParameter(0,1);	//[0]: Normalized constant
 			NBD_fun->SetParameter(1,k);	//[1]: k value
 			NBD_fun->SetParameter(2,mu);	//[2]: mu value
-			TTree *t = (TTree*)fGlauber->Get("nt_p_Pb");
+			TTree *t = (TTree*)fGlauber->Get("nt_Pb_Pb");
 
 			Float_t Ncoll, Npart, B;	Long_t Nevent;
 
@@ -228,7 +228,7 @@ void NBD::calcvar(){
      	NBD_fun->SetParameter(0,1);
         NBD_fun->SetParameter(1,kbest[0]);
         NBD_fun->SetParameter(2,mubest[0]);
-	TTree *t = (TTree*) fGlauber ->Get("nt_p_Pb");
+	TTree *t = (TTree*) fGlauber ->Get("nt_Pb_Pb");
 	Float_t Ncoll, Npart, B;
 	Long_t Nevent;
 

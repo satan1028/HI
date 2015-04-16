@@ -6,26 +6,32 @@ void plotqfit(int fixv2=0){
     const int nbin24 = 12;
     const double avgtrkbin[nbin24]={44.36,54.33,68.63,88.39,108.2,131.3,162.1,196.6,227.5,247.2,269.2,301.2};
     const double V24[nbin24]={0.02965,0.03913,0.04832,0.04941,0.04822,0.04955,0.049,0.04805,0.04709,0.04665,0.04772,0.04797};
-int xtheta=0;
+    int xtheta=0;
     gStyle->SetOptStat(1011);
     gStyle->SetOptFit(1111);
 TFile *f = TFile::Open("mergedV_Sum.root");
 TFile *fout = TFile::Open("qfitV.root","Update");
-TVectorD *vecDavgmult = f->Get(Form("avgmultall"));
-TVectorD *vecDavgtrk = f->Get(Form("avgtrk"));
+TVectorD *vecDavgmult = (TVectorD*)f->Get(Form("avgmultall"));
+TVectorD *vecDavgtrk = (TVectorD*)f->Get(Form("avgtrk"));
+TVectorD *vecDq22 = (TVectorD*)f->Get(Form("q22"));
+TVectorD *vecDq24 = (TVectorD*)f->Get(Form("q24"));
 double *avgmult = vecDavgmult->GetMatrixArray();
 double *avgtrk = vecDavgtrk->GetMatrixArray();
+double *q22 = vecDq22->GetMatrixArray();
+double *q24 = vecDq24->GetMatrixArray();
 TLatex *t= new TLatex();
 t->SetNDC();
 t->SetTextSize(0.04);
 t->SetTextFont(42);
 for(int ibin=0;ibin<nbin;ibin++){	//ibin<1
+ //   if(ibin!=15) continue;
 TH1D* hq = (TH1D*)f->Get(Form("D_%d/D_%d/hq",ibin,xtheta));
 TH1D* hqx = (TH1D*)f->Get(Form("D_%d/hqx",ibin));
 TH1D* hqy = (TH1D*)f->Get(Form("D_%d/hqy",ibin));
 TH1D* hq2 = (TH1D*)f->Get(Form("D_%d/hq2",ibin));
 TH1D* hq2nonf = (TH1D*)f->Get(Form("D_%d/hq2nonf",ibin));
-for(int k=0;k<nbin24;k++){
+int k;
+for(k=0;k<nbin24;k++){
     if(avgtrk[ibin]>avgtrkbin[k]&& avgtrk[ibin]<=avgtrkbin[k+1])
         break;
 }
@@ -40,8 +46,8 @@ for(int k=0;k<nbin24;k++){
         //normalizeByBinWidth(hqy);
         hq2->Scale(1./hq2->Integral(0,-1,"width"));
         hq2nonf->Scale(1./hq2nonf->Integral(0,-1,"width"));
-ffit = new TF1(Form("ffit"),"1./(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",0,10);
-f1fit = new TF1(Form("f1fit"),"x/(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",0,10);
+TF1 *ffit = new TF1(Form("ffit"),"1./(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",0,10);
+TF1* f1fit = new TF1(Form("f1fit"),"x/(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",0,10);
 //ffit = new TF1(Form("ffit"),"1./([0])*TMath::Exp(-([1]*[1]*[2]+x*x)/(2*[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/([0]))",0,10);
 //f1fit = new TF1(Form("f1fit"),"x/([0])*TMath::Exp(-([1]*[1]*[2]+x*x)/(2*[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/([0]))",0,10);
 ffit->SetParNames("g2","v2","M");
@@ -115,7 +121,7 @@ hq2->SetLineColor(4);
 hq2->SetMarkerSize(0.5);
 hq2->Fit(Form("f1fit"),"R","",0,10);
 TVectorD vecr;
-vecr.ResizeTo(6);
+vecr.ResizeTo(8);
 vecr[0]=f1fit->GetParameter(0);
 vecr[1]=f1fit->GetParError(0);
 vecr[2]=f1fit->GetParameter(1);
@@ -161,7 +167,7 @@ f1fit->FixParameter(1,V24[k]);
 //f1fit->FixParameter(0,1);
 hq2nonf->Fit(Form("f1fit"),"R","",0,10);
 TVectorD vecrnonf;
-vecrnonf.ResizeTo(6);
+vecrnonf.ResizeTo(8);
 vecrnonf[0]=f1fit->GetParameter(0);
 vecrnonf[1]=f1fit->GetParError(0);
 vecrnonf[2]=f1fit->GetParameter(1);
@@ -183,9 +189,14 @@ hq2nonf_cp->Fit(Form("ffit"),"R","",0,10);
 hq2nonf_cp->Draw("Psame");
 t->DrawLatex(0.5,0.2,Form("N_{trk}^{offline} = %.2f", avgtrk[ibin]*2));
 
+double v2calc = TMath::Sqrt(TMath::Sqrt(2*q22[ibin]*q22[ibin]-q24[ibin])/avgmult[ibin]);
+double g2calc = q22[ibin]-TMath::Sqrt(2*q22[ibin]*q22[ibin]-q24[ibin])-1;
+vecr[6]=v2calc;
+vecr[7]=g2calc;
+
 fout->cd();
-vecr.Write(Form("r_%d_%d",ibin,fixv2));
-vecrnonf.Write(Form("rnonf_%d_%d",ibin,fixv2));
+vecr.Write(Form("r_%d_%d",ibin,fixv2),TObject::kOverwrite);
+vecrnonf.Write(Form("rnonf_%d_%d",ibin,fixv2),TObject::kOverwrite);
 }
 /*
 c2->Print("hqx_fit.png");
@@ -194,4 +205,5 @@ c4->Print("hq2_fit.png");
 c5->Print("hq2nonf_fit.png");
 */
 }
+
 

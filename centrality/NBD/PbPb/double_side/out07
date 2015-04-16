@@ -1,443 +1,294 @@
-1.243	0.491	115.929
-1.243	0.492	117.083
-1.243	0.493	124.731
-1.243	0.494	125.596
-1.243	0.495	123.617
-1.243	0.496	122.432
-1.243	0.497	126.285
-1.243	0.498	137.805
-1.243	0.499	138.588
-1.243	0.5	143.348
-1.243	0.501	146.163
-1.243	0.502	155.558
-1.243	0.503	166.831
-1.243	0.504	177.103
-1.243	0.505	182.522
-1.243	0.506	193.009
-1.243	0.507	203.455
-1.243	0.508	211.571
-1.243	0.509	225.288
-1.243	0.51	237.391
-1.243	0.511	248.02
-1.244	0.491	120.777
-1.244	0.492	112.557
-1.244	0.493	114.408
-1.244	0.494	121.886
-1.244	0.495	126.01
-1.244	0.496	121.647
-1.244	0.497	122.462
-1.244	0.498	125.346
-1.244	0.499	136.145
-1.244	0.5	138.699
-1.244	0.501	144.116
-1.244	0.502	146.059
-1.244	0.503	155.574
-1.244	0.504	164.802
-1.244	0.505	173.22
-1.244	0.506	179.32
-1.244	0.507	188.568
-1.244	0.508	199.592
-1.244	0.509	210.759
-1.244	0.51	224.564
-1.244	0.511	233.604
-1.245	0.491	128.712
-1.245	0.492	117.356
-1.245	0.493	110.038
-1.245	0.494	114.501
-1.245	0.495	118.882
-1.245	0.496	126.461
-1.245	0.497	122.427
-1.245	0.498	123.529
-1.245	0.499	126.228
-1.245	0.5	134.777
-1.245	0.501	139.042
-1.245	0.502	141.186
-1.245	0.503	147.929
-1.245	0.504	154.46
-1.245	0.505	164.797
-1.245	0.506	171.909
-1.245	0.507	177.461
-1.245	0.508	190.258
-1.245	0.509	196.01
-1.245	0.51	209.9
-1.245	0.511	221.942
-1.246	0.491	132.344
-1.246	0.492	127.953
-1.246	0.493	116.998
-1.246	0.494	111.085
-1.246	0.495	114.656
-1.246	0.496	118.904
-1.246	0.497	124.459
-1.246	0.498	124.585
-1.246	0.499	122.04
-1.246	0.5	126.005
-1.246	0.501	135.065
-1.246	0.502	142.117
-1.246	0.503	137.034
-1.246	0.504	146.725
-1.246	0.505	154.296
-1.246	0.506	162.071
-1.246	0.507	168.23
-1.246	0.508	174.094
-1.246	0.509	186.456
-1.246	0.51	195.807
-1.246	0.511	210.203
-1.247	0.491	134.888
-1.247	0.492	134.902
-1.247	0.493	127.658
-1.247	0.494	115.188
-1.247	0.495	111.627
-1.247	0.496	112.525
-1.247	0.497	119.623
-1.247	0.498	123.403
-1.247	0.499	119.006
-1.247	0.5	124.393
-1.247	0.501	128.477
-1.247	0.502	134.211
-1.247	0.503	137.562
-1.247	0.504	136.17
-1.247	0.505	144.557
-1.247	0.506	154.371
-1.247	0.507	160.193
-1.247	0.508	167.975
-1.247	0.509	172.028
-1.247	0.51	183.529
-1.247	0.511	190.678
-1.248	0.491	141.931
-1.248	0.492	134.861
-1.248	0.493	136.23
-1.248	0.494	127.29
-1.248	0.495	113.75
-1.248	0.496	111.531
-1.248	0.497	111.218
-1.248	0.498	119.332
-1.248	0.499	121.043
-1.248	0.5	119.318
-1.248	0.501	123.959
-1.248	0.502	127.84
-1.248	0.503	133.202
-1.248	0.504	137.817
-1.248	0.505	135.938
-1.248	0.506	142.327
-1.248	0.507	153.776
-1.248	0.508	156.595
-1.248	0.509	166.738
-1.248	0.51	171.122
-1.248	0.511	181.414
-1.249	0.491	142.864
-1.249	0.492	140.246
-1.249	0.493	136.973
-1.249	0.494	135.676
-1.249	0.495	125.224
-1.249	0.496	114.051
-1.249	0.497	113.495
-1.249	0.498	110.326
-1.249	0.499	121.406
-1.249	0.5	115.534
-1.249	0.501	118.051
-1.249	0.502	122.095
-1.249	0.503	126.883
-1.249	0.504	134.329
-1.249	0.505	137.037
-1.249	0.506	134.507
-1.249	0.507	142.787
-1.249	0.508	154.068
-1.249	0.509	156.682
-1.249	0.51	162.788
-1.249	0.511	170.906
-1.25	0.491	151.576
-1.25	0.492	143.556
-1.25	0.493	140.03
-1.25	0.494	136.502
-1.25	0.495	132.933
-1.25	0.496	122.166
-1.25	0.497	113.83
-1.25	0.498	113.156
-1.25	0.499	110.944
-1.25	0.5	120.237
-1.25	0.501	114.69
-1.25	0.502	117.968
-1.25	0.503	124.018
-1.25	0.504	127.644
-1.25	0.505	132.597
-1.25	0.506	133.731
-1.25	0.507	135.501
-1.25	0.508	142.641
-1.25	0.509	154.396
-1.25	0.51	154.466
-1.25	0.511	163.888
-1.251	0.491	166.865
-1.251	0.492	151.237
-1.251	0.493	144.85
-1.251	0.494	141.196
-1.251	0.495	142.384
-1.251	0.496	129.782
-1.251	0.497	121.626
-1.251	0.498	112.929
-1.251	0.499	113.032
-1.251	0.5	114.319
-1.251	0.501	119.075
-1.251	0.502	112.52
-1.251	0.503	116.205
-1.251	0.504	123.556
-1.251	0.505	123.401
-1.251	0.506	134.589
-1.251	0.507	130.946
-1.251	0.508	133.743
-1.251	0.509	142.029
-1.251	0.51	153.855
-1.251	0.511	154.199
-1.252	0.491	177.664
-1.252	0.492	163.991
-1.252	0.493	150.712
-1.252	0.494	143.846
-1.252	0.495	139.313
-1.252	0.496	143.937
-1.252	0.497	129.313
-1.252	0.498	123.927
-1.252	0.499	114.313
-1.252	0.5	110.814
-1.252	0.501	112.29
-1.252	0.502	116.784
-1.252	0.503	115.555
-1.252	0.504	115.568
-1.252	0.505	122.99
-1.252	0.506	125.452
-1.252	0.507	131.863
-1.252	0.508	130.528
-1.252	0.509	131.867
-1.252	0.51	140.553
-1.252	0.511	150.977
-1.253	0.491	190.241
-1.253	0.492	178.3
-1.253	0.493	163.25
-1.253	0.494	153.479
-1.253	0.495	141.323
-1.253	0.496	138.4
-1.253	0.497	141.671
-1.253	0.498	128.659
-1.253	0.499	122.24
-1.253	0.5	116.227
-1.253	0.501	109.908
-1.253	0.502	115.738
-1.253	0.503	115.281
-1.253	0.504	114.455
-1.253	0.505	115.075
-1.253	0.506	121.859
-1.253	0.507	126.819
-1.253	0.508	128.551
-1.253	0.509	129.158
-1.253	0.51	131.294
-1.253	0.511	138.543
-1.254	0.491	199.761
-1.254	0.492	187.046
-1.254	0.493	178.835
-1.254	0.494	161.551
-1.254	0.495	153.709
-1.254	0.496	139.693
-1.254	0.497	137.965
-1.254	0.498	135.634
-1.254	0.499	127.109
-1.254	0.5	123.103
-1.254	0.501	117.565
-1.254	0.502	110.494
-1.254	0.503	115.793
-1.254	0.504	116.497
-1.254	0.505	112.381
-1.254	0.506	114.062
-1.254	0.507	122.59
-1.254	0.508	125.816
-1.254	0.509	130.552
-1.254	0.51	129.768
-1.254	0.511	131.206
-1.255	0.491	217.689
-1.255	0.492	200.252
-1.255	0.493	188.836
-1.255	0.494	176.042
-1.255	0.495	161.189
-1.255	0.496	154.847
-1.255	0.497	142.81
-1.255	0.498	140.089
-1.255	0.499	135.182
-1.255	0.5	130.677
-1.255	0.501	122.648
-1.255	0.502	117.004
-1.255	0.503	111.598
-1.255	0.504	114.463
-1.255	0.505	115.968
-1.255	0.506	114.303
-1.255	0.507	114.577
-1.255	0.508	124.847
-1.255	0.509	127.688
-1.255	0.51	128.718
-1.255	0.511	130.628
-1.256	0.491	226.917
-1.256	0.492	216.607
-1.256	0.493	200.455
-1.256	0.494	186.085
-1.256	0.495	172.166
-1.256	0.496	164.479
-1.256	0.497	153.58
-1.256	0.498	142.234
-1.256	0.499	140.215
-1.256	0.5	131.506
-1.256	0.501	129.216
-1.256	0.502	125.245
-1.256	0.503	115.073
-1.256	0.504	111.167
-1.256	0.505	110.011
-1.256	0.506	115.229
-1.256	0.507	113.656
-1.256	0.508	113.695
-1.256	0.509	123.738
-1.256	0.51	126.048
-1.256	0.511	123.466
-1.257	0.491	246.999
-1.257	0.492	230.748
-1.257	0.493	214.716
-1.257	0.494	200.913
-1.257	0.495	189.045
-1.257	0.496	170.013
-1.257	0.497	164.38
-1.257	0.498	155.298
-1.257	0.499	141.447
-1.257	0.5	140.66
-1.257	0.501	130.223
-1.257	0.502	130.385
-1.257	0.503	127.114
-1.257	0.504	116.661
-1.257	0.505	114.215
-1.257	0.506	110.984
-1.257	0.507	113.428
-1.257	0.508	113.893
-1.257	0.509	113.596
-1.257	0.51	123.865
-1.257	0.511	126.029
-1.258	0.491	265.247
-1.258	0.492	247.09
-1.258	0.493	232.23
-1.258	0.494	215.146
-1.258	0.495	206.879
-1.258	0.496	186.101
-1.258	0.497	170.114
-1.258	0.498	166.005
-1.258	0.499	154.92
-1.258	0.5	145.742
-1.258	0.501	138.279
-1.258	0.502	131.093
-1.258	0.503	129.924
-1.258	0.504	128.924
-1.258	0.505	118.052
-1.258	0.506	110.357
-1.258	0.507	110.18
-1.258	0.508	111.056
-1.258	0.509	113.626
-1.258	0.51	115.902
-1.258	0.511	125.668
-1.259	0.491	285.652
-1.259	0.492	267.058
-1.259	0.493	247.634
-1.259	0.494	233.685
-1.259	0.495	214.461
-1.259	0.496	205.222
-1.259	0.497	186.991
-1.259	0.498	171.31
-1.259	0.499	165.438
-1.259	0.5	155.164
-1.259	0.501	150.718
-1.259	0.502	134.633
-1.259	0.503	132.645
-1.259	0.504	130.796
-1.259	0.505	126.448
-1.259	0.506	120.56
-1.259	0.507	112.577
-1.259	0.508	109.517
-1.259	0.509	112.794
-1.259	0.51	113.707
-1.259	0.511	115.968
-1.26	0.491	306.848
-1.26	0.492	287.724
-1.26	0.493	267.922
-1.26	0.494	249.793
-1.26	0.495	231.076
-1.26	0.496	217.579
-1.26	0.497	204.395
-1.26	0.498	184.205
-1.26	0.499	172.455
-1.26	0.5	163.112
-1.26	0.501	154.751
-1.26	0.502	146.599
-1.26	0.503	133.531
-1.26	0.504	132.108
-1.26	0.505	131.096
-1.26	0.506	125.379
-1.26	0.507	118.559
-1.26	0.508	114.35
-1.26	0.509	110.471
-1.26	0.51	112.839
-1.26	0.511	114.156
-1.261	0.491	321.785
-1.261	0.492	307.141
-1.261	0.493	287.589
-1.261	0.494	266.653
-1.261	0.495	254.09
-1.261	0.496	234.539
-1.261	0.497	215.068
-1.261	0.498	207.112
-1.261	0.499	184.24
-1.261	0.5	169.43
-1.261	0.501	163.012
-1.261	0.502	157.451
-1.261	0.503	146.969
-1.261	0.504	134.466
-1.261	0.505	130.531
-1.261	0.506	131.236
-1.261	0.507	127.77
-1.261	0.508	117.353
-1.261	0.509	116.589
-1.261	0.51	109.734
-1.261	0.511	114.793
-1.262	0.491	342.705
-1.262	0.492	323.424
-1.262	0.493	310.705
-1.262	0.494	287.651
-1.262	0.495	267.944
-1.262	0.496	254.467
-1.262	0.497	236.582
-1.262	0.498	218.297
-1.262	0.499	207.483
-1.262	0.5	185.864
-1.262	0.501	167.937
-1.262	0.502	160.968
-1.262	0.503	157.42
-1.262	0.504	146.591
-1.262	0.505	136.491
-1.262	0.506	129.88
-1.262	0.507	130.716
-1.262	0.508	127.929
-1.262	0.509	117.891
-1.262	0.51	115.489
-1.262	0.511	110.043
-1.263	0.491	366.012
-1.263	0.492	344.049
-1.263	0.493	324.994
-1.263	0.494	312.311
-1.263	0.495	293.519
-1.263	0.496	270.998
-1.263	0.497	253.953
-1.263	0.498	237.122
-1.263	0.499	221.799
-1.263	0.5	206.39
-1.263	0.501	185.953
-1.263	0.502	169.617
-1.263	0.503	161.304
-1.263	0.504	152.201
-1.263	0.505	144.436
-1.263	0.506	141.504
-1.263	0.507	130.408
-1.263	0.508	131.585
-1.263	0.509	127.041
-1.263	0.51	119.432
-1.263	0.511	113.687
-{1.259,0.508}
-109.517	57
+1295555
+jobsub.slurm
+vmp1081
+Warning in <TStreamerInfo::BuildCheck>: 
+   The StreamerInfo for version 1 of class TObject read from the file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root
+   has a different checksum than the previously loaded StreamerInfo.
+   Reading objects of type TObject from the file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root 
+   (and potentially other files) might not work correctly.
+   Most likely the version number of the class was not properly
+   updated [See ClassDef(TObject,1)].
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 1 of class 'TObject' differs from 
+the in-memory layout version 1:
+   unsigned int fUniqueID; //
+vs
+   UInt_t fUniqueID; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 1 of class 'TObject' differs from 
+the in-memory layout version 1:
+   unsigned int fBits; //
+vs
+   UInt_t fBits; //
+Warning in <TStreamerInfo::BuildCheck>: 
+   The StreamerInfo for version 3 of class TCollection read from the file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root
+   has a different checksum than the previously loaded StreamerInfo.
+   Reading objects of type TCollection from the file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root 
+   (and potentially other files) might not work correctly.
+   Most likely the version number of the class was not properly
+   updated [See ClassDef(TCollection,3)].
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 3 of class 'TCollection' differs from 
+the in-memory layout version 3:
+   int fSize; //
+vs
+   Int_t fSize; //
+Warning in <TStreamerInfo::BuildCheck>: 
+   The StreamerInfo of class TNtuple read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root
+   has the same version (=2) as the active class but a different checksum.
+   You should update the version to ClassDef(TNtuple,3).
+   Do not try to write objects with the current class definition,
+   the files will not be readable.
+
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 2 of class 'TNtuple' differs from 
+the in-memory layout version 2:
+   int fNvar; //
+vs
+   Int_t fNvar; //
+Warning in <TStreamerInfo::BuildCheck>: 
+   The StreamerInfo of class TTree read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root
+   has the same version (=19) as the active class but a different checksum.
+   You should update the version to ClassDef(TTree,20).
+   Do not try to write objects with the current class definition,
+   the files will not be readable.
+
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 19 of class 'TTree' differs from 
+the in-memory layout version 19:
+   double fWeight; //
+vs
+   Double_t fWeight; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 19 of class 'TTree' differs from 
+the in-memory layout version 19:
+   int fTimerInterval; //
+vs
+   Int_t fTimerInterval; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 19 of class 'TTree' differs from 
+the in-memory layout version 19:
+   int fScanField; //
+vs
+   Int_t fScanField; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 19 of class 'TTree' differs from 
+the in-memory layout version 19:
+   int fUpdate; //
+vs
+   Int_t fUpdate; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 19 of class 'TTree' differs from 
+the in-memory layout version 19:
+   int fDefaultEntryOffsetLen; //
+vs
+   Int_t fDefaultEntryOffsetLen; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 19 of class 'TTree' differs from 
+the in-memory layout version 19:
+   int fNClusterRange; //
+vs
+   Int_t fNClusterRange; //
+Warning in <TStreamerInfo::BuildCheck>: 
+   The StreamerInfo of class TBranch read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root
+   has the same version (=12) as the active class but a different checksum.
+   You should update the version to ClassDef(TBranch,13).
+   Do not try to write objects with the current class definition,
+   the files will not be readable.
+
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 12 of class 'TBranch' differs from 
+the in-memory layout version 12:
+   int fCompress; //
+vs
+   Int_t fCompress; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 12 of class 'TBranch' differs from 
+the in-memory layout version 12:
+   int fBasketSize; //
+vs
+   Int_t fBasketSize; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 12 of class 'TBranch' differs from 
+the in-memory layout version 12:
+   int fEntryOffsetLen; //
+vs
+   Int_t fEntryOffsetLen; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 12 of class 'TBranch' differs from 
+the in-memory layout version 12:
+   int fWriteBasket; //
+vs
+   Int_t fWriteBasket; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 12 of class 'TBranch' differs from 
+the in-memory layout version 12:
+   int fOffset; //
+vs
+   Int_t fOffset; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 12 of class 'TBranch' differs from 
+the in-memory layout version 12:
+   int fMaxBaskets; //
+vs
+   Int_t fMaxBaskets; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 12 of class 'TBranch' differs from 
+the in-memory layout version 12:
+   int fSplitLevel; //
+vs
+   Int_t fSplitLevel; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 12 of class 'TBranch' differs from 
+the in-memory layout version 12:
+   int* fBasketBytes; //fMaxBaskets
+vs
+   Int_t* fBasketBytes; //fMaxBaskets
+Warning in <TStreamerInfo::BuildCheck>: 
+   The StreamerInfo of class TLeafF read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root
+   has the same version (=1) as the active class but a different checksum.
+   You should update the version to ClassDef(TLeafF,2).
+   Do not try to write objects with the current class definition,
+   the files will not be readable.
+
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 1 of class 'TLeafF' differs from 
+the in-memory layout version 1:
+   float fMinimum; //
+vs
+   Float_t fMinimum; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 1 of class 'TLeafF' differs from 
+the in-memory layout version 1:
+   float fMaximum; //
+vs
+   Float_t fMaximum; //
+Warning in <TStreamerInfo::BuildCheck>: 
+   The StreamerInfo of class TLeaf read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root
+   has the same version (=2) as the active class but a different checksum.
+   You should update the version to ClassDef(TLeaf,3).
+   Do not try to write objects with the current class definition,
+   the files will not be readable.
+
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 2 of class 'TLeaf' differs from 
+the in-memory layout version 2:
+   int fLen; //
+vs
+   Int_t fLen; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 2 of class 'TLeaf' differs from 
+the in-memory layout version 2:
+   int fLenType; //
+vs
+   Int_t fLenType; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 2 of class 'TLeaf' differs from 
+the in-memory layout version 2:
+   int fOffset; //
+vs
+   Int_t fOffset; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 2 of class 'TLeaf' differs from 
+the in-memory layout version 2:
+   bool fIsRange; //
+vs
+   Bool_t fIsRange; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 2 of class 'TLeaf' differs from 
+the in-memory layout version 2:
+   bool fIsUnsigned; //
+vs
+   Bool_t fIsUnsigned; //
+Warning in <TStreamerInfo::BuildCheck>: 
+   The StreamerInfo of class TRefTable read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root
+   has the same version (=3) as the active class but a different checksum.
+   You should update the version to ClassDef(TRefTable,4).
+   Do not try to write objects with the current class definition,
+   the files will not be readable.
+
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 3 of class 'TRefTable' differs from 
+the in-memory layout version 3:
+   int fSize; //
+vs
+   Int_t fSize; //
+Warning in <TStreamerInfo::BuildCheck>: 
+   The StreamerInfo of class TObjArray read from file /store/user/tuos/GlauberMC/PbPb2760GeV/glauberPbPb_dmin00_1M.root
+   has the same version (=3) as the active class but a different checksum.
+   You should update the version to ClassDef(TObjArray,4).
+   Do not try to write objects with the current class definition,
+   the files will not be readable.
+
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 3 of class 'TObjArray' differs from 
+the in-memory layout version 3:
+   int fLowerBound; //
+vs
+   Int_t fLowerBound; //
+Warning in <TStreamerInfo::CompareContent>: The following data member of
+the on-file layout version 3 of class 'TObjArray' differs from 
+the in-memory layout version 3:
+   int fLast; //
+vs
+   Int_t fLast; //
+
+ *** Break *** segmentation violation
+
+
+
+===========================================================
+There was a crash.
+This is the entire stack trace of all threads:
+===========================================================
+#0  0x00000031d6aac61e in waitpid () from /lib64/libc.so.6
+#1  0x00000031d6a3e609 in do_system () from /lib64/libc.so.6
+#2  0x00007f92cf3ee81c in TUnixSystem::StackTrace() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#3  0x00007f92cf3f1003 in TUnixSystem::DispatchSignals(ESignals) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#4  <signal handler called>
+#5  0x00007f92ce19fd07 in NBD::fit() () from /home/xuq7/HI/centrality/NBD/PbPb/NBDclass_C.so
+#6  0x00007f92ce1a0eb9 in NBD::calcvar() () from /home/xuq7/HI/centrality/NBD/PbPb/NBDclass_C.so
+#7  0x00007f92ce1a2e91 in G__NBDclass_C_ACLiC_dict_3306_0_9(G__value*, char const*, G__param*, int) () from /home/xuq7/HI/centrality/NBD/PbPb/NBDclass_C.so
+#8  0x00007f92ce7fe767 in Cint::G__ExceptionWrapper(int (*)(G__value*, char const*, G__param*, int), G__value*, char*, G__param*, int) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#9  0x00007f92ce8a75f1 in G__execute_call () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#10 0x00007f92ce8a79be in G__call_cppfunc () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#11 0x00007f92ce88c9b3 in G__interpret_func () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#12 0x00007f92ce8765d4 in G__getfunction () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#13 0x00007f92ce952c4c in G__getstructmem(int, G__FastAllocString&, char*, int, char*, int*, G__var_array*, int) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#14 0x00007f92ce94a518 in G__getvariable () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#15 0x00007f92ce851257 in G__getitem () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#16 0x00007f92ce857f1a in G__getexpr () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#17 0x00007f92ce8d768c in G__exec_statement () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#18 0x00007f92ce88aaea in G__interpret_func () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#19 0x00007f92ce876639 in G__getfunction () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#20 0x00007f92ce8519b2 in G__getitem () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#21 0x00007f92ce857f1a in G__getexpr () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#22 0x00007f92ce86332d in G__calc_internal () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#23 0x00007f92ce8e4e60 in G__process_cmd () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCint.so
+#24 0x00007f92cf3bb4f1 in TCint::ProcessLine(char const*, TInterpreter::EErrorCode*) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#25 0x00007f92cf3b2023 in TCint::ProcessLineSynch(char const*, TInterpreter::EErrorCode*) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#26 0x00007f92cf326ddd in TApplication::ExecuteFile(char const*, int*, bool) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#27 0x00007f92cf325b9a in TApplication::ProcessLine(char const*, bool, int*) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#28 0x00007f92cf93cb49 in TRint::HandleTermInput() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libRint.so
+#29 0x00007f92cf3effed in TUnixSystem::CheckDescriptors() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#30 0x00007f92cf3f1738 in TUnixSystem::DispatchOneEvent(bool) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#31 0x00007f92cf378a86 in TSystem::InnerLoop() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#32 0x00007f92cf37a654 in TSystem::Run() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#33 0x00007f92cf323b1f in TApplication::Run(bool) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libCore.so
+#34 0x00007f92cf93d817 in TRint::Run(bool) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc472/lcg/root/5.32.00-cms/lib/libRint.so
+#35 0x0000000000400f8c in main ()
+===========================================================
+
+
+The lines below might hint at the cause of the crash.
+If they do not help you then please submit a bug report at
+http://root.cern.ch/bugs. Please post the ENTIRE stack trace
+from above as an attachment in addition to anything else
+that might help us fixing this issue.
+===========================================================
+#5  0x00007f92ce19fd07 in NBD::fit() () from /home/xuq7/HI/centrality/NBD/PbPb/NBDclass_C.so
+#6  0x00007f92ce1a0eb9 in NBD::calcvar() () from /home/xuq7/HI/centrality/NBD/PbPb/NBDclass_C.so
+===========================================================
+
+
+Function store() busy flag cleared

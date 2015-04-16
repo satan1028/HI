@@ -7,10 +7,11 @@ void plotallbins(){
     for(int ibin=0;ibin<ntotbins;ibin++){
         for(int inonf=0;inonf<nnonf;inonf++){
         TFile *f = TFile::Open(Form("%s/qfitV.root",dir[ibin].Data()));
+        TVectorD *r;
         if(!inonf)
-        TVectorD *r = (TVectorD*)f->Get(Form("r_%d",xbin));
+        r = (TVectorD*)f->Get(Form("r_%d",xbin));
         else
-        TVectorD *r = (TVectorD*)f->Get(Form("rnonf_%d",xbin));
+        r = (TVectorD*)f->Get(Form("rnonf_%d",xbin));
         g2[inonf][ibin]=(*r)[0];
         g2err[inonf][ibin]=(*r)[1];
         v2[inonf][ibin]=TMath::Abs((*r)[2]);

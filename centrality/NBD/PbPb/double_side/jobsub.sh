@@ -6,9 +6,10 @@
 #PBS -o out$STH$GTH
 #PBS -j oe
 
-cd /home/xuq7/HI/CMSSW_5_3_20/src/
+cd /home/xuq7/HI/CMSSW_7_5_0_pre2/src/
 eval `scramv1 runtime -sh`
-cd /home/xuq7/HI/centrality/NBD/double_side
+cd /home/xuq7/HI/centrality/NBD/PbPb/double_side
 root -l -b <<EOF
+.L /home/xuq7/HI/centrality/NBD/PbPb/NBDclass.C+
 .x store.C
 EOF

@@ -1,44 +1,42 @@
 #include "../parameter.h"
 #include "par.h"
 void store(){
-	 if (!TClass::GetDict("NBD")) {
-                gROOT->ProcessLine(".L /home/xuq7/HI/centrality/NBD/NBDclass.C+");
-        }
 	TH1::AddDirectory(kFALSE); 
 	int Gth=atoi(getenv("GTH"));
 	int sth=atoi(getenv("STH"));
 	NBD *l;
 	struct para1 var;
+        TString dirname;
         
 	if(sth==0){
-	TString dirname = "std";
+	dirname = "std";
 	if(Gth<nGlau) l = new NBD(datafile,stdGlaulist[Gth],histoname);
 	else l = new NBD(datafile,stdGlaulist[0],histoname);
 	var=var1;
-	l->initmu(bestlist1[Gth].mubest-0.01,bestlist1[Gth].mubest+0.01,0.001);
-	l->initk(bestlist1[Gth].kbest-0.01,bestlist1[Gth].kbest+0.01,0.001);
+	//l->initmu(bestlist1[Gth].mubest-0.01,bestlist1[Gth].mubest+0.01,0.001);
+	//l->initk(bestlist1[Gth].kbest-0.01,bestlist1[Gth].kbest+0.01,0.001);
 	}
         
 	else if(sth==1){
-	TString dirname ="Gri055"; 
+	dirname ="Gri055"; 
 	if(Gth<nGlau) l = new NBD(datafile,Gri055Glaulist[Gth],histoname);
 	else l = new NBD(datafile,Gri055Glaulist[0],histoname);
 	var=var2;
-	l->initmu(bestlist2[Gth].mubest-0.01,bestlist2[Gth].mubest+0.01,0.001);
-	l->initk(bestlist2[Gth].kbest-0.01,bestlist2[Gth].kbest+0.01,0.001);
+	//l->initmu(bestlist2[Gth].mubest-0.01,bestlist2[Gth].mubest+0.01,0.001);
+	//l->initk(bestlist2[Gth].kbest-0.01,bestlist2[Gth].kbest+0.01,0.001);
 	}
         
 	else {
-	TString dirname ="Gri101";
+	dirname ="Gri101";
 	if(Gth<nGlau) l = new NBD(datafile,Gri101Glaulist[Gth],histoname);
 	else l = new NBD(datafile,Gri101Glaulist[0],histoname);
 	var=var3;
-	l->initmu(bestlist3[Gth].mubest-0.01,bestlist3[Gth].mubest+0.01,0.001);
-	l->initk(bestlist3[Gth].kbest-0.01,bestlist3[Gth].kbest+0.01,0.001);
+	//l->initmu(bestlist3[Gth].mubest-0.01,bestlist3[Gth].mubest+0.01,0.001);
+	//l->initk(bestlist3[Gth].kbest-0.01,bestlist3[Gth].kbest+0.01,0.001);
 	}
 
-//	l->initmu(var.mumin,var.mumax,var.mustep);
- //   	l->initk(var.kmin,var.kmax,var.kstep);
+	l->initmu(var.mumin,var.mumax,var.mustep);
+    	l->initk(var.kmin,var.kmax,var.kstep);
 	if(Gth<nGlau)
         	l->initx(var.xmin,var.xmax);
 	else if(Gth-nGlau==0)
@@ -46,8 +44,8 @@ void store(){
 	else
 		l->initx(var.xmin+binshift,var.xmax);
 
-//	l->fit();	
-
+	l->fit();	
+/*
  	if(sth==0) l->assign(bestlist1[Gth].mubest,bestlist1[Gth].kbest);
 	else if(sth==1) l->assign(bestlist2[Gth].mubest,bestlist2[Gth].kbest);
 	else l->assign(bestlist3[Gth].mubest,bestlist3[Gth].kbest);
@@ -83,5 +81,5 @@ void store(){
 	l->Npartdis->Write("Npartdis",TObject::kOverwrite);
 	l->Grgrid->Write("Grgrid",TObject::kOverwrite);
         outfile->Close();
-
+*/
 }

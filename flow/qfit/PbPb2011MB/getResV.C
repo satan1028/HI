@@ -21,6 +21,8 @@ void getResV(){
         TVectorD avgtrk;	avgtrk.ResizeTo(nbin);      avgtrk.Zero();
         TVectorD avgpt;         avgpt.ResizeTo(nbin);
         TVectorD avgeta;         avgeta.ResizeTo(nbin);
+        TVectorD q22;           q22.ResizeTo(nbin); q22.Zero();
+        TVectorD q24;           q24.ResizeTo(nbin); q24.Zero();
         TH1D* hq[nbin][ntheta];
         TH1D* hqx[nbin];
         TH1D* hqy[nbin];
@@ -47,6 +49,8 @@ void getResV(){
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));
 		TVectorD* totptall_t =  (TVectorD*)f[ifile]->Get(Form("totptall"));
 		TVectorD* totetaall_t =  (TVectorD*)f[ifile]->Get(Form("totetaall"));
+		TVectorD* q22_t =  (TVectorD*)f[ifile]->Get(Form("q22"));
+		TVectorD* q24_t =  (TVectorD*)f[ifile]->Get(Form("q24"));
 		for(int ibin=0;ibin<nbin;ibin++){
                                 TH1D* hqx_t = (TH1D*)f[ifile]->Get(Form("hqx_%d",ibin));
                                 hqx[ibin]->Add(hqx_t);
@@ -64,7 +68,9 @@ void getResV(){
 				totetaall[ibin] += (*totetaall_t)[ibin];
 			        Nevent[ibin] += (*Nevent_t)[ibin];
 			        totmultall[ibin] += (*totmultall_t)[ibin];	
-			        tottrk[ibin] += (*tottrk_t)[ibin];	
+			        tottrk[ibin] += (*tottrk_t)[ibin];
+                                q22[ibin] += (*q22_t)[ibin];        
+                                q24[ibin] += (*q24_t)[ibin];        
 		}
 		f[ifile]->Close();
 	}
@@ -72,6 +78,8 @@ void getResV(){
 	for(int ibin=0;ibin<nbin;ibin++){
 		avgmultall[ibin]=totmultall[ibin]/Nevent[ibin];
 		avgtrk[ibin]=tottrk[ibin]/Nevent[ibin];
+		q22[ibin]=q22[ibin]/Nevent[ibin];
+		q24[ibin]=q24[ibin]/Nevent[ibin];
 			for(int itheta=0;itheta<ntheta;itheta++){
 				avgpt[ibin]=1.0*totptall[ibin]/totmultall[ibin];
 				avgeta[ibin]=1.0*totetaall[ibin]/totmultall[ibin];
@@ -87,6 +95,8 @@ void getResV(){
        	avgtrk.Write("avgtrk");
         avgpt.Write("avgpt");
         avgeta.Write("avgeta");
+        q22.Write("q22");
+        q24.Write("q24");
         
 	for(int ibin=0;ibin<nbin;ibin++){
                 TDirectory *dir0 = outf->mkdir(Form("D_%d",ibin));dir0->cd();
