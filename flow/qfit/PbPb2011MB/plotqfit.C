@@ -109,7 +109,7 @@ t->DrawLatex(0.5,0.2,Form("N_{trk}^{offline} = %.2f",avgtrk[ibin]));
 
 TCanvas *c4 = new TCanvas("c4","c4",1000,500);
 c4->Divide(2,1);
-c4->cd(1);
+c4->cd(1)->SetLeftMargin(0.18);
 fixedFontHist(hq2,1.0,2.0);
 hq2->SetTitle("");
 hq2->GetXaxis()->SetTitle("q_{2}");
@@ -130,6 +130,7 @@ vecr[4]=avgmult[ibin];
 vecr[5]=avgtrk[ibin];
 hq2->Draw("Psame");
 c4->cd(2)->SetLogy();
+c4->cd(2)->SetLeftMargin(0.2);
 TH1D* hq2_cp = (TH1D*)hq2->Clone("hq2_cp");
 fixedFontHist(hq2_cp,1.0,2.0);
 divideByBinCenter(hq2_cp);
@@ -197,8 +198,8 @@ vecr[7]=g2calc;
 fout->cd();
 vecr.Write(Form("r_%d_%d",ibin,fixv2),TObject::kOverwrite);
 vecrnonf.Write(Form("rnonf_%d_%d",ibin,fixv2),TObject::kOverwrite);
-if(ibin==0)
-c4->Print("hq2_fit_0.png");
+if(ibin==15)
+c4->Print("hq2_fit_15.png");
 }
 //c5->Print("hq2nonf_fit.png");
 }
