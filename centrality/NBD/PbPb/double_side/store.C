@@ -78,7 +78,7 @@ if(type==1){
 	l->NcollAver.Write("NcollAver",TObject::kOverwrite);l->NpartAver.Write("NpartAver",TObject::kOverwrite);l->BAver.Write("BAver",TObject::kOverwrite);
 	l->centbin.Write("centbin",TObject::kOverwrite);	l->kpoint.Write("kpoint",TObject::kOverwrite);
 	l->centbin_.Write("centbin_",TObject::kOverwrite);	l->kpoint_.Write("kpoint_",TObject::kOverwrite);
-	l->Npartdis->Write("Npartdis",TObject::kOverwrite);
+	l->Npartdis->Write("Npartdis",TObject::kSingleKey | TObject::kOverwrite);
 	l->Grgrid->Write("Grgrid",TObject::kOverwrite);
         outfile->Close();
 }

@@ -9,7 +9,7 @@
 #include <TFile.h>
 #include <TString.h>
 #include <TList.h>
-#include <THStack.h>
+#include <TObjArray.h>
 #include <TVectorT.h>
 #include <TMath.h>
 #include <TTree.h>
@@ -36,7 +36,7 @@ public:
 	TVectorD kpoint;	//bin boundary
 	TVectorD centbin_;	//centrality bins using data(%)
 	TVectorD kpoint_;	//bin boundary using data(%)
-	THStack* Npartdis;
+	TObjArray* Npartdis;
 	TGraph2D* Grgrid;
 
 	NBD(){};
@@ -73,7 +73,7 @@ public:
                 N=Nv-1;
                 method[0]=methodv;
                 NpartAver.ResizeTo(N); NcollAver.ResizeTo(N);BAver.ResizeTo(N);
-                Npartdis = new THStack("Npartdis","");
+                Npartdis = new TObjArray(0);
         };
         void assign(double muv, double kv){
                 mubest[0]=muv;  kbest[0]=kv;
@@ -278,11 +278,11 @@ void NBD::calcvar(){
                 	NcollAver[i]/=PartEvent[i];
                         NpartAver[i]/=PartEvent[i];
                         BAver[i]/=PartEvent[i];
-			hNpart[i]->Scale(1.0/PartEvent[i]);
+			//hNpart[i]->Scale(1.0/PartEvent[i]);
 			Npartdis->Add(hNpart[i]);
          	}
 	}
-                hNpart[N]->Scale(1.0/TotalEvent);
+                //hNpart[N]->Scale(1.0/TotalEvent);
 		Npartdis->Add(hNpart[N]);
 		treefile->Close();
 		remove(treestr);

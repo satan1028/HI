@@ -9,7 +9,7 @@ void DrawTHStack(){
 	gStyle->SetOptStat(kFALSE);
 	int sth=0; int Gth=0;
 	TFile *f = TFile::Open(outG);
-	THStack *hs[3];
+	TObjArray *hs[3];
         std::vector<TH1D*> h[3];
 	TCanvas *c1 = new TCanvas("c1","stacked hists",10,10,600,600);
 	c1->SetLogy();
@@ -17,9 +17,9 @@ void DrawTHStack(){
 	TString name;	
         TH1D* hFrame = new TH1D("","",4000,0,4000);
 	hFrame->GetXaxis()->SetRangeUser(0,500);
-	hFrame->GetYaxis()->SetRangeUser(1e-5,1);
+	hFrame->GetYaxis()->SetRangeUser(1,1e5);
 	hFrame->GetXaxis()->SetTitle("N_{part}");
-	hFrame->GetYaxis()->SetTitle("Event Fraction P(N_{part})");
+	hFrame->GetYaxis()->SetTitle("# of Events");
         hFrame->DrawCopy();
        	if(Gth==0)
         	name = "G0";
@@ -34,11 +34,11 @@ void DrawTHStack(){
         	if(sth==0){dirname = "std";}
         	else if(sth==1){dirname ="Gri055";}
         	else {dirname ="Gri101";}
-		hs[sth] = (THStack*)f->Get(Form("%s/%s/Npartdis",dirname.Data(),name.Data()));
+		hs[sth] = (TObjArray*)f->Get(Form("%s/%s/Npartdis",dirname.Data(),name.Data()));
                 h[sth].resize(N);
                 for(int i=0;i<N;i++){
 //		h[sth][i] = (TH1D*)hs[sth]->GetStack()->At(N-1);
-		h[sth][i] = (TH1D*)hs[sth]->GetStack()->At(i);
+		h[sth][i] = (TH1D*)hs[sth]->At(i);
 		h[sth][i]->SetLineColor(colorCode[i]);
 		h[sth][i]->SetMarkerSize(1.0);
 		h[sth][i]->SetMarkerStyle(20);
@@ -53,7 +53,6 @@ void DrawTHStack(){
     leg0->SetBorderSize(0);
     leg0->SetTextFont(42);
     leg0->SetTextSize(0.030);
-    centbin->Print();
     for(int i=0;i<N;i++){
 	if(method==0)label[i] = Form("%.2f-%.2f%%",(*centbin)[i]*100,(*centbin)[i+1]*100);
 	else label[i] = Form("%.2f-%.2f",(*kpoint)[i],(*kpoint)[i+1]);
