@@ -1,4 +1,6 @@
-#include "/afs/cern.ch/user/q/qixu/CMSSW_6_2_5/src/Centrality/NBD_Glauber_fit/NBD/parameter.h"
+#include "../parameter.h"
+#include <iostream>
+#include <iomanip>
 #include "par.h"
 void Drawsys(){ 
  TCanvas *c1 = new TCanvas("c1","c1",1,1,550,460);
@@ -38,7 +40,7 @@ else
  hist->Draw();
 
 	double xbin[100];
-	TFile *f = TFile::Open("G.root");
+	TFile *f=TFile::Open(outG);
 	TGraph *graph[nGlau+2];
         TVectorD* NcollAver0 = (TVectorD*)f->Get(Form("%s/G0/NcollAver",dirname.Data()));
 	TVectorD *centbin = (TVectorD*)f->Get(Form("%s/G0/centbin",dirname.Data()));
@@ -73,12 +75,12 @@ else
 
 //char* label[9]={"60-90%","40-60%","30-40%","20-30%","10-20%","5-10%","1-5%","0-1%","0-90%"};
 //char* label[N]={"59.7-100%", "27.4-59.7%","16.6-27.4%","9.41-16.6%", "2.46-9.41%", "0-2.46%"};
-TString label[N];
+        std::vector<TString> label(N);
 for(int i=0;i<N;i++)
         if(method==0)label[i] = Form("%.2f-%.2f%%",(*centbin)[i]*100,(*centbin)[i+1]*100);
         else label[i] = Form("%.2f-%.2f",(*kpoint)[i],(*kpoint)[i+1]);
 
-    TLatex *tex1= new TLatex(0.6,1.12,"CMS Preliminary pPb \ #sqrt{s_{NN}} = 5.02 TeV");
+    TLatex *tex1= new TLatex(0.6,1.12,"CMS Preliminary PbPb #sqrt{s_{NN}} = 2.76 TeV");
     tex1->SetTextColor(1);
     tex1->SetTextFont(42);
     tex1->SetTextSize(0.05);
@@ -102,9 +104,9 @@ TLegend *leg2 = new TLegend(0.20,0.15,0.35,0.40);
     leg0->SetFillColor(10);
     leg1->SetFillColor(10);
     leg2->SetFillColor(10);
-    leg0->SetBorderSize(0.035);
-    leg1->SetBorderSize(0.035);
-    leg2->SetBorderSize(0.035);
+    leg0->SetBorderSize(0);
+    leg1->SetBorderSize(0);
+    leg2->SetBorderSize(0);
     leg0->SetTextFont(42);
     leg1->SetTextFont(42);
     leg2->SetTextFont(42);

@@ -1,4 +1,4 @@
-#include "/home/xuq7/CMSSW_6_2_3_patch1/src/Centrality/NBD/parameter.h"
+#include "../parameter.h"
 void Draw3panelNcoll(){
         gStyle->SetOptStat(kFALSE);
 	TString cenvarname;
@@ -86,7 +86,7 @@ void Draw3panelNcoll(){
 	if((*method)[0]==0)label[i] = Form("%.2f-%.2f%%",(*centbin)[i]*100,(*centbin)[i+1]*100);
 	else label[i] = Form("%.2f-%.2f",(*kpoint)[i],(*kpoint)[i+1]);
 
-    	TLatex *tex1= new TLatex(0.6,26.05,"CMS Preliminary pPb \ #sqrt{s_{NN}} = 5.02 TeV");
+    	TLatex *tex1= new TLatex(0.6,26.05,"CMS Preliminary pPb #sqrt{s_{NN}} = 5.02 TeV");
     	TLatex *tex2= new TLatex(3,5,Form("%s",cenvariable[cenvar].Data()));
     	tex1->SetTextColor(1);
     	tex2->SetTextColor(1);

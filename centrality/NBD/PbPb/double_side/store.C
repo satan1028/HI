@@ -1,6 +1,6 @@
 #include "../parameter.h"
 #include "par.h"
-void store(){
+void store(int type){
 	TH1::AddDirectory(kFALSE); 
 	int Gth=atoi(getenv("GTH"));
 	int sth=atoi(getenv("STH"));
@@ -13,8 +13,8 @@ void store(){
 	if(Gth<nGlau) l = new NBD(datafile,stdGlaulist[Gth],histoname);
 	else l = new NBD(datafile,stdGlaulist[0],histoname);
 	var=var1;
-	//l->initmu(bestlist1[Gth].mubest-0.01,bestlist1[Gth].mubest+0.01,0.001);
-	//l->initk(bestlist1[Gth].kbest-0.01,bestlist1[Gth].kbest+0.01,0.001);
+	l->initmu(bestlist1[Gth].mubest-0.01,bestlist1[Gth].mubest+0.01,0.001);
+	l->initk(bestlist1[Gth].kbest-0.01,bestlist1[Gth].kbest+0.01,0.001);
 	}
         
 	else if(sth==1){
@@ -35,17 +35,17 @@ void store(){
 	//l->initk(bestlist3[Gth].kbest-0.01,bestlist3[Gth].kbest+0.01,0.001);
 	}
 
-	l->initmu(var.mumin,var.mumax,var.mustep);
-    	l->initk(var.kmin,var.kmax,var.kstep);
+	//l->initmu(var.mumin,var.mumax,var.mustep);
+    	//l->initk(var.kmin,var.kmax,var.kstep);
 	if(Gth<nGlau)
         	l->initx(var.xmin,var.xmax);
 	else if(Gth-nGlau==0)
 		l->initx(var.xmin-binshift,var.xmax);
 	else
 		l->initx(var.xmin+binshift,var.xmax);
-
+if(type==0)
 	l->fit();	
-/*
+if(type==1){
  	if(sth==0) l->assign(bestlist1[Gth].mubest,bestlist1[Gth].kbest);
 	else if(sth==1) l->assign(bestlist2[Gth].mubest,bestlist2[Gth].kbest);
 	else l->assign(bestlist3[Gth].mubest,bestlist3[Gth].kbest);
@@ -57,8 +57,8 @@ void store(){
 	l->dataname.Write("dataname",TObject::kOverwrite);
 	l->histoname.Write("histoname",TObject::kOverwrite);
 	}
-	TDirectory *dir = outfile->GetDirectory(dirname);
-	if (!dir) {outfile->mkdir(dirname);	TDirectory *dir = outfile->GetDirectory(dirname);}
+	TDirectory *dir = (TDirectory*)outfile->GetDirectory(dirname);
+	if (!dir) {outfile->mkdir(dirname);	dir = (TDirectory*)outfile->GetDirectory(dirname);}
 	dir->cd();
 	TString name;
 	if(Gth==0)
@@ -67,8 +67,8 @@ void store(){
 		name = Form("Glau_%d",Gth);
 	else
 		name = Form("bin_%d",Gth-nGlau+1);
-	TDirectory *subdir = dir->GetDirectory(name);
-	if(!subdir) {dir->mkdir(name);	TDirectory *subdir = dir->GetDirectory(name);}
+	TDirectory *subdir = (TDirectory*)dir->GetDirectory(name);
+	if(!subdir) {dir->mkdir(name);	subdir = (TDirectory*)dir->GetDirectory(name);}
 	subdir->cd();
 	l->method.Write("method",TObject::kOverwrite);
 	l->Glaubername.Write("Glaubername",TObject::kOverwrite);
@@ -81,5 +81,5 @@ void store(){
 	l->Npartdis->Write("Npartdis",TObject::kOverwrite);
 	l->Grgrid->Write("Grgrid",TObject::kOverwrite);
         outfile->Close();
-*/
+}
 }

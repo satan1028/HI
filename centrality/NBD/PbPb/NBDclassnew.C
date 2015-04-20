@@ -88,49 +88,59 @@ void NBD::fit(){
 	TFile *fdata = TFile::Open(dataname.GetName());
 	TH1D *histo_obs = (TH1D*)fdata->Get(histoname.GetName());
 	TFile *fGlauber = TFile::Open(Glaubername.GetName());
-	TH1D *histo_exp = (TH1D*)histo_obs->Clone();
-	TF1 *NBD_fun = new TF1("NBD_fun","[0]*TMath::Gamma(x+[1])/(TMath::Gamma(x+1)*TMath::Gamma([1]))*TMath::Power([2]/[1],x)/TMath::Power([2]/[1]+1,x+[1])",0,100);
+        const int npar = (int)((mumax-mumin)/mustep+1)*(int)((kmax-kmin)/kstep+1);
+	TF1 *NBD_fun;
+	TH1D *histo_exp[npar];
+        int ipar;
+        for(ipar=0;ipar<npar;ipar++){
+            histo_exp[ipar] = (TH1D*)histo_obs->Clone(Form("histo_exp_%d",ipar));
+            histo_exp[ipar]->Reset("M");
+        }
+        NBD_fun= new TF1("NBD_fun","[0]*TMath::Gamma(x+[1])/(TMath::Gamma(x+1)*TMath::Gamma([1]))*TMath::Power([2]/[1],x)/TMath::Power([2]/[1]+1,x+[1])",0,100);
+	NBD_fun->SetParameter(0,1);	//[0]: Normalized constant
 	UInt_t iniseed = gRandom->GetSeed();	// reproduce the "random" numbers
-	std::vector<double> muvector, kvector, chisvector;//, ndfvector;
-	double mu,k;
-	for(mu=mumin;mu<=mumax;mu+=mustep){
-		for(k=kmin;k<=kmax;k+=kstep){
-		//	if(npar%50==0)	cout<<"Have run "<<npar<<" parameter sets"<<endl; 
-			NBD_fun->SetParameter(0,1);	//[0]: Normalized constant
-			NBD_fun->SetParameter(1,k);	//[1]: k value
-			NBD_fun->SetParameter(2,mu);	//[2]: mu value
-			TTree *t = (TTree*)fGlauber->Get("nt_Pb_Pb");
-
-			Float_t Ncoll, Npart, B;	Long_t Nevent;
-
-			t->SetBranchAddress("Ncoll",&Ncoll);
-			t->SetBranchAddress("Npart",&Npart);
-			t->SetBranchAddress("B",&B);
-
-			Nevent = (Long_t) t->GetEntries();
-			Long_t Ev;	Int_t Bino;	Double_t Para, Bi_Para;
-			gRandom->SetSeed(iniseed);
-                        histo_exp->Reset("M");
-			for (Ev=0; Ev<Nevent; Ev++){
-				//if(Ev%100000==0)	cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
-				t->GetEntry(Ev);
-				Para = 0; //make sure that Para doesn't accumulate through loops
-				for(Bino=0; Bino<Ncoll; Bino++){
-				//	Bi_Para = unr.SampleDiscr();
-					Bi_Para = NBD_fun->GetRandom();
-					Para += Bi_Para;
-				}
-				histo_exp->Fill(Para);
-			}
-                double chi_square = chisquare(histo_obs,histo_exp,xmin[0],xmax[0],Ndf[0]);
+	std::vector<double> muvector, kvector, chisvector, ndfvector;
+	double mu,k,chi_square,ndf;
+        TTree *t = (TTree*)fGlauber->Get("nt_Pb_Pb");
+	Float_t Ncoll, Npart, B;	Long_t Nevent;
+	t->SetBranchAddress("Ncoll",&Ncoll);
+	t->SetBranchAddress("Npart",&Npart);
+	t->SetBranchAddress("B",&B);
+	Nevent = (Long_t) t->GetEntries();
+	Long_t Ev;	Int_t Bino;	Double_t Para, Bi_Para;
+	gRandom->SetSeed(iniseed);
+	for (Ev=0; Ev<Nevent; Ev++){
+		if(Ev%1==0)	cout<<"\t"<<"Have run "<<Ev<<" events"<<endl;
+		t->GetEntry(Ev);
+		Para = 0; //make sure that Para doesn't accumulate through loops
+                ipar=0;
+	        for(mu=mumin;mu<=mumax;mu+=mustep){
+                    for(k=kmin;k<=kmax;k+=kstep){
+		     //	if(npar%50==0)	cout<<"Have run "<<npar<<" parameter sets"<<endl; 
+                        ipar++;
+		        NBD_fun->SetParameter(1,k);	//[1]: k value
+                 	NBD_fun->SetParameter(2,mu);	//[2]: mu value
+			for(Bino=0; Bino<Ncoll; Bino++){
+			        Bi_Para = NBD_fun->GetRandom();
+                		Para += Bi_Para;
+                        }
+        		histo_exp[ipar]->Fill(Para);
+                    }
+                }
+    	}
+	ipar=0;
+        for(mu=mumin;mu<=mumax;mu+=mustep){
+            for(k=kmin;k<=kmax;k+=kstep){
+                ipar++;
+                chi_square = chisquare(histo_obs,histo_exp[ipar],xmin[0],xmax[0],ndf);
                 if(chi_square>=0){
                     chisvector.push_back(chi_square);
+                    ndfvector.push_back(ndf);
                     muvector.push_back(mu);
                     kvector.push_back(k);
                 }
-                cout<<mu<<"\t"<<k<<"\t"<<chi_square<<"\t"<<Ndf[0]<<endl;//<<"\t"<<ndf<<"\t"<<p<<endl;
-		}
-	}
+            }
+        }
 	double *amu = &muvector[0];
 	double *ak = &kvector[0];
 	double *achis = &chisvector[0];
@@ -138,6 +148,7 @@ void NBD::fit(){
         mubest[0] = muvector[loc];
         kbest[0] = kvector[loc];
         chis[0] = chisvector[loc];
+        Ndf[0] = ndfvector[loc];
 	cout<<"{"<<mubest[0]<<","<<kbest[0]<<"}"<<endl;
 	cout<<chis[0]<<"\t"<<Ndf[0]<<endl;
 
@@ -238,14 +249,14 @@ void NBD::calcvar(){
         
 	TH1D* hNpart[N+1];
 	for(i=0; i<N; i++){     //Initialization
-	hNpart[i] = new TH1D(Form("Npart_%d-%d",i,i+1),Form("Npart distribution for %dth bin",i),4000,0,4000);
+	hNpart[i] = new TH1D(Form("Npart_%d-%d",i,i+1),Form("Npart distribution for %dth bin",i),80,0,80);
 	}
-	hNpart[N] = new TH1D(Form("Npart_0-%d",N),Form("Npart distribution for all bin"),4000,0,4000);
+	hNpart[N] = new TH1D(Form("Npart_0-%d",N),Form("Npart distribution for all bin"),80,0,80);
 
         std::vector<double> PartEvent(N);std::vector<double> PartEvent_(N+1);
 
         double TotalEvent=0;
-    
+
 	for(Ev=0; Ev<Nevent; Ev++){
 		//if(Ev%100000==0) cout<<"Have run "<<Ev<<" events"<<endl;
             	GlauEvent->GetEntry(Ev);

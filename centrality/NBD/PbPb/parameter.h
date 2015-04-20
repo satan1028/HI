@@ -18,7 +18,7 @@ struct para2{
 
 const int color[nGlau+2]={2,1,1,2,2,4,4,6,6,3,3};
 const int marker[nGlau+2]={29,20,24,21,25,27,33,28,34,20,24};
-const int color_[10]={2,3,4,5,6,7,8,9,10};
+const int color_[10]={2,3,4,5,6,7,8,9,2,3};
 
 TString stdGlaulist[nGlau]={
 /* "/lio/lfs/cms/store/user/qixu/Glauber/PbPb/glauberPbPb_Default_1M.root",

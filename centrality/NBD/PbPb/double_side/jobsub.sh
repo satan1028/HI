@@ -11,5 +11,6 @@ eval `scramv1 runtime -sh`
 cd /home/xuq7/HI/centrality/NBD/PbPb/double_side
 root -l -b <<EOF
 .L /home/xuq7/HI/centrality/NBD/PbPb/NBDclass.C+
-.x store.C
+.L store.C
+store(1)
 EOF

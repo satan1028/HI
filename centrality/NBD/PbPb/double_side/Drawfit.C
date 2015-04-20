@@ -1,12 +1,13 @@
-#include "/afs/cern.ch/user/q/qixu/CMSSW_6_2_5/src/Centrality/NBD_Glauber_fit/NBD/parameter.h"
+#include "../parameter.h"
 #include "par.h"
 #include <vector>
 void Drawfit(){
-	int sth=1, Gth=0;
+	int sth=0, Gth=0;
 	TFile *f = TFile::Open(outG);
-	if(sth==0){TString dirname = "std";}
-        else if(sth==1){TString dirname ="Gri055";}
-        else {TString dirname ="Gri101";}
+        TString dirname;
+	if(sth==0){dirname = "std";}
+        else if(sth==1){dirname ="Gri055";}
+        else { dirname ="Gri101";}
         TObjString* dataname = (TObjString*)f->Get(Form("dataname"));
         TObjString* histoname = (TObjString*)f->Get(Form("histoname"));
 	        TString name;
@@ -46,7 +47,7 @@ void Drawfit(){
 	NBD_fun->SetParameter(1,(*kbest)[0]);	//[1]: k value
 	NBD_fun->SetParameter(2,(*mubest)[0]);	//[2]: mu value
 		
-	TTree *t = (TTree*) fGlauber->Get("nt_p_Pb");
+	TTree *t = (TTree*) fGlauber->Get("nt_Pb_Pb");
 	Long_t Nevent;
 
 	Nevent = (Long_t) t->GetEntries();
@@ -75,25 +76,25 @@ void Drawfit(){
 	TCanvas *c1 = new TCanvas();
 	c1->SetLogy();
 
-        histo_obs_norm->GetXaxis()->SetRangeUser(0,100);
+        histo_obs_norm->GetXaxis()->SetRangeUser(0,5000);
         histo_obs_norm->SetMaximum(1.0);
-        histo_obs_norm->GetXaxis()->SetTitle("HF #Sigma E_{T} |#eta|>4");
+        histo_obs_norm->GetXaxis()->SetTitle("HF #Sigma E_{T} |#eta|>3");
         histo_obs_norm->GetYaxis()->SetTitle("Event Fraction");
         histo_obs_norm->SetTitle("");
 
 	histo_obs_norm->SetLineColor(1);
 	histo_obs_norm->SetMarkerStyle(24);
 	histo_obs_norm->SetMarkerColor(1);
-        histo_obs_norm->SetMarkerSize(1.5);
-	histo_obs_norm->Draw("P");
+        histo_obs_norm->SetMarkerSize(0.8);
+	histo_obs_norm->DrawCopy("P");
 
         TLegend *leg = new TLegend(0.56, 0.7, 0.8, 0.9);
         leg->SetFillColor(10);
         leg->SetFillStyle(0);
-        leg->SetBorderSize(0.035);
+        leg->SetBorderSize(0);
         leg->SetTextFont(42);
         leg->SetTextSize(0.045);
-        leg->AddEntry(histo_obs_norm,"CMS pPb real data","p");
+        leg->AddEntry(histo_obs_norm,"CMS PbPb real data","p");
         leg->AddEntry(histo_exp_norm,Form("NBD Fit, #mu=%.3f, k=%.3f",(*mubest)[0],(*kbest)[0]),"l");
 	leg->Draw("same");
         TLatex *tex1= new TLatex(0.2,0.8,Form("#chi^{2}/NDF=%.1f/%.f",(*chis)[0],(*Ndf)[0]));
@@ -113,7 +114,30 @@ void Drawfit(){
                 TH1D *h2_Clone = (TH1D*)histo_exp_norm->Clone();
                 h2_Clone->SetFillColor(color_[i]);
                 h2_Clone->GetXaxis()->SetRangeUser((*kpoint)[i],(*kpoint)[i+1]);
+		h2_Clone->DrawCopy("same");
+                }
+	histo_obs_norm->Draw("Psame");
+	TCanvas *c2 = new TCanvas();
+	c2->SetLogy();
+        histo_obs_norm->GetXaxis()->SetRangeUser(0,500);
+        histo_obs_norm->SetMaximum(1.0);
+        histo_obs_norm->GetXaxis()->SetTitle("HF #Sigma E_{T} |#eta|>3");
+        histo_obs_norm->GetYaxis()->SetTitle("Event Fraction");
+        histo_obs_norm->SetTitle("");
+
+	histo_obs_norm->SetLineColor(1);
+	histo_obs_norm->SetMarkerStyle(24);
+	histo_obs_norm->SetMarkerColor(1);
+        histo_obs_norm->SetMarkerSize(0.8);
+	histo_obs_norm->Draw("P");
+
+        for(int i=0;i<N-1;i++){
+                TH1D *h2_Clone = (TH1D*)histo_exp_norm->Clone();
+                h2_Clone->SetFillColor(color_[i]);
+                h2_Clone->GetXaxis()->SetRangeUser((*kpoint)[i],(*kpoint)[i+1]);
 		h2_Clone->Draw("same");
                 }
-	c1->SaveAs(Form("%sfit.png",dirname.Data()));	
+	histo_obs_norm->Draw("Psame");
+	c1->SaveAs(Form("%sfit_%s.png",dirname.Data(),name.Data()));	
+	c2->SaveAs(Form("%sfit_%s_zoom.png",dirname.Data(),name.Data()));	
 }

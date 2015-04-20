@@ -1,4 +1,4 @@
-#include "/home/xuq7/HI/centrality/NBD/parameter.h"
+#include "../parameter.h"
 #include <iostream>
 #include <iomanip>
 #include "par.h"
@@ -15,14 +15,16 @@ void merge(){
 	Ncollerr1.ResizeTo(N-1);Nparterr1.ResizeTo(N-1);Berr1.ResizeTo(N-1);
 	Ncollerr2.ResizeTo(N-1);Nparterr2.ResizeTo(N-1);Berr2.ResizeTo(N-1);
 	Ncollerr.ResizeTo(N-1);Nparterr.ResizeTo(N-1);Berr.ResizeTo(N-1);
-	if(method==0)
+	if(method==0){
         output<<"kpoint_simu\t"<<"kpoint_data\t"<<"centbin\t"<<"<Ncoll>"<<"\t"<<"<Ncoll> err1"<<"\t"<<"<Ncoll> err2"<<"\t"<<"<Ncoll> err"<<"\t"<<endl;
-	else
+        }
+	else{
         output<<"kpoint\t"<<"centbin_data\t"<<"centbin_simu\t"<<"<Ncoll>"<<"\t"<<"<Ncoll> err1"<<"\t"<<"<Ncoll> err2"<<"\t"<<"<Ncoll> err"<<"\t"<<endl;
+        }
 	//<<"<Npart>"<<"\t"<<"<Npart> err"<<"\t\t"<<"<B>"<<"\t"<<"<B> err"<<endl;
 	TString name;
-
-	for(int sth=0;sth<3;sth++){
+        TVectorD* kpoint; TVectorD* kpoint_; TVectorD* centbin; TVectorD* centbin_;
+	for(int sth=0;sth<1;sth++){
 		Ncollerr1.Zero();Nparterr1.Zero();Berr1.Zero();
 		Ncollerr2.Zero();Nparterr2.Zero();Berr2.Zero();
 		Ncollerr.Zero();Nparterr.Zero();Berr.Zero();
@@ -30,12 +32,12 @@ void merge(){
         	else if(sth==1){dirname ="Gri055";}
 	        else {dirname ="Gri101";}
         	output<<dirname<<endl;
-		TVectorD *centbin = (TVectorD*)f->Get(Form("%s/G0/centbin",dirname.Data()));
-		TVectorD *kpoint = (TVectorD*)f->Get(Form("%s/G0/kpoint",dirname.Data()));
+		centbin = (TVectorD*)f->Get(Form("%s/G0/centbin",dirname.Data()));
+		kpoint = (TVectorD*)f->Get(Form("%s/G0/kpoint",dirname.Data()));
 		if(method==0)
-		TVectorD *kpoint_ = (TVectorD*)f->Get(Form("%s/G0/kpoint_",dirname.Data()));
+		kpoint_ = (TVectorD*)f->Get(Form("%s/G0/kpoint_",dirname.Data()));
 		else
-		TVectorD *centbin_ = (TVectorD*)f->Get(Form("%s/G0/centbin_",dirname.Data()));
+		centbin_ = (TVectorD*)f->Get(Form("%s/G0/centbin_",dirname.Data()));
         	for(int i=0;i<N-1;i++){
                 	for(int iGlau=0;iGlau<nGlau+2; iGlau++){
         			if(iGlau==0)
@@ -84,9 +86,20 @@ void merge(){
         		output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*centbin_)[i]*100<<"% to "<<(*centbin_)[i+1]*100<<"%\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NcollAver[0])[i]<<"\t"<<Ncollerr1[i]<<"%\t"<<Ncollerr2[i]<<"%\t"<<TMath::Sqrt(Ncollerr[i])*100<<"%"<<endl;
         		//output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NcollAver[0])[i]<<"\t"<<Ncollerr1[i]<<"\t"<<Ncollerr2[i]<<"\t"<<Ncollerr[i]<<endl;
 //<<(*NpartAver[0])[i]<<"\t"<<Nparterr[i]<<"\t\t"<<(*BAver[0])[i]<<"\t"<<Berr[i]<<endl;
-        	}
 	output<<endl;
-	for(i=0;i<N-1;i++){
+        }
+	if(method==0)
+        output<<"kpoint_simu\t"<<"kpoint_data\t"<<"centbin\t"<<"<Npart>"<<"\t"<<"<Npart> err1"<<"\t"<<"<Npart> err2"<<"\t"<<"<Npart> err"<<"\t"<<endl;
+	else
+        output<<"kpoint\t"<<"centbin_data\t"<<"centbin_simu\t"<<"<Ncoll>"<<"\t"<<"<Ncoll> err1"<<"\t"<<"<Ncoll> err2"<<"\t"<<"<Ncoll> err"<<"\t"<<endl;
+        for(int i=0;i<N-1;i++){
+	if(method==0)
+        output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*kpoint_)[i]<<" to "<<(*kpoint_)[i+1]<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NpartAver[0])[i]<<"\t"<<Nparterr1[i]<<"%\t"<<Nparterr2[i]<<"%\t"<<TMath::Sqrt(Nparterr[i])*100<<"%"<<endl;
+        else
+        output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*centbin_)[i]*100<<"% to "<<(*centbin_)[i+1]*100<<"%\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NpartAver[0])[i]<<"\t"<<Nparterr1[i]<<"%\t"<<Nparterr2[i]<<"%\t"<<TMath::Sqrt(Ncollerr[i])*100<<"%"<<endl;
+	output<<endl;
+        }
+	for(int i=0;i<N-1;i++){
         	Ncollerr[i]=TMath::Sqrt(Ncollerr[i])*(*NcollAver[0])[i];
         	Nparterr[i]=TMath::Sqrt(Nparterr[i])*(*NpartAver[0])[i];
         	Berr[i]=TMath::Sqrt(Berr[i])*(*BAver[0])[i];
@@ -96,7 +109,7 @@ void merge(){
 	Nparterr.Write("Nparterr",TObject::kOverwrite);
 	Berr.Write("Berr",TObject::kOverwrite);	
 
-	std:::vector<double> xbin(N-1);
+	std::vector<double> xbin(N-1);
         for(int i=0;i<N-1;i++)
 		//xbin[i]=(centbin[N-i]+centbin[N-i-1])*100/2;
         	xbin[i]=0.29+i;

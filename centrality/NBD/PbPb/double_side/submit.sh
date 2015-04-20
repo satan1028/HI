@@ -8,9 +8,9 @@ do
 #if [[  $i == 1 || $i == 2 ]]; then
 #if [[  $j == 10 ]]; then
 	export GTH=$j;	export STH=$i;
-        #./jobsub.sh	
+        ./jobsub.sh	
 	#qsub -v GTH=$j,STH=$i jobsub.sh
-	sbatch -o out$STH$GTH jobsub.slurm
+	#sbatch -o out$STH$GTH jobsub.slurm
 #fi
 #fi
 done
