@@ -278,7 +278,7 @@ void NBD::calcvar(){
                 	NcollAver[i]/=PartEvent[i];
                         NpartAver[i]/=PartEvent[i];
                         BAver[i]/=PartEvent[i];
-			hNpart[i]->Scale(1.0/TotalEvent);
+			hNpart[i]->Scale(1.0/PartEvent[i]);
 			Npartdis->Add(hNpart[i]);
          	}
 	}

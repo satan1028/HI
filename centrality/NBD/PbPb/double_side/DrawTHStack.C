@@ -5,7 +5,7 @@
 void DrawTHStack(){
         static const int nColor = 11;
         static const int colorCode[nColor] = {
-        1,2,3,9,6,4,8,1,2,5,4};
+        1,2,3,9,6,4,8,1,2,4,5};
 	gStyle->SetOptStat(kFALSE);
 	int sth=0; int Gth=0;
 	TFile *f = TFile::Open(outG);
@@ -36,7 +36,7 @@ void DrawTHStack(){
         	else {dirname ="Gri101";}
 		hs[sth] = (THStack*)f->Get(Form("%s/%s/Npartdis",dirname.Data(),name.Data()));
                 h[sth].resize(N);
-                for(int i=0;i<N-1;i++){
+                for(int i=0;i<N;i++){
 //		h[sth][i] = (TH1D*)hs[sth]->GetStack()->At(N-1);
 		h[sth][i] = (TH1D*)hs[sth]->GetStack()->At(i);
 		h[sth][i]->SetLineColor(colorCode[i]);
@@ -48,12 +48,13 @@ void DrawTHStack(){
                 }
 	}
     std::vector<TString> label(N);
-	TLegend *leg0 = new TLegend(0.60,0.58,0.90,0.88);
+	TLegend *leg0 = new TLegend(0.60,0.60,0.90,0.90);
     leg0->SetFillColor(10);
     leg0->SetBorderSize(0);
     leg0->SetTextFont(42);
     leg0->SetTextSize(0.030);
-    for(int i=0;i<N-1;i++){
+    centbin->Print();
+    for(int i=0;i<N;i++){
 	if(method==0)label[i] = Form("%.2f-%.2f%%",(*centbin)[i]*100,(*centbin)[i+1]*100);
 	else label[i] = Form("%.2f-%.2f",(*kpoint)[i],(*kpoint)[i+1]);
 //    leg0->AddEntry(h[0][i],"standard","p");
