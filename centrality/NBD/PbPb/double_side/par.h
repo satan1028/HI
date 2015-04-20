@@ -1,5 +1,5 @@
 //const double bin[]={0,12.61,18.99,23.23,29.50,150};	//G1.root
-double bin[]={1.0,0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0};	//G0.root
+double bin[]={1.0,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0};	//G0.root
 //const double bin[]={1.0,0};	//G2.root
 int N=(int)(sizeof(bin)/sizeof(double));
 int method=0; //method=0: use bin; method=1: use kpoint

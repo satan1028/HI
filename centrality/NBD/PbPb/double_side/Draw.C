@@ -28,7 +28,7 @@ for(int i=0;i<nDil;i++)
   c1->SetTicks(-1);
 
 	N=N-1;
- TString str="Ncoll";
+ TString str="Npart";
  TH1D* hist = new TH1D("","",N,0,N);
  hist->GetXaxis()->SetNdivisions(502);
 if(method==0)
@@ -97,7 +97,7 @@ for(int i=0;i<N;i++)
         if(method==0)label[i] = Form("%.2f-%.2f%%",(*centbin)[i]*100,(*centbin)[i+1]*100);
         else label[i] = Form("%.2f-%.2f",(*kpoint)[i],(*kpoint)[i+1]);
 
-    TLatex *tex1= new TLatex(0.3,0.9,"CMS Preliminary PbPb #sqrt{s_{NN}} = 2.76 TeV");
+    TLatex *tex1= new TLatex(0.2,0.9,"CMS Preliminary PbPb #sqrt{s_{NN}} = 2.76 TeV");
     tex1->SetNDC();
     tex1->SetTextColor(1);
     tex1->SetTextFont(42);
@@ -114,7 +114,7 @@ double y = gPad->GetUymin();
       double x = hist->GetXaxis()->GetBinCenter(i+1);
       t.DrawText(x,y,label[i]);
    }
-TLegend *leg0 = new TLegend(0.28,0.63,0.50,0.85);
+TLegend *leg0 = new TLegend(0.18,0.70,0.50,0.85);
     leg0->SetFillColor(10);
     leg0->SetBorderSize(0);
     leg0->SetTextFont(42);
@@ -122,8 +122,8 @@ TLegend *leg0 = new TLegend(0.28,0.63,0.50,0.85);
     leg0->AddEntry(graph,"From fitting","p");
 //    leg0->AddEntry(Gri055_graph,"Gribov #Omega=0.55","p");
 //    leg0->AddEntry(Gri101_graph,"Gribov #Omega=1.01","p");
- if(str=="Npart")   leg0->AddEntry(graphNpartDil,"Npart from DiLepton","p");
- if(str=="Ncoll")   leg0->AddEntry(graphNcollDil,"Ncoll from DiLepton","p");
+ if(str=="Npart")   leg0->AddEntry(graphNpartDil,"Npart from run I","p");
+ if(str=="Ncoll")   leg0->AddEntry(graphNcollDil,"Ncoll from run I","p");
 	leg0->Draw();	
 c1->SaveAs(Form("%sGri.png",str.Data()));
 

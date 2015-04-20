@@ -2,7 +2,7 @@
 #include "par.h"
 #include <vector>
 void Drawfit(){
-	int sth=0, Gth=0;
+	int sth=0, Gth=10;
 	TFile *f = TFile::Open(outG);
         TString dirname;
 	if(sth==0){dirname = "std";}
@@ -88,7 +88,7 @@ void Drawfit(){
         histo_obs_norm->SetMarkerSize(0.8);
 	histo_obs_norm->DrawCopy("P");
 
-        TLegend *leg = new TLegend(0.56, 0.7, 0.8, 0.9);
+        TLegend *leg = new TLegend(0.46, 0.7, 0.8, 0.9);
         leg->SetFillColor(10);
         leg->SetFillStyle(0);
         leg->SetBorderSize(0);

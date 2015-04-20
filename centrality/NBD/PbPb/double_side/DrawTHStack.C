@@ -3,9 +3,9 @@
 #include <iomanip>
 #include "par.h"
 void DrawTHStack(){
-        static const int nColor = 11;
+        static const int nColor = 9;
         static const int colorCode[nColor] = {
-        1,2,3,9,6,4,8,1,2,4,5};
+        1,2,3,6,4,8,1,9,5};
 	gStyle->SetOptStat(kFALSE);
 	int sth=0; int Gth=0;
 	TFile *f = TFile::Open(outG);
@@ -48,7 +48,7 @@ void DrawTHStack(){
                 }
 	}
     std::vector<TString> label(N);
-	TLegend *leg0 = new TLegend(0.60,0.60,0.90,0.90);
+	TLegend *leg0 = new TLegend(0.60,0.60,0.90,0.88);
     leg0->SetFillColor(10);
     leg0->SetBorderSize(0);
     leg0->SetTextFont(42);
