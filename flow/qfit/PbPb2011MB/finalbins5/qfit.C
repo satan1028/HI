@@ -30,12 +30,14 @@ class qfit {
             
         int nvv, ispt;
         const double *binv;
-	TVectorD Nevent, totmultall, tottrk, totptall,totetaall;
+	TVectorD Nevent, totmultall, tottrk, totptall,totptall2,totetaall;
 	TString filename;
 	double theta[ntheta];
 	TVectorD totmultv[nbin];
 	TVectorD totptv[nbin];
 	TVectorD totetav[nbin];
+        TVectorD q22;
+        TVectorD q24;
         TH1D* hq[nbin][ntheta];
         TH1D* hqx[nbin];
         TH1D* hqy[nbin];
@@ -106,19 +108,24 @@ qfit::calcV()
                         if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection
 			Qx+=1.*cos(nn*phi[imult]);
 			Qy+=1.*sin(nn*phi[imult]);
+                        totptall2[xbin]+=pt[imult]*pt[imult];
                         totptall[xbin]+=pt[imult];
                         totetaall[xbin]+=eta[imult];
 			totmultall[xbin]++;
                         xmult++;
 		}
+                if(xmult==0) continue;
 			for(int itheta=0;itheta<ntheta;itheta++){
 				Q[itheta]=Qx*TMath::Cos(nn*theta[itheta])+Qy*TMath::Sin(nn*theta[itheta]);
                                 hq[xbin][itheta]->Fill(TMath::Abs(Q[itheta])/TMath::Sqrt(xmult));
 		}
                 hqx[xbin]->Fill(TMath::Abs(Qx)/TMath::Sqrt(xmult));
                 hqy[xbin]->Fill(TMath::Abs(Qy)/TMath::Sqrt(xmult));
-                hq2[xbin]->Fill(TMath::Sqrt(Qx*Qx+Qy*Qy)/TMath::Sqrt(xmult));
-                hq2nonf[xbin]->Fill(TMath::Sqrt(2)*TMath::Sqrt(Qx*Qx+Qy*Qy)/TMath::Sqrt(xmult));
+                double q2 = TMath::Sqrt(Qx*Qx+Qy*Qy)/TMath::Sqrt(xmult);
+                hq2[xbin]->Fill(q2);
+                hq2nonf[xbin]->Fill(TMath::Sqrt(2)*q2);
+                q22[xbin]+=q2*q2;
+                q24[xbin]+=q2*q2*q2*q2;
 		Nevent[xbin]++;
 	}
 	infile->Close();
@@ -179,8 +186,10 @@ qfit::beginJob(int ispt_)
     if(ispt_){             nvv = nptv;       binv = ptbinv;}
     else{             nvv = netav;          binv = etabinv;}
 
-	Nevent.ResizeTo(nbin);	totmultall.ResizeTo(nbin), tottrk.ResizeTo(nbin), totptall.ResizeTo(nbin), totetaall.ResizeTo(nbin);
-	Nevent.Zero();	totmultall.Zero(),	tottrk.Zero(); totptall.Zero(); totetaall.Zero();
+	Nevent.ResizeTo(nbin);	totmultall.ResizeTo(nbin), tottrk.ResizeTo(nbin), totptall.ResizeTo(nbin), totptall2.ResizeTo(nbin); totetaall.ResizeTo(nbin);
+	Nevent.Zero();	totmultall.Zero(),	tottrk.Zero(); totptall.Zero(); totptall2.Zero(); totetaall.Zero();
+        q22.ResizeTo(nbin);q24.ResizeTo(nbin);
+        q22.Zero();q24.Zero();
 
         	for(int itheta=0;itheta<ntheta;itheta++){
                		theta[itheta]=itheta*TMath::Pi()/ntheta/nn;
@@ -215,8 +224,11 @@ qfit::endJobV(TString outstr)
 	Nevent.Write("Nevent");
 	totmultall.Write("totmultall");
 	totptall.Write("totptall");
+	totptall2.Write("totptall2");
 	totetaall.Write("totetaall");
 	tottrk.Write("tottrk");
+        q22.Write("q22");
+        q24.Write("q24");
 	for(int ibin=0; ibin<nbin; ibin++){
         		for(int itheta=0;itheta<ntheta;itheta++){
                                 hq[ibin][itheta]->Write();

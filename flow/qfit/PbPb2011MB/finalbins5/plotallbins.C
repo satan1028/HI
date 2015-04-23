@@ -12,15 +12,16 @@ void plotallbins(){
 
     const int nnonf = 2;
     int fixv2=0;
+    int fixg2=1;
     double avgmult[nnonf][nbin],avgtrk[nnonf][nbin], v2[nnonf][nbin],v2err[nnonf][nbin],g2[nnonf][nbin],g2err[nnonf][nbin];
     for(int ibin=0;ibin<nbin;ibin++){
         for(int inonf=0;inonf<nnonf;inonf++){
         TFile *f = TFile::Open(Form("qfitV.root"));
         TVectorD *r;
         if(!inonf)
-        r = (TVectorD*)f->Get(Form("r_%d_%d",ibin,fixv2));
+        r = (TVectorD*)f->Get(Form("r_%d_%d_%d",ibin,fixv2,fixg2));
         else
-        r = (TVectorD*)f->Get(Form("rnonf_%d_%d",ibin,fixv2));
+        r = (TVectorD*)f->Get(Form("rnonf_%d_%d_%d",ibin,fixv2,fixg2));
         g2[inonf][ibin]=(*r)[0];
         g2err[inonf][ibin]=(*r)[1];
         v2[inonf][ibin]=TMath::Abs((*r)[2]);
@@ -41,9 +42,9 @@ void plotallbins(){
         TFile *f = TFile::Open(Form("../qfitV.root"));
         TVectorD *r;
         if(!inonf)
-        r = (TVectorD*)f->Get(Form("r_%d_%d",ibin,fixv2));
+        r = (TVectorD*)f->Get(Form("r_%d_%d_%d",ibin,fixv2,fixg2));
         else
-        r = (TVectorD*)f->Get(Form("rnonf_%d_%d",ibin,fixv2));
+        r = (TVectorD*)f->Get(Form("rnonf_%d_%d_%d",ibin,fixv2,fixg2));
         g2_[inonf][ibin]=(*r)[0];
         g2err_[inonf][ibin]=(*r)[1];
         v2_[inonf][ibin]=TMath::Abs((*r)[2]);

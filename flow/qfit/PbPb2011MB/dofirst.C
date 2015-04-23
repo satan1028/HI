@@ -1,6 +1,5 @@
-#include "par.h"
+
 void dofirst(){
-	gROOT->ProcessLine(".L qfit.C+");
 	int start=atoi(getenv("START"));
 	int end=atoi(getenv("END"));
 	TString name;
@@ -16,8 +15,8 @@ void dofirst(){
 	}
 }
 
-std::string readline(char* name, int iline){
-        std::ifstream backstory(name);
+std::string readline(string name, int iline){
+        std::ifstream backstory(name.c_str());
         std::string line;
         if (backstory.is_open())
                 if(backstory.good()){

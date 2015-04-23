@@ -8,7 +8,7 @@ const double avgtrkbin[nbin24]={44.36,54.33,68.63,88.39,108.2,131.3,162.1,196.6,
 const double V24[nbin24]={0.02965,0.03913,0.04832,0.04941,0.04822,0.04955,0.049,0.04805,0.04709,0.04665,0.04772,0.04797};
 const double V24err[nbin24]={0.005967,0.004262,0.001496,0.001351,0.001599,0.0003922,0.0003065,0.0002939,0.0004568,0.0008684,0.001471,0.004329};
 TString tbin[ntotbin] = {"M150120","M185150","M220185","M260220","M300260"};
-int xpt=0;
+int ibin=0;
 int count=0;
 double Ntrk[Nbin], V2_Sum[Nbin], V2err_Sum[Nbin],  V2_Prod[Nbin], V2err_Prod[Nbin];
 double Ntrkavg[ntotbin], Nevent[ntotbin], Nmult[ntotbin], V2avg_Sum[ntotbin], V2erravg_Sum[ntotbin],  V2avg_Prod[ntotbin], V2erravg_Prod[ntotbin];
@@ -30,15 +30,15 @@ Ntrk[count-1]=(*vecNtrk)[ibin]/(*vecNevent)[ibin];
 Ntrkavg[i]+=(*vecNtrk)[ibin];
 Nevent[i]+=(*vecNevent)[ibin];
 Nmult[i]+=(*vectotmult)[ibin];
-V2_Sum[count-1]=(*vecV2_Sum)[xpt];
+V2_Sum[count-1]=(*vecV2_Sum)[ibin];
 cout<<(*vectotmult)[ibin]<<endl;
-V2avg_Sum[i]+=(*vecV2_Sum)[xpt]*(*vectotmult)[ibin];
-V2err_Sum[count-1]=(*vecV2err_Sum)[xpt];
-V2erravg_Sum[i]+=(*vecV2err_Sum)[xpt]*(*vectotmult)[ibin];
-V2_Prod[count-1]=(*vecV2_Prod)[xpt];
-V2avg_Prod[i]+=(*vecV2_Prod)[xpt]*(*vectotmult)[ibin];
-V2err_Prod[count-1]=(*vecV2err_Prod)[xpt];
-V2erravg_Prod[i]+=(*vecV2err_Prod)[xpt]*(*vectotmult)[ibin];
+V2avg_Sum[i]+=(*vecV2_Sum)[ibin]*(*vectotmult)[ibin];
+V2err_Sum[count-1]=(*vecV2err_Sum)[ibin];
+V2erravg_Sum[i]+=(*vecV2err_Sum)[ibin]*(*vectotmult)[ibin];
+V2_Prod[count-1]=(*vecV2_Prod)[ibin];
+V2avg_Prod[i]+=(*vecV2_Prod)[ibin]*(*vectotmult)[ibin];
+V2err_Prod[count-1]=(*vecV2err_Prod)[ibin];
+V2erravg_Prod[i]+=(*vecV2err_Prod)[ibin]*(*vectotmult)[ibin];
 }
 Ntrkavg[i]/=Nevent[i];	V2avg_Sum[i]/=Nmult[i];	V2erravg_Sum[i]/=Nmult[i];	V2avg_Prod[i]/=Nmult[i];	V2erravg_Prod[i]/=Nmult[i];
 }

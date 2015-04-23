@@ -4,13 +4,13 @@
 #include "TGraphAsymmErrors.h"
 #include "TVectorD.h"
 #include "TObject.h"
-#include "THStack.h"
+#include "TObjArray.h"
 #include <iostream>
 #include <iomanip>
 #include "SetupBinning.h"
 #include "SetupTree.h"
 using namespace std;
-THStack* calcNtracks(int);
+TObjArray* calcNtracks(int);
 TH2F* calcwtrack(int);
 TH1D* calcwevent(int);
 TH1D* calcNevtsel(int);
@@ -30,14 +30,14 @@ void calcdNchdeta(int type=0, bool dotrack=1, bool doevent=1){ //-1 for genMC, 0
 	nom[0] = hnom->Integral();
 	cout<<"nom = "<<nom[0]<<endl;
 	double fMV = 0.;
-	THStack* SKNtracks = calcNtracks(type);
+	TObjArray* SKNtracks = calcNtracks(type);
 	TH2F* hwtrack = calcwtrack(type);
 	for(int ieta=0;ieta<neta;ieta++){
             hdnom->SetBinContent(ieta,0);
             hdnom->SetBinError(ieta,0);
         }
 	for(int iMult=0;iMult<nMult;iMult++){
-	    TH2F* htemp1 = (TH2F*)SKNtracks->GetStack()->At(iMult);
+	    TH2F* htemp1 = (TH2F*)SKNtracks->At(iMult);
             if(dotrack)
                 htemp1->Multiply(hwtrack);
 	    TH1D* htemp2 = htemp1->ProjectionY("htemp2",htemp1->GetXaxis()->FindBin(ptmin),-1,"e");
@@ -50,11 +50,11 @@ void calcdNchdeta(int type=0, bool dotrack=1, bool doevent=1){ //-1 for genMC, 0
 	    dNchdeta->SetBinError(ieta,hdnom->GetBinError(ieta)/hdnom->GetBinWidth(ieta));
 	}
 	dNchdeta->Scale(1.0/((1.+fMV)*nom[0]));
-	TH2F* hNtracks = (TH2F*)SKNtracks->GetStack()->At(1);
+	TH2F* hNtracks = (TH2F*)SKNtracks->At(1);
         if(type>=0)
-	    TFile *fout = new TFile(Form("output/Corr%s_track%d_event%d_pt%.1f.root",stype.Data(),dotrack,doevent,ptmin*10),"Recreate");
+	    TFile *fout = new TFile(Form("output/Corr%s_track%d_event%d_pt%.1f.root",stype.Data(),dotrack,doevent,ptmin),"Recreate");
         else
-	    TFile *fout = new TFile(Form("output/Corr%s_pt%.1f.root",stype.Data(),ptmin*10),"Recreate");
+	    TFile *fout = new TFile(Form("output/Corr%s_pt%.1f.root",stype.Data(),ptmin),"Recreate");
 	fout->cd();
 	dNchdeta->Write();
 	hNtracks->Write();
@@ -62,11 +62,11 @@ void calcdNchdeta(int type=0, bool dotrack=1, bool doevent=1){ //-1 for genMC, 0
 	nom.Write("nom",TObject::kOverwrite);
 	hwtrack->Write();
 	hNevtsel->Write();
-	SKNtracks->Write();
+	SKNtracks->Write("SKNtracks",TObject::kOverwrite | TObject::kSingleKey);
 	fout->Close();
 }	
 
-THStack* calcNtracks(int type){
+TObjArray* calcNtracks(int type){
 	TH1::SetDefaultSumw2();
 	treeInt *t = new treeInt(type);
 	t->Setup();
@@ -74,7 +74,7 @@ THStack* calcNtracks(int type){
 	for(int iMult=0;iMult<nMult;iMult++){
 		hNtracks[iMult]  = new TH2F(Form("hNtracks_%d",iMult),Form("hNtracks_%d",iMult),npt,ptbin,neta,etabin);
 	}
-	THStack* SKNtracks = new THStack("StackNtracks","");
+	TObjArray* SKNtracks = new TObjArray(0);
 	int xMult=-1;
 	for(int Ev=0; Ev<t->GetEntries();Ev++){
 		t->GetEntry(Ev);
@@ -246,4 +246,4 @@ TH1D* calcNevtsel(int type){
 		}
 	}
 	return hNevtsel;
-
+}

@@ -42,7 +42,6 @@ for(int i=0;i<ntotbin;i++){
 	int neta = vecDavgeta_Prod->GetNrows();
 	
 	c1->cd(i+1);
-	if(i!=ntotbin-1)
 	TGraphErrors *grProd=new TGraphErrors(neta,avgeta_Prod,v2_Prod,0,v2err_Prod);
 	grProd->SetMarkerStyle(29);
 	grProd->SetMarkerColor(4);

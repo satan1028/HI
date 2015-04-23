@@ -17,9 +17,11 @@ void getResV(){
         TVectorD avgmultall;	avgmultall.ResizeTo(nbin);      avgmultall.Zero();
         TVectorD tottrk;	tottrk.ResizeTo(nbin);      tottrk.Zero();
 	TVectorD totptall;      totptall.ResizeTo(nbin);    totptall.Zero();
+	TVectorD totptall2;      totptall2.ResizeTo(nbin);    totptall2.Zero();
 	TVectorD totetaall;      totetaall.ResizeTo(nbin);    totetaall.Zero();
         TVectorD avgtrk;	avgtrk.ResizeTo(nbin);      avgtrk.Zero();
         TVectorD avgpt;         avgpt.ResizeTo(nbin);
+        TVectorD avgpt2;         avgpt2.ResizeTo(nbin);
         TVectorD avgeta;         avgeta.ResizeTo(nbin);
         TVectorD q22;           q22.ResizeTo(nbin); q22.Zero();
         TVectorD q24;           q24.ResizeTo(nbin); q24.Zero();
@@ -48,6 +50,7 @@ void getResV(){
 		TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));
 		TVectorD* totptall_t =  (TVectorD*)f[ifile]->Get(Form("totptall"));
+		TVectorD* totptall2_t =  (TVectorD*)f[ifile]->Get(Form("totptall2"));
 		TVectorD* totetaall_t =  (TVectorD*)f[ifile]->Get(Form("totetaall"));
 		TVectorD* q22_t =  (TVectorD*)f[ifile]->Get(Form("q22"));
 		TVectorD* q24_t =  (TVectorD*)f[ifile]->Get(Form("q24"));
@@ -65,6 +68,7 @@ void getResV(){
                                     hq[ibin][itheta]->Add(hq_t);
 			        }
 				totptall[ibin] += (*totptall_t)[ibin];
+				totptall2[ibin] += (*totptall2_t)[ibin];
 				totetaall[ibin] += (*totetaall_t)[ibin];
 			        Nevent[ibin] += (*Nevent_t)[ibin];
 			        totmultall[ibin] += (*totmultall_t)[ibin];	
@@ -82,6 +86,7 @@ void getResV(){
 		q24[ibin]=q24[ibin]/Nevent[ibin];
 			for(int itheta=0;itheta<ntheta;itheta++){
 				avgpt[ibin]=1.0*totptall[ibin]/totmultall[ibin];
+				avgpt2[ibin]=1.0*totptall2[ibin]/totmultall[ibin];
 				avgeta[ibin]=1.0*totetaall[ibin]/totmultall[ibin];
 				}
 	}
@@ -94,6 +99,7 @@ void getResV(){
        	tottrk.Write("tottrk");
        	avgtrk.Write("avgtrk");
         avgpt.Write("avgpt");
+        avgpt2.Write("avgpt2");
         avgeta.Write("avgeta");
         q22.Write("q22");
         q24.Write("q24");

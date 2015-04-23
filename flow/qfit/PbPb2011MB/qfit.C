@@ -30,7 +30,7 @@ class qfit {
             
         int nvv, ispt;
         const double *binv;
-	TVectorD Nevent, totmultall, tottrk, totptall,totetaall;
+	TVectorD Nevent, totmultall, tottrk, totptall,totptall2,totetaall;
 	TString filename;
 	double theta[ntheta];
 	TVectorD totmultv[nbin];
@@ -108,6 +108,7 @@ qfit::calcV()
                         if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection
 			Qx+=1.*cos(nn*phi[imult]);
 			Qy+=1.*sin(nn*phi[imult]);
+                        totptall2[xbin]+=pt[imult]*pt[imult];
                         totptall[xbin]+=pt[imult];
                         totetaall[xbin]+=eta[imult];
 			totmultall[xbin]++;
@@ -185,8 +186,8 @@ qfit::beginJob(int ispt_)
     if(ispt_){             nvv = nptv;       binv = ptbinv;}
     else{             nvv = netav;          binv = etabinv;}
 
-	Nevent.ResizeTo(nbin);	totmultall.ResizeTo(nbin), tottrk.ResizeTo(nbin), totptall.ResizeTo(nbin), totetaall.ResizeTo(nbin);
-	Nevent.Zero();	totmultall.Zero(),	tottrk.Zero(); totptall.Zero(); totetaall.Zero();
+	Nevent.ResizeTo(nbin);	totmultall.ResizeTo(nbin), tottrk.ResizeTo(nbin), totptall.ResizeTo(nbin), totptall2.ResizeTo(nbin); totetaall.ResizeTo(nbin);
+	Nevent.Zero();	totmultall.Zero(),	tottrk.Zero(); totptall.Zero(); totptall2.Zero(); totetaall.Zero();
         q22.ResizeTo(nbin);q24.ResizeTo(nbin);
         q22.Zero();q24.Zero();
 
@@ -223,6 +224,7 @@ qfit::endJobV(TString outstr)
 	Nevent.Write("Nevent");
 	totmultall.Write("totmultall");
 	totptall.Write("totptall");
+	totptall2.Write("totptall2");
 	totetaall.Write("totetaall");
 	tottrk.Write("tottrk");
         q22.Write("q22");

@@ -1,6 +1,5 @@
 #include "par.h"
 void dofirst(){
-	gROOT->ProcessLine(".L qfit.C+");
 	int start=atoi(getenv("START"));
 	int end=atoi(getenv("END"));
 	TString name;

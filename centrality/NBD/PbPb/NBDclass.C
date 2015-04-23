@@ -91,7 +91,7 @@ void NBD::fit(){
 	TH1D *histo_exp = (TH1D*)histo_obs->Clone();
 	TF1 *NBD_fun = new TF1("NBD_fun","[0]*TMath::Gamma(x+[1])/(TMath::Gamma(x+1)*TMath::Gamma([1]))*TMath::Power([2]/[1],x)/TMath::Power([2]/[1]+1,x+[1])",0,100);
 	UInt_t iniseed = gRandom->GetSeed();	// reproduce the "random" numbers
-	std::vector<double> muvector, kvector, chisvector;//, ndfvector;
+	std::vector<double> muvector, kvector, chisvector, ndfvector;
 	double mu,k;
 	for(mu=mumin;mu<=mumax;mu+=mustep){
 		for(k=kmin;k<=kmax;k+=kstep){
@@ -122,13 +122,15 @@ void NBD::fit(){
 				}
 				histo_exp->Fill(Para);
 			}
-                double chi_square = chisquare(histo_obs,histo_exp,xmin[0],xmax[0],Ndf[0]);
+                double ndf;
+                double chi_square = chisquare(histo_obs,histo_exp,xmin[0],xmax[0],ndf);
                 if(chi_square>=0){
                     chisvector.push_back(chi_square);
                     muvector.push_back(mu);
                     kvector.push_back(k);
+                    ndfvector.push_back(ndf);
                 }
-                cout<<mu<<"\t"<<k<<"\t"<<chi_square<<"\t"<<Ndf[0]<<endl;//<<"\t"<<ndf<<"\t"<<p<<endl;
+                cout<<mu<<"\t"<<k<<"\t"<<chi_square<<"\t"<<ndf<<endl;//<<"\t"<<ndf<<"\t"<<p<<endl;
 		}
 	}
 	double *amu = &muvector[0];
@@ -138,6 +140,7 @@ void NBD::fit(){
         mubest[0] = muvector[loc];
         kbest[0] = kvector[loc];
         chis[0] = chisvector[loc];
+        Ndf[0] = ndfvector[loc];
 	cout<<"{"<<mubest[0]<<","<<kbest[0]<<"}"<<endl;
 	cout<<chis[0]<<"\t"<<Ndf[0]<<endl;
 

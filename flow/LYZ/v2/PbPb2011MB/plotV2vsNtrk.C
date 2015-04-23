@@ -1,0 +1,80 @@
+void plotV2vsNtrk(){
+
+const int ntotbin=13;
+const int nbin = 13;
+const double avgtrkbin[nbin]={54.39,69.11,89.21,109.3,134.1,166.5,201.6,229.4,249.4,269.4,289.4,309.4,334.3};
+const double V214006[nbin]={0.06413,0.06138,0.06137,0.06674,0.06906,0.07185,0.07545,0.07807,0.07934,0.08003,0.08152,0.08223,0.08308};
+const double V214006err[nbin]={0.01418,0.007515,0.003744,0.003738,0.003867,0.004024,0.004074,0.004216,0.004284,0.004322,0.004402,0.00444,0.004486};
+int xbin=0;
+double Ntrk[ntotbin], V2_Sum[ntotbin], V2err_Sum[ntotbin],  V2_Prod[ntotbin], V2err_Prod[ntotbin], V2intcorr_Prod[ntotbin], V2intcorrerr_Prod[ntotbin];
+for(int i=0;i<ntotbin;i++){
+TFile *mergedV_Sum = TFile::Open(Form("mergedV_Prod.root"));
+TFile *mergedV_Prod = TFile::Open(Form("mergedV_Prod.root"));
+//TFile *mergedv_Prod2 = TFile::Open(Form("mergedv_Prod2.root"));
+TVectorD *vecNtrk = (TVectorD*)mergedV_Sum->Get("avgtrk");
+TVectorD *vecNtrk_back = (TVectorD*)mergedV_Prod->Get("avgtrk");
+TVectorD *vecV2_Sum=(TVectorD*)mergedV_Sum->Get(Form("Vmean"));
+TVectorD *vecV2err_Sum=(TVectorD*)mergedV_Sum->Get(Form("deltaVmean"));
+TVectorD *vecV2_Prod=(TVectorD*)mergedV_Prod->Get(Form("Vmean"));
+//TVectorD *vecV2intcorr_Prod=(TVectorD*)mergedv_Prod2->Get(Form("V_intcorr",xbin));
+//TVectorD *vecV2intcorrerr_Prod=(TVectorD*)mergedv_Prod2->Get(Form("V_intcorrerr",xbin));
+TVectorD *vecV2err_Prod=(TVectorD*)mergedV_Prod->Get(Form("deltaVmean"));
+Ntrk[i]=(*vecNtrk)[i];
+V2_Sum[i]=(*vecV2_Sum)[i];
+V2err_Sum[i]=(*vecV2err_Sum)[i];
+V2_Prod[i]=(*vecV2_Prod)[i];
+V2err_Prod[i]=(*vecV2err_Prod)[i];
+//V2intcorr_Prod[i]=(*vecV2intcorr_Prod)[i];
+//V2intcorrerr_Prod[i]=(*vecV2intcorrerr_Prod)[i];
+}
+//const double V2[nbin]={0.0465,0.0498,0.0430,0.0447,0.0462};
+//const double V2Prod[nbin]={0.0536,0.0514,0.0491,0.0482,0.0462};
+//const double V2Proderr[nbin]={0.0013,0.0015,0.0015,0.0070,0.0027};
+TCanvas *c1 = new TCanvas;
+TGraphErrors *grSum=new TGraphErrors(ntotbin,Ntrk,V2_Sum,0,V2err_Sum);
+TGraphErrors *grProd=new TGraphErrors(ntotbin,Ntrk,V2_Prod,0,V2err_Prod);
+//TGraphErrors *grProdcorr=new TGraphErrors(ntotbin,Ntrk,V2intcorr_Prod,0,V2err_Prod);
+TGraphErrors *grV214006=new TGraphErrors(nbin,avgtrkbin,V214006,0,V214006err);
+TLatex *tl1 = new TLatex(0.2,0.3,Form("track normal cut"));
+TLatex *tl2 = new TLatex(0.2,0.2,Form("%.1f < p_{T} < %.1f (GeV/c)",0.3,6.0));
+tl1->SetNDC();
+tl2->SetNDC();
+grV214006->SetTitle("V_{2} vs Ntrkoffline");
+grV214006->GetXaxis()->SetTitle("Ntrkoffline");
+grV214006->GetYaxis()->SetTitle("V_{2}");
+grV214006->SetMaximum(0.15);
+grV214006->SetMinimum(0.03);
+//grSum->SetMarkerSize(1);
+//grProdcorr->SetMarkerSize(1.4);
+grV214006->SetMarkerSize(1.4);
+//grSum->SetMarkerColor(1);
+//grProdcorr->SetMarkerColor(1);
+//grSum->SetLineColor(1);
+//grProdcorr->SetLineColor(1);
+grProd->SetMarkerSize(1.4);
+grProd->SetMarkerColor(4);
+grProd->SetLineColor(4);
+grV214006->SetMarkerColor(2);
+//grSum->SetMarkerStyle(20);
+//grProdcorr->SetMarkerStyle(20);
+grProd->SetMarkerStyle(29);
+grV214006->SetMarkerStyle(24);
+TLegend *leg = new TLegend(0.2,0.7,0.4,0.85);
+leg->SetTextSize(0.05);
+leg->SetBorderSize(0);
+leg->SetFillColor(0);
+//leg->AddEntry(grSum,"LYZ Sum method","P");
+leg->AddEntry(grProd,"LYZ method","P");
+//leg->AddEntry(grProdcorr,"LYZ method corrected","P");
+leg->AddEntry(grV214006,"HIN 14-006 LYZ","P");
+grV214006->Draw("AP");
+//grSum->Draw("Psame");
+//grProdcorr->Draw("Psame");
+grProd->Draw("Psame");
+//tl1->Draw("same");
+tl2->Draw("same");
+leg->Draw("same");
+c1->Print("V2vsNtrk.png");
+
+}
+

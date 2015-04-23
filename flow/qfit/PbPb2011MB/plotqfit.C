@@ -2,7 +2,7 @@
 #include <iomanip>
 #include "../../../jetRpA/RpA/Quality/root_setting.h"
 
-void plotqfit(int fixv2=0){
+void plotqfit(int fixv2=0,int fixg2=0){
     const int nbin24 = 12;
     const double avgtrkbin[nbin24]={44.36,54.33,68.63,88.39,108.2,131.3,162.1,196.6,227.5,247.2,269.2,301.2};
     const double V24[nbin24]={0.02965,0.03913,0.04832,0.04941,0.04822,0.04955,0.049,0.04805,0.04709,0.04665,0.04772,0.04797};
@@ -11,20 +11,49 @@ void plotqfit(int fixv2=0){
     gStyle->SetOptFit(1111);
 TFile *f = TFile::Open("mergedV_Sum.root");
 TFile *fout = TFile::Open("qfitV.root","Update");
+TVectorD *vecDNevent = (TVectorD*)f->Get(Form("Nevent"));
 TVectorD *vecDavgmult = (TVectorD*)f->Get(Form("avgmultall"));
+TVectorD *vecDtotmult = (TVectorD*)f->Get(Form("totmultall"));
+TVectorD *vecDavgpt = (TVectorD*)f->Get(Form("avgpt"));
+TVectorD *vecDavgpt2 = (TVectorD*)f->Get(Form("avgpt2"));
 TVectorD *vecDavgtrk = (TVectorD*)f->Get(Form("avgtrk"));
 TVectorD *vecDq22 = (TVectorD*)f->Get(Form("q22"));
 TVectorD *vecDq24 = (TVectorD*)f->Get(Form("q24"));
+double avgmultall = vecDtotmult->Sum()/vecDNevent->Sum();
+cout<<avgmultall<<endl;
 double *avgmult = vecDavgmult->GetMatrixArray();
 double *avgtrk = vecDavgtrk->GetMatrixArray();
+double *avgpt = vecDavgpt->GetMatrixArray();
+double *avgpt2 = vecDavgpt2->GetMatrixArray();
 double *q22 = vecDq22->GetMatrixArray();
 double *q24 = vecDq24->GetMatrixArray();
 TLatex *t= new TLatex();
 t->SetNDC();
 t->SetTextSize(0.04);
 t->SetTextFont(42);
+/*
+if(fixg2){
+TH1D* hq2all = new TH1D("hq2all","hq2all",1000,0,10);
 for(int ibin=0;ibin<nbin;ibin++){	//ibin<1
- //   if(ibin!=15) continue;
+TH1D* hq2 = (TH1D*)f->Get(Form("D_%d/hq2",ibin));
+hq2all->Add(hq2);
+}
+TF1 *ffit = new TF1(Form("ffit"),"1./(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",0,10);
+TF1* f1fit = new TF1(Form("f1fit"),"x/(0.5*(1+[0]))*TMath::Exp(-([1]*[1]*[2]+x*x)/(1+[0]))*TMath::BesselI0(x*[1]*TMath::Sqrt([2])/(0.5*(1+[0])))",0,10);
+TH1D* hq2all_cp = (TH1D*)hq2all->Clone("hq2all_cp");
+hq2all->Scale(1./hq2all->Integral(0,-1,"width"));
+hq2all->Draw();
+divideByBinCenter(hq2all_cp);
+ffit->SetParameters(1,0.05,avgmultall);
+f1fit->SetParameters(1,0.05,avgmultall);
+ffit->FixParameter(2,avgmultall);
+f1fit->FixParameter(2,avgmultall);
+hq2all->Fit(Form("f1fit"),"R","",0,10);
+double g2all = f1fit->GetParameter(0);
+}
+*/
+for(int ibin=0;ibin<nbin;ibin++){	//ibin<1
+ //   if(ibin!=100) continue;
 TH1D* hq = (TH1D*)f->Get(Form("D_%d/D_%d/hq",ibin,xtheta));
 TH1D* hqx = (TH1D*)f->Get(Form("D_%d/hqx",ibin));
 TH1D* hqy = (TH1D*)f->Get(Form("D_%d/hqy",ibin));
@@ -60,10 +89,18 @@ if(fixv2){
 ffit->FixParameter(1,V24[k]);
 f1fit->FixParameter(1,V24[k]);
 }
+if(fixg2){
+    double sigma2 = avgpt2[ibin]/2./avgpt[ibin]/avgpt[ibin];
+    double g2all = 2*sigma2-1;
+    ffit->FixParameter(0,g2all);
+    f1fit->FixParameter(0,g2all);
+}
+
 //f1fit->FixParameter(0,0);
 //f1fit->FixParameter(0,0);
 ffit->FixParameter(2,avgmult[ibin]);
 f1fit->FixParameter(2,avgmult[ibin]);
+/*
 hq->Fit(Form("f1fit"),"R","P",0,10);
 TCanvas *c2 = new TCanvas("c2","c2",1000,500);
 c2->Divide(2,1);
@@ -106,7 +143,7 @@ hqy_cp->SetMarkerSize(0.5);
 hqy_cp->Fit(Form("ffit"),"R","",0,10);
 hqy_cp->Draw("Psame");
 t->DrawLatex(0.5,0.2,Form("N_{trk}^{offline} = %.2f",avgtrk[ibin]));
-
+*/
 TCanvas *c4 = new TCanvas("c4","c4",1000,500);
 c4->Divide(2,1);
 c4->cd(1)->SetLeftMargin(0.18);
@@ -164,6 +201,10 @@ if(fixv2){
 ffit->FixParameter(1,V24[k]);
 f1fit->FixParameter(1,V24[k]);
 }
+if(fixg2){
+    ffit->FixParameter(0,g2all);
+    f1fit->FixParameter(0,g2all);
+}
 //ffit->FixParameter(0,1);
 //f1fit->FixParameter(0,1);
 hq2nonf->Fit(Form("f1fit"),"R","",0,10);
@@ -196,8 +237,8 @@ vecr[6]=v2calc;
 vecr[7]=g2calc;
 
 fout->cd();
-vecr.Write(Form("r_%d_%d",ibin,fixv2),TObject::kOverwrite);
-vecrnonf.Write(Form("rnonf_%d_%d",ibin,fixv2),TObject::kOverwrite);
+vecr.Write(Form("r_%d_%d_%d",ibin,fixv2,fixg2),TObject::kOverwrite);
+vecrnonf.Write(Form("rnonf_%d_%d_%d",ibin,fixv2,fixg2),TObject::kOverwrite);
 if(ibin==15)
 c4->Print("hq2_fit_15.png");
 }

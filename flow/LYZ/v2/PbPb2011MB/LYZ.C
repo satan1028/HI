@@ -5,7 +5,6 @@
 #include "TTree.h"
 #include "TFile.h"
 #include "TMath.h"
-#include "TH1.h"
 #include <fstream>
 #include <iostream>
 #include "par.h"
@@ -14,10 +13,10 @@
 // class declaration
 //
 
-class Bessfun {
+class LYZ {
    public:
-      Bessfun(TString);
-      ~Bessfun();
+      LYZ(TString);
+      ~LYZ(){};
 
 	void beginJob(int ispt_=1) ;
 	void calcV(int);
@@ -42,11 +41,6 @@ class Bessfun {
 	TVectorD totmultv[nbin];
 	TVectorD totptv[nbin];
 	TVectorD totetav[nbin];
-        TH1D* hq[nbin][ntheta];
-        TH1D* hqx[nbin];
-        TH1D* hqy[nbin];
-        TH1D* hq2[nbin];
-        TH1D* hq2nonf[nbin];
 
 };
 
@@ -57,27 +51,14 @@ class Bessfun {
 
 
 
-Bessfun::Bessfun(TString filenamev)
+LYZ::LYZ(TString filenamev)
 {	
 	filename = filenamev;
 }
 
-Bessfun::~Bessfun(){
-    for(int ibin=0; ibin<nbin; ibin++){
-     	for(int itheta=0;itheta<ntheta;itheta++){
-                delete   hq[ibin][itheta];
-        }
-        delete   hqx[ibin];
-        delete   hqy[ibin];
-        delete   hq2[ibin];
-        delete   hq2nonf[ibin];
-    }
-}
-
-
 // ------------ method called for each event  ------------
 void
-Bessfun::calcV(int way)	//way=0: Prod way=1: Sum
+LYZ::calcV(int way)	//way=0: Prod way=1: Sum
 {
    using namespace std;
 
@@ -85,13 +66,14 @@ Bessfun::calcV(int way)	//way=0: Prod way=1: Sum
 	TComplex g[ntheta][nstepr];
 	double Q[ntheta];	double Qx;	double Qy;
 	int mult, ntrk;
-        Float_t phi[10000], eta[10000], pt[10000];
+        double phi[10000], eta[10000], pt[10000];
         TFile *infile = TFile::Open(filename);
-        TTree* t = (TTree*)infile->Get("tree");
-        t->SetBranchAddress("n",&mult);
-        t->SetBranchAddress("ptg",pt);
-        t->SetBranchAddress("phig",phi);
-        t->SetBranchAddress("etag",eta);
+        TTree* t = (TTree*)infile->Get("demo/TrackTree");
+        t->SetBranchAddress("mult",&mult);
+        t->SetBranchAddress("ntrk",&ntrk);
+        t->SetBranchAddress("pt",pt);
+        t->SetBranchAddress("phi",phi);
+        t->SetBranchAddress("eta",eta);
         int nevent = t->GetEntries();
         for(int ievt=0; ievt<nevent; ievt++){
                 t->GetEntry(ievt);
@@ -106,15 +88,15 @@ Bessfun::calcV(int way)	//way=0: Prod way=1: Sum
 	        	}
 			Qx=0,Qy=0;
 
-		ntrk = mult; int nTracks = ntrk;	int xbin=-1;
+		int nTracks = ntrk;	int xbin=-1;
 		for(int j=0;j<nbin;j++)
                 if(nTracks<trkbin[j]&&nTracks>=trkbin[j+1])
                         xbin=j;
         	if(xbin<0 || xbin==nbin) continue;	
                 tottrk[xbin]+=ntrk;
 		for(int imult=0;imult<mult;imult++){
-		//	if(eta[imult]<-2.40||eta[imult]>2.40) continue;
-                //       if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection
+			if(eta[imult]<-2.40||eta[imult]>2.40) continue;
+                        if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection
 			Qx+=1.*cos(nn*phi[imult]);
 			Qy+=1.*sin(nn*phi[imult]);
 			for(int itheta=0;itheta<ntheta;itheta++){
@@ -135,44 +117,39 @@ Bessfun::calcV(int way)	//way=0: Prod way=1: Sum
 			for(int itheta=0;itheta<ntheta;itheta++){
 				Q[itheta]=Qx*TMath::Cos(nn*theta[itheta])+Qy*TMath::Sin(nn*theta[itheta]);
 				for(int ir=0; ir<nstepr; ir++){
-					if(way!=0)	g[itheta][ir]=TComplex::Exp(TComplex(0,r[xbin][ir]*Qx));//g[itheta][0]
+					if(way!=0)	g[itheta][ir]=TComplex::Exp(TComplex(0,r[xbin][ir]*Q[itheta]));//g[itheta][0]
 					GRe[xbin][itheta][ir]+=g[itheta][ir].Re();
 					GIm[xbin][itheta][ir]+=g[itheta][ir].Im();
 				}
-                    hq[xbin][itheta]->Fill(TMath::Abs(Q[itheta])/TMath::Sqrt(mult));
 		}
-                hqx[xbin]->Fill(TMath::Abs(Qx)/TMath::Sqrt(mult));
-                hqy[xbin]->Fill(TMath::Abs(Qy)/TMath::Sqrt(mult));
-                hq2[xbin]->Fill(TMath::Sqrt(Qx*Qx+Qy*Qy)/TMath::Sqrt(mult));
-                hq2nonf[xbin]->Fill(TMath::Sqrt(2)*TMath::Sqrt(Qx*Qx+Qy*Qy)/TMath::Sqrt(mult));
+
 		Nevent[xbin]++;
 	}
 	infile->Close();
 }
 
 
-void Bessfun::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
+void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 	TComplex g0[ntheta], dDsum[ntheta], dNsum[ntheta][nvv];
 	TVectorD* r0res[nbin]; 
 	//TVectorD* Vres[nbin]; TVectorD* chires[nbin];
 	TFile *fres = TFile::Open(res);
 	for(int ibin=0;ibin<nbin;ibin++){
 		if(isample>=0)
-                	r0res[ibin] = (TVectorD*)fres->Get(Form("s_%d/D_%d/r0",isample,ibin));
-                else if(isample==-1)
-			r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/r0",ibin));
+                	r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/s_%d/r0",ibin,isample));
                 else
-		        r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/r02",ibin));
+			r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/r0",ibin));
 	}
 		
         int mult, ntrk;
-        Float_t phi[10000], eta[10000], pt[10000];
+        double phi[10000], eta[10000], pt[10000];
         TFile *infile = TFile::Open(filename);
-        TTree* t = (TTree*)infile->Get("tree");
-        t->SetBranchAddress("n",&mult);
-        t->SetBranchAddress("ptg",pt);
-        t->SetBranchAddress("phig",phi);
-        t->SetBranchAddress("etag",eta); 
+        TTree* t = (TTree*)infile->Get("demo/TrackTree");
+        t->SetBranchAddress("mult",&mult);
+        t->SetBranchAddress("ntrk",&ntrk);
+        t->SetBranchAddress("pt",pt);
+        t->SetBranchAddress("phi",phi);
+        t->SetBranchAddress("eta",eta); 
         int nevent = t->GetEntries();
 
 
@@ -190,15 +167,15 @@ void Bessfun::calcv(TString res, int way, int isample){	//way=0: product way=1: 
                         	g0[itheta]=0.;
                         dDsum[itheta]=0.;
                 }
-		ntrk = mult; int nTracks = ntrk;	int xbin=-1;
+		int nTracks = ntrk;	int xbin=-1;
 		for(int j=0;j<nbin;j++)
                 	if(nTracks<trkbin[j]&&nTracks>=trkbin[j+1])
                 	        xbin=j;
         	if(xbin<0 || xbin == nbin) continue;
 		tottrk[xbin]+=ntrk;
 		for(int imult=0;imult<mult;imult++){
-	//		if(eta[imult]<-2.40||eta[imult]>2.40) continue;
-	//		if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection	
+			if(eta[imult]<-2.40||eta[imult]>2.40) continue;
+			if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection	
 			int xv=-1;
 			for(int ivbin=0;ivbin<nvv; ivbin++){
                             if(ispt && pt[imult]>binv[ivbin] && pt[imult]<=binv[ivbin+1])
@@ -240,12 +217,12 @@ void Bessfun::calcv(TString res, int way, int isample){	//way=0: product way=1: 
 
 // ------------ method called once each job just before starting event loop  ------------
 void 
-Bessfun::beginJob(int ispt_)
+LYZ::beginJob(int ispt_)
 {
   double Vmax[nbin], eps[nbin];
   for(int ibin=0; ibin<nbin ;ibin++){
-        Vmax[ibin]=0.065*(trkbin[ibin]+30);
-        eps[ibin]=0.00025*(trkbin[ibin]+30);
+        Vmax[ibin]=0.10*(trkbin[ibin]+30);
+        eps[ibin]=0.00045*(trkbin[ibin]+30);
   }
     ispt = ispt_;
     if(ispt_){             nvv = nptv;       binv = ptbinv;}
@@ -279,24 +256,13 @@ Bessfun::beginJob(int ispt_)
                 for(int itheta=0;itheta<ntheta;itheta++){
                     dNRe[ibin][itheta].ResizeTo(nvv);	dNRe[ibin][itheta].Zero();
                     dNIm[ibin][itheta].ResizeTo(nvv);	dNIm[ibin][itheta].Zero();
-                    hq[ibin][itheta] = new TH1D(Form("hq_%d_%d",ibin,itheta),Form("hq_%d_%d",ibin,itheta),1000,0,10);
-                    hq[ibin][itheta]->Sumw2();
-
                 }
-                hqx[ibin] = new TH1D(Form("hqx_%d",ibin),Form("hqx_%d",ibin),1000,0,10);
-                hqy[ibin] = new TH1D(Form("hqy_%d",ibin),Form("hqy_%d",ibin),1000,0,10);
-                hq2[ibin] = new TH1D(Form("hq2_%d",ibin),Form("hq2_%d",ibin),1000,0,10);
-                hq2nonf[ibin] = new TH1D(Form("hq2nonf_%d",ibin),Form("hq2nonf_%d",ibin),1000,0,10);
-                hqx[ibin]->Sumw2();
-                hqy[ibin]->Sumw2();
-                hq2[ibin]->Sumw2();
-                hq2nonf[ibin]->Sumw2();
         }
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
 void 
-Bessfun::endJobV(TString outstr) 
+LYZ::endJobV(TString outstr) 
 {
         
 //fstrGRe, fstrGIm
@@ -348,17 +314,12 @@ Bessfun::endJobV(TString outstr)
         		for(int itheta=0;itheta<ntheta;itheta++){
 				GRe[ibin][itheta].Write(Form("GRe_%d_%d",ibin,itheta));
 				GIm[ibin][itheta].Write(Form("GIm_%d_%d",ibin,itheta));
-                                hq[ibin][itheta]->Write();
 		}
-                hqx[ibin]->Write();
-                hqy[ibin]->Write();
-                hq2[ibin]->Write();
-                hq2nonf[ibin]->Write();
 	}
 	fs->Close();
 }
 
-void Bessfun::endJobv(TString outstr){
+void LYZ::endJobv(TString outstr){
 	
    using namespace std;
 
