@@ -3,7 +3,7 @@ void plotv2vseta(){
 
 const int ntotbin=5;
 
-const int trkpointmin[ntotbin] = {120,150,185,220,260};
+const int trkpointmin[ntotbin] = {120,150,185,220,220};
 const int trkpointmax[ntotbin] = {150,185,220,260,300};
 int ibin=0;
 c1 = new TCanvas("c1"," ",1200,700);

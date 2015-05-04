@@ -62,7 +62,8 @@ void Write(UShort_t nEvents, UShort_t minN, UShort_t maxN)
   tree->Branch("weight", &weights);
   tree->Branch("event", &phiR, "phiR/D");
 
-  phiFunc->SetParameters(0, 0.01, 0.05, 0.03, 0.02, 0.01, 0.01);
+ // phiFunc->SetParameters(0, 0.01, 0.05, 0.03, 0.02, 0.01, 0.01);
+  phiFunc->SetParameters(0, 0., 0.05, 0., 0., 0., 0.);
   for (UShort_t bin = 1; bin <= weightDist->GetNbinsX(); bin++)
     weightDist->SetBinContent(bin, 1 + gRandom->Uniform(-0.144, +0.144));
   weightDist->SetFillColor(kGreen+1);
@@ -77,6 +78,7 @@ void Write(UShort_t nEvents, UShort_t minN, UShort_t maxN)
   phiDist->Sumw2();
 
   for (UShort_t ev = 0; ev < nEvents; ev++) {
+     // printf("%d\n",ev);
     UShort_t mult = UShort_t(gRandom->Uniform(minN,maxN));
     phiR          = gRandom->Uniform(0, TMath::TwoPi());
     phiFunc->SetParameter(0, phiR);

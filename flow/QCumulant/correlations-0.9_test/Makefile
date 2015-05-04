@@ -48,7 +48,7 @@ PROGS		:= correlations/progs/analyze.cc 		\
 		   correlations/progs/compare.cc 		\
 		   correlations/progs/print.cc			\
 		   correlations/progs/Write.C			\
-		   correlations/progs/Analyze.C			\
+		   correlations/progs/Analyze1.C			\
 		   correlations/progs/Compare.C			\
 		   correlations/progs/Simple.C
 DOCS		:= doc/Mainpage.hh				\
@@ -107,12 +107,12 @@ closed.dat recurrence.dat recursive.dat:data.dat analyze
 
 data.root:Write
 	@echo "=== Generating data file ======================="
-	@./$<  -e 10 -m 8 -M 10 
+	@./$<  -e 10000 -m 80 -M 100
 	@echo ""
 
-closed.root recurrence.root recursive.root:data.root Analyze
+closed.root recurrence.root recursive.root:data.root Analyze1
 	@echo "=== Analysing using $(basename $@) ======================="
-	@./Analyze -t $(basename $@) -n 6 -L -B 
+	@./Analyze1 -t $(basename $@) -n 6 -L -B 
 	@echo ""
 
 recurrence.dat:data.dat analyze closed.dat
@@ -141,8 +141,8 @@ retest:
 Write.o: 	correlations/progs/Write.C 
 Write:		LDFLAGS:=$(LDFLAGS) $(ROOTLIBS) 
 
-Analyze.o: 	correlations/progs/Analyze.C 
-Analyze:	LDFLAGS:=$(LDFLAGS) $(ROOTLIBS) 
+Analyze1.o: 	correlations/progs/Analyze1.C 
+Analyze1:	LDFLAGS:=$(LDFLAGS) $(ROOTLIBS) 
 
 Compare.o: 	correlations/progs/Compare.C 
 Compare:	LDFLAGS:=$(LDFLAGS) $(ROOTLIBS) 
@@ -185,7 +185,7 @@ html/index.html:doc/Doxyfile $(HEADERS) $(TESTS) $(PROGS) $(DOCS)
 clean:
 	find . -name "*~" -or -name "*_C.*" -or -name "*_hh.*" | xargs rm -f
 	rm -f core.* TAGS *.o *.png *.vlg *.dat  *.root Test test.C
-	rm -f analyze compare write print Analyze Write Compare doc/Doxyfile
+	rm -f analyze compare write print Analyze1 Write Compare doc/Doxyfile
 	rm -f algorithmsTiming.eps algorithmsTiming.png algorithmsTiming.pdf
 	rm -rf html TAGS $(NAME)-$(VERSION) 
 

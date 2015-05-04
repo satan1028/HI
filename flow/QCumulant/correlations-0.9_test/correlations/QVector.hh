@@ -61,6 +61,7 @@ namespace correlations {
      * @param useWeights Whether to use weights or not
      *
      */
+    QVector():_maxN(0), _maxP(0), _useWeights(false), _q(0){}
     QVector(Size mN, Size mP, bool useWeights)
       : _maxN(mN), _maxP(mP), _useWeights(useWeights), _q(0)
     {

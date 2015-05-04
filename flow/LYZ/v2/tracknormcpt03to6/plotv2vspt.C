@@ -66,7 +66,7 @@ for(int i=0;i<ntotbin;i++){
 	grProd->SetMarkerColor(4);
 	grProd->SetLineColor(4);
 	hFrame->Draw();
-	gr24->Draw("Psame");
+	//gr24->Draw("Psame");
 	grProd->Draw("Psame");
 	TLegend *tl = new TLegend(0.4,0.5,0.7,0.65);
 	tl->SetFillColor(0);

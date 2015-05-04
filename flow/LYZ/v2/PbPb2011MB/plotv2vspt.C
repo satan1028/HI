@@ -33,8 +33,8 @@ makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
     hFrame->GetXaxis()->SetRangeUser(-0.3,6.3);
     hFrame->SetMaximum(0.35);
     hFrame->SetMinimum(0);
-
-for(int i=0;i<ntotbin;i++){
+int shift=6;
+for(int i=shift;i<shift+ntotbin;i++){
 	//TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_sub.root",trkpointmax[i],trkpointmin[i]));
 	TFile *fProd = TFile::Open(Form("mergedv_Prod2.root"));
 	//TVectorD *vecDv2_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/vmeanmean",ibin));
@@ -54,13 +54,13 @@ for(int i=0;i<ntotbin;i++){
 	double *v2err_Prod = vecDv2err_Prod->GetMatrixArray();
 	int npt = vecDavgpt_Prod->GetNrows();
 	
-	c1->cd(i+1);
-	if(i!=ntotbin-1)
-	TGraphErrors *gr24=new TGraphErrors(npt24,pt,v24[i],0,v24err[i]);
+	c1->cd(i-shift+1);
+	//if(i!=ntotbin-1)
+	//TGraphErrors *gr24=new TGraphErrors(npt24,pt,v24[i],0,v24err[i]);
 	TGraphErrors *grProd=new TGraphErrors(npt,avgpt_Prod,v2_Prod,0,v2err_Prod);
-	gr24->SetMarkerSize(1.3);
-	gr24->SetMarkerColor(1);
-	gr24->SetMarkerStyle(20);
+	//gr24->SetMarkerSize(1.3);
+	//gr24->SetMarkerColor(1);
+	//gr24->SetMarkerStyle(20);
 	grProd->SetMarkerStyle(29);
 	grProd->SetMarkerColor(4);
 	grProd->SetLineColor(4);
@@ -74,9 +74,9 @@ for(int i=0;i<ntotbin;i++){
 	//tl->AddEntry(gr24,"v2 4-particle cum","lp");
 	tl->AddEntry(grProd,"LYZ Prod method","lp");
 	if(i==0 || i==3) 
-		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkbin[i+5],trkbin[i+4]));
+		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkbin[i],trkbin[i+1]));
 	else
-		TLatex *tlx2 = new TLatex(0.1,0.8,Form("%d<Ntrkoffline<%d",trkbin[i+5],trkbin[i+4]));
+		TLatex *tlx2 = new TLatex(0.1,0.8,Form("%d<Ntrkoffline<%d",trkbin[i],trkbin[i+1]));
 	tlx2->SetNDC();
 	tlx2->Draw("same");
 	fProd->Close();

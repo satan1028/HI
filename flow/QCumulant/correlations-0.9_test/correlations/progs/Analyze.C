@@ -105,7 +105,13 @@ Analyze(const TString& mode="CLOSED",
   correlations::HarmonicVector h(maxH);
   for (UShort_t i = 0; i < maxH; i++) {
     // Generate random harmonicx
-    h[i] = -6 + gRandom->Integer(12);
+    //h[i] = -6 + gRandom->Integer(12);
+   h[0] = -2;
+   h[1] = 2;
+   h[2] = -2;
+   h[3] = 2;
+   h[4] = -2;
+   h[5] = 2;
     Printf("h_%d:\t%d", i, h[i]);
   }
 
@@ -170,14 +176,15 @@ Analyze(const TString& mode="CLOSED",
   UShort_t nEvents = tree->GetEntries();
   for (UShort_t event = 0; event < nEvents; event++) {
     tree->GetEntry(event);
-    printf("Event # %4u  %4d particles ", event++, phis.GetSize());
+   // printf("Event # %4u  %4d particles ", event++, phis.GetSize());
 
+    q.reset();
     for (UShort_t pa = 0; pa < phis.GetSize(); pa++)
       q.fill(phis[pa], weights[pa]);
-
+    
     for (UShort_t i = 0; i < nQ; i++) {
       UShort_t n = i + 2;
-      printf("%s%d", i == 0 ? "" : "..", n);
+    //  printf("%s%d", i == 0 ? "" : "..", n);
       timer.Reset();
       timer.Start();
       qs[i] += c->calculate(n, h);
@@ -185,7 +192,7 @@ Analyze(const TString& mode="CLOSED",
       timing->Fill(n+.5, timer.RealTime());
     }
 
-    printf(" done\n");
+   // printf(" done\n");
   }
   file->Close();
 

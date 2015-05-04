@@ -17,7 +17,8 @@ makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
     hFrame->GetXaxis()->SetRangeUser(-2.5,2.5);
     hFrame->SetMaximum(0.2);
 
-for(int i=0;i<ntotbin;i++){
+    double shift=4;
+for(int i=shift;i<ntotbin+shift;i++){
 	//TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_sub.root",trkpointmax[i],trkpointmin[i]));
 	TFile *fProd = TFile::Open(Form("mergedv_Prod2_eta.root"));
 	//TVectorD *vecDv2_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/vmeanmean",ibin));
@@ -35,7 +36,7 @@ for(int i=0;i<ntotbin;i++){
 	double *v2_Prod = vecDv2_Prod->GetMatrixArray();
 	double *v2err_Prod = vecDv2err_Prod->GetMatrixArray();
 	int neta = vecDavgeta_Prod->GetNrows();
-	c1->cd(i+1);
+	c1->cd(i-shift+1);
 	TGraphErrors *grProd=new TGraphErrors(neta,avgeta_Prod,v2_Prod,0,v2err_Prod);
 	grProd->SetMarkerStyle(29);
 	grProd->SetMarkerColor(4);
@@ -48,9 +49,9 @@ for(int i=0;i<ntotbin;i++){
 	tl->SetTextSize(0.05);
 	tl->AddEntry(grProd,"LYZ Prod method","lp");
 	if(i==0 || i==3) 
-		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkbin[i+5],trkbin[i+4]));
+		TLatex *tlx2 = new TLatex(0.3,0.8,Form("%d<Ntrkoffline<%d",trkbin[i+1],trkbin[i]));
 	else
-		TLatex *tlx2 = new TLatex(0.1,0.8,Form("%d<Ntrkoffline<%d",trkbin[i+5],trkbin[i+4]));
+		TLatex *tlx2 = new TLatex(0.1,0.8,Form("%d<Ntrkoffline<%d",trkbin[i+1],trkbin[i]));
 	tlx2->SetNDC();
 	tlx2->Draw("same");
 	fProd->Close();

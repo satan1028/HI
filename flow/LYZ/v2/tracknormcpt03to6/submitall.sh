@@ -3,7 +3,7 @@ SumorProd="Prod"
 Vorv="veta"
 
 nfilesperjob=25
-nfiles=462
+nfiles=924
 njobs=`echo "$nfiles/$nfilesperjob" | bc`
 echo "split into $(($njobs+1)) jobs, $nfilesperjob files per job"
 
@@ -36,7 +36,8 @@ export END=$end
 export DIR=$dir
 export SUMORPROD=$SumorProd
 export VORV=$Vorv
-sbatch -J $dir$i -o $DIR/job$I$SUMORPROD.out jobsub.slurm
+#sbatch -J $dir$i -o $DIR/job$I$SUMORPROD.out jobsub.slurm
+./jobsub.slurm
 fi
 done
 done

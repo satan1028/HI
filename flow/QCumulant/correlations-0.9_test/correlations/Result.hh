@@ -98,7 +98,7 @@ namespace correlations {
     {
       std::cout << _sum << "\t" << _weights << std::endl;
     }
-  protected:
+ // protected:
     /** Sum of arguments */
     Complex _sum;
     /** Sum of Weights */

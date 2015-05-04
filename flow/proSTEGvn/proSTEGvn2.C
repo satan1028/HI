@@ -103,7 +103,7 @@ void proSTEGvn2()
       
     } // End of loop over particles
  
-    if (i%1 == 0) cout << i << " " << "events processed" << endl;
+    if (i%10000 == 0) cout << i << " " << "events processed" << endl;
 
     b_n = n;
     tree->Fill();

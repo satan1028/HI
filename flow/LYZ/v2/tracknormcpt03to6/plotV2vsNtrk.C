@@ -44,7 +44,7 @@ TGraphErrors *grProdcorr=new TGraphErrors(ntotbin,Ntrk,V2intcorr_Prod,0,V2err_Pr
 TGraphErrors *grV214006=new TGraphErrors(nbin,avgtrkbin,V214006,0,V214006err);
 TGraphErrors *grV24=new TGraphErrors(nbin24,avgtrkbin24,V24,0,V24err);
 TLatex *tl1 = new TLatex(0.2,0.3,Form("track normal cut"));
-TLatex *tl2 = new TLatex(0.2,0.2,Form("%.1f < p_{T} < %.1f (GeV/c)",0.3,6.0));
+TLatex *tl2 = new TLatex(0.2,0.2,Form("%.1f < p_{T} < %.1f (GeV/c)",0.3,3.0));
 tl1->SetNDC();
 tl2->SetNDC();
 grV214006->SetTitle("V_{2} vs Ntrkoffline");
@@ -85,7 +85,7 @@ grV214006->Draw("AP");
 grProdcorr->Draw("Psame");
 //grProd->Draw("Psame");
 grV24->Draw("Psame");
-tl1->Draw("same");
+//tl1->Draw("same");
 tl2->Draw("same");
 leg->Draw("same");
 c1->Print("V2vsNtrk.png");

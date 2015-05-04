@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mult=185
-for i in 151 152 153 154 174 212 213
+for i in {0..299}
 do
     export MULT=$mult
     export IFILE=$i

@@ -33,8 +33,10 @@ void getResvsub(){
 	TVectorD avgpt[nbin];
 	TVectorD v[nbin][ntheta],vmean[nbin],deltav[nbin][ntheta],deltavmean[nbin];
 	TVectorD IFILE[nbin];
-	if(SumorProd=="Sum")	TFile *infile = TFile::Open("mergedV_Sum_sub.root");
-	else	TFile *infile = TFile::Open("mergedV_Prod_sub.root");
+	//if(SumorProd=="Sum")	TFile *infile = TFile::Open("mergedV_Sum_sub.root");
+	if(SumorProd=="Sum")	TFile *infile = TFile::Open("mergedV_Sum.root");
+	//else	TFile *infile = TFile::Open("mergedV_Prod_sub.root");
+	else	TFile *infile = TFile::Open("mergedV_Prod.root");
 	if(SumorProd=="Sum")TFile *fout = new TFile("mergedv_Prod_sub.root","Recreate");
         else TFile *fout = new TFile("mergedv_Prod2_sub.root","Recreate");
 
@@ -74,10 +76,14 @@ void getResvsub(){
 		avgmult[ibin].ResizeTo(nptv);	avgpt[ibin].ResizeTo(nptv);
 		totpt[ibin].ResizeTo(nptv);	totpt[ibin].Zero();
 		vmean[ibin].ResizeTo(nptv);	deltavmean[ibin].ResizeTo(nptv);
-		V[ibin] = (TVectorD*) infile->Get(Form("D_%d/s_%d/D_0/V",ibin,isample));
-		chi[ibin] = (TVectorD*) infile->Get(Form("D_%d/s_%d/chi",ibin,isample));
-		V_mean = (TVectorD*) infile->Get(Form("D_%d/s_%d/Vmean",ibin,isample));
-		deltaV_mean = (TVectorD*) infile->Get(Form("D_%d/s_%d/deltaVmean",ibin,isample));
+		//V[ibin] = (TVectorD*) infile->Get(Form("D_%d/s_%d/D_0/V",ibin,isample));
+		//chi[ibin] = (TVectorD*) infile->Get(Form("D_%d/s_%d/chi",ibin,isample));
+		//V_mean = (TVectorD*) infile->Get(Form("D_%d/s_%d/Vmean",ibin,isample));
+		//deltaV_mean = (TVectorD*) infile->Get(Form("D_%d/s_%d/deltaVmean",ibin,isample));
+		V[ibin] = (TVectorD*) infile->Get(Form("D_%d/D_0/V",ibin,isample));
+		chi[ibin] = (TVectorD*) infile->Get(Form("D_%d/chi",ibin,isample));
+		V_mean = (TVectorD*) infile->Get(Form("D_%d/Vmean",ibin,isample));
+		deltaV_mean = (TVectorD*) infile->Get(Form("D_%d/deltaVmean",ibin,isample));
 		for(int itheta=0;itheta<ntheta;itheta++){
 			v[ibin][itheta].ResizeTo(nptv);	deltav[ibin][itheta].ResizeTo(nptv);
 			dD[ibin][itheta]=0;
