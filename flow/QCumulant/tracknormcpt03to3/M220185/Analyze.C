@@ -183,7 +183,7 @@ Analyze(const TString mode="CLOSED",
  
   // --- Setup input ------------------------------------------------
   TFile*   file = TFile::Open(Form("%s",filename.Data()), "READ");
-  TFile*   trkEff_pp = TFile::Open("/home/xuq7/HI/dNchdeta/Correction/trkEff_pp_all_42X_origin.root");
+  TFile*   trkEff_pp = TFile::Open("/home/xuq7/HI/flow/LYZ/v2/TrackCorrections_HIJING_538_OFFICIAL_Mar24.root");
   TTree*   tree = static_cast<TTree*>(file->Get("demo/TrackTree"));
   TH2F* rTotalEff3D = (TH2F*)trkEff_pp->Get("rTotalEff3D");
 //  TArrayD  phis(0);

@@ -80,7 +80,7 @@ void merge(){
     v22[ibin] = sqrt(c22[ibin]);
     v24[ibin] = TMath::Power(-c24[ibin],1./4);
     v26[ibin] = TMath::Power(1./4*c26[ibin],1./6);
-    v28[ibin] = TMath::Power(-1./8*c28[ibin],1./8);
+    v28[ibin] = TMath::Power(-1./33*c28[ibin],1./8);
     //v24[ibin] = TMath::Power(qc24[ibin],1./4);
     //v26[ibin] = TMath::Power(qc26[ibin],1./6);
 

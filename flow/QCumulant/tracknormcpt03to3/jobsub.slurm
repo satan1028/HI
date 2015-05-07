@@ -16,7 +16,7 @@ export SCRAM_ARCH=slc6_amd64_gcc472
 cd /home/xuq7/HI/CMSSW_5_3_20/src
 #cmsenv
 eval `scramv1 runtime -sh`
-cd /home/xuq7/HI/flow/QCumulant/PbPb2011MB
+cd /home/xuq7/HI/flow/QCumulant/tracknormcpt03to3/$DIR
 
 root -l -b <<EOF
 .x dofirst.C

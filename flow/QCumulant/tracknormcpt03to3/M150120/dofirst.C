@@ -7,7 +7,7 @@ void dofirst(){
 	for(int i=start;i<end;i++){
 	    cout<<"start "<<i<<" th job"<<endl;
             string name = readline("filelist.dat",i);
-    	    gROOT->ProcessLine(Form("Analyze(\"%s\",%d,0,\"%s\",%d)",method.Data(),maxN,name.c_str(),i));
+    	    gROOT->ProcessLine(Form("Analyze(\"%s\",%d,%d,\"%s\",%d)",method.Data(),maxN,doLoops,name.c_str(),i));
 	}
 }
 
