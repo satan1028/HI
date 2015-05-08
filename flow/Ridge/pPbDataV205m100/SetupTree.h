@@ -7,6 +7,7 @@ public:
 	treeInt(TString);
 	~treeInt();
 	void Setup();
+	void SetupExtra();
 	int GetEntries();
 	void GetEntry(int);
 	Float_t pt[10000],eta[10000],phi[10000];
@@ -35,6 +36,11 @@ treeInt::Setup(){
         tree->SetBranchAddress("etag",eta);
         tree->SetBranchAddress("phig",phi);
         //f->Close();
+}
+
+void treeInt::SetupExtra(){
+        tree->LoadBaskets();
+        tree->SetMaxVirtualSize(4e10);
 }
 
 int treeInt::GetEntries(){

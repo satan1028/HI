@@ -11,18 +11,15 @@ void merge(){
             
         TH2F* s[nbin];
         TH2F* b[nbin];
-        TH2F* b0[nbin];
         for(int ibin=0;ibin<nbin;ibin++){
             s[ibin] = new TH2F(Form("s_%d",ibin),Form("signal",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
             s[ibin]->Sumw2();
             b[ibin]  = new TH2F(Form("b_%d",ibin), "background",detastep,detamin,detamax,dphistep,dphimin,dphimax);
             b[ibin]->Sumw2();
-            b0[ibin]  = new TH2F(Form("b0_%d",ibin), "background0", detastep,detamin,detamax,dphistep,dphimin,dphimax);
-            b0[ibin]->Sumw2();
         }
         TFile *fout = new TFile(Form("Ana_merged.root"),"Recreate");
         TFile *f[nFileAll];
-        for(int ifile=0; ifile<1; ifile++){
+        for(int ifile=0; ifile<nFileAll; ifile++){
                 f[ifile] = TFile::Open(Form("%s/Ana_%d.root",outdir.Data(),ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 	//	TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
@@ -37,18 +34,20 @@ void merge(){
 			        tottrk[ibin] += (*tottrk_t)[ibin];	
                                 TH1D* s_t = (TH1D*)f[ifile]->Get(Form("signal_%d",ibin));
                                 TH1D* b_t = (TH1D*)f[ifile]->Get(Form("background_%d",ibin));
-                                TH1D* b0_t = (TH1D*)f[ifile]->Get(Form("background0_%d",ibin));
                                 s[ibin]->Add(s_t);
                                 b[ibin]->Add(b_t);
-                                b0[ibin]->Add(b0_t);
 		}
 		f[ifile]->Close();
         }
     for(int ibin=0;ibin<nbin;ibin++){
+        double etabinwidth = s[ibin]->GetXaxis()->GetBinWidth(1);
+        double phibinwidth = s[ibin]->GetYaxis()->GetBinWidth(1);
     avgtrk[ibin] = tottrk[ibin]/Nevent[ibin];
+    s[ibin]->Scale(1./etabinwidth/phibinwidth);
+    b[ibin]->Scale(1./etabinwidth/phibinwidth);
     TH1D* hr = (TH1D*)s[ibin]->Clone("hr");
     hr->Divide(b[ibin]);
-    hr->Multiply(b0[ibin]);
+    hr->Scale(b[ibin]->GetBinContent(b[ibin]->FindBin(0,0)));
 
     fout->cd();
     Nevent.Write("Nevent");
@@ -57,7 +56,6 @@ void merge(){
     dir0->cd();
     s[ibin]->Write("s");
     b[ibin]->Write("b");
-    b0[ibin]->Write("b0");
     hr->Write();
     }
 }

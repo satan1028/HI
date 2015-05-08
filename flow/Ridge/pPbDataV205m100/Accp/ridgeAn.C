@@ -23,7 +23,6 @@ class ridge{
         TVectorD Nevent, tottrk;
         TH2F* s[nbin];
         TH2F* b[nbin];
-        TH2F* b0[nbin];
         treeInt *t;
         Int_t nEvents;
         vector<vector<double> > pVectEta;
@@ -45,12 +44,14 @@ ridge::ridge(TString _filename){
 ridge::~ridge(){
     delete t;
     pVectEta.clear();
+    vector<vector<double> >().swap(pVectEta);
     pVectPhi.clear();
+    vector<vector<double> >().swap(pVectPhi);
     pNtrig.clear();
+    vector<int>().swap(pNtrig);
     for(int ibin=0;ibin<nbin;ibin++){
     delete s[ibin];
     delete b[ibin];
-    delete b0[ibin];
     }
 }
 
@@ -60,8 +61,6 @@ void ridge::beginJob(){
     s[ibin]->Sumw2();
     b[ibin] = new TH2F(Form("background_%d",ibin),Form("background_%d",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
     b[ibin]->Sumw2();
-    b0[ibin] = new TH2F(Form("background0_%d",ibin),Form("background0_%d",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
-    b0[ibin]->Sumw2();
   }
   Nevent.ResizeTo(nbin); Nevent.Zero();
   tottrk.ResizeTo(nbin); tottrk.Zero();
@@ -148,8 +147,6 @@ void ridge::calcB(){
                 double eta_ass = pvectorEta_ass[imult_ass];
                 double phi_ass = pvectorPhi_ass[imult_ass];
             b[xbin]->Fill(eta_trig-eta_ass,phi_trig-phi_ass,1./Ntrig);
-            if(fabs(eta_trig-eta_ass) < 0.3 && fabs(phi_trig-phi_ass) < TMath::Pi()/16.)
-            b0[xbin]->Fill(eta_trig-eta_ass,phi_trig-phi_ass,1./Ntrig);
                 }
             }
     }
@@ -164,7 +161,6 @@ void ridge::endJob(TString outfile){
     for(int ibin=0;ibin<nbin;ibin++){
         s[ibin]->Write();
         b[ibin]->Write();
-        b0[ibin]->Write();
     }
     fout->Close();
 }

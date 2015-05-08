@@ -1,6 +1,6 @@
 #!/bin/sh
 nfiles=300
-nfileperjob=20
+nfileperjob=10
 njobs=`echo "$nfiles/$nfileperjob" | bc`
 echo "split into $njobs jobs, $nfileperjob files per job"
 for i in `seq 1 $njobs`
