@@ -160,7 +160,7 @@ void ridge::calcB(){
                 for(int imult_ass=0;imult_ass<Nass;imult_ass++){
                 double eta_ass = pvectorEta_ass[ira][imult_ass];
                 double phi_ass = pvectorPhi_ass[ira][imult_ass];
-                b[xbin]->Fill(eta_trig-eta_ass,phi_trig-phi_ass,1./Ntrig);
+                b[xbin]->Fill(eta_trig-eta_ass,phi_trig-phi_ass,1.);
                 }
             }
         }

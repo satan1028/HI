@@ -1,8 +1,7 @@
 #include "par.h"
 void Draw(){
     gStyle->SetOptStat(kFALSE);
-    TFile *f = TFile::Open(Form("Ana_merged.root"));
-    //TFile *f = TFile::Open(Form("test.root"));
+    TFile *f = TFile::Open(Form("Anav2_merged.root"));
     int xbin=0;
     TH2F* hr = (TH2F*)f->Get(Form("D_%d/hr",xbin));
     TVectorD* vavgtrk = (TVectorD*)f->Get(Form("avgtrk"));
@@ -26,6 +25,6 @@ void Draw(){
     l.DrawLatex(0.5,0.85,Form("%.1f < #eta^{trig} < %.1f",etatrigmin,etatrigmax));
     l.DrawLatex(0.1,0.80,Form("%.1f < p_{T}^{ass} < %.1f",ptassmin,ptassmax));
     l.DrawLatex(0.5,0.80,Form("%.1f < #eta^{ass} < %.1f",etaassmin,etaassmax));
-    c1->Print("ridge.png");
+    c1->Print("ridgev2.png");
 }
 

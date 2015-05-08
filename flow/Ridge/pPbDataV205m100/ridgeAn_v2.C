@@ -135,7 +135,7 @@ void ridge::calcB(){
                 double phi_ass = t_ass->phi[imult_ass];
 	        if(eta_ass<etaassmin||eta_ass>etaassmax) continue;
                 if(t_ass->pt[imult_ass]<ptassmin||t_ass->pt[imult_ass]>ptassmax) continue; //event selection
-                b[xbin]->Fill(eta_trig-eta_ass,phi_trig-phi_ass,1./Ntrig);
+                b[xbin]->Fill(eta_trig-eta_ass,phi_trig-phi_ass,1.);
                 }
            }
     }
