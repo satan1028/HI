@@ -1,13 +1,13 @@
 #include "par.h"
 void Draw(){
     gStyle->SetOptStat(kFALSE);
-    TFile *f = TFile::Open(Form("Ana_merged.root"));
+    TFile *f = TFile::Open(Form("Anav2_merged.root"));
     int xbin=0;
     TH2F* hr = (TH2F*)f->Get(Form("D_%d/hr",xbin));
     TVectorD* vavgtrk = (TVectorD*)f->Get(Form("avgtrk"));
     hr->SetTitle("");
     hr->GetXaxis()->SetRangeUser(-4,4);
-    hr->GetYaxis()->SetRangeUser(-1,4);
+    hr->GetYaxis()->SetRangeUser(-4,4);
  //   hr->GetZaxis()->SetRangeUser(0,2);
     hr->GetXaxis()->SetTitle("#Delta#eta");
     hr->GetXaxis()->CenterTitle();

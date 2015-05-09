@@ -17,10 +17,10 @@ void merge(){
             b[ibin]  = new TH2F(Form("b_%d",ibin), "background",detastep,detamin,detamax,dphistep,dphimin,dphimax);
             b[ibin]->Sumw2();
         }
-        TFile *fout = new TFile(Form("Anav3_merged.root"),"Recreate");
+        TFile *fout = new TFile(Form("Ana_merged.root"),"Recreate");
         TFile *f[nFileAll];
-        for(int ifile=; ifile<1; ifile++){
-                f[ifile] = TFile::Open(Form("%s/Anav3_%d.root",outdir.Data(),ifile));
+        for(int ifile=0; ifile<nFileAll; ifile++){
+                f[ifile] = TFile::Open(Form("%s/Ana_%d.root",outdir.Data(),ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 	//	TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));
@@ -40,7 +40,11 @@ void merge(){
 		f[ifile]->Close();
         }
     for(int ibin=0;ibin<nbin;ibin++){
+        double etabinwidth = s[ibin]->GetXaxis()->GetBinWidth(1);
+        double phibinwidth = s[ibin]->GetYaxis()->GetBinWidth(1);
     avgtrk[ibin] = tottrk[ibin]/Nevent[ibin];
+    s[ibin]->Scale(1./etabinwidth/phibinwidth);
+    b[ibin]->Scale(1./etabinwidth/phibinwidth);
     TH1D* hr = (TH1D*)s[ibin]->Clone("hr");
     hr->Divide(b[ibin]);
     hr->Scale(b[ibin]->GetBinContent(b[ibin]->FindBin(0,0)));

@@ -31,8 +31,7 @@ class ridge{
         vector<vector<double> > pVectPhi_ass;
         vector<int> pntrk;
         void beginJob();
-        void calcS();
-        void calcB();
+        void calc();
         void endJob(TString);
 
     private:
@@ -101,7 +100,9 @@ void ridge::beginJob(){
     }
 }
 
-void ridge::calcS(){
+void ridge::calc(){
+    vector<vector<double> > pVectorEta_ass;
+    vector<vector<double> > pVectorPhi_ass;
     for(Int_t i=0;i<nEvents;i++){
         if(i%10000==0) cout<<"has processed "<<i<<"S events"<<endl;
             vector<double> pvectorEta_trig = pVectEta_trig[i];
@@ -117,9 +118,22 @@ void ridge::calcS(){
                 xbin=j;
             if(xbin<0 || xbin==nbin) continue;
             tottrk[xbin]+=ntrk;
-        for(int imult_trig=0;imult_trig<Ntrig;imult_trig++){
-              double eta_trig = pvectorEta_trig[imult_trig];
-              double phi_trig = pvectorPhi_trig[imult_trig];
+
+            pVectorEta_ass.clear();
+            pVectorPhi_ass.clear();
+            for(int ira=0;ira<nMix;ira++){
+            UInt_t iniseed = SetSeedOwn();
+            gRandom->SetSeed(iniseed);
+            TRandom3* r = new TRandom3(0);
+            int j = r->Integer(nEvents);
+            if(i==j){ira--; continue;}
+            pVectorEta_ass.push_back(pVectEta_ass[j]);
+            pVectorPhi_ass.push_back(pVectPhi_ass[j]);
+            }
+
+            for(int imult_trig=0;imult_trig<Ntrig;imult_trig++){
+                double eta_trig = pvectorEta_trig[imult_trig];
+                double phi_trig = pvectorPhi_trig[imult_trig];
             for(int imult_ass=0;imult_ass<Nass;imult_ass++){
               double eta_ass = pvectorEta_ass[imult_ass];
               double phi_ass = pvectorPhi_ass[imult_ass];
@@ -128,52 +142,21 @@ void ridge::calcS(){
               if(deltaeta == 0 && deltaphi == 0) continue;
               s[xbin]->Fill(deltaeta,deltaphi,1./Ntrig);
             }
-        }
-        Nevent[xbin]++;
-    }
-}
-
-
-void ridge::calcB(){
-    for(Int_t i=0;i<nEvents;i++){
-        if(i%5000==0) cout<<"has processed "<<i<<" B events"<<endl;
-            vector<double> pvectorEta_trig = pVectEta_trig[i];
-            vector<double> pvectorPhi_trig = pVectPhi_trig[i];
-            int Ntrig = pvectorEta_trig.size();
-            if(Ntrig<=2) continue;
-        int ntrk = pntrk[i]; int xbin=-1;
-        for(int k=0;k<nbin;k++)
-            if(ntrk<trkbin[k]&&ntrk>=trkbin[k+1])
-                xbin=k;
-            if(xbin<0 || xbin==nbin) continue;
-            vector<vector<double> > pvectorEta_ass(0);
-            vector<vector<double> > pvectorPhi_ass(0);
-            for(int ira=0;ira<nMix;ira++){
-            UInt_t iniseed = SetSeedOwn();
-            gRandom->SetSeed(iniseed);
-            TRandom3* r = new TRandom3(0);
-            int j = r->Integer(nEvents);
-            if(i==j){ira--; continue;}
-            pvectorEta_ass.push_back(pVectEta_ass[j]);
-            pvectorPhi_ass.push_back(pVectPhi_ass[j]);
-            }
-            for(int imult_trig=0;imult_trig<Ntrig;imult_trig++){
-                double eta_trig = pvectorEta_trig[imult_trig];
-                double phi_trig = pvectorPhi_trig[imult_trig];
-                for(int ira=0;ira<nMix;ira++){
-                    int Nass = pvectorEta_ass[ira].size();
-                for(int imult_ass=0;imult_ass<Nass;imult_ass++){
-                double eta_ass = pvectorEta_ass[ira][imult_ass];
-                double phi_ass = pvectorPhi_ass[ira][imult_ass];
+           for(int ira=0;ira<nMix;ira++){
+                for(int imult_ass=0;imult_ass<(int)pVectorEta_ass[ira].size();imult_ass++){
+                double eta_ass = pVectorEta_ass[ira][imult_ass];
+                double phi_ass = pVectorPhi_ass[ira][imult_ass];
                 double deltaeta = eta_trig - eta_ass;
                 double deltaphi = phi_trig - phi_ass;
                 if(deltaeta == 0 && deltaphi == 0) continue;
                 b[xbin]->Fill(deltaeta,deltaphi,1.);
                 }
             }
-        }
+            }
+        Nevent[xbin]++;
     }
 }
+
 
 void ridge::endJob(TString outfile){
     TFile *fout = new TFile(Form("%s",outfile.Data()),"Recreate");
