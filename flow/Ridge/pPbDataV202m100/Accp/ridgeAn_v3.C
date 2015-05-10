@@ -82,12 +82,22 @@ void ridge::beginJob(){
            // TVector3 pvector;
            // pvector.SetPtEtaPhi(t->pt[imult],t->eta[imult],t->phi[imult]);
 	    if(t->eta[imult]<etatrigmin||t->eta[imult]>etatrigmax) continue;
+	    if(t->phi[imult]>TMath::Pi()/180*56 && t->phi[imult]<TMath::Pi()/180*125) continue;
+	    if(t->phi[imult]>TMath::Pi()/180*215 && t->phi[imult]<TMath::Pi()/180*326) continue;
+	    if(t->eta[imult]<-2.2 && t->eta[imult]>etatrigmin) continue;
+	    if(t->eta[imult]<etatrigmax && t->eta[imult]>2.2) continue;
+	    if(t->eta[imult]<1.2 && t->eta[imult]>-1.2) continue;
             if(t->pt[imult]<pttrigmin||t->pt[imult]>pttrigmax) continue; //event selection
             pvectEta_trig.push_back(t->eta[imult]);
             pvectPhi_trig.push_back(t->phi[imult]);
         }
         for(int imult=0;imult<t->mult;imult++){
 	    if(t->eta[imult]<etaassmin||t->eta[imult]>etaassmax) continue;
+	    if(t->phi[imult]>TMath::Pi()/180*56 && t->phi[imult]<TMath::Pi()/180*125) continue;
+	    if(t->phi[imult]>TMath::Pi()/180*215 && t->phi[imult]<TMath::Pi()/180*326) continue;
+	    if(t->eta[imult]<-2.2 && t->eta[imult]>etaassmin) continue;
+	    if(t->eta[imult]<etaassmax && t->eta[imult]>2.2) continue;
+	    if(t->eta[imult]<1.2 && t->eta[imult]>-1.2) continue;
             if(t->pt[imult]<ptassmin||t->pt[imult]>ptassmax) continue; //event selection
             pvectEta_ass.push_back(t->eta[imult]);
             pvectPhi_ass.push_back(t->phi[imult]);
