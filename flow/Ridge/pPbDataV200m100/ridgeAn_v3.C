@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class ridge{
+class ridge{  //use vector, combine calcS() and calcB() in one event loop
     public:
         ridge(TString);
         ~ridge();
@@ -134,6 +134,10 @@ void ridge::calc(){
               double phi_ass = pvectorPhi_ass[imult_ass];
               double deltaeta = eta_trig - eta_ass;
               double deltaphi = phi_trig - phi_ass;
+              if(deltaphi>TMath::Pi())
+                  deltaphi=deltaphi-2*TMath::Pi();
+              if(deltaphi<-TMath::Pi()/2)
+                  deltaphi=deltaphi+2*TMath::Pi();
               if(deltaeta == 0 && deltaphi == 0) continue;
               s[xbin]->Fill(deltaeta,deltaphi,1./Ntrig);
             }
@@ -145,6 +149,10 @@ void ridge::calc(){
                 double phi_ass = pvectorPhi_ass[imult_ass];
                 double deltaeta = eta_trig - eta_ass;
                 double deltaphi = phi_trig - phi_ass;
+              if(deltaphi>TMath::Pi())
+                  deltaphi=deltaphi-2*TMath::Pi();
+              if(deltaphi<-TMath::Pi()/2)
+                  deltaphi=deltaphi+2*TMath::Pi();
                 if(deltaeta == 0 && deltaphi == 0) continue;
                 b[xbin]->Fill(deltaeta,deltaphi,1.);
                 }

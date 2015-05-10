@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class ridge{
+class ridge{  //use two trees
     public:
         ridge(TString);
         ~ridge();
@@ -86,6 +86,10 @@ void ridge::calcS(){
             if(t->pt[imult_ass]<ptassmin||t->pt[imult_ass]>ptassmax) continue; //event selection
                 double deltaeta = eta_trig - eta_ass;
                 double deltaphi = phi_trig - phi_ass;
+              if(deltaphi>TMath::Pi())
+                  deltaphi=deltaphi-2*TMath::Pi();
+              if(deltaphi<-TMath::Pi()/2)
+                  deltaphi=deltaphi+2*TMath::Pi();
                 if(deltaeta == 0 && deltaphi == 0) continue;
               s[xbin]->Fill(deltaeta,deltaphi,1./Ntrig);
             }
@@ -112,7 +116,6 @@ void ridge::calcB(){
                 xbin=k;
             if(xbin<0 || xbin==nbin) continue;
             int Ntrig = 0;
-            int Nass = 0;
         for(int imult_trig=0;imult_trig<t_trig->mult;imult_trig++){
 	    if(t_trig->eta[imult_trig]<etatrigmin||t_trig->eta[imult_trig]>etatrigmax) continue;
             if(t_trig->pt[imult_trig]<pttrigmin||t_trig->pt[imult_trig]>pttrigmax) continue; //event selection
@@ -142,6 +145,10 @@ void ridge::calcB(){
                 if(t_ass->pt[imult_ass]<ptassmin||t_ass->pt[imult_ass]>ptassmax) continue; //event selection
                 double deltaeta = eta_trig - eta_ass;
                 double deltaphi = phi_trig - phi_ass;
+              if(deltaphi>TMath::Pi())
+                  deltaphi=deltaphi-2*TMath::Pi();
+              if(deltaphi<-TMath::Pi()/2)
+                  deltaphi=deltaphi+2*TMath::Pi();
                 if(deltaeta == 0 && deltaphi == 0) continue;
                 b[xbin]->Fill(deltaeta,deltaphi,1.);
                 }

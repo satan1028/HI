@@ -1,5 +1,5 @@
 #include "par.h"
-void dofirst_cp(){
+void dofirst_v2(){
 	gROOT->ProcessLine(".L ridgeAn_v2.C+");
 	int start=atoi(getenv("START"));
 	int end=atoi(getenv("END"));

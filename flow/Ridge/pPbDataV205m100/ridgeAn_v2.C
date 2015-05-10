@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class ridge{
+class ridge{  //use two trees
     public:
         ridge(TString);
         ~ridge();
@@ -68,24 +68,30 @@ void ridge::calcS(){
             if(xbin<0 || xbin==nbin) continue;
             tottrk[xbin]+=ntrk;
         int Ntrig = 0;
-        for(int imult=0;imult<t->mult;imult++){
-	    if(t->eta[imult]<etatrigmin||t->eta[imult]>etatrigmax) continue;
-            if(t->pt[imult]<pttrigmin||t->pt[imult]>pttrigmax) continue; //event selection
+        for(int imult_trig=0;imult_trig<t->mult;imult_trig++){
+	    if(t->eta[imult_trig]<etatrigmin||t->eta[imult_trig]>etatrigmax) continue;
+            if(t->pt[imult_trig]<pttrigmin||t->pt[imult_trig]>pttrigmax) continue; //event selection
             Ntrig++;
         }
             if(Ntrig<=2) continue;
-        for(int imult1=0;imult1<t->mult;imult1++){
-              double eta1 = t->eta[imult1];
-              double phi1 = t->phi[imult1];
-	    if(eta1<etatrigmin||eta1>etatrigmax) continue;
-            if(t->pt[imult1]<pttrigmin||t->pt[imult1]>pttrigmax) continue; //event selection
-            for(int imult2=0;imult2<t->mult;imult2++){
-                if(imult1==imult2) continue;
-              double eta2 = t->eta[imult2];
-              double phi2 = t->phi[imult2];
-	    if(eta2<etatrigmin||eta2>etatrigmax) continue;
-            if(t->pt[imult2]<pttrigmin||t->pt[imult2]>pttrigmax) continue; //event selection
-              s[xbin]->Fill(eta1-eta2,phi1-phi2,1./Ntrig);
+        for(int imult_trig=0;imult_trig<t->mult;imult_trig++){
+              double eta_trig = t->eta[imult_trig];
+              double phi_trig = t->phi[imult_trig];
+	    if(eta_trig<etatrigmin||eta_trig>etatrigmax) continue;
+            if(t->pt[imult_trig]<pttrigmin||t->pt[imult_trig]>pttrigmax) continue; //event selection
+            for(int imult_ass=0;imult_ass<t->mult;imult_ass++){
+              double eta_ass = t->eta[imult_ass];
+              double phi_ass = t->phi[imult_ass];
+	    if(eta_ass<etaassmin||eta_ass>etaassmax) continue;
+            if(t->pt[imult_ass]<ptassmin||t->pt[imult_ass]>ptassmax) continue; //event selection
+                double deltaeta = eta_trig - eta_ass;
+                double deltaphi = phi_trig - phi_ass;
+              if(deltaphi>TMath::Pi())
+                  deltaphi=deltaphi-2*TMath::Pi();
+              if(deltaphi<-TMath::Pi()/2)
+                  deltaphi=deltaphi+2*TMath::Pi();
+                if(deltaeta == 0 && deltaphi == 0) continue;
+              s[xbin]->Fill(deltaeta,deltaphi,1./Ntrig);
             }
         }
         Nevent[xbin]++;
@@ -98,33 +104,35 @@ void ridge::calcB(){
   t_trig->Setup();
   treeInt* t_ass = new treeInt(Form("%s",filename.Data()));
   t_ass->Setup();
-  t_ass->SetupExtra();
-  int j[nMix];// index[nMix];
+//  t_ass->SetupExtra();
+ // int j[nMix];// index[nMix];
   Int_t nEvents = t_trig->GetEntries();
     for(Int_t i=0;i<nEvents;i++){
         t_trig->GetEntry(i);
-        if(i%1000==0) cout<<"has processed "<<i<<" B events"<<endl;
+        if(i%10000==0) cout<<"has processed "<<i<<" B events"<<endl;
         int ntrk = t_trig->mult; int xbin=-1;
         for(int k=0;k<nbin;k++)
             if(ntrk<trkbin[k]&&ntrk>=trkbin[k+1])
                 xbin=k;
             if(xbin<0 || xbin==nbin) continue;
             int Ntrig = 0;
-        for(int imult=0;imult<t_trig->mult;imult++){
-	    if(t_trig->eta[imult]<etatrigmin||t_trig->eta[imult]>etatrigmax) continue;
-            if(t_trig->pt[imult]<pttrigmin||t_trig->pt[imult]>pttrigmax) continue; //event selection
+        for(int imult_trig=0;imult_trig<t_trig->mult;imult_trig++){
+	    if(t_trig->eta[imult_trig]<etatrigmin||t_trig->eta[imult_trig]>etatrigmax) continue;
+            if(t_trig->pt[imult_trig]<pttrigmin||t_trig->pt[imult_trig]>pttrigmax) continue; //event selection
             Ntrig++;
         }
         if(Ntrig<=2) continue;
-            for(int ira=0;ira<nMix;ira++){
+            /*for(int ira=0;ira<nMix;ira++){
             UInt_t iniseed = SetSeedOwn();
             gRandom->SetSeed(iniseed);
             TRandom3* r = new TRandom3(0);
             j[ira] = r->Integer(nEvents);
             if(i==j[ira]) {ira--; continue;}
-            }
+            }*/
             for(int ira=0;ira<nMix;ira++){
-            t_ass->GetEntry(j[ira]);
+                int j = i+1+ira;
+                if(j>=nEvents) j=j-nEvents;
+            t_ass->GetEntry(j);
             for(int imult_trig=0;imult_trig<t_trig->mult;imult_trig++){
                 double eta_trig = t_trig->eta[imult_trig];
                 double phi_trig = t_trig->phi[imult_trig];
@@ -135,7 +143,14 @@ void ridge::calcB(){
                 double phi_ass = t_ass->phi[imult_ass];
 	        if(eta_ass<etaassmin||eta_ass>etaassmax) continue;
                 if(t_ass->pt[imult_ass]<ptassmin||t_ass->pt[imult_ass]>ptassmax) continue; //event selection
-                b[xbin]->Fill(eta_trig-eta_ass,phi_trig-phi_ass,1.);
+                double deltaeta = eta_trig - eta_ass;
+                double deltaphi = phi_trig - phi_ass;
+              if(deltaphi>TMath::Pi())
+                  deltaphi=deltaphi-2*TMath::Pi();
+              if(deltaphi<-TMath::Pi()/2)
+                  deltaphi=deltaphi+2*TMath::Pi();
+                if(deltaeta == 0 && deltaphi == 0) continue;
+                b[xbin]->Fill(deltaeta,deltaphi,1.);
                 }
            }
     }

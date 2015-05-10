@@ -1,7 +1,7 @@
 #include "par.h"
 void Draw(){
     gStyle->SetOptStat(kFALSE);
-    TFile *f = TFile::Open(Form("Anav2_merged.root"));
+    TFile *f = TFile::Open(Form("Anav3_merged.root"));
     int xbin=0;
     TH2F* hr = (TH2F*)f->Get(Form("D_%d/hr",xbin));
     TH2F* s = (TH2F*)f->Get(Form("D_%d/s",xbin));
@@ -9,7 +9,7 @@ void Draw(){
     TVectorD* vavgtrk = (TVectorD*)f->Get(Form("avgtrk"));
     hr->SetTitle("");
     hr->GetXaxis()->SetRangeUser(-4,4);
-    hr->GetYaxis()->SetRangeUser(-4,4);
+    hr->GetYaxis()->SetRangeUser(-1.5,4);
  //   hr->GetZaxis()->SetRangeUser(0,3e6);
     hr->GetXaxis()->SetTitle("#Delta#eta");
     hr->GetXaxis()->CenterTitle();
@@ -27,11 +27,11 @@ void Draw(){
     l.DrawLatex(0.5,0.85,Form("%.1f < #eta^{trig} < %.1f",etatrigmin,etatrigmax));
     l.DrawLatex(0.1,0.80,Form("%.1f < p_{T}^{ass} < %.1f",ptassmin,ptassmax));
     l.DrawLatex(0.5,0.80,Form("%.1f < #eta^{ass} < %.1f",etaassmin,etaassmax));
-    c1->Print("ridgev2.png");
+    c1->Print("ridgev3.png");
     TCanvas *c2 = new TCanvas();
     s->SetTitle("");
     s->GetXaxis()->SetRangeUser(-4,4);
-    s->GetYaxis()->SetRangeUser(-4,4);
+    s->GetYaxis()->SetRangeUser(-1.5,4);
   //  s->GetZaxis()->SetRangeUser(0,3e6);
     s->GetXaxis()->SetTitle("#Delta#eta");
     s->GetXaxis()->CenterTitle();
@@ -40,11 +40,11 @@ void Draw(){
     s->GetZaxis()->SetTitle("#frac{1}{N_{trig}}#frac{d^{2}N^{pair}}{d#Delta#eta d#Delta#phi}");
     s->Draw("surf1");
     l.DrawLatex(0.5,0.80,Form("signal"));
-    c2->Print("signal_v2.png");
+    c2->Print("signal_v3.png");
     TCanvas *c3 = new TCanvas();
     b->SetTitle("");
     b->GetXaxis()->SetRangeUser(-4,4);
-    b->GetYaxis()->SetRangeUser(-4,4);
+    b->GetYaxis()->SetRangeUser(-1.5,4);
   //  b->GetZaxis()->SetRangeUser(0,3e9);
     b->GetXaxis()->SetTitle("#Delta#eta");
     b->GetXaxis()->CenterTitle();
@@ -53,6 +53,6 @@ void Draw(){
     b->GetZaxis()->SetTitle("#frac{1}{N_{trig}}#frac{d^{2}N^{pair}}{d#Delta#eta d#Delta#phi}");
     b->Draw("surf1");
     l.DrawLatex(0.5,0.80,Form("background"));
-    c3->Print("background_v2.png");
+    c3->Print("background_v3.png");
 }
 

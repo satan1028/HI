@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class ridge{
+class ridge{    //use vector, calcS() and calcB() seperate
     public:
         ridge(TString);
         ~ridge();
@@ -153,7 +153,6 @@ void ridge::calcB(){
             gRandom->SetSeed(iniseed);
             TRandom3* r = new TRandom3(0);
             int j = r->Integer(nEvents);
-            if(i==j){ira--; continue;}
             pvectorEta_ass.push_back(pVectEta_ass[j]);
             pvectorPhi_ass.push_back(pVectPhi_ass[j]);
             }

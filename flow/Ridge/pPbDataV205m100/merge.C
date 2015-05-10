@@ -19,7 +19,7 @@ void merge(){
         }
         TFile *fout = new TFile(Form("Anav3_merged.root"),"Recreate");
         TFile *f[nFileAll];
-        for(int ifile=; ifile<1; ifile++){
+        for(int ifile=; ifile<nFileAll; ifile++){
                 f[ifile] = TFile::Open(Form("%s/Anav3_%d.root",outdir.Data(),ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 	//	TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));

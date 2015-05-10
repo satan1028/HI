@@ -13,6 +13,6 @@ export I=$i
 export START=$start
 export END=$end
 #qsub -v I=$i,START=$start,END=$end -N jobsub$i -z jobsub.sh
-sbatch -J ToyMC$i -o job$i.out jobsub_v2.slurm
+sbatch -J ToyMC$i -o job$i.out jobsub.slurm
 #fi
 done

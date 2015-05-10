@@ -17,10 +17,10 @@ void merge(){
             b[ibin]  = new TH2F(Form("b_%d",ibin), "background",detastep,detamin,detamax,dphistep,dphimin,dphimax);
             b[ibin]->Sumw2();
         }
-        TFile *fout = new TFile(Form("Anav2_merged.root"),"Recreate");
+        TFile *fout = new TFile(Form("Anav3_merged.root"),"Recreate");
         TFile *f[nFileAll];
         for(int ifile=; ifile<nFileAll; ifile++){
-                f[ifile] = TFile::Open(Form("%s/Anav2_%d.root",outdir.Data(),ifile));
+                f[ifile] = TFile::Open(Form("%s/Anav3_%d.root",outdir.Data(),ifile));
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 	//	TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));

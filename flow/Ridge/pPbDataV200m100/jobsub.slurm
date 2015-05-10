@@ -19,7 +19,7 @@ eval `scramv1 runtime -sh`
 cd /home/xuq7/HI/flow/Ridge/pPbDataV200m100
 
 root -l -b <<EOF
-.x dofirst_v3.C
+.x dofirst_v2.C
 EOF
 
 echo "Done!"
