@@ -25,7 +25,7 @@ void getResv(int ispt){
 	if(SumorProd=="Sum")fstrv.open("v_eta.txt");
 	else fstrv.open("v_2_eta.txt");
         }
-	TVectorD totmult[nbin], totpt[nbin], toteta[nbin];	TVectorD Nevent, totmultall, totmultall_, totmultallcorr;
+	TVectorD totmult[nbin],totpt[nbin], toteta[nbin];    TVectorD Nevent, totmultall, tottrkall,totmultall_, totmultallcorr;
 	TVectorD V_int, V_interr;
 	TVectorD* V_mean;
 	TVectorD* deltaV_mean;
@@ -37,15 +37,18 @@ void getResv(int ispt){
 	TVectorD* dNRe[nbin][ntheta]; TVectorD* dNIm[nbin][ntheta];
 	TComplex dD[nbin][ntheta], dN[nbin][ntheta][nvv];
 	TVectorD avgmult[nbin];	TVectorD avgmultall;
+	TVectorD avgtrk[nbin];	TVectorD avgtrkall;
 	TVectorD avgpt[nbin], avgeta[nbin];
 	TVectorD v[nbin][ntheta],vmean[nbin],deltav[nbin][ntheta],deltavmean[nbin];
 	if(SumorProd=="Sum")	TFile *infile = TFile::Open("mergedV_Sum.root");
 	else	TFile *infile = TFile::Open("mergedV_Prod.root");
 	Nevent.ResizeTo(nbin);	Nevent.Zero();
 	totmultall.ResizeTo(nbin);	totmultall.Zero();
+	tottrkall.ResizeTo(nbin);	tottrkall.Zero();
 	totmultall_.ResizeTo(nbin);	totmultall_.Zero();
 	totmultallcorr.ResizeTo(nbin);	totmultallcorr.Zero();
 	avgmultall.ResizeTo(nbin);
+	avgtrkall.ResizeTo(nbin);
 	V_int.ResizeTo(nbin);	V_int.Zero();
 	V_interr.ResizeTo(nbin);	V_interr.Zero();
         if(ispt){
@@ -92,6 +95,7 @@ void getResv(int ispt){
             }
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
+		TVectorD* tottrkall_t = (TVectorD*)f[ifile]->Get("tottrk");
 		for(int ibin=0;ibin<nbin;ibin++){
 			TVectorD* totmult_t = (TVectorD*)f[ifile]->Get(Form("totmult_%d",ibin));
 			TVectorD* totpt_t = (TVectorD*)f[ifile]->Get(Form("totpt_%d",ibin));
@@ -100,6 +104,7 @@ void getResv(int ispt){
 			dDIm[ibin] = (TVectorD*)f[ifile]->Get(Form("dDIm_%d",ibin));
 			Nevent[ibin]+=(*Nevent_t)[ibin];
 			totmultall[ibin]+=(*totmultall_t)[ibin];
+			tottrkall[ibin]+=(*tottrkall_t)[ibin];
 			for(int ivbin=0;ivbin<nvv;ivbin++){
 				totmult[ibin][ivbin]+=(*totmult_t)[ivbin];
 				totpt[ibin][ivbin]+=(*totpt_t)[ivbin];
@@ -118,6 +123,7 @@ void getResv(int ispt){
 	
         if(ispt){
 	TH2F* hetapt[nbin];
+	TH1D* hpt[nbin];
 	TH2F* hetapteffcorr[nbin];
         double eff[netav];
 	TFile *fhisto = TFile::Open("histomerged.root");
@@ -137,8 +143,10 @@ void getResv(int ispt){
 	
         for(int ibin=0;ibin<nbin;ibin++){
 		avgmultall[ibin]=1.0*totmultall[ibin]/Nevent[ibin];
+		avgtrkall[ibin]=1.0*tottrkall[ibin]/Nevent[ibin];
                 if(ispt){
                 hetapt[ibin] = (TH2F*)fhisto->Get(Form("D_%d/hetapt",ibin));
+                hpt[ibin] = (TH1D*)fhisto->Get(Form("D_%d/hpt",ibin));
                 //TH1D* hptre = (TH1D*)hpt[ibin]->Rebin(NbinY,Form("hptre_%d",ibin),ptbinhisto);
                 //TH1D* hptre = (TH1D*)hpt[ibin]->Rebin(NbinY,Form("hptre_%d",ibin),ptbinhisto);
                 hetapteffcorr[ibin] = (TH2F*)hetapt[ibin]->Clone(Form("hetapteffcorr_%d",ibin));
@@ -166,8 +174,8 @@ void getResv(int ispt){
 		fstrv<<binv[ivbin]<<"-"<<binv[ivbin+1]<<"\t"<<vmean[ibin][ivbin]<<"\t"<<deltavmean[ibin][ivbin]<<endl;
                 if(ispt){
                     for(int ietabin=0;ietabin<netav;ietabin++){
-                double eff[ietabin] = heff->GetBinContent(heff->FindBin((etabinv[ietabin]+etabinv[ietabin+1])/2,binv[ivbin]+binv[ivbin+1])/2);
-                totmulthisto_f[ibin][ietabin][ivbin]=hetapt[ibin]->Integral(hetapt[ibin]->GetXaxis()->FindBin(etabinv[ietabin]),hetapt[ibin]->GetXaxis()->FindBin(etabinv[ietabin+1])-1,hetapt[ibin]->GetYaxis()->FindBin(binv[ivbin]),hetapt[ibin]->GetYaxis()->FindBin(binv[ivbin+1])-1);
+                eff[ietabin] = heff->GetBinContent(heff->FindBin((etabinv[ietabin]+etabinv[ietabin+1])/2,(binv[ivbin]+binv[ivbin+1])/2));
+                totmulthisto_f[ibin][ietabin][ivbin]=hetapt[ibin]->Integral(hetapt[ibin]->GetXaxis()->FindBin(etabinv[ietabin]+1e-4),hetapt[ibin]->GetXaxis()->FindBin(etabinv[ietabin+1]-1e-4),hetapt[ibin]->GetYaxis()->FindBin(binv[ivbin]+1e-4),hetapt[ibin]->GetYaxis()->FindBin(binv[ivbin+1]+1e-4));
                 totmulthisto[ibin][ivbin]+=totmulthisto_f[ibin][ietabin][ivbin];
                 }
                 }
@@ -220,6 +228,7 @@ void getResv(int ispt){
         }
 	for(ibin=0;ibin<nbin;ibin++){
 	Nevent.Write("Nevent");
+	avgtrkall.Write("avgtrk");
 	V_int.Write("V_int");
 	V_interr.Write("V_interr");
         if(ispt){
