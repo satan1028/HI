@@ -18,10 +18,12 @@ void savehisto(){
 	TH1D* hpt[nbin];
 	TH1D* heta[nbin];
 	TH1D* hphi[nbin];	
+	TH2F* hetapt[nbin];	
 	for(int ibin=0;ibin<nbin;ibin++){
 		heta[ibin] = new TH1D("heta","heta",600,-3,3);
 		hphi[ibin] = new TH1D("hphi","hphi",800,-4,4);
 		hpt[ibin] = new TH1D("hpt","hpt",1500,0,15);
+		hetapt[ibin] = new TH2F("hetapt","hetapt",600,-3,3,1500,0,15);
 	}
 	for(long i=0;i<nevent;i++){
 		tree->GetEntry(i);
@@ -35,6 +37,7 @@ void savehisto(){
 			hpt[xbin]->Fill(pt[imult]);
 			heta[xbin]->Fill(eta[imult]);
 			hphi[xbin]->Fill(phi[imult]);
+			hetapt[xbin]->Fill(eta[imult],pt[imult]);
 		}
 	}
 /*	TCanvas *c1 = new TCanvas();
@@ -55,6 +58,7 @@ void savehisto(){
 		hpt[ibin]->Write("hpt",TObject::kOverwrite);
 		heta[ibin]->Write("heta",TObject::kOverwrite);
 		hphi[ibin]->Write("hphi",TObject::kOverwrite);
+		hetapt[ibin]->Write("hetapt",TObject::kOverwrite);
 	}
 	fout->Close();
 }

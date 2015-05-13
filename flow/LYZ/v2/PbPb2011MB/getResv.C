@@ -31,6 +31,7 @@ void getResv(int ispt){
 	TVectorD* deltaV_mean;
 	TVectorD* V[nbin]; TVectorD* chi;
 	TVectorD V_intcorr, V_intcorrerr;
+	TVectorD totmulthisto_f[nbin][netav];
 	TVectorD totmulthisto[nbin], totmulthistocorr[nbin];
 	TVectorD* dDRe[nbin]; TVectorD* dDIm[nbin];
 	TVectorD* dNRe[nbin][ntheta]; TVectorD* dNIm[nbin][ntheta];
@@ -54,8 +55,14 @@ void getResv(int ispt){
 	for(int ibin=0;ibin<nbin;ibin++){
 		totmult[ibin].ResizeTo(nvv);	totmult[ibin].Zero();
                 if(ispt){
-		totmulthisto[ibin].ResizeTo(nvv);	
+                    for(int ietabin=0;ietabin<netav;ietabin++){
+		totmulthisto_f[ibin][ietabin].ResizeTo(nvv);	
+		totmulthisto_f[ibin][ietabin].Zero();
+                    }
+		totmulthisto[ibin].ResizeTo(nvv);
+		totmulthisto[ibin].Zero();
 		totmulthistocorr[ibin].ResizeTo(nvv);
+		totmulthistocorr[ibin].Zero();
                 }
 		avgmult[ibin].ResizeTo(nvv);	avgpt[ibin].ResizeTo(nvv);  avgeta[ibin].ResizeTo(nvv);
 		totpt[ibin].ResizeTo(nvv);	totpt[ibin].Zero(); 
@@ -110,17 +117,19 @@ void getResv(int ispt){
 	}
 	
         if(ispt){
-	TH1D* hpt[nbin];
-	TH1D* hpteffcorr[nbin];
+	TH2F* hetapt[nbin];
+	TH2F* hetapteffcorr[nbin];
+        double eff[netav];
 	TFile *fhisto = TFile::Open("histomerged.root");
 	TFile *feff = TFile::Open("/home/xuq7/HI/dNchdeta/Correction/trkEff_pp_all_42X_origin.root");
 	TH2F* heff = (TH2F*)feff->Get("rTotalEff3D");
-      	TH1D* hpteff = (TH1D*)heff->ProjectionY("hpteff",heff->GetXaxis()->FindBin(-2.4),heff->GetXaxis()->FindBin(2.4)-1,"o");
+      	//TH1D* hpteff = (TH1D*)heff->ProjectionY("hpteff",heff->GetXaxis()->FindBin(-2.4),heff->GetXaxis()->FindBin(2.4)-1,"o");
+      	//TGraphError* hpteff = (TGraphErrors*)feff->Get("gEffPt");
 	TArrayD *ptarr = (TArrayD*)heff->GetYaxis()->GetXbins();
 	double *ptbinhisto = ptarr->GetArray();
 	int NbinX = heff->GetXaxis()->GetNbins();
 	int NbinY = heff->GetYaxis()->GetNbins();
-	hpteff->Scale(1.0/NbinX);
+	//hpteff->Scale(1.0/NbinX);
                 }
         for(int ibin=0;ibin<nbin;ibin++)
 		for(int itheta=0;itheta<ntheta;itheta++)
@@ -129,10 +138,10 @@ void getResv(int ispt){
         for(int ibin=0;ibin<nbin;ibin++){
 		avgmultall[ibin]=1.0*totmultall[ibin]/Nevent[ibin];
                 if(ispt){
-                hpt[ibin] = (TH1D*)fhisto->Get(Form("D_%d/hpt",ibin));
+                hetapt[ibin] = (TH2F*)fhisto->Get(Form("D_%d/hetapt",ibin));
                 //TH1D* hptre = (TH1D*)hpt[ibin]->Rebin(NbinY,Form("hptre_%d",ibin),ptbinhisto);
                 //TH1D* hptre = (TH1D*)hpt[ibin]->Rebin(NbinY,Form("hptre_%d",ibin),ptbinhisto);
-                hpteffcorr[ibin] = (TH1D*)hpt[ibin]->Clone(Form("hpteffcorr_%d",ibin));
+                hetapteffcorr[ibin] = (TH2F*)hetapt[ibin]->Clone(Form("hetapteffcorr_%d",ibin));
                 //hpteffcorr[ibin]->Divide(hpteff);
                 }
 	        for(int ivbin=0;ivbin<nvv; ivbin++){
@@ -156,8 +165,11 @@ void getResv(int ispt){
 		deltavmean[ibin][ivbin]/=TMath::Sqrt(ntheta);
 		fstrv<<binv[ivbin]<<"-"<<binv[ivbin+1]<<"\t"<<vmean[ibin][ivbin]<<"\t"<<deltavmean[ibin][ivbin]<<endl;
                 if(ispt){
-                double eff = hpteff->GetBinContent(hpteff->FindBin(binv[ivbin]+binv[ivbin+1])/2);
-                totmulthisto[ibin][ivbin]=hpt[ibin]->Integral(hpt[ibin]->GetXaxis()->FindBin(binv[ivbin]),hpt[ibin]->GetXaxis()->FindBin(binv[ivbin+1])-1);
+                    for(int ietabin=0;ietabin<netav;ietabin++){
+                double eff[ietabin] = heff->GetBinContent(heff->FindBin((etabinv[ietabin]+etabinv[ietabin+1])/2,binv[ivbin]+binv[ivbin+1])/2);
+                totmulthisto_f[ibin][ietabin][ivbin]=hetapt[ibin]->Integral(hetapt[ibin]->GetXaxis()->FindBin(etabinv[ietabin]),hetapt[ibin]->GetXaxis()->FindBin(etabinv[ietabin+1])-1,hetapt[ibin]->GetYaxis()->FindBin(binv[ivbin]),hetapt[ibin]->GetYaxis()->FindBin(binv[ivbin+1])-1);
+                totmulthisto[ibin][ivbin]+=totmulthisto_f[ibin][ietabin][ivbin];
+                }
                 }
                 
 		V_int[ibin]+=vmean[ibin][ivbin]*totmult[ibin][ivbin];
@@ -165,10 +177,11 @@ void getResv(int ispt){
 		totmultall_[ibin]+=totmult[ibin][ivbin];
                 if(ispt){
 		if(binv[ivbin+1]>3.0) continue;
-                totmulthistocorr[ibin][ivbin]=hpteffcorr[ibin]->Integral(hpteffcorr[ibin]->GetXaxis()->FindBin(binv[ivbin]),hpteffcorr[ibin]->GetXaxis()->FindBin(binv[ivbin+1])-1)/eff;
+                    for(int ietabin=0;ietabin<netav;ietabin++)
+                totmulthistocorr[ibin][ivbin]+=totmulthisto_f[ibin][ietabin][ivbin]/eff[ietabin];
 		V_intcorr[ibin]+=vmean[ibin][ivbin]*totmulthistocorr[ibin][ivbin];
 		V_intcorrerr[ibin]+=deltavmean[ibin][ivbin]*totmulthistocorr[ibin][ivbin];
-                totmultallcorr[ibin]+=hpteffcorr[ibin]->Integral(hpteffcorr[ibin]->GetXaxis()->FindBin(binv[ivbin]),hpteffcorr[ibin]->GetXaxis()->FindBin(binv[ivbin+1])-1)/eff;
+                totmultallcorr[ibin]+=totmulthistocorr[ibin][ivbin];
 		}
                 }
 		V_int[ibin]/=totmultall_[ibin];

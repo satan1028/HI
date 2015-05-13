@@ -1,5 +1,5 @@
 const int nFileAll = 300;
-const TString indir = "/lio/lfs/cms/store/user/qixu/flow/NewSTEG/pPbDataV202m100";
+const TString indir = "/lio/lfs/cms/store/user/qixu/flow/NewSTEG/pPbDataV202m100/fromlx";
 const TString outdir = "/scratch/xuq7/flow/ridge/pPbDataV202m100";
 const double pttrigmin = 0.3;
 const double pttrigmax = 6.0; 

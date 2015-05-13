@@ -1,11 +1,5 @@
 #include "par.h"
 void dosecond(){
-	//gSystem->AddIncludePath("-D__USE_XOPEN2K8");
-	remove("dDRe.txt");
-	remove("dDIm.txt");
-	remove("dNRe.txt");
-	remove("dNIm.txt");
-	remove("mult_.txt");
 	gROOT->ProcessLine(".L LYZ.C+");
         int start=atoi(getenv("START"));
         int end=atoi(getenv("END"));

@@ -21,6 +21,7 @@ void merge(){
         TFile *f[nFileAll];
         for(int ifile=; ifile<63; ifile++){
                 f[ifile] = TFile::Open(Form("%s/Anav3_%d.root",outdir.Data(),ifile));
+                if(!f[ifile]) continue;
 		TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
 	//	TVectorD* totmultall_t =  (TVectorD*)f[ifile]->Get(Form("totmultall"));
 		TVectorD* tottrk_t =  (TVectorD*)f[ifile]->Get(Form("tottrk"));

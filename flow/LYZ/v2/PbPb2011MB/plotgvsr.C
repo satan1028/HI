@@ -1,6 +1,6 @@
 #include "par.h"
 
-int xbin=8;	//xbin<1
+int xbin=5;	//xbin<1
 double ptmin=0.3, ptmax=6.0;
 const int nnu = 5;
 //const int marker[nnu] = {20,24,27};
@@ -15,9 +15,17 @@ TCanvas *c1 = new TCanvas();
 c1->SetLogy();
 TH1D* hFrame = new TH1D("","",1000,0,1);
 hFrame->GetYaxis()->SetRangeUser(5e-8,1);
-hFrame->GetXaxis()->SetRangeUser(0.14,0.40);
+hFrame->GetXaxis()->SetRangeUser(0.085,0.20);
 hFrame->GetXaxis()->SetTitle("r");
 hFrame->GetYaxis()->SetTitle("|G^{#theta}(ir)|^{2}");
+    hFrame->GetXaxis()->SetTitleSize(0.05);
+    hFrame->GetYaxis()->SetTitleSize(0.05);
+    hFrame->GetXaxis()->SetLabelSize(0.05);
+    hFrame->GetYaxis()->SetLabelSize(0.05);
+    hFrame->GetXaxis()->SetTitleOffset(0.95);
+    hFrame->GetYaxis()->SetTitleOffset(0.95);
+    hFrame->GetXaxis()->CenterTitle();
+    hFrame->GetYaxis()->CenterTitle();
 hFrame->SetTitle("");
 hFrame->Draw();
 TGraph *gr[nnu];
@@ -37,9 +45,11 @@ tg->AddEntry(gr[itheta],Form("#theta = #frac{%d}{%d}*#frac{#pi}{%d}",plotnu[ithe
 tg->Draw("same");
 TLatex *t= new TLatex();
 t->SetNDC();
-t->SetTextSize(0.03);
+t->SetTextSize(0.05);
+t->DrawLatex(0.2,0.85,Form("CMS PbPb #sqrt{s_{NN}} = 5.02TeV"));
+t->SetTextSize(0.036);
 t->SetTextFont(42);
-t->DrawLatex(0.5,0.2,Form("track, %d < mult <%d, %.1f < p_{T} < %.1f", trkbin[xbin+1],trkbin[xbin],ptmin,ptmax));
+t->DrawLatex(0.45,0.15,Form("%d < N_{trk}^{offline} < %d, %.1f < p_{T} < %.1f (GeV/c)", trkbin[xbin+1],trkbin[xbin],ptmin,ptmax));
 
 for(int itheta=0;itheta<nnu;itheta++){
 l[itheta] = new TLine(r0_theta[itheta],0,r0_theta[itheta],G2_theta[itheta]);
@@ -48,6 +58,7 @@ l[itheta]->SetLineColor(color[itheta]);
 l[itheta]->Draw("same");
 }
 c1->Print("gvsr_thetas.png");
+c1->Print("gvsr_thetas.pdf");
 
 
 }

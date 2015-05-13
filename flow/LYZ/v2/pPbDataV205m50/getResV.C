@@ -138,7 +138,7 @@ void getResV(){
                         for(int itheta=0;itheta<ntheta;itheta++){
 				deltaV[ibin][itheta]=V[ibin][itheta]/j01/TMath::BesselJ1(j01)*TMath::Sqrt((TMath::Exp(j01*j01/2./chi_[ibin]/chi_[ibin])+TMath::Exp(-j01*j01/2./chi_[ibin]/chi_[ibin])*TMath::BesselJ0(2*j01))/2./Nevent[ibin]);
                         	deltaVmean[ibin]+=TMath::Exp(j01*j01/2./chi_[ibin]/chi_[ibin]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Exp(-j01*j01/2./chi_[ibin]/chi_[ibin]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.));
-	        	  fstrV <<ibin<<"\t"<<itheta<<"\t"<<r0[ibin][itheta]<<"\t"<<V[ibin][itheta]<<"\t"<<sigma2[ibin][itheta]<<"\t"<<chi[ibin][itheta]<<"\t"<<deltaV[ibin][itheta]<<endl;
+	        	  fstrV<<ibin<<"\t"<<itheta<<"\t"<<r0[ibin][itheta]<<"\t"<<V[ibin][itheta]<<"\t"<<sigma2[ibin][itheta]<<"\t"<<chi[ibin][itheta]<<"\t"<<deltaV[ibin][itheta]<<endl;
 			}
                         fstrV<<"\t\t\t\t\t"<<sigma2_[ibin]<<"\t"<<chi_[ibin]<<endl;
 			deltaVmean[ibin]=Vmean[ibin]/j01/TMath::BesselJ1(j01)*TMath::Sqrt(deltaVmean[ibin]/ntheta/2./Nevent[ibin]);

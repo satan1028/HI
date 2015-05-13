@@ -16,11 +16,13 @@ void savehisto(){
 	
 	TH1D* hpt[nbin];
 	TH1D* heta[nbin];
-	TH1D* hphi[nbin];	
+	TH1D* hphi[nbin];
+        TH2F* hetapt[nbin];
 	for(int ibin=0;ibin<nbin;ibin++){
 		heta[ibin] = new TH1D(Form("heta_%d",ibin),Form("heta_%d",ibin),600,-3,3);
 		hphi[ibin] = new TH1D(Form("hphi_%d",ibin),Form("hphi_%d",ibin),800,-4,4);
 		hpt[ibin] = new TH1D(Form("hpt_%d",ibin),Form("hpt_%d",ibin),1500,0,15);
+		hetapt[ibin] = new TH2F(Form("hetapt_%d",ibin),Form("hetapt_%d",ibin),600,-3,3,1500,0,15);
 	}
         cout<<nevent<<endl;
 	for(long i=0;i<nevent;i++){
@@ -35,6 +37,7 @@ void savehisto(){
 			hpt[xbin]->Fill(pt[imult]);
 			heta[xbin]->Fill(eta[imult]);
 			hphi[xbin]->Fill(phi[imult]);
+			hetapt[xbin]->Fill(eta[imult],pt[imult]);
 		}
 	}
 /*	TCanvas *c1 = new TCanvas();
@@ -55,6 +58,7 @@ void savehisto(){
 		hpt[ibin]->Write("hpt",TObject::kOverwrite);
 		heta[ibin]->Write("heta",TObject::kOverwrite);
 		hphi[ibin]->Write("hphi",TObject::kOverwrite);
+		hetapt[ibin]->Write("hetapt",TObject::kOverwrite);
 	}
 	fout->Close();
 }

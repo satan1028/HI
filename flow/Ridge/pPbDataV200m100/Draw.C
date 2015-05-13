@@ -54,5 +54,22 @@ void Draw(){
     b->Draw("surf1");
     l.DrawLatex(0.5,0.80,Form("background"));
     c3->Print("background_v3.png");
+    TCanvas *c4 = new TCanvas();
+    TH1D* hs_phi = (TH1D*)s->ProjectionY();
+    TH1D* hb_phi = (TH1D*)b->ProjectionY();
+    TH1D* hr_phi = (TH1D*)hs_phi->Clone("hr_phi");
+    hr_phi->Divide(hb_phi);
+    hr_phi->Scale(hb_phi->GetBinContent(hb_phi->FindBin(0)));
+    hr_phi->SetTitle("");
+    hr_phi->GetXaxis()->SetRangeUser(-4,4);
+    hr_phi->GetYaxis()->SetRangeUser(36.925e6,36.940e6);
+    hr_phi->GetXaxis()->SetTitle("#Delta#phi");
+    hr_phi->GetXaxis()->CenterTitle();
+    hr_phi->GetYaxis()->SetTitle("#frac{1}{N_{trig}}#frac{dN^{pair}}{d#Delta#phi}");
+    hr_phi->GetYaxis()->CenterTitle();
+    hr_phi->Draw("P");
+    l.DrawLatex(0.5,0.80,Form("Integreated on #eta"));
+    c4->Print("ridgev3_phi.png");
 }
+
 
