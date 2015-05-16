@@ -16,6 +16,6 @@ for i in `seq 0 462`;do
 done
 echo  $idir ${arr[@]}
 if [[ $idir == M150120 ]];then
-   ./submitall.sh $idir ${arr[@]}
+   ./submitall.sh $idir 6
 fi
 done

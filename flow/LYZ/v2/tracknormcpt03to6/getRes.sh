@@ -1,6 +1,6 @@
 #!/bin/bash
 SumorProd="Prod"
-Vorv="v"
+Vorv="veta"
 
 cd /home/xuq7/HI/CMSSW_5_3_20/src
 eval `scramv1 runtime -sh`
@@ -26,7 +26,7 @@ getResvsub(1)
 EOF
 fi
 #root -l -q getResvsub.C
-if [[ $Vorv == "veta" ]];then
+if [[ $Vorv == "veta" && $dir != M300220 ]];then
 root -l <<EOF
 .L getResvsub.C
 getResvsub(0)

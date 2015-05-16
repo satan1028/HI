@@ -22,10 +22,11 @@ void getResv(int ispt){
 	else fstrv.open("v_2.txt");
         }
         else{
-	if(SumorProd=="Sum")fstrv.open("v_eta.txt");
-	else fstrv.open("v_2_eta.txt");
+	if(SumorProd=="Sum")fstrv.open("v_finer_eta.txt");
+	else fstrv.open("v_2_finer_eta.txt");
         }
-	TVectorD totmult[nbin],totpt[nbin], toteta[nbin];    TVectorD Nevent, totmultall, tottrkall,totmultall_, totmultallcorr;
+	TVectorD totmult[nbin],totpt[nbin], toteta[nbin];    
+        TVectorD Nevent, totmultall, tottrkall,totmultall_, totmultallcorr;
 	TVectorD V_int, V_interr;
 	TVectorD* V_mean;
 	TVectorD* deltaV_mean;
@@ -90,8 +91,8 @@ void getResv(int ispt){
 	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/Anav_Prod2_%d.root",ifile));
             }
             else{
-	        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/Anaveta_Prod_%d.root",ifile));
-	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/Anaveta_Prod2_%d.root",ifile));
+	        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/finereta/Anaveta_Prod_%d.root",ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/finereta/Anaveta_Prod2_%d.root",ifile));
             }
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
@@ -121,11 +122,11 @@ void getResv(int ispt){
 	f[ifile]->Close();
 	}
 	
+        double eff[netav];
         if(ispt){
 	TH2F* hetapt[nbin];
 	TH1D* hpt[nbin];
 	TH2F* hetapteffcorr[nbin];
-        double eff[netav];
 	TFile *fhisto = TFile::Open("histomerged.root");
 	//TFile *feff = TFile::Open("/home/xuq7/HI/dNchdeta/Correction/trkEff_pp_all_42X_origin.root");
 	TFile *feff = TFile::Open("/home/xuq7/HI/flow/LYZ/v2/TrackCorrections_HYDJET_442_OFFICIAL_Mar25.root");
@@ -224,8 +225,8 @@ void getResv(int ispt){
 	else TFile *fout = new TFile("mergedv_Prod2.root","Recreate");
         }
         else{
-	if(SumorProd=="Sum")TFile *fout = new TFile("mergedv_Prod_eta.root","Recreate");
-	else TFile *fout = new TFile("mergedv_Prod2_eta.root","Recreate");
+	if(SumorProd=="Sum")TFile *fout = new TFile("mergedv_Prod_finer_eta.root","Recreate");
+	else TFile *fout = new TFile("mergedv_Prod2_finer_eta.root","Recreate");
         }
 	for(ibin=0;ibin<nbin;ibin++){
 	Nevent.Write("Nevent");

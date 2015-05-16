@@ -66,7 +66,7 @@ void getResvsub(int ispt=1){
             }
             else{
         if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anaveta_Prod_%d.root",mdir.c_str(),ifile));
-        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/coarsebins/%s/Anaveta_Prod2_%d.root",mdir.c_str(),ifile));
+        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anaveta_Prod2_%d.root",mdir.c_str(),ifile));
             }
         TVectorD* Nevent_t =  (TVectorD*)f[ifile]->Get(Form("Nevent"));
         Nevent_[ibin]+=(*Nevent_t)[ibin];
@@ -122,7 +122,7 @@ void getResvsub(int ispt=1){
             }
             else{
 	        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anaveta_Prod_%d.root",mdir.c_str(),ifile));
-	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/coarsebins/%s/Anaveta_Prod2_%d.root",mdir.c_str(),ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anaveta_Prod2_%d.root",mdir.c_str(),ifile));
             }
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");

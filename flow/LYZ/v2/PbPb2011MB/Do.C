@@ -74,8 +74,8 @@ void dothird(){
         int end=atoi(getenv("END"));
         TString name;
         for(int i=start;i<end;i++){
-                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/Anaveta_Prod_%d.root",i);
-                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/Anaveta_Prod2_%d.root",i);
+                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/finereta/Anaveta_Prod_%d.root",i);
+                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/finereta/Anaveta_Prod2_%d.root",i);
                 remove(name.Data());
                 LYZ *l = new LYZ(readline("filelist.dat",i));
                 cout<<"start "<<i<<" th job"<<endl;
