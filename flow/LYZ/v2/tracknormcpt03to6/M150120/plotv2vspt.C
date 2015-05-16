@@ -47,7 +47,7 @@ gr->SetMarkerStyle(20);
 grProd->SetMarkerStyle(29);
 grProd->SetMarkerColor(4);
 gr->Draw("AP");
-grProd->Draw("Psame");
+//grProd->Draw("Psame");
 TLegend *tl = new TLegend(0.6,0.2,0.8,0.35);
 
 tl->SetFillColor(0);

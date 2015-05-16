@@ -75,14 +75,14 @@ void getResv(int ispt){
 		}
 	}
         
-        for(int ifile=0; ifile<nFileAll; ifile++){
+        for(int ifile=0; ifile<nFileAll;ifile++){
             if(ispt){
 	        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod_%d.root",mdir.c_str(),ifile));
 	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod2_%d.root",mdir.c_str(),ifile));
             }
             else{
 	        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/coarsebins/%s/Anaveta_Prod_%d.root",mdir.c_str(),ifile));
-	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/coarsebins/%s/Anaveta_Prod2_%d.root",mdir.c_str(),ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anaveta_Prod2_%d.root",mdir.c_str(),ifile));
             }
 		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
 		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
@@ -141,7 +141,8 @@ void getResv(int ispt){
 			for(int itheta=0;itheta<ntheta;itheta++){
 				dN[ibin][itheta][ivbin]/=totmult[ibin][ivbin];
 				TComplex Res=dN[ibin][itheta][ivbin]/dD[ibin][itheta];
-				v[ibin][itheta][ivbin]=(*V[ibin])[itheta]*avgmultall[ibin]*TMath::BesselJ1(j01)/Besselj01(mm)*Res.Re();
+				//v[ibin][itheta][ivbin]=(*V[ibin])[itheta]*avgmultall[ibin]*TMath::BesselJ1(j01)/Besselj01(mm)*Res.Re();
+				v[ibin][itheta][ivbin]=0.04918*avgmultall[ibin]*TMath::BesselJ1(j01)/Besselj01(mm)*Res.Re();
 				vmean[ibin][ivbin]+=v[ibin][itheta][ivbin];
 				deltav[ibin][itheta][ivbin]=TMath::Cos(mm*nn*theta[itheta])/totmult[ibin][ivbin]*(TMath::Exp(j01*j01/2./(*chi)[ibin]/(*chi)[ibin]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Power(-1,mm)*TMath::Exp(-j01*j01/2./(*chi)[ibin]/(*chi)[ibin]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.)));
 				deltavmean[ibin][ivbin]+=deltav[ibin][itheta][ivbin];

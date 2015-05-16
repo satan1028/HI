@@ -2,15 +2,19 @@
 void plotv2vspt(){
 
 int ibin=0;
-TFile *f = TFile::Open("mergedv_Prod.root");
-TFile *fProd = TFile::Open("mergedv_Prod2.root");
+TFile *f = TFile::Open("mergedv_Prod2.root");
+TFile *fProd = TFile::Open("mergedv_Prod2_sub.root");
 TVectorD *vecDv2 = (TVectorD*)f->Get(Form("D_%d/vmean",ibin));
 TVectorD *vecDv2err = (TVectorD*)f->Get(Form("D_%d/deltavmean",ibin));
 TVectorD *vecDavgpt = (TVectorD*)f->Get(Form("D_%d/avgpt",ibin));
 
-TVectorD *vecDv2_ = (TVectorD*)fProd->Get(Form("D_%d/vmean",ibin));
+/*TVectorD *vecDv2_ = (TVectorD*)fProd->Get(Form("D_%d/vmean",ibin));
 TVectorD *vecDv2err_ = (TVectorD*)fProd->Get(Form("D_%d/deltavmean",ibin));
-TVectorD *vecDavgpt_ = (TVectorD*)fProd->Get(Form("D_%d/avgpt",ibin));
+TVectorD *vecDavgpt_ = (TVectorD*)fProd->Get(Form("D_%d/avgpt",ibin));*/
+TVectorD *vecDv2_ = (TVectorD*)fProd->Get(Form("D_%d/vmeanmean",ibin));
+TVectorD *vecDv2err_ = (TVectorD*)fProd->Get(Form("D_%d/deltavmeanmean",ibin));
+TVectorD *vecDv2err_ = (TVectorD*)fProd->Get(Form("D_%d/sigmavmeanmean",ibin));
+TVectorD *vecDavgpt_ = (TVectorD*)f->Get(Form("D_%d/avgpt",ibin));
 
 double *avgpt = vecDavgpt->GetMatrixArray();
 double *v2 = vecDv2->GetMatrixArray();
@@ -46,8 +50,8 @@ gr->SetMarkerStyle(20);
 
 grProd->SetMarkerStyle(29);
 grProd->SetMarkerColor(4);
-gr->Draw("AP");
-grProd->Draw("Psame");
+//gr->Draw("AP");
+grProd->Draw("AP");
 TLegend *tl = new TLegend(0.6,0.2,0.8,0.35);
 
 tl->SetFillColor(0);

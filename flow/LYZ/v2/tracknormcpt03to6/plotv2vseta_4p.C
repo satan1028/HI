@@ -29,29 +29,30 @@ int shift=5;
 int xbin=0;
 for(int i=shift;i<shift+ntotbin;i++){
         int t = ntotbin-(i-shift);
-	//TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_sub.root",trkpointmax[i],trkpointmin[i]));
-	TFile *fProd = TFile::Open(Form("M%d%d/mergedv_Prod2_eta.root",trkpointmax[t-1],trkpointmin[t-1]));
-	//TVectorD *vecDv2_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/vmeanmean",ibin));
-	//TVectorD *vecDv2err_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/sigmavmeanmean",ibin));
-	//TVectorD *vecDavgeta_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/avgavgeta",ibin));
+	TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_eta_sub.root",trkpointmax[t-1],trkpointmin[t-1]));
+	//TFile *fProd = TFile::Open(Form("M%d%d/mergedv_Prod2_eta.root",trkpointmax[t-1],trkpointmin[t-1]));
+	TVectorD *vecDv2_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/vmeanmean",xbin));
+	TVectorD *vecDv2err_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/sigmavmeanmean",xbin));
+	TVectorD *vecDavgeta_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/avgavgeta",xbin));
 	
-	TVectorD *vecDv2_Prod = (TVectorD*)fProd->Get(Form("D_%d/vmean",xbin));
-	TVectorD *vecDv2err_Prod = (TVectorD*)fProd->Get(Form("D_%d/deltavmean",xbin));
-	TVectorD *vecDavgeta_Prod = (TVectorD*)fProd->Get(Form("D_%d/avgeta",xbin));
+	//TVectorD *vecDv2_Prod = (TVectorD*)fProd->Get(Form("D_%d/vmean",xbin));
+	//TVectorD *vecDv2err_Prod = (TVectorD*)fProd->Get(Form("D_%d/deltavmean",xbin));
+	//TVectorD *vecDavgeta_Prod = (TVectorD*)fProd->Get(Form("D_%d/avgeta",xbin));
 
-	//double *avgeta_Proderr = vecDavgeta_Proderr->GetMatrixArray();
-	//double *v2_Proderr = vecDv2_Proderr->GetMatrixArray();
-	//double *v2err_Proderr = vecDv2err_Proderr->GetMatrixArray();
+	double *avgeta_Proderr = vecDavgeta_Proderr->GetMatrixArray();
+	double *v2_Proderr = vecDv2_Proderr->GetMatrixArray();
+	double *v2err_Proderr = vecDv2err_Proderr->GetMatrixArray();
 
-	double *avgeta_Prod = vecDavgeta_Prod->GetMatrixArray();
-	double *v2_Prod = vecDv2_Prod->GetMatrixArray();
-	double *v2err_Prod = vecDv2err_Prod->GetMatrixArray();
-	int neta = vecDavgeta_Prod->GetNrows();
+	//double *avgeta_Prod = vecDavgeta_Prod->GetMatrixArray();
+	//double *v2_Prod = vecDv2_Prod->GetMatrixArray();
+	//double *v2err_Prod = vecDv2err_Prod->GetMatrixArray();
+	int neta = vecDavgeta_Proderr->GetNrows();
 	
 	c1->cd(t);
 	//if(i!=ntotbin-1)
 	//TGraphErrors *gr24=new TGraphErrors(neta24,eta,v24[i],0,v24err[i]);
-	TGraphErrors *grProd=new TGraphErrors(neta,avgeta_Prod,v2_Prod,0,v2err_Prod);
+	//TGraphErrors *grProd=new TGraphErrors(neta,avgeta_Prod,v2_Prod,0,v2err_Prod);
+	TGraphErrors *grProd=new TGraphErrors(neta,avgeta_Proderr,v2_Proderr,0,v2err_Proderr);
 	//gr24->SetMarkerSize(1.3);
 	//gr24->SetMarkerColor(1);
 	//gr24->SetMarkerStyle(20);
@@ -81,7 +82,7 @@ for(int i=shift;i<shift+ntotbin;i++){
 	tlx2->SetNDC();
 	tlx2->SetTextSize(0.055);
 	tlx2->Draw("same");
-	fProd->Close();
+	//fProd->Close();
         //TLatex *tlx1 = new TLatex(0.12,0.25,Form("%.1f<p_{T}<%.1f (GeV/c)",0.3,6.0));
 	//tlx1->SetNDC();
 	//tlx1->SetTextSize(0.045);

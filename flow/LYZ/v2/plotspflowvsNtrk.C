@@ -34,7 +34,8 @@ for(int i=0;i<ntotbin;i++){
 	V2err_Prod[i]=(*vecV2err_Prod)[xbin];
 	V2sp[i]=InV2/V2_Prod[i];
 	V2spError[i]=InV2/V2_Prod[i]/V2_Prod[i]*(*vecV2err_Prod)[xbin];
-	cout<<V2sp[i]<<"pm"<<V2spError[i]<<"\t";
+	//cout<<V2sp[i]<<"pm"<<V2spError[i]<<"\t";
+	cout<<V2sp[i]<<",";
 	}
 //    V2_Prod[1]*= 1.25;        
 //    V2_Prod[2] = 0.0411;

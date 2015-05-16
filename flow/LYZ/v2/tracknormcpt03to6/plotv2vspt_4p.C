@@ -28,15 +28,15 @@ int shift=5;
 int xbin=0;
 for(int i=shift;i<shift+ntotbin;i++){
         int t = ntotbin-(i-shift);
-	//TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_sub.root",trkpointmax[i],trkpointmin[i]));
-	TFile *fProd = TFile::Open(Form("M%d%d/mergedv_Prod2.root",trkpointmax[t-1],trkpointmin[t-1]));
-	//TVectorD *vecDv2_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/vmeanmean",ibin));
-	//TVectorD *vecDv2err_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/sigmavmeanmean",ibin));
-	//TVectorD *vecDavgpt_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/avgavgpt",ibin));
+	TFile *fProd = TFile::Open(Form("M%d%d/mergedv_Prod2_sub.root",trkpointmax[t-1],trkpointmin[t-1]));
+	//TFile *fProd = TFile::Open(Form("M%d%d/mergedv_Prod2_sub.root",trkpointmax[t-1],trkpointmin[t-1]));
+	TVectorD *vecDv2_Prod = (TVectorD*)fProd->Get(Form("D_%d/vmeanmean",xbin));
+	TVectorD *vecDv2err_Prod = (TVectorD*)fProd->Get(Form("D_%d/sigmavmeanmean",xbin));
+	TVectorD *vecDavgpt_Prod = (TVectorD*)fProd->Get(Form("D_%d/avgavgpt",xbin));
 	
-	TVectorD *vecDv2_Prod = (TVectorD*)fProd->Get(Form("D_%d/vmean",xbin));
-	TVectorD *vecDv2err_Prod = (TVectorD*)fProd->Get(Form("D_%d/deltavmean",xbin));
-	TVectorD *vecDavgpt_Prod = (TVectorD*)fProd->Get(Form("D_%d/avgpt",xbin));
+	//TVectorD *vecDv2_Prod = (TVectorD*)fProd->Get(Form("D_%d/vmean",xbin));
+	//TVectorD *vecDv2err_Prod = (TVectorD*)fProd->Get(Form("D_%d/deltavmean",xbin));
+	//TVectorD *vecDavgpt_Prod = (TVectorD*)fProd->Get(Form("D_%d/avgpt",xbin));
 
 	//double *avgpt_Proderr = vecDavgpt_Proderr->GetMatrixArray();
 	//double *v2_Proderr = vecDv2_Proderr->GetMatrixArray();

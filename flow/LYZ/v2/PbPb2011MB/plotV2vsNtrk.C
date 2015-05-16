@@ -6,6 +6,7 @@ const double avgtrkbin[nbin]={54.39,69.11,89.21,109.3,134.1,166.5,201.6,229.4,24
 const double V214006[nbin]={0.06413,0.06138,0.06137,0.06674,0.06906,0.07185,0.07545,0.07807,0.07934,0.08003,0.08152,0.08223,0.08308};
 const double V214006err[nbin]={0.01418,0.007515,0.003744,0.003738,0.003867,0.004024,0.004074,0.004216,0.004284,0.004322,0.004402,0.00444,0.004486};
 int xbin=0;
+double spcorr[ntotbin] = {0.60529,0.71839,0.813137,0.866738,0.94733,0.99686,0.992652,1.00056,0.996552,0.99867,0.999543,0.998042,1.00};
 double Ntrk[ntotbin], Ntrk_v[ntotbin], V2_Sum[ntotbin], V2err_Sum[ntotbin],  V2_Prod[ntotbin], V2err_Prod[ntotbin], V2intcorr_Prod[ntotbin], V2intcorrerr_Prod[ntotbin];
 for(int i=0;i<ntotbin;i++){
 TFile *mergedV_Sum = TFile::Open(Form("mergedV_Prod.root"));
@@ -28,6 +29,8 @@ V2_Prod[i]=(*vecV2_Prod)[i];
 V2err_Prod[i]=(*vecV2err_Prod)[i];
 V2intcorr_Prod[i]=(*vecV2intcorr_Prod)[i];
 V2intcorrerr_Prod[i]=(*vecV2intcorrerr_Prod)[i];
+V2intcorr_Prod[i]*=spcorr[ntotbin-i-1];
+V2intcorrerr_Prod[i]*=spcorr[ntotbin-i-1];
 }
 //const double V2[nbin]={0.0465,0.0498,0.0430,0.0447,0.0462};
 //const double V2Prod[nbin]={0.0536,0.0514,0.0491,0.0482,0.0462};

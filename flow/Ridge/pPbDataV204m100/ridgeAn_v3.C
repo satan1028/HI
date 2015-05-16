@@ -16,13 +16,17 @@
 
 using namespace std;
 
+double phicov(double);
+
 class ridge{  //use vector, combine calcS() and calcB() in one event loop
     public:
         ridge(TString);
         ~ridge();
         TVectorD Nevent, tottrk;
         TH2F* s[nbin];
+        TH2F* s_sym[nbin];
         TH2F* b[nbin];
+        TH2F* b_sym[nbin];
         treeInt *t;
         Int_t nEvents;
         vector<vector<double> > pVectEta_trig;
@@ -54,7 +58,9 @@ ridge::~ridge(){
     vector<vector<double> >().swap(pVectPhi_ass);
     for(int ibin=0;ibin<nbin;ibin++){
     delete s[ibin];
+    delete s_sym[ibin];
     delete b[ibin];
+    delete b_sym[ibin];
     }
 }
 
@@ -62,8 +68,12 @@ void ridge::beginJob(){
   for(int ibin=0;ibin<nbin;ibin++){
     s[ibin] = new TH2F(Form("signal_%d",ibin),Form("signal_%d",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
     s[ibin]->Sumw2();
+    s_sym[ibin] = new TH2F(Form("signal_sym_%d",ibin),Form("signal_sym_%d",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
+    s_sym[ibin]->Sumw2();
     b[ibin] = new TH2F(Form("background_%d",ibin),Form("background_%d",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
     b[ibin]->Sumw2();
+    b_sym[ibin] = new TH2F(Form("background_sym_%d",ibin),Form("background_sym_%d",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
+    b_sym[ibin]->Sumw2();
   }
   Nevent.ResizeTo(nbin); Nevent.Zero();
   tottrk.ResizeTo(nbin); tottrk.Zero();
@@ -78,8 +88,6 @@ void ridge::beginJob(){
         vector<double> pvectEta_ass;
         vector<double> pvectPhi_ass;
         for(int imult=0;imult<t->mult;imult++){
-           // TVector3 pvector;
-           // pvector.SetPtEtaPhi(t->pt[imult],t->eta[imult],t->phi[imult]);
 	    if(t->eta[imult]<etatrigmin||t->eta[imult]>etatrigmax) continue;
             if(t->pt[imult]<pttrigmin||t->pt[imult]>pttrigmax) continue; //event selection
             pvectEta_trig.push_back(t->eta[imult]);
@@ -111,7 +119,7 @@ void ridge::calc(){
             vector<double> pvectorPhi_ass = pVectPhi_ass[i];
             int Ntrig = pvectorEta_trig.size();
             int Nass = pvectorEta_ass.size();
-            if(Ntrig <= 2 || Nass <= 2) continue;
+            if(Ntrig <= 2) continue;
         int ntrk = pntrk[i]; int xbin=-1;
         for(int k=0;k<nbin;k++)
             if(ntrk<trkbin[k]&&ntrk>=trkbin[k+1])
@@ -127,25 +135,31 @@ void ridge::calc(){
            }
             for(int imult_trig=0;imult_trig<Ntrig;imult_trig++){
                 double eta_trig = pvectorEta_trig[imult_trig];
-                double phi_trig = pvectorPhi_trig[imult_trig];
+                double phi_trig = phicov(pvectorPhi_trig[imult_trig]);
             for(int imult_ass=0;imult_ass<Nass;imult_ass++){
               double eta_ass = pvectorEta_ass[imult_ass];
-              double phi_ass = pvectorPhi_ass[imult_ass];
-              double deltaeta = eta_trig - eta_ass;
-              double deltaphi = phi_trig - phi_ass;
+              double phi_ass = phicov(pvectorPhi_ass[imult_ass]);
+              double deltaeta = -eta_trig + eta_ass;
+              double deltaphi = -phi_trig + phi_ass;
               if(deltaphi>TMath::Pi())
                   deltaphi=deltaphi-2*TMath::Pi();
               if(deltaphi<-TMath::Pi()/2)
                   deltaphi=deltaphi+2*TMath::Pi();
               if(deltaeta == 0 && deltaphi == 0) continue;
-              s[xbin]->Fill(deltaeta,deltaphi,1./Ntrig);
+                 s_sym[xbin]->Fill(fabs(deltaeta),fabs(deltaphi),1.0/4.0/Ntrig);
+                 s_sym[xbin]->Fill(-fabs(deltaeta),fabs(deltaphi),1.0/4.0/Ntrig);
+                 s_sym[xbin]->Fill(fabs(deltaeta),-fabs(deltaphi),1.0/4.0/Ntrig);
+                 s_sym[xbin]->Fill(-fabs(deltaeta),-fabs(deltaphi),1.0/4.0/Ntrig);
+                 s_sym[xbin]->Fill(fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),1.0/4.0/Ntrig);
+                 s_sym[xbin]->Fill(-fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),1.0/4.0/Ntrig);                                       
+                 s[xbin]->Fill(deltaeta,deltaphi,1./Ntrig);
             }
                 for(int ira=0;ira<nMix;ira++){
                 vector<double> pVectorEta_ass = pVectEta_ass[j[ira]];
                 vector<double> pVectorPhi_ass = pVectPhi_ass[j[ira]];
                 for(int imult_ass=0;imult_ass<(int)pVectorEta_ass.size();imult_ass++){
                 double eta_ass = pVectorEta_ass[imult_ass];
-                double phi_ass = pVectorPhi_ass[imult_ass];
+                double phi_ass = phicov(pVectorPhi_ass[imult_ass]);
                 double deltaeta = eta_trig - eta_ass;
                 double deltaphi = phi_trig - phi_ass;
               if(deltaphi>TMath::Pi())
@@ -153,7 +167,13 @@ void ridge::calc(){
               if(deltaphi<-TMath::Pi()/2)
                   deltaphi=deltaphi+2*TMath::Pi();
                 if(deltaeta == 0 && deltaphi == 0) continue;
-                b[xbin]->Fill(deltaeta,deltaphi,1./Ntrig);
+                 b_sym[xbin]->Fill(fabs(deltaeta),fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
+                 b_sym[xbin]->Fill(-fabs(deltaeta),fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
+                 b_sym[xbin]->Fill(fabs(deltaeta),-fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
+                 b_sym[xbin]->Fill(-fabs(deltaeta),-fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
+                 b_sym[xbin]->Fill(fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
+                 b_sym[xbin]->Fill(-fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
+                 b[xbin]->Fill(deltaeta,deltaphi,1./Ntrig/pVectorEta_ass.size());
                 }
             }
             }
@@ -169,9 +189,21 @@ void ridge::endJob(TString outfile){
     tottrk.Write("tottrk");
     for(int ibin=0;ibin<nbin;ibin++){
         s[ibin]->Write();
+        s_sym[ibin]->Write();
         b[ibin]->Write();
+        b_sym[ibin]->Write();
     }
     fout->Close();
 }
-    
+
+double phicov(double phi){
+    double phic;
+if(phi<-TMath::Pi())
+    phic = phi+2*TMath::Pi();
+else if(phi>TMath::Pi())
+    phic = phi-2*TMath::Pi();
+else 
+    phic = phi;
+return phic;
+}
 

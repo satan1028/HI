@@ -48,9 +48,9 @@ using namespace std;
    double etaMin_ass_=-2.4;
    double etaMax_ass_=2.4;
    double ptMin_trg_=1.0;
-   double ptMax_trg_=3.0;
+   double ptMax_trg_=10.0;
    double ptMin_ass_=1.0;
-   double ptMax_ass_=3.0;
+   double ptMax_ass_=10.0;
    int bkgFactor_=10;
 
   Int_t rmult=0;
@@ -70,8 +70,8 @@ using namespace std;
      long neve=t1->GetEntries();
      cout<<"Nevts = "<<neve<<endl;
      //for(long ne=0; ne<neve; ne++){
-     for(long ne=0; ne<50000; ne++){
-       if(ne%100==0)  cout<<"Have run "<<ne<<" events ,"<<" First pass"<<endl;
+     for(long ne=0; ne<neve; ne++){
+       if(ne%1000==0)  cout<<"Have run "<<ne<<" events ,"<<" First pass"<<endl;
        t1->GetEntry(ne);
 
        pVect_trg = new vector<TVector3>;
@@ -137,9 +137,9 @@ using namespace std;
 
   for(int nround=0;nround<bkgFactor_;nround++)
   {
+      cout<<"round = "<<nround<<endl;
     for(int nevt_ass=0; nevt_ass<nevttotal_ass; nevt_ass++)
     {
-      cout<<"round = "<<nround<<", evt = "<<nevt_ass<<endl;
       int nevt_trg = gRandom->Integer(nevttotal_trg);
       if(nevt_trg == nevt_ass) { nevt_ass--; continue; }
       //if(fabs((*zvtxVect)[nevt_trg]-(*zvtxVect)[nevt_ass])>0.5) { nevt_ass--; continue; }
@@ -182,13 +182,13 @@ using namespace std;
     }
   }
 
-  int nEvent = hMult->Integral(3,10000);
-  hSignal->Scale(1.0/nEvent);
-  hBackground->Scale(hSignal->Integral()/hBackground->Integral());
+//  int nEvent = hMult->Integral(3,10000);
+//  hSignal->Scale(1.0/nEvent);
+//  hBackground->Scale(hSignal->Integral()/hBackground->Integral());
   hCorrelation->Add(hSignal);
-  hCorrelation->Add(hBackground,-1);
+//  hCorrelation->Add(hBackground,-1);
   hCorrelation->Divide(hBackground);
-  hCorrelation->Scale(hSignal->Integral());
+//  hCorrelation->Scale(hSignal->Integral());
 
 
 

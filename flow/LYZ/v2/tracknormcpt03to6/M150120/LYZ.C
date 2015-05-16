@@ -131,7 +131,7 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
 
 void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 	TComplex g0[ntheta], dDsum[ntheta], dNsum[ntheta][nvv];
-	TVectorD* r0res[nbin]; 
+	TVectorD *r0res[nbin]; 
 	//TVectorD* Vres[nbin]; TVectorD* chires[nbin];
 	TFile *fres = TFile::Open(res);
 	for(int ibin=0;ibin<nbin;ibin++){

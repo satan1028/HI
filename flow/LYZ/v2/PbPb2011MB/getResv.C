@@ -127,7 +127,8 @@ void getResv(int ispt){
 	TH2F* hetapteffcorr[nbin];
         double eff[netav];
 	TFile *fhisto = TFile::Open("histomerged.root");
-	TFile *feff = TFile::Open("/home/xuq7/HI/dNchdeta/Correction/trkEff_pp_all_42X_origin.root");
+	//TFile *feff = TFile::Open("/home/xuq7/HI/dNchdeta/Correction/trkEff_pp_all_42X_origin.root");
+	TFile *feff = TFile::Open("/home/xuq7/HI/flow/LYZ/v2/TrackCorrections_HYDJET_442_OFFICIAL_Mar25.root");
 	TH2F* heff = (TH2F*)feff->Get("rTotalEff3D");
       	//TH1D* hpteff = (TH1D*)heff->ProjectionY("hpteff",heff->GetXaxis()->FindBin(-2.4),heff->GetXaxis()->FindBin(2.4)-1,"o");
       	//TGraphError* hpteff = (TGraphErrors*)feff->Get("gEffPt");

@@ -18,7 +18,7 @@ class LYZ {
       LYZ(TString);
       ~LYZ(){};
 
-	void beginJob(int ispt=1) ;
+	void beginJob(int ispt_=1) ;
 	void calcV(int);
 	void calcv(TString, int, int);
      	void endJobV(TString) ;
@@ -27,7 +27,7 @@ class LYZ {
       // ----------member data ---------------------------
    private:
             
-        int nvv;
+        int nvv, ispt;
         const double *binv;
 	TVectorD Nevent, totmultall, tottrk, totptall,totetaall, Qx1, Qy1, Q2;
 	TString filename;
@@ -131,7 +131,7 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
 
 void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 	TComplex g0[ntheta], dDsum[ntheta], dNsum[ntheta][nvv];
-	TVectorD* r0res[nbin]; 
+	TVectorD *r0res[nbin]; 
 	//TVectorD* Vres[nbin]; TVectorD* chires[nbin];
 	TFile *fres = TFile::Open(res);
 	for(int ibin=0;ibin<nbin;ibin++){
@@ -178,9 +178,9 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 			if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection	
 			int xv=-1;
 			for(int ivbin=0;ivbin<nvv; ivbin++){
-                            if(binv == ptbinv && pt[imult]>binv[ivbin] && pt[imult]<=binv[ivbin+1])
+                            if(ispt && pt[imult]>binv[ivbin] && pt[imult]<=binv[ivbin+1])
                                 xv = ivbin;
-                            if(binv == etabinv && eta[imult]>binv[ivbin] && eta[imult]<=binv[ivbin+1])
+                            if((!ispt) && eta[imult]>binv[ivbin] && eta[imult]<=binv[ivbin+1])
                                 xv = ivbin;
                         }
 			if(xv<0 || xv==nvv)	continue;
@@ -217,14 +217,15 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 
 // ------------ method called once each job just before starting event loop  ------------
 void 
-LYZ::beginJob(int ispt)
+LYZ::beginJob(int ispt_)
 {
   double Vmax[nbin], eps[nbin];
   for(int ibin=0; ibin<nbin ;ibin++){
         Vmax[ibin]=0.065*(trkbin[ibin]+30);
         eps[ibin]=0.00025*(trkbin[ibin]+30);
   }
-    if(ispt){             nvv = nptv;       binv = ptbinv;}
+    ispt = ispt_;
+    if(ispt_){             nvv = nptv;       binv = ptbinv;}
     else{             nvv = netav;          binv = etabinv;}
 
 	Nevent.ResizeTo(nbin);	totmultall.ResizeTo(nbin), tottrk.ResizeTo(nbin), totptall.ResizeTo(nbin), totetaall.ResizeTo(nbin);
