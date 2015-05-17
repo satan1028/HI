@@ -52,8 +52,8 @@ makeMultiPanelCanvas(c1,3,2,0,0,0.25,0.2,0.03);
     hFrame->SetMaximum(0.18);
 
 for(int i=0;i<ntotbin;i++){
-	TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_eta_sub.root",trkpointmax[i],trkpointmin[i]));
-	//TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_coarse_eta_sub.root",trkpointmax[i],trkpointmin[i]));
+	//TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_eta_sub.root",trkpointmax[i],trkpointmin[i]));
+	TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_coarse_eta_sub.root",trkpointmax[i],trkpointmin[i]));
 	//TFile *fProd = TFile::Open(Form("M%d%d/mergedv_Prod2_eta.root",trkpointmax[i],trkpointmin[i]));
         
 	TVectorD *vecDv2_Proderr = (TVectorD*)fProderr->Get(Form("D_%d/vmeanmean",ibin));
@@ -124,8 +124,8 @@ for(int i=0;i<ntotbin;i++){
 	//tlx0->Draw("same");
 	tlx1->Draw("same");
 	tl->Draw("same");
-	c1->Print("v2vseta.png");
-	c1->Print("v2vseta.pdf");
+	c1->Print("v2vseta_coarse.png");
+	c1->Print("v2vseta_coarse.pdf");
 
 }
 
