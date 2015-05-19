@@ -16,10 +16,10 @@ void merge(){
 	Ncollerr2.ResizeTo(N-1);Nparterr2.ResizeTo(N-1);Berr2.ResizeTo(N-1);
 	Ncollerr.ResizeTo(N-1);Nparterr.ResizeTo(N-1);Berr.ResizeTo(N-1);
 	if(method==0){
-        output<<"kpoint_simu\t"<<"kpoint_data\t"<<"centbin\t"<<"<Ncoll>"<<"\t"<<"<Ncoll> err1"<<"\t"<<"<Ncoll> err2"<<"\t"<<"<Ncoll> err"<<"\t"<<endl;
+        output<<"kpoint_simu\t"<<"kpoint_data\t"<<"centbin\t"<<"<Ncoll>"<<"\t""<Ncoll> err"<<"\t"<<endl;
         }
 	else{
-        output<<"kpoint\t"<<"centbin_data\t"<<"centbin_simu\t"<<"<Ncoll>"<<"\t"<<"<Ncoll> err1"<<"\t"<<"<Ncoll> err2"<<"\t"<<"<Ncoll> err"<<"\t"<<endl;
+        output<<"kpoint\t"<<"centbin_data\t"<<"centbin_simu\t"<<"<Ncoll>"<<"\t"<<"<Ncoll> err"<<"\t"<<endl;
         }
 	//<<"<Npart>"<<"\t"<<"<Npart> err"<<"\t\t"<<"<B>"<<"\t"<<"<B> err"<<endl;
 	TString name;
@@ -81,22 +81,22 @@ void merge(){
         		Berr1[i]=TMath::Sqrt(Berr1[i])*100;//(*BAver[0])[i];
         		Berr2[i]=TMath::Sqrt(Berr2[i])*100;//(*BAver[0])[i];
 			if(method==0)
-        		output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*kpoint_)[i]<<" to "<<(*kpoint_)[i+1]<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NcollAver[0])[i]<<"\t"<<Ncollerr1[i]<<"%\t"<<Ncollerr2[i]<<"%\t"<<TMath::Sqrt(Ncollerr[i])*100<<"%"<<endl;
+        		output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*kpoint_)[i]<<" to "<<(*kpoint_)[i+1]<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NcollAver[0])[i]<<"\t"<<TMath::Sqrt(Ncollerr[i])*(*NcollAver[0])[i]<<endl;
 			else
-        		output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*centbin_)[i]*100<<"% to "<<(*centbin_)[i+1]*100<<"%\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NcollAver[0])[i]<<"\t"<<Ncollerr1[i]<<"%\t"<<Ncollerr2[i]<<"%\t"<<TMath::Sqrt(Ncollerr[i])*100<<"%"<<endl;
+        		output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*centbin_)[i]*100<<"% to "<<(*centbin_)[i+1]*100<<"%\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NcollAver[0])[i]<<"\t"<<TMath::Sqrt(Ncollerr[i])*(*NcollAver[0])[i]<<endl;
         		//output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NcollAver[0])[i]<<"\t"<<Ncollerr1[i]<<"\t"<<Ncollerr2[i]<<"\t"<<Ncollerr[i]<<endl;
 //<<(*NpartAver[0])[i]<<"\t"<<Nparterr[i]<<"\t\t"<<(*BAver[0])[i]<<"\t"<<Berr[i]<<endl;
 	output<<endl;
         }
 	if(method==0)
-        output<<"kpoint_simu\t"<<"kpoint_data\t"<<"centbin\t"<<"<Npart>"<<"\t"<<"<Npart> err1"<<"\t"<<"<Npart> err2"<<"\t"<<"<Npart> err"<<"\t"<<endl;
+        output<<"kpoint_simu\t"<<"kpoint_data\t"<<"centbin\t"<<"<Npart>"<<"\t"<<"<Npart> err"<<"\t"<<endl;
 	else
-        output<<"kpoint\t"<<"centbin_data\t"<<"centbin_simu\t"<<"<Ncoll>"<<"\t"<<"<Ncoll> err1"<<"\t"<<"<Ncoll> err2"<<"\t"<<"<Ncoll> err"<<"\t"<<endl;
+        output<<"kpoint\t"<<"centbin_data\t"<<"centbin_simu\t"<<"<Npart>"<<"\t"<<"<Npart> err"<<"\t"<<endl;
         for(int i=0;i<N-1;i++){
 	if(method==0)
-        output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*kpoint_)[i]<<" to "<<(*kpoint_)[i+1]<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NpartAver[0])[i]<<"\t"<<Nparterr1[i]<<"%\t"<<Nparterr2[i]<<"%\t"<<TMath::Sqrt(Nparterr[i])*100<<"%"<<endl;
+        output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*kpoint_)[i]<<" to "<<(*kpoint_)[i+1]<<"\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NpartAver[0])[i]<<"\t"<<TMath::Sqrt(Nparterr[i])*(*NpartAver[0])[i]<<endl;
         else
-        output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*centbin_)[i]*100<<"% to "<<(*centbin_)[i+1]*100<<"%\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NpartAver[0])[i]<<"\t"<<Nparterr1[i]<<"%\t"<<Nparterr2[i]<<"%\t"<<TMath::Sqrt(Ncollerr[i])*100<<"%"<<endl;
+        output<<(*kpoint)[i]<<" to "<<(*kpoint)[i+1]<<"\t"<<(*centbin_)[i]*100<<"% to "<<(*centbin_)[i+1]*100<<"%\t"<<(*centbin)[i]*100<<"% to "<<(*centbin)[i+1]*100<<"%:"<<"\t"<<(*NpartAver[0])[i]<<"\t"<<TMath::Sqrt(Nparterr[i])*(*NpartAver[0])[i]<<endl;
 	output<<endl;
         }
 	for(int i=0;i<N-1;i++){

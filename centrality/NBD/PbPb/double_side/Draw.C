@@ -28,7 +28,7 @@ for(int i=0;i<nDil;i++)
   c1->SetTicks(-1);
 
 	N=N-1;
- TString str="Npart";
+ TString str="Ncoll";
  TH1D* hist = new TH1D("","",N,0,N);
  hist->GetXaxis()->SetNdivisions(502);
 if(method==0)
@@ -126,5 +126,6 @@ TLegend *leg0 = new TLegend(0.18,0.70,0.50,0.85);
  if(str=="Ncoll")   leg0->AddEntry(graphNcollDil,"Ncoll from run I","p");
 	leg0->Draw();	
 c1->SaveAs(Form("%sGri.png",str.Data()));
+c1->SaveAs(Form("%sGri.pdf",str.Data()));
 
 }

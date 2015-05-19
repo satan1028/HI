@@ -6,16 +6,16 @@ const int ntotbin=5;
 const int npt24=9;
 const double pt[npt24]={0.4,0.7,1.2,1.7,2.2,2.7,3.4,4.4,5.4};
 const double v24[5][npt24]={
-{0.02809,0.04599,0.06869,0.08440,0.09715,0.09357,0.07924,0.04701,0.01620},
-{0.02682,0.04447,0.06771,0.08586,0.09932,0.09782,0.08714,0.06139,0.05068},
-{0.02582,0.04324,0.06644,0.08396,0.09725,0.1032,0.09603,0.07668,0.0605},
-{0.02507,0.04214,0.06471,0.08294,0.09241,0.09917,0.09663,0.08479,0.06271},
+    {0.0436326,0.0795412,0.117455,0.135615,0.138952,0.137704,0.12716,0.104461,0.102546},
+    {0.0441134,0.081454,0.120992,0.142609,0.148646,0.144631,0.13748,0.115206,0.102368},
+    {0.0444633,0.0827859,0.124137,0.145269,0.149668,0.150845,0.144292,0.115638,0.127838},
+    {0.045803,0.083701,0.127181,0.148425,0.151695,0.152144,0.135538,0.115144,0.0939622}
 };
 const double v24err[5][npt24]={
-{0.0007,0.00057,0.00085,0.0014,0.0022,0.0034,0.0041,0.0072,0.011},
-{0.00058,0.00043,0.00063,0.00099,0.0016,0.0025,0.0031,0.0054,0.0086},
-{0.00053,0.00038,0.00056,0.00088,0.0014,0.0022,0.0027,0.0049,0.0076},
-{0.00079,0.00057,0.00084,0.0013,0.002,0.0032,0.004,0.0075,0.012},
+    {0.000639539,0.000826055,0.00117583,0.00173971,0.00147411,0.00425427,0.00290752,0.0075635,0.0180777},
+    {0.000489939,0.000748004,0.00106544,0.00130725,0.0021476,0.00300211,0.00460689,0.00430641,0.00958347},
+    {0.000539929,0.000592858,0.00159546,0.001461,0.00161371,0.00332517,0.00381725,0.00692403,0.0137116},
+    {0.000685138,0.0011504,0.00182689,0.00135556,0.00211262,0.00191136,0.00361452,0.00609861,0.0112248}
 };
 const double v26[5][npt24]={
     {0.0436647,0.0766372,0.115253,0.134962,0.138116,0.132017,0.129223,0.0959764,0.159984},
@@ -86,15 +86,17 @@ for(int i=shift;i<shift+ntotbin;i++){
 	//if(i!=ntotbin-1)
 	//TGraphErrors *gr24=new TGraphErrors(npt24,pt,v24[i],0,v24err[i]);
 	TGraphErrors *grProd=new TGraphErrors(npt,avgpt_Prod,v2_Prod,0,v2err_Prod);
+	TGraphErrors *gr24=new TGraphErrors(npt24,pt,v24[i-shift],0,v24err[i-shift]);
 	TGraphErrors *gr26=new TGraphErrors(npt24,pt,v26[i-shift],0,v26err[i-shift]);
 	TGraphErrors *gr28=new TGraphErrors(npt24,pt,v28[i-shift],0,v28err[i-shift]);
-	//gr24->SetMarkerSize(1.3);
-	//gr24->SetMarkerColor(1);
-	//gr24->SetMarkerStyle(20);
 	grProd->SetMarkerSize(1.4);
 	grProd->SetMarkerStyle(20);
 	grProd->SetMarkerColor(6);
 	grProd->SetLineColor(6);
+	gr24->SetMarkerSize(1.4);
+	gr24->SetMarkerColor(1);
+	gr24->SetLineColor(1);
+	gr24->SetMarkerStyle(20);
 	gr26->SetMarkerSize(1.4);
 	gr26->SetMarkerColor(4);
 	gr26->SetMarkerStyle(34);
@@ -104,18 +106,18 @@ for(int i=shift;i<shift+ntotbin;i++){
 	gr28->SetMarkerStyle(33);
 	gr28->SetLineColor(2);
 	hFrame->Draw();
-	//gr24->Draw("Psame");
-	grProd->Draw("Psame");
 	if((i-shift)!=ntotbin-1){
+	gr24->Draw("Psame");
 	gr26->Draw("Psame");
 	gr28->Draw("Psame");
         }
-	TLegend *tl = new TLegend(0.4,0.5,0.7,0.65);
+	grProd->Draw("Psame");
+	TLegend *tl = new TLegend(0.4,0.4,0.7,0.65);
 	tl->SetFillColor(0);
 	tl->SetBorderSize(0);
 	tl->SetTextSize(0.05);
-	//tl->AddEntry(gr24,"v2 4-particle cum","lp");
 	tl->AddEntry(grProd,"v_{2}{LYZ}","lp");
+	tl->AddEntry(gr24,"v_{2}{4} cumulant","lp");
 	tl->AddEntry(gr26,"v_{2}{6} cumulant","lp");
 	tl->AddEntry(gr28,"v_{2}{8} cumulant","lp");
 	if(i-shift==0 || i-shift==3) 
