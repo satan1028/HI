@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <iomanip>
 #include "SetSeedOwn.C"
 #include "par.h"
 
@@ -23,6 +24,7 @@ class ridge{  //use vector, combine calcS() and calcB() in one event loop
         ridge(TString);
         ~ridge();
         TVectorD Nevent, tottrk;
+        TH1D* hMult[nbin];
         TH2F* s[nbin];
         TH2F* s_sym[nbin];
         TH2F* b[nbin];
@@ -65,21 +67,19 @@ ridge::~ridge(){
 }
 
 void ridge::beginJob(){
+    TH1::SetDefaultSumw2();
   for(int ibin=0;ibin<nbin;ibin++){
+    hMult[ibin] = new TH1D(Form("mult_%d",ibin),Form("mult_%d",ibin),250,0,250);
     s[ibin] = new TH2F(Form("signal_%d",ibin),Form("signal_%d",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
-    s[ibin]->Sumw2();
     s_sym[ibin] = new TH2F(Form("signal_sym_%d",ibin),Form("signal_sym_%d",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
-    s_sym[ibin]->Sumw2();
     b[ibin] = new TH2F(Form("background_%d",ibin),Form("background_%d",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
-    b[ibin]->Sumw2();
     b_sym[ibin] = new TH2F(Form("background_sym_%d",ibin),Form("background_sym_%d",ibin),detastep,detamin,detamax,dphistep,dphimin,dphimax);
-    b_sym[ibin]->Sumw2();
   }
   Nevent.ResizeTo(nbin); Nevent.Zero();
   tottrk.ResizeTo(nbin); tottrk.Zero();
   t = new treeInt(Form("%s",filename.Data()));
   t->Setup();
-  nEvents = t->GetEntries();
+  nEvents = 20000;t->GetEntries();
     for(Int_t i=0;i<nEvents;i++){
   //      if(i%10000==0) cout<<"has processed "<<i<<"begin events"<<endl;
         t->GetEntry(i);
@@ -108,6 +108,9 @@ void ridge::beginJob(){
 }
 
 void ridge::calc(){
+   // UInt_t iniseed = SetSeedOwn();
+   // gRandom->SetSeed(iniseed);
+    TRandom3* r = new TRandom3(0);
    // int nEvents_trig = (int)pVectEta_trig.size();
     int nEvents_ass = (int)pVectEta_ass.size();
    int j[nMix];
@@ -119,19 +122,17 @@ void ridge::calc(){
             vector<double> pvectorPhi_ass = pVectPhi_ass[i];
             int Ntrig = pvectorEta_trig.size();
             int Nass = pvectorEta_ass.size();
-            if(Ntrig <= 2) continue;
         int ntrk = pntrk[i]; int xbin=-1;
         for(int k=0;k<nbin;k++)
             if(ntrk<trkbin[k]&&ntrk>=trkbin[k+1])
                 xbin=k;
             if(xbin<0 || xbin==nbin) continue;
             tottrk[xbin]+=ntrk;
-
+            hMult[xbin]->Fill(Ntrig);
+            if(Ntrig <= 2) continue;
            for(int ira=0;ira<nMix;ira++){
-                UInt_t iniseed = SetSeedOwn();
-                gRandom->SetSeed(iniseed);
-                TRandom3* r = new TRandom3(0);
                 j[ira] = r->Integer(nEvents_ass);
+                if(j[ira]==i) { ira--; continue;}
            }
             for(int imult_trig=0;imult_trig<Ntrig;imult_trig++){
                 double eta_trig = pvectorEta_trig[imult_trig];
@@ -139,20 +140,21 @@ void ridge::calc(){
             for(int imult_ass=0;imult_ass<Nass;imult_ass++){
               double eta_ass = pvectorEta_ass[imult_ass];
               double phi_ass = phicov(pvectorPhi_ass[imult_ass]);
-              double deltaeta = -eta_trig + eta_ass;
-              double deltaphi = -phi_trig + phi_ass;
+              double deltaeta = eta_trig - eta_ass;
+              double deltaphi = phi_trig - phi_ass;
               if(deltaphi>TMath::Pi())
                   deltaphi=deltaphi-2*TMath::Pi();
               if(deltaphi<-TMath::Pi()/2)
                   deltaphi=deltaphi+2*TMath::Pi();
               if(deltaeta == 0 && deltaphi == 0) continue;
-                 s_sym[xbin]->Fill(fabs(deltaeta),fabs(deltaphi),1.0/4.0/Ntrig);
-                 s_sym[xbin]->Fill(-fabs(deltaeta),fabs(deltaphi),1.0/4.0/Ntrig);
-                 s_sym[xbin]->Fill(fabs(deltaeta),-fabs(deltaphi),1.0/4.0/Ntrig);
-                 s_sym[xbin]->Fill(-fabs(deltaeta),-fabs(deltaphi),1.0/4.0/Ntrig);
-                 s_sym[xbin]->Fill(fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),1.0/4.0/Ntrig);
-                 s_sym[xbin]->Fill(-fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),1.0/4.0/Ntrig);                                       
-                 s[xbin]->Fill(deltaeta,deltaphi,1./Ntrig);
+                    double weight = 1.0/Ntrig;
+                 s_sym[xbin]->Fill(fabs(deltaeta),fabs(deltaphi),weight);
+                 s_sym[xbin]->Fill(-fabs(deltaeta),fabs(deltaphi),weight);
+                 s_sym[xbin]->Fill(fabs(deltaeta),-fabs(deltaphi),weight);
+                 s_sym[xbin]->Fill(-fabs(deltaeta),-fabs(deltaphi),weight);
+                 s_sym[xbin]->Fill(fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),weight);
+                 s_sym[xbin]->Fill(-fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),weight);
+                 s[xbin]->Fill(deltaeta,deltaphi,weight);
             }
                 for(int ira=0;ira<nMix;ira++){
                 vector<double> pVectorEta_ass = pVectEta_ass[j[ira]];
@@ -167,13 +169,14 @@ void ridge::calc(){
               if(deltaphi<-TMath::Pi()/2)
                   deltaphi=deltaphi+2*TMath::Pi();
                 if(deltaeta == 0 && deltaphi == 0) continue;
-                 b_sym[xbin]->Fill(fabs(deltaeta),fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
-                 b_sym[xbin]->Fill(-fabs(deltaeta),fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
-                 b_sym[xbin]->Fill(fabs(deltaeta),-fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
-                 b_sym[xbin]->Fill(-fabs(deltaeta),-fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
-                 b_sym[xbin]->Fill(fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
-                 b_sym[xbin]->Fill(-fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),1.0/Ntrig/pVectorEta_ass.size());
-                 b[xbin]->Fill(deltaeta,deltaphi,1./Ntrig/pVectorEta_ass.size());
+                    double weight = 1.0/Ntrig/pVectorEta_ass.size();
+                 b_sym[xbin]->Fill(fabs(deltaeta),fabs(deltaphi),weight);
+                 b_sym[xbin]->Fill(-fabs(deltaeta),fabs(deltaphi),weight);
+                 b_sym[xbin]->Fill(fabs(deltaeta),-fabs(deltaphi),weight);
+                 b_sym[xbin]->Fill(-fabs(deltaeta),-fabs(deltaphi),weight);
+                 b_sym[xbin]->Fill(fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),weight);
+                 b_sym[xbin]->Fill(-fabs(deltaeta),2*TMath::Pi()-fabs(deltaphi),weight);
+                 b[xbin]->Fill(deltaeta,deltaphi,weight);
                 }
             }
             }
@@ -188,6 +191,7 @@ void ridge::endJob(TString outfile){
     Nevent.Write("Nevent");
     tottrk.Write("tottrk");
     for(int ibin=0;ibin<nbin;ibin++){
+        hMult[ibin]->Write();
         s[ibin]->Write();
         s_sym[ibin]->Write();
         b[ibin]->Write();

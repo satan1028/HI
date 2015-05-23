@@ -13,6 +13,7 @@
 #include <TCanvas.h>
 #include <TVector3.h>
 #include <TRandom.h>
+#include "iomanip"
 
 #define PI 3.14159265359
 using namespace std; 
@@ -32,7 +33,7 @@ using namespace std;
    vector< vector<TVector3> > *pVectVect_ass;
    vector<double> *zvtxVect;
 
-  //TH1D::SetDefaultSumw2();
+  TH1::SetDefaultSumw2();
   TH1D* hMult = new TH1D("mult","N",250,0,250);
   TH2D* hSignal = new TH2D("signal","#Delta#eta,#Delta#phi",32+1,-4.8-0.15,4.8+0.15,32-1,-PI/2+PI/32,3*PI/2-PI/32);
   TH2D* hBackground = new TH2D("background","#Delta#eta, #Delta#phi",32+1,-4.8-0.15,4.8+0.15,32-1,-PI/2+PI/32,3*PI/2-PI/32);
@@ -69,7 +70,6 @@ using namespace std;
      t1->SetBranchAddress("phirg", &phir0);
      long neve=t1->GetEntries();
      cout<<"Nevts = "<<neve<<endl;
-     //for(long ne=0; ne<neve; ne++){
      for(long ne=0; ne<neve; ne++){
        if(ne%1000==0)  cout<<"Have run "<<ne<<" events ,"<<" First pass"<<endl;
        t1->GetEntry(ne);
@@ -170,7 +170,6 @@ using namespace std;
             deltaPhi=deltaPhi+2*PI;
 
           if(deltaEta==0 && deltaPhi==0) continue;
-
           hBackground->Fill(fabs(deltaEta),fabs(deltaPhi),1.0/nMult_trg/nMult_ass);
           hBackground->Fill(-fabs(deltaEta),fabs(deltaPhi),1.0/nMult_trg/nMult_ass);
           hBackground->Fill(fabs(deltaEta),-fabs(deltaPhi),1.0/nMult_trg/nMult_ass);
@@ -181,6 +180,7 @@ using namespace std;
       }
     }
   }
+
 
 //  int nEvent = hMult->Integral(3,10000);
 //  hSignal->Scale(1.0/nEvent);

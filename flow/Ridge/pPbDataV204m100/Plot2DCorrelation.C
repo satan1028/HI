@@ -5,7 +5,7 @@ void Plot2DCorrelation(){
   gStyle->SetPalette(1);
 
   Int_t nFlagSaveFIGs = 0;
-  TFile *f = new TFile("Anav3_merged.root");
+  TFile *f = new TFile("Anav3_merged1.root");
 
   TH2D *hCorrelation = (TH2D*) f->Get("D_0/hr");
 

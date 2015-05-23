@@ -1,9 +1,10 @@
 #include "par.h"
 void Draw(){
     gStyle->SetOptStat(kFALSE);
-    TFile *f = TFile::Open(Form("Anav3_merged.root"));
+    gStyle->SetPalette(1);
+    TFile *f = TFile::Open(Form("Anav3_merged1.root"));
     int xbin=0;
-    TH2F* hr = (TH2F*)f->Get(Form("D_%d/hr",xbin));
+    TH2F* hr = (TH2F*)f->Get(Form("D_%d/hr_sym",xbin));
     TH2F* s = (TH2F*)f->Get(Form("D_%d/s",xbin));
     TH2F* b = (TH2F*)f->Get(Form("D_%d/b",xbin));
     TVectorD* vavgtrk = (TVectorD*)f->Get(Form("avgtrk"));
@@ -17,6 +18,8 @@ void Draw(){
     hr->GetYaxis()->CenterTitle();
     hr->GetZaxis()->SetTitle("#frac{1}{N_{trig}}#frac{d^{2}N^{pair}}{d#Delta#eta d#Delta#phi}");
     TCanvas *c1 = new TCanvas();
+    c1->SetTheta(60.839);
+    c1->SetPhi(38.0172);
     hr->Draw("surf1");
     TLatex l;
     l.SetNDC();
