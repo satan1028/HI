@@ -1,0 +1,36 @@
+2927009
+jobsub.slurm
+vmp1105
+**** Following environment variables are going to be unset.
+       XDAQ_DOCUMENT_ROOT
+       XDAQ_OS
+       G4NEUTRONXS
+       LHAPATH
+       XDAQ_PLATFORM
+       XDAQ_ROOT
+cling::DynamicLibraryManager::loadLibrary(): libCint.so: cannot open shared object file: No such file or directory
+In file included from input_line_26:1:
+/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/Ancestor/double_side/store.C:5:2: error: unknown type name 'NBD'
+        NBD *l;
+        ^
+/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/Ancestor/double_side/store.C:11:24: error: unknown type name 'NBD'
+        if(Gth<nGlau) l = new NBD(datafile,stdGlaulist[Gth],histoname);
+                              ^
+/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/Ancestor/double_side/store.C:12:15: error: unknown type name 'NBD'
+        else l = new NBD(datafile,stdGlaulist[0],histoname);
+                     ^
+/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/Ancestor/double_side/store.C:21:24: error: unknown type name 'NBD'
+        if(Gth<nGlau) l = new NBD(datafile,Gri055Glaulist[Gth],histoname);
+                              ^
+/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/Ancestor/double_side/store.C:22:15: error: unknown type name 'NBD'
+        else l = new NBD(datafile,Gri055Glaulist[0],histoname);
+                     ^
+/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/Ancestor/double_side/store.C:31:24: error: unknown type name 'NBD'
+        if(Gth<nGlau) l = new NBD(datafile,Gri101Glaulist[Gth],histoname);
+                              ^
+/gpfs22/home/xuq7/HI/centrality/NBD/PbPb/Ancestor/double_side/store.C:32:15: error: unknown type name 'NBD'
+        else l = new NBD(datafile,Gri101Glaulist[0],histoname);
+                     ^
+input_line_30:2:3: error: use of undeclared identifier 'store'
+ (store(0, 0, 3))
+  ^

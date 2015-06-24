@@ -428,3 +428,6 @@
 150414_163700: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -getoutput 141 -c PbPb2011MB/
 150414_163713: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -resubmit 414 -c PbPb2011MB/
 150414_163735: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -getoutput 414 -c PbPb2011MB/
+150618_114253: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c PbPb2011MB/
+150618_114322: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -getoutput 414 -c PbPb2011MB/
+150618_114428: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c PbPb2011MB/

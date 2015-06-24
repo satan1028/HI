@@ -172,7 +172,7 @@ SkimTrack::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
        math::XYZPoint v1(vx,vy, vz);
     
-    if(fabs(vz)<vzcutmax){
+    if(fabs(vz)<vzcutmax && fabs(vz)>vzcutmin){
     edm::Handle<reco::TrackCollection> tracks;
     iEvent.getByLabel(srcTrack,tracks);
 

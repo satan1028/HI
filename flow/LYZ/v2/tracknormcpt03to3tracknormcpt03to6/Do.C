@@ -42,12 +42,12 @@ void dosecond(){
 	string dir=getenv("DIR");
         TString name;
         for(int i=start;i<end;i++){
-                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to3tracknormcpt03to6/%s/newptbin/Anav_Prod_%d.root",dir.c_str(),i);
-                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to3tracknormcpt03to6/%s/newptbin/Anav_Prod2_%d.root",dir.c_str(),i);
+                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to3tracknormcpt03to6/%s/Anav_Prod_%d.root",dir.c_str(),i);
+                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to3tracknormcpt03to6/%s/Anav_Prod2_%d.root",dir.c_str(),i);
                 remove(name.Data());
                 LYZ *l = new LYZ(readline("filelist.dat",i));
                 cout<<"start "<<i<<" th job"<<endl;
-                l->beginJob();
+                l->beginJob(1);
                 if(SumorProd=="Sum")       l->calcv("mergedV_Sum.root",0,-1);
                 else    l->calcv("mergedV_Prod.root",0,-1);
                 l->endJobv(name);
@@ -74,7 +74,7 @@ void dosecondsub(){
                 remove(name.Data());
                 LYZ *l = new LYZ(readline("filelist.dat",i));
                 cout<<"start "<<i<<" th job"<<endl;
-                l->beginJob();
+                l->beginJob(1);
 		for(int isample=0;isample<nsamples;isample++){
                         if(i>getfilenumber(infname,isample-1)&&i<=getfilenumber(infname,isample)){
 			l->calcv(infname,0,isample);
@@ -83,6 +83,26 @@ void dosecondsub(){
         	}
 	}
 }
+
+void dothird(){
+        string SumorProd=getenv("SUMORPROD");
+        int start=atoi(getenv("BEGIN"));
+        int end=atoi(getenv("END"));
+        string dir=getenv("DIR");
+        TString name;
+        for(int i=start;i<end;i++){
+                if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to3tracknormcpt03to6/%s/Anaveta_Prod_%d.root",dir.c_str(),i);
+                else            name=Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to3tracknormcpt03to6/%s/Anaveta_Prod2_%d.root",dir.c_str(),i);
+                remove(name.Data());
+                LYZ *l = new LYZ(readline("filelist.dat",i));
+                cout<<"start "<<i<<" th job"<<endl;
+                l->beginJob(0);
+                if(SumorProd=="Sum")       l->calcv("mergedV_Sum.root",0,-1);
+                else    l->calcv("mergedV_Prod.root",0,-1);
+                l->endJobv(name);
+        }
+}
+
 
 int getfilenumber(TString inf, int isample){
 	if(isample==-1) return -1;

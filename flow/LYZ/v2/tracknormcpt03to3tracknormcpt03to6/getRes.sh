@@ -1,5 +1,5 @@
 #!/bin/bash
-SumorProd="Sum"
+SumorProd="Prod"
 Vorv="v"
 
 cd /home/xuq7/HI/CMSSW_5_3_20/src
@@ -16,7 +16,8 @@ root -l -q getResV.C
 #root -l -q getResVsub.C
 #root -l -q nsubvsV2.C
 else
-root -l -q getResv.C
+#root -l -q getResv.C
+root -l -q "getResvsub.C(1)"
 fi
 cd ..
 fi

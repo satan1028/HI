@@ -18,7 +18,7 @@ class LYZ {
       LYZ(TString);
       ~LYZ(){};
 
-	void beginJob() ;
+	void beginJob(int ispt_=1) ;
 	void calcV(int);
 	void calcv(TString, int, int);
      	void endJobV(TString) ;
@@ -26,21 +26,21 @@ class LYZ {
 
       // ----------member data ---------------------------
    private:
-
-	TVectorD Nevent, totmultall, tottrk;
+            
+        int nvv, ispt;
+        const double *binv;
+	TVectorD Nevent, totmultall, tottrk, totptall,totetaall, Qx1, Qy1, Q2;
 	TString filename;
-        TVectorD Qx1[nbin];	
-	TVectorD Qy1[nbin];
-	TVectorD Q2[nbin];	
-	double Qx2[nbin][nptV],Qy2[nbin][nptV];
+	double Qx2[nbin],Qy2[nbin];
 	double theta[ntheta];
         double r[nbin][nstepr];
-	TVectorD GRe[nbin][nptV][ntheta];
-	TVectorD GIm[nbin][nptV][ntheta];
+	TVectorD GRe[nbin][ntheta];
+	TVectorD GIm[nbin][ntheta];
 	TVectorD dDRe[nbin], dNRe[nbin][ntheta];
 	TVectorD dDIm[nbin], dNIm[nbin][ntheta];
-	TVectorD totmult[nbin];
-	TVectorD totpt[nbin];
+	TVectorD totmultv[nbin];
+	TVectorD totptv[nbin];
+	TVectorD totetav[nbin];
 
 };
 
@@ -63,8 +63,8 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
    using namespace std;
 
 
-	TComplex g[nptV][ntheta][nstepr];
-	double Q[nptV][ntheta];	double Qx[nptV];	double Qy[nptV];
+	TComplex g[ntheta][nstepr];
+	double Q[ntheta];	double Qx;	double Qy;
 	int mult, ntrk;
         double phi[10000], eta[10000], pt[10000];
         TFile *infile = TFile::Open(filename);
@@ -78,17 +78,15 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
         for(int ievt=0; ievt<nevent; ievt++){
                 t->GetEntry(ievt);
 	//	if(ievt%10000==0) cout<<"has processed "<<ievt<<" events"<<endl;
-		for(int iptbin=0; iptbin<nptV;iptbin++){
 			for(int itheta=0;itheta<ntheta;itheta++){
-       			Q[iptbin][itheta]=0;
+       			Q[itheta]=0;
                 	for(int ir=0; ir<nstepr; ir++)
                 		if(way==0)
-                        		g[iptbin][itheta][ir]=1.;
+                        		g[itheta][ir]=1.;
                         	else
-                        		g[iptbin][itheta][ir]=0.;
+                        		g[itheta][ir]=0.;
 	        	}
-			Qx[iptbin]=0,Qy[iptbin]=0;
-		}
+			Qx=0,Qy=0;
 
 		int nTracks = ntrk;	int xbin=-1;
 		for(int j=0;j<nbin;j++)
@@ -99,37 +97,30 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
 		for(int imult=0;imult<mult;imult++){
 			if(eta[imult]<-2.40||eta[imult]>2.40) continue;
                         if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection
-			int ipt=-1;
-			for(int iptbin=0;iptbin<nptV; iptbin++){
-                        	if(pt[imult]>ptbinV[iptbin] && pt[imult]<=ptbinV[iptbin+1])
-                        		ipt = iptbin;
-                        }
-			if(ipt<0 || ipt==nptV)	continue;
-                        totpt[xbin][ipt]+=pt[imult];
-                        totmult[xbin][ipt]++;
-			Qx[ipt]+=1.*cos(nn*phi[imult]);
-			Qy[ipt]+=1.*sin(nn*phi[imult]);
+			Qx+=1.*cos(nn*phi[imult]);
+			Qy+=1.*sin(nn*phi[imult]);
 			for(int itheta=0;itheta<ntheta;itheta++){
                         	double temp=TMath::Cos(nn*(phi[imult]-theta[itheta]));
 				for(int ir=0; ir<nstepr; ir++)
-	                           if(way==0)
-					g[ipt][itheta][ir]*=TComplex(1.,r[xbin][ir]*temp);
+	                           if(way==0){
+					g[itheta][ir]*=TComplex(1.,r[xbin][ir]*temp);
+                                   }
                 	        //   else 
 				//	g[itheta][0]+=temp;
                 	}
+                        totptall[xbin]+=pt[imult];
+                        totetaall[xbin]+=eta[imult];
 			totmultall[xbin]++;
 		}
-		for(int iptbin=0; iptbin<nptV;iptbin++){
-			Qx1[xbin][iptbin]+=Qx[iptbin];	Qy1[xbin][iptbin]+=Qy[iptbin];
-			Qx2[xbin][iptbin]+=Qx[iptbin]*Qx[iptbin];	Qy2[xbin][iptbin]+=Qy[iptbin]*Qy[iptbin];
+			Qx1[xbin]+=Qx;	Qy1[xbin]+=Qy;
+			Qx2[xbin]+=Qx*Qx;	Qy2[xbin]+=Qy*Qy;
 			for(int itheta=0;itheta<ntheta;itheta++){
-				Q[iptbin][itheta]=Qx[iptbin]*TMath::Cos(nn*theta[itheta])+Qy[iptbin]*TMath::Sin(nn*theta[itheta]);
+				Q[itheta]=Qx*TMath::Cos(nn*theta[itheta])+Qy*TMath::Sin(nn*theta[itheta]);
 				for(int ir=0; ir<nstepr; ir++){
-					if(way!=0)	g[iptbin][itheta][ir]=TComplex::Exp(TComplex(0,r[xbin][ir]*Q[iptbin][itheta]));//g[itheta][0]
-					GRe[xbin][iptbin][itheta][ir]+=g[iptbin][itheta][ir].Re();
-					GIm[xbin][iptbin][itheta][ir]+=g[iptbin][itheta][ir].Im();
+					if(way!=0)	g[itheta][ir]=TComplex::Exp(TComplex(0,r[xbin][ir]*Q[itheta]));//g[itheta][0]
+					GRe[xbin][itheta][ir]+=g[itheta][ir].Re();
+					GIm[xbin][itheta][ir]+=g[itheta][ir].Im();
 				}
-			}
 		}
 
 		Nevent[xbin]++;
@@ -139,16 +130,15 @@ LYZ::calcV(int way)	//way=0: Prod way=1: Sum
 
 
 void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
-	TComplex g0[ntheta], dDsum[ntheta], dNsum[ntheta][nptv];
-	TVectorD* r0res[nbin]; 
+	TComplex g0[ntheta], dDsum[ntheta], dNsum[ntheta][nvv];
+	TVectorD *r0res[nbin]; 
 	//TVectorD* Vres[nbin]; TVectorD* chires[nbin];
 	TFile *fres = TFile::Open(res);
-	int xpt=0;
 	for(int ibin=0;ibin<nbin;ibin++){
 		if(isample>=0)
-                	r0res[ibin] = (TVectorD*)fres->Get(Form("s_%d/D_%d/D_%d/r0",isample,ibin,xpt));
+                	r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/s_%d/r0",ibin,isample));
                 else
-			r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/D_%d/r0",ibin,xpt));
+			r0res[ibin] = (TVectorD*)fres->Get(Form("D_%d/r0",ibin));
 	}
 		
         int mult, ntrk;
@@ -161,14 +151,15 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
         t->SetBranchAddress("phi",phi);
         t->SetBranchAddress("eta",eta); 
         int nevent = t->GetEntries();
-	
+
+
 	for(int ievt=0; ievt<nevent; ievt++){
 		t->GetEntry(ievt);
 	//	if(ievt%100==0) cout<<"has processed "<<ievt<<" events"<<endl;
 		
-		for(int iptbin=0; iptbin<nptv;iptbin++)
+		for(int ivbin=0; ivbin<nvv;ivbin++)
                         for(int itheta=0;itheta<ntheta;itheta++)
-                        dNsum[itheta][iptbin]=0.;
+                        dNsum[itheta][ivbin]=0.;
                 for(int itheta=0;itheta<ntheta;itheta++){
                         if(way==0)
 				g0[itheta]=1.;
@@ -185,14 +176,17 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 		for(int imult=0;imult<mult;imult++){
 			if(eta[imult]<-2.40||eta[imult]>2.40) continue;
 			if(pt[imult]<ptmin||pt[imult]>ptmax) continue; //event selection	
-			int ipt=-1;
-			for(int iptbin=0;iptbin<nptv; iptbin++){
-                                if(pt[imult]>ptbinv[iptbin] && pt[imult]<=ptbinv[iptbin+1])
-                                ipt = iptbin;
+			int xv=-1;
+			for(int ivbin=0;ivbin<nvv; ivbin++){
+                            if(ispt && pt[imult]>binv[ivbin] && pt[imult]<=binv[ivbin+1])
+                                xv = ivbin;
+                            if((!ispt) && eta[imult]>binv[ivbin] && eta[imult]<=binv[ivbin+1])
+                                xv = ivbin;
                         }
-			if(ipt<0 || ipt==nptv)	continue;
-			totpt[xbin][ipt]+=pt[imult];
-                        totmult[xbin][ipt]++;
+			if(xv<0 || xv==nvv)	continue;
+			totptv[xbin][xv]+=pt[imult];
+			totetav[xbin][xv]+=eta[imult];
+                        totmultv[xbin][xv]++;
 			for(int itheta=0;itheta<ntheta;itheta++){
                                 Double_t temp=TMath::Cos(nn*(phi[imult]-theta[itheta]));
 				TComplex temp1(1.,(*r0res[xbin])[itheta]*temp);
@@ -201,7 +195,7 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
                                 else 
 					g0[itheta]+=temp;
                                 dDsum[itheta]+=temp/temp1;
-                                dNsum[itheta][ipt]+=TMath::Cos(mm*nn*(phi[imult]-theta[itheta]))/temp1;
+                                dNsum[itheta][xv]+=TMath::Cos(mm*nn*(phi[imult]-theta[itheta]))/temp1;
 			}
 		totmultall[xbin]++;
 		}
@@ -209,9 +203,9 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 		for(int itheta=0;itheta<ntheta;itheta++){
 			dDRe[xbin][itheta]+=(g0[itheta]*dDsum[itheta]).Re();
 			dDIm[xbin][itheta]+=(g0[itheta]*dDsum[itheta]).Im();
-			for(int iptbin=0;iptbin<nptv; iptbin++){
-				dNRe[xbin][itheta][iptbin]+=(g0[itheta]*dNsum[itheta][iptbin]).Re();
-				dNIm[xbin][itheta][iptbin]+=(g0[itheta]*dNsum[itheta][iptbin]).Im();
+			for(int ivbin=0;ivbin<nvv; ivbin++){
+				dNRe[xbin][itheta][ivbin]+=(g0[itheta]*dNsum[itheta][ivbin]).Re();
+				dNIm[xbin][itheta][ivbin]+=(g0[itheta]*dNsum[itheta][ivbin]).Im();
                 	}
 		}
 	Nevent[xbin]++;
@@ -221,49 +215,47 @@ void LYZ::calcv(TString res, int way, int isample){	//way=0: product way=1: sum
 }
 
 
-
 // ------------ method called once each job just before starting event loop  ------------
 void 
-LYZ::beginJob()
+LYZ::beginJob(int ispt_)
 {
   double Vmax[nbin], eps[nbin];
-for(int ibin=0; ibin<nbin ;ibin++){
+  for(int ibin=0; ibin<nbin ;ibin++){
         Vmax[ibin]=0.065*(trkbin[ibin]+30);
         eps[ibin]=0.00025*(trkbin[ibin]+30);
-}
+  }
+    ispt = ispt_;
+    if(ispt_){             nvv = nptv;       binv = ptbinv;}
+    else{             nvv = netav;          binv = etabinv;}
 
-	Nevent.ResizeTo(nbin);	totmultall.ResizeTo(nbin), tottrk.ResizeTo(nbin);;	
-	Nevent.Zero();	totmultall.Zero(),	tottrk.Zero();
+	Nevent.ResizeTo(nbin);	totmultall.ResizeTo(nbin), tottrk.ResizeTo(nbin), totptall.ResizeTo(nbin), totetaall.ResizeTo(nbin);
+		Qx1.ResizeTo(nbin);	Qy1.ResizeTo(nbin);	Q2.ResizeTo(nbin);
+	Nevent.Zero();	totmultall.Zero(),	tottrk.Zero(); totptall.Zero(); totetaall.Zero();
+		Qx1.Zero();	Qy1.Zero();	Q2.Zero();
 	for(int ibin=0; ibin<nbin; ibin++){
-		for(int iptbin=0;iptbin<nptV; iptbin++){
-        		Qx2[ibin][iptbin]=0;  Qy2[ibin][iptbin]=0;
-		}
+        		Qx2[ibin]=0;  Qy2[ibin]=0;
 	}
 
         	for(int itheta=0;itheta<ntheta;itheta++){
                		theta[itheta]=itheta*TMath::Pi()/ntheta/nn;
 			for(int ibin=0; ibin<nbin; ibin++){
-				for(int iptbin=0;iptbin<nptV; iptbin++){
-					GRe[ibin][iptbin][itheta].ResizeTo(nstepr); 	GRe[ibin][iptbin][itheta].Zero();
-					GIm[ibin][iptbin][itheta].ResizeTo(nstepr);	GIm[ibin][iptbin][itheta].Zero();
+					GRe[ibin][itheta].ResizeTo(nstepr); 	GRe[ibin][itheta].Zero();
+					GIm[ibin][itheta].ResizeTo(nstepr);	GIm[ibin][itheta].Zero();
 				}
-        		}
 		}
 	
 	for(int ibin=0; ibin<nbin; ibin++){
-        	for(int ir=0; ir<nstepr; ir++)
-                if(isSimple==0)	r[ibin][ir]=j01/(Vmax[ibin]-eps[ibin]*ir);
-        	else	r[ibin][ir]=0.00025*20*(ir+1);
-		Qx1[ibin].ResizeTo(nptV);	Qy1[ibin].ResizeTo(nptV);	Q2[ibin].ResizeTo(nptV);
-		Qx1[ibin].Zero();	Qy1[ibin].Zero();	Q2[ibin].Zero();
-                totmult[ibin].ResizeTo(nptv);	totmult[ibin].Zero();  
-                totpt[ibin].ResizeTo(nptv);	totpt[ibin].Zero();  
+        	    for(int ir=0; ir<nstepr; ir++)
+                        if(isSimple==0)	r[ibin][ir]=j01/(Vmax[ibin]-eps[ibin]*ir);
+                	else	r[ibin][ir]=0.00025*20*(ir+1);
+                totmultv[ibin].ResizeTo(nvv);	totmultv[ibin].Zero();  
+                totptv[ibin].ResizeTo(nvv);	totptv[ibin].Zero();  
+                totetav[ibin].ResizeTo(nvv);	totetav[ibin].Zero();  
 		dDRe[ibin].ResizeTo(ntheta);	dDRe[ibin].Zero();
 		dDIm[ibin].ResizeTo(ntheta);	dDIm[ibin].Zero();
                 for(int itheta=0;itheta<ntheta;itheta++){
-                dNRe[ibin][itheta].ResizeTo(nptv);	dNRe[ibin][itheta].Zero();
-                dNIm[ibin][itheta].ResizeTo(nptv);	dNIm[ibin][itheta].Zero();
-              
+                    dNRe[ibin][itheta].ResizeTo(nvv);	dNRe[ibin][itheta].Zero();
+                    dNIm[ibin][itheta].ResizeTo(nvv);	dNIm[ibin][itheta].Zero();
                 }
         }
 }
@@ -274,64 +266,55 @@ LYZ::endJobV(TString outstr)
 {
         
 //fstrGRe, fstrGIm
-	ofstream fstrQx1, fstrQy1, fstrQ2, fstrmult;
+//	ofstream fstrQx1, fstrQy1, fstrQ2, fstrmult;
 
 //        fstrGRe.open("GRe.txt",std::ios::app);
 //        fstrGIm.open("GIm.txt",std::ios::app);
-        fstrQx1.open("Qx1.txt",std::ios::app);
-        fstrQy1.open("Qy1.txt",std::ios::app);
-        fstrQ2.open("Q2.txt",std::ios::app);
-        fstrmult.open("mult.txt",std::ios::app);
+//        fstrQx1.open("Qx1.txt",std::ios::app);
+//        fstrQy1.open("Qy1.txt",std::ios::app);
+ //       fstrQ2.open("Q2.txt",std::ios::app);
+ //       fstrmult.open("mult.txt",std::ios::app);
 
 	for(int ibin=0; ibin<nbin; ibin++){
-			fstrmult<<Nevent[ibin]<<"\t";
-        		fstrmult<<totmultall[ibin]<<"\t";
-			fstrmult<<tottrk[ibin]<<std::endl;
-		for(int iptbin=0;iptbin<nptV; iptbin++){
-			Q2[ibin][iptbin]+=Qx2[ibin][iptbin]+Qy2[ibin][iptbin];
+//			fstrmult<<Nevent[ibin]<<"\t";
+//        		fstrmult<<totmultall[ibin]<<"\t";
+//			fstrmult<<tottrk[ibin]<<std::endl;
+			Q2[ibin]+=Qx2[ibin]+Qy2[ibin];
                 	for(int ir=0; ir<nstepr; ir++){
                         	for(int itheta=0;itheta<ntheta;itheta++){
- //                               	fstrGRe<<GRe[ibin][iptbin][itheta][ir]<<"\t";
-  //                              	fstrGIm<<GIm[ibin][iptbin][itheta][ir]<<"\t";
+ //                               	fstrGRe<<GRe[ibin][itheta][ir]<<"\t";
+  //                              	fstrGIm<<GIm[ibin][itheta][ir]<<"\t";
 				}
   //                      	fstrGRe<<std::endl;
   //                      	fstrGIm<<std::endl;
                 	}
  //               	fstrGRe<<std::endl<<std::endl;
  //               	fstrGIm<<std::endl<<std::endl;
-                	fstrQx1<<Qx1[ibin][iptbin]<<"\t";
-                	fstrQy1<<Qy1[ibin][iptbin]<<"\t";
-                	fstrQ2<<Qx2[ibin][iptbin]+Qy2[ibin][iptbin]<<"\t";
-		}       
-//                fstrGRe<<std::endl<<std::endl;
-//               fstrGIm<<std::endl<<std::endl;
-                fstrQx1<<std::endl;
-                fstrQy1<<std::endl;
-                fstrQ2<<std::endl;
+ //               	fstrQx1<<Qx1[ibin]<<"\t";
+ //               	fstrQy1<<Qy1[ibin]<<"\t";
+ //               	fstrQ2<<Qx2[ibin]+Qy2[ibin]<<"\t";
         }
-	fstrmult.close();
+//	fstrmult.close();
 //        fstrGRe.close();
 //        fstrGIm.close();
-        fstrQx1.close();
-        fstrQy1.close();
-        fstrQ2.close();
+ //       fstrQx1.close();
+//        fstrQy1.close();
+//        fstrQ2.close();
 	TFile *fs = new TFile(outstr,"Recreate");
 	fs->cd();
 	Nevent.Write("Nevent");
 	totmultall.Write("totmultall");
+	totptall.Write("totptall");
+	totetaall.Write("totetaall");
 	tottrk.Write("tottrk");
+	Qx1.Write("Qx1");
+	Qy1.Write("Qy1");
+	Q2.Write("Q2");
 	for(int ibin=0; ibin<nbin; ibin++){
-		for(int iptbin=0;iptbin<nptV; iptbin++){
         		for(int itheta=0;itheta<ntheta;itheta++){
-				GRe[ibin][iptbin][itheta].Write(Form("GRe_%d_%d_%d",ibin,iptbin,itheta));
-				GIm[ibin][iptbin][itheta].Write(Form("GIm_%d_%d_%d",ibin,iptbin,itheta));
-			}
+				GRe[ibin][itheta].Write(Form("GRe_%d_%d",ibin,itheta));
+				GIm[ibin][itheta].Write(Form("GIm_%d_%d",ibin,itheta));
 		}
-	Qx1[ibin].Write(Form("Qx1_%d",ibin));
-	Qy1[ibin].Write(Form("Qy1_%d",ibin));
-	Q2[ibin].Write(Form("Q2_%d",ibin));
-	totpt[ibin].Write(Form("totpt_%d",ibin));
-	totmult[ibin].Write(Form("totmult_%d",ibin));
 	}
 	fs->Close();
 }
@@ -341,37 +324,37 @@ void LYZ::endJobv(TString outstr){
    using namespace std;
 
         ofstream fstrdNRe, fstrdNIm, fstrdDRe, fstrdDIm, fstrmult;
-        fstrdNRe.open("dNRe.txt",ios::app);
-        fstrdNIm.open("dNIm.txt",ios::app);
-        fstrdDRe.open("dDRe.txt",ios::app);
-        fstrdDIm.open("dDIm.txt",ios::app);
-        fstrmult.open("mult_.txt",ios::app);
+//        fstrdNRe.open("dNRe.txt",ios::app);
+//        fstrdNIm.open("dNIm.txt",ios::app);
+ //       fstrdDRe.open("dDRe.txt",ios::app);
+//        fstrdDIm.open("dDIm.txt",ios::app);
+//        fstrmult.open("mult_.txt",ios::app);
 
 
 	for(int ibin=0;ibin<nbin;ibin++){
-        	fstrmult<<Nevent[ibin]<<endl;
-        	for(int iptbin=0;iptbin<nptv; iptbin++){
-                	fstrmult<<(double)totmult[ibin][iptbin]/Nevent[ibin]<<"\t";
-                	fstrmult<<(double)totpt[ibin][iptbin]/totmult[ibin][iptbin]<<"\t";
+  //      	fstrmult<<Nevent[ibin]<<endl;
+        	for(int ivbin=0;ivbin<nvv; ivbin++){
+   //             	fstrmult<<(double)totmultv[ibin][ivbin]/Nevent[ibin]<<"\t";
+    //            	fstrmult<<(double)totptv[ibin][ivbin]/totmultv[ibin][ivbin]<<"\t";
 		}
         	for(int itheta=0;itheta<ntheta;itheta++){
-                	for(int iptbin=0;iptbin<nptv; iptbin++){
-                        	fstrdNRe<<dNRe[ibin][itheta][iptbin]<<"\t";
-                        	fstrdNIm<<dNIm[ibin][itheta][iptbin]<<"\t";
+                	for(int ivbin=0;ivbin<nvv; ivbin++){
+//                        	fstrdNRe<<dNRe[ibin][itheta][ivbin]<<"\t";
+ //                       	fstrdNIm<<dNIm[ibin][itheta][ivbin]<<"\t";
 			}
-                	fstrdNRe<<endl;
-                	fstrdNIm<<endl;
-                	fstrdDRe<<dDRe[ibin][itheta]<<"\t";
-                	fstrdDIm<<dDIm[ibin][itheta]<<"\t";
+  //              	fstrdNRe<<endl;
+   //             	fstrdNIm<<endl;
+//                	fstrdDRe<<dDRe[ibin][itheta]<<"\t";
+ //               	fstrdDIm<<dDIm[ibin][itheta]<<"\t";
         	}
-        	fstrmult<<tottrk[ibin]<<endl;
-        	fstrmult<<endl<<totmultall[ibin]<<endl;
+  //      	fstrmult<<tottrk[ibin]<<endl;
+  //      	fstrmult<<endl<<totmultall[ibin]<<endl;
 	}	
-        fstrmult<<endl;
-        fstrdNRe<<endl;
-        fstrdNIm<<endl;
-        fstrdDRe<<endl;
-        fstrdDIm<<endl;
+   //     fstrmult<<endl;
+    //    fstrdNRe<<endl;
+ //       fstrdNIm<<endl;
+ //       fstrdDRe<<endl;
+ //       fstrdDIm<<endl;
 	
 	TFile *fs = new TFile(outstr,"Recreate");
 	fs->cd();
@@ -386,8 +369,9 @@ void LYZ::endJobv(TString outstr){
                         dNRe[ibin][itheta].Write(Form("dNRe_%d_%d",ibin,itheta));
                         dNIm[ibin][itheta].Write(Form("dNIm_%d_%d",ibin,itheta));
                 }
-		totmult[ibin].Write(Form("totmult_%d",ibin));
-		totpt[ibin].Write(Form("totpt_%d",ibin));
+		totmultv[ibin].Write(Form("totmult_%d",ibin));
+		totptv[ibin].Write(Form("totpt_%d",ibin));
+		totetav[ibin].Write(Form("toteta_%d",ibin));
         }
 	fs->Close();
 

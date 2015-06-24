@@ -7,7 +7,7 @@ void Plot2DCorrelation(){
   Int_t nFlagSaveFIGs = 0;
   TFile *f = new TFile("Anav3_merged1.root");
 
-  TH2D *hCorrelation = (TH2D*) f->Get("D_0/hr");
+  TH2D *hCorrelation = (TH2D*) f->Get("D_0/hr_sym");
 
    TCanvas *c = new TCanvas("c", "",10,73,530,500);
    gStyle->SetOptStat(0);

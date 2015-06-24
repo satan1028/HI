@@ -79,7 +79,7 @@ void ridge::beginJob(){
   tottrk.ResizeTo(nbin); tottrk.Zero();
   t = new treeInt(Form("%s",filename.Data()));
   t->Setup();
-  nEvents = 20000;t->GetEntries();
+  nEvents = 10000;//t->GetEntries();
     for(Int_t i=0;i<nEvents;i++){
   //      if(i%10000==0) cout<<"has processed "<<i<<"begin events"<<endl;
         t->GetEntry(i);

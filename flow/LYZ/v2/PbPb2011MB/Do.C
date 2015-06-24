@@ -25,13 +25,10 @@ void dofirst(){
 
 void dosecond(){
 	string SumorProd=getenv("SUMORPROD");
-      //  int start=atoi(getenv("BEGIN"));
-      //  int end=atoi(getenv("END"));
+        int start=atoi(getenv("BEGIN"));
+        int end=atoi(getenv("END"));
         TString name;
-        int temp[9]={160,200,220,240,260,280,300,340,360};
-      //  for(int i=start;i<end;i++){
-            for(int j=0;j<9;j++){
-                i=temp[j];
+        for(int i=start;i<end;i++){
                 if(SumorProd=="Sum")       name=Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/Anav_Prod_%d.root",i);
                 else            name=Form("/scratch/xuq7/flow/pbsjoboutput/PbPb2011MB/Anav_Prod2_%d.root",i);
                 remove(name.Data());

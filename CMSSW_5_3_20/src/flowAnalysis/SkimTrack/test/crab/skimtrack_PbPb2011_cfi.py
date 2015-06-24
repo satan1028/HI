@@ -67,7 +67,7 @@ process.source = cms.Source('PoolSource',
 
 # histogram output
 process.TFileService = cms.Service("TFileService",
-                                  fileName = cms.string("skimTreeTrack_414.root"))
+                                  fileName = cms.string("skimTreeTrack.root"))
 
 process.demo = cms.EDAnalyzer('SkimTrack',
    srcTrack = cms.untracked.InputTag("generalTracks"),

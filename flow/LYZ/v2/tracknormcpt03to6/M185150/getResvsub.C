@@ -117,7 +117,7 @@ void getResvsub(int ispt=1){
 
         for(int ifile=0; ifile<nFileAll; ifile++){
             if(ispt){
-	        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod__%d.root",mdir.c_str(),ifile));
+	        if(SumorProd=="Sum") f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod_%d.root",mdir.c_str(),ifile));
 	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/tracknormcpt03to6/%s/Anav_Prod2_%d.root",mdir.c_str(),ifile));
             }
             else{
