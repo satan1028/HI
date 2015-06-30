@@ -28,7 +28,7 @@ for(int i=0;i<nDil;i++)
   c1->SetTicks(-1);
 
 	N=N-1;
- TString str="Npart";
+ TString str="Ncoll";
  TH1D* hist = new TH1D("","",N,0,N);
  hist->GetXaxis()->SetNdivisions(502);
 if(method==0)
@@ -156,7 +156,9 @@ c1->SaveAs(Form("%sGri.pdf",str.Data()));
   c2->SetTicks(-1);
 c2->cd();
 TGraphErrors* fdvf1 = (TGraphErrors*)graph->Clone("fdvf1");
+TGraphErrors* f1dvDil = (TGraphErrors*)graph->Clone("f1dvDil");
 TGraphErrors* fdvDil = (TGraphErrors*)graph->Clone("fdvDil");
+TGraphErrors* Dilsys = (TGraphErrors*)graph->Clone("Dilsys");
 for(int ip = 0;ip<fdvf1->GetN();ip++){
     double x = graph->GetX()[ip];
     double ey = graph->GetEY()[ip];
@@ -172,11 +174,27 @@ for(int ip = 0;ip<fdvf1->GetN();ip++){
         fdvf1->SetPointError(ip,0,y/y1*sqrt((ey/y)**2+(ey1/y1)**2));
         if(str=="Ncoll"){
         fdvDil->SetPoint(ip,x,y/yNcoll);
-        fdvDil->SetPointError(ip,0,y/yNcoll*sqrt((ey/y)**2+(eyNcoll/yNcoll)**2));
+        //double yerr = y/yNcoll*sqrt((ey/y)**2+(eyNcoll/yNcoll)**2);
+        double yerr = 0;
+        fdvDil->SetPointError(ip,0,yerr);
+        f1dvDil->SetPoint(ip,x,y1/yNcoll);
+        //double y1err = y1/yNcoll*sqrt((ey1/y1)**2+(eyNcoll/yNcoll)**2);
+        double y1err = 0;
+        f1dvDil->SetPointError(ip,0,y1err);
+        Dilsys->SetPoint(ip,x,1.);
+        Dilsys->SetPointError(ip,0,TMath::Max(fabs(y1/yNcoll-1),fabs(y/yNcoll-1)));
         }
         else if(str=="Npart"){
         fdvDil->SetPoint(ip,x,y/yNpart);
-        fdvDil->SetPointError(ip,0,y/yNpart*sqrt((ey/y)**2+(eyNpart/yNpart)**2));
+        //double yerr = y/yNpart*sqrt((ey/y)**2+(eyNcoll/yNpart)**2);
+        double yerr = 0;
+        fdvDil->SetPointError(ip,0,yerr);
+        f1dvDil->SetPoint(ip,x,y1/yNpart);
+        //double y1err = y1/yNpart*sqrt((ey1/y1)**2+(eyNcoll/yNcoll)**2);
+        double yerr = 0;
+        f1dvDil->SetPointError(ip,0,y1err);
+        Dilsys->SetPoint(ip,x,1.);
+        Dilsys->SetPointError(ip,0,TMath::Max(fabs(y1/yNpart-1),fabs(y/yNpart-1)));
         }
 }
 }
@@ -189,13 +207,21 @@ fdvf1->SetMarkerColor(1);
 fdvf1->SetLineColor(1);
 fdvf1->SetLineWidth(2);
 fdvf1->SetMarkerSize(1.4);
-fdvf1->Draw("Psameez");
-fdvDil->SetMarkerStyle(24);
-fdvDil->SetMarkerColor(2);
-fdvDil->SetLineColor(2);
+//fdvf1->Draw("Psameez");
+f1dvDil->SetMarkerStyle(24);
+f1dvDil->SetMarkerColor(2);
+f1dvDil->SetLineColor(2);
+f1dvDil->SetLineWidth(2);
+f1dvDil->SetMarkerSize(1.4);
+fdvDil->SetMarkerStyle(20);
+fdvDil->SetMarkerColor(4);
+fdvDil->SetLineColor(4);
 fdvDil->SetLineWidth(2);
 fdvDil->SetMarkerSize(1.4);
+Dilsys->SetFillColor(kYellow+2);
+Dilsys->Draw("e3same");
 fdvDil->Draw("Psameez");
+f1dvDil->Draw("Psameez");
 tex1->Draw();
 TLine *l = new TLine(0,1,N,1);
 l->SetLineStyle(2);
@@ -206,8 +232,9 @@ TLegend *leg1 = new TLegend(0.18,0.72,0.50,0.86);
     leg1->SetBorderSize(0);
     leg1->SetTextFont(42);
     leg1->SetTextSize(0.04);
-    leg1->AddEntry(fdvf1,"Ancestor fitting/One Comp fitting","p");
-    leg1->AddEntry(fdvDil,"Ancestor fitting/Run I fitting","p");
+    //leg1->AddEntry(fdvf1,"Ancestor fitting/One Comp fitting","p");
+    leg1->AddEntry(f1dvDil,"One Component fitting/Run I fitting","p");
+    leg1->AddEntry(fdvDil,"Two Component fitting/Run I fitting","p");
     double y = gPad->GetUymin()+0.5;
    for (int i=0;i<N;i++) {
       double x = hist->GetXaxis()->GetBinCenter(i+1);
