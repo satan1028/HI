@@ -159,6 +159,7 @@ TGraphErrors* fdvf1 = (TGraphErrors*)graph->Clone("fdvf1");
 TGraphErrors* f1dvDil = (TGraphErrors*)graph->Clone("f1dvDil");
 TGraphErrors* fdvDil = (TGraphErrors*)graph->Clone("fdvDil");
 TGraphErrors* Dilsys = (TGraphErrors*)graph->Clone("Dilsys");
+TGraphErrors* Dilsys2 = (TGraphErrors*)graph->Clone("Dilsys2");
 for(int ip = 0;ip<fdvf1->GetN();ip++){
     double x = graph->GetX()[ip];
     double ey = graph->GetEY()[ip];
@@ -174,27 +175,27 @@ for(int ip = 0;ip<fdvf1->GetN();ip++){
         fdvf1->SetPointError(ip,0,y/y1*sqrt((ey/y)**2+(ey1/y1)**2));
         if(str=="Ncoll"){
         fdvDil->SetPoint(ip,x,y/yNcoll);
-        //double yerr = y/yNcoll*sqrt((ey/y)**2+(eyNcoll/yNcoll)**2);
-        double yerr = 0;
-        fdvDil->SetPointError(ip,0,yerr);
+        double yerr = y/yNcoll*sqrt((ey/y)**2+(eyNcoll/yNcoll)**2);
+        fdvDil->SetPointError(ip,0,0);
         f1dvDil->SetPoint(ip,x,y1/yNcoll);
-        //double y1err = y1/yNcoll*sqrt((ey1/y1)**2+(eyNcoll/yNcoll)**2);
-        double y1err = 0;
-        f1dvDil->SetPointError(ip,0,y1err);
+        double y1err = y1/yNcoll*sqrt((ey1/y1)**2+(eyNcoll/yNcoll)**2);
+        f1dvDil->SetPointError(ip,0,0);
         Dilsys->SetPoint(ip,x,1.);
         Dilsys->SetPointError(ip,0,TMath::Max(fabs(y1/yNcoll-1),fabs(y/yNcoll-1)));
+        Dilsys2->SetPoint(ip,x,1.);
+        Dilsys2->SetPointError(ip,0,TMath::Max(yerr,y1err));
         }
         else if(str=="Npart"){
         fdvDil->SetPoint(ip,x,y/yNpart);
-        //double yerr = y/yNpart*sqrt((ey/y)**2+(eyNcoll/yNpart)**2);
-        double yerr = 0;
-        fdvDil->SetPointError(ip,0,yerr);
+        double yerr = y/yNpart*sqrt((ey/y)**2+(eyNcoll/yNpart)**2);
+        fdvDil->SetPointError(ip,0,0);
         f1dvDil->SetPoint(ip,x,y1/yNpart);
-        //double y1err = y1/yNpart*sqrt((ey1/y1)**2+(eyNcoll/yNcoll)**2);
-        double yerr = 0;
-        f1dvDil->SetPointError(ip,0,y1err);
+        double y1err = y1/yNpart*sqrt((ey1/y1)**2+(eyNcoll/yNcoll)**2);
+        f1dvDil->SetPointError(ip,0,0);
         Dilsys->SetPoint(ip,x,1.);
         Dilsys->SetPointError(ip,0,TMath::Max(fabs(y1/yNpart-1),fabs(y/yNpart-1)));
+        Dilsys2->SetPoint(ip,x,1.);
+        Dilsys2->SetPointError(ip,0,TMath::Max(yerr,y1err));
         }
 }
 }
@@ -219,6 +220,8 @@ fdvDil->SetLineColor(4);
 fdvDil->SetLineWidth(2);
 fdvDil->SetMarkerSize(1.4);
 Dilsys->SetFillColor(kYellow+2);
+Dilsys2->SetFillColor(kYellow+1);
+Dilsys2->Draw("e3same");
 Dilsys->Draw("e3same");
 fdvDil->Draw("Psameez");
 f1dvDil->Draw("Psameez");
@@ -227,7 +230,7 @@ TLine *l = new TLine(0,1,N,1);
 l->SetLineStyle(2);
 l->SetLineWidth(3);
 l->Draw("same");
-TLegend *leg1 = new TLegend(0.18,0.72,0.50,0.86);
+TLegend *leg1 = new TLegend(0.48,0.72,0.80,0.86);
     leg1->SetFillColor(10);
     leg1->SetBorderSize(0);
     leg1->SetTextFont(42);
@@ -235,6 +238,8 @@ TLegend *leg1 = new TLegend(0.18,0.72,0.50,0.86);
     //leg1->AddEntry(fdvf1,"Ancestor fitting/One Comp fitting","p");
     leg1->AddEntry(f1dvDil,"One Component fitting/Run I fitting","p");
     leg1->AddEntry(fdvDil,"Two Component fitting/Run I fitting","p");
+    leg1->AddEntry(Dilsys,"RunI fitting systematics","f");
+    leg1->AddEntry(Dilsys2,"RunI fitting ratio systematics","f");
     double y = gPad->GetUymin()+0.5;
    for (int i=0;i<N;i++) {
       double x = hist->GetXaxis()->GetBinCenter(i+1);
