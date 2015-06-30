@@ -21,7 +21,7 @@ cd /home/xuq7/HI/flow/LYZ/v2/trackzvtxl/PbPb2011MB
 root -l -b <<EOF
 .L LYZ.C+
 .L Do.C
-dofirst()
+dothird()
 EOF
 #dosecond()
 #root -l -b dosecond.C

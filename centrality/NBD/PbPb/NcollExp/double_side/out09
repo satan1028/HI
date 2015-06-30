@@ -1,0 +1,819 @@
+2973568
+jobsub.slurm
+vmp452
+**** Following environment variables are going to be unset.
+       XDAQ_DOCUMENT_ROOT
+       XDAQ_OS
+       G4NEUTRONXS
+       LHAPATH
+       XDAQ_PLATFORM
+       XDAQ_ROOT
+Error in <TF1::GetRandom>: Integral of function is zero
+0		0	0	0.5	-1	1.55452e-316
+Error in <TF1::GetRandom>: Integral of function is zero
+1		0	0	0.6	-1	1.55452e-316
+Error in <TF1::GetRandom>: Integral of function is zero
+2		0	0	0.7	-1	1.55452e-316
+Error in <TF1::GetRandom>: Integral of function is zero
+3		0	0	0.8	-1	1.55452e-316
+Error in <TF1::GetRandom>: Integral of function is zero
+4		0	0	0.9	-1	1.55452e-316
+Error in <TF1::GetRandom>: Integral of function is zero
+5		0	0	1	-1	1.55452e-316
+Error in <TF1::GetRandom>: Integral of function is zero
+6		0	0	1.1	-1	1.55452e-316
+Error in <TF1::GetRandom>: Integral of function is zero
+7		0	0	1.2	-1	1.55452e-316
+Error in <TF1::GetRandom>: Integral of function is zero
+8		0	0	1.3	135158	360
+Error in <TF1::GetRandom>: Integral of function is zero
+9		0	0	1.4	651456	360
+Error in <TF1::GetRandom>: Integral of function is zero
+10		0	0.5	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+11		0	0.5	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+12		0	0.5	0.7	2936.29	360
+Error in <TF1::GetRandom>: Integral of function is zero
+13		0	0.5	0.8	1.78995e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+14		0	0.5	0.9	1.31945e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+15		0	0.5	1	925435	360
+Error in <TF1::GetRandom>: Integral of function is zero
+16		0	0.5	1.1	112807	360
+Error in <TF1::GetRandom>: Integral of function is zero
+17		0	0.5	1.2	341183	360
+Error in <TF1::GetRandom>: Integral of function is zero
+18		0	0.5	1.3	135158	360
+Error in <TF1::GetRandom>: Integral of function is zero
+19		0	0.5	1.4	670905	360
+Error in <TF1::GetRandom>: Integral of function is zero
+20		0	1	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+21		0	1	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+22		0	1	0.7	2936.29	360
+Error in <TF1::GetRandom>: Integral of function is zero
+23		0	1	0.8	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+24		0	1	0.9	1.31945e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+25		0	1	1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+26		0	1	1.1	602122	360
+Error in <TF1::GetRandom>: Integral of function is zero
+27		0	1	1.2	341183	360
+Error in <TF1::GetRandom>: Integral of function is zero
+28		0	1	1.3	918124	360
+Error in <TF1::GetRandom>: Integral of function is zero
+29		0	1	1.4	651456	360
+Error in <TF1::GetRandom>: Integral of function is zero
+30		0	1.5	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+31		0	1.5	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+32		0	1.5	0.7	2936.29	360
+Error in <TF1::GetRandom>: Integral of function is zero
+33		0	1.5	0.8	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+34		0	1.5	0.9	1.31945e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+35		0	1.5	1	925435	360
+Error in <TF1::GetRandom>: Integral of function is zero
+36		0	1.5	1.1	602122	360
+Error in <TF1::GetRandom>: Integral of function is zero
+37		0	1.5	1.2	341183	360
+Error in <TF1::GetRandom>: Integral of function is zero
+38		0	1.5	1.3	135158	360
+Error in <TF1::GetRandom>: Integral of function is zero
+39		0	1.5	1.4	670905	360
+Error in <TF1::GetRandom>: Integral of function is zero
+40		0	2	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+41		0	2	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+42		0	2	0.7	1.98921e+07	360
+Error in <TF1::GetRandom>: Integral of function is zero
+43		0	2	0.8	1.6729e+07	360
+Error in <TF1::GetRandom>: Integral of function is zero
+44		0	2	0.9	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+45		0	2	1	925435	360
+Error in <TF1::GetRandom>: Integral of function is zero
+46		0	2	1.1	112807	360
+Error in <TF1::GetRandom>: Integral of function is zero
+47		0	2	1.2	341183	360
+Error in <TF1::GetRandom>: Integral of function is zero
+48		0	2	1.3	918124	360
+Error in <TF1::GetRandom>: Integral of function is zero
+49		0	2	1.4	651456	360
+Error in <TF1::GetRandom>: Integral of function is zero
+50		0	2.5	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+51		0	2.5	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+52		0	2.5	0.7	2936.29	360
+Error in <TF1::GetRandom>: Integral of function is zero
+53		0	2.5	0.8	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+54		0	2.5	0.9	1.31945e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+55		0	2.5	1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+56		0	2.5	1.1	602122	360
+Error in <TF1::GetRandom>: Integral of function is zero
+57		0	2.5	1.2	341183	360
+Error in <TF1::GetRandom>: Integral of function is zero
+58		0	2.5	1.3	135158	360
+Error in <TF1::GetRandom>: Integral of function is zero
+59		0	2.5	1.4	670905	360
+Error in <TF1::GetRandom>: Integral of function is zero
+60		0	3	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+61		0	3	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+62		0	3	0.7	2936.29	360
+Error in <TF1::GetRandom>: Integral of function is zero
+63		0	3	0.8	1.78995e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+64		0	3	0.9	1.31945e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+65		0	3	1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+66		0	3	1.1	602122	360
+Error in <TF1::GetRandom>: Integral of function is zero
+67		0	3	1.2	341183	360
+Error in <TF1::GetRandom>: Integral of function is zero
+68		0	3	1.3	135158	360
+Error in <TF1::GetRandom>: Integral of function is zero
+69		0	3	1.4	651456	360
+Error in <TF1::GetRandom>: Integral of function is zero
+70		0	3.5	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+71		0	3.5	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+72		0	3.5	0.7	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+73		0	3.5	0.8	1.78995e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+74		0	3.5	0.9	1.31945e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+75		0	3.5	1	925435	360
+Error in <TF1::GetRandom>: Integral of function is zero
+76		0	3.5	1.1	602122	360
+Error in <TF1::GetRandom>: Integral of function is zero
+77		0	3.5	1.2	341183	360
+Error in <TF1::GetRandom>: Integral of function is zero
+78		0	3.5	1.3	918124	360
+Error in <TF1::GetRandom>: Integral of function is zero
+79		0	3.5	1.4	651456	360
+Error in <TF1::GetRandom>: Integral of function is zero
+80		0	4	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+81		0	4	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+82		0	4	0.7	2936.29	360
+Error in <TF1::GetRandom>: Integral of function is zero
+83		0	4	0.8	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+84		0	4	0.9	1.31945e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+85		0	4	1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+86		0	4	1.1	602122	360
+Error in <TF1::GetRandom>: Integral of function is zero
+87		0	4	1.2	1.14005e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+88		0	4	1.3	135158	360
+Error in <TF1::GetRandom>: Integral of function is zero
+89		0	4	1.4	670905	360
+Error in <TF1::GetRandom>: Integral of function is zero
+90		0	4.5	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+91		0	4.5	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+92		0	4.5	0.7	2936.29	360
+Error in <TF1::GetRandom>: Integral of function is zero
+93		0	4.5	0.8	1.78995e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+94		0	4.5	0.9	1.31945e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+95		0	4.5	1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+96		0	4.5	1.1	602122	360
+Error in <TF1::GetRandom>: Integral of function is zero
+97		0	4.5	1.2	341183	360
+Error in <TF1::GetRandom>: Integral of function is zero
+98		0	4.5	1.3	135158	360
+Error in <TF1::GetRandom>: Integral of function is zero
+99		0	4.5	1.4	651456	360
+Error in <TF1::GetRandom>: Integral of function is zero
+100		0	5	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+101		0	5	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+102		0	5	0.7	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+103		0	5	0.8	1.78995e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+104		0	5	0.9	1.31945e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+105		0	5	1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+106		0	5	1.1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+107		0	5	1.2	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+108		0	5	1.3	708922	360
+Error in <TF1::GetRandom>: Integral of function is zero
+109		0	5	1.4	954535	360
+Error in <TF1::GetRandom>: Integral of function is zero
+110		1	0	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+111		1	0	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+112		1	0	0.7	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+113		1	0	0.8	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+114		1	0	0.9	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+115		1	0	1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+116		1	0	1.1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+117		1	0	1.2	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+118		1	0	1.3	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+119		1	0	1.4	-1	360
+120		1	0.5	0.5	2.04388e+06	360
+121		1	0.5	0.6	1.40495e+06	360
+122		1	0.5	0.7	898801	360
+123		1	0.5	0.8	508425	360
+124		1	0.5	0.9	214270	360
+125		1	0.5	1	7926.74	360
+126		1	0.5	1.1	2.88623e+06	360
+127		1	0.5	1.2	2.35532e+06	360
+128		1	0.5	1.3	1.94003e+06	360
+129		1	0.5	1.4	1.54976e+06	360
+130		1	1	0.5	2.17592e+06	360
+131		1	1	0.6	1.49319e+06	360
+132		1	1	0.7	964345	360
+133		1	1	0.8	559178	360
+134		1	1	0.9	253898	360
+135		1	1	1	34388.8	360
+136		1	1	1.1	2.69794e+06	360
+137		1	1	1.2	2.57988e+06	360
+138		1	1	1.3	1.98823e+06	360
+139		1	1	1.4	1.71596e+06	360
+140		1	1.5	0.5	2.2281e+06	360
+141		1	1.5	0.6	1.52782e+06	360
+142		1	1.5	0.7	989990	360
+143		1	1.5	0.8	578947	360
+144		1	1.5	0.9	269403	360
+145		1	1.5	1	45364.3	360
+146		1	1.5	1.1	2.76024e+06	360
+147		1	1.5	1.2	2.61379e+06	360
+148		1	1.5	1.3	1.98582e+06	360
+149		1	1.5	1.4	1.54341e+06	360
+150		1	2	0.5	2.25701e+06	360
+151		1	2	0.6	1.54623e+06	360
+152		1	2	0.7	1.00387e+06	360
+153		1	2	0.8	589442	360
+154		1	2	0.9	277790	360
+155		1	2	1	51198.2	360
+156		1	2	1.1	2.83181e+06	360
+157		1	2	1.2	2.53731e+06	360
+158		1	2	1.3	2.02629e+06	360
+159		1	2	1.4	1.62554e+06	360
+160		1	2.5	0.5	2.27412e+06	360
+161		1	2.5	0.6	1.55782e+06	360
+162		1	2.5	0.7	1.01257e+06	360
+163		1	2.5	0.8	596080	360
+164		1	2.5	0.9	283045	360
+165		1	2.5	1	54947.6	360
+166		1	2.5	1.1	2.70687e+06	360
+167		1	2.5	1.2	2.57415e+06	360
+168		1	2.5	1.3	2.02764e+06	360
+169		1	2.5	1.4	1.71725e+06	360
+170		1	3	0.5	2.28597e+06	360
+171		1	3	0.6	1.56608e+06	360
+172		1	3	0.7	1.01842e+06	360
+173		1	3	0.8	600584	360
+174		1	3	0.9	286585	360
+175		1	3	1	57442.8	360
+176		1	3	1.1	2.63764e+06	360
+177		1	3	1.2	2.54594e+06	360
+178		1	3	1.3	2.04261e+06	360
+179		1	3	1.4	1.74348e+06	360
+180		1	3.5	0.5	2.29484e+06	360
+181		1	3.5	0.6	1.57186e+06	360
+182		1	3.5	0.7	1.02264e+06	360
+183		1	3.5	0.8	603877	360
+184		1	3.5	0.9	289134	360
+185		1	3.5	1	59316.6	360
+186		1	3.5	1.1	2.5847e+06	360
+187		1	3.5	1.2	2.56709e+06	360
+188		1	3.5	1.3	1.94271e+06	360
+189		1	3.5	1.4	1.73268e+06	360
+190		1	4	0.5	2.30178e+06	360
+191		1	4	0.6	1.57673e+06	360
+192		1	4	0.7	1.02592e+06	360
+193		1	4	0.8	606407	360
+194		1	4	0.9	291134	360
+195		1	4	1	60767.1	360
+196		1	4	1.1	2.66629e+06	360
+197		1	4	1.2	2.4586e+06	360
+198		1	4	1.3	2.04974e+06	360
+199		1	4	1.4	1.61455e+06	360
+200		1	4.5	0.5	2.30772e+06	360
+201		1	4.5	0.6	1.58034e+06	360
+202		1	4.5	0.7	1.0286e+06	360
+203		1	4.5	0.8	608377	360
+204		1	4.5	0.9	292735	360
+205		1	4.5	1	61898.2	360
+206		1	4.5	1.1	2.74558e+06	360
+207		1	4.5	1.2	2.56914e+06	360
+208		1	4.5	1.3	2.08881e+06	360
+209		1	4.5	1.4	1.66474e+06	360
+210		1	5	0.5	2.31286e+06	360
+211		1	5	0.6	1.58303e+06	360
+212		1	5	0.7	1.03074e+06	360
+213		1	5	0.8	609973	360
+214		1	5	0.9	294001	360
+215		1	5	1	62776.6	360
+216		1	5	1.1	2.64211e+06	360
+217		1	5	1.2	2.53245e+06	360
+218		1	5	1.3	2.07516e+06	360
+219		1	5	1.4	1.66463e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+220		2	0	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+221		2	0	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+222		2	0	0.7	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+223		2	0	0.8	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+224		2	0	0.9	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+225		2	0	1	925435	360
+Error in <TF1::GetRandom>: Integral of function is zero
+226		2	0	1.1	602122	360
+Error in <TF1::GetRandom>: Integral of function is zero
+227		2	0	1.2	1.14005e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+228		2	0	1.3	918124	360
+Error in <TF1::GetRandom>: Integral of function is zero
+229		2	0	1.4	-1	360
+230		2	0.5	0.5	1.65819e+06	360
+231		2	0.5	0.6	1.08944e+06	360
+232		2	0.5	0.7	640745	360
+233		2	0.5	0.8	301403	360
+234		2	0.5	0.9	57015.9	360
+235		2	0.5	1	3.17659e+06	360
+236		2	0.5	1.1	2.90792e+06	360
+237		2	0.5	1.2	2.22734e+06	360
+238		2	0.5	1.3	1.70698e+06	360
+239		2	0.5	1.4	1.43384e+06	360
+240		2	1	0.5	1.78941e+06	360
+241		2	1	0.6	1.17625e+06	360
+242		2	1	0.7	703993	360
+243		2	1	0.8	349292	360
+244		2	1	0.9	91483.5	360
+245		2	1	1	3.057e+06	360
+246		2	1	1.1	2.89145e+06	360
+247		2	1	1.2	2.22997e+06	360
+248		2	1	1.3	1.82304e+06	360
+249		2	1	1.4	1.49775e+06	360
+250		2	1.5	0.5	1.8436e+06	360
+251		2	1.5	0.6	1.2106e+06	360
+252		2	1.5	0.7	728589	360
+253		2	1.5	0.8	367688	360
+254		2	1.5	0.9	104971	360
+255		2	1.5	1	3.00672e+06	360
+256		2	1.5	1.1	2.89944e+06	360
+257		2	1.5	1.2	2.35928e+06	360
+258		2	1.5	1.3	1.81487e+06	360
+259		2	1.5	1.4	1.50179e+06	360
+260		2	2	0.5	1.87342e+06	360
+261		2	2	0.6	1.22894e+06	360
+262		2	2	0.7	741705	360
+263		2	2	0.8	377508	360
+264		2	2	0.9	112128	360
+265		2	2	1	2.91571e+06	360
+266		2	2	1.1	2.79313e+06	360
+267		2	2	1.2	2.28494e+06	360
+268		2	2	1.3	1.82729e+06	360
+269		2	2	1.4	1.5889e+06	360
+270		2	2.5	0.5	1.89211e+06	360
+271		2	2.5	0.6	1.24051e+06	360
+272		2	2.5	0.7	749679	360
+273		2	2.5	0.8	383461	360
+274		2	2.5	0.9	116614	360
+275		2	2.5	1	2.79456e+06	360
+276		2	2.5	1.1	2.87162e+06	360
+277		2	2.5	1.2	2.27794e+06	360
+278		2	2.5	1.3	1.87098e+06	360
+279		2	2.5	1.4	1.55468e+06	360
+280		2	3	0.5	1.90496e+06	360
+281		2	3	0.6	1.24842e+06	360
+282		2	3	0.7	755209	360
+283		2	3	0.8	387498	360
+284		2	3	0.9	119577	360
+285		2	3	1	2.76303e+06	360
+286		2	3	1.1	2.99031e+06	360
+287		2	3	1.2	2.31191e+06	360
+288		2	3	1.3	1.90657e+06	360
+289		2	3	1.4	1.47544e+06	360
+290		2	3.5	0.5	1.91465e+06	360
+291		2	3.5	0.6	1.25407e+06	360
+292		2	3.5	0.7	759196	360
+293		2	3.5	0.8	390553	360
+294		2	3.5	0.9	121760	360
+295		2	3.5	1	2.79202e+06	360
+296		2	3.5	1.1	2.88811e+06	360
+297		2	3.5	1.2	2.28929e+06	360
+298		2	3.5	1.3	1.86761e+06	360
+299		2	3.5	1.4	1.56449e+06	360
+300		2	4	0.5	1.92193e+06	360
+301		2	4	0.6	1.25834e+06	360
+302		2	4	0.7	762131	360
+303		2	4	0.8	392814	360
+304		2	4	0.9	123414	360
+305		2	4	1	2.73672e+06	360
+306		2	4	1.1	2.85541e+06	360
+307		2	4	1.2	2.33106e+06	360
+308		2	4	1.3	1.8778e+06	360
+309		2	4	1.4	1.51386e+06	360
+310		2	4.5	0.5	1.92769e+06	360
+311		2	4.5	0.6	1.26156e+06	360
+312		2	4.5	0.7	764487	360
+313		2	4.5	0.8	394537	360
+314		2	4.5	0.9	124712	360
+315		2	4.5	1	2.69091e+06	360
+316		2	4.5	1.1	2.94255e+06	360
+317		2	4.5	1.2	2.26071e+06	360
+318		2	4.5	1.3	1.89589e+06	360
+319		2	4.5	1.4	1.41332e+06	360
+320		2	5	0.5	1.9324e+06	360
+321		2	5	0.6	1.26428e+06	360
+322		2	5	0.7	766454	360
+323		2	5	0.8	395971	360
+324		2	5	0.9	125736	360
+325		2	5	1	2.65766e+06	360
+326		2	5	1.1	2.94169e+06	360
+327		2	5	1.2	2.29817e+06	360
+328		2	5	1.3	1.94082e+06	360
+329		2	5	1.4	1.5267e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+330		3	0	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+331		3	0	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+332		3	0	0.7	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+333		3	0	0.8	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+334		3	0	0.9	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+335		3	0	1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+336		3	0	1.1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+337		3	0	1.2	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+338		3	0	1.3	135158	360
+Error in <TF1::GetRandom>: Integral of function is zero
+339		3	0	1.4	651456	360
+340		3	0.5	0.5	1.43035e+06	360
+341		3	0.5	0.6	900715	360
+342		3	0.5	0.7	489985	360
+343		3	0.5	0.8	183902	360
+344		3	0.5	0.9	338949	360
+345		3	0.5	1	3.36601e+06	360
+346		3	0.5	1.1	2.61157e+06	360
+347		3	0.5	1.2	2.10735e+06	360
+348		3	0.5	1.3	1.60845e+06	360
+349		3	0.5	1.4	1.34448e+06	360
+350		3	1	0.5	1.55366e+06	360
+351		3	1	0.6	982463	360
+352		3	1	0.7	548407	360
+353		3	1	0.8	226495	360
+354		3	1	0.9	6129.04	360
+355		3	1	1	3.23481e+06	360
+356		3	1	1.1	2.64161e+06	360
+357		3	1	1.2	2.18973e+06	360
+358		3	1	1.3	1.77051e+06	360
+359		3	1	1.4	1.43508e+06	360
+360		3	1.5	0.5	1.60313e+06	360
+361		3	1.5	0.6	1.01399e+06	360
+362		3	1.5	0.7	570246	360
+363		3	1.5	0.8	242360	360
+364		3	1.5	0.9	15708.5	360
+365		3	1.5	1	3.29978e+06	360
+366		3	1.5	1.1	2.76377e+06	360
+367		3	1.5	1.2	2.23971e+06	360
+368		3	1.5	1.3	1.69988e+06	360
+369		3	1.5	1.4	1.44189e+06	360
+370		3	2	0.5	1.62991e+06	360
+371		3	2	0.6	1.03062e+06	360
+372		3	2	0.7	581463	360
+373		3	2	0.8	250533	360
+374		3	2	0.9	20939.7	360
+375		3	2	1	3.23692e+06	360
+376		3	2	1.1	2.77499e+06	360
+377		3	2	1.2	2.18393e+06	360
+378		3	2	1.3	1.62043e+06	360
+379		3	2	1.4	1.46978e+06	360
+380		3	2.5	0.5	1.64689e+06	360
+381		3	2.5	0.6	1.04071e+06	360
+382		3	2.5	0.7	588368	360
+383		3	2.5	0.8	255421	360
+384		3	2.5	0.9	24240.8	360
+385		3	2.5	1	3.35277e+06	360
+386		3	2.5	1.1	2.76116e+06	360
+387		3	2.5	1.2	2.25054e+06	360
+388		3	2.5	1.3	1.76175e+06	360
+389		3	2.5	1.4	1.43521e+06	360
+390		3	3	0.5	1.65804e+06	360
+391		3	3	0.6	1.04752e+06	360
+392		3	3	0.7	592961	360
+393		3	3	0.8	258671	360
+394		3	3	0.9	26280.7	360
+395		3	3	1	3.36725e+06	360
+396		3	3	1.1	2.83002e+06	360
+397		3	3	1.2	2.15061e+06	360
+398		3	3	1.3	1.68563e+06	360
+399		3	3	1.4	1.39717e+06	360
+400		3	3.5	0.5	1.66673e+06	360
+401		3	3.5	0.6	1.05241e+06	360
+402		3	3.5	0.7	596201	360
+403		3	3.5	0.8	261013	360
+404		3	3.5	0.9	27810.8	360
+405		3	3.5	1	3.22281e+06	360
+406		3	3.5	1.1	2.77628e+06	360
+407		3	3.5	1.2	2.27388e+06	360
+408		3	3.5	1.3	1.78572e+06	360
+409		3	3.5	1.4	1.38642e+06	360
+410		3	4	0.5	1.67315e+06	360
+411		3	4	0.6	1.05611e+06	360
+412		3	4	0.7	598668	360
+413		3	4	0.8	262673	360
+414		3	4	0.9	28975.6	360
+415		3	4	1	3.30538e+06	360
+416		3	4	1.1	2.7979e+06	360
+417		3	4	1.2	2.31377e+06	360
+418		3	4	1.3	1.68359e+06	360
+419		3	4	1.4	1.37053e+06	360
+420		3	4.5	0.5	1.67825e+06	360
+421		3	4.5	0.6	1.05902e+06	360
+422		3	4.5	0.7	600561	360
+423		3	4.5	0.8	264052	360
+424		3	4.5	0.9	29728	360
+425		3	4.5	1	3.22678e+06	360
+426		3	4.5	1.1	2.75068e+06	360
+427		3	4.5	1.2	2.20016e+06	360
+428		3	4.5	1.3	1.74569e+06	360
+429		3	4.5	1.4	1.38667e+06	360
+430		3	5	0.5	1.68235e+06	360
+431		3	5	0.6	1.06133e+06	360
+432		3	5	0.7	601996	360
+433		3	5	0.8	265082	360
+434		3	5	0.9	30459.6	360
+435		3	5	1	3.26088e+06	360
+436		3	5	1.1	2.78266e+06	360
+437		3	5	1.2	2.27232e+06	360
+438		3	5	1.3	1.71803e+06	360
+439		3	5	1.4	1.42532e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+440		4	0	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+441		4	0	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+442		4	0	0.7	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+443		4	0	0.8	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+444		4	0	0.9	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+445		4	0	1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+446		4	0	1.1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+447		4	0	1.2	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+448		4	0	1.3	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+449		4	0	1.4	-1	360
+450		4	0.5	0.5	1.26923e+06	360
+451		4	0.5	0.6	769339	360
+452		4	0.5	0.7	385539	360
+453		4	0.5	0.8	105543	360
+454		4	0.5	0.9	3.55205e+06	360
+455		4	0.5	1	3.17311e+06	360
+456		4	0.5	1.1	2.48351e+06	360
+457		4	0.5	1.2	1.9359e+06	360
+458		4	0.5	1.3	1.56524e+06	360
+459		4	0.5	1.4	1.39782e+06	360
+460		4	1	0.5	1.38603e+06	360
+461		4	1	0.6	844830	360
+462		4	1	0.7	439059	360
+463		4	1	0.8	143121	360
+464		4	1	0.9	2.58671e+06	360
+465		4	1	1	3.36383e+06	360
+466		4	1	1.1	2.58238e+06	360
+467		4	1	1.2	1.98502e+06	360
+468		4	1	1.3	1.6723e+06	360
+469		4	1	1.4	1.39615e+06	360
+470		4	1.5	0.5	1.4316e+06	360
+471		4	1.5	0.6	873012	360
+472		4	1.5	0.7	458437	360
+473		4	1.5	0.8	156843	360
+474		4	1.5	0.9	2.04435e+06	360
+475		4	1.5	1	3.36139e+06	360
+476		4	1.5	1.1	2.67087e+06	360
+477		4	1.5	1.2	2.18423e+06	360
+478		4	1.5	1.3	1.66385e+06	360
+479		4	1.5	1.4	1.37744e+06	360
+480		4	2	0.5	1.45608e+06	360
+481		4	2	0.6	887413	360
+482		4	2	0.7	468118	360
+483		4	2	0.8	163528	360
+484		4	2	0.9	1.68799e+06	360
+485		4	2	1	3.27775e+06	360
+486		4	2	1.1	2.66693e+06	360
+487		4	2	1.2	2.10068e+06	360
+488		4	2	1.3	1.71955e+06	360
+489		4	2	1.4	1.36934e+06	360
+490		4	2.5	0.5	1.47116e+06	360
+491		4	2.5	0.6	896083	360
+492		4	2.5	0.7	473829	360
+493		4	2.5	0.8	167392	360
+494		4	2.5	0.9	1.50301e+06	360
+495		4	2.5	1	3.30031e+06	360
+496		4	2.5	1.1	2.55255e+06	360
+497		4	2.5	1.2	2.05648e+06	360
+498		4	2.5	1.3	1.62951e+06	360
+499		4	2.5	1.4	1.38775e+06	360
+500		4	3	0.5	1.48161e+06	360
+501		4	3	0.6	901904	360
+502		4	3	0.7	477528	360
+503		4	3	0.8	169929	360
+504		4	3	0.9	1.35515e+06	360
+505		4	3	1	3.36226e+06	360
+506		4	3	1.1	2.49922e+06	360
+507		4	3	1.2	2.02544e+06	360
+508		4	3	1.3	1.71569e+06	360
+509		4	3	1.4	1.40733e+06	360
+510		4	3.5	0.5	1.48915e+06	360
+511		4	3.5	0.6	905930	360
+512		4	3.5	0.7	480115	360
+513		4	3.5	0.8	171709	360
+514		4	3.5	0.9	1.22246e+06	360
+515		4	3.5	1	3.30727e+06	360
+516		4	3.5	1.1	2.63934e+06	360
+517		4	3.5	1.2	2.10275e+06	360
+518		4	3.5	1.3	1.65211e+06	360
+519		4	3.5	1.4	1.38468e+06	360
+520		4	4	0.5	1.49479e+06	360
+521		4	4	0.6	908949	360
+522		4	4	0.7	481976	360
+523		4	4	0.8	172986	360
+524		4	4	0.9	1.17551e+06	360
+525		4	4	1	3.21987e+06	360
+526		4	4	1.1	2.68997e+06	360
+527		4	4	1.2	2.12737e+06	360
+528		4	4	1.3	1.59876e+06	360
+529		4	4	1.4	1.40566e+06	360
+530		4	4.5	0.5	1.49932e+06	360
+531		4	4.5	0.6	911383	360
+532		4	4.5	0.7	483462	360
+533		4	4.5	0.8	173966	360
+534		4	4.5	0.9	1.11466e+06	360
+535		4	4.5	1	3.18761e+06	360
+536		4	4.5	1.1	2.63892e+06	360
+537		4	4.5	1.2	2.00965e+06	360
+538		4	4.5	1.3	1.66418e+06	360
+539		4	4.5	1.4	1.3714e+06	360
+540		4	5	0.5	1.50292e+06	360
+541		4	5	0.6	913314	360
+542		4	5	0.7	484629	360
+543		4	5	0.8	174743	360
+544		4	5	0.9	1.07752e+06	360
+545		4	5	1	3.15212e+06	360
+546		4	5	1.1	2.61235e+06	360
+547		4	5	1.2	2.07704e+06	360
+548		4	5	1.3	1.68271e+06	360
+549		4	5	1.4	1.39307e+06	360
+Error in <TF1::GetRandom>: Integral of function is zero
+550		5	0	0.5	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+551		5	0	0.6	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+552		5	0	0.7	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+553		5	0	0.8	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+554		5	0	0.9	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+555		5	0	1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+556		5	0	1.1	-1	360
+Error in <TF1::GetRandom>: Integral of function is zero
+557		5	0	1.2	341183	360
+Error in <TF1::GetRandom>: Integral of function is zero
+558		5	0	1.3	135158	360
+Error in <TF1::GetRandom>: Integral of function is zero
+559		5	0	1.4	670905	360
+560		5	0.5	0.5	1.14547e+06	360
+561		5	0.5	0.6	669620	360
+562		5	0.5	0.7	307424	360
+563		5	0.5	0.8	49624.5	360
+564		5	0.5	0.9	3.81618e+06	360
+565		5	0.5	1	3.12846e+06	360
+566		5	0.5	1.1	2.41824e+06	360
+567		5	0.5	1.2	1.86731e+06	360
+568		5	0.5	1.3	1.43337e+06	360
+569		5	0.5	1.4	1.29355e+06	360
+570		5	1	0.5	1.25567e+06	360
+571		5	1	0.6	739693	360
+572		5	1	0.7	356107	360
+573		5	1	0.8	82108.8	360
+574		5	1	0.9	3.6752e+06	360
+575		5	1	1	3.17494e+06	360
+576		5	1	1.1	2.48344e+06	360
+577		5	1	1.2	1.94341e+06	360
+578		5	1	1.3	1.53728e+06	360
+579		5	1	1.4	1.21155e+06	360
+580		5	1.5	0.5	1.2983e+06	360
+581		5	1.5	0.6	765041	360
+582		5	1.5	0.7	373213	360
+583		5	1.5	0.8	93651.5	360
+584		5	1.5	0.9	3.64916e+06	360
+585		5	1.5	1	3.19705e+06	360
+586		5	1.5	1.1	2.47913e+06	360
+587		5	1.5	1.2	2.16115e+06	360
+588		5	1.5	1.3	1.63509e+06	360
+589		5	1.5	1.4	1.24121e+06	360
+590		5	2	0.5	1.32081e+06	360
+591		5	2	0.6	777844	360
+592		5	2	0.7	381483	360
+593		5	2	0.8	99203.4	360
+594		5	2	0.9	3.63818e+06	360
+595		5	2	1	3.29672e+06	360
+596		5	2	1.1	2.43326e+06	360
+597		5	2	1.2	1.95489e+06	360
+598		5	2	1.3	1.46741e+06	360
+599		5	2	1.4	1.28377e+06	360
+600		5	2.5	0.5	1.3345e+06	360
+601		5	2.5	0.6	785355	360
+602		5	2.5	0.7	386204	360
+603		5	2.5	0.8	102270	360
+604		5	2.5	0.9	3.48119e+06	360
+605		5	2.5	1	3.26696e+06	360
+606		5	2.5	1.1	2.4073e+06	360
+607		5	2.5	1.2	1.9669e+06	360
+608		5	2.5	1.3	1.5656e+06	360
+609		5	2.5	1.4	1.31199e+06	360
+610		5	3	0.5	1.34387e+06	360
+611		5	3	0.6	790350	360
+612		5	3	0.7	389265	360
+613		5	3	0.8	104297	360
+614		5	3	0.9	3.57863e+06	360
+615		5	3	1	3.28707e+06	360
+616		5	3	1.1	2.48834e+06	360
+617		5	3	1.2	2.02725e+06	360
+618		5	3	1.3	1.49917e+06	360
+619		5	3	1.4	1.24241e+06	360
+620		5	3.5	0.5	1.35046e+06	360
+621		5	3.5	0.6	793848	360
+622		5	3.5	0.7	391332	360
+623		5	3.5	0.8	105629	360
+624		5	3.5	0.9	3.64894e+06	360
+625		5	3.5	1	3.23661e+06	360
+626		5	3.5	1.1	2.42964e+06	360
+627		5	3.5	1.2	1.87021e+06	360
+628		5	3.5	1.3	1.56336e+06	360
+629		5	3.5	1.4	1.21404e+06	360
+630		5	4	0.5	1.35548e+06	360
+631		5	4	0.6	796352	360
+632		5	4	0.7	392856	360
+633		5	4	0.8	106636	360
+634		5	4	0.9	3.60448e+06	360
+635		5	4	1	3.2788e+06	360
+636		5	4	1.1	2.38481e+06	360
+637		5	4	1.2	1.96848e+06	360
+638		5	4	1.3	1.62784e+06	360
+639		5	4	1.4	1.28953e+06	360
+640		5	4.5	0.5	1.35945e+06	360
+641		5	4.5	0.6	798271	360
+642		5	4.5	0.7	393987	360
+643		5	4.5	0.8	107333	360
+644		5	4.5	0.9	3.65105e+06	360
+645		5	4.5	1	3.26953e+06	360
+646		5	4.5	1.1	2.44532e+06	360
+647		5	4.5	1.2	1.9976e+06	360
+slurmstepd: error: *** JOB 2973568 CANCELLED AT 2015-06-25T20:34:42 DUE TO TIME LIMIT on vmp452 ***

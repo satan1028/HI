@@ -6,7 +6,7 @@ njobs=`echo "$nfiles/$nfileperjob" | bc`
 echo "split into $njobs jobs, $nfileperjob files per job"
 for i in `seq 0 $njobs`
 do
-if [[ $i == 4 || $i == 6 || $i == 7 || $i == 10 || $i == 15 || $i == 21 ]];then
+#if [[ $i == 4 || $i == 6 || $i == 7 || $i == 10 || $i == 15 || $i == 21 ]];then
 echo $i
 start=`echo "$i*$nfileperjob" | bc`
 end=`echo "($i+1)*$nfileperjob" | bc`
@@ -19,5 +19,5 @@ export END=$end
 export SUMORPROD=$SumorProd
 #qsub -v I=$i,START=$start,END=$end -N jobsub$i -z jobsub.sh
 sbatch -J PbPbMB$i -o job$i.out jobsub.slurm
-fi
+#fi
 done

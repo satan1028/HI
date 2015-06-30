@@ -62,7 +62,7 @@ makeMultiPanelCanvas(c1,4,1,0,0,0.15,0.15,0.01);
     hFrame->GetXaxis()->SetRangeUser(-0.3,6.3);
     hFrame->SetMaximum(0.35);
     hFrame->SetMinimum(0);
-int shift=5;
+int shift=2;
 for(int i=shift;i<shift+ntotbin;i++){
         int t = ntotbin-(i-shift);
 	//TFile *fProderr = TFile::Open(Form("M%d%d/mergedv_Prod2_sub.root",trkpointmax[i],trkpointmin[i]));

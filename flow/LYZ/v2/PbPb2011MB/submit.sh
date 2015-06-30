@@ -6,7 +6,7 @@ njobs=`echo "$nfiles/$nfileperjob" | bc`
 echo "split into $njobs jobs, $nfileperjob files per job"
 for i in `seq 0 $njobs`
 do
-#if [[ $i != 27 ]];then
+#if [[ $i = 11 || $i == 12 || $i == 13 ]];then
 echo $i
 start=`echo "$i*$nfileperjob" | bc`
 end=`echo "($i+1)*$nfileperjob" | bc`

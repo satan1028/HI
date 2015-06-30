@@ -10,8 +10,8 @@ void getResV(){
 	string SumorProd = getenv("SUMORPROD");
         double Vmax[nbin], eps[nbin];
         for(int ibin=0; ibin<nbin ;ibin++){
-            Vmax[ibin]=0.1*(trkbin[ibin]+30);
-            eps[ibin]=0.00045*(trkbin[ibin]+30);
+            Vmax[ibin]=0.12*(trkbin[ibin]+50);
+            eps[ibin]=0.00045*(trkbin[ibin]+50);
         }
 	ofstream  fstrV;
 	double theta[ntheta];

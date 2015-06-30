@@ -7,8 +7,8 @@ const double V214006[nbin]={0.06413,0.06138,0.06137,0.06674,0.06906,0.07185,0.07
 const double V214006err[nbin]={0.01418,0.007515,0.003744,0.003738,0.003867,0.004024,0.004074,0.004216,0.004284,0.004322,0.004402,0.00444,0.004486};
 int xbin=0;
 //double spcorr[ntotbin] = {0.60529,0.71839,0.813137,0.866738,0.94733,0.99686,0.992652,1.00056,0.996552,0.99867,0.999543,0.998042,1.00};
-//double spcorr[ntotbin] = {0.866738,0.94733,0.99686,0.992652,1.00056,0.996552,0.99867,0.999543,0.998042,1.,1.,1.,1.};
-double spcorr[ntotbin] = {1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.};
+double spcorr[ntotbin] = {0.866738,0.94733,0.99686,0.992652,1.00056,0.996552,0.99867,0.999543,0.998042,1.,1.};
+//double spcorr[ntotbin] = {1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.};
 double Ntrk[ntotbin], Ntrk_v[ntotbin], V2_Sum[ntotbin], V2err_Sum[ntotbin],  V2_Prod[ntotbin], V2err_Prod[ntotbin], V2intcorr_Prod[ntotbin], V2intcorrerr_Prod[ntotbin];
 for(int i=0;i<ntotbin;i++){
 TFile *mergedV_Sum = TFile::Open(Form("mergedV_Prod.root"));

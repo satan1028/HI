@@ -5,40 +5,46 @@ void store(int type, int sth=0, int Gth=0){
 	NBD *l;
 	struct para1 var;
         TString dirname;
-        
+        double sss=0.1;
 	if(sth==0){
 	dirname = "std";
-	if(Gth<nGlau) l = new NBD(datafile,stdGlaulist[Gth],histoname);
-	else l = new NBD(datafile,stdGlaulist[0],histoname);
-	var=var1;
-	//l->initmu(bestlist1[Gth].mubest-0.01,bestlist1[Gth].mubest+0.01,0.002);
-	//l->initk(bestlist1[Gth].kbest-0.01,bestlist1[Gth].kbest+0.01,0.002);
-	//l->initf(bestlist1[Gth].fbest-0.01,bestlist1[Gth].fbest+0.01,0.002);
+	if(Gth<nGlau)
+            l = new NBD(datafile,stdGlaulist[Gth],histoname);
+	else
+            l = new NBD(datafile,stdGlaulist[0],histoname);
+	var = var1[Gth];
+	l->initmu(bestlist1[Gth].mubest-sss,bestlist1[Gth].mubest+sss,sss/5);
+	l->initk(bestlist1[Gth].kbest-sss,bestlist1[Gth].kbest+sss,sss/5);
+	l->initf(bestlist1[Gth].fbest-sss,bestlist1[Gth].fbest+sss,sss/5);
 	}
         
 	else if(sth==1){
 	dirname ="Gri055"; 
-	if(Gth<nGlau) l = new NBD(datafile,Gri055Glaulist[Gth],histoname);
-	else l = new NBD(datafile,Gri055Glaulist[0],histoname);
-	var=var2;
-	//l->initmu(bestlist2[Gth].mubest-0.01,bestlist2[Gth].mubest+0.01,0.002);
-	//l->initk(bestlist2[Gth].kbest-0.01,bestlist2[Gth].kbest+0.01,0.002);
-	//l->initf(bestlist2[Gth].fbest-0.01,bestlist2[Gth].fbest+0.01,0.002);
+	if(Gth<nGlau)
+            l = new NBD(datafile,Gri055Glaulist[Gth],histoname);
+	else
+            l = new NBD(datafile,Gri055Glaulist[0],histoname);
+	var = var2[Gth];
+	l->initmu(bestlist2[Gth].mubest-sss,bestlist2[Gth].mubest+sss,sss/5);
+	l->initk(bestlist2[Gth].kbest-sss,bestlist2[Gth].kbest+sss,sss/5);
+	l->initf(bestlist2[Gth].fbest-sss,bestlist2[Gth].fbest+sss,sss/5);
 	}
         
 	else {
 	dirname ="Gri101";
-	if(Gth<nGlau) l = new NBD(datafile,Gri101Glaulist[Gth],histoname);
-	else l = new NBD(datafile,Gri101Glaulist[0],histoname);
-	var=var3;
-	//l->initmu(bestlist3[Gth].mubest-0.01,bestlist3[Gth].mubest+0.01,0.002);
-	//l->initk(bestlist3[Gth].kbest-0.01,bestlist3[Gth].kbest+0.01,0.002);
-	//l->initf(bestlist3[Gth].fbest-0.01,bestlist3[Gth].fbest+0.01,0.002);
+	if(Gth<nGlau)
+            l = new NBD(datafile,Gri101Glaulist[Gth],histoname);
+	else
+            l = new NBD(datafile,Gri101Glaulist[0],histoname);
+        var = var3[Gth];
+	l->initmu(bestlist3[Gth].mubest-sss,bestlist3[Gth].mubest+sss,sss/5);
+	l->initk(bestlist3[Gth].kbest-sss,bestlist3[Gth].kbest+sss,sss/5);
+	l->initf(bestlist3[Gth].fbest-sss,bestlist3[Gth].fbest+sss,sss/5);
 	}
 
-	l->initmu(var.mumin,var.mumax,var.mustep);
-    	l->initk(var.kmin,var.kmax,var.kstep);
-    	l->initf(var.fmin,var.fmax,var.fstep);
+	//l->initmu(var.mumin,var.mumax,var.mustep);
+    	//l->initk(var.kmin,var.kmax,var.kstep);
+    	//l->initf(var.fmin,var.fmax,var.fstep);
 	if(Gth<nGlau)
         	l->initx(var.xmin,var.xmax);
 	else if(Gth-nGlau==0)
